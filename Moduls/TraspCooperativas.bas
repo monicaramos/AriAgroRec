@@ -515,7 +515,7 @@ End Function
 
 
 
-Private Function ProcesarFicheroComunicacion2(nomFich As String) As Boolean
+Public Function ProcesarFicheroComunicacion2(nomFich As String) As Boolean
 Dim NF As Long
 Dim cad As String
 Dim i As Integer
@@ -595,37 +595,91 @@ Dim Sql As String
 
     ComprobarRegistro = True
 
-    Fecha = RecuperaValorNew(cad, ";", 1)
-    codsoc = RecuperaValor(cad, 4)
-    numfactu = RecuperaValor(cad, 2)
-    numfactu = Replace(numfactu, "-", "|") & "|"
-    Digito = RecuperaValor(numfactu, 1)
-    numfactu = RecuperaValor(numfactu, 4)
-    numfactu = Format((CInt(Digito) * 1000000) + CLng(numfactu), "0000000")
+
+'Id , fechacreacion, usuariocreacion, Tipo, tabla, sqlaejecutar, Observaciones
+
+    Id = RecuperaValorNew(cad, ";", 1)
+    Fecha = RecuperaValorNew(cad, ";", 2)
+    Usuario = RecuperaValorNew(cad, ";", 3)
+    Tipo = RecuperaValorNew(cad, ";", 4)
+    tabla = RecuperaValorNew(cad, ";", 5)
+    Sql = RecuperaValorNew(cad, ";", 6)
+    Observaciones = RecuperaValorNew(cad, ";", 7)
     
-    
-    baseimpo = RecuperaValor(cad, 6)
-    CuotaIva = RecuperaValor(cad, 7)
-    TotalFac = RecuperaValor(cad, 8)
-    
-    c_BaseImpo = CCur(TransformaPuntosComas(baseimpo))
-    c_CuotaIva = CCur(TransformaPuntosComas(CuotaIva))
-    c_TotalFac = CCur(TransformaPuntosComas(TotalFac))
-    
+    ' id existente
+    Sql = "select count(*) from comunica_rec where id = " & DBSet(Id, "N")
+    If TotalRegistros(Sql) <> 0 Then
+        Mens = "Id Existente"
+        Sql = "insert into tmpinformes (codusu, fecha1, importe1, nombre1) values (" & _
+              vUsu.Codigo & "," & DBSet(Fecha, "F") & _
+              DBSet(Id, "N") & "," & DBSet(Mens, "T") & ")"
+        
+        conn.Execute Sql
+    End If
     
     'Comprobamos fechas
     If Not EsFechaOK(Fecha) Then
         Mens = "Fecha incorrecta"
-        Sql = "insert into tmpinformes (codusu, fecha1, importe1, importe2, importe3, " & _
-              "importe4, importe5, nombre1) values (" & _
+        Sql = "insert into tmpinformes (codusu, fecha1, importe1,  nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Fecha, "F") & _
-              "," & DBSet(codsoc, "N") & "," & _
-              DBSet(numfactu, "N") & "," & _
-              DBSet(c_BaseImpo, "N") & "," & _
-              DBSet(c_CuotaIva, "N") & "," & _
-              DBSet(c_TotalFac, "N") & "," & DBSet(Mens, "T") & ")"
+              DBSet(Id, "N") & "," & DBSet(Mens, "T") & ")"
         
         conn.Execute Sql
     End If
 
 End Function
+
+
+
+Public Function ProcesarFicheroComunicacion() As Boolean
+Dim cad As String
+Dim i As Integer
+Dim longitud As Long
+Dim Rs As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
+Dim NumReg As Long
+Dim Sql As String
+Dim B As Boolean
+
+Dim SqlActualizar As String
+Dim CadError As String
+
+    On Error GoTo eProcesarFichero
+    
+    ProcesarFicheroComunicacion = False
+    
+    
+    CadError = ""
+    
+    Sql = "select * from comunica_rec where fechaactualizacion is null"
+    Sql = Sql & " order by fechacrecion, tipo"
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    While Not Rs.EOF
+    
+        CadError = "Id: " & Rs!Id & vbCrLf & "Tabla: " & Rs!tabla & vbCrLf & "SQL: " & Rs!Sql
+    
+        SqlEjecutar = DBLet(Rs!sqlaejecutar, "T")
+        
+        conn.Execute Sql
+    
+        SqlActualizar = "update comunica_rec set fechaactualizacion = " & DBSet(Now(), "FH")
+        SqlActualizar = SqlActualizar & ", usuarioactualizacion = " & DBSet(vUsu.Nombre, "T")
+        SqlActualizar = SqlActualizar & " where id = " & DBSet(Rs!Id, "N")
+        
+        conn.Execute SqlActualizar
+    
+        Rs.MoveNext
+    Wend
+    
+    ProcesarFicheroComunicacion = True
+    Exit Function
+
+eProcesarFicheroComunicacion:
+    MuestraError Err.Number, "Procesar fichero comunicación:" & vbCrLf & CadError, Err.Description
+    ProcesarFicheroComunicacion = False
+End Function
+
+

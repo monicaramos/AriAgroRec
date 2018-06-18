@@ -21,6 +21,110 @@ Begin VB.Form frmDocAltaBaja
       TabIndex        =   0
       Top             =   45
       Width           =   6795
+      Begin VB.Frame FrameBajaSocio 
+         Caption         =   "Baja de Socios"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   3180
+         Left            =   450
+         TabIndex        =   12
+         Top             =   1800
+         Width           =   5970
+         Begin VB.TextBox txtCodigo 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   1950
+            Index           =   8
+            Left            =   2025
+            MaxLength       =   800
+            MultiLine       =   -1  'True
+            ScrollBars      =   2  'Vertical
+            TabIndex        =   14
+            Top             =   855
+            Width           =   3720
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   7
+            Left            =   2025
+            MaxLength       =   10
+            TabIndex        =   13
+            Top             =   405
+            Width           =   1350
+         End
+         Begin VB.Label Label2 
+            Caption         =   "Motivos de Baja"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   330
+            Index           =   5
+            Left            =   270
+            TabIndex        =   16
+            Top             =   900
+            Width           =   1635
+         End
+         Begin VB.Image imgFec 
+            Height          =   240
+            Index           =   2
+            Left            =   1710
+            Picture         =   "frmDocAltaBaja.frx":000C
+            ToolTipText     =   "Buscar fecha"
+            Top             =   405
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Fecha Baja"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   255
+            Index           =   1
+            Left            =   270
+            TabIndex        =   15
+            Top             =   420
+            Width           =   1185
+         End
+      End
       Begin VB.Frame FrameAltaCampo 
          Caption         =   "Alta de Campos"
          BeginProperty Font 
@@ -99,7 +203,7 @@ Begin VB.Form frmDocAltaBaja
             Height          =   240
             Index           =   3
             Left            =   1755
-            Picture         =   "frmDocAltaBaja.frx":000C
+            Picture         =   "frmDocAltaBaja.frx":0097
             ToolTipText     =   "Buscar fecha"
             Top             =   1305
             Width           =   240
@@ -108,7 +212,7 @@ Begin VB.Form frmDocAltaBaja
             Height          =   240
             Index           =   0
             Left            =   1755
-            Picture         =   "frmDocAltaBaja.frx":0097
+            Picture         =   "frmDocAltaBaja.frx":0122
             ToolTipText     =   "Buscar fecha"
             Top             =   405
             Width           =   240
@@ -234,7 +338,7 @@ Begin VB.Form frmDocAltaBaja
       Begin VB.CommandButton Command8 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmDocAltaBaja.frx":0122
+         Picture         =   "frmDocAltaBaja.frx":01AD
          Style           =   1  'Graphical
          TabIndex        =   3
          Top             =   2215
@@ -244,7 +348,7 @@ Begin VB.Form frmDocAltaBaja
       Begin VB.CommandButton Command7 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmDocAltaBaja.frx":042C
+         Picture         =   "frmDocAltaBaja.frx":04B7
          Style           =   1  'Graphical
          TabIndex        =   2
          Top             =   1440
@@ -293,110 +397,6 @@ Begin VB.Form frmDocAltaBaja
             TabIndex        =   34
             Top             =   270
             Width           =   1020
-         End
-      End
-      Begin VB.Frame FrameBajaSocio 
-         Caption         =   "Baja de Socios"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   -1  'True
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   3180
-         Left            =   450
-         TabIndex        =   12
-         Top             =   1800
-         Width           =   5970
-         Begin VB.TextBox txtCodigo 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   1950
-            Index           =   8
-            Left            =   2025
-            MaxLength       =   800
-            MultiLine       =   -1  'True
-            ScrollBars      =   2  'Vertical
-            TabIndex        =   14
-            Top             =   855
-            Width           =   3720
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   7
-            Left            =   2025
-            MaxLength       =   10
-            TabIndex        =   13
-            Top             =   405
-            Width           =   1350
-         End
-         Begin VB.Label Label2 
-            Caption         =   "Motivos de Baja"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   330
-            Index           =   5
-            Left            =   270
-            TabIndex        =   16
-            Top             =   900
-            Width           =   1635
-         End
-         Begin VB.Image imgFec 
-            Height          =   240
-            Index           =   2
-            Left            =   1710
-            Picture         =   "frmDocAltaBaja.frx":0736
-            ToolTipText     =   "Buscar fecha"
-            Top             =   405
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Fecha Baja"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   255
-            Index           =   1
-            Left            =   270
-            TabIndex        =   15
-            Top             =   420
-            Width           =   1185
          End
       End
       Begin VB.Frame FrameAltaSocio 
@@ -872,22 +872,22 @@ Dim vSQL As String
     If Opcion(0).Value And Opcion1(0).Value Then
         cadTitulo = "Documento Alta de Socios"
         
-        If txtcodigo(4).Text <> "" Then
-            CadParam = CadParam & "pFecha=""" & txtcodigo(4).Text & """|"
+        If txtCodigo(4).Text <> "" Then
+            CadParam = CadParam & "pFecha=""" & txtCodigo(4).Text & """|"
             numParam = numParam + 1
         End If
         
-        CadParam = CadParam & "pImporte=""" & txtcodigo(5).Text & """|"
+        CadParam = CadParam & "pImporte=""" & txtCodigo(5).Text & """|"
         numParam = numParam + 1
         
         CadParam = CadParam & "pBanco=" & Check1(0).Value & "|"
         numParam = numParam + 1
         
-        CadParam = CadParam & "pObserva=""" & txtcodigo(3).Text & """|"
+        CadParam = CadParam & "pObserva=""" & txtCodigo(3).Text & """|"
         numParam = numParam + 1
         
         '[Monica]25/04/2018: para el caso de coopic quieren imprimir, firmado ante
-        CadParam = CadParam & "pFirmado=""" & txtcodigo(6).Text & """|"
+        CadParam = CadParam & "pFirmado=""" & txtCodigo(6).Text & """|"
         numParam = numParam + 1
         
         
@@ -908,10 +908,10 @@ Dim vSQL As String
     If Opcion(1).Value And Opcion1(0).Value Then
         cadTitulo = "Documento Alta de Campos"
     
-        CadParam = CadParam & "pFecha=""" & txtcodigo(2).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtCodigo(2).Text & """|"
         numParam = numParam + 1
     
-        CadParam = CadParam & "pFechaCons=""" & txtcodigo(9).Text & """|"
+        CadParam = CadParam & "pFechaCons=""" & txtCodigo(9).Text & """|"
         numParam = numParam + 1
     
         If Not AnyadirAFormula(cadFormula, "{rcampos.codsocio} = " & NumCod & " and isnull({rcampos.fecbajas}) ") Then Exit Sub
@@ -942,10 +942,10 @@ Dim vSQL As String
     
         cadTitulo = "Documento Baja de Socios"
         
-        CadParam = CadParam & "pFecha=""" & txtcodigo(7).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtCodigo(7).Text & """|"
         numParam = numParam + 1
     
-        CadParam = CadParam & "pCausas=""" & txtcodigo(8).Text & """|"
+        CadParam = CadParam & "pCausas=""" & txtCodigo(8).Text & """|"
         numParam = numParam + 1
         
         '[Monica]13/03/2014: para el caso de escalona y utxera enlazamos con el codpropiet del campo
@@ -965,10 +965,10 @@ Dim vSQL As String
     If Opcion(1).Value And Opcion1(1).Value Then
         cadTitulo = "Documento Baja de Campos"
          
-        CadParam = CadParam & "pFecha=""" & txtcodigo(7).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtCodigo(7).Text & """|"
         numParam = numParam + 1
     
-        CadParam = CadParam & "pCausas=""" & txtcodigo(8).Text & """|"
+        CadParam = CadParam & "pCausas=""" & txtCodigo(8).Text & """|"
         numParam = numParam + 1
         
         
@@ -985,7 +985,7 @@ Dim vSQL As String
     
     'transmision de campos
     If Opcion1(2).Value Then
-        If txtcodigo(0).Text = "" Then
+        If txtCodigo(0).Text = "" Then
             MsgBox "Debe introducir un Socio Receptor. Reintroduzca.", vbExclamation
             Exit Sub
         End If
@@ -1002,10 +1002,10 @@ Dim vSQL As String
             If Not AnyadirAFormula(cadSelect, "rcampos.codsocio = " & NumCod) Then Exit Sub
         End If
         
-        CadParam = CadParam & "pFecha=""" & txtcodigo(1).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtCodigo(1).Text & """|"
         numParam = numParam + 1
         
-        If Not AnyadirAFormula(cadFormula, "{rsocios_alias.codsocio} = " & txtcodigo(0).Text) Then Exit Sub
+        If Not AnyadirAFormula(cadFormula, "{rsocios_alias.codsocio} = " & txtCodigo(0).Text) Then Exit Sub
 
         Set frmMens = New frmMensajes
         
@@ -1166,13 +1166,13 @@ Dim CadValues2 As String
                 
                 '[Monica]08/06/2018: en caso de ser alta en positivo en caso de baja en negativo
                 If esAlta Then
-                    CadValues2 = CadValues2 & ",(" & DBSet(Rs!Codsocio, "N") & "," & DBSet(txtcodigo(2).Text, "F") & "," & DBSet(Rs!Codaport, "N") & ","
-                    CadValues2 = CadValues2 & DBSet("ALTA CAMPO", "T") & "," & Year(CDate(txtcodigo(2).Text)) & "," & DBSet(Rs!supculti, "N") & ","
+                    CadValues2 = CadValues2 & ",(" & DBSet(Rs!Codsocio, "N") & "," & DBSet(txtCodigo(2).Text, "F") & "," & DBSet(Rs!Codaport, "N") & ","
+                    CadValues2 = CadValues2 & DBSet("ALTA CAMPO", "T") & "," & Year(CDate(txtCodigo(2).Text)) & "," & DBSet(Rs!supculti, "N") & ","
                     
                     CadValues2 = CadValues2 & DBSet(Importe, "N") & ",0," & DBSet(vCont, "N") & "," & DBSet(Rs!codcampo, "N") & ")"
                 Else
-                    CadValues2 = CadValues2 & ",(" & DBSet(Rs!Codsocio, "N") & "," & DBSet(txtcodigo(7).Text, "F") & "," & DBSet(Rs!Codaport, "N") & ","
-                    CadValues2 = CadValues2 & DBSet(txtcodigo(8).Text, "T") & "," & Year(CDate(txtcodigo(7).Text)) & "," & DBSet(Rs!supculti, "N") & ","
+                    CadValues2 = CadValues2 & ",(" & DBSet(Rs!Codsocio, "N") & "," & DBSet(txtCodigo(7).Text, "F") & "," & DBSet(Rs!Codaport, "N") & ","
+                    CadValues2 = CadValues2 & DBSet(txtCodigo(8).Text, "T") & "," & Year(CDate(txtCodigo(7).Text)) & "," & DBSet(Rs!supculti, "N") & ","
                     CadValues2 = CadValues2 & DBSet(Importe * (-1), "N") & ",0," & DBSet(vCont, "N") & "," & DBSet(Rs!codcampo, "N") & ")"
                 End If
                 
@@ -1187,18 +1187,18 @@ Dim CadValues2 As String
             '[Monica]07/06/2018:añado esto aqui pq lo ha quitado de arriba
             Sql2 = "select * from raportacion"
             If esAlta Then
-                Sql2 = Sql2 & " where codsocio = " & DBSet(NumCod, "N") & " and numfactu in (" & NumCampo & ") and fecaport = " & DBSet(txtcodigo(2), "F")
+                Sql2 = Sql2 & " where codsocio = " & DBSet(NumCod, "N") & " and numfactu in (" & NumCampo & ") and fecaport = " & DBSet(txtCodigo(2), "F")
             Else
-                Sql2 = Sql2 & " where codsocio = " & DBSet(NumCod, "N") & " and numfactu in (" & NumCampo & ") and fecaport = " & DBSet(txtcodigo(7), "F")
+                Sql2 = Sql2 & " where codsocio = " & DBSet(NumCod, "N") & " and numfactu in (" & NumCampo & ") and fecaport = " & DBSet(txtCodigo(7), "F")
             End If
             
             Set frmIns = New frmIntTesorPago
             
             frmIns.CadTag = Sql2
             If esAlta Then
-                frmIns.NumCod = txtcodigo(2).Text & "|" & NumCod & "|" & vCont & "|"
+                frmIns.NumCod = txtCodigo(2).Text & "|" & NumCod & "|" & vCont & "|"
             Else
-                frmIns.NumCod = txtcodigo(7).Text & "|" & NumCod & "|" & vCont & "|"
+                frmIns.NumCod = txtCodigo(7).Text & "|" & NumCod & "|" & vCont & "|"
             End If
             frmIns.esAlta = esAlta
             frmIns.Campos = NumCampo
@@ -1212,13 +1212,13 @@ Dim CadValues2 As String
 '                Sql = Sql & "select codsocio, @NumF:=@Numf + 1 from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ") bb "
 '                Sql = Sql & " where " & vSelect & ")"
                 Sql = "update raportacion set intconta = 1 where codsocio = " & DBSet(NumCod, "N")
-                Sql = Sql & " and fecaport = " & DBSet(txtcodigo(7).Text, "F")
+                Sql = Sql & " and fecaport = " & DBSet(txtCodigo(7).Text, "F")
                 Sql = Sql & " and numfactu in (" & NumCampo & ")"
                 If Not esAlta Then Sql = Sql & " and codaport = 1"
                 conn.Execute Sql
             
                 If Not esAlta Then
-                    Sql = "update rcampos set fecbajas = " & DBSet(txtcodigo(7).Text, "F")
+                    Sql = "update rcampos set fecbajas = " & DBSet(txtCodigo(7).Text, "F")
                     Sql = Sql & " where codcampo in (" & NumCampo & ")"
                     conn.Execute Sql
                 End If
@@ -1261,10 +1261,10 @@ Private Sub Form_Activate()
         PrimeraVez = False
         Select Case OpcionListado
             Case 12 ' Listado de Calidades
-                PonerFoco txtcodigo(18)
+                PonerFoco txtCodigo(18)
         
             Case 13 ' Listado de Socios por seccion
-                PonerFoco txtcodigo(8)
+                PonerFoco txtCodigo(8)
                 
         End Select
     End If
@@ -1343,7 +1343,7 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtCodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
@@ -1364,7 +1364,7 @@ Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -1388,7 +1388,7 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 16, 17 'CALIDADES
             AbrirFrmCalidad (Index)
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub ListView1_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -1427,13 +1427,13 @@ Private Sub imgFec_Click(Index As Integer)
     If Index = 4 Then Indice = 1
     
     imgFec(0).Tag = Indice '<===
-    If txtcodigo(Indice).Text <> "" Then frmC.NovaData = txtcodigo(Indice).Text
+    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(Indice) '<===
+    PonerFoco txtCodigo(Indice) '<===
     ' ********************************************
 End Sub
 
@@ -1459,8 +1459,8 @@ Private Sub Opcion_Click(Index As Integer)
     '[Monica]25/04/2018: para el caso de coopic, "firmado ante"
     If FrameAltaSocio.visible Then
         Label2(0).visible = (vParamAplic.Cooperativa = 16)
-        txtcodigo(6).visible = (vParamAplic.Cooperativa = 16)
-        txtcodigo(6).Enabled = (vParamAplic.Cooperativa = 16)
+        txtCodigo(6).visible = (vParamAplic.Cooperativa = 16)
+        txtCodigo(6).Enabled = (vParamAplic.Cooperativa = 16)
     End If
 
     PonerFocoFrame
@@ -1493,7 +1493,7 @@ Private Sub Opcion1_Click(Index As Integer)
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -1529,7 +1529,7 @@ Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -1538,19 +1538,19 @@ Dim cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 0 ' socio receptor
-            If txtcodigo(Index).Text <> "" Then
-                PonerFormatoEntero txtcodigo(Index)
-                txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtCodigo(Index).Text <> "" Then
+                PonerFormatoEntero txtCodigo(Index)
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
             End If
             
         Case 1, 2, 4, 7 'FECHAS
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
 
         Case 9 ' fechas
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index), True
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index), True
 
         Case 5 ' importe
-            If txtcodigo(Index).Text <> "" Then PonerFormatoDecimal txtcodigo(Index), 1
+            If txtCodigo(Index).Text <> "" Then PonerFormatoDecimal txtCodigo(Index), 1
             
     End Select
 End Sub
@@ -2014,9 +2014,9 @@ End Function
 
 Private Sub PonerFocoFrame()
 
-    If Me.FrameAltaCampo.visible Then PonerFoco txtcodigo(2)
-    If Me.FrameAltaSocio.visible Then PonerFoco txtcodigo(4)
-    If Me.FrameBajaSocio.visible Then PonerFoco txtcodigo(7)
-    If Me.FrameTransmision.visible Then PonerFoco txtcodigo(1)
+    If Me.FrameAltaCampo.visible Then PonerFoco txtCodigo(2)
+    If Me.FrameAltaSocio.visible Then PonerFoco txtCodigo(4)
+    If Me.FrameBajaSocio.visible Then PonerFoco txtCodigo(7)
+    If Me.FrameTransmision.visible Then PonerFoco txtCodigo(1)
 
 End Sub

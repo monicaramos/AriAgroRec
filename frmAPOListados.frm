@@ -17,11 +17,68 @@ Begin VB.Form frmAPOListados
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameCertificadoCPi 
-      Height          =   6720
+      Height          =   7440
       Left            =   0
       TabIndex        =   412
       Top             =   0
       Width           =   6555
+      Begin VB.TextBox txtcodigo 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   115
+         Left            =   1740
+         MaxLength       =   40
+         TabIndex        =   423
+         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+         Top             =   4770
+         Width           =   4560
+      End
+      Begin VB.TextBox txtcodigo 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   114
+         Left            =   1740
+         MaxLength       =   40
+         TabIndex        =   425
+         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+         Top             =   5670
+         Width           =   4560
+      End
+      Begin VB.TextBox txtcodigo 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   113
+         Left            =   1740
+         MaxLength       =   40
+         TabIndex        =   424
+         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+         Top             =   5220
+         Width           =   4560
+      End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
@@ -38,7 +95,7 @@ Begin VB.Form frmAPOListados
          Index           =   122
          Left            =   2775
          Locked          =   -1  'True
-         TabIndex        =   437
+         TabIndex        =   440
          Text            =   "Text5"
          Top             =   3645
          Width           =   3465
@@ -195,8 +252,8 @@ Begin VB.Form frmAPOListados
          EndProperty
          Height          =   375
          Left            =   4035
-         TabIndex        =   426
-         Top             =   6000
+         TabIndex        =   427
+         Top             =   6720
          Width           =   1065
       End
       Begin VB.CommandButton CmdCancel 
@@ -214,7 +271,7 @@ Begin VB.Form frmAPOListados
          Index           =   14
          Left            =   5205
          TabIndex        =   428
-         Top             =   6000
+         Top             =   6720
          Width           =   1065
       End
       Begin VB.TextBox txtcodigo 
@@ -274,7 +331,7 @@ Begin VB.Form frmAPOListados
          MaxLength       =   10
          TabIndex        =   422
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-         Top             =   4380
+         Top             =   4335
          Width           =   1360
       End
       Begin VB.TextBox txtcodigo 
@@ -287,16 +344,73 @@ Begin VB.Form frmAPOListados
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   975
+         Height          =   390
          Index           =   97
-         Left            =   1710
+         Left            =   1740
          MaxLength       =   250
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   424
+         TabIndex        =   426
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-         Top             =   4875
+         Top             =   6135
          Width           =   4545
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Presidente"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Index           =   143
+         Left            =   255
+         TabIndex        =   444
+         Top             =   4815
+         Width           =   1815
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Firmado ante "
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Index           =   133
+         Left            =   255
+         TabIndex        =   443
+         Top             =   5715
+         Width           =   1815
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Secretario"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Index           =   132
+         Left            =   255
+         TabIndex        =   442
+         Top             =   5265
+         Width           =   1815
       End
       Begin VB.Image imgBuscar 
          Height          =   240
@@ -322,7 +436,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   131
          Left            =   705
-         TabIndex        =   438
+         TabIndex        =   441
          Top             =   3645
          Width           =   645
       End
@@ -352,7 +466,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   142
          Left            =   255
-         TabIndex        =   436
+         TabIndex        =   439
          Top             =   2970
          Width           =   1560
       End
@@ -370,7 +484,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   141
          Left            =   705
-         TabIndex        =   435
+         TabIndex        =   438
          Top             =   3270
          Width           =   645
       End
@@ -410,7 +524,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   140
          Left            =   255
-         TabIndex        =   434
+         TabIndex        =   437
          Top             =   975
          Width           =   540
       End
@@ -428,7 +542,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   139
          Left            =   750
-         TabIndex        =   433
+         TabIndex        =   436
          Top             =   1590
          Width           =   600
       End
@@ -446,7 +560,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   138
          Left            =   735
-         TabIndex        =   432
+         TabIndex        =   435
          Top             =   1215
          Width           =   645
       End
@@ -482,7 +596,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   137
          Left            =   705
-         TabIndex        =   431
+         TabIndex        =   434
          Top             =   2625
          Width           =   600
       End
@@ -500,7 +614,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   136
          Left            =   705
-         TabIndex        =   430
+         TabIndex        =   433
          Top             =   2220
          Width           =   645
       End
@@ -519,7 +633,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   135
          Left            =   255
-         TabIndex        =   429
+         TabIndex        =   432
          Top             =   1965
          Width           =   1815
       End
@@ -538,7 +652,7 @@ Begin VB.Form frmAPOListados
          Height          =   345
          Index           =   29
          Left            =   255
-         TabIndex        =   427
+         TabIndex        =   431
          Top             =   315
          Width           =   5160
       End
@@ -548,7 +662,7 @@ Begin VB.Form frmAPOListados
          Left            =   1470
          Picture         =   "frmAPOListados.frx":066A
          ToolTipText     =   "Buscar fecha"
-         Top             =   4380
+         Top             =   4335
          Width           =   240
       End
       Begin VB.Label Label4 
@@ -566,8 +680,8 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   134
          Left            =   255
-         TabIndex        =   425
-         Top             =   4080
+         TabIndex        =   430
+         Top             =   4035
          Width           =   1815
       End
       Begin VB.Label Label4 
@@ -585,8 +699,8 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   130
          Left            =   255
-         TabIndex        =   423
-         Top             =   4875
+         TabIndex        =   429
+         Top             =   6135
          Width           =   1815
       End
    End
@@ -9167,7 +9281,7 @@ Private Sub CmdAcepApoObli_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -9187,8 +9301,8 @@ Dim Sql2 As String
     
     '======== FORMULA  ====================================
     'D/H socio
-    cDesde = Trim(txtCodigo(77).Text)
-    cHasta = Trim(txtCodigo(78).Text)
+    cDesde = Trim(txtcodigo(77).Text)
+    cHasta = Trim(txtcodigo(78).Text)
     nDesde = txtNombre(78).Text
     nHasta = txtNombre(78).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -9203,7 +9317,7 @@ Dim Sql2 As String
     
     
     If HayRegistros(tabla, cadSelect) Then
-        Sql2 = "select * from raportacion where (fecaport, codaport, codsocio) in (select " & DBSet(txtCodigo(74).Text, "F") & "," & DBSet(txtCodigo(71).Text, "N") & ", codsocio from "
+        Sql2 = "select * from raportacion where (fecaport, codaport, codsocio) in (select " & DBSet(txtcodigo(74).Text, "F") & "," & DBSet(txtcodigo(71).Text, "N") & ", codsocio from "
         Sql2 = Sql2 & tabla
         If cadSelect <> "" Then Sql2 = Sql2 & " where " & cadSelect & ")"
         
@@ -9244,11 +9358,11 @@ Private Sub CmdAcepCertCPi_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSql As String
+Dim vSQL As String
 
     InicializarVbles
     
@@ -9261,8 +9375,8 @@ Dim vSql As String
     
     '======== FORMULA  ====================================
     'D/H socio
-    cDesde = Trim(txtCodigo(119).Text)
-    cHasta = Trim(txtCodigo(120).Text)
+    cDesde = Trim(txtcodigo(119).Text)
+    cHasta = Trim(txtcodigo(120).Text)
     nDesde = txtNombre(119).Text
     nHasta = txtNombre(120).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -9273,8 +9387,8 @@ Dim vSql As String
     End If
     
     'D/H Fecha
-    cDesde = Trim(txtCodigo(117).Text)
-    cHasta = Trim(txtCodigo(118).Text)
+    cDesde = Trim(txtcodigo(117).Text)
+    cHasta = Trim(txtcodigo(118).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{raportacion.fecaport}"
@@ -9283,8 +9397,8 @@ Dim vSql As String
     End If
     
     'Tipo de Aportacion
-    cDesde = Trim(txtCodigo(121).Text)
-    cHasta = Trim(txtCodigo(122).Text)
+    cDesde = Trim(txtcodigo(121).Text)
+    cHasta = Trim(txtcodigo(122).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{raportacion.codaport}"
@@ -9296,12 +9410,15 @@ Dim vSql As String
     tabla = "raportacion INNER JOIN rsocios ON raportacion.codsocio = rsocios.codsocio"
     
     If HayRegistros(tabla, cadSelect) Then
-        CadParam = CadParam & "pObser=""" & txtCodigo(97).Text & """|"
-        CadParam = CadParam & "pFecha=""" & txtCodigo(116).Text & """|"
-        CadParam = CadParam & "pDesdeFecha=""" & txtCodigo(117).Text & """|"
-        CadParam = CadParam & "pHastaFecha=""" & txtCodigo(118).Text & """|"
+        CadParam = CadParam & "pObser=""" & txtcodigo(97).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtcodigo(116).Text & """|"
+        CadParam = CadParam & "pDesdeFecha=""" & txtcodigo(117).Text & """|"
+        CadParam = CadParam & "pHastaFecha=""" & txtcodigo(118).Text & """|"
+        CadParam = CadParam & "pSecretario=""" & txtcodigo(113).Text & """|"
+        CadParam = CadParam & "pFirmado=""" & txtcodigo(114).Text & """|"
+        CadParam = CadParam & "pPresidente=""" & txtcodigo(115).Text & """|"
         
-        numParam = numParam + 4
+        numParam = numParam + 6
         
         indRPT = 74 ' "rManAportacion.rpt"
         
@@ -9320,11 +9437,11 @@ Private Sub CmdAcepCertBol_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSql As String
+Dim vSQL As String
 
     InicializarVbles
     
@@ -9337,8 +9454,8 @@ Dim vSql As String
     
     '======== FORMULA  ====================================
     'D/H socio
-    cDesde = Trim(txtCodigo(88).Text)
-    cHasta = Trim(txtCodigo(89).Text)
+    cDesde = Trim(txtcodigo(88).Text)
+    cHasta = Trim(txtcodigo(89).Text)
     nDesde = txtNombre(88).Text
     nHasta = txtNombre(89).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -9349,8 +9466,8 @@ Dim vSql As String
     End If
     
     'D/H Fecha
-    cDesde = Trim(txtCodigo(90).Text)
-    cHasta = Trim(txtCodigo(91).Text)
+    cDesde = Trim(txtcodigo(90).Text)
+    cHasta = Trim(txtcodigo(91).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{raportacion.fecaport}"
@@ -9359,18 +9476,18 @@ Dim vSql As String
     End If
     
     'Tipo de Aportacion
-    If Not AnyadirAFormula(cadFormula, "{raportacion.codaport} = " & DBSet(txtCodigo(87).Text, "N")) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect, "{raportacion.codaport} = " & DBSet(txtCodigo(87).Text, "N")) Then Exit Sub
+    If Not AnyadirAFormula(cadFormula, "{raportacion.codaport} = " & DBSet(txtcodigo(87).Text, "N")) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, "{raportacion.codaport} = " & DBSet(txtcodigo(87).Text, "N")) Then Exit Sub
     
     tabla = "raportacion INNER JOIN rsocios ON raportacion.codsocio = rsocios.codsocio"
     
     If HayRegistros(tabla, cadSelect) Then
-        CadParam = CadParam & "pPresi=""" & txtCodigo(92).Text & """|"
-        CadParam = CadParam & "pSecre=""" & txtCodigo(93).Text & """|"
-        CadParam = CadParam & "pTesor=""" & txtCodigo(94).Text & """|"
-        CadParam = CadParam & "pObser=""" & txtCodigo(95).Text & """|"
-        CadParam = CadParam & "pFecha=""" & txtCodigo(76).Text & """|"
-        CadParam = CadParam & "pHastaFecha=""" & txtCodigo(91).Text & """|"
+        CadParam = CadParam & "pPresi=""" & txtcodigo(92).Text & """|"
+        CadParam = CadParam & "pSecre=""" & txtcodigo(93).Text & """|"
+        CadParam = CadParam & "pTesor=""" & txtcodigo(94).Text & """|"
+        CadParam = CadParam & "pObser=""" & txtcodigo(95).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtcodigo(76).Text & """|"
+        CadParam = CadParam & "pHastaFecha=""" & txtcodigo(91).Text & """|"
         numParam = numParam + 6
         
         indRPT = 74 ' "rManAportacion.rpt"
@@ -9403,7 +9520,7 @@ Dim Nregs As Long
     Nregs = TotalRegistrosConsulta(Sql)
     
     Sql = "update rtipoapor set numero = numero + " & DBSet(Nregs, "N")
-    Sql = Sql & " where codaport = " & DBSet(txtCodigo(87).Text, "N")
+    Sql = Sql & " where codaport = " & DBSet(txtcodigo(87).Text, "N")
     
     conn.Execute Sql
     
@@ -9418,11 +9535,11 @@ Private Sub CmdAcepDevApoQua_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSql As String
+Dim vSQL As String
 
     InicializarVbles
     
@@ -9436,8 +9553,8 @@ Dim vSql As String
     '======== FORMULA  ====================================
     'Seleccionar registros de la empresa conectada
     'D/H socio
-    cDesde = Trim(txtCodigo(107).Text)
-    cHasta = Trim(txtCodigo(108).Text)
+    cDesde = Trim(txtcodigo(107).Text)
+    cHasta = Trim(txtcodigo(108).Text)
     nDesde = txtNombre(107).Text
     nHasta = txtNombre(108).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -9448,8 +9565,8 @@ Dim vSql As String
     End If
     
     'D/H clase
-    cDesde = Trim(txtCodigo(109).Text)
-    cHasta = Trim(txtCodigo(110).Text)
+    cDesde = Trim(txtcodigo(109).Text)
+    cHasta = Trim(txtcodigo(110).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{variedades.codclase}"
@@ -9457,23 +9574,23 @@ Dim vSql As String
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHClase= """) Then Exit Sub
     End If
     
-    vSql = ""
-    If txtCodigo(109).Text <> "" Then vSql = vSql & " and clases.codclase >= " & DBSet(txtCodigo(109).Text, "N")
-    If txtCodigo(110).Text <> "" Then vSql = vSql & " and clases.codclase <= " & DBSet(txtCodigo(110).Text, "N")
+    vSQL = ""
+    If txtcodigo(109).Text <> "" Then vSQL = vSQL & " and clases.codclase >= " & DBSet(txtcodigo(109).Text, "N")
+    If txtcodigo(110).Text <> "" Then vSQL = vSQL & " and clases.codclase <= " & DBSet(txtcodigo(110).Text, "N")
     
                 
     Set frmMens2 = New frmMensajes
     
     frmMens2.OpcionMensaje = 16
-    frmMens2.cadWHERE = vSql
+    frmMens2.cadWHERE = vSQL
     frmMens2.Show vbModal
     
     Set frmMens2 = Nothing
     
     
     'D/H Fecha
-    cDesde = Trim(txtCodigo(106).Text)
-    cHasta = Trim(txtCodigo(111).Text)
+    cDesde = Trim(txtcodigo(106).Text)
+    cHasta = Trim(txtcodigo(111).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{raporhco.fecaport}"
@@ -9482,8 +9599,8 @@ Dim vSql As String
     End If
     
     'Ejercicio
-    If Not AnyadirAFormula(cadFormula, "{raporhco.ejercicio} = " & DBSet(txtCodigo(98).Text, "N")) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect, "{raporhco.ejercicio} = " & DBSet(txtCodigo(98).Text, "N")) Then Exit Sub
+    If Not AnyadirAFormula(cadFormula, "{raporhco.ejercicio} = " & DBSet(txtcodigo(98).Text, "N")) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, "{raporhco.ejercicio} = " & DBSet(txtcodigo(98).Text, "N")) Then Exit Sub
     
     
     tabla = "raporhco INNER JOIN variedades ON raporhco.codvarie = variedades.codvarie "
@@ -9517,11 +9634,11 @@ Private Sub CmdAcepDevApor_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSql As String
+Dim vSQL As String
 
     InicializarVbles
     
@@ -9534,8 +9651,8 @@ Dim vSql As String
     
     '======== FORMULA  ====================================
     'D/H socio
-    cDesde = Trim(txtCodigo(103).Text)
-    cHasta = Trim(txtCodigo(104).Text)
+    cDesde = Trim(txtcodigo(103).Text)
+    cHasta = Trim(txtcodigo(104).Text)
     nDesde = txtNombre(103).Text
     nHasta = txtNombre(104).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -9546,8 +9663,8 @@ Dim vSql As String
     End If
     
     'D/H Fecha
-    cDesde = Trim(txtCodigo(101).Text)
-    cHasta = Trim(txtCodigo(102).Text)
+    cDesde = Trim(txtcodigo(101).Text)
+    cHasta = Trim(txtcodigo(102).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{raportacion.fecaport}"
@@ -9556,8 +9673,8 @@ Dim vSql As String
     End If
     
     'Tipo de Aportacion
-    If Not AnyadirAFormula(cadFormula, "{raportacion.codaport} = " & DBSet(txtCodigo(105).Text, "N")) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect, "{raportacion.codaport} = " & DBSet(txtCodigo(105).Text, "N")) Then Exit Sub
+    If Not AnyadirAFormula(cadFormula, "{raportacion.codaport} = " & DBSet(txtcodigo(105).Text, "N")) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, "{raportacion.codaport} = " & DBSet(txtcodigo(105).Text, "N")) Then Exit Sub
     
     
     
@@ -9590,7 +9707,7 @@ Dim vSql As String
 
 End Sub
 
-Private Function ActualizarDevoluciones(vTabla As String, vSelect As String) As Boolean
+Private Function ActualizarDevoluciones(vtabla As String, vSelect As String) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
@@ -9625,24 +9742,24 @@ Dim Importe As Currency
 
     B = True
 
-    pb11.visible = True
-    pb11.Max = TotalRegistrosConsulta(Sql)
-    pb11.Value = 0
+    Pb11.visible = True
+    Pb11.Max = TotalRegistrosConsulta(Sql)
+    Pb11.Value = 0
     
     SqlValues = ""
     
     While Not Rs.EOF And B
-        IncrementarProgresNew pb11, 1
+        IncrementarProgresNew Pb11, 1
     
-        SqlExiste = "select count(*) from raportacion where codsocio = " & DBSet(Rs!Codigo1, "N") & " and codaport=" & DBSet(txtCodigo(96).Text, "N") & " and fecaport=" & DBSet(txtCodigo(100).Text, "F") & " and numfactu = 0"
+        SqlExiste = "select count(*) from raportacion where codsocio = " & DBSet(Rs!Codigo1, "N") & " and codaport=" & DBSet(txtcodigo(96).Text, "N") & " and fecaport=" & DBSet(txtcodigo(100).Text, "F") & " and numfactu = 0"
         B = (TotalRegistros(SqlExiste) = 0)
         
         If Not B Then
-            MsgBox "El registro para el socio " & Format(DBLet(Rs!Codigo1, "N"), "000000") & " de fecha " & txtCodigo(100).Text & " y tipo " & DBSet(txtCodigo(96).Text, "N") & " existe. Revise.", vbExclamation
+            MsgBox "El registro para el socio " & Format(DBLet(Rs!Codigo1, "N"), "000000") & " de fecha " & txtcodigo(100).Text & " y tipo " & DBSet(txtcodigo(96).Text, "N") & " existe. Revise.", vbExclamation
         Else
             Importe = DBLet(Rs!Importe, "N") * (-1)
         
-            SqlValues = "(" & DBSet(Rs!Codigo1, "N") & "," & DBSet(txtCodigo(100).Text, "F") & "," & DBSet(txtCodigo(96).Text, "N") & "," & DBSet(txtCodigo(99).Text, "T") & ",'',0,"
+            SqlValues = "(" & DBSet(Rs!Codigo1, "N") & "," & DBSet(txtcodigo(100).Text, "F") & "," & DBSet(txtcodigo(96).Text, "N") & "," & DBSet(txtcodigo(99).Text, "T") & ",'',0,"
             SqlValues = SqlValues & DBSet(Importe, "N") & "," & ValorNulo & ",0,0,0)"
             
             conn.Execute Sql2 & SqlValues
@@ -9667,7 +9784,7 @@ eActualizarDevoluciones:
     
 End Function
 
-Private Function InsertarTemporal(vTabla As String, vSelect As String) As Boolean
+Private Function InsertarTemporal(vtabla As String, vSelect As String) As Boolean
 Dim Sql As String
 
     On Error GoTo eInsertarTemporal
@@ -9679,7 +9796,7 @@ Dim Sql As String
                                             'socio, fecaport,codaport,numfactu, codtipom, importe
     Sql = "insert into tmpinformes (codusu, codigo1, fecha1, campo1, importe1, nombre1, importe2)"
     Sql = Sql & " select " & vUsu.Codigo & ", raportacion.codsocio, fecaport, codaport, numfactu, codtipom, importe "
-    Sql = Sql & " from " & vTabla
+    Sql = Sql & " from " & vtabla
     Sql = Sql & " where " & vSelect
     
     conn.Execute Sql
@@ -9693,7 +9810,7 @@ End Function
 
 
 
-Private Function InsertarTemporal2(vTabla As String, vSelect As String) As Boolean
+Private Function InsertarTemporal2(vtabla As String, vSelect As String) As Boolean
 Dim Sql As String
 
     On Error GoTo eInsertarTemporal
@@ -9704,8 +9821,8 @@ Dim Sql As String
     conn.Execute Sql
                                             'socio, fecaport,codaport,numfactu, codtipom, importe
     Sql = "insert into tmpinformes (codusu, codigo1, fecha1, campo1, importe1, nombre1, importe2)"
-    Sql = Sql & " select " & vUsu.Codigo & ", codsocio, " & DBSet(txtCodigo(74).Text, "F") & "," & DBSet(txtCodigo(71).Text, "N") & ", 0, null," & DBSet(txtCodigo(73).Text, "N")
-    Sql = Sql & " from " & vTabla
+    Sql = Sql & " select " & vUsu.Codigo & ", codsocio, " & DBSet(txtcodigo(74).Text, "F") & "," & DBSet(txtcodigo(71).Text, "N") & ", 0, null," & DBSet(txtcodigo(73).Text, "N")
+    Sql = Sql & " from " & vtabla
     Sql = Sql & " where " & vSelect
     
     conn.Execute Sql
@@ -9724,7 +9841,7 @@ Private Sub CmdAcepInsApoBol_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -9744,11 +9861,11 @@ Dim Sql As String
     '======== FORMULA  ====================================
     'Tipo de movimiento:
     Tipos = ""
-    For I = 1 To ListView1(0).ListItems.Count
-        If ListView1(0).ListItems(I).Checked Then
-            Tipos = Tipos & DBSet(ListView1(0).ListItems(I).Key, "T") & ","
+    For i = 1 To ListView1(0).ListItems.Count
+        If ListView1(0).ListItems(i).Checked Then
+            Tipos = Tipos & DBSet(ListView1(0).ListItems(i).Key, "T") & ","
         End If
-    Next I
+    Next i
     
     If Tipos = "" Then
         MsgBox "Debe seleccionar al menos un tipo de factura.", vbExclamation
@@ -9762,8 +9879,8 @@ Dim Sql As String
     End If
     
     'D/H socio
-    cDesde = Trim(txtCodigo(66).Text)
-    cHasta = Trim(txtCodigo(67).Text)
+    cDesde = Trim(txtcodigo(66).Text)
+    cHasta = Trim(txtcodigo(67).Text)
     nDesde = txtNombre(66).Text
     nHasta = txtNombre(67).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -9774,8 +9891,8 @@ Dim Sql As String
     End If
     
     'D/H Nro de Factura
-    cDesde = Trim(txtCodigo(61).Text)
-    cHasta = Trim(txtCodigo(62).Text)
+    cDesde = Trim(txtcodigo(61).Text)
+    cHasta = Trim(txtcodigo(62).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{" & tabla & ".numfactu}"
@@ -9788,8 +9905,8 @@ Dim Sql As String
     Case 11 'Insercion de aportaciones
         
         'D/H Fecha factura
-        cDesde = Trim(txtCodigo(64).Text)
-        cHasta = Trim(txtCodigo(65).Text)
+        cDesde = Trim(txtcodigo(64).Text)
+        cHasta = Trim(txtcodigo(65).Text)
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
             Codigo = "{" & tabla & ".fecfactu}"
@@ -9810,8 +9927,8 @@ Dim Sql As String
         
     Case 12 'Impresion de recibos
         'D/H Fecha factura
-        cDesde = Trim(txtCodigo(64).Text)
-        cHasta = Trim(txtCodigo(65).Text)
+        cDesde = Trim(txtcodigo(64).Text)
+        cHasta = Trim(txtcodigo(65).Text)
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
             Codigo = "{" & tabla & ".fecaport}"
@@ -9819,7 +9936,7 @@ Dim Sql As String
             If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHFecha= """) Then Exit Sub
         End If
         
-        CadParam = CadParam & "pFecha=""" & txtCodigo(70).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtcodigo(70).Text & """|"
         numParam = numParam + 1
         
         If HayRegistros(tabla, cadSelect) Then
@@ -9842,11 +9959,11 @@ Private Sub CmdAcepCalApoQua_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSql As String
+Dim vSQL As String
 
 InicializarVbles
     
@@ -9860,13 +9977,13 @@ InicializarVbles
      '======== FORMULA  ====================================
     'Seleccionar registros de la empresa conectada
     'SECCION
-    Codigo = "{rsocios_seccion.codsecci}=" & txtCodigo(32).Text
+    Codigo = "{rsocios_seccion.codsecci}=" & txtcodigo(32).Text
     If Not AnyadirAFormula(cadFormula, Codigo) Then Exit Sub
     If Not AnyadirAFormula(cadSelect, Codigo) Then Exit Sub
     
     'D/H socio
-    cDesde = Trim(txtCodigo(29).Text)
-    cHasta = Trim(txtCodigo(30).Text)
+    cDesde = Trim(txtcodigo(29).Text)
+    cHasta = Trim(txtcodigo(30).Text)
     nDesde = txtNombre(29).Text
     nHasta = txtNombre(30).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -9877,14 +9994,14 @@ InicializarVbles
     End If
     
     'hasta el año de plantacion
-    Codigo = "{rcampos.anoplant}<=" & txtCodigo(25).Text
+    Codigo = "{rcampos.anoplant}<=" & txtcodigo(25).Text
     If Not AnyadirAFormula(cadFormula, Codigo) Then Exit Sub
     If Not AnyadirAFormula(cadSelect, Codigo) Then Exit Sub
     
     
     'D/H clase
-    cDesde = Trim(txtCodigo(27).Text)
-    cHasta = Trim(txtCodigo(28).Text)
+    cDesde = Trim(txtcodigo(27).Text)
+    cHasta = Trim(txtcodigo(28).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{variedades.codclase}"
@@ -9892,15 +10009,15 @@ InicializarVbles
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHClase= """) Then Exit Sub
     End If
     
-    vSql = ""
-    If txtCodigo(27).Text <> "" Then vSql = vSql & " and clases.codclase >= " & DBSet(txtCodigo(27).Text, "N")
-    If txtCodigo(28).Text <> "" Then vSql = vSql & " and clases.codclase <= " & DBSet(txtCodigo(28).Text, "N")
+    vSQL = ""
+    If txtcodigo(27).Text <> "" Then vSQL = vSQL & " and clases.codclase >= " & DBSet(txtcodigo(27).Text, "N")
+    If txtcodigo(28).Text <> "" Then vSQL = vSQL & " and clases.codclase <= " & DBSet(txtcodigo(28).Text, "N")
     
                 
     Set frmMens1 = New frmMensajes
     
     frmMens1.OpcionMensaje = 16
-    frmMens1.cadWHERE = vSql
+    frmMens1.cadWHERE = vSQL
     frmMens1.Show vbModal
     
     Set frmMens1 = Nothing
@@ -9919,7 +10036,7 @@ InicializarVbles
 
 End Sub
 
-Private Function CalculoAportacionQuatretonda(vTabla As String, vWhere As String) As Boolean
+Private Function CalculoAportacionQuatretonda(vtabla As String, vWhere As String) As Boolean
 Dim Sql As String
 Dim Importe As Currency
 Dim Rs As ADODB.Recordset
@@ -9946,11 +10063,11 @@ Dim Existe As Boolean
     SqlInsert = "insert into ariagro.raporhco (numaport,codsocio,codcampo,poligono,parcela,codparti,codvarie,impaport," & _
                 "fecaport,anoplant,observac,supcoope,ejercicio,intconta) values "
     
-    Sql = "select rcampos.* from " & vTabla
+    Sql = "select rcampos.* from " & vtabla
     Sql = Sql & " where " & vWhere
     
-    CargarProgres pb5, TotalRegistrosConsulta(Sql)
-    pb5.visible = True
+    CargarProgres Pb5, TotalRegistrosConsulta(Sql)
+    Pb5.visible = True
     
     
     CadValues = ""
@@ -9964,9 +10081,9 @@ Dim Existe As Boolean
     While Not Rs.EOF And B
         Sql2 = "select count(*) from ariagro.raporhco where codsocio = " & DBSet(Rs!Codsocio, "N")
         Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codcampo, "N") & " and codvarie = " & DBSet(Rs!Codvarie, "N")
-        Sql2 = Sql2 & " and fecaport = " & DBSet(txtCodigo(20).Text, "F")
+        Sql2 = Sql2 & " and fecaport = " & DBSet(txtcodigo(20).Text, "F")
         
-        IncrementarProgres pb5, 1
+        IncrementarProgres Pb5, 1
         DoEvents
         
         
@@ -9974,9 +10091,9 @@ Dim Existe As Boolean
             B = False
             cadErr = "Ya existe la aportación para el socio " & DBLet(Rs!Codsocio, "N") & ", campo " & _
                     DBLet(Rs!codcampo, "N") & ", variedad " & DBLet(Rs!Codvarie, "N") & _
-                    " y fecha de aportación " & txtCodigo(20).Text & ". Revise."
+                    " y fecha de aportación " & txtcodigo(20).Text & ". Revise."
         Else
-            Importe = Round2(Round2(DBLet(Rs!supcoope, "N") / vParamAplic.Faneca, 2) * CCur(ImporteSinFormato(txtCodigo(26).Text)), 2)
+            Importe = Round2(Round2(DBLet(Rs!supcoope, "N") / vParamAplic.Faneca, 2) * CCur(ImporteSinFormato(txtcodigo(26).Text)), 2)
         
             If Importe <> 0 Then ' no insertamos una aportacion 0
                 NumApor = vTipoMov.ConseguirContador(CodTipoMov)
@@ -9995,9 +10112,9 @@ Dim Existe As Boolean
                 
                 CadValues = "(" & DBSet(NumApor, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ","
                 CadValues = CadValues & DBSet(Rs!Poligono, "N") & "," & DBSet(Rs!Parcela, "N") & "," & DBSet(Rs!codparti, "N") & ","
-                CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Importe, "N") & "," & DBSet(txtCodigo(20).Text, "F") & ","
+                CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Importe, "N") & "," & DBSet(txtcodigo(20).Text, "F") & ","
                 CadValues = CadValues & DBSet(Rs!anoplant, "N") & "," & ValorNulo & "," & DBSet(Rs!supcoope, "N") & ","
-                CadValues = CadValues & DBSet(txtCodigo(31).Text, "N") & ",0)"
+                CadValues = CadValues & DBSet(txtcodigo(31).Text, "N") & ",0)"
                 
                 conn.Execute SqlInsert & CadValues
                 
@@ -10013,7 +10130,7 @@ Dim Existe As Boolean
     
     If B Then
         CalculoAportacionQuatretonda = True
-        pb5.visible = False
+        Pb5.visible = False
         conn.CommitTrans
         Exit Function
     End If
@@ -10021,7 +10138,7 @@ Dim Existe As Boolean
 
 eCalculoAportacionQuatretonda:
     conn.RollbackTrans
-    pb5.visible = False
+    Pb5.visible = False
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Calculo de Aportaciones de Quatretonda", Err.Description
     End If
@@ -10035,12 +10152,12 @@ Private Sub CmdAcepIntTesBol_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
 Dim B As Boolean
-Dim vSql As String
+Dim vSQL As String
 
 InicializarVbles
     
@@ -10052,8 +10169,8 @@ InicializarVbles
     numParam = numParam + 1
     
     'D/H socio
-    cDesde = Trim(txtCodigo(81).Text)
-    cHasta = Trim(txtCodigo(82).Text)
+    cDesde = Trim(txtcodigo(81).Text)
+    cHasta = Trim(txtcodigo(82).Text)
     nDesde = txtNombre(81).Text
     nHasta = txtNombre(82).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -10064,8 +10181,8 @@ InicializarVbles
     End If
     
     'D/H Fecha aportacion
-    cDesde = Trim(txtCodigo(79).Text)
-    cHasta = Trim(txtCodigo(80).Text)
+    cDesde = Trim(txtcodigo(79).Text)
+    cHasta = Trim(txtcodigo(80).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{raportacion.fecaport}"
@@ -10074,8 +10191,8 @@ InicializarVbles
     End If
     
     ' del tipo de aportacion
-    If Not AnyadirAFormula(cadFormula, "{raportacion.codaport} = " & DBSet(txtCodigo(75).Text, "N")) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect, "{raportacion.codaport} = " & DBSet(txtCodigo(75).Text, "N")) Then Exit Sub
+    If Not AnyadirAFormula(cadFormula, "{raportacion.codaport} = " & DBSet(txtcodigo(75).Text, "N")) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, "{raportacion.codaport} = " & DBSet(txtcodigo(75).Text, "N")) Then Exit Sub
     
     ' Condicion de que no esten contabilizados
     If Not AnyadirAFormula(cadFormula, "{raportacion.intconta} = 0") Then Exit Sub
@@ -10120,12 +10237,12 @@ Private Sub CmdAcepIntTesQua_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
 Dim B As Boolean
-Dim vSql As String
+Dim vSQL As String
 
 InicializarVbles
     
@@ -10137,8 +10254,8 @@ InicializarVbles
     numParam = numParam + 1
     
     'D/H socio
-    cDesde = Trim(txtCodigo(44).Text)
-    cHasta = Trim(txtCodigo(45).Text)
+    cDesde = Trim(txtcodigo(44).Text)
+    cHasta = Trim(txtcodigo(45).Text)
     nDesde = txtNombre(44).Text
     nHasta = txtNombre(45).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -10149,8 +10266,8 @@ InicializarVbles
     End If
     
     'D/H Fecha aportacion
-    cDesde = Trim(txtCodigo(46).Text)
-    cHasta = Trim(txtCodigo(47).Text)
+    cDesde = Trim(txtcodigo(46).Text)
+    cHasta = Trim(txtcodigo(47).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{raporhco.fecaport}"
@@ -10159,8 +10276,8 @@ InicializarVbles
     End If
     
     'D/H Clase
-    cDesde = Trim(txtCodigo(43).Text)
-    cHasta = Trim(txtCodigo(48).Text)
+    cDesde = Trim(txtcodigo(43).Text)
+    cHasta = Trim(txtcodigo(48).Text)
     nDesde = txtNombre(43).Text
     nHasta = txtNombre(48).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -10174,15 +10291,15 @@ InicializarVbles
     If Not AnyadirAFormula(cadFormula, "{raporhco.intconta} = 0") Then Exit Sub
     If Not AnyadirAFormula(cadSelect, "{raporhco.intconta} = 0") Then Exit Sub
     
-    vSql = ""
-    If txtCodigo(43).Text <> "" Then vSql = vSql & " and clases.codclase >= " & DBSet(txtCodigo(43).Text, "N")
-    If txtCodigo(48).Text <> "" Then vSql = vSql & " and clases.codclase <= " & DBSet(txtCodigo(48).Text, "N")
+    vSQL = ""
+    If txtcodigo(43).Text <> "" Then vSQL = vSQL & " and clases.codclase >= " & DBSet(txtcodigo(43).Text, "N")
+    If txtcodigo(48).Text <> "" Then vSQL = vSQL & " and clases.codclase <= " & DBSet(txtcodigo(48).Text, "N")
     
                 
     Set frmMens2 = New frmMensajes
     
     frmMens2.OpcionMensaje = 16
-    frmMens2.cadWHERE = vSql
+    frmMens2.cadWHERE = vSQL
     frmMens2.Show vbModal
     
     Set frmMens2 = Nothing
@@ -10225,11 +10342,11 @@ Private Sub CmdAcepListado_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSql As String
+Dim vSQL As String
 
 InicializarVbles
     
@@ -10242,8 +10359,8 @@ InicializarVbles
     
     '======== FORMULA  ====================================
     'D/H socio
-    cDesde = Trim(txtCodigo(23).Text)
-    cHasta = Trim(txtCodigo(24).Text)
+    cDesde = Trim(txtcodigo(23).Text)
+    cHasta = Trim(txtcodigo(24).Text)
     nDesde = txtNombre(23).Text
     nHasta = txtNombre(24).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -10254,8 +10371,8 @@ InicializarVbles
     End If
     
     'D/H Fecha
-    cDesde = Trim(txtCodigo(21).Text)
-    cHasta = Trim(txtCodigo(22).Text)
+    cDesde = Trim(txtcodigo(21).Text)
+    cHasta = Trim(txtcodigo(22).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{raportacion.fecaport}"
@@ -10264,8 +10381,8 @@ InicializarVbles
     End If
     
     'D/H Tipo de Aportacion
-    cDesde = Trim(txtCodigo(13).Text)
-    cHasta = Trim(txtCodigo(19).Text)
+    cDesde = Trim(txtcodigo(13).Text)
+    cHasta = Trim(txtcodigo(19).Text)
     nDesde = txtNombre(13).Text
     nHasta = txtNombre(19).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -10275,15 +10392,15 @@ InicializarVbles
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHAportacion= """) Then Exit Sub
     End If
     
-    vSql = ""
-    If txtCodigo(13).Text <> "" Then vSql = vSql & " and rtipoapor.codaport >= " & DBSet(txtCodigo(13).Text, "N")
-    If txtCodigo(19).Text <> "" Then vSql = vSql & " and rtipoapor.codaport <= " & DBSet(txtCodigo(19).Text, "N")
+    vSQL = ""
+    If txtcodigo(13).Text <> "" Then vSQL = vSQL & " and rtipoapor.codaport >= " & DBSet(txtcodigo(13).Text, "N")
+    If txtcodigo(19).Text <> "" Then vSQL = vSQL & " and rtipoapor.codaport <= " & DBSet(txtcodigo(19).Text, "N")
     
                 
     Set frmMens = New frmMensajes
     
     frmMens.OpcionMensaje = 32
-    frmMens.cadWHERE = vSql
+    frmMens.cadWHERE = vSQL
     frmMens.Show vbModal
     
     Set frmMens = Nothing
@@ -10299,7 +10416,7 @@ InicializarVbles
             numParam = numParam + 1
     End Select
     
-    CadParam = CadParam & "pResumen=" & ChkResumen(0).Value & "|"
+    CadParam = CadParam & "pResumen=" & chkResumen(0).Value & "|"
     numParam = numParam + 1
     
     tabla = "raportacion INNER JOIN rsocios ON raportacion.codsocio = rsocios.codsocio and rsocios.fechabaja is null "
@@ -10322,11 +10439,11 @@ Private Sub CmdAcepListAporQua_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSql As String
+Dim vSQL As String
 
 InicializarVbles
     
@@ -10339,8 +10456,8 @@ InicializarVbles
     
     '======== FORMULA  ====================================
     'D/H socio
-    cDesde = Trim(txtCodigo(36).Text)
-    cHasta = Trim(txtCodigo(37).Text)
+    cDesde = Trim(txtcodigo(36).Text)
+    cHasta = Trim(txtcodigo(37).Text)
     nDesde = txtNombre(36).Text
     nHasta = txtNombre(37).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -10351,8 +10468,8 @@ InicializarVbles
     End If
     
     'D/H Fecha
-    cDesde = Trim(txtCodigo(35).Text)
-    cHasta = Trim(txtCodigo(41).Text)
+    cDesde = Trim(txtcodigo(35).Text)
+    cHasta = Trim(txtcodigo(41).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{raporhco.fecaport}"
@@ -10362,8 +10479,8 @@ InicializarVbles
     
     If OpcionListado = 6 Then
         'D/H Clase
-        cDesde = Trim(txtCodigo(38).Text)
-        cHasta = Trim(txtCodigo(39).Text)
+        cDesde = Trim(txtcodigo(38).Text)
+        cHasta = Trim(txtcodigo(39).Text)
         nDesde = txtNombre(38).Text
         nHasta = txtNombre(39).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -10374,15 +10491,15 @@ InicializarVbles
         End If
     End If
     
-    vSql = ""
-    If txtCodigo(38).Text <> "" Then vSql = vSql & " and variedades.codclase >= " & DBSet(txtCodigo(38).Text, "N")
-    If txtCodigo(39).Text <> "" Then vSql = vSql & " and variedades.codclase <= " & DBSet(txtCodigo(39).Text, "N")
+    vSQL = ""
+    If txtcodigo(38).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtcodigo(38).Text, "N")
+    If txtcodigo(39).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtcodigo(39).Text, "N")
     
                 
     Set frmMens2 = New frmMensajes
     
     frmMens2.OpcionMensaje = 16
-    frmMens2.cadWHERE = vSql
+    frmMens2.cadWHERE = vSQL
     frmMens2.Show vbModal
     
     Set frmMens2 = Nothing
@@ -10452,7 +10569,7 @@ Private Sub CmdAcepRegBajaSocios_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -10471,7 +10588,7 @@ Dim vCampAnt As CCampAnt
     numParam = numParam + 1
     
     ' socios dados de alta durante la campaña anterior
-    Sql = "rsocios.codsocio = " & DBSet(txtCodigo(59).Text, "N")
+    Sql = "rsocios.codsocio = " & DBSet(txtcodigo(59).Text, "N")
     If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     
     tabla = "rsocios"
@@ -10481,7 +10598,7 @@ Dim vCampAnt As CCampAnt
         Me.Label1(1).visible = True
         Me.Refresh
         DoEvents
-        If CargarTablaTemporal3(tabla, cadSelect, "0", Me.pb7) Then
+        If CargarTablaTemporal3(tabla, cadSelect, "0", Me.Pb7) Then
             Label1(1).Caption = "Comprobando Socios en Sección"
             Label1(1).visible = True
             Me.Refresh
@@ -10507,7 +10624,7 @@ Private Sub CmdAcepRegul_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -10523,8 +10640,8 @@ InicializarVbles
     numParam = numParam + 1
     
     'D/H socio
-    cDesde = Trim(txtCodigo(10).Text)
-    cHasta = Trim(txtCodigo(11).Text)
+    cDesde = Trim(txtcodigo(10).Text)
+    cHasta = Trim(txtcodigo(11).Text)
     nDesde = txtNombre(10).Text
     nHasta = txtNombre(11).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -10535,8 +10652,8 @@ InicializarVbles
     End If
     
     'D/H Fecha factura
-    cDesde = Trim(txtCodigo(8).Text)
-    cHasta = Trim(txtCodigo(9).Text)
+    cDesde = Trim(txtcodigo(8).Text)
+    cHasta = Trim(txtcodigo(9).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{raportacion.fecaport}"
@@ -10551,7 +10668,7 @@ InicializarVbles
         Me.Label1(1).visible = True
         Me.Refresh
         DoEvents
-        If CargarTablaTemporal(tabla, cadSelect, txtCodigo(4).Text, txtCodigo(5).Text, Me.Pb2) Then
+        If CargarTablaTemporal(tabla, cadSelect, txtcodigo(4).Text, txtcodigo(5).Text, Me.pb2) Then
             Label1(1).Caption = "Comprobando Socios en Sección"
             Label1(1).visible = True
             Me.Refresh
@@ -10574,7 +10691,7 @@ InicializarVbles
 
 End Sub
 
-Private Function SociosEnSeccion(vTabla As String, vWhere As String, Seccion As Integer) As Boolean
+Private Function SociosEnSeccion(vtabla As String, vWhere As String, Seccion As Integer) As Boolean
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim B As Boolean
@@ -10584,8 +10701,8 @@ Dim B As Boolean
     SociosEnSeccion = False
 
     'Seleccionamos los distintos socios, cuentas que vamos a facturar
-    Sql = "SELECT DISTINCT " & vTabla & ".codigo1 codsocio"
-    Sql = Sql & " from " & vTabla
+    Sql = "SELECT DISTINCT " & vtabla & ".codigo1 codsocio"
+    Sql = Sql & " from " & vtabla
     If vWhere <> "" Then Sql = Sql & " where " & vWhere
     Sql = Sql & " order by 1 "
 
@@ -10658,39 +10775,39 @@ Dim SqlExiste As String
 
     Sql2 = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe) values "
 
-    Campanya = Mid(Format(Year(CDate(txtCodigo(8).Text)) + 1, "0000"), 3, 2) & "/" & Mid(Format(Year(CDate(txtCodigo(9).Text)), "0000"), 3, 2)
+    Campanya = Mid(Format(Year(CDate(txtcodigo(8).Text)) + 1, "0000"), 3, 2) & "/" & Mid(Format(Year(CDate(txtcodigo(9).Text)), "0000"), 3, 2)
     Descripc = "ACUMULADA " & Campanya
 
     B = True
 
-    Pb2.visible = True
-    Pb2.Max = TotalRegistrosConsulta(Sql)
-    Pb2.Value = 0
+    pb2.visible = True
+    pb2.Max = TotalRegistrosConsulta(Sql)
+    pb2.Value = 0
     
     While Not Rs.EOF And B
-        IncrementarProgresNew Pb2, 1
+        IncrementarProgresNew pb2, 1
     
         SqlValues = ""
         
-        Sql = "select importe from raportacion where codsocio=" & DBSet(Rs!Codigo1, "N") & " and codaport=0 and fecaport=" & DBSet(txtCodigo(8).Text, "F")
+        Sql = "select importe from raportacion where codsocio=" & DBSet(Rs!Codigo1, "N") & " and codaport=0 and fecaport=" & DBSet(txtcodigo(8).Text, "F")
     
         ImporIni = DevuelveValor(Sql)
         Importe = ImporIni + DBLet(Rs!importe4, "N")
     
-        SqlExiste = "select count(*) from raportacion where codsocio = " & DBSet(Rs!Codigo1, "N") & " and codaport=0 and fecaport=" & DBSet(txtCodigo(14).Text, "F")
+        SqlExiste = "select count(*) from raportacion where codsocio = " & DBSet(Rs!Codigo1, "N") & " and codaport=0 and fecaport=" & DBSet(txtcodigo(14).Text, "F")
         B = (TotalRegistros(SqlExiste) = 0)
         
         If Not B Then
-            MsgBox "El registro para el socio " & Format(DBLet(Rs!Codigo1, "N"), "000000") & " de fecha " & DBSet(txtCodigo(9).Text, "F") & " y tipo 0 existe. Revise.", vbExclamation
+            MsgBox "El registro para el socio " & Format(DBLet(Rs!Codigo1, "N"), "000000") & " de fecha " & DBSet(txtcodigo(9).Text, "F") & " y tipo 0 existe. Revise.", vbExclamation
         Else
             
             '[Monica]27/10/2015: en el caso de que el socio no quiera devolucion grabamos el registro de acumulado anterior
             If NoDevolverAporSocio(CStr(Rs!Codigo1)) Then
-                SqlValues = "(" & DBSet(Rs!Codigo1, "N") & "," & DBSet(txtCodigo(14).Text, "F") & ",0," & DBSet(Descripc, "T") & ","
+                SqlValues = "(" & DBSet(Rs!Codigo1, "N") & "," & DBSet(txtcodigo(14).Text, "F") & ",0," & DBSet(Descripc, "T") & ","
                 SqlValues = SqlValues & DBSet(Campanya, "T") & "," & DBSet(Rs!importe1, "N") & "," & DBSet(ImporIni, "N") & ")"
             Else
                 ' como estaba
-                SqlValues = "(" & DBSet(Rs!Codigo1, "N") & "," & DBSet(txtCodigo(14).Text, "F") & ",0," & DBSet(Descripc, "T") & ","
+                SqlValues = "(" & DBSet(Rs!Codigo1, "N") & "," & DBSet(txtcodigo(14).Text, "F") & ",0," & DBSet(Descripc, "T") & ","
                 SqlValues = SqlValues & DBSet(Campanya, "T") & "," & DBSet(Rs!importe2, "N") & "," & DBSet(Importe, "N") & ")"
             End If
             
@@ -10700,7 +10817,7 @@ Dim SqlExiste As String
             If NoDevolverAporSocio(CStr(Rs!Codigo1)) Then
                 B = True
             Else
-                B = InsertarEnTesoreriaNewAPO(MensError, Rs!Codigo1, DBLet(Rs!importe4, "N"), txtCodigo(15).Text, txtCodigo(17).Text, txtCodigo(16).Text, txtCodigo(18).Text, txtCodigo(14).Text, 0)
+                B = InsertarEnTesoreriaNewAPO(MensError, Rs!Codigo1, DBLet(Rs!importe4, "N"), txtcodigo(15).Text, txtcodigo(17).Text, txtcodigo(16).Text, txtcodigo(18).Text, txtcodigo(14).Text, 0)
             End If
         End If
     
@@ -10738,7 +10855,7 @@ Private Sub cmdAceptar_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -10755,8 +10872,8 @@ InicializarVbles
     
     '======== FORMULA  ====================================
     'D/H socio
-    cDesde = Trim(txtCodigo(0).Text)
-    cHasta = Trim(txtCodigo(1).Text)
+    cDesde = Trim(txtcodigo(0).Text)
+    cHasta = Trim(txtcodigo(1).Text)
     nDesde = txtNombre(0).Text
     nHasta = txtNombre(1).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -10767,8 +10884,8 @@ InicializarVbles
     End If
     
     'D/H Fecha factura
-    cDesde = Trim(txtCodigo(2).Text)
-    cHasta = Trim(txtCodigo(3).Text)
+    cDesde = Trim(txtcodigo(2).Text)
+    cHasta = Trim(txtcodigo(3).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{raportacion.fecaport}"
@@ -10781,7 +10898,7 @@ InicializarVbles
     
     
     If HayRegistros(tabla, cadSelect) Then
-        If CargarTablaTemporal(tabla, cadSelect, txtCodigo(6).Text, txtCodigo(7).Text, Me.Pb1) Then
+        If CargarTablaTemporal(tabla, cadSelect, txtcodigo(6).Text, txtcodigo(7).Text, Me.pb1) Then
             '[Monica]20/01/2016: si es mogente solo las de regularizacion negaiva
             If chkNegativas.Value = 1 Then BorrarPositivas
             
@@ -10815,9 +10932,9 @@ InicializarVbles
                     cadTitulo = "Informe Aportaciones"
                     LlamarImprimir
                 Case 3 ' Certificado de aportaciones
-                    CadParam = CadParam & "pDesdeFecha=""" & txtCodigo(2).Text & """|"
-                    CadParam = CadParam & "pHastaFecha=""" & txtCodigo(3).Text & """|"
-                    CadParam = CadParam & "pFecha=""" & txtCodigo(12).Text & """|"
+                    CadParam = CadParam & "pDesdeFecha=""" & txtcodigo(2).Text & """|"
+                    CadParam = CadParam & "pHastaFecha=""" & txtcodigo(3).Text & """|"
+                    CadParam = CadParam & "pFecha=""" & txtcodigo(12).Text & """|"
                     numParam = numParam + 3
                     '[Monica]11/03/2015:imprimimos el resumen
                     If vParamAplic.Cooperativa = 3 Then
@@ -10849,7 +10966,7 @@ Dim Sql As String
 End Sub
 
 
-Private Function CargarTablaTemporal(nTabla1 As String, nSelect1 As String, Precio1 As String, Precio2 As String, ByRef Pb1 As ProgressBar) As Boolean
+Private Function CargarTablaTemporal(nTabla1 As String, nSelect1 As String, Precio1 As String, Precio2 As String, ByRef pb1 As ProgressBar) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql2 As String
@@ -10886,9 +11003,9 @@ Dim Importe As Currency
     Sql2 = Sql2 & " order by 1, 3, 4"
     
     
-    Pb1.visible = True
-    Pb1.Max = TotalRegistrosConsulta(Sql2)
-    Pb1.Value = 0
+    pb1.visible = True
+    pb1.Max = TotalRegistrosConsulta(Sql2)
+    pb1.Value = 0
     
     
     cValues = ""
@@ -10910,7 +11027,7 @@ Dim Importe As Currency
     While Not Rs.EOF
         Entro = True
         
-        Pb1.Value = Pb1.Value + 1
+        pb1.Value = pb1.Value + 1
         DoEvents
         
         If SocioAnt <> Rs.Fields(0).Value Then
@@ -10993,7 +11110,7 @@ Dim Importe As Currency
     Set Rs = Nothing
 
     CargarTablaTemporal = True
-    Pb1.visible = False
+    pb1.visible = False
     
     Exit Function
     
@@ -11004,7 +11121,7 @@ End Function
 Private Function ExistenRegistrosAcumulados(nTabla As String, nWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim I As Long
+Dim i As Long
 Dim cadMen As String
 Dim cad As String
 
@@ -11026,14 +11143,14 @@ Dim cad As String
     
     If Not Rs.EOF Then
         cadMen = "Los siguientes socios tienen más de un registro de acumulado anterior entre las fechas: "
-        I = 0
+        i = 0
         While Not Rs.EOF
-            I = I + 1
+            i = i + 1
             cad = cad & Format(Rs.Fields(0), "000000") & ","
             
-            If I = 10 Then
+            If i = 10 Then
                 cad = cad & vbCrLf
-                I = 0
+                i = 0
             End If
             
             Rs.MoveNext
@@ -11061,7 +11178,7 @@ Private Sub CmdAcepRegAltaSocios_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -11104,7 +11221,7 @@ InicializarVbles
         Me.Label1(1).visible = True
         Me.Refresh
         DoEvents
-        If CargarTablaTemporal2(tabla, cadSelect, txtCodigo(60).Text, Me.Pb6) Then
+        If CargarTablaTemporal2(tabla, cadSelect, txtcodigo(60).Text, Me.Pb6) Then
             Label1(1).Caption = "Comprobando Socios en Sección"
             Label1(1).visible = True
             Me.Refresh
@@ -11117,7 +11234,7 @@ InicializarVbles
                 Me.Label1(1).Caption = "Actualizando Regularización"
                 Me.Refresh
                 DoEvents
-                If ActualizarRegularizacionAltaSocio(txtCodigo(60).Text) Then
+                If ActualizarRegularizacionAltaSocio(txtcodigo(60).Text) Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation
                     cmdCancel_Click (0)
                 End If
@@ -11136,94 +11253,98 @@ Private Sub Form_Activate()
     
         Select Case OpcionListado
             Case 1 ' informe de aportaciones
-                PonerFoco txtCodigo(0)
-                txtCodigo(3).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
+                PonerFoco txtcodigo(0)
+                txtcodigo(3).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
             Case 2 ' regularizacion
-                txtCodigo(9).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
-                txtCodigo(14).Text = Format(DateAdd("d", 1, vParam.FecFinCam), "dd/mm/yyyy")
+                txtcodigo(9).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
+                txtcodigo(14).Text = Format(DateAdd("d", 1, vParam.FecFinCam), "dd/mm/yyyy")
             
                 '[Monica]30/01/2014: valores por defecto de las formas de pago
-                txtCodigo(16).Text = Format(vParamAplic.ForpaNega, "000")
+                txtcodigo(16).Text = Format(vParamAplic.ForpaNega, "000")
                 txtCodigo_LostFocus (16)
-                txtCodigo(17).Text = Format(vParamAplic.ForpaPosi, "000")
+                txtcodigo(17).Text = Format(vParamAplic.ForpaPosi, "000")
                 txtCodigo_LostFocus (17)
             
-                PonerFoco txtCodigo(10)
+                PonerFoco txtcodigo(10)
             Case 3 ' Certificado de Aportaciones
-                PonerFoco txtCodigo(0)
-                txtCodigo(3).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
-                txtCodigo(12).Text = Format(Now, "dd/mm/yyyy")
+                PonerFoco txtcodigo(0)
+                txtcodigo(3).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
+                txtcodigo(12).Text = Format(Now, "dd/mm/yyyy")
             Case 4 ' Informe de Aportaciones en el mantenimiento
-                PonerFoco txtCodigo(23)
+                PonerFoco txtcodigo(23)
                 '[Monica]18/01/2016: Añadimos la relacion con la cooperativa
                 Combo1(1).ListIndex = 0
             Case 5 ' calculo de aportaciones de quatretonda
-                PonerFoco txtCodigo(32)
+                PonerFoco txtcodigo(32)
             Case 6 ' listado de aportaciones para quatretonda
                 Opcion1(0).Value = True
-                PonerFoco txtCodigo(33)
+                PonerFoco txtcodigo(33)
                 Combo1(0).ListIndex = 0
             Case 7 ' borrrado masivo de aportaciones de quatretonda
-                PonerFoco txtCodigo(44)
+                PonerFoco txtcodigo(44)
             Case 8 ' integracion en tesoreria de quatretonda
-                PonerFoco txtCodigo(44)
+                PonerFoco txtcodigo(44)
                 
                 '[Monica]30/01/2014: valores por defecto de las formas de pago
-                txtCodigo(40).Text = Format(vParamAplic.ForpaNega, "000")
+                txtcodigo(40).Text = Format(vParamAplic.ForpaNega, "000")
                 txtCodigo_LostFocus (40)
-                txtCodigo(42).Text = Format(vParamAplic.ForpaPosi, "000")
+                txtcodigo(42).Text = Format(vParamAplic.ForpaPosi, "000")
                 txtCodigo_LostFocus (42)
 
             Case 9 ' integracion en tesoreria alta de socios moixent
-                PonerFoco txtCodigo(60)
+                PonerFoco txtcodigo(60)
             
                 '[Monica]30/01/2014: valores por defecto de las formas de pago
-                txtCodigo(52).Text = Format(vParamAplic.ForpaNega, "000")
+                txtcodigo(52).Text = Format(vParamAplic.ForpaNega, "000")
                 txtCodigo_LostFocus (52)
-                txtCodigo(53).Text = Format(vParamAplic.ForpaPosi, "000")
+                txtcodigo(53).Text = Format(vParamAplic.ForpaPosi, "000")
                 txtCodigo_LostFocus (53)
             
             Case 10 ' integracion en tesoreria baja de socios moixent
-                PonerFoco txtCodigo(59)
+                PonerFoco txtcodigo(59)
                 
                 '[Monica]30/01/2014: valores por defecto de las formas de pago
-                txtCodigo(56).Text = Format(vParamAplic.ForpaNega, "000")
+                txtcodigo(56).Text = Format(vParamAplic.ForpaNega, "000")
                 txtCodigo_LostFocus (56)
-                txtCodigo(55).Text = Format(vParamAplic.ForpaPosi, "000")
+                txtcodigo(55).Text = Format(vParamAplic.ForpaPosi, "000")
                 txtCodigo_LostFocus (55)
                 
             Case 11 ' Insercion de aportaciones de Bolbaite
-                PonerFoco txtCodigo(61)
-                txtCodigo(69).Text = vParamAplic.PorcenAFO ' por defecto
-                If txtCodigo(69).Text <> "" Then txtCodigo(69).Text = Format(txtCodigo(69).Text, "##0.00")
+                PonerFoco txtcodigo(61)
+                txtcodigo(69).Text = vParamAplic.PorcenAFO ' por defecto
+                If txtcodigo(69).Text <> "" Then txtcodigo(69).Text = Format(txtcodigo(69).Text, "##0.00")
             
             Case 12 ' Impresion de Recibos de Bolbaite
-                PonerFoco txtCodigo(61)
-                txtCodigo(70).Text = Format(Now, "dd/mm/yyyy")
+                PonerFoco txtcodigo(61)
+                txtcodigo(70).Text = Format(Now, "dd/mm/yyyy")
                 
             Case 13 ' Aportacion obligatoria
-                PonerFoco txtCodigo(74)
-                txtCodigo(74).Text = Format(Now, "dd/mm/yyyy")
+                PonerFoco txtcodigo(74)
+                txtcodigo(74).Text = Format(Now, "dd/mm/yyyy")
                 
                 
             Case 14 ' integracion a contabilidad de aportaciones bolbaite
-                PonerFoco txtCodigo(81)
-                txtCodigo(86).Text = Format(Now, "dd/mm/yyyy")
+                PonerFoco txtcodigo(81)
+                txtcodigo(86).Text = Format(Now, "dd/mm/yyyy")
                 
                 '[Monica]30/01/2014:
-                txtCodigo(85).Text = Format(vParamAplic.ForpaNega, "000")
+                txtcodigo(85).Text = Format(vParamAplic.ForpaNega, "000")
                 txtCodigo_LostFocus (85)
-                txtCodigo(84).Text = Format(vParamAplic.ForpaPosi, "000")
+                txtcodigo(84).Text = Format(vParamAplic.ForpaPosi, "000")
                 txtCodigo_LostFocus (84)
                 
             Case 15 ' certificado de retenciones
-                PonerFoco txtCodigo(88)
+                PonerFoco txtcodigo(88)
                 
             Case 16 ' devolucion de aportaciones
-                PonerFoco txtCodigo(103)
+                PonerFoco txtcodigo(103)
                 
             Case 17 ' devolucion de aportaciones de quatretonda
-                PonerFoco txtCodigo(107)
+                PonerFoco txtcodigo(107)
+                
+            Case 18 ' certificado de aportaciones de coopic
+                txtcodigo(115).Text = vParam.PerContacto
+                PonerFoco txtcodigo(119)
                 
         End Select
         Screen.MousePointer = vbDefault
@@ -11278,7 +11399,7 @@ Dim List As Collection
         Case 1 ' rendimiento por articulo
             FrameCobrosVisible True, H, W
             tabla = "raportacion"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             Frame1.visible = False
             Frame1.Enabled = False
             Label1(0).Caption = "Informe de Aportaciones"
@@ -11288,12 +11409,12 @@ Dim List As Collection
         
             FrameRegularizacionVisible True, H, W
             tabla = "raportacion"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             
         Case 3 ' Certificado de aportaciones
             FrameCobrosVisible True, H, W
             tabla = "raportacion"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             Frame1.visible = True
             Frame1.Enabled = True
             Label1(0).Caption = "Certificado de Aportaciones"
@@ -11309,7 +11430,7 @@ Dim List As Collection
         Case 4 ' Informe de aportaciones
             FrameInformesVisible True, H, W
             tabla = "raportacion"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             Label1(0).Caption = "Certificado de Aportaciones"
             
             CargaCombo
@@ -11317,13 +11438,13 @@ Dim List As Collection
         Case 5 ' Cálculo de Aportaciones de Quatretonda
             FrameCalculoAporQuaVisible True, H, W
             tabla = "rcampos"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             Label1(0).Caption = "Cálculo de Aportaciones"
     
         Case 6 ' Listado de aportaciones para quatretonda
             FrameListAporQuaVisible True, H, W
             tabla = "raporhco"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             CargaCombo
                     
         Case 7 ' borrado masivo
@@ -11347,9 +11468,9 @@ Dim List As Collection
         Case 17 ' Devolucion de aportaciones para quatretonda
             FrameDevolAporQuaVisible True, H, W
             tabla = "raporhco"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             CargaCombo
-            txtCodigo(112).Text = Format(Now, "dd/mm/yyyy")
+            txtcodigo(112).Text = Format(Now, "dd/mm/yyyy")
             
             
         Case 8 ' integracion en tesoreria
@@ -11370,7 +11491,7 @@ Dim List As Collection
         
             FrameRegBajaSociosVisible True, H, W
             tabla = "rsocios"
-            Me.pb7.visible = False
+            Me.Pb7.visible = False
             
         Case 11 ' insercion de aportaciones para bolbaite
             FrameInsertarApoBolVisible True, H, W
@@ -11390,7 +11511,7 @@ Dim List As Collection
             Frame5.visible = False
             Frame5.Enabled = False
             Me.CmdAcepInsApoBol.Top = 5100
-            Me.cmdCancel(8).Top = 5100
+            Me.CmdCancel(8).Top = 5100
             
             CargarListView 0
             
@@ -11398,14 +11519,14 @@ Dim List As Collection
             FrameAportacionObligatoriaVisible True, H, W
             
             tabla = "rsocios"
-            Me.pb9.visible = False
+            Me.Pb9.visible = False
             
         Case 14
             FrameIntTesorBolVisible True, H, W
             
             ConexionConta vParamAplic.Seccionhorto
             tabla = "raportacion"
-            Me.pb10.visible = False
+            Me.Pb10.visible = False
             
         Case 15 ' certificado de aportacion bolbaite
             FrameCertificadoBolVisible True, H, W
@@ -11435,32 +11556,32 @@ End Sub
 
 Private Sub frmApo_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de tipo de aportaciones
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtCodigo(indCodigo).Text = Format(txtCodigo(indCodigo).Text, "000")
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = Format(txtcodigo(indCodigo).Text, "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
  'Fecha
-    txtCodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
+    txtcodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
 End Sub
 
 Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de clases
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Cuentas contables
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de formas de pago de contabilidad
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtCodigo(indCodigo).Text = Format(txtCodigo(indCodigo).Text, "000")
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = Format(txtcodigo(indCodigo).Text, "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -11511,19 +11632,19 @@ End Sub
 
 Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Clientes
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Clientes
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
 Private Sub Image1_Click(Index As Integer)
-Dim I As Integer
+Dim i As Integer
 Dim TotalCant As Currency
 Dim TotalImporte As Currency
 
@@ -11532,13 +11653,13 @@ Dim TotalImporte As Currency
     Select Case Index
         ' informe de resultados y listado de retenciones
         Case 2
-            For I = 1 To ListView1(0).ListItems.Count
-                ListView1(0).ListItems(I).Checked = True
-            Next I
+            For i = 1 To ListView1(0).ListItems.Count
+                ListView1(0).ListItems(i).Checked = True
+            Next i
         Case 3
-            For I = 1 To ListView1(0).ListItems.Count
-                ListView1(0).ListItems(I).Checked = False
-            Next I
+            For i = 1 To ListView1(0).ListItems.Count
+                ListView1(0).ListItems(i).Checked = False
+            Next i
     End Select
     
     Screen.MousePointer = vbDefault
@@ -11650,11 +11771,11 @@ Dim Indice As Integer
     End Select
     ' ***canviar l'index de imgFec pel 1r index de les imagens de buscar data***
     imgFec(0).Tag = Indice 'independentment de les dates que tinga, sempre pose l'index en la 27
-    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
+    If txtcodigo(Indice).Text <> "" Then frmC.NovaData = txtcodigo(Indice).Text
 
     frmC.Show vbModal
     Set frmC = Nothing
-    PonerFoco txtCodigo(CByte(imgFec(0).Tag))
+    PonerFoco txtcodigo(CByte(imgFec(0).Tag))
     ' ***************************
 End Sub
 
@@ -11781,14 +11902,14 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmTipoAportacion (Index + 62)
     End Select
     
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
 End Sub
 
 Private Sub AbrirFrmCuentas(Indice As Integer)
     indCodigo = Indice
     Set frmCtas = New frmCtasConta
     frmCtas.DatosADevolverBusqueda = "0|1|"
-    frmCtas.CodigoActual = txtCodigo(indCodigo)
+    frmCtas.CodigoActual = txtcodigo(indCodigo)
     frmCtas.Show vbModal
     Set frmCtas = Nothing
 End Sub
@@ -11797,10 +11918,12 @@ Private Sub AbrirFrmForpaConta(Indice As Integer)
     indCodigo = Indice
     Set frmFPa = New frmForpaConta
     frmFPa.DatosADevolverBusqueda = "0|1|"
-    frmFPa.CodigoActual = txtCodigo(indCodigo)
+    frmFPa.CodigoActual = txtcodigo(indCodigo)
     frmFPa.Show vbModal
     Set frmFPa = Nothing
 End Sub
+
+
 
 
 
@@ -11810,7 +11933,7 @@ Private Sub Opcion1_Click(Index As Integer)
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -11977,7 +12100,7 @@ Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -11986,25 +12109,25 @@ Dim cad As String, cadTipo As String 'tipo cliente
     
     Select Case Index
         Case 0, 1, 10, 11, 23, 24, 29, 30, 36, 37, 44, 45, 59, 66, 67, 77, 78, 81, 82, 88, 89, 103, 104, 107, 108, 119, 120 'socios
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
         
         Case 8, 9, 12, 14, 15, 20, 35, 41, 46, 47, 34, 49, 51, 54, 57, 64, 65, 74, 86, 79, 80, 100 'FECHAS
-            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index), True
+            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index), True
             
         Case 2, 3, 21, 22, 76, 90, 91, 101, 102, 106, 111, 112, 117, 118, 116
-            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index), False
+            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index), False
             
         Case 6, 7, 60 'precios
-            PonerFormatoDecimal txtCodigo(Index), 7
+            PonerFormatoDecimal txtcodigo(Index), 7
             
         Case 16, 17, 40, 42, 52, 53, 55, 56, 84, 85 ' forma de pago
             If vSeccion Is Nothing Then Exit Sub
             
             If vParamAplic.ContabilidadNueva Then
-                If txtCodigo(Index).Text <> "" Then txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtCodigo(Index).Text, "N")
+                If txtcodigo(Index).Text <> "" Then txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtcodigo(Index).Text, "N")
             Else
-                If txtCodigo(Index).Text <> "" Then txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtCodigo(Index).Text, "N")
+                If txtcodigo(Index).Text <> "" Then txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(Index).Text, "N")
             End If
             If txtNombre(Index).Text = "" Then
                 MsgBox "Forma de Pago  no existe en la contabilidad. Reintroduzca.", vbExclamation
@@ -12013,42 +12136,42 @@ Dim cad As String, cadTipo As String 'tipo cliente
         Case 18, 33, 50, 58, 83 ' cta de banco
             If vSeccion Is Nothing Then Exit Sub
         
-            If txtCodigo(Index).Text <> "" Then txtNombre(Index).Text = PonerNombreCuenta(txtCodigo(Index), 2)
+            If txtcodigo(Index).Text <> "" Then txtNombre(Index).Text = PonerNombreCuenta(txtcodigo(Index), 2)
             
         Case 4, 5 ' importes
-            PonerFormatoDecimal txtCodigo(Index), 7
+            PonerFormatoDecimal txtcodigo(Index), 7
             
         Case 13, 19, 68, 71, 75, 87, 96, 105, 121, 122 ' codigo de aportaciones
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rtipoapor", "nomaport", "codaport", "N")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rtipoapor", "nomaport", "codaport", "N")
         
         Case 27, 28, 38, 39, 43, 48, 109, 110 'CLASES
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "clases", "nomclase", "codclase", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "clases", "nomclase", "codclase", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
         
         Case 32, 33 'SECCIONES
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rseccion", "nomsecci", "codsecci", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rseccion", "nomsecci", "codsecci", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
     
         Case 25 'Año
-            PonerFormatoEntero txtCodigo(Index)
+            PonerFormatoEntero txtcodigo(Index)
         
         Case 26 ' Euros/hanegada para el calculo de aportaciones quatetonda
-            PonerFormatoDecimal txtCodigo(Index), 3
+            PonerFormatoDecimal txtcodigo(Index), 3
         
         Case 31 'Ejercicio
-            PonerFormatoEntero txtCodigo(Index)
+            PonerFormatoEntero txtcodigo(Index)
         
         Case 69 'porcentaje de aportacion
-            PonerFormatoDecimal txtCodigo(Index), 4
+            PonerFormatoDecimal txtcodigo(Index), 4
             
         Case 61, 62 'numero de factura
-            PonerFormatoEntero txtCodigo(Index)
+            PonerFormatoEntero txtcodigo(Index)
             
         Case 73 ' importe de la aportacion obligatoria
-            PonerFormatoDecimal txtCodigo(Index), 3
+            PonerFormatoDecimal txtcodigo(Index), 3
             
         Case 92, 93, 94
-            txtCodigo(Index).Text = UCase(txtCodigo(Index))
+            txtcodigo(Index).Text = UCase(txtcodigo(Index))
         
     End Select
 End Sub
@@ -12211,7 +12334,7 @@ Private Sub FrameCertificadoCPiVisible(visible As Boolean, ByRef H As Integer, B
     If visible = True Then
         Me.FrameCertificadoCPi.Top = -90
         Me.FrameCertificadoCPi.Left = 0
-        Me.FrameCertificadoCPi.Height = 6720
+        Me.FrameCertificadoCPi.Height = 7740
         Me.FrameCertificadoCPi.Width = 6555
         W = Me.FrameCertificadoCPi.Width
         H = Me.FrameCertificadoCPi.Height
@@ -12315,7 +12438,7 @@ End Sub
 Private Sub AbrirFrmClase(Indice As Integer)
     indCodigo = Indice
     Set frmCla = New frmBasico2
-    AyudaClasesCom frmCla, txtCodigo(Indice).Text
+    AyudaClasesCom frmCla, txtcodigo(Indice).Text
     Set frmCla = Nothing
 End Sub
 
@@ -12339,7 +12462,7 @@ Private Sub AbrirFrmVariedades(Indice As Integer)
     indCodigo = Indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
-    frmVar.CodigoActual = txtCodigo(indCodigo)
+    frmVar.CodigoActual = txtcodigo(indCodigo)
     frmVar.Show vbModal
     Set frmVar = Nothing
 End Sub
@@ -12372,7 +12495,7 @@ End Function
 Private Function ProcesarCambios(cadWHERE As String) As Boolean
 Dim Sql As String
 Dim Sql1 As String
-Dim I As Integer
+Dim i As Integer
 Dim HayReg As Integer
 Dim B As Boolean
 
@@ -12415,69 +12538,69 @@ Dim Sql As String
 
     Select Case OpcionListado
         Case 1
-            If txtCodigo(6).Text = "" Then
+            If txtcodigo(6).Text = "" Then
                 MsgBox "Debe introducir un valor en Precio Aumento de Kilos. Revise.", vbExclamation
                 B = False
             End If
             If B Then
-                If txtCodigo(7).Text = "" Then
+                If txtcodigo(7).Text = "" Then
                     MsgBox "Debe introducir un valor en Precio Disminución de Kilos. Revise.", vbExclamation
                     B = False
                 End If
             End If
         Case 2
-            If txtCodigo(4).Text = "" Then
+            If txtcodigo(4).Text = "" Then
                 MsgBox "Debe introducir un valor en Precio Aumento de Kilos. Revise.", vbExclamation
                 B = False
             End If
             If B Then
-                If txtCodigo(5).Text = "" Then
+                If txtcodigo(5).Text = "" Then
                     MsgBox "Debe introducir un valor en Precio Disminución de Kilos. Revise.", vbExclamation
                     B = False
                 End If
             End If
             If B Then
-                If txtCodigo(8).Text = "" Or txtCodigo(9).Text = "" Then
+                If txtcodigo(8).Text = "" Or txtcodigo(9).Text = "" Then
                     MsgBox "Debe introducir valor en desde/hasta Fecha Factura. Revise.", vbExclamation
                     B = False
                 End If
             End If
         Case 5 ' calculo de aportaciones de quatretonda
-            If txtCodigo(32).Text = "" Then
+            If txtcodigo(32).Text = "" Then
                 MsgBox "Debe introducir una sección. Reintroduzca.", vbExclamation
-                PonerFoco txtCodigo(32)
+                PonerFoco txtcodigo(32)
                 B = False
             End If
             ' debe introducir todos los datos para el calculo de aportaciones
             ' importe por hda
             If B Then
-                If CDbl(ComprobarCero(txtCodigo(26).Text)) = "0" Then
+                If CDbl(ComprobarCero(txtcodigo(26).Text)) = "0" Then
                     MsgBox "Debe introducir el importe por hanegada. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(26)
+                    PonerFoco txtcodigo(26)
                     B = False
                 End If
             End If
             ' fecha de aportacion
             If B Then
-                If txtCodigo(20).Text = "" Then
+                If txtcodigo(20).Text = "" Then
                     MsgBox "Debe introducir la Fecha de Aportación. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(20)
+                    PonerFoco txtcodigo(20)
                     B = False
                 End If
             End If
             ' año
             If B Then
-                If txtCodigo(25).Text = "" Then
+                If txtcodigo(25).Text = "" Then
                     MsgBox "Debe introducir el Año. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(25)
+                    PonerFoco txtcodigo(25)
                     B = False
                 End If
             End If
             ' Ejercicio
             If B Then
-                If txtCodigo(31).Text = "" Then
+                If txtcodigo(31).Text = "" Then
                     MsgBox "Debe introducir el Ejercicio. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(31)
+                    PonerFoco txtcodigo(31)
                     B = False
                 End If
             End If
@@ -12487,208 +12610,208 @@ Dim Sql As String
             ' debe introducir todos los datos para el calculo de aportaciones
             ' fecha de aportacion
             If B Then
-                If txtCodigo(112).Text = "" Then
+                If txtcodigo(112).Text = "" Then
                     MsgBox "Debe introducir la Fecha de Devolución de Aportación. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(112)
+                    PonerFoco txtcodigo(112)
                     B = False
                 End If
             End If
             ' Ejercicio
             If B Then
-                If txtCodigo(98).Text = "" Then
+                If txtcodigo(98).Text = "" Then
                     MsgBox "Debe introducir el Ejercicio de devolución. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(98)
+                    PonerFoco txtcodigo(98)
                     B = False
                 End If
             End If
             
             
         Case 8 ' Integracion de aportaciones en tesoreria
-            If txtCodigo(34).Text = "" Then
+            If txtcodigo(34).Text = "" Then
                 MsgBox "Debe introducir la Fecha de Vencimiento. Reintroduzca.", vbExclamation
-                PonerFoco txtCodigo(34)
+                PonerFoco txtcodigo(34)
                 B = False
             End If
             
             If B Then
-                If txtCodigo(33).Text = "" Then
+                If txtcodigo(33).Text = "" Then
                     MsgBox "Debe introducir la Cuenta de Banco Prevista. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(33)
+                    PonerFoco txtcodigo(33)
                     B = False
                 Else
-                    If PonerNombreCuenta(txtCodigo(33), 2) = "" Then
+                    If PonerNombreCuenta(txtcodigo(33), 2) = "" Then
 '                        MsgBox "La Cuenta de Banco Prevista no existe en Contabilidad. Reintroduzca.", vbExclamation
-                        PonerFoco txtCodigo(33)
+                        PonerFoco txtcodigo(33)
                         B = False
                     End If
                 End If
             End If
             
             If B Then
-                If txtCodigo(40).Text = "" Then
+                If txtcodigo(40).Text = "" Then
                     MsgBox "Debe introducir la Forma de Pago Positiva. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(40)
+                    PonerFoco txtcodigo(40)
                     B = False
                 Else
                     If vParamAplic.ContabilidadNueva Then
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtCodigo(40).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtcodigo(40).Text, "N")
                     Else
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtCodigo(40).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(40).Text, "N")
                     End If
                     If vDevuelve = "" Then
                         MsgBox "La Forma de Pago Positiva no existe en Contabilidad. Reintroduzca.", vbExclamation
-                        PonerFoco txtCodigo(40)
+                        PonerFoco txtcodigo(40)
                         B = False
                     End If
                 End If
             End If
             
             If B Then
-                If txtCodigo(42).Text = "" Then
+                If txtcodigo(42).Text = "" Then
                     MsgBox "Debe introducir la Forma de Pago Negativa. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(42)
+                    PonerFoco txtcodigo(42)
                     B = False
                 Else
                     If vParamAplic.ContabilidadNueva Then
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtCodigo(42).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtcodigo(42).Text, "N")
                     Else
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtCodigo(42).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(42).Text, "N")
                     End If
                     If vDevuelve = "" Then
                         MsgBox "La Forma de Pago Negativa no existe en Contabilidad. Reintroduzca.", vbExclamation
-                        PonerFoco txtCodigo(42)
+                        PonerFoco txtcodigo(42)
                         B = False
                     End If
                 End If
             End If
             
         Case 9 ' integracion en tesoreria de alta de socios solo para mogente
-            If txtCodigo(60).Text = "" Then
+            If txtcodigo(60).Text = "" Then
                 MsgBox "Debe introducir el precio kilo. Reintroduzca.", vbExclamation
-                PonerFoco txtCodigo(60)
+                PonerFoco txtcodigo(60)
                 B = False
             End If
             
             If B Then
-                If txtCodigo(51).Text = "" Then
+                If txtcodigo(51).Text = "" Then
                     MsgBox "Debe introducir la Fecha de Vencimiento. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(51)
+                    PonerFoco txtcodigo(51)
                     B = False
                 End If
             End If
             
             If B Then
-                If txtCodigo(50).Text = "" Then
+                If txtcodigo(50).Text = "" Then
                     MsgBox "Debe introducir la Cuenta de Banco Prevista. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(50)
+                    PonerFoco txtcodigo(50)
                     B = False
                 Else
-                    If PonerNombreCuenta(txtCodigo(50), 2) = "" Then
-                        PonerFoco txtCodigo(50)
+                    If PonerNombreCuenta(txtcodigo(50), 2) = "" Then
+                        PonerFoco txtcodigo(50)
                         B = False
                     End If
                 End If
             End If
             
             If B Then
-                If txtCodigo(52).Text = "" Then
+                If txtcodigo(52).Text = "" Then
                     MsgBox "Debe introducir la Forma de Pago Positiva. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(52)
+                    PonerFoco txtcodigo(52)
                     B = False
                 Else
                     If vParamAplic.ContabilidadNueva Then
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtCodigo(52).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtcodigo(52).Text, "N")
                     Else
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtCodigo(52).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(52).Text, "N")
                     End If
                     If vDevuelve = "" Then
                         MsgBox "La Forma de Pago Positiva no existe en Contabilidad. Reintroduzca.", vbExclamation
-                        PonerFoco txtCodigo(52)
+                        PonerFoco txtcodigo(52)
                         B = False
                     End If
                 End If
             End If
             
             If B Then
-                If txtCodigo(53).Text = "" Then
+                If txtcodigo(53).Text = "" Then
                     MsgBox "Debe introducir la Forma de Pago Negativa. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(53)
+                    PonerFoco txtcodigo(53)
                     B = False
                 Else
                     If vParamAplic.ContabilidadNueva Then
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtCodigo(53).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtcodigo(53).Text, "N")
                     Else
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtCodigo(53).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(53).Text, "N")
                     End If
                     If vDevuelve = "" Then
                         MsgBox "La Forma de Pago Negativa no existe en Contabilidad. Reintroduzca.", vbExclamation
-                        PonerFoco txtCodigo(53)
+                        PonerFoco txtcodigo(53)
                         B = False
                     End If
                 End If
             End If
         
         Case 10 ' integracion en tesoreria de baja de socios solo para mogente
-            If txtCodigo(54).Text = "" Then
+            If txtcodigo(54).Text = "" Then
                 MsgBox "Debe introducir la Fecha de Devolución. Reintroduzca.", vbExclamation
-                PonerFoco txtCodigo(54)
+                PonerFoco txtcodigo(54)
                 B = False
             End If
             
             If B Then
-                If txtCodigo(57).Text = "" Then
+                If txtcodigo(57).Text = "" Then
                     MsgBox "Debe introducir la Fecha de Vencimiento. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(57)
+                    PonerFoco txtcodigo(57)
                     B = False
                 End If
             End If
             
             If B Then
-                If txtCodigo(58).Text = "" Then
+                If txtcodigo(58).Text = "" Then
                     MsgBox "Debe introducir la Cuenta de Banco Prevista. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(58)
+                    PonerFoco txtcodigo(58)
                     B = False
                 Else
-                    If PonerNombreCuenta(txtCodigo(58), 2) = "" Then
-                        PonerFoco txtCodigo(58)
+                    If PonerNombreCuenta(txtcodigo(58), 2) = "" Then
+                        PonerFoco txtcodigo(58)
                         B = False
                     End If
                 End If
             End If
             
             If B Then
-                If txtCodigo(56).Text = "" Then
+                If txtcodigo(56).Text = "" Then
                     MsgBox "Debe introducir la Forma de Pago Positiva. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(56)
+                    PonerFoco txtcodigo(56)
                     B = False
                 Else
                     If vParamAplic.ContabilidadNueva Then
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtCodigo(56).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtcodigo(56).Text, "N")
                     Else
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtCodigo(56).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(56).Text, "N")
                     End If
                     If vDevuelve = "" Then
                         MsgBox "La Forma de Pago Positiva no existe en Contabilidad. Reintroduzca.", vbExclamation
-                        PonerFoco txtCodigo(56)
+                        PonerFoco txtcodigo(56)
                         B = False
                     End If
                 End If
             End If
             
             If B Then
-                If txtCodigo(55).Text = "" Then
+                If txtcodigo(55).Text = "" Then
                     MsgBox "Debe introducir la Forma de Pago Negativa. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(55)
+                    PonerFoco txtcodigo(55)
                     B = False
                 Else
                     If vParamAplic.ContabilidadNueva Then
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtCodigo(55).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtcodigo(55).Text, "N")
                     Else
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtCodigo(55).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(55).Text, "N")
                     End If
                     If vDevuelve = "" Then
                         MsgBox "La Forma de Pago Negativa no existe en Contabilidad. Reintroduzca.", vbExclamation
-                        PonerFoco txtCodigo(55)
+                        PonerFoco txtcodigo(55)
                         B = False
                     End If
                 End If
@@ -12696,40 +12819,40 @@ Dim Sql As String
         
             ' vemos si el socio al que vamos a dar de baja tiene concepto de aportacion 0
             If B Then
-                Sql = "select * from raportacion where raportacion.codsocio = " & DBSet(txtCodigo(59).Text, "N")
+                Sql = "select * from raportacion where raportacion.codsocio = " & DBSet(txtcodigo(59).Text, "N")
                 If TotalRegistrosConsulta(Sql) = 0 Then
                     MsgBox "El socio a dar de baja no tiene registro de regularizacion. Revise.", vbExclamation
-                    PonerFoco txtCodigo(59)
+                    PonerFoco txtcodigo(59)
                     B = False
                 End If
                 ' vemos si el socio tiene fecha de baja
                 If B Then
                     Sql = "select * from rsocios  "
-                    Sql = Sql & " where codsocio = " & DBSet(txtCodigo(59).Text, "N") & " and not fechabaja is null "
+                    Sql = Sql & " where codsocio = " & DBSet(txtcodigo(59).Text, "N") & " and not fechabaja is null "
                     If TotalRegistrosConsulta(Sql) = 0 Then
                         MsgBox "El socio a dar de baja no tiene fecha de baja. Revise.", vbExclamation
-                        PonerFoco txtCodigo(59)
+                        PonerFoco txtcodigo(59)
                         B = False
                     End If
                 End If
                 ' vemos si el socio esta en la seccion de almazara
                 If B Then
-                    Sql = "select * from rsocios_seccion where codsocio = " & DBSet(txtCodigo(59).Text, "N")
+                    Sql = "select * from rsocios_seccion where codsocio = " & DBSet(txtcodigo(59).Text, "N")
                     Sql = Sql & " and codsecci = " & DBSet(vParamAplic.SeccionAlmaz, "N")
                     If TotalRegistrosConsulta(Sql) = 0 Then
                         MsgBox "El socio a dar de baja no es de la sección de almazara. Revise.", vbExclamation
-                        PonerFoco txtCodigo(59)
+                        PonerFoco txtcodigo(59)
                         B = False
                     End If
                 End If
                 ' comprobamos que a este socio no se le haya hecho ya la devolucion
                 If B Then
-                    Sql = "select sum(importe) from raportacion where codsocio = " & DBSet(txtCodigo(59).Text, "N")
-                    Sql = Sql & " and fecaport >= (select max(fecaport) from raportacion where codsocio = " & DBSet(txtCodigo(59).Text, "N")
+                    Sql = "select sum(importe) from raportacion where codsocio = " & DBSet(txtcodigo(59).Text, "N")
+                    Sql = Sql & " and fecaport >= (select max(fecaport) from raportacion where codsocio = " & DBSet(txtcodigo(59).Text, "N")
                     Sql = Sql & " and codaport = 0) "
                     If DevuelveValor(Sql) = 0 Then
                         MsgBox "Al socio ya se le ha hecho la devolución de la aportación. Revise.", vbExclamation
-                        PonerFoco txtCodigo(59)
+                        PonerFoco txtcodigo(59)
                         B = False
                     End If
                 End If
@@ -12737,124 +12860,124 @@ Dim Sql As String
         
         Case 11 ' insercion de aportaciones Bolbaite
             ' descripcion
-            If txtCodigo(63).Text = "" Then
+            If txtcodigo(63).Text = "" Then
                 MsgBox "Debe introducir la descripción. Revise.", vbExclamation
-                PonerFoco txtCodigo(63)
+                PonerFoco txtcodigo(63)
                 B = False
             End If
             ' tipo de aportacion
             If B Then
-                If txtCodigo(68).Text = "" Then
+                If txtcodigo(68).Text = "" Then
                     MsgBox "Debe introducir el Tipo de Aportación. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(68)
+                    PonerFoco txtcodigo(68)
                     B = False
                 Else
-                    vDevuelve = DevuelveDesdeBDNew(cAgro, "rtipoapor", "nomaport", "codaport", txtCodigo(68).Text, "N")
+                    vDevuelve = DevuelveDesdeBDNew(cAgro, "rtipoapor", "nomaport", "codaport", txtcodigo(68).Text, "N")
                     If vDevuelve = "" Then
                         MsgBox "El tipo de Aportación no existe. Reintroduzca.", vbExclamation
-                        PonerFoco txtCodigo(68)
+                        PonerFoco txtcodigo(68)
                         B = False
                     End If
                 End If
             End If
         
         Case 12 ' Impresion de recibos de aportaciones de bolbaite
-            If txtCodigo(70).Text = "" Then
+            If txtcodigo(70).Text = "" Then
                 MsgBox "Debe introducir la fecha de Impresión de Recibo. Reintroduzca.", vbExclamation
-                PonerFoco txtCodigo(70)
+                PonerFoco txtcodigo(70)
                 B = False
             End If
         
         Case 13 ' Aportacion obligatoria de bolbaite
-            If txtCodigo(74).Text = "" Then
+            If txtcodigo(74).Text = "" Then
                 MsgBox "Debe introducir la fecha de Aportación. Reintroduzca.", vbExclamation
-                PonerFoco txtCodigo(74)
+                PonerFoco txtcodigo(74)
                 B = False
             End If
             ' descripcion
-            If txtCodigo(72).Text = "" Then
+            If txtcodigo(72).Text = "" Then
                 MsgBox "Debe introducir la descripción. Revise.", vbExclamation
-                PonerFoco txtCodigo(72)
+                PonerFoco txtcodigo(72)
                 B = False
             End If
             ' tipo de aportacion
             If B Then
-                If txtCodigo(71).Text = "" Then
+                If txtcodigo(71).Text = "" Then
                     MsgBox "Debe introducir el Tipo de Aportación. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(71)
+                    PonerFoco txtcodigo(71)
                     B = False
                 Else
-                    vDevuelve = DevuelveDesdeBDNew(cAgro, "rtipoapor", "nomaport", "codaport", txtCodigo(71).Text, "N")
+                    vDevuelve = DevuelveDesdeBDNew(cAgro, "rtipoapor", "nomaport", "codaport", txtcodigo(71).Text, "N")
                     If vDevuelve = "" Then
                         MsgBox "El tipo de Aportación no existe. Reintroduzca.", vbExclamation
-                        PonerFoco txtCodigo(71)
+                        PonerFoco txtcodigo(71)
                         B = False
                     End If
                 End If
             End If
         
         Case 14 ' integracion en tesoreria de bolbaite
-            If txtCodigo(86).Text = "" Then
+            If txtcodigo(86).Text = "" Then
                 MsgBox "Debe introducir la fecha de Vencimiento. Reintroduzca.", vbExclamation
-                PonerFoco txtCodigo(86)
+                PonerFoco txtcodigo(86)
                 B = False
             End If
         
             ' tipo de aportacion
             If B Then
-                If txtCodigo(75).Text = "" Then
+                If txtcodigo(75).Text = "" Then
                     MsgBox "Debe introducir el Tipo de Aportación. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(75)
+                    PonerFoco txtcodigo(75)
                     B = False
                 End If
             End If
         
             If B Then
-                If txtCodigo(83).Text = "" Then
+                If txtcodigo(83).Text = "" Then
                     MsgBox "Debe introducir la Cuenta de Banco Prevista. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(83)
+                    PonerFoco txtcodigo(83)
                     B = False
                 Else
-                    If PonerNombreCuenta(txtCodigo(83), 2) = "" Then
-                        PonerFoco txtCodigo(83)
+                    If PonerNombreCuenta(txtcodigo(83), 2) = "" Then
+                        PonerFoco txtcodigo(83)
                         B = False
                     End If
                 End If
             End If
             
             If B Then
-                If txtCodigo(85).Text = "" Then
+                If txtcodigo(85).Text = "" Then
                     MsgBox "Debe introducir la Forma de Pago Positiva. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(85)
+                    PonerFoco txtcodigo(85)
                     B = False
                 Else
                     If vParamAplic.ContabilidadNueva Then
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtCodigo(85).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtcodigo(85).Text, "N")
                     Else
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtCodigo(85).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(85).Text, "N")
                     End If
                     If vDevuelve = "" Then
                         MsgBox "La Forma de Pago Positiva no existe en Contabilidad. Reintroduzca.", vbExclamation
-                        PonerFoco txtCodigo(85)
+                        PonerFoco txtcodigo(85)
                         B = False
                     End If
                 End If
             End If
             
             If B Then
-                If txtCodigo(84).Text = "" Then
+                If txtcodigo(84).Text = "" Then
                     MsgBox "Debe introducir la Forma de Pago Negativa. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(84)
+                    PonerFoco txtcodigo(84)
                     B = False
                 Else
                     If vParamAplic.ContabilidadNueva Then
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtCodigo(84).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtcodigo(84).Text, "N")
                     Else
-                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtCodigo(84).Text, "N")
+                        vDevuelve = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(84).Text, "N")
                     End If
                     If vDevuelve = "" Then
                         MsgBox "La Forma de Pago Negativa no existe en Contabilidad. Reintroduzca.", vbExclamation
-                        PonerFoco txtCodigo(84)
+                        PonerFoco txtcodigo(84)
                         B = False
                     End If
                 End If
@@ -12862,37 +12985,37 @@ Dim Sql As String
         
         Case 15 ' Certificado
             If B Then
-                If txtCodigo(90).Text = "" Then
+                If txtcodigo(90).Text = "" Then
                     MsgBox "Debe introducir la fecha desde de Aportación. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(90)
+                    PonerFoco txtcodigo(90)
                     B = False
                 End If
             End If
             If B Then
-                If txtCodigo(91).Text = "" Then
+                If txtcodigo(91).Text = "" Then
                     MsgBox "Debe introducir la fecha hasta de Aportación. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(91)
+                    PonerFoco txtcodigo(91)
                     B = False
                 End If
             End If
             If B Then
-                If txtCodigo(76).Text = "" Then
+                If txtcodigo(76).Text = "" Then
                     MsgBox "Debe introducir la fecha de Certificado. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(76)
+                    PonerFoco txtcodigo(76)
                     B = False
                 End If
             End If
             ' tipo de aportacion
             If B Then
-                If txtCodigo(87).Text = "" Then
+                If txtcodigo(87).Text = "" Then
                     MsgBox "Debe introducir el Tipo de Aportación. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(87)
+                    PonerFoco txtcodigo(87)
                     B = False
                 Else
                     '[Monica]05/12/2013
                     If txtNombre(87).Text = "" Then
                         MsgBox "El Tipo de Aportación no existe. Reintroduzca.", vbExclamation
-                        PonerFoco txtCodigo(87)
+                        PonerFoco txtcodigo(87)
                         B = False
                     End If
                 End If
@@ -12900,58 +13023,58 @@ Dim Sql As String
                     
             ' Presidente
             If B Then
-                If txtCodigo(92).Text = "" Then
+                If txtcodigo(92).Text = "" Then
                     MsgBox "Debe introducir el Presidente. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(92)
+                    PonerFoco txtcodigo(92)
                     B = False
                 End If
             End If
             ' Secretario
             If B Then
-                If txtCodigo(93).Text = "" Then
+                If txtcodigo(93).Text = "" Then
                     MsgBox "Debe introducir el Secretario. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(93)
+                    PonerFoco txtcodigo(93)
                     B = False
                 End If
             End If
             ' Tesorero
             If B Then
-                If txtCodigo(94).Text = "" Then
+                If txtcodigo(94).Text = "" Then
                     MsgBox "Debe introducir el Tesorero. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(94)
+                    PonerFoco txtcodigo(94)
                     B = False
                 End If
             End If
             
         Case 16 ' devolucion de aportacion
             If B Then
-                If txtCodigo(100).Text = "" Then
+                If txtcodigo(100).Text = "" Then
                     MsgBox "Debe introducir la fecha de Devolución. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(100)
+                    PonerFoco txtcodigo(100)
                     B = False
                 End If
             End If
             ' tipo de aportacion origen
             If B Then
-                If txtCodigo(105).Text = "" Then
+                If txtcodigo(105).Text = "" Then
                     MsgBox "Debe introducir el Tipo de Aportación. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(105)
+                    PonerFoco txtcodigo(105)
                     B = False
                 End If
             End If
             ' tipo de aportacion destino
             If B Then
-                If txtCodigo(96).Text = "" Then
+                If txtcodigo(96).Text = "" Then
                     MsgBox "Debe introducir el Nuevo Tipo de Aportación. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(96)
+                    PonerFoco txtcodigo(96)
                     B = False
                 End If
             End If
             ' descripcion
             If B Then
-                If txtCodigo(99).Text = "" Then
+                If txtcodigo(99).Text = "" Then
                     MsgBox "Debe introducir la descripción. Revise.", vbExclamation
-                    PonerFoco txtCodigo(99)
+                    PonerFoco txtcodigo(99)
                     B = False
                 End If
             End If
@@ -12973,9 +13096,9 @@ Dim Sql As String
 '                End If
 '            End If
             If B Then
-                If txtCodigo(116).Text = "" Then
+                If txtcodigo(116).Text = "" Then
                     MsgBox "Debe introducir la fecha de Certificado. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(116)
+                    PonerFoco txtcodigo(116)
                     B = False
                 End If
             End If
@@ -13006,7 +13129,7 @@ Dim Rs4 As ADODB.Recordset
 
 Dim CadValues As String, cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim I As Byte
+Dim i As Byte
 Dim DigConta As String
 Dim CC As String
 Dim vrefer As String
@@ -13074,7 +13197,7 @@ Dim vvIban As String
                     
                     '[Monica]22/11/2013: Tema iban
                     If vEmpresa.HayNorma19_34Nueva = 1 Then
-                        CadValues2 = CadValues2 & ", " & DBSet(vSocio.IBAN, "T", "S") & ") "
+                        CadValues2 = CadValues2 & ", " & DBSet(vSocio.Iban, "T", "S") & ") "
                     Else
                         CadValues2 = CadValues2 & ") "
                     End If
@@ -13093,7 +13216,7 @@ Dim vvIban As String
                 
                     CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & "," & Text33csb & "," & DBSet(Text41csb, "T") & ",1"
                     
-                    vvIban = MiFormat(vSocio.IBAN, "") & MiFormat(vSocio.Banco, "0000") & MiFormat(vSocio.Sucursal, "0000") & MiFormat(CC, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
+                    vvIban = MiFormat(vSocio.Iban, "") & MiFormat(vSocio.Banco, "0000") & MiFormat(vSocio.Sucursal, "0000") & MiFormat(CC, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
                     
                     CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                     CadValues2 = CadValues2 & DBSet(vSocio.Nombre, "T") & "," & DBSet(vSocio.Direccion, "T") & "," & DBSet(vSocio.Poblacion, "T") & ","
@@ -13123,8 +13246,8 @@ Dim vvIban As String
                 CC = DBLet(vSocio.Digcontrol, "T")
                 If DBLet(vSocio.Digcontrol, "T") = "**" Then CC = "00"
                 
-                I = 1
-                CadValues2 = CadValuesAux2 & I
+                i = 1
+                CadValues2 = CadValuesAux2 & i
                 CadValues2 = CadValues2 & ", " & DBSet(ForpaNeg, "N") & ", " & DBSet(FecVen, "F") & ", "
                 CadValues2 = CadValues2 & DBSet(DBLet(Importe, "N") * (-1), "N") & ", " & DBSet(CtaBan, "T") & ","
             
@@ -13151,7 +13274,7 @@ Dim vvIban As String
 
 
                 If vParamAplic.ContabilidadNueva Then
-                    vvIban = MiFormat(vSocio.IBAN, "") & MiFormat(CStr(vSocio.Banco), "0000") & MiFormat(CStr(vSocio.Sucursal), "0000") & MiFormat(CC, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
+                    vvIban = MiFormat(vSocio.Iban, "") & MiFormat(CStr(vSocio.Banco), "0000") & MiFormat(CStr(vSocio.Sucursal), "0000") & MiFormat(CC, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
                     
                     CadValues2 = CadValues2 & ", " & DBSet(vvIban, "T") & ","
                     'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
@@ -13160,7 +13283,7 @@ Dim vvIban As String
                 Else
                     '[Monica]22/11/2013: Tema iban
                     If vEmpresa.HayNorma19_34Nueva = 1 Then
-                        CadValues2 = CadValues2 & ", " & DBSet(vSocio.IBAN, "T", "S") & ") "
+                        CadValues2 = CadValues2 & ", " & DBSet(vSocio.Iban, "T", "S") & ") "
                     Else
                         CadValues2 = CadValues2 & ") "
                     End If
@@ -13406,7 +13529,7 @@ Dim Rs4 As ADODB.Recordset
 
 Dim CadValues As String, cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim I As Byte
+Dim i As Byte
 Dim DigConta As String
 Dim CC As String
 Dim vrefer As String
@@ -13437,11 +13560,11 @@ Dim vvIban As String
     Set vSocio = New cSocio
     If vSocio.LeerDatos(CStr(Socio)) Then
         If vSocio.LeerDatosSeccion(CStr(Socio), CStr(Seccion)) Then
-            FecVen = txtCodigo(34).Text
-            ForpaNeg = txtCodigo(40).Text
-            ForpaPos = txtCodigo(42).Text
-            CtaBan = txtCodigo(33).Text
-            fecfactu = txtCodigo(49).Text
+            FecVen = txtcodigo(34).Text
+            ForpaNeg = txtcodigo(40).Text
+            ForpaPos = txtcodigo(42).Text
+            CtaBan = txtcodigo(33).Text
+            fecfactu = txtcodigo(49).Text
             numfactu = Format(vSocio.Codigo, "000000")
             
             
@@ -13469,14 +13592,14 @@ Dim vvIban As String
                     
                     '[Monica]22/11/2013: Tema iban
                     If vEmpresa.HayNorma19_34Nueva = 1 Then
-                        CadValues2 = CadValues2 & ", " & DBSet(vSocio.IBAN, "T", "S") & ") "
+                        CadValues2 = CadValues2 & ", " & DBSet(vSocio.Iban, "T", "S") & ") "
                     Else
                         CadValues2 = CadValues2 & ") "
                     End If
                 Else
                     CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & "," & Text33csb & "," & DBSet(Text41csb, "T") & ",1"
                     
-                    vvIban = MiFormat(vSocio.IBAN, "") & MiFormat(vSocio.Banco, "0000") & MiFormat(vSocio.Sucursal, "0000") & MiFormat(CC, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
+                    vvIban = MiFormat(vSocio.Iban, "") & MiFormat(vSocio.Banco, "0000") & MiFormat(vSocio.Sucursal, "0000") & MiFormat(CC, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
                     
                     CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                     CadValues2 = CadValues2 & DBSet(vSocio.Nombre, "T") & "," & DBSet(vSocio.Direccion, "T") & "," & DBSet(vSocio.Poblacion, "T") & ","
@@ -13526,14 +13649,14 @@ Dim vvIban As String
                     
                     '[Monica]22/11/2013: Tema iban
                     If vEmpresa.HayNorma19_34Nueva = 1 Then
-                        CadValues2 = CadValues2 & ", " & DBSet(vSocio.IBAN, "T", "S") & ") "
+                        CadValues2 = CadValues2 & ", " & DBSet(vSocio.Iban, "T", "S") & ") "
                     Else
                         CadValues2 = CadValues2 & ") "
                     End If
                 Else
                     CadValues2 = CadValues2 & Text1csb & "," & DBSet(Text2csb, "T")
                     
-                    vvIban = MiFormat(vSocio.IBAN, "") & MiFormat(CStr(vSocio.Banco), "0000") & MiFormat(CStr(vSocio.Sucursal), "0000") & MiFormat(CC, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
+                    vvIban = MiFormat(vSocio.Iban, "") & MiFormat(CStr(vSocio.Banco), "0000") & MiFormat(CStr(vSocio.Sucursal), "0000") & MiFormat(CC, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
                     
                     CadValues2 = CadValues2 & ", " & DBSet(vvIban, "T") & ","
                     'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
@@ -13731,7 +13854,7 @@ eBorradoMasivoAporQua:
 End Function
 
 
-Private Function CargarTablaTemporal2(nTabla1 As String, nSelect1 As String, Precio1 As String, ByRef Pb1 As ProgressBar) As Boolean
+Private Function CargarTablaTemporal2(nTabla1 As String, nSelect1 As String, Precio1 As String, ByRef pb1 As ProgressBar) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql2 As String
@@ -13842,7 +13965,7 @@ Dim Fecha As Date
             conn.Execute Sql2 & SqlValues
             
             MensError = "Insertando cobro en tesoreria"
-            B = InsertarEnTesoreriaNewAPO(MensError, Rs!Codigo1, DBLet(Importe, "N"), txtCodigo(51).Text, txtCodigo(52).Text, txtCodigo(53).Text, txtCodigo(50).Text, CStr(Fecha), 1)
+            B = InsertarEnTesoreriaNewAPO(MensError, Rs!Codigo1, DBLet(Importe, "N"), txtcodigo(51).Text, txtcodigo(52).Text, txtcodigo(53).Text, txtcodigo(50).Text, CStr(Fecha), 1)
             If Not B Then
                 MsgBox "Error: " & MensError, vbExclamation
             End If
@@ -13873,7 +13996,7 @@ End Function
 
 
 
-Private Function CargarTablaTemporal3(nTabla1 As String, nSelect1 As String, Precio1 As String, ByRef Pb1 As ProgressBar) As Boolean
+Private Function CargarTablaTemporal3(nTabla1 As String, nSelect1 As String, Precio1 As String, ByRef pb1 As ProgressBar) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql2 As String
@@ -13982,14 +14105,14 @@ Dim Fecha As Date
 
     B = True
 
-    pb7.visible = True
-    pb7.Max = TotalRegistrosConsulta(Sql)
-    pb7.Value = 0
+    Pb7.visible = True
+    Pb7.Max = TotalRegistrosConsulta(Sql)
+    Pb7.Value = 0
     
-    Fecha = txtCodigo(54).Text
+    Fecha = txtcodigo(54).Text
     
     While Not Rs.EOF And B
-        IncrementarProgresNew pb7, 1
+        IncrementarProgresNew Pb7, 1
     
         SqlValues = ""
         
@@ -14007,7 +14130,7 @@ Dim Fecha As Date
             conn.Execute Sql2 & SqlValues
             
             MensError = "Insertando pago en tesoreria"
-            B = InsertarEnTesoreriaNewAPO(MensError, Rs!Codigo1, DBLet(Importe, "N"), txtCodigo(57).Text, txtCodigo(55).Text, txtCodigo(56).Text, txtCodigo(58).Text, CStr(Fecha), 2)
+            B = InsertarEnTesoreriaNewAPO(MensError, Rs!Codigo1, DBLet(Importe, "N"), txtcodigo(57).Text, txtcodigo(55).Text, txtcodigo(56).Text, txtcodigo(58).Text, CStr(Fecha), 2)
             If Not B Then
                 MsgBox "Error: " & MensError, vbExclamation
             End If
@@ -14140,11 +14263,11 @@ Dim SqlExiste As String
         Sql2 = Sql2 & " and numfactu = " & DBSet(Rs!numfactu, "N")
         
         If TotalRegistros(Sql2) = 0 Then
-            Importe = Round2(DBLet(Rs!BaseReten) * ImporteSinFormato(ComprobarCero(txtCodigo(69).Text)) / 100, 2)
+            Importe = Round2(DBLet(Rs!BaseReten) * ImporteSinFormato(ComprobarCero(txtcodigo(69).Text)) / 100, 2)
         
-            SqlValues = SqlValues & "(" & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(txtCodigo(68).Text, "N") & ","
-            SqlValues = SqlValues & DBSet(txtCodigo(63).Text, "T") & ",' ',0," & DBSet(Importe, "N") & "," & DBSet(Rs!CodTipom, "T") & ","
-            SqlValues = SqlValues & DBSet(Rs!numfactu, "N") & ",0," & DBSet(txtCodigo(69).Text, "N") & "),"
+            SqlValues = SqlValues & "(" & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(txtcodigo(68).Text, "N") & ","
+            SqlValues = SqlValues & DBSet(txtcodigo(63).Text, "T") & ",' ',0," & DBSet(Importe, "N") & "," & DBSet(Rs!CodTipom, "T") & ","
+            SqlValues = SqlValues & DBSet(Rs!numfactu, "N") & ",0," & DBSet(txtcodigo(69).Text, "N") & "),"
         End If
     
         Rs.MoveNext
@@ -14218,24 +14341,24 @@ Dim SqlExiste As String
 
     SqlValues = ""
 
-    pb9.visible = True
-    pb9.Max = TotalRegistrosConsulta(Sql)
-    pb9.Value = 0
+    Pb9.visible = True
+    Pb9.Max = TotalRegistrosConsulta(Sql)
+    Pb9.Value = 0
     
     Sql = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe,codtipom,numfactu,intconta,porcaport) values "
     
     While Not Rs.EOF And B
-        IncrementarProgresNew pb9, 1
+        IncrementarProgresNew Pb9, 1
     
-        Sql2 = "select * from raportacion where fecaport = " & DBSet(txtCodigo(74).Text, "F")
+        Sql2 = "select * from raportacion where fecaport = " & DBSet(txtcodigo(74).Text, "F")
         Sql2 = Sql2 & " and codsocio = " & DBSet(Rs!Codsocio, "N")
-        Sql2 = Sql2 & " and codaport = " & DBSet(txtCodigo(71).Text, "N")
+        Sql2 = Sql2 & " and codaport = " & DBSet(txtcodigo(71).Text, "N")
         
         If TotalRegistros(Sql2) = 0 Then
-            Importe = ImporteSinFormato(txtCodigo(73).Text)
+            Importe = ImporteSinFormato(txtcodigo(73).Text)
         
-            SqlValues = SqlValues & "(" & DBSet(Rs!Codsocio, "N") & "," & DBSet(txtCodigo(74).Text, "F") & "," & DBSet(txtCodigo(71).Text, "N") & ","
-            SqlValues = SqlValues & DBSet(txtCodigo(72).Text, "T") & ",' ',0," & DBSet(Importe, "N") & "," & ValorNulo & ","
+            SqlValues = SqlValues & "(" & DBSet(Rs!Codsocio, "N") & "," & DBSet(txtcodigo(74).Text, "F") & "," & DBSet(txtcodigo(71).Text, "N") & ","
+            SqlValues = SqlValues & DBSet(txtcodigo(72).Text, "T") & ",' ',0," & DBSet(Importe, "N") & "," & ValorNulo & ","
             SqlValues = SqlValues & "0,0,0),"
         End If
     
@@ -14309,12 +14432,12 @@ Dim SqlExiste As String
 
     B = True
 
-    pb10.visible = True
-    pb10.Max = TotalRegistrosConsulta(Sql)
-    pb10.Value = 0
+    Pb10.visible = True
+    Pb10.Max = TotalRegistrosConsulta(Sql)
+    Pb10.Value = 0
     
     While Not Rs.EOF And B
-        IncrementarProgresNew pb10, 1
+        IncrementarProgresNew Pb10, 1
     
         MensError = "Insertando cobro en tesoreria" & vbCrLf & vbCrLf
         B = InsertarEnTesoreriaAPOBol(MensError, Rs)  'Rs!Codsocio, DBLet(Rs!Importe, "N"))
@@ -14398,7 +14521,7 @@ Dim Rs4 As ADODB.Recordset
 
 Dim CadValues As String, cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim I As Byte
+Dim i As Byte
 Dim DigConta As String
 Dim CC As String
 Dim vrefer As String
@@ -14431,10 +14554,10 @@ Dim vvIban As String
     Set vSocio = New cSocio
     If vSocio.LeerDatos(CStr(Rs!Codsocio)) Then
         If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), CStr(Seccion)) Then
-            FecVen = txtCodigo(86).Text
-            ForpaNeg = txtCodigo(84).Text
-            ForpaPos = txtCodigo(85).Text
-            CtaBan = txtCodigo(83).Text
+            FecVen = txtcodigo(86).Text
+            ForpaNeg = txtcodigo(84).Text
+            ForpaPos = txtcodigo(85).Text
+            CtaBan = txtcodigo(83).Text
             fecfactu = Rs!fecaport
             If Rs!numfactu = 0 Then
                 letraser = ""
@@ -14465,7 +14588,7 @@ Dim vvIban As String
                     CadValues2 = CadValues2 & Text33csb & "," & DBSet(Text41csb, "T") & ",1" ')"
                     '[Monica]22/11/2013: Tema iban
                     If vEmpresa.HayNorma19_34Nueva = 1 Then
-                        CadValues2 = CadValues2 & ", " & DBSet(vSocio.IBAN, "T", "S") & ") "
+                        CadValues2 = CadValues2 & ", " & DBSet(vSocio.Iban, "T", "S") & ") "
                     Else
                         CadValues2 = CadValues2 & ") "
                     End If
@@ -14483,7 +14606,7 @@ Dim vvIban As String
                 Else
                     CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & "," & Text33csb & "," & DBSet(Text41csb, "T") & ",1"
                     
-                    vvIban = MiFormat(vSocio.IBAN, "") & MiFormat(vSocio.Banco, "0000") & MiFormat(vSocio.Sucursal, "0000") & MiFormat(CC, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
+                    vvIban = MiFormat(vSocio.Iban, "") & MiFormat(vSocio.Banco, "0000") & MiFormat(vSocio.Sucursal, "0000") & MiFormat(CC, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
                     
                     CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                     CadValues2 = CadValues2 & DBSet(vSocio.Nombre, "T") & "," & DBSet(vSocio.Direccion, "T") & "," & DBSet(vSocio.Poblacion, "T") & ","
@@ -14525,7 +14648,7 @@ Dim vvIban As String
                     CadValues2 = CadValues2 & Text1csb & "," & DBSet(Text2csb, "T") '& ")"
                     '[Monica]22/11/2013: Tema iban
                     If vEmpresa.HayNorma19_34Nueva = 1 Then
-                        CadValues2 = CadValues2 & ", " & DBSet(vSocio.IBAN, "T", "S") & ") "
+                        CadValues2 = CadValues2 & ", " & DBSet(vSocio.Iban, "T", "S") & ") "
                     Else
                         CadValues2 = CadValues2 & ") "
                     End If
@@ -14541,7 +14664,7 @@ Dim vvIban As String
                 Else
                     CadValues2 = CadValues2 & Text1csb & "," & DBSet(Text2csb, "T")
                 
-                    vvIban = MiFormat(vSocio.IBAN, "") & MiFormat(CStr(vSocio.Banco), "0000") & MiFormat(CStr(vSocio.Sucursal), "0000") & MiFormat(CC, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
+                    vvIban = MiFormat(vSocio.Iban, "") & MiFormat(CStr(vSocio.Banco), "0000") & MiFormat(CStr(vSocio.Sucursal), "0000") & MiFormat(CC, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
                     
                     CadValues2 = CadValues2 & ", " & DBSet(vvIban, "T") & ","
                     'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
@@ -14574,7 +14697,7 @@ End Function
 
 
 
-Private Function InsertarDevolucionesQua(vTabla As String, vSelect As String) As Boolean
+Private Function InsertarDevolucionesQua(vtabla As String, vSelect As String) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
@@ -14630,7 +14753,7 @@ Dim Existe As Boolean
     SqlInsert = "insert into ariagro.raporhco (numaport,codsocio,codcampo,poligono,parcela,codparti,codvarie,impaport," & _
                 "fecaport,anoplant,observac,supcoope,ejercicio,intconta) values "
     
-    Sql = "select raporhco.* from " & vTabla
+    Sql = "select raporhco.* from " & vtabla
     Sql = Sql & " where " & vSelect
     
     CargarProgres pb12, TotalRegistrosConsulta(Sql)
@@ -14666,9 +14789,9 @@ Dim Existe As Boolean
                 
         CadValues = "(" & DBSet(NumApor, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ","
         CadValues = CadValues & DBSet(Rs!Poligono, "N") & "," & DBSet(Rs!Parcela, "N") & "," & DBSet(Rs!codparti, "N") & ","
-        CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!ImpAport * (-1), "N") & "," & DBSet(txtCodigo(112).Text, "F") & ","
+        CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!ImpAport * (-1), "N") & "," & DBSet(txtcodigo(112).Text, "F") & ","
         CadValues = CadValues & DBSet(Rs!anoplant, "N") & "," & ValorNulo & "," & DBSet(Rs!supcoope, "N") & ","
-        CadValues = CadValues & DBSet(txtCodigo(98).Text, "N") & ",0)"
+        CadValues = CadValues & DBSet(txtcodigo(98).Text, "N") & ",0)"
                 
         conn.Execute SqlInsert & CadValues
                 
@@ -14682,7 +14805,7 @@ Dim Existe As Boolean
     
     If B Then
         InsertarDevolucionesQua = True
-        pb5.visible = False
+        Pb5.visible = False
         conn.CommitTrans
         Exit Function
     End If
@@ -14705,7 +14828,7 @@ eActualizarDevoluciones:
 End Function
 
 
-Private Function InsertarTemporalDevolQua(vTabla As String, vSelect As String) As Boolean
+Private Function InsertarTemporalDevolQua(vtabla As String, vSelect As String) As Boolean
 Dim Sql As String
 
     On Error GoTo eInsertarTemporal
@@ -14717,7 +14840,7 @@ Dim Sql As String
                                             'socio,  campo,    variedad,  importe
     Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, importe3)"
     Sql = Sql & " select " & vUsu.Codigo & ", rapohco.codsocio, raporhco.codcampo, raporhco.codvarie, sum(coalesce(raporhco.impaport,0)) importe "
-    Sql = Sql & " from " & vTabla
+    Sql = Sql & " from " & vtabla
     Sql = Sql & " where " & vSelect
     Sql = Sql & " group by 1,2,3,4 "
     Sql = Sql & " order by 1,2,3,4 "

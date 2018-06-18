@@ -1321,8 +1321,8 @@ Dim i As Integer
     
     
     '[Monica]14/06/2018: creacion de fichero csv de descarga de datos de comunica
-    MDIppal.mnE_Util(21).Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)
-    MDIppal.mnE_Util(21).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)
+    MDIppal.mnE_Util(21).Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And vUsu.Nivel = 0
+    MDIppal.mnE_Util(21).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And vUsu.Nivel = 0
     
     
     '[Monica]20/10/2015: solo para ABN traspaso de campos de almazara

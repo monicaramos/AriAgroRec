@@ -1882,7 +1882,7 @@ Dim FrmEM As frmEMail
             CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
             numParam = numParam + 1
 
-
+            conn.BeginTrans
             If ProcesarFicheroComunicacion2(Me.cd1.FileName) Then
                     cadTabla = "tmpinformes"
                     cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
@@ -1890,21 +1890,22 @@ Dim FrmEM As frmEMail
                     Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
 
                     If TotalRegistros(Sql) <> 0 Then
-    '                If HayRegParaInforme(cadTABLA, cadSelect) Then
-                        MsgBox "Hay errores en el Traspaso de Rendimiento. Debe corregirlos previamente.", vbExclamation
-                        cadTitulo = "Errores de Traspaso Rendimiento"
-                        cadNombreRPT = "rErroresTrasRdto2.rpt"
+                        MsgBox "Hay errores en el Traspaso de Datos. Debe corregirlos previamente.", vbExclamation
+                        cadTitulo = "Errores de Traspaso Datos"
+                        cadNombreRPT = "rErroresTrasDatosCoop2.rpt"
 
                         LlamarImprimir
                         Exit Sub
                     Else
-                        conn.BeginTrans
-                        B = ProcesarFicheroMoixent(Me.CommonDialog1.FileName)
+                        B = ProcesarFicheroComunicacion
+                        If B Then
+                            conn.CommitTrans
+                        Else
+                            conn.RollbackTrans
+                        End If
                     End If
-            '[Monica]13/01/2015: si hay error en la comprobacion que no haga nada
             Else
-                conn.BeginTrans
-
+                conn.RollbackTrans
             End If
         Else
             MsgBox "No ha seleccionado ningún fichero", vbExclamation
@@ -2697,7 +2698,7 @@ Dim devuelve As String
             If OpcionListado = 305 Then
                 H = 5325
                 Me.cmdAceptarEtiqProv.Top = Me.cmdAceptarEtiqProv.Top - 2000
-                Me.CmdCancel(9).Top = CmdCancel(9).Top - 2000
+                Me.cmdCancel(9).Top = cmdCancel(9).Top - 2000
             End If
             PonerFrameVisible Me.FrameEtiqProv, True, H, W
             Me.Frame2.visible = (OpcionListado = 306)
@@ -2738,7 +2739,7 @@ Dim devuelve As String
             chkMail(3).visible = OpcionListado = 316 'Solo para facturae
             If OpcionListado = 316 Then
                 cmdEnvioMail.Left = 3240
-                CmdCancel(indFrame).Left = 4320
+                cmdCancel(indFrame).Left = 4320
                 Label14(16).Caption = "Facturacion E"
                 cmdEnvioMail.TabIndex = 474
                 Check4.Enabled = True
@@ -2760,7 +2761,7 @@ Dim devuelve As String
     End Select
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.CmdCancel(indFrame).Cancel = True
+    Me.cmdCancel(indFrame).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
     
