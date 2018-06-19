@@ -1832,7 +1832,9 @@ End Sub
 Private Sub CmdAceptarComunica_Click()
 Dim v_cadena As String
 Dim FrmEM As frmEMail
-    
+Dim CadTabla As String
+Dim Sql As String
+
     If Option2(0) Then
         If Me.ChkEntradas.Value Then
             If txtCodigo(5).Text = "" Or txtCodigo(6).Text = "" Then
@@ -1860,21 +1862,21 @@ Dim FrmEM As frmEMail
             End If
         End If
   
-        If CargarFicheroCsv(txtCodigo(5), txtCodigo(6), txtCodigo(5), txtCodigo(6), ChkEntradas.Value, ChkAlbaranes.Value) Then
+        If CargarFicheroCsv(txtCodigo(5), txtCodigo(6), txtCodigo(5), txtCodigo(6), ChkEntradas.Value, ChkAlbaranes.Value, Me.Cd1) Then
             MsgBox "Proceso realizado correctamente", vbExclamation
         End If
     Else
-        Me.cd1.Flags = cdlOFNExplorer + cdlOFNHideReadOnly + cdlOFNPathMustExist + cdlOFNFileMustExist
+        Me.Cd1.Flags = cdlOFNExplorer + cdlOFNHideReadOnly + cdlOFNPathMustExist + cdlOFNFileMustExist
     
-        Me.cd1.DefaultExt = "csv"
-        cd1.Filter = "Archivos CSV|*.csv|"
-        cd1.FilterIndex = 1
-        Me.cd1.FileName = "comunica.csv"
-        Me.cd1.CancelError = True
-        Me.cd1.ShowOpen
+        Me.Cd1.DefaultExt = "csv"
+        Cd1.Filter = "Archivos CSV|*.csv|"
+        Cd1.FilterIndex = 1
+        Me.Cd1.FileName = "comunica.csv"
+        Me.Cd1.CancelError = True
+        Me.Cd1.ShowOpen
         
         
-        If Me.cd1.FileName <> "" Then
+        If Me.Cd1.FileName <> "" Then
             InicializarVbles
             InicializarTabla
                 '========= PARAMETROS  =============================
@@ -1883,8 +1885,8 @@ Dim FrmEM As frmEMail
             numParam = numParam + 1
 
             conn.BeginTrans
-            If ProcesarFicheroComunicacion2(Me.cd1.FileName) Then
-                    cadTabla = "tmpinformes"
+            If ProcesarFicheroComunicacion2(Me.Cd1.FileName) Then
+                    CadTabla = "tmpinformes"
                     cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
 
                     Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
@@ -3185,6 +3187,17 @@ Private Sub InicializarVbles()
     Documento = ""
 End Sub
 
+
+Private Sub InicializarTabla()
+Dim Sql As String
+
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
+
+End Sub
+
+
+
 Private Function PonerDesdeHasta(campo As String, Tipo As String, indD As Byte, indH As Byte, param As String) As Boolean
 Dim devuelve As String
 Dim cad As String
@@ -3231,7 +3244,7 @@ End Sub
 
 
 
-Private Sub EnviarSMS(cadWHERE As String, cadTit As String, cadRpt As String, cadTabla As String, ByRef EstaOk As Boolean)
+Private Sub EnviarSMS(cadWHERE As String, cadTit As String, cadRpt As String, CadTabla As String, ByRef EstaOk As Boolean)
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim Cad1 As String, Cad2 As String, lista As String
@@ -3252,13 +3265,13 @@ On Error GoTo EEnviar
 
     Screen.MousePointer = vbHourglass
     
-    If cadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
-       cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
-       cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
+    If CadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
+       CadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
+       CadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
         'seleccionamos todos los socios a los que queremos enviar un SMS
         Sql = "SELECT distinct rsocios.codsocio,nomsocio,rsocios.movsocio "
     End If
-    Sql = Sql & "FROM " & cadTabla
+    Sql = Sql & "FROM " & CadTabla
     Sql = Sql & " WHERE " & cadWHERE
     
     Set Rs = New ADODB.Recordset
@@ -3395,7 +3408,7 @@ Dim Sql2 As String
 
 End Sub
 
-Private Sub EnviarEMailMulti(cadWHERE As String, cadTit As String, cadRpt As String, cadTabla As String)
+Private Sub EnviarEMailMulti(cadWHERE As String, cadTit As String, cadRpt As String, CadTabla As String)
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim Cad1 As String, Cad2 As String, lista As String
@@ -3405,21 +3418,21 @@ On Error GoTo EEnviar
 
     Screen.MousePointer = vbHourglass
     
-    If cadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
-       cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
-       cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
+    If CadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
+       CadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
+       CadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
        
         'seleccionamos todos los socios a los que queremos enviar e-mail
         Sql = "SELECT distinct rsocios.codsocio,nomsocio,maisocio, maisocio "
         If ImpresionNormal Then
-            Sql = Sql & "FROM " & cadTabla
+            Sql = Sql & "FROM " & CadTabla
         Else
             Sql = Sql & "FROM " & "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio"
         End If
-    ElseIf cadTabla = "sclien" Then
+    ElseIf CadTabla = "sclien" Then
         'seleccionamos todos los clientes a los que queremos enviar e-mail
         Sql = "SELECT codclien,nomclien,maiclie1,maiclie2 "
-        Sql = Sql & "FROM " & cadTabla
+        Sql = Sql & "FROM " & CadTabla
     End If
     Sql = Sql & " WHERE " & cadWHERE
     
@@ -3452,9 +3465,9 @@ On Error GoTo EEnviar
               lista = lista & Format(Rs.Fields(0), "000000") & " - " & Rs.Fields(1) & vbCrLf
         ElseIf Cad1 <> "" And Cad2 <> "" Then 'tiene 2 e-mail
             'ver a q e-mail se va a enviar (administracion, compras)
-            If cadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
-                cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
-                cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
+            If CadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
+                CadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
+                CadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
                 If Me.OptMailCom(0).Value = True Then Cad1 = Cad2
             Else
                 If Me.OptMailCom(1).Value = True Then Cad1 = Cad2
@@ -3472,9 +3485,9 @@ On Error GoTo EEnviar
                 With frmImprimir
                     .OtrosParametros = CadParam
                     .NumeroParametros = numParam
-                    If cadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
-                       cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
-                       cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
+                    If CadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
+                       CadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
+                       CadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
                         Sql = "{rsocios.codsocio}=" & Rs.Fields(0)
                         .Opcion = 306
                     Else
@@ -3538,9 +3551,9 @@ On Error GoTo EEnviar
       
     If cont > 0 Then
         espera 0.4
-        If cadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
-           cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
-           cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
+        If CadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
+           CadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
+           CadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
             Sql = "Carta: " & txtNombre(63).Text & "|"
             
             '[Monica]08/07/2011: si no hay a la atencion no se pone nada en el cuerpo del mensaje
@@ -3585,9 +3598,9 @@ On Error GoTo EEnviar
    
     'Mostra mensaje con aquellos proveedores que no tienen e-mail
     If lista <> "" Then
-        If cadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
-           cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
-           cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
+        If CadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
+           CadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
+           CadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
             lista = "Socios sin e-mail:" & vbCrLf & vbCrLf & lista
         Else
             lista = "Clientes sin e-mail:" & vbCrLf & vbCrLf & lista

@@ -111,7 +111,7 @@ Dim Sql As String
 End Function
 
 
-Public Function CargarFicheroCsv(vDesFecEnt As String, vHasFecEnt As String, vDesFecAlb As String, vHasFecAlb As String, Entradas As Boolean, Albaranes As Boolean) As Boolean
+Public Function CargarFicheroCsv(vDesFecEnt As String, vHasFecEnt As String, vDesFecAlb As String, vHasFecAlb As String, Entradas As Boolean, Albaranes As Boolean, vCd1 As CommonDialog) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Mens As String
@@ -184,7 +184,7 @@ Dim v_cadena As String
             Exit Function
         End If
         
-        If CopiarFichero Then
+        If CopiarFichero(vCd1) Then
             MsgBox "Proceso realizado correctamente", vbExclamation
         
             CargarFicheroCsv = True
@@ -199,7 +199,7 @@ eCargarFicheroCsv:
     conn.RollbackTrans
 End Function
 
-Private Function CopiarFichero() As Boolean
+Private Function CopiarFichero(vCd1 As CommonDialog) As Boolean
 Dim nomFich As String
 
 On Error GoTo ecopiarfichero
@@ -208,17 +208,17 @@ On Error GoTo ecopiarfichero
     ' abrimos el commondialog para indicar donde guardarlo
 '    Me.CommonDialog1.InitDir = App.path
 
-    cd1.DefaultExt = "csv"
+    Cd1.DefaultExt = "csv"
     
-    cd1.Filter = "Archivos csv|csv|"
-    cd1.FilterIndex = 1
+    Cd1.Filter = "Archivos csv|csv|"
+    Cd1.FilterIndex = 1
     
     ' copiamos el primer fichero
-    cd1.FileName = "comunica.csv"
-    Me.cd1.ShowSave
+    Cd1.FileName = "comunica.csv"
+    Me.Cd1.ShowSave
     
-    If cd1.FileName <> "" Then
-        FileCopy App.Path & "\comunica.csv", cd1.FileName
+    If Cd1.FileName <> "" Then
+        FileCopy App.Path & "\comunica.csv", Cd1.FileName
     End If
     
     CopiarFichero = True
@@ -642,14 +642,14 @@ Dim Sql As String
 Dim B As Boolean
 
 Dim SqlActualizar As String
-Dim CadError As String
+Dim cadError As String
 
     On Error GoTo eProcesarFichero
     
     ProcesarFicheroComunicacion = False
     
     
-    CadError = ""
+    cadError = ""
     
     Sql = "select * from comunica_rec where fechaactualizacion is null"
     Sql = Sql & " order by fechacrecion, tipo"
@@ -659,7 +659,7 @@ Dim CadError As String
     
     While Not Rs.EOF
     
-        CadError = "Id: " & Rs!Id & vbCrLf & "Tabla: " & Rs!tabla & vbCrLf & "SQL: " & Rs!Sql
+        cadError = "Id: " & Rs!Id & vbCrLf & "Tabla: " & Rs!tabla & vbCrLf & "SQL: " & Rs!Sql
     
         SqlEjecutar = DBLet(Rs!sqlaejecutar, "T")
         
@@ -678,7 +678,7 @@ Dim CadError As String
     Exit Function
 
 eProcesarFicheroComunicacion:
-    MuestraError Err.Number, "Procesar fichero comunicación:" & vbCrLf & CadError, Err.Description
+    MuestraError Err.Number, "Procesar fichero comunicación:" & vbCrLf & cadError, Err.Description
     ProcesarFicheroComunicacion = False
 End Function
 
