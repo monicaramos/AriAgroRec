@@ -536,6 +536,7 @@ Begin VB.Form frmManCampos
       _Version        =   393216
       Style           =   1
       Tabs            =   10
+      Tab             =   4
       TabsPerRow      =   11
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -550,64 +551,41 @@ Begin VB.Form frmManCampos
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManCampos.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "Label1(26)"
-      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label28"
-      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "imgZoom(0)"
-      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "Label29"
-      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "Label6(0)"
-      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "Label5"
-      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).Control(6)=   "imgBuscar(2)"
-      Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "imgBuscar(3)"
-      Tab(0).Control(7).Enabled=   0   'False
       Tab(0).Control(8)=   "Label2"
-      Tab(0).Control(8).Enabled=   0   'False
       Tab(0).Control(9)=   "imgBuscar(13)"
-      Tab(0).Control(9).Enabled=   0   'False
       Tab(0).Control(10)=   "Label36"
-      Tab(0).Control(10).Enabled=   0   'False
       Tab(0).Control(11)=   "Frame4"
-      Tab(0).Control(11).Enabled=   0   'False
       Tab(0).Control(12)=   "FrameDatosDtoAdministracion"
-      Tab(0).Control(12).Enabled=   0   'False
       Tab(0).Control(13)=   "Text5(3)"
-      Tab(0).Control(13).Enabled=   0   'False
       Tab(0).Control(14)=   "Text4(3)"
-      Tab(0).Control(14).Enabled=   0   'False
       Tab(0).Control(15)=   "Text1(37)"
-      Tab(0).Control(15).Enabled=   0   'False
       Tab(0).Control(16)=   "Text1(21)"
-      Tab(0).Control(16).Enabled=   0   'False
       Tab(0).Control(17)=   "Text1(3)"
-      Tab(0).Control(17).Enabled=   0   'False
       Tab(0).Control(18)=   "Text1(2)"
-      Tab(0).Control(18).Enabled=   0   'False
       Tab(0).Control(19)=   "Text2(2)"
-      Tab(0).Control(19).Enabled=   0   'False
       Tab(0).Control(20)=   "Text2(3)"
-      Tab(0).Control(20).Enabled=   0   'False
       Tab(0).Control(21)=   "Combo1(0)"
-      Tab(0).Control(21).Enabled=   0   'False
       Tab(0).Control(22)=   "Text5(0)"
-      Tab(0).Control(22).Enabled=   0   'False
       Tab(0).ControlCount=   23
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmManCampos.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame10"
-      Tab(1).Control(1)=   "Frame9"
-      Tab(1).Control(2)=   "Frame8"
+      Tab(1).Control(0)=   "Frame3"
+      Tab(1).Control(1)=   "Frame5"
+      Tab(1).Control(2)=   "Frame6"
       Tab(1).Control(3)=   "Frame7"
-      Tab(1).Control(4)=   "Frame6"
-      Tab(1).Control(5)=   "Frame5"
-      Tab(1).Control(6)=   "Frame3"
+      Tab(1).Control(4)=   "Frame8"
+      Tab(1).Control(5)=   "Frame9"
+      Tab(1).Control(6)=   "Frame10"
       Tab(1).ControlCount=   7
       TabCaption(2)   =   "Coopropietarios"
       TabPicture(2)   =   "frmManCampos.frx":0044
@@ -621,8 +599,9 @@ Begin VB.Form frmManCampos
       Tab(3).ControlCount=   1
       TabCaption(4)   =   "Parcelas"
       TabPicture(4)   =   "frmManCampos.frx":007C
-      Tab(4).ControlEnabled=   0   'False
+      Tab(4).ControlEnabled=   -1  'True
       Tab(4).Control(0)=   "FrameAux2"
+      Tab(4).Control(0).Enabled=   0   'False
       Tab(4).ControlCount=   1
       TabCaption(5)   =   "Agroseguro"
       TabPicture(5)   =   "frmManCampos.frx":0098
@@ -642,8 +621,8 @@ Begin VB.Form frmManCampos
       TabCaption(8)   =   "Ordenes Rec."
       TabPicture(8)   =   "frmManCampos.frx":00EC
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "FrameAux6"
-      Tab(8).Control(1)=   "ListView4"
+      Tab(8).Control(0)=   "ListView4"
+      Tab(8).Control(1)=   "FrameAux6"
       Tab(8).ControlCount=   2
       TabCaption(9)   =   "Registro Visitas"
       TabPicture(9)   =   "frmManCampos.frx":0108
@@ -2141,7 +2120,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   4680
+         Left            =   -70320
          MaxLength       =   30
          TabIndex        =   184
          Top             =   2160
@@ -2764,7 +2743,7 @@ Begin VB.Form frmManCampos
       Begin VB.Frame FrameAux2 
          BorderStyle     =   0  'None
          Height          =   4950
-         Left            =   -74820
+         Left            =   180
          TabIndex        =   147
          Top             =   450
          Width           =   14210
@@ -4559,7 +4538,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   1560
+         Left            =   -73440
          Style           =   2  'Dropdown List
          TabIndex        =   7
          Tag             =   "Tipo Parcela|N|N|0|1|rcampos|tipoparc||N|"
@@ -4580,7 +4559,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   2445
+         Left            =   -72555
          MaxLength       =   30
          TabIndex        =   85
          Top             =   915
@@ -4600,7 +4579,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   2445
+         Left            =   -72555
          MaxLength       =   30
          TabIndex        =   84
          Top             =   520
@@ -4619,7 +4598,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   1560
+         Left            =   -73440
          MaxLength       =   6
          TabIndex        =   4
          Tag             =   "Variedad|N|N|1|9999|rcampos|codvarie|000000||"
@@ -4639,7 +4618,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   1560
+         Left            =   -73440
          MaxLength       =   4
          TabIndex        =   5
          Tag             =   "Partida|N|N|1|9999|rcampos|codparti|0000||"
@@ -4658,7 +4637,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   435
          Index           =   21
-         Left            =   6960
+         Left            =   -68040
          MaxLength       =   250
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -4680,7 +4659,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   360
          Index           =   37
-         Left            =   1560
+         Left            =   -73440
          MaxLength       =   6
          TabIndex        =   6
          Tag             =   "Zona|N|N|1|9999|rcampos|codzonas|0000||"
@@ -4701,7 +4680,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   2445
+         Left            =   -72555
          MaxLength       =   30
          TabIndex        =   77
          Top             =   1305
@@ -4721,7 +4700,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   1560
+         Left            =   -73440
          MaxLength       =   30
          TabIndex        =   76
          Top             =   1710
@@ -4740,7 +4719,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   4065
-         Left            =   6780
+         Left            =   -68220
          TabIndex        =   73
          Top             =   480
          Width           =   7710
@@ -5502,7 +5481,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   2715
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   68
          Top             =   2580
          Width           =   6165
@@ -6231,7 +6210,7 @@ Begin VB.Form frmManCampos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   3330
+         Left            =   -71670
          TabIndex        =   185
          Top             =   2190
          Width           =   1155
@@ -6239,7 +6218,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   13
-         Left            =   1260
+         Left            =   -73740
          ToolTipText     =   "Buscar Zona"
          Top             =   1320
          Width           =   240
@@ -6256,7 +6235,7 @@ Begin VB.Form frmManCampos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   86
          Top             =   2175
          Width           =   1395
@@ -6264,7 +6243,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   3
-         Left            =   1260
+         Left            =   -73740
          ToolTipText     =   "Buscar Partida"
          Top             =   930
          Width           =   240
@@ -6272,7 +6251,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   2
-         Left            =   1260
+         Left            =   -73740
          ToolTipText     =   "Buscar Variedad"
          Top             =   540
          Width           =   240
@@ -6289,7 +6268,7 @@ Begin VB.Form frmManCampos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   180
+         Left            =   -74820
          TabIndex        =   82
          Top             =   525
          Width           =   975
@@ -6307,7 +6286,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   180
+         Left            =   -74820
          TabIndex        =   81
          Top             =   915
          Width           =   735
@@ -6324,7 +6303,7 @@ Begin VB.Form frmManCampos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   6960
+         Left            =   -68040
          TabIndex        =   80
          Top             =   4590
          Width           =   1530
@@ -6332,7 +6311,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgZoom 
          Height          =   240
          Index           =   0
-         Left            =   8520
+         Left            =   -66480
          ToolTipText     =   "Zoom descripción"
          Top             =   4590
          Width           =   240
@@ -6349,7 +6328,7 @@ Begin VB.Form frmManCampos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   180
+         Left            =   -74820
          TabIndex        =   79
          Top             =   1710
          Width           =   1035
@@ -6367,7 +6346,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   255
          Index           =   26
-         Left            =   180
+         Left            =   -74820
          TabIndex        =   78
          Top             =   1320
          Width           =   735
@@ -6619,7 +6598,7 @@ Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
 Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
-Private cadTitulo As String 'Titulo para la ventana frmImprimir
+Private CadTitulo As String 'Titulo para la ventana frmImprimir
 Private cadNombreRPT As String 'Nombre del informe
 
 Dim VarieAnt As String
@@ -7566,7 +7545,7 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
 Dim Sql As String
-Dim tabla As String
+Dim Tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
@@ -7585,9 +7564,9 @@ Dim tabla As String
             Sql = Sql & " ORDER BY rcampos_cooprop.codsocio "
        
        Case 1 ' clasificacion
-            tabla = "rcampos_clasif"
+            Tabla = "rcampos_clasif"
             Sql = "SELECT rcampos_clasif.codcampo, rcampos_clasif.codvarie, rcampos_clasif.codcalid, rcalidad.nomcalid, rcampos_clasif.muestra "
-            Sql = Sql & " FROM " & tabla & " INNER JOIN rcalidad ON rcampos_clasif.codvarie = rcalidad.codvarie "
+            Sql = Sql & " FROM " & Tabla & " INNER JOIN rcalidad ON rcampos_clasif.codvarie = rcalidad.codvarie "
             Sql = Sql & " and rcampos_clasif.codcalid = rcalidad.codcalid "
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab(True)
@@ -7595,83 +7574,83 @@ Dim tabla As String
                 Sql = Sql & " WHERE rcampos_clasif.codcampo = -1"
             End If
             Sql = Sql
-            Sql = Sql & " ORDER BY " & tabla & ".codcalid "
+            Sql = Sql & " ORDER BY " & Tabla & ".codcalid "
             
        Case 2 ' parcelas
-            tabla = "rcampos_parcelas"
+            Tabla = "rcampos_parcelas"
             Sql = "SELECT rcampos_parcelas.codcampo, rcampos_parcelas.numlinea, rcampos_parcelas.poligono,rcampos_parcelas.parcela,rcampos_parcelas.subparce, "
             Sql = Sql & "rcampos_parcelas.recintos,rcampos_parcelas.codsigpa,rcampos_parcelas.supsigpa,"
             Sql = Sql & "rcampos_parcelas.supcultsigpa,rcampos_parcelas.supcatas,rcampos_parcelas.supcultcatas"
-            Sql = Sql & " FROM " & tabla
+            Sql = Sql & " FROM " & Tabla
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab2(True)
             Else
                 Sql = Sql & " WHERE rcampos_parcelas.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
             
        Case 3 ' agroseguro
-            tabla = "rcampos_seguros"
+            Tabla = "rcampos_seguros"
             Sql = "SELECT rcampos_seguros.codcampo, rcampos_seguros.numlinea, rcampos_seguros.fecha, rcampos_seguros.codincid, rincidencia.nomincid, "
             Sql = Sql & "rcampos_seguros.kilos,rcampos_seguros.kilosaportacion, rcampos_seguros.importe,rcampos_seguros.fechapago,"
             Sql = Sql & "rcampos_seguros.essiniestro , IF(essiniestro=1,'*','') as dsiniestro "
-            Sql = Sql & " FROM " & tabla & " INNER JOIN rincidencia ON rcampos_seguros.codincid = rincidencia.codincid "
+            Sql = Sql & " FROM " & Tabla & " INNER JOIN rincidencia ON rcampos_seguros.codincid = rincidencia.codincid "
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab3(True)
             Else
                 Sql = Sql & " WHERE rcampos_seguros.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
             
         Case 4 ' hco del campo
-            tabla = "rcampos_hco"
+            Tabla = "rcampos_hco"
             Sql = "SELECT rcampos_hco.codcampo, rcampos_hco.numlinea, rcampos_hco.codsocio, rsocios.nomsocio, rcampos_hco.fechaalta, "
             Sql = Sql & "rcampos_hco.fechabaja, rcampos_hco.codincid, rincidencia.nomincid"
-            Sql = Sql & " FROM (" & tabla & " INNER JOIN rincidencia ON rcampos_hco.codincid = rincidencia.codincid) "
+            Sql = Sql & " FROM (" & Tabla & " INNER JOIN rincidencia ON rcampos_hco.codincid = rincidencia.codincid) "
             Sql = Sql & " INNER JOIN rsocios ON rcampos_hco.codsocio = rsocios.codsocio "
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab4(True)
             Else
                 Sql = Sql & " WHERE rcampos_hco.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
         
         Case 5 ' gastos del campo
-            tabla = "rcampos_gastos"
+            Tabla = "rcampos_gastos"
             Sql = "SELECT rcampos_gastos.codcampo, rcampos_gastos.numlinea, rcampos_gastos.codgasto, rconcepgasto.nomgasto, rcampos_gastos.fecha, "
             Sql = Sql & "rcampos_gastos.importe, rcampos_gastos.contabilizado, IF(contabilizado=1,'*','') as dcontabilizado "
-            Sql = Sql & " FROM " & tabla & " INNER JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
+            Sql = Sql & " FROM " & Tabla & " INNER JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
             
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab5(True)
             Else
                 Sql = Sql & " WHERE rcampos_gastos.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
     
         Case 6 ' impresion de ordenes de recoleccion del campo
-            tabla = "rcampos_ordrec"
+            Tabla = "rcampos_ordrec"
             Sql = "SELECT rcampos_ordrec.codcampo, rcampos_ordrec.nroorden, rcampos_ordrec.fecimpre "
-            Sql = Sql & " FROM " & tabla
+            Sql = Sql & " FROM " & Tabla
             
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab6(True)
             Else
                 Sql = Sql & " WHERE rcampos_ordrec.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".nroorden "
+            Sql = Sql & " ORDER BY " & Tabla & ".nroorden "
     
         Case 7 ' revisiones
-            tabla = "rcampos_revision"
+            Tabla = "rcampos_revision"
             Sql = "SELECT rcampos_revision.codcampo, rcampos_revision.numlinea, rcampos_revision.fecha, rcampos_revision.tecnico, rcampos_revision.observac "
-            Sql = Sql & " FROM " & tabla
+            Sql = Sql & " FROM " & Tabla
             
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab7(True)
             Else
                 Sql = Sql & " WHERE rcampos_revision.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
     
     
     
@@ -7956,7 +7935,7 @@ Dim NroDoc As String
                 
                 cadFormula = "{rcampos.codcampo} in [" & vCampos & "]  and {rsocios.codsocio} = " & DBSet(Text1(1).Text, "N")
                 
-                cadTitulo = "Documento Baja de Campos"
+                CadTitulo = "Documento Baja de Campos"
                  
                 CadParam = CadParam & "pFecha=""" & DBLet(RS1.Fields(1)) & """|"
                 numParam = numParam + 1
@@ -8206,7 +8185,7 @@ Dim Rs As ADODB.Recordset
     
     If TotalRegistros(Sql) <> 0 Then
         cadNombreRPT = "rErroresCampos.rpt"
-        cadTitulo = "Campos con duplicidades"
+        CadTitulo = "Campos con duplicidades"
         frmImprimir.Opcion = 0
         LlamarImprimir
     End If
@@ -11561,7 +11540,7 @@ Private Sub LlamarImprimir()
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
-        .Titulo = cadTitulo
+        .Titulo = CadTitulo
         .NombreRPT = cadNombreRPT
         .Opcion = 0
         .Show vbModal

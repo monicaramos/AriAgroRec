@@ -2,25 +2,25 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANPAG000000F20180525T140641</MsgId>
-      <CreDtTm>2018-05-25T14:06:41</CreDtTm>
-      <NbOfTxs>1</NbOfTxs>
-      <CtrlSum>68.98</CtrlSum>
+      <MsgId>TRANPAG000000F20180621T115537</MsgId>
+      <CreDtTm>2018-06-21T11:55:37</CreDtTm>
+      <NbOfTxs>2</NbOfTxs>
+      <CtrlSum>661.97</CtrlSum>
       <InitgPty>
          <Nm>Catadau</Nm>
          <Id>
            <OrgId>
                <Othr>
-                  <Id>F46038881AN0</Id>
+                  <Id>F46038881AN6</Id>
                </Othr>
            </OrgId>
          </Id>
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>20180525140641F46038881</PmtInfId>
+      <PmtInfId>20180621115537F46038881</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
-      <ReqdExctnDt>2018-06-15</ReqdExctnDt>
+      <ReqdExctnDt>2018-06-16</ReqdExctnDt>
       <Dbtr>
          <Nm>Catadau</Nm>
          <PstlAdr>
@@ -30,14 +30,14 @@
          <Id>
             <OrgId>
                <Othr>
-                  <Id>F46038881AN0</Id>
+                  <Id>F46038881AN6</Id>
                </Othr>
             </OrgId>
          </Id>
     </Dbtr>
     <DbtrAcct>
        <Id>
-          <IBAN>ES5230582268501021006736</IBAN>
+          <IBAN>ES8830582268592710000105</IBAN>
        </Id>
        <Ccy>EUR</Ccy>
     </DbtrAcct>
@@ -48,14 +48,14 @@
     </DbtrAgt>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>73939701Z</EndToEndId>
+         <EndToEndId>73756536K</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">68.98</InstdAmt>
+          <InstdAmt Ccy="EUR">547.95</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -63,25 +63,63 @@
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>MARTINEZ DELGADO,ALFONSO</Nm>
+          <Nm>TARAZONA SOBREVELA, ERNESTO</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>73939701Z</Id>
+                     <Id>73756536K</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES2530582268582810017212</IBAN>
+              <IBAN>ES9730582268512810002388</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 15/06/2018 Importe 68,98</Ustrd>
+         <Ustrd>Pago N mina 16/06/2018 Importe 547,95</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>20818013T</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">114.02</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CCRIES2AXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>YUSTE OERA, JORJE</Nm>
+           <Id>
+               <OrgId>
+                  <Othr>
+                     <Id>20818013T</Id>
+                  </Othr>
+               </OrgId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES7730582268512720003141</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>Pago N mina 16/06/2018 Importe 114,02</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    </PmtInf>

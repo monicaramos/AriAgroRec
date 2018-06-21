@@ -729,7 +729,7 @@ Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim HayReg As Integer
 Dim B As Boolean
 Dim Rs As ADODB.Recordset
@@ -1405,7 +1405,7 @@ End Sub
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim I As Integer
+Dim i As Integer
 
 ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
 '    For I = 0 To Combo1.Count - 1
@@ -1569,7 +1569,7 @@ Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim HayReg As Integer
 Dim B As Boolean
 Dim Rs As ADODB.Recordset
@@ -1682,7 +1682,7 @@ On Error GoTo eProcesarCambiosCoopic
             If TNeto34 >= 0 Then
         
                 '[Monica]25/05/2018: anticipos pendientes de descuento
-                Sql = "update horasanticipos set descontado = 1, fechahora = " & DBSet(txtCodigo(1).Text, "F") & ", idcontador = " & DBSet(Max, "N")
+                Sql = "update horasanticipos set descontado = 1, fechahora = " & DBSet(txtCodigo(20).Text, "F") & ", idcontador = " & DBSet(Max, "N")
                 Sql = Sql & " where codtraba = " & DBSet(AntCodTraba, "N") & " and descontado = 0 "
                 conn.Execute Sql
         
