@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManCapataz 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Capataces"
-   ClientHeight    =   6480
+   ClientHeight    =   9780
    ClientLeft      =   45
    ClientTop       =   30
    ClientWidth     =   12765
@@ -13,7 +13,7 @@ Begin VB.Form frmManCapataz
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6480
+   ScaleHeight     =   9780
    ScaleWidth      =   12765
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -182,7 +182,7 @@ Begin VB.Form frmManCapataz
       Left            =   10290
       TabIndex        =   4
       Tag             =   "   "
-      Top             =   5925
+      Top             =   9210
       Visible         =   0   'False
       Width           =   1035
    End
@@ -201,7 +201,7 @@ Begin VB.Form frmManCapataz
       Height          =   375
       Left            =   11460
       TabIndex        =   5
-      Top             =   5940
+      Top             =   9225
       Visible         =   0   'False
       Width           =   1095
    End
@@ -250,13 +250,13 @@ Begin VB.Form frmManCapataz
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManCapataz.frx":000C
-      Height          =   4920
+      Height          =   8145
       Left            =   120
       TabIndex        =   8
       Top             =   870
       Width           =   12485
       _ExtentX        =   22013
-      _ExtentY        =   8678
+      _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -332,7 +332,7 @@ Begin VB.Form frmManCapataz
       Height          =   375
       Left            =   11460
       TabIndex        =   9
-      Top             =   5940
+      Top             =   9225
       Visible         =   0   'False
       Width           =   1095
    End
@@ -341,7 +341,7 @@ Begin VB.Form frmManCapataz
       Index           =   1
       Left            =   120
       TabIndex        =   6
-      Top             =   5850
+      Top             =   9135
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center

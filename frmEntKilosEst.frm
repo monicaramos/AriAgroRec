@@ -5,17 +5,17 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmEntKilosEst 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Entrada de Kilos Estimados"
-   ClientHeight    =   6750
+   ClientHeight    =   10470
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   15000
+   ClientWidth     =   18000
    ClipControls    =   0   'False
    Icon            =   "frmEntKilosEst.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6750
-   ScaleWidth      =   15000
+   ScaleHeight     =   10470
+   ScaleWidth      =   18000
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
@@ -71,7 +71,7 @@ Begin VB.Form frmEntKilosEst
       Height          =   645
       Left            =   3540
       TabIndex        =   20
-      Top             =   5970
+      Top             =   9705
       Width           =   6525
       Begin VB.TextBox txtAux2 
          Alignment       =   1  'Right Justify
@@ -175,11 +175,11 @@ Begin VB.Form frmEntKilosEst
       Width           =   1440
    End
    Begin VB.Frame Frame2 
-      Height          =   620
+      Height          =   750
       Left            =   120
       TabIndex        =   10
       Top             =   675
-      Width           =   14765
+      Width           =   17730
       Begin VB.CheckBox Check1 
          Caption         =   "Ordenado por Campo"
          BeginProperty Font 
@@ -192,17 +192,17 @@ Begin VB.Form frmEntKilosEst
             Strikethrough   =   0   'False
          EndProperty
          Height          =   315
-         Left            =   5760
+         Left            =   8145
          TabIndex        =   19
-         Top             =   180
+         Top             =   225
          Width           =   2595
       End
       Begin VB.Frame Frame4 
          BorderStyle     =   0  'None
          Height          =   435
-         Left            =   8655
+         Left            =   11040
          TabIndex        =   14
-         Top             =   120
+         Top             =   165
          Width           =   5970
          Begin VB.OptionButton Option1 
             Caption         =   "Cooperativa"
@@ -304,7 +304,7 @@ Begin VB.Form frmEntKilosEst
          TabIndex        =   0
          Tag             =   "Cod.Socio|N|N|0|999999|rcampos|codsocio|000000|N|"
          Text            =   "Text1"
-         Top             =   200
+         Top             =   240
          Width           =   840
       End
       Begin VB.TextBox Text2 
@@ -324,8 +324,8 @@ Begin VB.Form frmEntKilosEst
          Locked          =   -1  'True
          TabIndex        =   11
          Text            =   "Text2"
-         Top             =   200
-         Width           =   3495
+         Top             =   240
+         Width           =   5835
       End
       Begin VB.Label Label1 
          Caption         =   "Socio"
@@ -341,7 +341,7 @@ Begin VB.Form frmEntKilosEst
          Height          =   255
          Left            =   150
          TabIndex        =   12
-         Top             =   195
+         Top             =   240
          Width           =   585
       End
       Begin VB.Image imgBuscar 
@@ -349,7 +349,7 @@ Begin VB.Form frmEntKilosEst
          Index           =   0
          Left            =   810
          ToolTipText     =   "Buscar socio"
-         Top             =   210
+         Top             =   255
          Width           =   255
       End
    End
@@ -382,7 +382,7 @@ Begin VB.Form frmEntKilosEst
       Index           =   0
       Left            =   120
       TabIndex        =   8
-      Top             =   5985
+      Top             =   9720
       Width           =   3255
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -415,9 +415,9 @@ Begin VB.Form frmEntKilosEst
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   12600
+      Left            =   15660
       TabIndex        =   1
-      Top             =   6075
+      Top             =   9810
       Width           =   1065
    End
    Begin VB.CommandButton cmdCancelar 
@@ -433,9 +433,9 @@ Begin VB.Form frmEntKilosEst
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   13770
+      Left            =   16830
       TabIndex        =   2
-      Top             =   6075
+      Top             =   9810
       Width           =   1065
    End
    Begin VB.CommandButton cmdRegresar 
@@ -450,21 +450,21 @@ Begin VB.Form frmEntKilosEst
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   13770
+      Left            =   16830
       TabIndex        =   3
-      Top             =   6075
+      Top             =   9810
       Visible         =   0   'False
       Width           =   1065
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmEntKilosEst.frx":000C
-      Height          =   4550
-      Left            =   120
+      Height          =   8145
+      Left            =   135
       TabIndex        =   6
-      Top             =   1350
-      Width           =   14735
-      _ExtentX        =   25982
-      _ExtentY        =   8017
+      Top             =   1485
+      Width           =   17730
+      _ExtentX        =   31274
+      _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   -1  'True
       AllowArrows     =   -1  'True
@@ -584,9 +584,9 @@ Begin VB.Form frmEntKilosEst
          Strikethrough   =   0   'False
       EndProperty
       Height          =   255
-      Left            =   240
+      Left            =   180
       TabIndex        =   7
-      Top             =   8220
+      Top             =   10035
       Visible         =   0   'False
       Width           =   3495
    End
@@ -695,7 +695,7 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim I As Integer
+Dim i As Integer
     
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -724,9 +724,9 @@ Dim I As Integer
     
     
     
-    For I = 0 To imgBuscar.Count - 1
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
+    For i = 0 To imgBuscar.Count - 1
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
     
     CargaCombo
     LimpiarCampos   'Limpia los campos TextBox
@@ -744,7 +744,7 @@ End Sub
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim I As Byte
+Dim i As Byte
 Dim Sql As String
 On Error GoTo ECarga
 
@@ -778,12 +778,12 @@ On Error GoTo ECarga
     
     
     DataGrid1.Columns(1).Caption = "Partida"
-    DataGrid1.Columns(1).Width = 2000
+    DataGrid1.Columns(1).Width = 3000
     DataGrid1.Columns(1).Alignment = dbgCenter
        
     'Variedad
     DataGrid1.Columns(2).Caption = "Variedad"
-    DataGrid1.Columns(2).Width = 1800
+    DataGrid1.Columns(2).Width = 3800
     DataGrid1.Columns(2).Alignment = dbgCenter
     
     'Hanegadas
@@ -833,10 +833,10 @@ On Error GoTo ECarga
     End If
     
     
-    For I = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(I).AllowSizing = False
-        DataGrid1.Columns(I).Locked = True
-    Next I
+    For i = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(i).AllowSizing = False
+        DataGrid1.Columns(i).Locked = True
+    Next i
     
     DataGrid1.ScrollBars = dbgAutomatic
     DataGrid1.RowHeight = 350
@@ -1071,7 +1071,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte
+Dim i As Byte
 Dim B As Boolean
        
     Modo = Kmodo
@@ -1107,9 +1107,9 @@ Dim B As Boolean
            
     B = Modo <> 0 And Modo <> 2 And Modo <> 4
    
-    For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = B
-    Next I
+    For i = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(i).Enabled = B
+    Next i
 
     B = (Modo = 1)
     Toolbar1.Buttons(1).Enabled = Not B
@@ -1231,8 +1231,8 @@ End Function
 
 
 Private Sub PonerBotonCabecera(B As Boolean)
-    Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
+    Me.CmdAceptar.visible = Not B
+    Me.CmdCancelar.visible = Not B
     If B Then Me.lblIndicador.Caption = ""
 End Sub
 
@@ -1282,7 +1282,7 @@ Private Sub PasarSigReg()
 '        DataGrid1.Row = DataGrid1.Row + 1
         DataGrid1.Bookmark = DataGrid1.Bookmark + 1
     ElseIf DataGrid1.Bookmark = Data1.Recordset.RecordCount Then
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     End If
 End Sub
 
@@ -1310,12 +1310,12 @@ End Function
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim I As Integer
+Dim i As Integer
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
-    For I = 1 To Combo1.Count - 1
-        Combo1(I).Clear
-    Next I
+    For i = 1 To Combo1.Count - 1
+        Combo1(i).Clear
+    Next i
     
     'tipo de recoleccion
     Combo1(1).AddItem "Cooperativa"

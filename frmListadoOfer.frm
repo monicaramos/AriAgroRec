@@ -2759,7 +2759,7 @@ Dim devuelve As String
             If OpcionListado = 305 Then
                 H = 5325
                 Me.cmdAceptarEtiqProv.Top = Me.cmdAceptarEtiqProv.Top - 2000
-                Me.CmdCancel(9).Top = CmdCancel(9).Top - 2000
+                Me.cmdCancel(9).Top = cmdCancel(9).Top - 2000
             End If
             PonerFrameVisible Me.FrameEtiqProv, True, H, W
             Me.Frame2.visible = (OpcionListado = 306)
@@ -2800,7 +2800,7 @@ Dim devuelve As String
             chkMail(3).visible = OpcionListado = 316 'Solo para facturae
             If OpcionListado = 316 Then
                 cmdEnvioMail.Left = 3240
-                CmdCancel(indFrame).Left = 4320
+                cmdCancel(indFrame).Left = 4320
                 Label14(16).Caption = "Facturacion E"
                 cmdEnvioMail.TabIndex = 474
                 Check4.Enabled = True
@@ -2822,7 +2822,7 @@ Dim devuelve As String
     End Select
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.CmdCancel(indFrame).Cancel = True
+    Me.cmdCancel(indFrame).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
     
@@ -4116,10 +4116,10 @@ Dim B As Boolean
     lblProgres(0).Caption = "Insertando en Tabla temporal: " & nomFich
     longitud = FileLen(nomFich)
     
-    pb1.visible = True
-    Me.pb1.Max = longitud
+    Pb1.visible = True
+    Me.Pb1.Max = longitud
     Me.Refresh
-    Me.pb1.Value = 0
+    Me.Pb1.Value = 0
     DoEvents
     ' PROCESO DEL FICHERO VENTAS.TXT
 
@@ -4128,7 +4128,7 @@ Dim B As Boolean
     While Not EOF(NF) 'And B
         i = i + 1
         
-        Me.pb1.Value = Me.pb1.Value + Len(cad)
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & i
         Me.Refresh
         DoEvents
@@ -4142,7 +4142,7 @@ Dim B As Boolean
         If cad <> "" Then
             i = i + 1
             
-            Me.pb1.Value = Me.pb1.Value + Len(cad)
+            Me.Pb1.Value = Me.Pb1.Value + Len(cad)
             lblProgres(1).Caption = "Linea " & i
             Me.Refresh
             DoEvents
@@ -4150,7 +4150,7 @@ Dim B As Boolean
         End If
 '    End If
     
-    pb1.visible = False
+    Pb1.visible = False
     lblProgres(0).Caption = ""
     lblProgres(1).Caption = ""
 
@@ -4210,6 +4210,21 @@ Dim Mens As String
         
         conn.Execute Sql
     End If
+    
+    'damos aviso de las entradas comunicadas que han sido modificadas
+    If tabla = "rclasifica" And Tipo = "U" Then
+        Mens = "Entrada comunicada modificada " & Observaciones
+        
+        Sql = "insert into tmpinformes (codusu, fecha1, importe1,  nombre1) values (" & _
+              vUsu.Codigo & "," & DBSet(Fecha, "F") & "," & _
+              DBSet(Id, "N") & "," & DBSet(Mens, "T") & ")"
+        
+        conn.Execute Sql
+    End If
+    
+    
+    
+    
     
     'vemos si da error el sql a ejecutar y lo registramos
     conn.Execute SqlEjec

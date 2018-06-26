@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmConfTipoMov 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Tipos de Movimiento"
-   ClientHeight    =   6255
+   ClientHeight    =   9735
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   10575
@@ -13,7 +13,7 @@ Begin VB.Form frmConfTipoMov
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6255
+   ScaleHeight     =   9735
    ScaleWidth      =   10575
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -111,7 +111,7 @@ Begin VB.Form frmConfTipoMov
       Height          =   555
       Left            =   240
       TabIndex        =   10
-      Top             =   5475
+      Top             =   9030
       Width           =   2355
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -257,7 +257,7 @@ Begin VB.Form frmConfTipoMov
       Height          =   375
       Left            =   8100
       TabIndex        =   7
-      Top             =   5595
+      Top             =   9150
       Visible         =   0   'False
       Width           =   1095
    End
@@ -276,7 +276,7 @@ Begin VB.Form frmConfTipoMov
       Height          =   375
       Left            =   9255
       TabIndex        =   8
-      Top             =   5595
+      Top             =   9150
       Width           =   1095
    End
    Begin MSAdodcLib.Adodc Data1 
@@ -327,13 +327,13 @@ Begin VB.Form frmConfTipoMov
       _Version        =   393216
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
-      Height          =   4540
+      Height          =   8145
       Left            =   240
       TabIndex        =   0
       Top             =   840
       Width           =   10095
       _ExtentX        =   17806
-      _ExtentY        =   8017
+      _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -485,7 +485,7 @@ Private Sub Combo1_LostFocus()
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim I As String
+Dim i As String
 On Error Resume Next
 
     Select Case Modo
@@ -514,11 +514,11 @@ On Error Resume Next
             If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    I = Data1.Recordset.Fields(0)
+                    i = Data1.Recordset.Fields(0)
                     PonerModo 0
                     CancelaADODC Me.Data1
                     CargaGrid
-                    Data1.Recordset.Find (Data1.Recordset.Fields(0).Name & " ='" & I & "'")
+                    Data1.Recordset.Find (Data1.Recordset.Fields(0).Name & " ='" & i & "'")
                 End If
                 Me.DataGrid1.SetFocus
                 'Data1.Recordset.MoveFirst
@@ -682,7 +682,7 @@ End Sub
 
 Private Sub BotonAnyadir()
 Dim anc As Single
-Dim I As Byte
+Dim i As Byte
     
     
     'Situamos el grid al final
@@ -695,9 +695,9 @@ Dim I As Byte
         anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top + 5  '+ 600
     End If
 
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     Me.CboMueveStock.ListIndex = 1
     Me.Combo1.ListIndex = 0
 '$$$
@@ -713,7 +713,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim I As Integer
+Dim i As Integer
 Dim anc As Single
 
     If Data1.Recordset.EOF Then Exit Sub
@@ -722,8 +722,8 @@ Dim anc As Single
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -810,8 +810,8 @@ Private Sub BotonVerTodos()
 End Sub
 
 Private Sub BotonBuscar()
-    cmdCancelar.visible = True
-    cmdCancelar.SetFocus
+    CmdCancelar.visible = True
+    CmdCancelar.SetFocus
     CargaGrid "codtipom is null"
     'Buscar
     txtAux(0).Text = "":    txtAux(1).Text = "": txtAux(2).Text = "": txtAux(3).Text = ""
@@ -834,7 +834,7 @@ End Sub
 
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Orden As String)
-Dim I As Byte
+Dim i As Byte
 Dim tots As String
 Dim Sql As String
 
@@ -906,9 +906,9 @@ Dim Sql As String
 
 
    'No permitir cambiar tamaño de columnas
-   For I = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(I).AllowSizing = False
-   Next I
+   For i = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(i).AllowSizing = False
+   Next i
    
    
    
@@ -940,7 +940,7 @@ End Sub
 
 Private Sub PonerModo(vModo As Byte)
 Dim B As Boolean
-Dim I As Byte
+Dim i As Byte
 
     Modo = vModo
     
@@ -955,17 +955,17 @@ Dim I As Byte
     
     B = (Modo = 0) Or (Modo = 2)
 
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not B
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not B
+        txtAux(i).BackColor = vbWhite
+    Next i
     txtAux(4).visible = False
     
     Me.CboMueveStock.visible = Not B
     Me.Combo1.visible = Not B
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
 
 '    'Si estamo modificar or insert
 '    If Modo = 3 Then
@@ -975,7 +975,7 @@ Dim I As Byte
 '    End If
     
     Me.DataGrid1.Enabled = (Modo <> 3 And Modo <> 4)
-    cmdAceptar.Enabled = (vUsu.Nivel <= 1)
+    CmdAceptar.Enabled = (vUsu.Nivel <= 1)
 
     'Solo usuario root puede Insertar, Modificar y Borrar
     'Usuario administrador solo puede modificar campos "contador", "letra serie", y "Tipo Documento"
@@ -1070,14 +1070,14 @@ End Sub
 
 
 Private Sub CargaTxtAux(alto As Single, xModo As Byte)
-Dim I As Byte
+Dim i As Byte
 
     DeseleccionaGrid Me.DataGrid1
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     CboMueveStock.Top = alto - 15
     Combo1.Top = alto - 15
     

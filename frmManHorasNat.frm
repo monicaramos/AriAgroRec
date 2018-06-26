@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManHorasNat 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Entrada de Horas Trabajadores Natural "
-   ClientHeight    =   6075
+   ClientHeight    =   9795
    ClientLeft      =   195
    ClientTop       =   180
    ClientWidth     =   17445
@@ -13,7 +13,7 @@ Begin VB.Form frmManHorasNat
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6075
+   ScaleHeight     =   9795
    ScaleWidth      =   17445
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameFiltro 
@@ -568,7 +568,7 @@ Begin VB.Form frmManHorasNat
       Height          =   375
       Left            =   14970
       TabIndex        =   11
-      Top             =   5610
+      Top             =   9210
       Visible         =   0   'False
       Width           =   1065
    End
@@ -587,7 +587,7 @@ Begin VB.Form frmManHorasNat
       Height          =   375
       Left            =   16200
       TabIndex        =   12
-      Top             =   5610
+      Top             =   9210
       Visible         =   0   'False
       Width           =   1065
    End
@@ -636,13 +636,13 @@ Begin VB.Form frmManHorasNat
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManHorasNat.frx":0050
-      Height          =   4545
+      Height          =   8145
       Left            =   150
       TabIndex        =   15
       Top             =   840
       Width           =   17130
       _ExtentX        =   30215
-      _ExtentY        =   8017
+      _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -718,7 +718,7 @@ Begin VB.Form frmManHorasNat
       Height          =   375
       Left            =   16200
       TabIndex        =   16
-      Top             =   5610
+      Top             =   9210
       Visible         =   0   'False
       Width           =   1095
    End
@@ -727,7 +727,7 @@ Begin VB.Form frmManHorasNat
       Index           =   1
       Left            =   120
       TabIndex        =   13
-      Top             =   5460
+      Top             =   9060
       Width           =   2685
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -967,7 +967,7 @@ Dim Modo As Byte
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim indCodigo As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 
 ' utilizado para buscar por checks
 Private BuscaChekc As String
@@ -989,25 +989,25 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not B
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not B
+        txtAux(i).BackColor = vbWhite
+    Next i
     
     txtAux2(0).visible = Not B
     txtAux2(7).visible = Not B
     txtAux2(8).visible = Not B
     txtAux2(9).visible = Not B
     
-    For I = 0 To btnBuscar.Count - 1
-        btnBuscar(I).visible = Not B
-    Next I
+    For i = 0 To btnBuscar.Count - 1
+        btnBuscar(i).visible = Not B
+    Next i
     
     chkAux(0).visible = Not B
     chkAux(1).visible = Not B
 
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -1096,9 +1096,9 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux(1).Text = Format(Now, "dd/mm/yyyy")
     txtAux(8).Text = "0"
     txtAux2(0).Text = ""
@@ -1130,9 +1130,9 @@ Private Sub BotonBuscar()
     CargaGrid "horas.codtraba = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     chkAux(0).Value = 0
     chkAux(1).Value = 0
     Me.txtAux2(0).Text = ""
@@ -1147,13 +1147,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -1197,18 +1197,18 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     
     ' ### [Monica] 12/09/2006
     txtAux2(0).Top = alto
     txtAux2(7).Top = alto
     txtAux2(8).Top = alto
     txtAux2(9).Top = alto
-    For I = 0 To btnBuscar.Count - 1
-        btnBuscar(I).Top = alto - 5
-    Next I
+    For i = 0 To btnBuscar.Count - 1
+        btnBuscar(i).Top = alto - 5
+    Next i
     
     Me.chkAux(0).Top = alto
     Me.chkAux(1).Top = alto
@@ -1374,7 +1374,7 @@ Private Sub chkAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As Integer
+    Dim i As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -1410,10 +1410,10 @@ Private Sub cmdAceptar_Click()
 '                If ModificaDesdeFormulario(Me) Then
                 If ModificaDesdeForm Then
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(0)
+                    i = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1448,7 +1448,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1457,16 +1457,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -2068,19 +2068,19 @@ End Sub
 
 Private Sub AbrirFicheroFiltro(Leer As Boolean, Fichero As String)
 Dim Sql As String
-Dim I As Integer
+Dim i As Integer
 
 On Error GoTo EAbrir
-    I = FreeFile
+    i = FreeFile
     If Leer Then
-        Open Fichero For Input As #I
+        Open Fichero For Input As #i
         Fichero = "3"
-        Line Input #I, Fichero
+        Line Input #i, Fichero
     Else
-        Open Fichero For Output As #I
-        Print #I, Filtro
+        Open Fichero For Output As #i
+        Print #i, Filtro
     End If
-    Close #I
+    Close #i
     Exit Sub
 EAbrir:
     Err.Clear
@@ -2093,12 +2093,12 @@ Dim Aux As String
 'Filtro = 0: sin filtro
     Aux = ""
     If Filtro < 3 Then
-        I = Year(Now)
+        i = Year(Now)
         If Filtro = 1 Then
             'Año actual
-            Aux = " year(fechahora) >= " & I
+            Aux = " year(fechahora) >= " & i
         Else
-            Aux = " year(fechahora) >=" & I - 1
+            Aux = " year(fechahora) >=" & i - 1
         End If
     Else
         Aux = "(1=1)"
@@ -2133,17 +2133,17 @@ Private Sub CargarSqlFiltro()
     
     cadFiltro = ""
     
-    I = Year(Now)
+    i = Year(Now)
     
     Select Case Me.cboFiltro.ListIndex
         Case -1, 0 ' sin filtro
             cadFiltro = "(1=1)"
         
         Case 1 ' año actual
-            cadFiltro = " year(fechahora) >= " & I
+            cadFiltro = " year(fechahora) >= " & i
         
         Case 2 ' año actual y anterior
-            cadFiltro = " year(fechahora) >=" & I - 1
+            cadFiltro = " year(fechahora) >=" & i - 1
     
     End Select
     

@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManPartidas 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Partidas"
-   ClientHeight    =   6135
+   ClientHeight    =   9810
    ClientLeft      =   45
    ClientTop       =   30
    ClientWidth     =   13440
@@ -13,7 +13,7 @@ Begin VB.Form frmManPartidas
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6135
+   ScaleHeight     =   9810
    ScaleWidth      =   13440
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -244,7 +244,7 @@ Begin VB.Form frmManPartidas
       Height          =   375
       Left            =   10995
       TabIndex        =   5
-      Top             =   5565
+      Top             =   9255
       Visible         =   0   'False
       Width           =   1035
    End
@@ -263,7 +263,7 @@ Begin VB.Form frmManPartidas
       Height          =   375
       Left            =   12150
       TabIndex        =   6
-      Top             =   5565
+      Top             =   9255
       Visible         =   0   'False
       Width           =   1095
    End
@@ -312,13 +312,13 @@ Begin VB.Form frmManPartidas
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManPartidas.frx":000C
-      Height          =   4550
+      Height          =   8145
       Left            =   135
       TabIndex        =   9
       Top             =   870
       Width           =   13125
       _ExtentX        =   23151
-      _ExtentY        =   8017
+      _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -394,7 +394,7 @@ Begin VB.Form frmManPartidas
       Height          =   375
       Left            =   12150
       TabIndex        =   10
-      Top             =   5580
+      Top             =   9225
       Visible         =   0   'False
       Width           =   1095
    End
@@ -403,7 +403,7 @@ Begin VB.Form frmManPartidas
       Index           =   1
       Left            =   120
       TabIndex        =   7
-      Top             =   5460
+      Top             =   9150
       Width           =   3195
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -610,7 +610,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 
 Dim ZonaAnt As String
 
@@ -627,18 +627,18 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not B
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not B
+        txtAux(i).BackColor = vbWhite
+    Next i
     
     txtAux2(2).visible = Not B
     btnBuscar(0).visible = Not B
     txtAux2(3).visible = Not B
     btnBuscar(1).visible = Not B
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -707,9 +707,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 1 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux2(2).Text = ""
     txtAux2(3).Text = ""
 
@@ -730,22 +730,22 @@ Private Sub BotonBuscar()
     CargaGrid "rpartida.codparti = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -785,9 +785,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     
     ' ### [Monica] 12/09/2006
     txtAux2(2).Top = alto
@@ -882,7 +882,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim I As Integer
+    Dim i As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -968,7 +968,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -977,16 +977,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -1388,7 +1388,7 @@ Dim B As Boolean
 
     On Error GoTo eModificar
 
-    I = adodc1.Recordset.Fields(0)
+    i = adodc1.Recordset.Fields(0)
 
     conn.BeginTrans
 
@@ -1421,7 +1421,7 @@ Dim B As Boolean
     
         conn.CommitTrans
         
-        adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+        adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
         
         Exit Sub
     End If

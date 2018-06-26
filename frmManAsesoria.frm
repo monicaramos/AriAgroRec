@@ -5,16 +5,16 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManAsesoria 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Diferencias Asesoria"
-   ClientHeight    =   6105
+   ClientHeight    =   9720
    ClientLeft      =   195
    ClientTop       =   180
-   ClientWidth     =   11325
+   ClientWidth     =   13320
    Icon            =   "frmManAsesoria.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6105
-   ScaleWidth      =   11325
+   ScaleHeight     =   9720
+   ScaleWidth      =   13320
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral2 
       Height          =   705
@@ -256,9 +256,9 @@ Begin VB.Form frmManAsesoria
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   8850
+      Left            =   10830
       TabIndex        =   5
-      Top             =   5535
+      Top             =   9180
       Visible         =   0   'False
       Width           =   1035
    End
@@ -275,9 +275,9 @@ Begin VB.Form frmManAsesoria
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10020
+      Left            =   12000
       TabIndex        =   7
-      Top             =   5550
+      Top             =   9195
       Visible         =   0   'False
       Width           =   1095
    End
@@ -326,13 +326,13 @@ Begin VB.Form frmManAsesoria
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManAsesoria.frx":000C
-      Height          =   4545
+      Height          =   8145
       Left            =   90
       TabIndex        =   9
       Top             =   840
-      Width           =   11000
-      _ExtentX        =   19394
-      _ExtentY        =   8017
+      Width           =   13000
+      _ExtentX        =   22939
+      _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -406,9 +406,9 @@ Begin VB.Form frmManAsesoria
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10020
+      Left            =   12015
       TabIndex        =   10
-      Top             =   5550
+      Top             =   9225
       Visible         =   0   'False
       Width           =   1095
    End
@@ -417,7 +417,7 @@ Begin VB.Form frmManAsesoria
       Index           =   1
       Left            =   60
       TabIndex        =   6
-      Top             =   5460
+      Top             =   9105
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -487,9 +487,9 @@ Begin VB.Form frmManAsesoria
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   10620
+      Left            =   12735
       TabIndex        =   18
-      Top             =   210
+      Top             =   180
       Width           =   405
       _ExtentX        =   714
       _ExtentY        =   582
@@ -637,7 +637,7 @@ Dim Modo As Byte
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim indCodigo As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 
 ' utilizado para buscar por checks
 Private BuscaChekc As String
@@ -655,21 +655,21 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not B
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not B
+        txtAux(i).BackColor = vbWhite
+    Next i
     
     txtAux2(0).visible = Not B
     
-    For I = 0 To btnBuscar.Count - 1
-        btnBuscar(I).visible = Not B
-    Next I
+    For i = 0 To btnBuscar.Count - 1
+        btnBuscar(i).visible = Not B
+    Next i
     
     chkAux(0).visible = Not B
 
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -760,9 +760,9 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux(1).Text = Format(Now, "dd/mm/yyyy")
     txtAux2(0).Text = ""
     
@@ -788,9 +788,9 @@ Private Sub BotonBuscar()
     CargaGrid "rrecasesoria.codtraba = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     chkAux(0).Value = 0
     Me.txtAux2(0).Text = ""
     
@@ -801,13 +801,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -842,15 +842,15 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     
     ' ### [Monica] 12/09/2006
     txtAux2(0).Top = alto
-    For I = 0 To btnBuscar.Count - 1
-        btnBuscar(I).Top = alto - 5
-    Next I
+    For i = 0 To btnBuscar.Count - 1
+        btnBuscar(i).Top = alto - 5
+    Next i
     
     Me.chkAux(0).Top = alto
 End Sub
@@ -979,7 +979,7 @@ Private Sub chkAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As Integer
+    Dim i As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -1014,7 +1014,7 @@ Private Sub cmdAceptar_Click()
 '                If ModificaDesdeFormulario(Me) Then
                 If ModificaDesdeForm Then
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(0)
+                    i = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
 '                    If CadB <> "" Then
@@ -1024,7 +1024,7 @@ Private Sub cmdAceptar_Click()
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1059,7 +1059,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1068,16 +1068,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -1301,9 +1301,9 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Codigo|1000|;S|btnBuscar(1)|B||195|;S|txtAux2(0)|T|Trabajador|3000|;"
+    tots = "S|txtAux(0)|T|Codigo|1000|;S|btnBuscar(1)|B||195|;S|txtAux2(0)|T|Trabajador|4000|;"
     tots = tots & "S|txtAux(1)|T|Fecha|1400|;S|btnBuscar(0)|B||195|;"
-    tots = tots & "S|txtAux(2)|T|Concepto|3300|;"
+    tots = tots & "S|txtAux(2)|T|Concepto|4300|;"
     tots = tots & "S|txtAux(3)|T|Importe|1400|;"
     tots = tots & "N||||0|;S|chkAux(0)|CB|IA|300|;"
     

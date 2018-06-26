@@ -689,7 +689,7 @@ Begin VB.Form frmManClasifica
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   7530
+         Left            =   7560
          Style           =   2  'Dropdown List
          TabIndex        =   10
          Tag             =   "Tipo Entrada|N|N|0|3|rclasifica|tipoentr||N|"
@@ -2606,6 +2606,13 @@ Private Sub cmdAceptar_Click()
 '                        PonerFoco txtAux(12)
                     End If
             End Select
+            
+            If vParamAplic.Cooperativa = 16 Then
+                If EntradaComunicada(Text1(0).Text) Then
+                    ComunicaDatos False
+                End If
+            End If
+            
             'nuevo calculamos los totales de lineas
 '            CalcularTotales
                     
@@ -2618,6 +2625,118 @@ Error1:
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Sub
+
+Private Sub ComunicaDatos(EsCabecera As Boolean)
+Dim Sql As String
+Dim CadIns2 As String
+Dim CadIns3 As String
+Dim Rs As ADODB.Recordset
+Dim CadVal2 As String
+Dim CadVal3 As String
+
+    If EsCabecera Then
+        Sql = "update rclasifica set "
+        Sql = Sql & "fechaent = " & DBSet(Text1(1).Text, "F")
+        Sql = Sql & ",horaentr = " & DBSet(Text1(21).Text, "FH")
+        Sql = Sql & ",codvarie = " & DBSet(Text1(3).Text, "N")
+        Sql = Sql & ",codsocio = " & DBSet(Text1(4).Text - cMaxSocio, "N")
+        Sql = Sql & ",codcampo = " & DBSet(Text1(5).Text - cMaxCampo, "N")
+        Sql = Sql & ",tipoentr = " & DBSet(Combo1(0).ListIndex, "N")
+        Sql = Sql & ",recolect = " & DBSet(Combo1(1).ListIndex, "N")
+        Sql = Sql & ",transportadopor = " & DBSet(Combo1(3).ListIndex, "N")
+        
+        ' transportista
+        Dim Transpor As String
+        Transpor = Text1(7).Text
+        If Transpor <> "" Then
+            If Mid(Transpor, 1, 1) = "A" Then
+                Transpor = Mid(Transpor, 2)
+            Else
+                Transpor = "C" & Transpor
+            End If
+        End If
+        
+        Sql = Sql & ",codtrans = " & DBSet(Transpor, "T")
+        
+        ' capataz
+        If CLng(ComprobarCero(Text1(6).Text)) > cMaxCapa Then
+            Sql = Sql & ",codcapat = " & DBSet(CLng(ComprobarCero(Text1(6).Text)) - cMaxCapa, "N")
+        Else
+            Sql = Sql & ",codcapat = " & DBSet(CLng(ComprobarCero(Text1(6).Text)) + cMaxCapa, "N")
+        End If
+        
+        Sql = Sql & ",codtarif = " & DBSet(Text1(8).Text, "N")
+        Sql = Sql & ",kilosbru = " & DBSet(Text1(9).Text, "N")
+        Sql = Sql & ",kilosnet = " & DBSet(Text1(10).Text, "N")
+        Sql = Sql & ",numcajon = " & DBSet(Text1(11).Text, "N")
+        Sql = Sql & ",kilostra = " & DBSet(Text1(23).Text, "N")
+        Sql = Sql & ",horastra = " & DBSet(Text1(18).Text, "N")
+        Sql = Sql & ",numtraba = " & DBSet(Text1(19).Text, "N")
+        Sql = Sql & ",imptrans = " & DBSet(Text1(14).Text, "N")
+        Sql = Sql & ",impacarr = " & DBSet(Text1(15).Text, "N")
+        Sql = Sql & ",imprecol = " & DBSet(Text1(16).Text, "N")
+        Sql = Sql & ",imppenal = " & DBSet(Text1(17).Text, "N")
+        Sql = Sql & ",observac = " & DBSet(Text1(20).Text, "T")
+        Sql = Sql & ",numalbar = " & DBSet(Text1(12).Text, "N")
+        Sql = Sql & ",fecalbar = " & DBSet(Text1(13).Text, "F")
+        Sql = Sql & ",contrato = " & DBSet(Text1(24).Text, "T")
+        Sql = Sql & ",prestimado = " & DBSet(Text1(22).Text, "N")
+        Sql = Sql & " where numnotac = " & DBSet(Text1(0).Text, "N")
+        
+        ComunicaCooperativa "rclasifica", Sql, "U", "Entrada modificada " & Text1(0).Text
+    
+    Else
+
+        Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Text1(0).Text, "N")
+        
+        ComunicaCooperativa "rclasifica", Sql, "U", "Entrada modificada " & Text1(0).Text
+        
+        Sql = "delete from rclasifica_incidencia where numnotac = " & DBSet(Text1(0).Text, "N")
+        
+        ComunicaCooperativa "rclasifica", Sql, "U", "Entrada modificada " & Text1(0).Text
+        
+        
+        ' rclasifica_clasif
+        CadIns2 = "insert into rclasifica_clasif (numnotac,codvarie,codcalid,muestra,kilosnet) values ("
+        
+        ' rclasifica_incidencia
+        CadIns3 = "insert into rclasifica_incidencia (numnotac,codincid) values ("
+        
+        Sql = "select * from rclasifica_clasif where numnotac = " & DBSet(Text1(0).Text, "N")
+        
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs.EOF
+            CadVal2 = DBSet(Text1(0).Text, "N") & "," & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!codcalid, "N") & "," & DBSet(Rs!Muestra, "N") & ","
+            CadVal2 = CadVal2 & DBSet(Rs!KilosNet, "N") & ")"
+        
+            CadVal2 = CadIns2 & CadVal2
+        
+            ComunicaCooperativa "rclasifica_clasif", CadVal2, "I"
+        
+            Rs.MoveNext
+        Wend
+        Set Rs = Nothing
+        
+        
+        Sql = "select * from rclasifica_incidencia where numnotac = " & DBSet(Text1(0).Text, "N")
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs.EOF
+            CadVal3 = DBSet(Text1(0).Text, "N") & "," & DBSet(Rs!codincid, "N") & ")"
+        
+            CadVal3 = CadIns3 & CadVal3
+        
+            ComunicaCooperativa "rclasifica_incidencia", CadVal3, "I"
+            
+            Rs.MoveNext
+        Wend
+        Set Rs = Nothing
+        
+    End If
+End Sub
+
+
 
 Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
@@ -2655,7 +2774,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub Form_Load()
-Dim I As Integer
+Dim i As Integer
 
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -2707,8 +2826,8 @@ Dim I As Integer
     
     ' ******* si n'hi han llínies *******
     'ICONETS DE LES BARRES ALS TABS DE LLÍNIA
-    For I = 0 To ToolAux.Count - 1
-        With Me.ToolAux(I)
+    For i = 0 To ToolAux.Count - 1
+        With Me.ToolAux(i)
             .HotImageList = frmPpal.imgListComun_OM16
             .DisabledImageList = frmPpal.imgListComun_BN16
             .ImageList = frmPpal.imgListComun16
@@ -2716,18 +2835,18 @@ Dim I As Integer
             .Buttons(2).Image = 4   'Modificar
             .Buttons(3).Image = 5   'Borrar
         End With
-    Next I
+    Next i
     ' ***********************************
     
     'cargar IMAGES .Image =de busqueda
-    For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
+    For i = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
 '    Me.imgBuscar(8).Picture = frmPpal.imgListComun.ListImages(21).Picture
     
-    For I = 0 To imgAyuda.Count - 1
-        imgAyuda(I).Picture = frmPpal.ImageListB.ListImages(10).Picture
-    Next I
+    For i = 0 To imgAyuda.Count - 1
+        imgAyuda(i).Picture = frmPpal.ImageListB.ListImages(10).Picture
+    Next i
    
     'carga IMAGES de mail
 '    For i = 0 To Me.imgMail.Count - 1
@@ -2735,9 +2854,9 @@ Dim I As Integer
 '    Next i
     
     'IMAGES para zoom
-    For I = 0 To Me.imgZoom.Count - 1
-        Me.imgZoom(I).Picture = frmPpal.imgListImages16.ListImages(3).Picture
-    Next I
+    For i = 0 To Me.imgZoom.Count - 1
+        Me.imgZoom(i).Picture = frmPpal.imgListImages16.ListImages(3).Picture
+    Next i
     
     CodTipoMov = "NOC"
     
@@ -2806,7 +2925,7 @@ End Sub
 '   En PONERMODO s'habiliten, o no, els diversos camps del
 '   formulari en funció del modo en que anem a treballar
 Private Sub PonerModo(Kmodo As Byte, Optional indFrame As Integer)
-Dim I As Integer, NumReg As Byte
+Dim i As Integer, NumReg As Byte
 Dim B As Boolean
 
     On Error GoTo EPonerModo
@@ -2840,8 +2959,8 @@ Dim B As Boolean
     '---------------------------------------------
     
     B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdCancelar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -2873,9 +2992,9 @@ Dim B As Boolean
     
 '    Frame4.Enabled = (Modo = 1)
 '  cambiado por esto
-    For I = 15 To 19
-        Text1(I).Enabled = (Modo = 1)
-    Next I
+    For i = 15 To 19
+        Text1(i).Enabled = (Modo = 1)
+    Next i
     Combo1(2).Enabled = (Modo = 1)
     Text1(14).Enabled = (Modo = 1) Or (Modo = 4)
 '
@@ -2947,7 +3066,7 @@ End Sub
 Private Sub PonerModoOpcionesMenu(Modo)
 'Actives unes Opcions de Menú i Toolbar según el modo en que estem
 Dim B As Boolean, bAux As Boolean
-Dim I As Byte
+Dim i As Byte
     
     'Barra de CAPÇALERA
     '------------------------------------------
@@ -2996,12 +3115,12 @@ Dim I As Byte
 '++monica: si insertamos lo he quitado
 '    b = (Modo = 3 Or Modo = 4 Or Modo = 2) And Not DeConsulta
     B = (Modo = 2) And Not DeConsulta
-    For I = 0 To ToolAux.Count - 1
-        ToolAux(I).Buttons(1).Enabled = B
-        If B Then bAux = (B And Me.Adoaux(I).Recordset.RecordCount > 0)
-        ToolAux(I).Buttons(2).Enabled = bAux
-        ToolAux(I).Buttons(3).Enabled = bAux
-    Next I
+    For i = 0 To ToolAux.Count - 1
+        ToolAux(i).Buttons(1).Enabled = B
+        If B Then bAux = (B And Me.Adoaux(i).Recordset.RecordCount > 0)
+        ToolAux(i).Buttons(2).Enabled = bAux
+        ToolAux(i).Buttons(3).Enabled = bAux
+    Next i
     
 End Sub
 
@@ -3229,11 +3348,11 @@ Private Sub imgZoom_Click(Index As Integer)
 End Sub
 
 Private Sub mnBuscar_Click()
-Dim I As Integer
+Dim i As Integer
     BotonBuscar
-    For I = 0 To Combo1.Count - 1
-        Combo1(I).ListIndex = -1 'quan busque, per defecte no seleccione cap tipo de client
-    Next I
+    For i = 0 To Combo1.Count - 1
+        Combo1(i).ListIndex = -1 'quan busque, per defecte no seleccione cap tipo de client
+    Next i
 End Sub
 
 Private Sub mnEliminar_Click()
@@ -3286,7 +3405,7 @@ Private Function ActualizarEntradasCastelduc(NotaOrigen As Long) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim RsGastos As ADODB.Recordset
-Dim I As Integer
+Dim i As Integer
 Dim Sql As String
 Dim Sql2 As String
 
@@ -3563,7 +3682,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub BotonBuscar()
-Dim I As Integer
+Dim i As Integer
 ' ***** Si la clau primaria de la capçalera no es Text1(0), canviar-ho en <=== *****
     If Modo <> 1 Then
         LimpiarCampos
@@ -3571,9 +3690,9 @@ Dim I As Integer
         PonerFoco Text1(0) ' <===
         Text1(0).BackColor = vbLightBlue ' <===
         ' *** si n'hi han combos a la capçalera ***
-        For I = 0 To Combo1.Count - 1
-            Combo1(I).ListIndex = -1
-        Next I
+        For i = 0 To Combo1.Count - 1
+            Combo1(i).ListIndex = -1
+        Next i
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
@@ -3624,7 +3743,7 @@ End Sub
 Private Sub cmdRegresar_Click()
 Dim cad As String
 Dim Aux As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 
     If Data1.Recordset.EOF Then
@@ -3633,16 +3752,16 @@ Dim J As Integer
     End If
     
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & Text1(J).Text & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -3731,6 +3850,15 @@ Private Sub BotonModificar()
 
     Gastos = False
 
+    '[Monica]26/06/2018: si la entrada está comunicada tiene que tener permiso para modificarla
+    If vParamAplic.Cooperativa = 16 Then
+        If EntradaComunicada(Text1(0).Text) Then
+            If vUsu.Nivel > 0 Then
+                MsgBox "No tiene permisos para modificar esta entrada.", vbExclamation
+                Exit Sub
+            End If
+        End If
+    End If
 
     VarieAnt = Text1(3).Text
 
@@ -3750,6 +3878,16 @@ Dim cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
+    
+    
+    '[Monica]26/06/2018: si la entrada está comunicada tiene que tener permiso para modificarla
+    If vParamAplic.Cooperativa = 16 Then
+        If EntradaComunicada(Text1(0).Text) Then
+            MsgBox "No puede eliminar esta entrada.", vbExclamation
+            Exit Sub
+        End If
+    End If
+    
 
     ' *** repasar el nom de l'adodc, l'index del Field i el camp que te la PK ***
     ' ### [Monica] 26/09/2006 dejamos modificar y eliminar el codigo 0
@@ -3783,7 +3921,7 @@ EEliminar:
 End Sub
 
 Private Sub BotonGastos()
-Dim I As Integer
+Dim i As Integer
 
     Gastos = True
 
@@ -3794,32 +3932,32 @@ Dim I As Integer
     PonerModo 4
 
     ' *** bloquejar els camps visibles de la clau primaria de la capçalera ***
-    For I = 0 To 13
-        BloquearTxt Text1(I), True
-    Next I
+    For i = 0 To 13
+        BloquearTxt Text1(i), True
+    Next i
     BloquearTxt Text1(20), True
     imgFec(0).Enabled = False
     imgFec(1).Enabled = False
-    For I = 0 To 5
-        BloquearImage imgBuscar(I), True
-    Next I
+    For i = 0 To 5
+        BloquearImage imgBuscar(i), True
+    Next i
     BloquearCmb Combo1(0), True
     BloquearCmb Combo1(1), True
     BloquearCmb Combo1(3), True
     
-    For I = 14 To 16
-        BloquearTxt Text1(I), True
-        Text1(I).Enabled = False
-    Next I
+    For i = 14 To 16
+        BloquearTxt Text1(i), True
+        Text1(i).Enabled = False
+    Next i
     
     
     ' desbloqueamos el frame de gastos
     Frame4.Enabled = True
     
-    For I = 17 To 19
-        BloquearTxt Text1(I), False
-        Text1(I).Enabled = True
-    Next I
+    For i = 17 To 19
+        BloquearTxt Text1(i), False
+        Text1(i).Enabled = True
+    Next i
     
     
     ' *** foco al 1r camp visible que NO siga clau primaria ***
@@ -3830,7 +3968,7 @@ End Sub
 
 
 Private Sub PonerCampos()
-Dim I As Integer
+Dim i As Integer
 Dim CodPobla As String, desPobla As String
 Dim CPostal As String, desProvi As String, desPais As String
 
@@ -3845,11 +3983,11 @@ Dim CPostal As String, desProvi As String, desPais As String
     
     ' *** si n'hi han llínies en datagrids ***
     'For i = 0 To DataGridAux.Count - 1
-    For I = 0 To 1
-        CargaGrid I, True
-        If Not Adoaux(I).Recordset.EOF Then _
-            PonerCamposForma2 Me, Adoaux(I), 2, "FrameAux" & I
-    Next I
+    For i = 0 To 1
+        CargaGrid i, True
+        If Not Adoaux(i).Recordset.EOF Then _
+            PonerCamposForma2 Me, Adoaux(i), 2, "FrameAux" & i
+    Next i
 
     Text1(2).Text = Mid(Text1(21).Text, 12, 8)
     
@@ -3872,7 +4010,7 @@ Dim CPostal As String, desProvi As String, desPais As String
 End Sub
 
 Private Sub cmdCancelar_Click()
-Dim I As Integer
+Dim i As Integer
 Dim V
 
     Select Case Modo
@@ -4496,7 +4634,7 @@ Private Sub BotonAnyadirLinea(Index As Integer)
 Dim NumF As String
 Dim vWhere As String, vtabla As String
 Dim anc As Single
-Dim I As Integer
+Dim i As Integer
     
     ModoLineas = 1 'Posem Modo Afegir Llínia
     
@@ -4504,6 +4642,17 @@ Dim I As Integer
         cmdAceptar_Click
         If ModoLineas = 0 Then Exit Sub
     End If
+    
+    '[Monica]26/06/2018: si la entrada está comunicada tiene que tener permiso para modificarla
+    If vParamAplic.Cooperativa = 16 Then
+        If EntradaComunicada(Text1(0).Text) Then
+            If vUsu.Nivel > 0 Then
+                MsgBox "No tiene permisos para modificar esta entrada.", vbExclamation
+                Exit Sub
+            End If
+        End If
+    End If
+    
        
     NumTabMto = Index
     PonerModo 5, Index
@@ -4556,9 +4705,9 @@ Dim I As Integer
                     txtAux(8).Text = Text1(0).Text 'numnotac
                     txtAux(9).Text = "" 'NumF 'codcoste
                     txtAux2(9).Text = ""
-                    For I = 9 To 9
-                        BloquearTxt txtAux(I), False
-                    Next I
+                    For i = 9 To 9
+                        BloquearTxt txtAux(i), False
+                    Next i
                     BloquearbtnBuscar Me, Modo, ModoLineas, "FrameAux1"
                     PonerFoco txtAux(9)
             End Select
@@ -4568,7 +4717,7 @@ End Sub
 
 Private Sub BotonModificarLinea(Index As Integer)
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     Dim J As Integer
     
     If Adoaux(Index).Recordset.EOF Then Exit Sub
@@ -4589,8 +4738,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         Case 0, 1 ' *** pose els index de llínies que tenen datagrid (en o sense tab) ***
             If DataGridAux(Index).Bookmark < DataGridAux(Index).FirstRow Or DataGridAux(Index).Bookmark > (DataGridAux(Index).FirstRow + DataGridAux(Index).VisibleRows - 1) Then
-                I = DataGridAux(Index).Bookmark - DataGridAux(Index).FirstRow
-                DataGridAux(Index).Scroll 0, I
+                i = DataGridAux(Index).Bookmark - DataGridAux(Index).FirstRow
+                DataGridAux(Index).Scroll 0, i
                 DataGridAux(Index).Refresh
             End If
               
@@ -4625,9 +4774,9 @@ Private Sub BotonModificarLinea(Index As Integer)
                 txtAux(J).Text = DataGridAux(Index).Columns(J - 8).Text
             Next J
             txtAux2(9).Text = DataGridAux(Index).Columns(2).Text
-            For I = 9 To 9
-                BloquearTxt txtAux(I), True
-            Next I
+            For i = 9 To 9
+                BloquearTxt txtAux(i), True
+            Next i
             BloquearbtnBuscar Me, Modo, ModoLineas, "FrameAux1"
             
     End Select
@@ -4685,12 +4834,12 @@ End Sub
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim I As Integer
+Dim i As Integer
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
-    For I = 0 To Combo1.Count - 1
-        Combo1(I).Clear
-    Next I
+    For i = 0 To Combo1.Count - 1
+        Combo1(i).Clear
+    Next i
     
     'tipo de entrada
     Combo1(0).AddItem "Normal"
@@ -4817,7 +4966,7 @@ Dim Nuevo As Boolean
                     End If
                     PonerFoco txtAux(Index)
                 Else
-                    cmdAceptar.SetFocus
+                    CmdAceptar.SetFocus
                 End If
             Else
                 txtAux2(Index).Text = ""
@@ -4832,7 +4981,7 @@ Dim Nuevo As Boolean
         Case 4 ' kilosnetos
             PonerFormatoEntero txtAux(Index)
             
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
     End Select
 End Sub
 
@@ -4892,7 +5041,7 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
                         PasarSigReg
                     End If
                     If ModoLineas = 1 Then
-                        cmdAceptar.SetFocus
+                        CmdAceptar.SetFocus
                     End If
                     
                     '050509
@@ -5000,7 +5149,7 @@ Private Sub imgBuscar_Click(Index As Integer)
 End Sub
 
 Private Sub DataGridAux_RowColChange(Index As Integer, LastRow As Variant, ByVal LastCol As Integer)
-Dim I As Byte
+Dim i As Byte
 
     If ModoLineas <> 1 Then
         Select Case Index
@@ -5027,9 +5176,9 @@ Dim I As Byte
 '                txtAux(11).Text = ""
 '                txtAux(12).Text = ""
             Case 1 'departamentos
-                For I = 21 To 24
+                For i = 21 To 24
 '                   txtAux(i).Text = ""
-                Next I
+                Next i
 '               txtAux2(22).Text = ""
             Case 2 'Tarjetas
 '               txtAux(50).Text = ""
@@ -5050,7 +5199,7 @@ End Sub
 
 Private Sub CargaFrame(Index As Integer, enlaza As Boolean)
 Dim tip As Integer
-Dim I As Byte
+Dim i As Byte
 
     Adoaux(Index).ConnectionString = conn
     Adoaux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
@@ -5086,7 +5235,7 @@ End Sub
 
 Private Sub CargaGrid(Index As Integer, enlaza As Boolean)
 Dim B As Boolean
-Dim I As Byte
+Dim i As Byte
 Dim tots As String
 
     On Error GoTo ECarga
@@ -5200,6 +5349,13 @@ Dim V As Integer
     
         TerminaBloquear
         If ModificaDesdeFormulario2(Me, 2, nomframe) Then
+            
+            If vParamAplic.Cooperativa = 16 Then
+                If EntradaComunicada(Text1(0).Text) Then
+                    ComunicaDatos False
+                End If
+            End If
+            
             ModoLineas = 0
             Select Case NumTabMto
                 Case 0
@@ -5330,7 +5486,7 @@ Dim KilosNet As Long
 Dim EurDesta As Currency
 Dim EurRecol As Currency
 Dim PrecAcarreo As Currency
-Dim I As Integer
+Dim i As Integer
 
     On Error Resume Next
     
@@ -5338,9 +5494,9 @@ Dim I As Integer
     GasAcarreo = 0
     
     If Combo1(0).ListIndex = 1 Then
-        For I = 14 To 19
-            Text1(I).Text = ""
-        Next I
+        For i = 14 To 19
+            Text1(i).Text = ""
+        Next i
         Exit Sub
     End If
     
@@ -5506,7 +5662,7 @@ Dim KilosNet As Long
 Dim EurDesta As Currency
 Dim EurRecol As Currency
 Dim PrecAcarreo As Currency
-Dim I As Integer
+Dim i As Integer
 Dim KilosNetos As Long
 
 
@@ -5931,6 +6087,35 @@ Dim Sql As String
           MenError = "Actualizar Traza: "
           B = ActualizarTraza(Text1(0).Text, Text1(3).Text, Text1(4).Text, Text1(5).Text, Text1(1).Text, Text1(21).Text, MenError)
     End If
+    
+    '[Monica]26/06/2018: en caso de que la entrada esté comunicada y modifican
+    If B Then
+        'en caso de que sea coopic
+        If vParamAplic.Cooperativa = 16 Then
+            If EntradaComunicada(Text1(0).Text) Then
+                If DBLet(Data1.Recordset!Codvarie, "N") <> CLng(Text1(3).Text) Or DBLet(Data1.Recordset!Codsocio, "N") <> CLng(Text1(4).Text) Or DBLet(Data1.Recordset!codcampo, "N") <> CLng(Text1(5).Text) Or _
+                    CStr(Data1.Recordset!FechaEnt) <> Text1(1).Text Or CStr(Data1.Recordset!horaentr) <> Text1(21).Text Or _
+                    DBLet(Data1.Recordset!codcapat, "N") <> CLng(ComprobarCero(Text1(6).Text)) Or CStr(Data1.Recordset!codTrans) <> Text1(7).Text Or _
+                    DBLet(Data1.Recordset!codtarif, "N") <> CLng(ComprobarCero(Text1(8).Text)) Or DBLet(Data1.Recordset!KilosBru, "N") <> ImporteSinFormato(ComprobarCero(Text1(9).Text)) Or _
+                    DBLet(Data1.Recordset!KilosNet, "N") <> CLng(ComprobarCero(Text1(10).Text)) Or DBLet(Data1.Recordset!Numcajon, "N") <> ImporteSinFormato(ComprobarCero(Text1(11).Text)) Or _
+                    DBLet(Data1.Recordset!KilosTra, "N") <> CLng(ComprobarCero(Text1(23).Text)) Or DBLet(Data1.Recordset!numalbar, "N") <> ImporteSinFormato(ComprobarCero(Text1(12).Text)) Or _
+                    DBLet(Data1.Recordset!fecalbar, "F") <> Text1(13).Text Or DBLet(Data1.Recordset!horastra, "N") <> CCur(ComprobarCero(Text1(18).Text)) Or _
+                    DBLet(Data1.Recordset!numtraba, "N") <> CCur(ComprobarCero(Text1(19).Text)) Or _
+                    DBLet(Data1.Recordset!horastra, "N") <> CCur(ComprobarCero(Text1(18).Text)) Or _
+                    DBLet(Data1.Recordset!ImpTrans, "N") <> CCur(ComprobarCero(Text1(14).Text)) Or _
+                    DBLet(Data1.Recordset!impacarr, "N") <> CCur(ComprobarCero(Text1(15).Text)) Or _
+                    DBLet(Data1.Recordset!imprecol, "N") <> CCur(ComprobarCero(Text1(16).Text)) Or _
+                    DBLet(Data1.Recordset!ImpPenal, "N") <> CCur(ComprobarCero(Text1(17).Text)) Or _
+                    DBLet(Data1.Recordset!TipoEntr, "N") <> CLng(Combo1(0).ListIndex) Or DBLet(Data1.Recordset!Recolect, "N") <> ComprobarCero(Combo1(1).ListIndex) Or _
+                    DBLet(Data1.Recordset!transportadopor, "N") <> CLng(Combo1(3).ListIndex) Then
+
+                    ComunicaDatos True
+
+                End If
+            End If
+        End If
+    End If
+    
     
     If B Then CalcularGastos
         

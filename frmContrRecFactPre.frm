@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmContrRecFactPre 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Asignacion de Precios"
-   ClientHeight    =   8775
+   ClientHeight    =   9435
    ClientLeft      =   45
    ClientTop       =   30
    ClientWidth     =   11670
@@ -13,7 +13,7 @@ Begin VB.Form frmContrRecFactPre
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8775
+   ScaleHeight     =   9435
    ScaleWidth      =   11670
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -81,7 +81,7 @@ Begin VB.Form frmContrRecFactPre
       Height          =   4665
       Left            =   90
       TabIndex        =   10
-      Top             =   3240
+      Top             =   4050
       Width           =   11450
       Begin VB.Frame FrameToolAux1 
          Height          =   645
@@ -535,7 +535,7 @@ Begin VB.Form frmContrRecFactPre
       Height          =   375
       Left            =   9345
       TabIndex        =   3
-      Top             =   8130
+      Top             =   8895
       Visible         =   0   'False
       Width           =   1065
    End
@@ -554,7 +554,7 @@ Begin VB.Form frmContrRecFactPre
       Height          =   375
       Left            =   10470
       TabIndex        =   4
-      Top             =   8130
+      Top             =   8895
       Visible         =   0   'False
       Width           =   1065
    End
@@ -582,13 +582,13 @@ Begin VB.Form frmContrRecFactPre
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmContrRecFactPre.frx":0024
-      Height          =   2190
+      Height          =   3120
       Left            =   60
       TabIndex        =   7
       Top             =   840
       Width           =   11445
       _ExtentX        =   20188
-      _ExtentY        =   3863
+      _ExtentY        =   5503
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -664,16 +664,16 @@ Begin VB.Form frmContrRecFactPre
       Height          =   375
       Left            =   10470
       TabIndex        =   8
-      Top             =   8145
+      Top             =   8910
       Visible         =   0   'False
       Width           =   1065
    End
    Begin VB.Frame Frame1 
       Height          =   675
       Index           =   1
-      Left            =   120
+      Left            =   75
       TabIndex        =   5
-      Top             =   7905
+      Top             =   8670
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -869,7 +869,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 Dim indCodigo As Integer
 
 Dim NumTabMto As Integer 'Indica quin nº de Tab està en modo Mantenimient
@@ -889,9 +889,9 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo, ModoLineas
     End If
     
-    For I = 0 To 2 'txtAux.Count - 1
-        txtAux(I).visible = False
-    Next I
+    For i = 0 To 2 'txtAux.Count - 1
+        txtAux(i).visible = False
+    Next i
     
     txtAux(2).visible = (Modo = 4)
     txtAux(2).Enabled = (Modo = 4)
@@ -901,11 +901,11 @@ Dim B As Boolean
     txtAux(46).visible = (Modo = 5)
     txtAux(46).Enabled = (Modo = 5)
     
-    cmdAceptar.visible = Modo = 4 Or Modo = 5
-    cmdCancelar.visible = Modo = 4 Or Modo = 5
+    CmdAceptar.visible = Modo = 4 Or Modo = 5
+    CmdCancelar.visible = Modo = 4 Or Modo = 5
     
-    cmdAceptar.Enabled = Modo = 4 Or Modo = 5
-    cmdCancelar.Enabled = Modo = 4 Or Modo = 5
+    CmdAceptar.Enabled = Modo = 4 Or Modo = 5
+    CmdCancelar.Enabled = Modo = 4 Or Modo = 5
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -950,12 +950,12 @@ Dim bAux As Boolean
 '    Me.mnImprimir.Enabled = B
     
     B = (Modo = 4 Or Modo = 2) And Not DeConsulta
-    For I = 1 To 1 'ToolAux.Count - 1
-        ToolAux(I).Buttons(1).Enabled = B
-        If B Then bAux = (B And Me.Adoaux(I).Recordset.RecordCount > 0)
+    For i = 1 To 1 'ToolAux.Count - 1
+        ToolAux(i).Buttons(1).Enabled = B
+        If B Then bAux = (B And Me.Adoaux(i).Recordset.RecordCount > 0)
 '        ToolAux(i).Buttons(2).Enabled = bAux
-        ToolAux(I).Buttons(3).Enabled = bAux
-    Next I
+        ToolAux(i).Buttons(3).Enabled = bAux
+    Next i
     
     
     
@@ -988,9 +988,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 1 To 5
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To 5
+        txtAux(i).Text = ""
+    Next i
     txtAux2(2).Text = ""
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
@@ -1012,9 +1012,9 @@ Private Sub BotonBuscar()
 
     '*******************************************************************************
     'Buscar
-    For I = 0 To 8 'txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To 8 'txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux2(2).Text = ""
     txtAux2(4).Text = ""
     
@@ -1024,20 +1024,20 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
     If DataGrid1.Row < 0 Then
-        anc = 320
+        anc = DataGrid1.Top + 240 ' 320
     Else
-        anc = DataGrid1.RowTop(DataGrid1.Row) + 545
+        anc = DataGrid1.Top + DataGrid1.RowTop(DataGrid1.Row) + 5 '+ 545
     End If
 
     'Llamamos al form
@@ -1061,9 +1061,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     
 
     'Fijamos el ancho
-    For I = 0 To 2
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To 2
+        txtAux(i).Top = alto
+    Next i
 
     ' ### [Monica] 12/09/2006
     txtAux2(0).Top = alto
@@ -1072,7 +1072,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1087,22 +1087,22 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Concepto de Coste?"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
+    Sql = "¿Seguro que desea eliminar el Concepto de Coste?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
-        SQL = "Delete from rhisfruta_clasif where codcoste=" & adodc1.Recordset!codCoste
-        conn.Execute SQL
+        Sql = "Delete from rhisfruta_clasif where codcoste=" & adodc1.Recordset!codCoste
+        conn.Execute Sql
         
-        SQL = "Delete from rhisfruta_cta where codcoste=" & adodc1.Recordset!codCoste
-        conn.Execute SQL
+        Sql = "Delete from rhisfruta_cta where codcoste=" & adodc1.Recordset!codCoste
+        conn.Execute Sql
         
-        SQL = "Delete from rhisfruta where codcoste=" & adodc1.Recordset!codCoste
-        conn.Execute SQL
+        Sql = "Delete from rhisfruta where codcoste=" & adodc1.Recordset!codCoste
+        conn.Execute Sql
         CargaGrid CadB
         
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
@@ -1163,7 +1163,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim I As Long
+    Dim i As Long
     Dim J As Long
 
     Select Case Modo
@@ -1201,11 +1201,11 @@ Private Sub cmdAceptar_Click()
                 If ModificaRegistro Then
                     TerminaBloquear
                     
-                    I = adodc1.Recordset.Fields(0)
+                    i = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
                     
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1288,7 +1288,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1297,16 +1297,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -1389,8 +1389,8 @@ Private Sub Form_Load()
     
     ' ******* si n'hi han llínies *******
     'ICONETS DE LES BARRES ALS TABS DE LLÍNIA
-    For I = 1 To 1
-        With Me.ToolAux(I)
+    For i = 1 To 1
+        With Me.ToolAux(i)
             .HotImageList = frmPpal.imgListComun_OM16
             .DisabledImageList = frmPpal.imgListComun_BN16
             .ImageList = frmPpal.imgListComun16
@@ -1398,7 +1398,7 @@ Private Sub Form_Load()
             .Buttons(2).Image = 4   'Modificar
             .Buttons(3).Image = 5   'Borrar
         End With
-    Next I
+    Next i
     ' ***********************************
 '    LimpiarCampos   'Neteja els camps TextBox
     ' ******* si n'hi han llínies *******
@@ -1433,19 +1433,19 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub LimpiarPrecios()
-Dim SQL As String
+Dim Sql As String
 
-    SQL = "update rhisfruta set prestimado = " & DBSet(Precio, "N")
-    SQL = SQL & " where numalbar in (" & Albaranes & ")"
+    Sql = "update rhisfruta set prestimado = " & DBSet(Precio, "N")
+    Sql = Sql & " where numalbar in (" & Albaranes & ")"
 
-    conn.Execute SQL
+    conn.Execute Sql
     
-    SQL = "update rhisfruta_clasif set precio = " & DBSet(Precio, "N")
+    Sql = "update rhisfruta_clasif set precio = " & DBSet(Precio, "N")
     '[Monica]19/09/2013: añadimos el importe
-    SQL = SQL & ", importe = round(kilosnet * " & DBSet(Precio, "N") & ",2) "
-    SQL = SQL & " where numalbar in (" & Albaranes & ")"
+    Sql = Sql & ", importe = round(kilosnet * " & DBSet(Precio, "N") & ",2) "
+    Sql = Sql & " where numalbar in (" & Albaranes & ")"
     
-    conn.Execute SQL
+    conn.Execute Sql
     
 End Sub
 
@@ -1524,20 +1524,20 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid "
+    Sql = Sql & " ORDER BY rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid "
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Código|1000|;S|txtAux2(0)|T|Variedad|4175|;" '2575
@@ -1562,7 +1562,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
     
     Select Case Index
         Case 2 ' precios
-            If PonerFormatoDecimal(txtAux(Index), 7) Then cmdAceptar.SetFocus
+            If PonerFormatoDecimal(txtAux(Index), 7) Then CmdAceptar.SetFocus
             
         Case 44 ' precios
             PonerFormatoDecimal txtAux(Index), 7
@@ -1570,7 +1570,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
             PonerFormatoDecimal txtAux(46), 3
             
         Case 46 'importe
-            If PonerFormatoDecimal(txtAux(Index), 3) Then cmdAceptar.SetFocus
+            If PonerFormatoDecimal(txtAux(Index), 3) Then CmdAceptar.SetFocus
         
     End Select
     
@@ -1579,7 +1579,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 Dim TipoCoste As Byte
 
@@ -1692,7 +1692,7 @@ End Sub
 '****************************************************
 Private Sub CargaGridAux(Index As Integer, enlaza As Boolean)
 Dim B As Boolean
-Dim I As Byte
+Dim i As Byte
 Dim tots As String
 
     On Error GoTo ECarga
@@ -1734,25 +1734,25 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 1 ' LINEAS
-            SQL = "SELECT rhisfruta_clasif.numalbar, rhisfruta.fecalbar, rhisfruta_clasif.codvarie, variedades.nomvarie, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta_clasif.kilosnet, rhisfruta_clasif.precio, rhisfruta_clasif.importe "
-            SQL = SQL & " FROM rhisfruta_clasif, rhisfruta, variedades, rcalidad "
-            SQL = SQL & " where rhisfruta.numalbar = rhisfruta_clasif.numalbar "
-            SQL = SQL & " and rhisfruta_clasif.codvarie = variedades.codvarie "
-            SQL = SQL & " and rhisfruta_clasif.codvarie = rcalidad.codvarie "
-            SQL = SQL & " and rhisfruta_clasif.codcalid = rcalidad.codcalid "
-            SQL = SQL & " and rhisfruta_clasif.numalbar in (" & Albaranes & ")"
+            Sql = "SELECT rhisfruta_clasif.numalbar, rhisfruta.fecalbar, rhisfruta_clasif.codvarie, variedades.nomvarie, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta_clasif.kilosnet, rhisfruta_clasif.precio, rhisfruta_clasif.importe "
+            Sql = Sql & " FROM rhisfruta_clasif, rhisfruta, variedades, rcalidad "
+            Sql = Sql & " where rhisfruta.numalbar = rhisfruta_clasif.numalbar "
+            Sql = Sql & " and rhisfruta_clasif.codvarie = variedades.codvarie "
+            Sql = Sql & " and rhisfruta_clasif.codvarie = rcalidad.codvarie "
+            Sql = Sql & " and rhisfruta_clasif.codcalid = rcalidad.codcalid "
+            Sql = Sql & " and rhisfruta_clasif.numalbar in (" & Albaranes & ")"
             
-            SQL = SQL & " ORDER BY rhisfruta_clasif.numalbar, rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid "
+            Sql = Sql & " ORDER BY rhisfruta_clasif.numalbar, rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid "
     
     End Select
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 Private Function ObtenerWhereCab(conW As Boolean) As String
@@ -1786,7 +1786,7 @@ Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Bu
 End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -1810,28 +1810,28 @@ Dim Eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 1 'lineas de confeccion
-            SQL = "¿ Seguro que desea eliminar la linea ?"
-            SQL = SQL & vbCrLf & "Linea: " & Adoaux(Index).Recordset!codlinea '& " " & Adoaux(Index).Recordset!NomTraba
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            Sql = "¿ Seguro que desea eliminar la linea ?"
+            Sql = Sql & vbCrLf & "Linea: " & Adoaux(Index).Recordset!codlinea '& " " & Adoaux(Index).Recordset!NomTraba
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                SQL = "DELETE FROM rhisfruta_clasif "
-                SQL = SQL & vWhere & " AND numlinea= " & Adoaux(Index).Recordset!numlinea
+                Sql = "DELETE FROM rhisfruta_clasif "
+                Sql = Sql & vWhere & " AND numlinea= " & Adoaux(Index).Recordset!numlinea
             End If
             
         Case 2 'lineas de cuentas contables
-            SQL = "¿ Seguro que desea eliminar la cuenta asociada ?"
-            SQL = SQL & vbCrLf & "Cuenta Contable: " & Adoaux(Index).Recordset!ctacontable '& " " & Adoaux(Index).Recordset!NomTraba
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            Sql = "¿ Seguro que desea eliminar la cuenta asociada ?"
+            Sql = Sql & vbCrLf & "Cuenta Contable: " & Adoaux(Index).Recordset!ctacontable '& " " & Adoaux(Index).Recordset!NomTraba
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                SQL = "DELETE FROM rhisfruta_cta "
-                SQL = SQL & vWhere & " AND numlinea= " & Adoaux(Index).Recordset!numlinea
+                Sql = "DELETE FROM rhisfruta_cta "
+                Sql = Sql & vWhere & " AND numlinea= " & Adoaux(Index).Recordset!numlinea
             End If
     End Select
 
     If Eliminar Then
         NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute SQL
+        conn.Execute Sql
         
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         CargaGridAux Index, True
@@ -1852,7 +1852,7 @@ Private Sub BotonAnyadirLinea(Index As Integer)
 Dim NumF As String
 Dim vWhere As String, vtabla As String
 Dim anc As Single
-Dim I As Integer
+Dim i As Integer
     
     
     NumTabMto = Index
@@ -1912,7 +1912,7 @@ End Sub
 
 Private Sub BotonModificarLinea(Index As Integer)
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     Dim J As Integer
     
     If Adoaux(Index).Recordset.EOF Then Exit Sub
@@ -1931,8 +1931,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         Case 1, 2 ' *** pose els index de llínies que tenen datagrid (en o sense tab) ***
             If DataGridAux(Index).Bookmark < DataGridAux(Index).FirstRow Or DataGridAux(Index).Bookmark > (DataGridAux(Index).FirstRow + DataGridAux(Index).VisibleRows - 1) Then
-                I = DataGridAux(Index).Bookmark - DataGridAux(Index).FirstRow
-                DataGridAux(Index).Scroll 0, I
+                i = DataGridAux(Index).Bookmark - DataGridAux(Index).FirstRow
+                DataGridAux(Index).Scroll 0, i
                 DataGridAux(Index).Refresh
             End If
               
@@ -2062,7 +2062,7 @@ Private Function ModificaRegistro() As Boolean
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
 Dim V As Integer
-Dim SQL As String
+Dim Sql As String
 
     
     On Error GoTo eModificaRegistro
@@ -2075,20 +2075,20 @@ Dim SQL As String
     nomframe = "FrameAux1" 'lineas de confeccion
     
     
-    SQL = "update rhisfruta set prestimado = " & DBSet(txtAux(2).Text, "N")
-    SQL = SQL & " where codvarie = " & DBSet(txtAux(0).Text, "N")
-    SQL = SQL & " and numalbar in (" & Albaranes & ")"
+    Sql = "update rhisfruta set prestimado = " & DBSet(txtAux(2).Text, "N")
+    Sql = Sql & " where codvarie = " & DBSet(txtAux(0).Text, "N")
+    Sql = Sql & " and numalbar in (" & Albaranes & ")"
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     If MsgBox("¿ Desea actualizar los precios de todas las calidades de los albaranes ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-        SQL = "update rhisfruta_clasif set precio = " & DBSet(txtAux(2).Text, "N")
-        SQL = SQL & " , importe = round(kilosnet * " & DBSet(txtAux(2).Text, "N") & ",2) "
-        SQL = SQL & " where codvarie = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and codcalid = " & DBSet(txtAux(1).Text, "N")
-        SQL = SQL & " and numalbar in (" & Albaranes & ")"
+        Sql = "update rhisfruta_clasif set precio = " & DBSet(txtAux(2).Text, "N")
+        Sql = Sql & " , importe = round(kilosnet * " & DBSet(txtAux(2).Text, "N") & ",2) "
+        Sql = Sql & " where codvarie = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and codcalid = " & DBSet(txtAux(1).Text, "N")
+        Sql = Sql & " and numalbar in (" & Albaranes & ")"
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     CargaGridAux 1, True
@@ -2131,7 +2131,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -2148,9 +2148,9 @@ Dim vFact As Byte, vDocum As Byte
     If B And nomframe = "FrameAux1" Then
         'comprobamos que no exista ese codigo de linea
         If ModoLineas = 1 Then
-            SQL = "select count(*) from rhisfruta_clasif where codcoste = " & Me.adodc1.Recordset!codCoste
-            SQL = SQL & " and codlinea = " & DBSet(txtAux(42).Text, "N")
-            If TotalRegistros(SQL) <> 0 Then
+            Sql = "select count(*) from rhisfruta_clasif where codcoste = " & Me.adodc1.Recordset!codCoste
+            Sql = Sql & " and codlinea = " & DBSet(txtAux(42).Text, "N")
+            If TotalRegistros(Sql) <> 0 Then
                 MsgBox "Código de linea ya existe. Revise.", vbExclamation
                 B = False
             End If
@@ -2160,9 +2160,9 @@ Dim vFact As Byte, vDocum As Byte
     If B And nomframe = "FramAux2" Then
         'comprobamos que no exista ese codigo de linea
         If ModoLineas = 1 Then
-            SQL = "select count(*) from rhisfruta_cta where codcoste = " & Me.adodc1.Recordset!codCoste
-            SQL = SQL & " and ctacontable = " & DBSet(txtAux(52).Text, "T")
-            If TotalRegistros(SQL) <> 0 Then
+            Sql = "select count(*) from rhisfruta_cta where codcoste = " & Me.adodc1.Recordset!codCoste
+            Sql = Sql & " and ctacontable = " & DBSet(txtAux(52).Text, "T")
+            If TotalRegistros(Sql) <> 0 Then
                 MsgBox "Cuenta contable ya existe. Revise.", vbExclamation
                 B = False
             End If

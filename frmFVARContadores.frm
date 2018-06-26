@@ -5,16 +5,16 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmFVARContadores 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Contadores de Facturas Varias"
-   ClientHeight    =   6255
+   ClientHeight    =   9615
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   7605
+   ClientWidth     =   9600
    Icon            =   "frmFVARContadores.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6255
-   ScaleWidth      =   7605
+   ScaleHeight     =   9615
+   ScaleWidth      =   9600
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral 
@@ -182,10 +182,10 @@ Begin VB.Form frmFVARContadores
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   5160
+      Left            =   7185
       TabIndex        =   4
       Tag             =   "   "
-      Top             =   5685
+      Top             =   9150
       Visible         =   0   'False
       Width           =   1035
    End
@@ -202,21 +202,21 @@ Begin VB.Form frmFVARContadores
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   6330
+      Left            =   8355
       TabIndex        =   5
-      Top             =   5685
+      Top             =   9150
       Visible         =   0   'False
       Width           =   1095
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmFVARContadores.frx":000C
-      Height          =   4545
+      Height          =   8145
       Left            =   120
       TabIndex        =   8
       Top             =   855
-      Width           =   7320
-      _ExtentX        =   12912
-      _ExtentY        =   8017
+      Width           =   9320
+      _ExtentX        =   16431
+      _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -290,9 +290,9 @@ Begin VB.Form frmFVARContadores
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   6360
+      Left            =   8385
       TabIndex        =   9
-      Top             =   5700
+      Top             =   9075
       Visible         =   0   'False
       Width           =   1095
    End
@@ -301,7 +301,7 @@ Begin VB.Form frmFVARContadores
       Index           =   1
       Left            =   120
       TabIndex        =   6
-      Top             =   5520
+      Top             =   9030
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -385,9 +385,9 @@ Begin VB.Form frmFVARContadores
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   7020
+      Left            =   9000
       TabIndex        =   13
-      Top             =   210
+      Top             =   180
       Width           =   405
       _ExtentX        =   714
       _ExtentY        =   582
@@ -510,7 +510,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 
 Private Sub PonerModo(vModo)
 Dim B As Boolean
@@ -524,13 +524,13 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not B
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not B
+        txtAux(i).BackColor = vbWhite
+    Next i
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -597,9 +597,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 1 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
@@ -621,9 +621,9 @@ Private Sub BotonBuscar()
     CargaGrid "stipom.codtipom = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
 '    PosicionarCombo Combo1, "724"
     LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
@@ -631,13 +631,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -674,9 +674,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     ' ### [Monica] 12/09/2006
 End Sub
 
@@ -734,7 +734,7 @@ Private Sub PonerLongCampos()
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As String
+    Dim i As String
     
 
     Select Case Modo
@@ -769,10 +769,10 @@ Private Sub cmdAceptar_Click()
             If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(0)
+                    i = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " ='" & I & "'")
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " ='" & i & "'")
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -802,7 +802,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -811,16 +811,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -991,7 +991,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Código|800|;S|txtAux(1)|T|Denominación|3500|;S|txtAux(2)|T|Contador|1125|;S|txtAux(3)|T|Letra Serie|1325|;"
+    tots = "S|txtAux(0)|T|Código|800|;S|txtAux(1)|T|Denominación|4500|;S|txtAux(2)|T|Contador|1125|;S|txtAux(3)|T|Letra Serie|2325|;"
     
     
     arregla tots, DataGrid1, Me, 350

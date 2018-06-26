@@ -5,16 +5,16 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManCategorias 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Categorias"
-   ClientHeight    =   6330
+   ClientHeight    =   9945
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   10335
+   ClientWidth     =   12330
    Icon            =   "frmManCategorias.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6330
-   ScaleWidth      =   10335
+   ScaleHeight     =   9945
+   ScaleWidth      =   12330
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox txtAux 
@@ -192,9 +192,9 @@ Begin VB.Form frmManCategorias
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   7875
+      Left            =   9900
       TabIndex        =   5
-      Top             =   5775
+      Top             =   9330
       Visible         =   0   'False
       Width           =   1065
    End
@@ -211,9 +211,9 @@ Begin VB.Form frmManCategorias
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   9135
+      Left            =   11160
       TabIndex        =   6
-      Top             =   5775
+      Top             =   9330
       Visible         =   0   'False
       Width           =   1065
    End
@@ -262,13 +262,13 @@ Begin VB.Form frmManCategorias
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManCategorias.frx":0010
-      Height          =   4560
+      Height          =   8145
       Left            =   120
       TabIndex        =   9
       Top             =   930
-      Width           =   10100
-      _ExtentX        =   17806
-      _ExtentY        =   8043
+      Width           =   12100
+      _ExtentX        =   21352
+      _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -342,9 +342,9 @@ Begin VB.Form frmManCategorias
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   9135
+      Left            =   11160
       TabIndex        =   10
-      Top             =   5805
+      Top             =   9315
       Visible         =   0   'False
       Width           =   1095
    End
@@ -353,7 +353,7 @@ Begin VB.Form frmManCategorias
       Index           =   1
       Left            =   120
       TabIndex        =   7
-      Top             =   5610
+      Top             =   9210
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -423,9 +423,9 @@ Begin VB.Form frmManCategorias
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   9675
+      Left            =   11745
       TabIndex        =   13
-      Top             =   180
+      Top             =   225
       Width           =   405
       _ExtentX        =   714
       _ExtentY        =   582
@@ -557,7 +557,7 @@ Dim Modo As Byte
 Dim PrimeraVez As Boolean
 Dim indCodigo As Integer
 
-Dim I As Integer
+Dim i As Integer
 
 
 Private Sub PonerModo(vModo)
@@ -572,16 +572,16 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To 3
-        txtAux(I).visible = Not B
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To 3
+        txtAux(i).visible = Not B
+        txtAux(i).BackColor = vbWhite
+    Next i
     txtAux2(3).visible = Not B
     Me.btnBuscar(0).visible = Not B
     Combo1.visible = Not B
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -650,9 +650,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 0 To 3
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To 3
+        txtAux(i).Text = ""
+    Next i
     txtAux2(3).Text = ""
     Combo1.ListIndex = 0
     
@@ -673,9 +673,9 @@ Private Sub BotonBuscar()
     CargaGrid "codcateg = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To 3
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To 3
+        txtAux(i).Text = ""
+    Next i
     txtAux2(3).Text = ""
     Combo1.ListIndex = -1
 '    PosicionarCombo Combo1, "724"
@@ -686,13 +686,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -709,9 +709,9 @@ Private Sub BotonModificar()
     txtAux(3).Text = DataGrid1.Columns(5).Text
     txtAux2(3).Text = DataGrid1.Columns(6).Text
     ' ***** canviar-ho pel nom del camp del combo *********
-    I = adodc1.Recordset!Tipo
+    i = adodc1.Recordset!Tipo
     ' *****************************************************
-    PosicionarCombo Me.Combo1, I
+    PosicionarCombo Me.Combo1, i
 '    For j = 0 To Combo1.ListCount - 1
 '        If Combo1.ItemData(j) = i Then
 '            Combo1.ListIndex = j
@@ -731,9 +731,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To 3
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To 3
+        txtAux(i).Top = alto
+    Next i
     txtAux2(3).Top = alto
     Me.btnBuscar(0).Top = alto
     Combo1.Top = alto - 15
@@ -811,7 +811,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim I As Integer
+    Dim i As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -845,10 +845,10 @@ Private Sub cmdAceptar_Click()
             If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(0)
+                    i = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -883,7 +883,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -892,16 +892,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -1096,8 +1096,8 @@ Private Sub CargaGrid(Optional vSQL As String)
     
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Código|800|;S|txtAux(1)|T|Descripción|3087|;S|txtAux(2)|T|Precio|1000|;"
-    tots = tots & "N|||||;S|Combo1|C|Tipo|1000|;S|txtAux(3)|T|Banco|800|;S|btnBuscar(0)|B|||;S|txtAux2(3)|T|Denominación|2830|;"
+    tots = "S|txtAux(0)|T|Código|800|;S|txtAux(1)|T|Descripción|4087|;S|txtAux(2)|T|Precio|1000|;"
+    tots = tots & "N|||||;S|Combo1|C|Tipo|1000|;S|txtAux(3)|T|Banco|800|;S|btnBuscar(0)|B|||;S|txtAux2(3)|T|Denominación|3830|;"
     arregla tots, DataGrid1, Me, 350
     
     DataGrid1.ScrollBars = dbgAutomatic

@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmBasico2 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Formulario basico"
-   ClientHeight    =   6480
+   ClientHeight    =   9270
    ClientLeft      =   45
    ClientTop       =   30
    ClientWidth     =   7830
@@ -13,7 +13,7 @@ Begin VB.Form frmBasico2
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6480
+   ScaleHeight     =   9270
    ScaleWidth      =   7830
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -166,7 +166,7 @@ Begin VB.Form frmBasico2
       Left            =   5445
       TabIndex        =   3
       Tag             =   "   "
-      Top             =   5910
+      Top             =   8745
       Visible         =   0   'False
       Width           =   1095
    End
@@ -185,7 +185,7 @@ Begin VB.Form frmBasico2
       Height          =   375
       Left            =   6615
       TabIndex        =   4
-      Top             =   5910
+      Top             =   8745
       Visible         =   0   'False
       Width           =   1095
    End
@@ -233,13 +233,13 @@ Begin VB.Form frmBasico2
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmBasico2.frx":000C
-      Height          =   5265
+      Height          =   8145
       Left            =   135
       TabIndex        =   7
       Top             =   405
       Width           =   7575
       _ExtentX        =   13361
-      _ExtentY        =   9287
+      _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -315,7 +315,7 @@ Begin VB.Form frmBasico2
       Height          =   375
       Left            =   6630
       TabIndex        =   8
-      Top             =   5910
+      Top             =   8745
       Visible         =   0   'False
       Width           =   1095
    End
@@ -324,7 +324,7 @@ Begin VB.Form frmBasico2
       Index           =   1
       Left            =   120
       TabIndex        =   5
-      Top             =   5760
+      Top             =   8595
       Width           =   2985
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -529,7 +529,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 Dim vTag1 As CTag
 Dim vTag3 As CTag
 
@@ -546,20 +546,20 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).BackColor = vbWhite
+    Next i
     
-    For I = 0 To txtAux.Count - 1
-        If txtAux(I).Tag <> "" Then
-            txtAux(I).visible = Not B
+    For i = 0 To txtAux.Count - 1
+        If txtAux(i).Tag <> "" Then
+            txtAux(i).visible = Not B
         Else
-            txtAux(I).visible = False
+            txtAux(i).visible = False
         End If
-    Next I
+    Next i
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -606,9 +606,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 1 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
@@ -627,22 +627,22 @@ Private Sub BotonBuscar()
     CargaGrid CampoCP & " is null "
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     LLamaLineas DataGrid1.Top + 230, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -669,14 +669,14 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     ' ### [Monica] 12/09/2006
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -684,15 +684,15 @@ Dim temp As Boolean
     If adodc1.Recordset.EOF Then Exit Sub
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el registro de " & Me.Caption & "?"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
+    Sql = "¿Seguro que desea eliminar el registro de " & Me.Caption & "?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from " & tabla & " where " & CampoCP & "=" & adodc1.Recordset.Fields(0).Value
-        conn.Execute SQL
+        Sql = "Delete from " & tabla & " where " & CampoCP & "=" & adodc1.Recordset.Fields(0).Value
+        conn.Execute Sql
         CargaGrid CadB
         PonerModoOpcionesMenu
         adodc1.Recordset.Cancel
@@ -714,7 +714,7 @@ Private Sub PonerLongCampos()
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As Variant ' Integer
+    Dim i As Variant ' Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -746,11 +746,11 @@ Private Sub cmdAceptar_Click()
             If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(0)
+                    i = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
 
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & DBSet(I, RecuperaValor(Tag1, 2)))
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & DBSet(i, RecuperaValor(Tag1, 2)))
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -780,7 +780,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -789,16 +789,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -924,8 +924,8 @@ Private Sub Form_Load()
         
         Me.DataGrid1.Top = Me.DataGrid1.Top + 500
         Me.Frame1(1).Top = Me.Frame1(1).Top + 500
-        Me.cmdAceptar.Top = Me.cmdAceptar.Top + 500
-        Me.cmdCancelar.Top = Me.cmdCancelar.Top + 500
+        Me.CmdAceptar.Top = Me.CmdAceptar.Top + 500
+        Me.CmdCancelar.Top = Me.CmdCancelar.Top + 500
         Me.cmdRegresar.Top = Me.cmdRegresar.Top + 500
         
         Me.Height = Me.Height + 500
@@ -982,7 +982,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
     
@@ -995,15 +995,15 @@ Private Sub CargaGrid(Optional vSQL As String)
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY " & CampoOrden & " " & TipoOrden
+    Sql = Sql & " ORDER BY " & CampoOrden & " " & TipoOrden
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     
     
@@ -1018,13 +1018,13 @@ Private Sub CargaGrid(Optional vSQL As String)
 
 End Sub
 
-Private Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, SQL As String, PrimeraVez As Boolean)
+Private Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, Sql As String, PrimeraVez As Boolean)
 On Error GoTo ECargaGrid
 
     vDataGrid.Enabled = True
     '    vdata.Recordset.Cancel
 '    vData.ConnectionString = conn
-    vData.RecordSource = SQL
+    vData.RecordSource = Sql
     vData.CursorType = adOpenDynamic
     vData.LockType = adLockPessimistic
     vDataGrid.ScrollBars = dbgNone
@@ -1079,7 +1079,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 

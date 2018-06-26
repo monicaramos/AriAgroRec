@@ -198,7 +198,7 @@ Begin VB.Form frmManFactSocios
       _ExtentY        =   7805
       _Version        =   393216
       Tabs            =   5
-      Tab             =   4
+      Tab             =   2
       TabsPerRow      =   5
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -213,9 +213,9 @@ Begin VB.Form frmManFactSocios
       TabCaption(0)   =   "Variedad/Calidad"
       TabPicture(0)   =   "frmManFactSocios.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame3"
+      Tab(0).Control(0)=   "FrameAnticipos"
       Tab(0).Control(1)=   "Frame4"
-      Tab(0).Control(2)=   "FrameAnticipos"
+      Tab(0).Control(2)=   "Frame3"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Gastos a Pie"
       TabPicture(1)   =   "frmManFactSocios.frx":0028
@@ -224,8 +224,9 @@ Begin VB.Form frmManFactSocios
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Albaranes"
       TabPicture(2)   =   "frmManFactSocios.frx":0044
-      Tab(2).ControlEnabled=   0   'False
+      Tab(2).ControlEnabled=   -1  'True
       Tab(2).Control(0)=   "FrameAlbaranes"
+      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).ControlCount=   1
       TabCaption(3)   =   "Rectificativa"
       TabPicture(3)   =   "frmManFactSocios.frx":0060
@@ -234,7 +235,7 @@ Begin VB.Form frmManFactSocios
       Tab(3).ControlCount=   1
       TabCaption(4)   =   "Facturas Varias"
       TabPicture(4)   =   "frmManFactSocios.frx":007C
-      Tab(4).ControlEnabled=   -1  'True
+      Tab(4).ControlEnabled=   0   'False
       Tab(4).Control(0)=   "FrameFVarias"
       Tab(4).Control(0).Enabled=   0   'False
       Tab(4).ControlCount=   1
@@ -432,7 +433,7 @@ Begin VB.Form frmManFactSocios
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   3720
-         Left            =   45
+         Left            =   -74955
          TabIndex        =   134
          Top             =   360
          Width           =   13390
@@ -1472,7 +1473,7 @@ Begin VB.Form frmManFactSocios
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   3720
-         Left            =   -74955
+         Left            =   45
          TabIndex        =   53
          Top             =   360
          Width           =   13390
@@ -5893,8 +5894,8 @@ Dim b1 As Boolean
     
     '---------------------------------------------
     B = (Modo <> 0 And Modo <> 2)
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdCancelar.visible = B
+    CmdAceptar.visible = B
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     BloquearImgFec Me, 0, Modo
@@ -6027,7 +6028,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -6035,7 +6036,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     End If
 End Sub
 
@@ -6344,8 +6345,8 @@ Private Sub PonerBotonCabecera(B As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
     On Error Resume Next
 
-    Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
+    Me.CmdAceptar.visible = Not B
+    Me.CmdCancelar.visible = Not B
     Me.cmdRegresar.visible = B
     Me.cmdRegresar.Caption = "Cabecera"
     If B Then
@@ -6548,7 +6549,7 @@ Dim Sql As String
         Case 7 'peso neto
             If txtAux(Index) <> "" Then
                 PonerFormatoEntero txtAux(Index)
-                cmdAceptar.SetFocus
+                CmdAceptar.SetFocus
             End If
 
     End Select
@@ -7177,7 +7178,7 @@ Dim cadMen As String
     
         Case 16 ' importe
             If txtAux3(Index) <> "" Then
-                If PonerFormatoDecimal(txtAux3(Index), 3) Then cmdAceptar.SetFocus
+                If PonerFormatoDecimal(txtAux3(Index), 3) Then CmdAceptar.SetFocus
             End If
         
     End Select

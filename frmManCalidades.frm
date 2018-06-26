@@ -5,16 +5,16 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManCalidades 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Calidades"
-   ClientHeight    =   6090
+   ClientHeight    =   10065
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   17175
+   ClientWidth     =   17265
    Icon            =   "frmManCalidades.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6090
-   ScaleWidth      =   17175
+   ScaleHeight     =   10065
+   ScaleWidth      =   17265
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral 
@@ -326,7 +326,7 @@ Begin VB.Form frmManCalidades
       Height          =   375
       Left            =   14835
       TabIndex        =   12
-      Top             =   5535
+      Top             =   9360
       Visible         =   0   'False
       Width           =   1035
    End
@@ -345,7 +345,7 @@ Begin VB.Form frmManCalidades
       Height          =   375
       Left            =   15990
       TabIndex        =   13
-      Top             =   5535
+      Top             =   9360
       Visible         =   0   'False
       Width           =   1095
    End
@@ -396,13 +396,13 @@ Begin VB.Form frmManCalidades
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManCalidades.frx":0014
-      Height          =   4550
-      Left            =   150
+      Height          =   8145
+      Left            =   135
       TabIndex        =   16
-      Top             =   810
-      Width           =   16925
+      Top             =   900
+      Width           =   16920
       _ExtentX        =   29845
-      _ExtentY        =   8017
+      _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -478,7 +478,7 @@ Begin VB.Form frmManCalidades
       Height          =   375
       Left            =   15990
       TabIndex        =   17
-      Top             =   5535
+      Top             =   9360
       Visible         =   0   'False
       Width           =   1095
    End
@@ -487,7 +487,7 @@ Begin VB.Form frmManCalidades
       Index           =   1
       Left            =   150
       TabIndex        =   14
-      Top             =   5460
+      Top             =   9285
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -692,7 +692,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 
 Private Sub PonerModo(vModo)
 Dim B As Boolean
@@ -707,10 +707,10 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not B
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not B
+        txtAux(i).BackColor = vbWhite
+    Next i
     
     txtAux2(2).visible = Not B
     btnBuscar(0).visible = Not B
@@ -719,8 +719,8 @@ Dim B As Boolean
     chkAux(0).visible = Not B
     chkAux(1).visible = Not B
 
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -790,9 +790,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 1 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux2(2).Text = ""
     Combo1(0).ListIndex = -1
     Combo1(1).ListIndex = -1
@@ -816,9 +816,9 @@ Private Sub BotonBuscar()
     CargaGrid "rcalidad.codvarie = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux2(2).Text = ""
     Combo1(0).ListIndex = -1
     Combo1(1).ListIndex = -1
@@ -831,13 +831,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -856,13 +856,13 @@ Private Sub BotonModificar()
     txtAux(4).Text = DataGrid1.Columns(9).Text
     txtAux(5).Text = DataGrid1.Columns(10).Text
     ' ***** canviar-ho pel nom del camp del combo *********
-    I = adodc1.Recordset!tipcalid
+    i = adodc1.Recordset!tipcalid
     ' *****************************************************
-    PosicionarCombo Me.Combo1(0), I
+    PosicionarCombo Me.Combo1(0), i
     
-    I = adodc1.Recordset!tipcalid1
+    i = adodc1.Recordset!tipcalid1
     ' *****************************************************
-    PosicionarCombo Me.Combo1(1), I
+    PosicionarCombo Me.Combo1(1), i
     
     Me.chkAux(0).Value = Me.adodc1.Recordset!gastosrec
     
@@ -884,9 +884,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     
     ' ### [Monica] 12/09/2006
     txtAux2(2).Top = alto
@@ -987,7 +987,7 @@ Private Sub chkAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As Integer
+    Dim i As Integer
     Dim cad As String
 
     Select Case Modo
@@ -1050,7 +1050,7 @@ Dim cad As String, Indicador As String
 End Sub
 
 Private Sub LimpiarCampos()
-Dim I As Integer
+Dim i As Integer
 
     On Error Resume Next
     
@@ -1059,9 +1059,9 @@ Dim I As Integer
     Me.chkAux(0).Value = 0
     Me.chkAux(1).Value = 0
     
-    For I = 0 To Combo1.Count - 1
-        Combo1(I).ListIndex = -1
-    Next I
+    For i = 0 To Combo1.Count - 1
+        Combo1(i).ListIndex = -1
+    Next i
     
     ' *** si n'hi han combos a la capçalera ***
     ' *****************************************
@@ -1100,7 +1100,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1109,16 +1109,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -1209,7 +1209,8 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & " WHERE variedades.codvarie = rcalidad.codvarie "
     '************************************************************************
     
-    
+'    Me.DataGrid1.Height = Me.DataGrid1.Height + 60
+
     CadB = ""
     CargaGrid
     

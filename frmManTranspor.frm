@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManTranspor 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Transportistas"
-   ClientHeight    =   6615
+   ClientHeight    =   7770
    ClientLeft      =   45
    ClientTop       =   30
    ClientWidth     =   15375
@@ -13,7 +13,7 @@ Begin VB.Form frmManTranspor
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6615
+   ScaleHeight     =   7770
    ScaleWidth      =   15375
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -96,7 +96,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   4
       TabIndex        =   15
       Tag             =   "IBAN|T|S|||rtransporte|iban|||"
-      Top             =   4290
+      Top             =   4875
       Width           =   630
    End
    Begin VB.CheckBox chkAbonos 
@@ -115,7 +115,7 @@ Begin VB.Form frmManTranspor
       Left            =   11760
       TabIndex        =   24
       Tag             =   "Se factura|N|N|0|1|rtransporte|esfacttrainterna||N|"
-      Top             =   5580
+      Top             =   6570
       Width           =   3375
    End
    Begin VB.TextBox txtAux2 
@@ -136,7 +136,7 @@ Begin VB.Form frmManTranspor
       Locked          =   -1  'True
       MaxLength       =   40
       TabIndex        =   48
-      Top             =   5070
+      Top             =   5970
       Width           =   3645
    End
    Begin VB.TextBox txtAux1 
@@ -155,7 +155,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   10
       TabIndex        =   22
       Tag             =   "Trabajador|N|S|||rtransporte|codtraba|000000||"
-      Top             =   5070
+      Top             =   5970
       Width           =   975
    End
    Begin VB.TextBox txtAux1 
@@ -175,7 +175,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   7
       TabIndex        =   21
       Tag             =   "contador Factura|N|N|0|9999999|rtransporte|contador|0000000||"
-      Top             =   4680
+      Top             =   5535
       Width           =   1170
    End
    Begin VB.CheckBox chkAbonos 
@@ -194,7 +194,7 @@ Begin VB.Form frmManTranspor
       Left            =   8670
       TabIndex        =   23
       Tag             =   "Se factura|N|N|0|1|rtransporte|sefactura||N|"
-      Top             =   5580
+      Top             =   6570
       Width           =   2415
    End
    Begin VB.TextBox txtAux1 
@@ -214,7 +214,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   4
       TabIndex        =   16
       Tag             =   "Banco|N|S|0|9999|rtransporte|codbanco|0000||"
-      Top             =   4290
+      Top             =   4875
       Width           =   630
    End
    Begin VB.TextBox txtAux1 
@@ -234,7 +234,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   10
       TabIndex        =   19
       Tag             =   "Cuenta Bancaria|T|S|||rtransporte|cuentaba|0000000000||"
-      Top             =   4290
+      Top             =   4875
       Width           =   1425
    End
    Begin VB.TextBox txtAux1 
@@ -254,7 +254,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   2
       TabIndex        =   18
       Tag             =   "Digito Control|T|S|||rtransporte|digcontr|00||"
-      Top             =   4290
+      Top             =   4875
       Width           =   615
    End
    Begin VB.TextBox txtAux1 
@@ -274,7 +274,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   4
       TabIndex        =   17
       Tag             =   "Sucursal|N|S|0|9999|rtransporte|codsucur|0000||"
-      Top             =   4290
+      Top             =   4875
       Width           =   660
    End
    Begin VB.ComboBox Combo1 
@@ -293,7 +293,7 @@ Begin VB.Form frmManTranspor
       Style           =   2  'Dropdown List
       TabIndex        =   20
       Tag             =   "Tipo IRPF|N|N|0|2|rtransporte|tipoirpf||N|"
-      Top             =   4680
+      Top             =   5535
       Width           =   2310
    End
    Begin VB.TextBox txtAux1 
@@ -312,7 +312,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   2
       TabIndex        =   14
       Tag             =   "Cod.Iva|N|N|||rtransporte|codiva|00||"
-      Top             =   3900
+      Top             =   4440
       Width           =   975
    End
    Begin VB.TextBox txtAux1 
@@ -331,7 +331,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   10
       TabIndex        =   13
       Tag             =   "Cta.Contable Proveedor|T|S|||rtransporte|codmacpro|||"
-      Top             =   3510
+      Top             =   4005
       Width           =   1335
    End
    Begin VB.TextBox txtAux1 
@@ -350,7 +350,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   10
       TabIndex        =   12
       Tag             =   "Forma Pago|N|N|||rtransporte|codforpa|000||"
-      Top             =   3120
+      Top             =   3570
       Width           =   975
    End
    Begin VB.TextBox txtAux2 
@@ -371,7 +371,7 @@ Begin VB.Form frmManTranspor
       Locked          =   -1  'True
       MaxLength       =   40
       TabIndex        =   41
-      Top             =   3900
+      Top             =   4440
       Width           =   3675
    End
    Begin VB.TextBox txtAux2 
@@ -392,7 +392,7 @@ Begin VB.Form frmManTranspor
       Locked          =   -1  'True
       MaxLength       =   40
       TabIndex        =   40
-      Top             =   3510
+      Top             =   4005
       Width           =   3315
    End
    Begin VB.TextBox txtAux2 
@@ -413,7 +413,7 @@ Begin VB.Form frmManTranspor
       Locked          =   -1  'True
       MaxLength       =   40
       TabIndex        =   39
-      Top             =   3120
+      Top             =   3570
       Width           =   3675
    End
    Begin VB.TextBox txtAux1 
@@ -432,7 +432,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   35
       TabIndex        =   6
       Tag             =   "Domicilio|T|N|||rtransporte|dirtrans|||"
-      Top             =   1170
+      Top             =   1215
       Width           =   4680
    End
    Begin VB.TextBox txtAux1 
@@ -451,7 +451,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   30
       TabIndex        =   7
       Tag             =   "Población|T|N|||rtransporte|pobtrans|||"
-      Top             =   1545
+      Top             =   1635
       Width           =   4680
    End
    Begin VB.TextBox txtAux1 
@@ -470,7 +470,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   30
       TabIndex        =   8
       Tag             =   "Provincia|T|N|||rtransporte|protrans|||"
-      Top             =   1950
+      Top             =   2085
       Width           =   4680
    End
    Begin VB.TextBox txtAux1 
@@ -527,7 +527,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   40
       TabIndex        =   11
       Tag             =   "Mail|T|S|||rtransporte|maitrans|||"
-      Top             =   2730
+      Top             =   2955
       Width           =   4680
    End
    Begin VB.TextBox txtAux1 
@@ -546,7 +546,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   10
       TabIndex        =   9
       Tag             =   "Teléfono|T|S|||rtransporte|teltran1|||"
-      Top             =   2325
+      Top             =   2505
       Width           =   1725
    End
    Begin VB.TextBox txtAux1 
@@ -565,7 +565,7 @@ Begin VB.Form frmManTranspor
       MaxLength       =   10
       TabIndex        =   10
       Tag             =   "Fax|T|S|||rtransporte|movtrans|||"
-      Top             =   2325
+      Top             =   2505
       Width           =   1740
    End
    Begin VB.TextBox txtAux 
@@ -626,7 +626,7 @@ Begin VB.Form frmManTranspor
       Left            =   12840
       TabIndex        =   25
       Tag             =   "   "
-      Top             =   6000
+      Top             =   7170
       Visible         =   0   'False
       Width           =   1035
    End
@@ -645,7 +645,7 @@ Begin VB.Form frmManTranspor
       Height          =   375
       Left            =   14070
       TabIndex        =   26
-      Top             =   6000
+      Top             =   7170
       Visible         =   0   'False
       Width           =   1095
    End
@@ -694,13 +694,13 @@ Begin VB.Form frmManTranspor
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManTranspor.frx":000C
-      Height          =   4905
+      Height          =   5985
       Left            =   120
       TabIndex        =   29
       Top             =   840
       Width           =   8260
       _ExtentX        =   14579
-      _ExtentY        =   8652
+      _ExtentY        =   10557
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -776,7 +776,7 @@ Begin VB.Form frmManTranspor
       Height          =   375
       Left            =   14040
       TabIndex        =   30
-      Top             =   6000
+      Top             =   7170
       Visible         =   0   'False
       Width           =   1095
    End
@@ -785,7 +785,7 @@ Begin VB.Form frmManTranspor
       Index           =   1
       Left            =   120
       TabIndex        =   27
-      Top             =   5820
+      Top             =   6990
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -886,7 +886,7 @@ Begin VB.Form frmManTranspor
       Height          =   285
       Left            =   8670
       TabIndex        =   49
-      Top             =   5100
+      Top             =   6000
       Width           =   1275
    End
    Begin VB.Image imgBuscar 
@@ -894,7 +894,7 @@ Begin VB.Form frmManTranspor
       Index           =   3
       Left            =   10140
       ToolTipText     =   "Buscar Trabajador"
-      Top             =   5100
+      Top             =   6045
       Width           =   240
    End
    Begin VB.Label Label4 
@@ -911,7 +911,7 @@ Begin VB.Form frmManTranspor
       Height          =   255
       Left            =   12930
       TabIndex        =   47
-      Top             =   4710
+      Top             =   5565
       Width           =   1065
    End
    Begin VB.Label Label38 
@@ -928,7 +928,7 @@ Begin VB.Form frmManTranspor
       Height          =   255
       Left            =   8670
       TabIndex        =   46
-      Top             =   4320
+      Top             =   4905
       Width           =   1125
    End
    Begin VB.Image imgBuscar 
@@ -936,7 +936,7 @@ Begin VB.Form frmManTranspor
       Index           =   2
       Left            =   10140
       ToolTipText     =   "Buscar iva"
-      Top             =   3960
+      Top             =   4500
       Width           =   240
    End
    Begin VB.Image imgBuscar 
@@ -944,7 +944,7 @@ Begin VB.Form frmManTranspor
       Index           =   0
       Left            =   10140
       ToolTipText     =   "Buscar F.Pago"
-      Top             =   3135
+      Top             =   3585
       Width           =   240
    End
    Begin VB.Image imgBuscar 
@@ -952,7 +952,7 @@ Begin VB.Form frmManTranspor
       Index           =   1
       Left            =   10140
       ToolTipText     =   "Buscar cuenta"
-      Top             =   3540
+      Top             =   4035
       Width           =   240
    End
    Begin VB.Label Label43 
@@ -969,7 +969,7 @@ Begin VB.Form frmManTranspor
       Height          =   285
       Left            =   8670
       TabIndex        =   45
-      Top             =   4680
+      Top             =   5535
       Width           =   1065
    End
    Begin VB.Label Label13 
@@ -986,7 +986,7 @@ Begin VB.Form frmManTranspor
       Height          =   285
       Left            =   8670
       TabIndex        =   44
-      Top             =   3150
+      Top             =   3600
       Width           =   795
    End
    Begin VB.Label Label12 
@@ -1003,7 +1003,7 @@ Begin VB.Form frmManTranspor
       Height          =   285
       Left            =   8670
       TabIndex        =   43
-      Top             =   3930
+      Top             =   4470
       Width           =   405
    End
    Begin VB.Label Label9 
@@ -1020,7 +1020,7 @@ Begin VB.Form frmManTranspor
       Height          =   285
       Left            =   8670
       TabIndex        =   42
-      Top             =   3540
+      Top             =   4035
       Width           =   1530
    End
    Begin VB.Label Label1 
@@ -1056,7 +1056,7 @@ Begin VB.Form frmManTranspor
       Index           =   9
       Left            =   8670
       TabIndex        =   37
-      Top             =   1635
+      Top             =   1725
       Width           =   1035
    End
    Begin VB.Label Label2 
@@ -1073,7 +1073,7 @@ Begin VB.Form frmManTranspor
       Height          =   255
       Left            =   8670
       TabIndex        =   36
-      Top             =   2010
+      Top             =   2145
       Width           =   1065
    End
    Begin VB.Label Label1 
@@ -1091,7 +1091,7 @@ Begin VB.Form frmManTranspor
       Index           =   7
       Left            =   8670
       TabIndex        =   35
-      Top             =   1260
+      Top             =   1305
       Width           =   1035
    End
    Begin VB.Label Label3 
@@ -1115,7 +1115,7 @@ Begin VB.Form frmManTranspor
       Height          =   240
       Index           =   0
       Left            =   10140
-      Top             =   2745
+      Top             =   2970
       Width           =   240
    End
    Begin VB.Label Label7 
@@ -1132,7 +1132,7 @@ Begin VB.Form frmManTranspor
       Height          =   255
       Left            =   8670
       TabIndex        =   33
-      Top             =   2790
+      Top             =   3015
       Width           =   525
    End
    Begin VB.Label Label1 
@@ -1150,7 +1150,7 @@ Begin VB.Form frmManTranspor
       Index           =   1
       Left            =   8670
       TabIndex        =   32
-      Top             =   2385
+      Top             =   2565
       Width           =   1035
    End
    Begin VB.Label Label5 
@@ -1167,7 +1167,7 @@ Begin VB.Form frmManTranspor
       Height          =   255
       Left            =   12840
       TabIndex        =   31
-      Top             =   2355
+      Top             =   2535
       Width           =   525
    End
    Begin VB.Menu mnOpciones 

@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManVtasCampo 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Ventas Campo"
-   ClientHeight    =   6615
+   ClientHeight    =   9825
    ClientLeft      =   45
    ClientTop       =   30
    ClientWidth     =   14775
@@ -13,7 +13,7 @@ Begin VB.Form frmManVtasCampo
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6615
+   ScaleHeight     =   9825
    ScaleWidth      =   14775
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -170,7 +170,7 @@ Begin VB.Form frmManVtasCampo
       Height          =   675
       Left            =   4020
       TabIndex        =   19
-      Top             =   5850
+      Top             =   9045
       Width           =   6465
       Begin VB.TextBox Text2 
          Alignment       =   1  'Right Justify
@@ -508,7 +508,7 @@ Begin VB.Form frmManVtasCampo
       Height          =   375
       Left            =   12405
       TabIndex        =   8
-      Top             =   5985
+      Top             =   9180
       Visible         =   0   'False
       Width           =   1035
    End
@@ -527,7 +527,7 @@ Begin VB.Form frmManVtasCampo
       Height          =   375
       Left            =   13560
       TabIndex        =   9
-      Top             =   5985
+      Top             =   9180
       Visible         =   0   'False
       Width           =   1095
    End
@@ -578,13 +578,13 @@ Begin VB.Form frmManVtasCampo
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManVtasCampo.frx":0010
-      Height          =   4900
+      Height          =   8145
       Left            =   120
       TabIndex        =   12
       Top             =   780
       Width           =   14520
       _ExtentX        =   25612
-      _ExtentY        =   8652
+      _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -660,7 +660,7 @@ Begin VB.Form frmManVtasCampo
       Height          =   375
       Left            =   13560
       TabIndex        =   13
-      Top             =   6000
+      Top             =   9195
       Visible         =   0   'False
       Width           =   1095
    End
@@ -669,7 +669,7 @@ Begin VB.Form frmManVtasCampo
       Index           =   1
       Left            =   120
       TabIndex        =   10
-      Top             =   5910
+      Top             =   9105
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -899,7 +899,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 Dim cadSelGrid As String
 
 Private Sub PonerModo(vModo)
@@ -915,14 +915,14 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        BloquearTxt txtAux(I), (Modo = 0 Or Modo = 2)
-    Next I
+    For i = 0 To txtAux.Count - 1
+        BloquearTxt txtAux(i), (Modo = 0 Or Modo = 2)
+    Next i
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not B
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not B
+        txtAux(i).BackColor = vbWhite
+    Next i
     
     txtAux2(0).visible = Not B
     txtAux2(1).visible = Not B
@@ -932,8 +932,8 @@ Dim B As Boolean
     btnBuscar(2).visible = Not B
     Combo1(0).visible = Not B
 
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -943,12 +943,12 @@ Dim B As Boolean
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
     PonerOpcionesMenu  'En funcion del usuario
     'Si estamos modo Modificar bloquear todo excepto el importe de anticipo
-    For I = 0 To txtAux.Count - 1
-        If I <> 6 Then txtAux(I).Enabled = (Modo <> 4)
-    Next I
-    For I = 0 To 2
-        BloquearBtn Me.btnBuscar(I), (Modo = 4)
-    Next I
+    For i = 0 To txtAux.Count - 1
+        If i <> 6 Then txtAux(i).Enabled = (Modo <> 4)
+    Next i
+    For i = 0 To 2
+        BloquearBtn Me.btnBuscar(i), (Modo = 4)
+    Next i
     Combo1(0).Enabled = (Modo <> 4)
     
 End Sub
@@ -1024,9 +1024,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 1 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux2(2).Text = ""
     Combo1(0).ListIndex = -1
 
@@ -1047,9 +1047,9 @@ Private Sub BotonBuscar()
     CargaGrid "rhisfruta.numalbar = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux2(0).Text = ""
     txtAux2(1).Text = ""
     txtAux2(2).Text = ""
@@ -1060,13 +1060,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -1090,9 +1090,9 @@ Private Sub BotonModificar()
     txtAux(6).Text = DataGrid1.Columns(11).Text
     
     ' ***** canviar-ho pel nom del camp del combo *********
-    I = adodc1.Recordset!Recolect
+    i = adodc1.Recordset!Recolect
     ' *****************************************************
-    PosicionarCombo Me.Combo1(0), I
+    PosicionarCombo Me.Combo1(0), i
     
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
@@ -1106,9 +1106,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     
     ' ### [Monica] 12/09/2006
     txtAux2(0).Top = alto
@@ -1273,7 +1273,7 @@ Private Sub chkAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As Long
+    Dim i As Long
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -1313,7 +1313,7 @@ Private Sub cmdAceptar_Click()
             If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(9)
+                    i = adodc1.Recordset.Fields(9)
                     PonerModo 2
                     CargaGrid CadB
 '                    If CadB <> "" Then
@@ -1323,7 +1323,7 @@ Private Sub cmdAceptar_Click()
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(9).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(9).Name & " =" & i)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1358,7 +1358,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1367,16 +1367,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub

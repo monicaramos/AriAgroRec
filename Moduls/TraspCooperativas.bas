@@ -307,11 +307,11 @@ Dim NumNotac As Long
                 CadValues = CadValues & DBSet(Rs!codcapat + cMaxCapa, "N") & ","
             End If
             
-            CadValues = CadValues & DBSet(Rs!Codtarif, "N") & "," & DBSet(Rs!KilosBru, "N") & ","
+            CadValues = CadValues & DBSet(Rs!codtarif, "N") & "," & DBSet(Rs!KilosBru, "N") & ","
             CadValues = CadValues & DBSet(Rs!Numcajon, "N") & "," & DBSet(Rs!KilosNet, "N") & "," & DBSet(Rs!Observac, "T") & ","
             CadValues = CadValues & DBSet(Rs!ImpTrans, "N") & "," & DBSet(Rs!impacarr, "N") & "," & DBSet(Rs!imprecol, "N") & ","
             CadValues = CadValues & DBSet(Rs!ImpPenal, "N") & "," & DBSet(Rs!tiporecol, "N") & "," & DBSet(Rs!horastra, "N") & ","
-            CadValues = CadValues & DBSet(Rs!numtraba, "N") & "," & DBSet(Rs!numalbar, "N") & "," & DBSet(Rs!Fecalbar, "F") & ","
+            CadValues = CadValues & DBSet(Rs!numtraba, "N") & "," & DBSet(Rs!numalbar, "N") & "," & DBSet(Rs!fecalbar, "F") & ","
             CadValues = CadValues & DBSet(Rs!impreso, "N") & "," & DBSet(Rs!PrEstimado, "N") & "," & DBSet(Rs!transportadopor, "N") & ","
             CadValues = CadValues & DBSet(Rs!KilosTra, "N") & "," & DBSet(Rs!contrato, "N") & ")"
         
@@ -548,4 +548,10 @@ eCargarAlbaranesVenta:
 End Function
 
 
+Public Function EntradaComunicada(Nota As String) As Boolean
+Dim Sql As String
 
+    Sql = "select estacomunicada from rclasifica where numnotac = " & DBSet(Nota, "N")
+    EntradaComunicada = (DevuelveValor(Sql) = 1)
+
+End Function

@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManHorasCata 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Entrada de Horas Catadau"
-   ClientHeight    =   7980
+   ClientHeight    =   10320
    ClientLeft      =   195
    ClientTop       =   180
    ClientWidth     =   19770
@@ -13,7 +13,7 @@ Begin VB.Form frmManHorasCata
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7980
+   ScaleHeight     =   10320
    ScaleWidth      =   19770
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox txtAux 
@@ -67,7 +67,7 @@ Begin VB.Form frmManHorasCata
       Index           =   4
       Left            =   1935
       TabIndex        =   46
-      Top             =   6660
+      Top             =   9045
       Width           =   510
    End
    Begin VB.TextBox txtAux 
@@ -154,7 +154,7 @@ Begin VB.Form frmManHorasCata
       Index           =   11
       Left            =   4005
       TabIndex        =   43
-      Top             =   7425
+      Top             =   9810
       Width           =   4785
    End
    Begin VB.TextBox txtAux 
@@ -344,7 +344,7 @@ Begin VB.Form frmManHorasCata
       Height          =   1005
       Left            =   9045
       TabIndex        =   28
-      Top             =   6750
+      Top             =   9135
       Width           =   6765
       Begin VB.TextBox txtAux2 
          Alignment       =   1  'Right Justify
@@ -569,7 +569,7 @@ Begin VB.Form frmManHorasCata
       Index           =   6
       Left            =   4005
       TabIndex        =   24
-      Top             =   6660
+      Top             =   9045
       Width           =   4785
    End
    Begin VB.CommandButton btnBuscar 
@@ -755,7 +755,7 @@ Begin VB.Form frmManHorasCata
       Index           =   0
       Left            =   4005
       TabIndex        =   20
-      Top             =   7035
+      Top             =   9420
       Width           =   4785
    End
    Begin VB.CommandButton btnBuscar 
@@ -816,7 +816,7 @@ Begin VB.Form frmManHorasCata
       Height          =   375
       Left            =   17280
       TabIndex        =   13
-      Top             =   7185
+      Top             =   9570
       Visible         =   0   'False
       Width           =   1035
    End
@@ -835,7 +835,7 @@ Begin VB.Form frmManHorasCata
       Height          =   375
       Left            =   18450
       TabIndex        =   15
-      Top             =   7200
+      Top             =   9585
       Visible         =   0   'False
       Width           =   1095
    End
@@ -884,13 +884,13 @@ Begin VB.Form frmManHorasCata
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManHorasCata.frx":000C
-      Height          =   5265
+      Height          =   8145
       Left            =   90
       TabIndex        =   17
       Top             =   780
       Width           =   19505
       _ExtentX        =   34396
-      _ExtentY        =   9287
+      _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -966,7 +966,7 @@ Begin VB.Form frmManHorasCata
       Height          =   375
       Left            =   18450
       TabIndex        =   18
-      Top             =   7200
+      Top             =   9540
       Visible         =   0   'False
       Width           =   1095
    End
@@ -975,7 +975,7 @@ Begin VB.Form frmManHorasCata
       Index           =   1
       Left            =   60
       TabIndex        =   14
-      Top             =   7200
+      Top             =   9585
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -1090,7 +1090,7 @@ Begin VB.Form frmManHorasCata
       Height          =   270
       Left            =   135
       TabIndex        =   47
-      Top             =   6705
+      Top             =   9090
       Width           =   2025
    End
    Begin VB.Label Label6 
@@ -1108,7 +1108,7 @@ Begin VB.Form frmManHorasCata
       Height          =   270
       Left            =   2880
       TabIndex        =   44
-      Top             =   7470
+      Top             =   9855
       Width           =   945
    End
    Begin VB.Label Label5 
@@ -1126,7 +1126,7 @@ Begin VB.Form frmManHorasCata
       Height          =   225
       Left            =   2880
       TabIndex        =   42
-      Top             =   7110
+      Top             =   9495
       Width           =   945
    End
    Begin VB.Label Label4 
@@ -1144,7 +1144,7 @@ Begin VB.Form frmManHorasCata
       Height          =   225
       Left            =   2880
       TabIndex        =   41
-      Top             =   6705
+      Top             =   9090
       Width           =   945
    End
    Begin VB.Menu mnOpciones 
@@ -1292,7 +1292,7 @@ Dim Modo As Byte
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim indCodigo As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 
 ' utilizado para buscar por checks
 Private BuscaChekc As String
@@ -1310,18 +1310,18 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not B
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not B
+        txtAux(i).BackColor = vbWhite
+    Next i
     
 '    txtAux2(0).visible = Not B
 '    txtAux2(6).visible = Not B
     txtAux2(7).visible = Not B
     
-    For I = 0 To btnBuscar.Count - 1
-        btnBuscar(I).visible = Not B
-    Next I
+    For i = 0 To btnBuscar.Count - 1
+        btnBuscar(i).visible = Not B
+    Next i
     
     chkAux(0).visible = Not B
     chkAux(1).visible = Not B
@@ -1431,9 +1431,9 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux(1).Text = Format(Now, "dd/mm/yyyy")
     txtAux2(0).Text = ""
     txtAux2(6).Text = ""
@@ -1469,9 +1469,9 @@ Private Sub BotonBuscar()
     CargaGrid "horas.codcapat = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     chkAux(0).Value = 0
     chkAux(1).Value = 0
     Me.txtAux2(0).Text = ""
@@ -1488,13 +1488,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -1544,17 +1544,17 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     
     ' ### [Monica] 12/09/2006
 '    txtAux2(0).Top = alto
 '    txtAux2(6).Top = alto
     txtAux2(7).Top = alto
-    For I = 0 To btnBuscar.Count - 1
-        btnBuscar(I).Top = alto - 15
-    Next I
+    For i = 0 To btnBuscar.Count - 1
+        btnBuscar(i).Top = alto - 15
+    Next i
     
     Me.chkAux(0).Top = alto
     Me.chkAux(1).Top = alto
@@ -1709,7 +1709,7 @@ Private Sub chkAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As Integer
+    Dim i As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -1797,7 +1797,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1806,16 +1806,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
