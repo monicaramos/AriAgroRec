@@ -392,17 +392,17 @@ Public Function QuitarCaracterACadena(cadForm As String, Caracter As String) As 
 'IN: [cadForm] es la cadena en la que se eliminara todos los caractes iguales a la vble [Caracter]
 'OUT: cadena sin los caracteres
 'EJEMPLO: "{scaalb.numalbar}", "{"  -->  "scaalb.numalbar}"
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
     Aux = cadForm
-    I = InStr(1, Aux, Caracter, vbTextCompare)
-    While I > 0
-        I = InStr(1, Aux, Caracter, vbTextCompare)
-        If I > 0 Then
+    i = InStr(1, Aux, Caracter, vbTextCompare)
+    While i > 0
+        i = InStr(1, Aux, Caracter, vbTextCompare)
+        If i > 0 Then
             J = Len(Caracter)
-            Aux = Mid(Aux, 1, I - 1) & Mid(Aux, I + J, Len(Aux) - 1)
+            Aux = Mid(Aux, 1, i - 1) & Mid(Aux, i + J, Len(Aux) - 1)
         End If
     Wend
     QuitarCaracterACadena = Aux
@@ -510,20 +510,20 @@ End Function
 
 Public Function SaltosDeLinea(ByVal cadena As String) As String
     Dim Devu As String
-    Dim I As Integer
+    Dim i As Integer
     
     Devu = ""
     Do
-        I = InStr(1, cadena, vbCrLf)
-        If I > 0 Then
+        i = InStr(1, cadena, vbCrLf)
+        If i > 0 Then
             If Devu <> "" Then Devu = Devu & """ + chr(13) + """
-            Devu = Devu & Mid(cadena, 1, I - 1)
-            cadena = Mid(cadena, I + 2)
+            Devu = Devu & Mid(cadena, 1, i - 1)
+            cadena = Mid(cadena, i + 2)
             
        Else
             Devu = Devu & cadena
        End If
-    Loop While I > 0
+    Loop While i > 0
     SaltosDeLinea = Devu
 End Function
 

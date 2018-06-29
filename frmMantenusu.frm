@@ -1219,7 +1219,7 @@ Dim J As Integer
             Set Nod = TreeView1.Nodes.Add(Sql, tvwChild, "C" & miRsAux!Contador)
         End If
         Sql = miRsAux!Name & "|"
-        If Not IsNull(miRsAux!indice) Then Sql = Sql & miRsAux!indice
+        If Not IsNull(miRsAux!Indice) Then Sql = Sql & miRsAux!Indice
         Nod.Tag = Sql
    
         Nod.Text = miRsAux!Caption
@@ -1246,14 +1246,8 @@ Dim J As Integer
     Wend
     miRsAux.Close
     
-    
-    
-    
-    
-    
     Set miRsAux = Nothing
 End Sub
-
 
 
 Private Sub TreeView1_NodeCheck(ByVal Node As MSComctlLib.Node)
@@ -1304,11 +1298,11 @@ Private Sub GuardarMenuUsuario()
 End Sub
 
 Private Sub InsertaBD(vtag As String)
-Dim c As String
+Dim C As String
     i = i + 1
     'SQL = "INSERT INTO appmenususuario (aplicacion, codusu, codigo, tag)
-    c = Sql & i & ",'" & vtag & "')"
-    conn.Execute c
+    C = Sql & i & ",'" & vtag & "')"
+    conn.Execute C
 End Sub
 
 

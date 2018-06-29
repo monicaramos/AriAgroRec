@@ -1938,9 +1938,27 @@ Dim B As Boolean
             CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
             numParam = numParam + 1
 
+            'Si estamos importando y hay entradas modificadas preguntamos si quieren seguir
+            If HayEntradasModificadas(Me.cd1.FileName) Then
+                cadTabla = "tmpinformes"
+                cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
+
+                Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
+
+                If TotalRegistros(Sql) <> 0 Then
+                    Titulo = "Entradas comunicadas modificadas"
+                    cadNombreRPT = "rErroresTrasDatosCoop.rpt"
+                    
+                    nomRPT = cadNombreRPT
+                    
+                    LlamarImprimir
+                    If MsgBox("Hay Entradas modificadas. ¿Desea continuar con el proceso?.", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Sub
+                End If
+            End If
+                
+
             conn.BeginTrans
             If ProcesarFicheroComunicacion2(Me.cd1.FileName) Then
-            
                 cadTabla = "tmpinformes"
                 cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
 
@@ -1950,7 +1968,7 @@ Dim B As Boolean
                     conn.RollbackTrans
                 
                     MsgBox "Hay errores en el Traspaso de Datos. Debe corregirlos previamente.", vbExclamation
-                    cadTitulo = "Errores de Traspaso Datos"
+                    Titulo = "Errores de Traspaso Datos"
                     cadNombreRPT = "rErroresTrasDatosCoop.rpt"
                     
                     nomRPT = cadNombreRPT
@@ -1960,12 +1978,6 @@ Dim B As Boolean
                 Else
                     conn.CommitTrans
                     MsgBox "Proceso realizado correctamente.", vbExclamation
-'                        B = ProcesarFicheroComunicacion
-'                        If B Then
-'                            conn.CommitTrans
-'                        Else
-'                            conn.RollbackTrans
-'                        End If
                 End If
             Else
                 conn.RollbackTrans
@@ -4107,6 +4119,9 @@ Dim B As Boolean
     
     ProcesarFicheroComunicacion2 = False
     
+    conn.Execute "delete from tmpinformes where codusu = " & vUsu.Codigo
+    
+    
     NF = FreeFile
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
@@ -4211,19 +4226,6 @@ Dim Mens As String
         conn.Execute Sql
     End If
     
-    'damos aviso de las entradas comunicadas que han sido modificadas
-    If tabla = "rclasifica" And Tipo = "U" Then
-        Mens = "Entrada comunicada modificada " & Observaciones
-        
-        Sql = "insert into tmpinformes (codusu, fecha1, importe1,  nombre1) values (" & _
-              vUsu.Codigo & "," & DBSet(Fecha, "F") & "," & _
-              DBSet(Id, "N") & "," & DBSet(Mens, "T") & ")"
-        
-        conn.Execute Sql
-    End If
-    
-    
-    
     
     
     'vemos si da error el sql a ejecutar y lo registramos
@@ -4241,7 +4243,6 @@ Dim Mens As String
         SqlActualizar = SqlActualizar & " where id = " & DBSet(Id, "N")
         
         conn.Execute SqlActualizar
-    
     End If
     
     ComprobarRegistro = True
@@ -4311,5 +4312,139 @@ End Function
 
 
 
+
+
+Public Function HayEntradasModificadas(nomFich As String) As Boolean
+Dim NF As Long
+Dim cad As String
+Dim i As Integer
+Dim longitud As Long
+Dim Rs As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
+Dim NumReg As Long
+Dim Sql As String
+Dim Sql1 As String
+Dim Total As Long
+Dim v_cant As Currency
+Dim v_impo As Currency
+Dim v_prec As Currency
+Dim B As Boolean
+
+    On Error GoTo eProcesarFicheroComunicacion2
+    
+    HayEntradasModificadas = False
+    
+    conn.Execute "delete from tmpinformes where codusu = " & vUsu.Codigo
+    
+    
+    NF = FreeFile
+    Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
+    
+    Line Input #NF, cad
+    i = 0
+    
+    lblProgres(0).Caption = "Insertando en Tabla temporal: " & nomFich
+    longitud = FileLen(nomFich)
+    
+    Pb1.visible = True
+    Me.Pb1.Max = longitud
+    Me.Refresh
+    Me.Pb1.Value = 0
+    DoEvents
+    ' PROCESO DEL FICHERO VENTAS.TXT
+
+    B = True
+
+    While Not EOF(NF) 'And B
+        i = i + 1
+        
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & i
+        Me.Refresh
+        DoEvents
+        B = ComprobarEntrada(cad)
+        
+        Line Input #NF, cad
+    Wend
+    Close #NF
+    
+'    If B Then
+        If cad <> "" Then
+            i = i + 1
+            
+            Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+            lblProgres(1).Caption = "Linea " & i
+            Me.Refresh
+            DoEvents
+            B = ComprobarEntrada(cad)
+        End If
+'    End If
+    
+    Pb1.visible = False
+    lblProgres(0).Caption = ""
+    lblProgres(1).Caption = ""
+
+    HayEntradasModificadas = True 'B
+    Exit Function
+
+eProcesarFicheroComunicacion2:
+    HayEntradasModificadas = False
+End Function
+
+Private Function ComprobarEntrada(cad As String) As Boolean
+Dim Sql As String
+Dim Id As String
+Dim Fecha As String
+Dim Usuario As String
+Dim Tipo As String
+Dim tabla As String
+Dim Observaciones As String
+Dim SqlEjec As String
+Dim SqlActualizar As String
+
+Dim Mens As String
+
+    On Error GoTo eComprobarRegistro
+
+    ComprobarEntrada = False
+
+    Id = RecuperaValorNew(cad, ";", 1)
+    Fecha = RecuperaValorNew(cad, ";", 2)
+    Usuario = RecuperaValorNew(cad, ";", 3)
+    Tipo = RecuperaValorNew(cad, ";", 4)
+    tabla = RecuperaValorNew(cad, ";", 5)
+    SqlEjec = RecuperaValorNew(cad, ";", 6)
+    Observaciones = RecuperaValorNew(cad, ";", 7)
+    
+    Mens = ""
+    
+    'damos aviso de las entradas comunicadas que han sido modificadas
+    If tabla = "rclasifica" And Tipo = "U" Then
+        Mens = "Entrada comunicada modif."
+        
+        Sql = "insert into tmpinformes (codusu, fecha1, importe1,  nombre1, text1) values (" & _
+              vUsu.Codigo & "," & DBSet(Fecha, "F") & "," & _
+              DBSet(Id, "N") & "," & DBSet(Mens, "T") & "," & DBSet(Observaciones, "T") & ")"
+        
+        conn.Execute Sql
+    End If
+    
+    'idem de los albaranes
+    If tabla = "albaran" And Tipo = "U" Then
+        Mens = "Albarán comunicado modif."
+        
+        Sql = "insert into tmpinformes (codusu, fecha1, importe1,  nombre1, text1) values (" & _
+              vUsu.Codigo & "," & DBSet(Fecha, "F") & "," & _
+              DBSet(Id, "N") & "," & DBSet(Mens, "T") & "," & DBSet(Observaciones, "T") & ")"
+        
+        conn.Execute Sql
+    End If
+    
+    ComprobarEntrada = True
+    Exit Function
+    
+eComprobarRegistro:
+    MuestraError Err.Number, "Comprobar Entrada", Err.Description
+End Function
 
 
