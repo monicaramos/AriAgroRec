@@ -241,12 +241,12 @@ Private mtipo As String
 Private conn As ADODB.Connection
 Private mrs As ADODB.Recordset
 
-Public Property Let tipo(ByVal vData As String)
+Public Property Let Tipo(ByVal vData As String)
     mtipo = vData
 End Property
 
-Public Property Get tipo() As String
-    tipo = mtipo
+Public Property Get Tipo() As String
+    Tipo = mtipo
 End Property
 
 
@@ -254,9 +254,7 @@ Public Function abrir(vODBC As String, vUsu As String, vPass As String) As Boole
     '-- Abrimos la conexión en función del ODBC pasado
     Set conn = New ADODB.Connection
     conn.ConnectionString = "Provider=MSDASQL.1;Persist Security Info=False;" & _
-                            "Data Source=" & vODBC & _
-                            ";UID=" & vUsu & _
-                            ";PWD=" & vPass
+                            "Data Source=" & vODBC
     conn.Open
 End Function
 
@@ -267,11 +265,9 @@ Public Function abrir_MYSQL(vServidor As String, vBaseDatos As String, vUsu As S
     Set conn = New ADODB.Connection
     On Error GoTo abrir_MYSQL_error
     conn.ConnectionString = "DRIVER={MySQL ODBC 3.51 Driver};DESC=" & _
+                        ";DATA SOURCE=vAriagro" & _
                         ";DATABASE=" & vBaseDatos & _
-                        ";SERVER=" & vServidor & _
-                        ";UID=" & vUsu & _
-                        ";PWD=" & vPass & _
-                        ";PORT=3306;OPTION=3;STMT="
+                        ";SERVER=" & vServidor
     conn.Open
     mtipo = "MYSQL"
     abrir_MYSQL = True
@@ -284,9 +280,11 @@ Public Function abrirL(vUsu As String, vPass As String, vBaseDatos As String, vS
     '-- Abrimos la conexión en función del ODBC pasado
     On Error GoTo err_abrirL
     Set conn = New ADODB.Connection
-    conn.ConnectionString = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATABASE=" & vBaseDatos & ";SERVER=" & vServer & ";" _
-                & ";UID=" & vUsu _
-                 & ";PWD=" & vPass
+    conn.ConnectionString = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;" _
+                & ";DATA SOURCE=vAriagro" _
+                & ";DATABASE=" & vBaseDatos & ";SERVER=" & vServer
+                
+                
     conn.Open
     abrirL = True
     Exit Function
@@ -312,21 +310,21 @@ Public Function cursor(vSQL As String) As ADODB.Recordset
     Set cursor = mrs
 End Function
 
-Public Function fecha(vData) As String
+Public Function Fecha(vData) As String
     '-- Devuelve un string con la fecha correspondiente
     If Not IsNull(vData) And IsDate(vData) Then
         Select Case mtipo
             Case "ACCESS"
-                fecha = "#" & Format(vData, "yyyy/mm/dd") & "#"
+                Fecha = "#" & Format(vData, "yyyy/mm/dd") & "#"
             Case "MYSQL"
-                fecha = "'" & Format(vData, "yyyy-mm-dd") & "'"
+                Fecha = "'" & Format(vData, "yyyy-mm-dd") & "'"
             Case "MULTIBASE"
-                fecha = "'" & Format(vData, "dd/mm/yyyy") & "'"
+                Fecha = "'" & Format(vData, "dd/mm/yyyy") & "'"
             Case Default
-                fecha = "'" & Format(vData, "yyyy-mm-dd") & "'"
+                Fecha = "'" & Format(vData, "yyyy-mm-dd") & "'"
         End Select
     Else
-        fecha = "NULL"
+        Fecha = "NULL"
     End If
 End Function
 
