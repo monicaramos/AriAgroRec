@@ -16,6 +16,481 @@ Begin VB.Form frmListado
    ScaleWidth      =   13185
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameCalidades 
+      Height          =   4455
+      Left            =   0
+      TabIndex        =   24
+      Top             =   30
+      Width           =   7110
+      Begin VB.CommandButton CmdCancel 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   2
+         Left            =   5685
+         TabIndex        =   42
+         Top             =   3765
+         Width           =   1065
+      End
+      Begin VB.CommandButton cmdAceptar 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   2
+         Left            =   4470
+         TabIndex        =   40
+         Top             =   3765
+         Width           =   1065
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   18
+         Left            =   1935
+         MaxLength       =   6
+         TabIndex        =   34
+         Top             =   1230
+         Width           =   870
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   19
+         Left            =   1935
+         MaxLength       =   6
+         TabIndex        =   35
+         Top             =   1635
+         Width           =   870
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   18
+         Left            =   2850
+         Locked          =   -1  'True
+         TabIndex        =   33
+         Text            =   "Text5"
+         Top             =   1230
+         Width           =   4005
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   19
+         Left            =   2850
+         Locked          =   -1  'True
+         TabIndex        =   32
+         Text            =   "Text5"
+         Top             =   1635
+         Width           =   4005
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   16
+         Left            =   1935
+         MaxLength       =   6
+         TabIndex        =   36
+         Top             =   2355
+         Width           =   870
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   17
+         Left            =   1935
+         MaxLength       =   6
+         TabIndex        =   38
+         Top             =   2760
+         Width           =   870
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   16
+         Left            =   2850
+         Locked          =   -1  'True
+         TabIndex        =   31
+         Text            =   "Text5"
+         Top             =   2355
+         Width           =   4005
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   17
+         Left            =   2850
+         Locked          =   -1  'True
+         TabIndex        =   30
+         Text            =   "Text5"
+         Top             =   2760
+         Width           =   4005
+      End
+      Begin VB.CommandButton Command8 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmListado.frx":000C
+         Style           =   1  'Graphical
+         TabIndex        =   29
+         Top             =   2215
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.CommandButton Command7 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmListado.frx":0316
+         Style           =   1  'Graphical
+         TabIndex        =   28
+         Top             =   1440
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.Frame Frame2 
+         Caption         =   "Ordenar por"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   975
+         Left            =   450
+         TabIndex        =   25
+         Top             =   3195
+         Width           =   2190
+         Begin VB.OptionButton Opcion 
+            Caption         =   "Variedad"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   345
+            Index           =   2
+            Left            =   495
+            TabIndex        =   27
+            Top             =   225
+            Width           =   1515
+         End
+         Begin VB.OptionButton Opcion 
+            Caption         =   "Calidad"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   3
+            Left            =   495
+            TabIndex        =   26
+            Top             =   585
+            Width           =   1200
+         End
+      End
+      Begin MSComctlLib.ListView ListView1 
+         Height          =   1215
+         Index           =   2
+         Left            =   5265
+         TabIndex        =   37
+         Top             =   405
+         Visible         =   0   'False
+         Width           =   1050
+         _ExtentX        =   1852
+         _ExtentY        =   2143
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         NumItems        =   2
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Object.Width           =   2540
+         EndProperty
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   35
+         Left            =   870
+         TabIndex        =   47
+         Top             =   1275
+         Width           =   645
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   34
+         Left            =   870
+         TabIndex        =   46
+         Top             =   1680
+         Width           =   600
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Variedad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   240
+         Index           =   33
+         Left            =   555
+         TabIndex        =   45
+         Top             =   990
+         Width           =   855
+      End
+      Begin VB.Label Label8 
+         Caption         =   "Informe de Calidades"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   540
+         TabIndex        =   44
+         Top             =   405
+         Width           =   5025
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   32
+         Left            =   870
+         TabIndex        =   43
+         Top             =   2355
+         Width           =   645
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   31
+         Left            =   870
+         TabIndex        =   41
+         Top             =   2790
+         Width           =   600
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Calidad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   240
+         Index           =   30
+         Left            =   555
+         TabIndex        =   39
+         Top             =   2070
+         Width           =   705
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   19
+         Left            =   1575
+         MouseIcon       =   "frmListado.frx":0620
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar variedad"
+         Top             =   1665
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   18
+         Left            =   1575
+         MouseIcon       =   "frmListado.frx":0772
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar variedad"
+         Top             =   1260
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   17
+         Left            =   1575
+         MouseIcon       =   "frmListado.frx":08C4
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar calidad"
+         Top             =   2790
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   16
+         Left            =   1575
+         MouseIcon       =   "frmListado.frx":0A16
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar calidad"
+         Top             =   2385
+         Width           =   240
+      End
+   End
    Begin VB.Frame FrameTraspasoCalibrador 
       Height          =   4665
       Left            =   0
@@ -245,7 +720,7 @@ Begin VB.Form frmListado
             Height          =   240
             Index           =   9
             Left            =   900
-            Picture         =   "frmListado.frx":000C
+            Picture         =   "frmListado.frx":0B68
             ToolTipText     =   "Buscar fecha"
             Top             =   240
             Width           =   240
@@ -367,7 +842,7 @@ Begin VB.Form frmListado
             Height          =   240
             Index           =   181
             Left            =   1800
-            MouseIcon       =   "frmListado.frx":0097
+            MouseIcon       =   "frmListado.frx":0BF3
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar situación"
             Top             =   240
@@ -567,7 +1042,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   46
          Left            =   2340
-         MouseIcon       =   "frmListado.frx":01E9
+         MouseIcon       =   "frmListado.frx":0D45
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar situación"
          Top             =   1275
@@ -577,7 +1052,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   5
          Left            =   2310
-         Picture         =   "frmListado.frx":033B
+         Picture         =   "frmListado.frx":0E97
          ToolTipText     =   "Buscar fecha"
          Top             =   1830
          Width           =   240
@@ -638,7 +1113,7 @@ Begin VB.Form frmListado
             Height          =   240
             Index           =   43
             Left            =   4455
-            Picture         =   "frmListado.frx":03C6
+            Picture         =   "frmListado.frx":0F22
             ToolTipText     =   "Buscar fecha"
             Top             =   315
             Width           =   240
@@ -647,7 +1122,7 @@ Begin VB.Form frmListado
             Height          =   240
             Index           =   42
             Left            =   1170
-            Picture         =   "frmListado.frx":0451
+            Picture         =   "frmListado.frx":0FAD
             ToolTipText     =   "Buscar fecha"
             Top             =   315
             Width           =   240
@@ -1572,7 +2047,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   83
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":04DC
+         MouseIcon       =   "frmListado.frx":1038
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar zona"
          Top             =   5880
@@ -1600,7 +2075,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   82
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":062E
+         MouseIcon       =   "frmListado.frx":118A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar zona"
          Top             =   5520
@@ -1733,7 +2208,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   58
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":0780
+         MouseIcon       =   "frmListado.frx":12DC
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar partida"
          Top             =   5025
@@ -1743,7 +2218,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   57
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":08D2
+         MouseIcon       =   "frmListado.frx":142E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar partida"
          Top             =   4650
@@ -1753,7 +2228,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   59
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":0A24
+         MouseIcon       =   "frmListado.frx":1580
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   3780
@@ -1763,7 +2238,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   60
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":0B76
+         MouseIcon       =   "frmListado.frx":16D2
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   4155
@@ -1945,7 +2420,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   5
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":0CC8
+         MouseIcon       =   "frmListado.frx":1824
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar situación"
          Top             =   3285
@@ -1955,7 +2430,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   4
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":0E1A
+         MouseIcon       =   "frmListado.frx":1976
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar situación"
          Top             =   2910
@@ -2096,7 +2571,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   3
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":0F6C
+         MouseIcon       =   "frmListado.frx":1AC8
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1560
@@ -2106,7 +2581,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   2
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":10BE
+         MouseIcon       =   "frmListado.frx":1C1A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1200
@@ -2116,7 +2591,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   1
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":1210
+         MouseIcon       =   "frmListado.frx":1D6C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2400
@@ -2126,7 +2601,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   0
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":1362
+         MouseIcon       =   "frmListado.frx":1EBE
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2025
@@ -2621,7 +3096,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   70
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":14B4
+         MouseIcon       =   "frmListado.frx":2010
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar concepto"
          Top             =   5460
@@ -2631,7 +3106,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   65
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1606
+         MouseIcon       =   "frmListado.frx":2162
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar concepto"
          Top             =   5100
@@ -2641,7 +3116,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   64
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1758
+         MouseIcon       =   "frmListado.frx":22B4
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2610
@@ -2651,7 +3126,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   63
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":18AA
+         MouseIcon       =   "frmListado.frx":2406
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -2717,7 +3192,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   17
          Left            =   1620
-         Picture         =   "frmListado.frx":19FC
+         Picture         =   "frmListado.frx":2558
          ToolTipText     =   "Buscar fecha"
          Top             =   4560
          Width           =   240
@@ -2726,7 +3201,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   16
          Left            =   1620
-         Picture         =   "frmListado.frx":1A87
+         Picture         =   "frmListado.frx":25E3
          ToolTipText     =   "Buscar fecha"
          Top             =   4140
          Width           =   240
@@ -2735,7 +3210,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   62
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1B12
+         MouseIcon       =   "frmListado.frx":266E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3600
@@ -2745,7 +3220,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   61
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1C64
+         MouseIcon       =   "frmListado.frx":27C0
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3210
@@ -2755,7 +3230,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   50
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1DB6
+         MouseIcon       =   "frmListado.frx":2912
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -2765,7 +3240,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   47
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1F08
+         MouseIcon       =   "frmListado.frx":2A64
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -3354,7 +3829,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   124
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":205A
+         MouseIcon       =   "frmListado.frx":2BB6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1635
@@ -3364,7 +3839,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   123
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":21AC
+         MouseIcon       =   "frmListado.frx":2D08
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1305
@@ -3374,7 +3849,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   38
          Left            =   1650
-         Picture         =   "frmListado.frx":22FE
+         Picture         =   "frmListado.frx":2E5A
          ToolTipText     =   "Buscar fecha"
          Top             =   2640
          Width           =   240
@@ -3383,7 +3858,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   37
          Left            =   1650
-         Picture         =   "frmListado.frx":2389
+         Picture         =   "frmListado.frx":2EE5
          ToolTipText     =   "Buscar fecha"
          Top             =   2250
          Width           =   240
@@ -3520,7 +3995,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   23
          Left            =   3360
-         Picture         =   "frmListado.frx":2414
+         Picture         =   "frmListado.frx":2F70
          ToolTipText     =   "Buscar fecha"
          Top             =   1950
          Width           =   240
@@ -3788,7 +4263,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   39
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":249F
+         MouseIcon       =   "frmListado.frx":2FFB
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -4256,7 +4731,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   37
          Left            =   1710
-         MouseIcon       =   "frmListado.frx":25F1
+         MouseIcon       =   "frmListado.frx":314D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   3435
@@ -4266,7 +4741,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   38
          Left            =   1710
-         MouseIcon       =   "frmListado.frx":2743
+         MouseIcon       =   "frmListado.frx":329F
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   3870
@@ -4406,7 +4881,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   33
          Left            =   1710
-         MouseIcon       =   "frmListado.frx":2895
+         MouseIcon       =   "frmListado.frx":33F1
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -4416,7 +4891,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   34
          Left            =   1710
-         MouseIcon       =   "frmListado.frx":29E7
+         MouseIcon       =   "frmListado.frx":3543
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1710
@@ -4426,7 +4901,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   3
          Left            =   1710
-         Picture         =   "frmListado.frx":2B39
+         Picture         =   "frmListado.frx":3695
          ToolTipText     =   "Buscar fecha"
          Top             =   4950
          Width           =   240
@@ -4435,7 +4910,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   2
          Left            =   1710
-         Picture         =   "frmListado.frx":2BC4
+         Picture         =   "frmListado.frx":3720
          ToolTipText     =   "Buscar fecha"
          Top             =   4545
          Width           =   240
@@ -4500,7 +4975,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   35
          Left            =   1710
-         MouseIcon       =   "frmListado.frx":2C4F
+         MouseIcon       =   "frmListado.frx":37AB
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2265
@@ -4510,7 +4985,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   36
          Left            =   1710
-         MouseIcon       =   "frmListado.frx":2DA1
+         MouseIcon       =   "frmListado.frx":38FD
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2700
@@ -5169,7 +5644,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   53
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":2EF3
+         MouseIcon       =   "frmListado.frx":3A4F
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -5179,7 +5654,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   54
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":3045
+         MouseIcon       =   "frmListado.frx":3BA1
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1710
@@ -5189,7 +5664,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   51
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":3197
+         MouseIcon       =   "frmListado.frx":3CF3
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3390
@@ -5199,7 +5674,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   52
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":32E9
+         MouseIcon       =   "frmListado.frx":3E45
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3825
@@ -5209,7 +5684,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   15
          Left            =   1620
-         Picture         =   "frmListado.frx":343B
+         Picture         =   "frmListado.frx":3F97
          ToolTipText     =   "Buscar fecha"
          Top             =   4860
          Width           =   240
@@ -5218,7 +5693,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   14
          Left            =   1620
-         Picture         =   "frmListado.frx":34C6
+         Picture         =   "frmListado.frx":4022
          ToolTipText     =   "Buscar fecha"
          Top             =   4455
          Width           =   240
@@ -5283,7 +5758,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   55
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":3551
+         MouseIcon       =   "frmListado.frx":40AD
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2310
@@ -5293,7 +5768,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   56
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":36A3
+         MouseIcon       =   "frmListado.frx":41FF
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2745
@@ -5442,7 +5917,7 @@ Begin VB.Form frmListado
          Width           =   3375
       End
       Begin VB.Label Label21 
-         Caption         =   $"frmListado.frx":37F5
+         Caption         =   $"frmListado.frx":4351
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   8.25
@@ -5483,7 +5958,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   20
          Left            =   1980
-         Picture         =   "frmListado.frx":388E
+         Picture         =   "frmListado.frx":43EA
          ToolTipText     =   "Buscar fecha"
          Top             =   2610
          Width           =   240
@@ -5530,7 +6005,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   71
          Left            =   1995
-         MouseIcon       =   "frmListado.frx":3919
+         MouseIcon       =   "frmListado.frx":4475
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   2145
@@ -5560,7 +6035,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   72
          Left            =   1995
-         MouseIcon       =   "frmListado.frx":3A6B
+         MouseIcon       =   "frmListado.frx":45C7
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar incidencia"
          Top             =   3090
@@ -5929,7 +6404,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   78
          Left            =   1485
-         MouseIcon       =   "frmListado.frx":3BBD
+         MouseIcon       =   "frmListado.frx":4719
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar cliente"
          Top             =   2610
@@ -5939,7 +6414,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   77
          Left            =   1485
-         MouseIcon       =   "frmListado.frx":3D0F
+         MouseIcon       =   "frmListado.frx":486B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar cliente"
          Top             =   2220
@@ -6005,7 +6480,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   19
          Left            =   1485
-         Picture         =   "frmListado.frx":3E61
+         Picture         =   "frmListado.frx":49BD
          ToolTipText     =   "Buscar fecha"
          Top             =   4560
          Width           =   240
@@ -6014,7 +6489,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   18
          Left            =   1485
-         Picture         =   "frmListado.frx":3EEC
+         Picture         =   "frmListado.frx":4A48
          ToolTipText     =   "Buscar fecha"
          Top             =   4140
          Width           =   240
@@ -6023,7 +6498,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   76
          Left            =   1485
-         MouseIcon       =   "frmListado.frx":3F77
+         MouseIcon       =   "frmListado.frx":4AD3
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3600
@@ -6033,7 +6508,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   75
          Left            =   1485
-         MouseIcon       =   "frmListado.frx":40C9
+         MouseIcon       =   "frmListado.frx":4C25
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3210
@@ -6043,7 +6518,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   74
          Left            =   1485
-         MouseIcon       =   "frmListado.frx":421B
+         MouseIcon       =   "frmListado.frx":4D77
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -6053,7 +6528,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   73
          Left            =   1485
-         MouseIcon       =   "frmListado.frx":436D
+         MouseIcon       =   "frmListado.frx":4EC9
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -6593,7 +7068,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   128
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":44BF
+         MouseIcon       =   "frmListado.frx":501B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2610
@@ -6603,7 +7078,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   127
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":4611
+         MouseIcon       =   "frmListado.frx":516D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -6669,7 +7144,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   36
          Left            =   1650
-         Picture         =   "frmListado.frx":4763
+         Picture         =   "frmListado.frx":52BF
          ToolTipText     =   "Buscar fecha"
          Top             =   3630
          Width           =   240
@@ -6678,7 +7153,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   35
          Left            =   1650
-         Picture         =   "frmListado.frx":47EE
+         Picture         =   "frmListado.frx":534A
          ToolTipText     =   "Buscar fecha"
          Top             =   3240
          Width           =   240
@@ -6687,7 +7162,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   126
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":4879
+         MouseIcon       =   "frmListado.frx":53D5
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -6697,7 +7172,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   125
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":49CB
+         MouseIcon       =   "frmListado.frx":5527
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -6932,7 +7407,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   122
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":4B1D
+         MouseIcon       =   "frmListado.frx":5679
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar cooperativa"
          Top             =   1665
@@ -7177,7 +7652,7 @@ Begin VB.Form frmListado
             Height          =   240
             Index           =   41
             Left            =   1395
-            Picture         =   "frmListado.frx":4C6F
+            Picture         =   "frmListado.frx":57CB
             ToolTipText     =   "Buscar fecha"
             Top             =   270
             Width           =   240
@@ -7415,7 +7890,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   40
          Left            =   1755
-         Picture         =   "frmListado.frx":4CFA
+         Picture         =   "frmListado.frx":5856
          ToolTipText     =   "Buscar fecha"
          Top             =   2565
          Width           =   240
@@ -7424,7 +7899,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   39
          Left            =   1755
-         Picture         =   "frmListado.frx":4D85
+         Picture         =   "frmListado.frx":58E1
          ToolTipText     =   "Buscar fecha"
          Top             =   2160
          Width           =   240
@@ -8168,7 +8643,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   7
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":4E10
+         MouseIcon       =   "frmListado.frx":596C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2610
@@ -8178,7 +8653,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   6
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":4F62
+         MouseIcon       =   "frmListado.frx":5ABE
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -8244,7 +8719,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   0
          Left            =   1620
-         Picture         =   "frmListado.frx":50B4
+         Picture         =   "frmListado.frx":5C10
          ToolTipText     =   "Buscar fecha"
          Top             =   4140
          Width           =   240
@@ -8253,7 +8728,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   1
          Left            =   1620
-         Picture         =   "frmListado.frx":513F
+         Picture         =   "frmListado.frx":5C9B
          ToolTipText     =   "Buscar fecha"
          Top             =   4545
          Width           =   240
@@ -8262,7 +8737,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   15
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":51CA
+         MouseIcon       =   "frmListado.frx":5D26
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3600
@@ -8272,7 +8747,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   14
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":531C
+         MouseIcon       =   "frmListado.frx":5E78
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3210
@@ -8282,7 +8757,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   13
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":546E
+         MouseIcon       =   "frmListado.frx":5FCA
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -8292,7 +8767,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   12
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":55C0
+         MouseIcon       =   "frmListado.frx":611C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -8675,7 +9150,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command6 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":5712
+         Picture         =   "frmListado.frx":626E
          Style           =   1  'Graphical
          TabIndex        =   12
          Top             =   1440
@@ -8685,7 +9160,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command5 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":5A1C
+         Picture         =   "frmListado.frx":6578
          Style           =   1  'Graphical
          TabIndex        =   11
          Top             =   2215
@@ -8940,7 +9415,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   11
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":5D26
+         MouseIcon       =   "frmListado.frx":6882
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   2790
@@ -8950,7 +9425,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   10
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":5E78
+         MouseIcon       =   "frmListado.frx":69D4
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   2400
@@ -8960,7 +9435,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   9
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":5FCA
+         MouseIcon       =   "frmListado.frx":6B26
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar sección"
          Top             =   1680
@@ -8970,7 +9445,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   8
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":611C
+         MouseIcon       =   "frmListado.frx":6C78
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar sección"
          Top             =   1275
@@ -9672,7 +10147,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   90
          Left            =   1800
-         MouseIcon       =   "frmListado.frx":626E
+         MouseIcon       =   "frmListado.frx":6DCA
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -9682,7 +10157,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   91
          Left            =   1800
-         MouseIcon       =   "frmListado.frx":63C0
+         MouseIcon       =   "frmListado.frx":6F1C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1680
@@ -9692,7 +10167,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   94
          Left            =   1800
-         MouseIcon       =   "frmListado.frx":6512
+         MouseIcon       =   "frmListado.frx":706E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar concepto"
          Top             =   3360
@@ -9702,7 +10177,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   95
          Left            =   1800
-         MouseIcon       =   "frmListado.frx":6664
+         MouseIcon       =   "frmListado.frx":71C0
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar concepto"
          Top             =   3765
@@ -9712,7 +10187,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   22
          Left            =   1800
-         Picture         =   "frmListado.frx":67B6
+         Picture         =   "frmListado.frx":7312
          ToolTipText     =   "Buscar fecha"
          Top             =   4695
          Width           =   240
@@ -9721,7 +10196,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   21
          Left            =   1800
-         Picture         =   "frmListado.frx":6841
+         Picture         =   "frmListado.frx":739D
          ToolTipText     =   "Buscar fecha"
          Top             =   4320
          Width           =   240
@@ -9786,7 +10261,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   92
          Left            =   1800
-         MouseIcon       =   "frmListado.frx":68CC
+         MouseIcon       =   "frmListado.frx":7428
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar campo"
          Top             =   2280
@@ -9796,7 +10271,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   93
          Left            =   1800
-         MouseIcon       =   "frmListado.frx":6A1E
+         MouseIcon       =   "frmListado.frx":757A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar campo"
          Top             =   2685
@@ -10001,7 +10476,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   81
          Left            =   1020
-         MouseIcon       =   "frmListado.frx":6B70
+         MouseIcon       =   "frmListado.frx":76CC
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar cuenta"
          Top             =   3150
@@ -10011,7 +10486,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   80
          Left            =   1020
-         MouseIcon       =   "frmListado.frx":6CC2
+         MouseIcon       =   "frmListado.frx":781E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar concepto"
          Top             =   1710
@@ -10151,7 +10626,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command58 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":6E14
+         Picture         =   "frmListado.frx":7970
          Style           =   1  'Graphical
          TabIndex        =   820
          Top             =   2215
@@ -10161,7 +10636,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command57 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":711E
+         Picture         =   "frmListado.frx":7C7A
          Style           =   1  'Graphical
          TabIndex        =   819
          Top             =   1440
@@ -10715,7 +11190,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   117
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":7428
+         MouseIcon       =   "frmListado.frx":7F84
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   2745
@@ -10725,7 +11200,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   116
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":757A
+         MouseIcon       =   "frmListado.frx":80D6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   2325
@@ -10735,7 +11210,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   115
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":76CC
+         MouseIcon       =   "frmListado.frx":8228
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -10745,7 +11220,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   114
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":781E
+         MouseIcon       =   "frmListado.frx":837A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1260
@@ -11122,7 +11597,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   24
          Left            =   1605
-         Picture         =   "frmListado.frx":7970
+         Picture         =   "frmListado.frx":84CC
          ToolTipText     =   "Buscar fecha"
          Top             =   3660
          Width           =   240
@@ -11205,7 +11680,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   45
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":79FB
+         MouseIcon       =   "frmListado.frx":8557
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   2640
@@ -11215,7 +11690,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   42
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":7B4D
+         MouseIcon       =   "frmListado.frx":86A9
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1305
@@ -11225,7 +11700,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   44
          Left            =   1605
-         MouseIcon       =   "frmListado.frx":7C9F
+         MouseIcon       =   "frmListado.frx":87FB
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   2280
@@ -11235,7 +11710,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   43
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":7DF1
+         MouseIcon       =   "frmListado.frx":894D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1695
@@ -11355,7 +11830,7 @@ Begin VB.Form frmListado
             Height          =   240
             Index           =   89
             Left            =   1170
-            MouseIcon       =   "frmListado.frx":7F43
+            MouseIcon       =   "frmListado.frx":8A9F
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar Nro.Orden"
             Top             =   210
@@ -11604,7 +12079,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   28
          Left            =   1890
-         Picture         =   "frmListado.frx":8095
+         Picture         =   "frmListado.frx":8BF1
          ToolTipText     =   "Buscar fecha"
          Top             =   2610
          Width           =   240
@@ -11633,7 +12108,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   85
          Left            =   1890
-         MouseIcon       =   "frmListado.frx":8120
+         MouseIcon       =   "frmListado.frx":8C7C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1635
@@ -11643,7 +12118,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   84
          Left            =   1890
-         MouseIcon       =   "frmListado.frx":8272
+         MouseIcon       =   "frmListado.frx":8DCE
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   1170
@@ -11731,7 +12206,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   86
          Left            =   1890
-         MouseIcon       =   "frmListado.frx":83C4
+         MouseIcon       =   "frmListado.frx":8F20
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar partida"
          Top             =   2160
@@ -12178,7 +12653,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   111
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":8516
+         MouseIcon       =   "frmListado.frx":9072
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1680
@@ -12188,7 +12663,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   110
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":8668
+         MouseIcon       =   "frmListado.frx":91C4
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -12198,7 +12673,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   109
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":87BA
+         MouseIcon       =   "frmListado.frx":9316
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   2790
@@ -12208,7 +12683,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   108
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":890C
+         MouseIcon       =   "frmListado.frx":9468
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   2430
@@ -12218,7 +12693,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   34
          Left            =   1650
-         Picture         =   "frmListado.frx":8A5E
+         Picture         =   "frmListado.frx":95BA
          ToolTipText     =   "Buscar fecha"
          Top             =   3915
          Width           =   240
@@ -12227,7 +12702,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   33
          Left            =   1650
-         Picture         =   "frmListado.frx":8AE9
+         Picture         =   "frmListado.frx":9645
          ToolTipText     =   "Buscar fecha"
          Top             =   3510
          Width           =   240
@@ -12473,7 +12948,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   32
          Left            =   1545
-         Picture         =   "frmListado.frx":8B74
+         Picture         =   "frmListado.frx":96D0
          ToolTipText     =   "Buscar fecha"
          Top             =   2625
          Width           =   240
@@ -12482,7 +12957,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   31
          Left            =   1545
-         Picture         =   "frmListado.frx":8BFF
+         Picture         =   "frmListado.frx":975B
          ToolTipText     =   "Buscar fecha"
          Top             =   2220
          Width           =   240
@@ -12511,7 +12986,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   103
          Left            =   1545
-         MouseIcon       =   "frmListado.frx":8C8A
+         MouseIcon       =   "frmListado.frx":97E6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1590
@@ -12521,7 +12996,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   102
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":8DDC
+         MouseIcon       =   "frmListado.frx":9938
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1245
@@ -12909,7 +13384,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   96
          Left            =   1500
-         MouseIcon       =   "frmListado.frx":8F2E
+         MouseIcon       =   "frmListado.frx":9A8A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1440
@@ -12919,7 +13394,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   97
          Left            =   1515
-         MouseIcon       =   "frmListado.frx":9080
+         MouseIcon       =   "frmListado.frx":9BDC
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1830
@@ -13316,7 +13791,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   0
          Left            =   5985
-         Picture         =   "frmListado.frx":91D2
+         Picture         =   "frmListado.frx":9D2E
          ToolTipText     =   "Desmarcar todos"
          Top             =   3945
          Width           =   240
@@ -13325,7 +13800,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   1
          Left            =   6255
-         Picture         =   "frmListado.frx":9BD4
+         Picture         =   "frmListado.frx":A730
          ToolTipText     =   "Marcar todos"
          Top             =   3945
          Width           =   240
@@ -13354,7 +13829,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   41
          Left            =   1440
-         MouseIcon       =   "frmListado.frx":10426
+         MouseIcon       =   "frmListado.frx":10F82
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   3600
@@ -13364,7 +13839,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   32
          Left            =   1440
-         MouseIcon       =   "frmListado.frx":10578
+         MouseIcon       =   "frmListado.frx":110D4
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2580
@@ -13430,7 +13905,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   8
          Left            =   1440
-         Picture         =   "frmListado.frx":106CA
+         Picture         =   "frmListado.frx":11226
          ToolTipText     =   "Buscar fecha"
          Top             =   4440
          Width           =   240
@@ -13439,7 +13914,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   7
          Left            =   1440
-         Picture         =   "frmListado.frx":10755
+         Picture         =   "frmListado.frx":112B1
          ToolTipText     =   "Buscar fecha"
          Top             =   4080
          Width           =   240
@@ -13448,7 +13923,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   31
          Left            =   1440
-         MouseIcon       =   "frmListado.frx":107E0
+         MouseIcon       =   "frmListado.frx":1133C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -13458,7 +13933,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   28
          Left            =   1440
-         MouseIcon       =   "frmListado.frx":10932
+         MouseIcon       =   "frmListado.frx":1148E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1680
@@ -13598,7 +14073,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   27
          Left            =   1440
-         MouseIcon       =   "frmListado.frx":10A84
+         MouseIcon       =   "frmListado.frx":115E0
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1290
@@ -13608,7 +14083,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   40
          Left            =   1440
-         MouseIcon       =   "frmListado.frx":10BD6
+         MouseIcon       =   "frmListado.frx":11732
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   3210
@@ -13969,7 +14444,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   101
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":10D28
+         MouseIcon       =   "frmListado.frx":11884
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3930
@@ -13979,7 +14454,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   100
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":10E7A
+         MouseIcon       =   "frmListado.frx":119D6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3570
@@ -14045,7 +14520,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   99
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":10FCC
+         MouseIcon       =   "frmListado.frx":11B28
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   2790
@@ -14055,7 +14530,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   98
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":1111E
+         MouseIcon       =   "frmListado.frx":11C7A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   2430
@@ -14195,7 +14670,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   105
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":11270
+         MouseIcon       =   "frmListado.frx":11DCC
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1650
@@ -14205,7 +14680,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   104
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":113C2
+         MouseIcon       =   "frmListado.frx":11F1E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1260
@@ -14314,7 +14789,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   27
          Left            =   1740
-         Picture         =   "frmListado.frx":11514
+         Picture         =   "frmListado.frx":12070
          ToolTipText     =   "Buscar fecha"
          Top             =   2520
          Width           =   240
@@ -14343,7 +14818,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   26
          Left            =   1755
-         Picture         =   "frmListado.frx":1159F
+         Picture         =   "frmListado.frx":120FB
          ToolTipText     =   "Buscar fecha"
          Top             =   1980
          Width           =   240
@@ -14352,7 +14827,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   25
          Left            =   1755
-         Picture         =   "frmListado.frx":1162A
+         Picture         =   "frmListado.frx":12186
          ToolTipText     =   "Buscar fecha"
          Top             =   1560
          Width           =   240
@@ -14890,7 +15365,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   25
          Left            =   1425
-         MouseIcon       =   "frmListado.frx":116B5
+         MouseIcon       =   "frmListado.frx":12211
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   1830
@@ -14900,7 +15375,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   26
          Left            =   1425
-         MouseIcon       =   "frmListado.frx":11807
+         MouseIcon       =   "frmListado.frx":12363
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2205
@@ -14987,7 +15462,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   22
          Left            =   1410
-         MouseIcon       =   "frmListado.frx":11959
+         MouseIcon       =   "frmListado.frx":124B5
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   2595
@@ -15034,7 +15509,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   11
          Left            =   2475
-         Picture         =   "frmListado.frx":11AAB
+         Picture         =   "frmListado.frx":12607
          ToolTipText     =   "Buscar fecha"
          Top             =   4680
          Width           =   240
@@ -15099,7 +15574,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   23
          Left            =   1440
-         MouseIcon       =   "frmListado.frx":11B36
+         MouseIcon       =   "frmListado.frx":12692
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   975
@@ -15109,7 +15584,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   24
          Left            =   1440
-         MouseIcon       =   "frmListado.frx":11C88
+         MouseIcon       =   "frmListado.frx":127E4
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1350
@@ -15642,7 +16117,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   69
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":11DDA
+         MouseIcon       =   "frmListado.frx":12936
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3600
@@ -15652,7 +16127,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   68
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":11F2C
+         MouseIcon       =   "frmListado.frx":12A88
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3195
@@ -15662,7 +16137,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   12
          Left            =   1620
-         Picture         =   "frmListado.frx":1207E
+         Picture         =   "frmListado.frx":12BDA
          ToolTipText     =   "Buscar fecha"
          Top             =   4545
          Width           =   240
@@ -15671,7 +16146,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   10
          Left            =   1620
-         Picture         =   "frmListado.frx":12109
+         Picture         =   "frmListado.frx":12C65
          ToolTipText     =   "Buscar fecha"
          Top             =   4140
          Width           =   240
@@ -15736,7 +16211,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   67
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":12194
+         MouseIcon       =   "frmListado.frx":12CF0
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2610
@@ -15746,7 +16221,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   66
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":122E6
+         MouseIcon       =   "frmListado.frx":12E42
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2205
@@ -15879,7 +16354,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   49
          Left            =   1530
-         MouseIcon       =   "frmListado.frx":12438
+         MouseIcon       =   "frmListado.frx":12F94
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1785
@@ -15889,7 +16364,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   48
          Left            =   1530
-         MouseIcon       =   "frmListado.frx":1258A
+         MouseIcon       =   "frmListado.frx":130E6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1380
@@ -15968,481 +16443,6 @@ Begin VB.Form frmListado
          TabIndex        =   322
          Top             =   1380
          Width           =   645
-      End
-   End
-   Begin VB.Frame FrameCalidades 
-      Height          =   4455
-      Left            =   0
-      TabIndex        =   24
-      Top             =   30
-      Width           =   7110
-      Begin VB.CommandButton CmdCancel 
-         Caption         =   "&Cancelar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   2
-         Left            =   4740
-         TabIndex        =   42
-         Top             =   3810
-         Width           =   1065
-      End
-      Begin VB.CommandButton cmdAceptar 
-         Caption         =   "&Aceptar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   2
-         Left            =   3525
-         TabIndex        =   40
-         Top             =   3810
-         Width           =   1065
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   18
-         Left            =   1935
-         MaxLength       =   6
-         TabIndex        =   34
-         Top             =   1230
-         Width           =   870
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   19
-         Left            =   1935
-         MaxLength       =   6
-         TabIndex        =   35
-         Top             =   1635
-         Width           =   870
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   18
-         Left            =   2850
-         Locked          =   -1  'True
-         TabIndex        =   33
-         Text            =   "Text5"
-         Top             =   1230
-         Width           =   3015
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   19
-         Left            =   2850
-         Locked          =   -1  'True
-         TabIndex        =   32
-         Text            =   "Text5"
-         Top             =   1635
-         Width           =   3015
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   16
-         Left            =   1935
-         MaxLength       =   6
-         TabIndex        =   36
-         Top             =   2355
-         Width           =   870
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   17
-         Left            =   1935
-         MaxLength       =   6
-         TabIndex        =   38
-         Top             =   2760
-         Width           =   870
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   16
-         Left            =   2850
-         Locked          =   -1  'True
-         TabIndex        =   31
-         Text            =   "Text5"
-         Top             =   2355
-         Width           =   3015
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   17
-         Left            =   2850
-         Locked          =   -1  'True
-         TabIndex        =   30
-         Text            =   "Text5"
-         Top             =   2760
-         Width           =   3015
-      End
-      Begin VB.CommandButton Command8 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmListado.frx":126DC
-         Style           =   1  'Graphical
-         TabIndex        =   29
-         Top             =   2215
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.CommandButton Command7 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmListado.frx":129E6
-         Style           =   1  'Graphical
-         TabIndex        =   28
-         Top             =   1440
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.Frame Frame2 
-         Caption         =   "Ordenar por"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   975
-         Left            =   450
-         TabIndex        =   25
-         Top             =   3195
-         Width           =   2190
-         Begin VB.OptionButton Opcion 
-            Caption         =   "Variedad"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   345
-            Index           =   2
-            Left            =   495
-            TabIndex        =   27
-            Top             =   225
-            Width           =   1515
-         End
-         Begin VB.OptionButton Opcion 
-            Caption         =   "Calidad"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Index           =   3
-            Left            =   495
-            TabIndex        =   26
-            Top             =   585
-            Width           =   1200
-         End
-      End
-      Begin MSComctlLib.ListView ListView1 
-         Height          =   1215
-         Index           =   2
-         Left            =   5265
-         TabIndex        =   37
-         Top             =   405
-         Visible         =   0   'False
-         Width           =   1050
-         _ExtentX        =   1852
-         _ExtentY        =   2143
-         View            =   3
-         LabelEdit       =   1
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         NumItems        =   2
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Object.Width           =   2540
-         EndProperty
-         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   1
-            Object.Width           =   2540
-         EndProperty
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Desde"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   35
-         Left            =   870
-         TabIndex        =   47
-         Top             =   1275
-         Width           =   645
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Hasta"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   34
-         Left            =   870
-         TabIndex        =   46
-         Top             =   1680
-         Width           =   600
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Variedad"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   240
-         Index           =   33
-         Left            =   555
-         TabIndex        =   45
-         Top             =   990
-         Width           =   855
-      End
-      Begin VB.Label Label8 
-         Caption         =   "Informe de Calidades"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   540
-         TabIndex        =   44
-         Top             =   405
-         Width           =   5025
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Desde"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   32
-         Left            =   870
-         TabIndex        =   43
-         Top             =   2355
-         Width           =   645
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Hasta"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   31
-         Left            =   870
-         TabIndex        =   41
-         Top             =   2790
-         Width           =   600
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Calidad"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   240
-         Index           =   30
-         Left            =   555
-         TabIndex        =   39
-         Top             =   2070
-         Width           =   705
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   19
-         Left            =   1575
-         MouseIcon       =   "frmListado.frx":12CF0
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar variedad"
-         Top             =   1665
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   18
-         Left            =   1575
-         MouseIcon       =   "frmListado.frx":12E42
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar variedad"
-         Top             =   1260
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   17
-         Left            =   1575
-         MouseIcon       =   "frmListado.frx":12F94
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar calidad"
-         Top             =   2790
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   16
-         Left            =   1575
-         MouseIcon       =   "frmListado.frx":130E6
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar calidad"
-         Top             =   2385
-         Width           =   240
       End
    End
    Begin VB.Frame FrameTraspasoFactCoop 
@@ -18467,6 +18467,7 @@ Public OpcionListado As Byte
     ' 10 .- Reimpresion de Entradas de Bascula
     ' 11 .- Listado de Entradas de Pesadas
     ' 12 .- Listado de Calidades
+    ' 121.- Listado de Calibres
     ' 13 .- Listado de Socios por Sección
     ' 14 .- Listado de Entradas en Bascula
     ' 15 .- Listado de Campos
@@ -18684,7 +18685,7 @@ Private Sub Check19_Click()
     Me.FrameNroOrden.visible = (Check19.Value = 1)
     EsReimpresion = (Check19.Value = 1)
     If Not FrameNroOrden.visible Then
-        txtcodigo(141).Text = ""
+        txtCodigo(141).Text = ""
     End If
 End Sub
 
@@ -18717,7 +18718,7 @@ End Sub
 Private Sub chkBaja_Click()
     Frame9.Enabled = (chkBaja.Value = 1)
     If Not Frame9.Enabled Then
-        txtcodigo(181).Text = ""
+        txtCodigo(181).Text = ""
         txtNombre(181).Text = ""
     End If
 End Sub
@@ -18746,8 +18747,8 @@ Dim vSQL As String
 
      '======== FORMULA  ====================================
      'D/H Socio
-     cDesde = Trim(txtcodigo(23).Text)
-     cHasta = Trim(txtcodigo(24).Text)
+     cDesde = Trim(txtCodigo(23).Text)
+     cHasta = Trim(txtCodigo(24).Text)
      nDesde = txtNombre(23).Text
      nHasta = txtNombre(24).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -18758,8 +18759,8 @@ Dim vSQL As String
      End If
 
      'D/H Clase
-     cDesde = Trim(txtcodigo(25).Text)
-     cHasta = Trim(txtcodigo(26).Text)
+     cDesde = Trim(txtCodigo(25).Text)
+     cHasta = Trim(txtCodigo(26).Text)
      nDesde = txtNombre(25).Text
      nHasta = txtNombre(26).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -18770,9 +18771,9 @@ Dim vSQL As String
      End If
      
     ' PRODUCTO
-    If txtcodigo(22).Text <> "" Then
-        If Not AnyadirAFormula(cadSelect, "{variedades.codprodu} = " & DBSet(txtcodigo(22).Text, "N")) Then Exit Sub
-        If Not AnyadirAFormula(cadFormula, "{variedades.codprodu}  = " & DBSet(txtcodigo(22).Text, "N")) Then Exit Sub
+    If txtCodigo(22).Text <> "" Then
+        If Not AnyadirAFormula(cadSelect, "{variedades.codprodu} = " & DBSet(txtCodigo(22).Text, "N")) Then Exit Sub
+        If Not AnyadirAFormula(cadFormula, "{variedades.codprodu}  = " & DBSet(txtCodigo(22).Text, "N")) Then Exit Sub
     End If
      
      If Not AnyadirAFormula(cadSelect, "{rcampos.fecbajas} is null") Then Exit Sub
@@ -18782,9 +18783,9 @@ Dim vSQL As String
      tabla = "(" & tabla & ") INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio "
      
      vSQL = ""
-     If txtcodigo(25).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtcodigo(25).Text, "N")
-     If txtcodigo(26).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtcodigo(26).Text, "N")
-     If txtcodigo(22).Text <> "" Then vSQL = vSQL & " and variedades.codprodu = " & DBSet(txtcodigo(22).Text, "N")
+     If txtCodigo(25).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(25).Text, "N")
+     If txtCodigo(26).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(26).Text, "N")
+     If txtCodigo(22).Text <> "" Then vSQL = vSQL & " and variedades.codprodu = " & DBSet(txtCodigo(22).Text, "N")
      Set frmMens = New frmMensajes
      
      frmMens.OpcionMensaje = 16
@@ -18807,7 +18808,7 @@ Dim vSQL As String
 End Sub
 
 Private Sub cmdAcepAsigGlobalgap_Click()
-Dim sql As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim RsPar As ADODB.Recordset
 Dim RsPro As ADODB.Recordset
@@ -18819,9 +18820,9 @@ Dim GGPro As String
     conn.BeginTrans
 
 
-    sql = "select count(*) from rcampos where fecbajas is null  "
+    Sql = "select count(*) from rcampos where fecbajas is null  "
     
-    CargarProgres pb10, TotalRegistros(sql)
+    CargarProgres pb10, TotalRegistros(Sql)
     Me.pb10.visible = True
     
     Label2(238).Caption = "Calculando registros GlobalGap"
@@ -18832,10 +18833,10 @@ Dim GGPro As String
     
     
     
-    sql = "select * from rcampos where fecbajas is null order by codcampo "
+    Sql = "select * from rcampos where fecbajas is null order by codcampo "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         Label2(262).Caption = "Campo : " & Rs!codcampo
@@ -18845,10 +18846,10 @@ Dim GGPro As String
     
         GGPar = ""
         GGPro = ""
-        sql = "select globalgap from rpartida where codparti = " & DBSet(Rs!codparti, "N")
+        Sql = "select globalgap from rpartida where codparti = " & DBSet(Rs!codparti, "N")
         
         Set RsPar = New ADODB.Recordset
-        RsPar.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RsPar.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
         If Not RsPar.EOF Then
             GGPar = DBLet(RsPar!globalgap, "T")
@@ -18856,11 +18857,11 @@ Dim GGPro As String
         Set RsPar = Nothing
         
         
-        sql = "select globalgap from productos, variedades where variedades.codvarie = " & DBSet(Rs!codvarie, "N")
-        sql = sql & " and productos.codprodu = variedades.codprodu "
+        Sql = "select globalgap from productos, variedades where variedades.codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = Sql & " and productos.codprodu = variedades.codprodu "
         
         Set RsPro = New ADODB.Recordset
-        RsPro.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RsPro.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
         If Not RsPro.EOF Then
             GGPro = DBLet(RsPro!globalgap, "T")
@@ -18869,12 +18870,12 @@ Dim GGPro As String
     
         If GGPar = "" Or GGPro = "" Then
             If Check25.Value = 1 Then
-                sql = "update rcampos set codigoggap = " & ValorNulo & " where codcampo = " & DBSet(Rs!codcampo, "N")
-                conn.Execute sql
+                Sql = "update rcampos set codigoggap = " & ValorNulo & " where codcampo = " & DBSet(Rs!codcampo, "N")
+                conn.Execute Sql
             End If
         Else
-            sql = "update rcampos set codigoggap = " & DBSet(GGPro & GGPar, "T") & " where codcampo = " & DBSet(Rs!codcampo, "N")
-            conn.Execute sql
+            Sql = "update rcampos set codigoggap = " & DBSet(GGPro & GGPar, "T") & " where codcampo = " & DBSet(Rs!codcampo, "N")
+            conn.Execute Sql
         End If
     
     
@@ -18894,46 +18895,46 @@ eAsignacion:
 End Sub
 
 Private Sub cmdAcepBajaSocio_Click()
-Dim sql As String
+Dim Sql As String
 
     On Error GoTo eErrores
 
-    If txtcodigo(47).Text = "" Then
+    If txtCodigo(47).Text = "" Then
         MsgBox "Debe introducir la fecha de baja.", vbExclamation
-        PonerFoco txtcodigo(47)
+        PonerFoco txtCodigo(47)
         Exit Sub
     End If
-    If txtcodigo(46).Text = "" Then
+    If txtCodigo(46).Text = "" Then
         MsgBox "Debe introducir la nueva situación del socio.", vbExclamation
-        PonerFoco txtcodigo(46)
+        PonerFoco txtCodigo(46)
         Exit Sub
     End If
     
     If Me.chkBaja.Value = 1 Then
-        If txtcodigo(181).Text = "" Then
+        If txtCodigo(181).Text = "" Then
             MsgBox "Debe introducir la nueva situación de los campos del socio.", vbExclamation
-            PonerFoco txtcodigo(46)
+            PonerFoco txtCodigo(46)
             Exit Sub
         End If
     End If
     
-    sql = "update rsocios_seccion set fecbaja = " & DBSet(txtcodigo(47), "F")
-    sql = sql & " where codsocio = " & DBSet(NumCod, "N")
-    sql = sql & " and (fecbaja is null or fecbaja = '')"
-    conn.Execute sql
+    Sql = "update rsocios_seccion set fecbaja = " & DBSet(txtCodigo(47), "F")
+    Sql = Sql & " where codsocio = " & DBSet(NumCod, "N")
+    Sql = Sql & " and (fecbaja is null or fecbaja = '')"
+    conn.Execute Sql
     
-    sql = "update rsocios set codsitua = " & DBSet(txtcodigo(46).Text, "N")
-    sql = sql & ", fechabaja = " & DBSet(txtcodigo(47), "F")
-    sql = sql & " where codsocio = " & DBSet(NumCod, "N")
-    conn.Execute sql
+    Sql = "update rsocios set codsitua = " & DBSet(txtCodigo(46).Text, "N")
+    Sql = Sql & ", fechabaja = " & DBSet(txtCodigo(47), "F")
+    Sql = Sql & " where codsocio = " & DBSet(NumCod, "N")
+    conn.Execute Sql
     
     If Me.chkBaja.Value = 1 Then
-        sql = "update rcampos set fecbajas = " & DBSet(txtcodigo(47), "F")
-        sql = sql & ", codsitua = " & DBSet(txtcodigo(181), "N")
-        sql = sql & " where codsocio = " & DBSet(NumCod, "N")
-        sql = sql & " and (fecbajas is null or fecbajas = '')"
+        Sql = "update rcampos set fecbajas = " & DBSet(txtCodigo(47), "F")
+        Sql = Sql & ", codsitua = " & DBSet(txtCodigo(181), "N")
+        Sql = Sql & " where codsocio = " & DBSet(NumCod, "N")
+        Sql = Sql & " and (fecbajas is null or fecbajas = '')"
         
-        conn.Execute sql
+        conn.Execute Sql
     End If
     
     
@@ -18948,7 +18949,7 @@ End Sub
 
 
 Private Sub CmdAcepBonifica_Click()
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Porcentaje As Currency
 Dim i As Long
@@ -18971,50 +18972,50 @@ Dim i As Long
 
 End Sub
 
-Private Sub cmdAcepCambsoc_Click(Index As Integer)
+Private Sub cmdAcepCambsoc_Click(index As Integer)
 Dim SocioCampo As String
 
     ' Cambio de Socio de un campo
     
-    If txtcodigo(111).Text = "" Then
+    If txtCodigo(111).Text = "" Then
          MsgBox "Debe introducir un nuevo socio para el campo.", vbExclamation
-         PonerFoco txtcodigo(111)
+         PonerFoco txtCodigo(111)
          Exit Sub
     Else
-        If CLng(DevuelveValor("select codsocio from rcampos where codcampo = " & DBSet(NumCod, "N"))) = CLng(txtcodigo(111).Text) Then
+        If CLng(DevuelveValor("select codsocio from rcampos where codcampo = " & DBSet(NumCod, "N"))) = CLng(txtCodigo(111).Text) Then
             MsgBox "El código de socio coincide con el actual del campo. Revise.", vbExclamation
-            PonerFoco txtcodigo(111)
+            PonerFoco txtCodigo(111)
             Exit Sub
         Else
-            If TotalRegistros("select count(*) from rsocios_seccion where codsocio = " & DBSet(txtcodigo(111).Text, "N") & " and fecbaja is null and codsecci = " & vParamAplic.Seccionhorto) = 0 Then
+            If TotalRegistros("select count(*) from rsocios_seccion where codsocio = " & DBSet(txtCodigo(111).Text, "N") & " and fecbaja is null and codsecci = " & vParamAplic.Seccionhorto) = 0 Then
                 MsgBox "El nuevo Socio no existe en la Seccion de Horto o está dado de baja.", vbExclamation
-                PonerFoco txtcodigo(111)
+                PonerFoco txtCodigo(111)
                 Exit Sub
             End If
         End If
     End If
     
-    If txtcodigo(106).Text = "" Then
+    If txtCodigo(106).Text = "" Then
         MsgBox "Debe introducir obligatoriamente una fecha de cambio para el campo. Revise.", vbExclamation
-        PonerFoco txtcodigo(106)
+        PonerFoco txtCodigo(106)
         Exit Sub
     Else
-        If CDate(txtcodigo(106).Text) < CDate(DevuelveValor("select fecalta from rcampos where codcampo = " & DBSet(NumCod, "N"))) Then
+        If CDate(txtCodigo(106).Text) < CDate(DevuelveValor("select fecalta from rcampos where codcampo = " & DBSet(NumCod, "N"))) Then
             MsgBox "La fecha de cambio ha de ser superior a la fecha de alta del campo. Revise.", vbExclamation
-            PonerFoco txtcodigo(106)
+            PonerFoco txtCodigo(106)
             Exit Sub
         End If
     End If
         
-    If txtcodigo(107).Text = "" Then
+    If txtCodigo(107).Text = "" Then
         MsgBox "Debe introducir obligatoriamente una incidencia. Revise.", vbExclamation
-        PonerFoco txtcodigo(107)
+        PonerFoco txtCodigo(107)
         Exit Sub
     Else
-        txtNombre(107).Text = PonerNombreDeCod(txtcodigo(107), "rincidencia", "nomincid", "codincid", "N")
+        txtNombre(107).Text = PonerNombreDeCod(txtCodigo(107), "rincidencia", "nomincid", "codincid", "N")
         If txtNombre(107).Text = "" Then
             MsgBox "El código de incidencia no existe. Revise.", vbExclamation
-            PonerFoco txtcodigo(107)
+            PonerFoco txtCodigo(107)
             Exit Sub
         End If
     End If
@@ -19042,7 +19043,7 @@ Dim SocioCampo As String
 End Sub
 
 Private Function CambiarSocio(SocioAnt As String)
-Dim sql As String
+Dim Sql As String
 Dim FecAltas As String
 Dim NumF As Long
 
@@ -19056,24 +19057,24 @@ Dim NumF As Long
     '------------------------------------------------------------------------------
     '  LOG de acciones
     Set LOG = New cLOG
-    LOG.Insertar 9, vUsu, "Campo:" & NumCod & " Socio Ant." & SocioAnt & " - Nuevo : " & txtcodigo(111).Text
+    LOG.Insertar 9, vUsu, "Campo:" & NumCod & " Socio Ant." & SocioAnt & " - Nuevo : " & txtCodigo(111).Text
     Set LOG = Nothing
     '-----------------------------------------------------------------------------
 
-    sql = "update rentradas set codsocio = " & DBSet(txtcodigo(111).Text, "N")
-    sql = sql & " where codcampo = " & DBSet(NumCod, "N")
+    Sql = "update rentradas set codsocio = " & DBSet(txtCodigo(111).Text, "N")
+    Sql = Sql & " where codcampo = " & DBSet(NumCod, "N")
     
-    conn.Execute sql
+    conn.Execute Sql
     
-    sql = "update rclasifica set codsocio = " & DBSet(txtcodigo(111).Text, "N")
-    sql = sql & " where codcampo = " & DBSet(NumCod, "N")
+    Sql = "update rclasifica set codsocio = " & DBSet(txtCodigo(111).Text, "N")
+    Sql = Sql & " where codcampo = " & DBSet(NumCod, "N")
     
-    conn.Execute sql
+    conn.Execute Sql
     
-    sql = "update rhisfruta set codsocio = " & DBSet(txtcodigo(111).Text, "N")
-    sql = sql & " where codcampo = " & DBSet(NumCod, "N")
+    Sql = "update rhisfruta set codsocio = " & DBSet(txtCodigo(111).Text, "N")
+    Sql = Sql & " where codcampo = " & DBSet(NumCod, "N")
     
-    conn.Execute sql
+    conn.Execute Sql
     
     NumF = SugerirCodigoSiguienteStr("rcampos_hco", "numlinea", "codcampo = " & DBSet(NumCod, "N"))
     FecAltas = DevuelveValor("select fecaltas from rcampos where codcampo = " & DBSet(NumCod, "N"))
@@ -19081,46 +19082,46 @@ Dim NumF As Long
     '[Monica]31/10/2012: en el caso de alzira no tenemos que cambiar la fecha de alta del campo, luego la fecha desde del socio
     '                    debe ser la maxima + 1 del ultimo socio (si lo hay) o la fecha de alta del campo si no lo hay
     If vParamAplic.Cooperativa = 4 Then
-        sql = "select date_add(max(fechabaja), interval 1 day) from rcampos_hco where codcampo = " & DBSet(NumCod, "N")
-        If DevuelveValor(sql) <> 0 Then
-            FecAltas = DevuelveValor(sql)
+        Sql = "select date_add(max(fechabaja), interval 1 day) from rcampos_hco where codcampo = " & DBSet(NumCod, "N")
+        If DevuelveValor(Sql) <> 0 Then
+            FecAltas = DevuelveValor(Sql)
         End If
     End If
     
-    sql = "insert into rcampos_hco (codcampo, numlinea, codsocio, fechaalta, fechabaja, codincid) values ("
-    sql = sql & DBSet(NumCod, "N") & "," & DBSet(NumF, "N") & "," & DBSet(SocioAnt, "N") & "," & DBSet(FecAltas, "F") & ","
-    sql = sql & DBSet(txtcodigo(106).Text, "F") & "," & DBSet(txtcodigo(107).Text, "N") & ")"
+    Sql = "insert into rcampos_hco (codcampo, numlinea, codsocio, fechaalta, fechabaja, codincid) values ("
+    Sql = Sql & DBSet(NumCod, "N") & "," & DBSet(NumF, "N") & "," & DBSet(SocioAnt, "N") & "," & DBSet(FecAltas, "F") & ","
+    Sql = Sql & DBSet(txtCodigo(106).Text, "F") & "," & DBSet(txtCodigo(107).Text, "N") & ")"
     
-    conn.Execute sql
+    conn.Execute Sql
     
     '[Monica]31/10/2012: no tocaremos la fecha de alta del campo
     If vParamAplic.Cooperativa = 4 Then ' la fecha de alta del campo no la toco
-        sql = "update rcampos set codsocio = " & DBSet(txtcodigo(111).Text, "N")
+        Sql = "update rcampos set codsocio = " & DBSet(txtCodigo(111).Text, "N")
     Else
-        sql = "update rcampos set codsocio = " & DBSet(txtcodigo(111).Text, "N") & ", fecaltas = " & DBSet(txtcodigo(106).Text, "F")
+        Sql = "update rcampos set codsocio = " & DBSet(txtCodigo(111).Text, "N") & ", fecaltas = " & DBSet(txtCodigo(106).Text, "F")
     End If
     
     '[Monica]21/09/2012: hemos preguntado si quieren cambiar tambien el propietario
-    If ConPropietario Then sql = sql & ", codpropiet = " & DBSet(txtcodigo(111).Text, "N")
+    If ConPropietario Then Sql = Sql & ", codpropiet = " & DBSet(txtCodigo(111).Text, "N")
          
-    sql = sql & " where codcampo = " & DBSet(NumCod, "N")
+    Sql = Sql & " where codcampo = " & DBSet(NumCod, "N")
     
-    conn.Execute sql
+    conn.Execute Sql
     
     ' actualizamos la tabla de coopropietarios
-    sql = "update rcampos_cooprop set codsocio = " & DBSet(txtcodigo(111).Text, "N") & " where codcampo = " & DBSet(NumCod, "N")
-    sql = sql & " and codsocio = " & DBSet(SocioAnt, "N")
+    Sql = "update rcampos_cooprop set codsocio = " & DBSet(txtCodigo(111).Text, "N") & " where codcampo = " & DBSet(NumCod, "N")
+    Sql = Sql & " and codsocio = " & DBSet(SocioAnt, "N")
     
-    conn.Execute sql
+    conn.Execute Sql
     
     '[Monica]08/06/2012: si la cooperativa es Escalona y cambiamos el socio del campo, me actualiza la tabla de contadores
     If vParamAplic.Cooperativa = 10 Then
-        sql = "update rpozos set codsocio = " & DBSet(txtcodigo(111).Text, "N") & " where codcampo = " & DBSet(NumCod, "N")
+        Sql = "update rpozos set codsocio = " & DBSet(txtCodigo(111).Text, "N") & " where codcampo = " & DBSet(NumCod, "N")
         
         '[Monica]21/09/2012: le traemos de que hidrantes queremos los cambios
-        If CadTag <> "" Then sql = sql & " and " & CadTag
+        If CadTag <> "" Then Sql = Sql & " and " & CadTag
         
-        conn.Execute sql
+        conn.Execute Sql
     End If
     
     
@@ -19135,13 +19136,13 @@ eCambiarSocio:
 End Function
 
 Private Function HayFacturasdelSocio(Socio As String) As Boolean
-Dim sql As String
+Dim Sql As String
 
     HayFacturasdelSocio = False
     
-    sql = "select * from rfactsoc where codsocio = " & DBSet(Socio, "N")
+    Sql = "select * from rfactsoc where codsocio = " & DBSet(Socio, "N")
     
-    If TotalRegistrosConsulta(sql) <> 0 Then
+    If TotalRegistrosConsulta(Sql) <> 0 Then
     
         Set frmMens = New frmMensajes
         
@@ -19177,8 +19178,8 @@ Dim i As Integer
     numParam = numParam + 1
 
     'D/H SOCIO
-    cDesde = Trim(txtcodigo(182).Text)
-    cHasta = Trim(txtcodigo(183).Text)
+    cDesde = Trim(txtCodigo(182).Text)
+    cHasta = Trim(txtCodigo(183).Text)
     nDesde = txtNombre(182).Text
     nHasta = txtNombre(183).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -19190,8 +19191,8 @@ Dim i As Integer
     
 
     'D/H fecha
-    cDesde = Trim(txtcodigo(190).Text)
-    cHasta = Trim(txtcodigo(191).Text)
+    cDesde = Trim(txtCodigo(190).Text)
+    cHasta = Trim(txtCodigo(191).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -19225,7 +19226,7 @@ Dim i As Integer
 End Sub
 
 Private Function CargarTemporalCamposSinEntradas()
-Dim sql As String
+Dim Sql As String
 Dim vCampAnt As CCampAnt
 Dim ctabla1 As String
 Dim Sql2 As String
@@ -19259,12 +19260,12 @@ Dim cTablaAnticip As String
     Screen.MousePointer = vbHourglass
     
     ' borramos las tablas temporales donde insertaremos los campos que tienen entradas
-    sql = "delete from tmpinformes2 where codusu= " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes2 where codusu= " & vUsu.Codigo
+    conn.Execute Sql
     
     ' tabla final donde insertaremos los campos sin entradas
-    sql = "delete from tmpinformes where codusu= " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu= " & vUsu.Codigo
+    conn.Execute Sql
     
     Label2(268).visible = True
     Label2(268).Caption = "Procesando campaña actual"
@@ -19272,36 +19273,36 @@ Dim cTablaAnticip As String
     DoEvents
     
     ' insertamos los campos con entradas de la campaña actual sin fecha de baja
-    sql = "insert into tmpinformes2 (codusu,importe1, codigo1)"
-    sql = sql & " select distinct " & vUsu.Codigo & ", aaaa.codcampo, aaaa.codsocio "
-    sql = sql & " from ( "
+    Sql = "insert into tmpinformes2 (codusu,importe1, codigo1)"
+    Sql = Sql & " select distinct " & vUsu.Codigo & ", aaaa.codcampo, aaaa.codsocio "
+    Sql = Sql & " from ( "
     
-    sql = sql & "select distinct " & vUsu.Codigo & ", rentradas.codcampo, rentradas.codsocio "
-    sql = sql & " from rentradas "
-    sql = sql & " where codcampo in (select codcampo from rcampos where fecbajas is null) "
-    If txtcodigo(182).Text <> "" Then sql = sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
-    If txtcodigo(183).Text <> "" Then sql = sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
-    If txtcodigo(190).Text <> "" Then sql = sql & " and fechaent >= " & DBSet(txtcodigo(190).Text, "F")
-    If txtcodigo(191).Text <> "" Then sql = sql & " and fechaent <= " & DBSet(txtcodigo(191).Text, "F")
-    sql = sql & " union "
-    sql = sql & "select distinct " & vUsu.Codigo & ", rclasifica.codcampo, rclasifica.codsocio "
-    sql = sql & " from rclasifica "
-    sql = sql & " where codcampo in (select codcampo from rcampos where fecbajas is null) "
-    If txtcodigo(182).Text <> "" Then sql = sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
-    If txtcodigo(183).Text <> "" Then sql = sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
-    If txtcodigo(190).Text <> "" Then sql = sql & " and fechaent >= " & DBSet(txtcodigo(190).Text, "F")
-    If txtcodigo(191).Text <> "" Then sql = sql & " and fechaent <= " & DBSet(txtcodigo(191).Text, "F")
-    sql = sql & " union "
-    sql = sql & "select distinct " & vUsu.Codigo & ", rhisfruta.codcampo, rhisfruta.codsocio "
-    sql = sql & " from rhisfruta "
-    sql = sql & " where codcampo in (select codcampo from rcampos where fecbajas is null) "
-    If txtcodigo(182).Text <> "" Then sql = sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
-    If txtcodigo(183).Text <> "" Then sql = sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
-    If txtcodigo(190).Text <> "" Then sql = sql & " and fecalbar >= " & DBSet(txtcodigo(190).Text, "F")
-    If txtcodigo(191).Text <> "" Then sql = sql & " and fecalbar <= " & DBSet(txtcodigo(191).Text, "F")
-    sql = sql & " ) aaaa "
+    Sql = Sql & "select distinct " & vUsu.Codigo & ", rentradas.codcampo, rentradas.codsocio "
+    Sql = Sql & " from rentradas "
+    Sql = Sql & " where codcampo in (select codcampo from rcampos where fecbajas is null) "
+    If txtCodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtCodigo(182).Text, "N")
+    If txtCodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtCodigo(183).Text, "N")
+    If txtCodigo(190).Text <> "" Then Sql = Sql & " and fechaent >= " & DBSet(txtCodigo(190).Text, "F")
+    If txtCodigo(191).Text <> "" Then Sql = Sql & " and fechaent <= " & DBSet(txtCodigo(191).Text, "F")
+    Sql = Sql & " union "
+    Sql = Sql & "select distinct " & vUsu.Codigo & ", rclasifica.codcampo, rclasifica.codsocio "
+    Sql = Sql & " from rclasifica "
+    Sql = Sql & " where codcampo in (select codcampo from rcampos where fecbajas is null) "
+    If txtCodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtCodigo(182).Text, "N")
+    If txtCodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtCodigo(183).Text, "N")
+    If txtCodigo(190).Text <> "" Then Sql = Sql & " and fechaent >= " & DBSet(txtCodigo(190).Text, "F")
+    If txtCodigo(191).Text <> "" Then Sql = Sql & " and fechaent <= " & DBSet(txtCodigo(191).Text, "F")
+    Sql = Sql & " union "
+    Sql = Sql & "select distinct " & vUsu.Codigo & ", rhisfruta.codcampo, rhisfruta.codsocio "
+    Sql = Sql & " from rhisfruta "
+    Sql = Sql & " where codcampo in (select codcampo from rcampos where fecbajas is null) "
+    If txtCodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtCodigo(182).Text, "N")
+    If txtCodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtCodigo(183).Text, "N")
+    If txtCodigo(190).Text <> "" Then Sql = Sql & " and fecalbar >= " & DBSet(txtCodigo(190).Text, "F")
+    If txtCodigo(191).Text <> "" Then Sql = Sql & " and fecalbar <= " & DBSet(txtCodigo(191).Text, "F")
+    Sql = Sql & " ) aaaa "
     
-    conn.Execute sql
+    conn.Execute Sql
     
   
 ' TODAS LAS CAMPAÑAS ANTERIORES
@@ -19321,46 +19322,46 @@ If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamApli
         
         
             ' borramos la tabla temporal de la campaña anterior
-            sql = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmpinformes2 where codusu= " & vUsu.Codigo
-            conn.Execute sql
+            Sql = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmpinformes2 where codusu= " & vUsu.Codigo
+            conn.Execute Sql
             
-            sql = "insert into " & RsBd.Fields(0).Value & ".tmpinformes2 (codusu,importe1, codigo1)"
-            sql = sql & " select distinct " & vUsu.Codigo & ", aaaa.codcampo, aaaa.codsocio "
-            sql = sql & " from ( "
+            Sql = "insert into " & RsBd.Fields(0).Value & ".tmpinformes2 (codusu,importe1, codigo1)"
+            Sql = Sql & " select distinct " & vUsu.Codigo & ", aaaa.codcampo, aaaa.codsocio "
+            Sql = Sql & " from ( "
             
-            sql = sql & "select distinct " & vUsu.Codigo & ", rentradas.codcampo, rentradas.codsocio "
-            sql = sql & " from " & RsBd.Fields(0).Value & ".rentradas "
-            sql = sql & " where codcampo in (select codcampo from " & RsBd.Fields(0).Value & ".rcampos where fecbajas is null) "
-            If txtcodigo(182).Text <> "" Then sql = sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
-            If txtcodigo(183).Text <> "" Then sql = sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
-            If txtcodigo(190).Text <> "" Then sql = sql & " and fechaent >= " & DBSet(txtcodigo(190).Text, "F")
-            If txtcodigo(191).Text <> "" Then sql = sql & " and fechaent <= " & DBSet(txtcodigo(191).Text, "F")
-            sql = sql & " union "
-            sql = sql & "select distinct " & vUsu.Codigo & ", rclasifica.codcampo, rclasifica.codsocio "
-            sql = sql & " from " & RsBd.Fields(0).Value & ".rclasifica "
-            sql = sql & " where codcampo in (select codcampo from " & RsBd.Fields(0).Value & ".rcampos where fecbajas is null) "
-            If txtcodigo(182).Text <> "" Then sql = sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
-            If txtcodigo(183).Text <> "" Then sql = sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
-            If txtcodigo(190).Text <> "" Then sql = sql & " and fechaent >= " & DBSet(txtcodigo(190).Text, "F")
-            If txtcodigo(191).Text <> "" Then sql = sql & " and fechaent <= " & DBSet(txtcodigo(191).Text, "F")
-            sql = sql & " union "
-            sql = sql & "select distinct " & vUsu.Codigo & ", rhisfruta.codcampo, rhisfruta.codsocio "
-            sql = sql & " from " & RsBd.Fields(0).Value & ".rhisfruta "
-            sql = sql & " where codcampo in (select codcampo from " & RsBd.Fields(0).Value & ".rcampos where fecbajas is null) "
-            If txtcodigo(182).Text <> "" Then sql = sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
-            If txtcodigo(183).Text <> "" Then sql = sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
-            If txtcodigo(190).Text <> "" Then sql = sql & " and fecalbar >= " & DBSet(txtcodigo(190).Text, "F")
-            If txtcodigo(191).Text <> "" Then sql = sql & " and fecalbar <= " & DBSet(txtcodigo(191).Text, "F")
-            sql = sql & " ) aaaa"
+            Sql = Sql & "select distinct " & vUsu.Codigo & ", rentradas.codcampo, rentradas.codsocio "
+            Sql = Sql & " from " & RsBd.Fields(0).Value & ".rentradas "
+            Sql = Sql & " where codcampo in (select codcampo from " & RsBd.Fields(0).Value & ".rcampos where fecbajas is null) "
+            If txtCodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtCodigo(182).Text, "N")
+            If txtCodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtCodigo(183).Text, "N")
+            If txtCodigo(190).Text <> "" Then Sql = Sql & " and fechaent >= " & DBSet(txtCodigo(190).Text, "F")
+            If txtCodigo(191).Text <> "" Then Sql = Sql & " and fechaent <= " & DBSet(txtCodigo(191).Text, "F")
+            Sql = Sql & " union "
+            Sql = Sql & "select distinct " & vUsu.Codigo & ", rclasifica.codcampo, rclasifica.codsocio "
+            Sql = Sql & " from " & RsBd.Fields(0).Value & ".rclasifica "
+            Sql = Sql & " where codcampo in (select codcampo from " & RsBd.Fields(0).Value & ".rcampos where fecbajas is null) "
+            If txtCodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtCodigo(182).Text, "N")
+            If txtCodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtCodigo(183).Text, "N")
+            If txtCodigo(190).Text <> "" Then Sql = Sql & " and fechaent >= " & DBSet(txtCodigo(190).Text, "F")
+            If txtCodigo(191).Text <> "" Then Sql = Sql & " and fechaent <= " & DBSet(txtCodigo(191).Text, "F")
+            Sql = Sql & " union "
+            Sql = Sql & "select distinct " & vUsu.Codigo & ", rhisfruta.codcampo, rhisfruta.codsocio "
+            Sql = Sql & " from " & RsBd.Fields(0).Value & ".rhisfruta "
+            Sql = Sql & " where codcampo in (select codcampo from " & RsBd.Fields(0).Value & ".rcampos where fecbajas is null) "
+            If txtCodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtCodigo(182).Text, "N")
+            If txtCodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtCodigo(183).Text, "N")
+            If txtCodigo(190).Text <> "" Then Sql = Sql & " and fecalbar >= " & DBSet(txtCodigo(190).Text, "F")
+            If txtCodigo(191).Text <> "" Then Sql = Sql & " and fecalbar <= " & DBSet(txtCodigo(191).Text, "F")
+            Sql = Sql & " ) aaaa"
             
-            conn.Execute sql
+            conn.Execute Sql
         
         
             ' introducimos los campos con entradas en la temporal de la campaña actual
-            sql = "insert into tmpinformes2 select * from " & Trim(RsBd.Fields(0).Value) & ".tmpinformes2 "
-            sql = sql & " where codusu = " & vUsu.Codigo
+            Sql = "insert into tmpinformes2 select * from " & Trim(RsBd.Fields(0).Value) & ".tmpinformes2 "
+            Sql = Sql & " where codusu = " & vUsu.Codigo
             
-            conn.Execute sql
+            conn.Execute Sql
             
         End If
     
@@ -19378,15 +19379,15 @@ End If ' Por Montifrut que tiene la otra en el ariagro2
     
     ' una vez tenemos todos los campos que tienen entradas, insertamos en tmpinformes los que no tienen fecha de baja y no estan
     ' en campos con entradas
-    sql = "insert into tmpinformes (codusu, importe1, codigo1, importe2, importe3)  "
-    sql = sql & " select distinct " & vUsu.Codigo & ",rcampos.codcampo, rcampos.codsocio, round(rcampos.supcoope / " & DBSet(vParamAplic.Faneca, "N") & ",2)  , rcampos.codvarie from rcampos "
-    sql = sql & " where fecbajas is null "
-    If txtcodigo(182).Text <> "" Then sql = sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
-    If txtcodigo(183).Text <> "" Then sql = sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
-    sql = sql & " and not codcampo in (select importe1 from tmpinformes2 where codusu = " & vUsu.Codigo & ") "
+    Sql = "insert into tmpinformes (codusu, importe1, codigo1, importe2, importe3)  "
+    Sql = Sql & " select distinct " & vUsu.Codigo & ",rcampos.codcampo, rcampos.codsocio, round(rcampos.supcoope / " & DBSet(vParamAplic.Faneca, "N") & ",2)  , rcampos.codvarie from rcampos "
+    Sql = Sql & " where fecbajas is null "
+    If txtCodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtCodigo(182).Text, "N")
+    If txtCodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtCodigo(183).Text, "N")
+    Sql = Sql & " and not codcampo in (select importe1 from tmpinformes2 where codusu = " & vUsu.Codigo & ") "
 
     
-    conn.Execute sql
+    conn.Execute Sql
     
     'de todos los socios que tenemos con algun campo sin entradas eliminamos los que algunos de sus campos estan con entradas
     If Check28.Value Then
@@ -19395,10 +19396,10 @@ End If ' Por Montifrut que tiene la otra en el ariagro2
         Me.Refresh
         DoEvents
         
-        sql = "delete from tmpinformes where codusu = " & vUsu.Codigo & " and "
-        sql = sql & " codigo1 in (select codigo1 from tmpinformes2 where codusu = " & vUsu.Codigo & " group by 1)"
+        Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo & " and "
+        Sql = Sql & " codigo1 in (select codigo1 from tmpinformes2 where codusu = " & vUsu.Codigo & " group by 1)"
         
-        conn.Execute sql
+        conn.Execute Sql
     End If
     
     
@@ -19419,20 +19420,20 @@ End Function
 
 Private Sub CmdAcepContaGastos_Click()
 Dim cadWHERE As String
-Dim sql As String
+Dim Sql As String
 Dim B As Boolean
 
     cadWHERE = NumCod
 
-    txtcodigo(108).Text = Format(DevuelveValor("select fecha from rcampos_gastos where " & cadWHERE), "dd/mm/yyyy")
+    txtCodigo(108).Text = Format(DevuelveValor("select fecha from rcampos_gastos where " & cadWHERE), "dd/mm/yyyy")
 
     If Not DatosOkGastos(cadWHERE) Then Exit Sub
 
-    sql = "CONGAS" 'contabilizar recibos de pozos
+    Sql = "CONGAS" 'contabilizar recibos de pozos
 
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (sql)
-    If Not BloqueoManual(sql, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se pueden Contabilizar Asiento de Gastos Campos. Hay otro usuario contabilizando.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -19441,14 +19442,14 @@ Dim B As Boolean
      'Comprobar que el intervalo de fechas D/H esta dentro del ejercicio de la
      'contabilidad par ello mirar en la BD de la Conta los parámetros
     If Not ComprobarFechasConta(108) Then Exit Sub
-    txtcodigo(108).Text = Format(DevuelveValor("select fecha from rcampos_gastos where " & cadWHERE), "dd/mm/yyyy")
+    txtCodigo(108).Text = Format(DevuelveValor("select fecha from rcampos_gastos where " & cadWHERE), "dd/mm/yyyy")
 
     
     '===========================================================================
     'CONTABILIZAR ASIENTO DE GASTOS
     '===========================================================================
     Me.lblProgres(0).Caption = "Contabilizar Asiento de Gastos: "
-    CargarProgres Me.Pb1, 10
+    CargarProgres Me.pb1, 10
     Me.lblProgres(1).Caption = "Insertando Asiento en Diario..."
 
 
@@ -19460,7 +19461,7 @@ Dim B As Boolean
     '-----------------------------------------------------------------------------
 
     '---- Pasar Asiento a la Contabilidad
-    B = PasarAsientoGastoCampo(cadWHERE, Orden2, txtcodigo(108).Text, txtcodigo(128).Text, txtcodigo(112).Text, txtcodigo(119).Text)
+    B = PasarAsientoGastoCampo(cadWHERE, Orden2, txtCodigo(108).Text, txtCodigo(128).Text, txtCodigo(112).Text, txtCodigo(119).Text)
 
     '---- Mostrar ListView de posibles errores (si hay)
     If B Then
@@ -19492,8 +19493,8 @@ Dim vcad As String
     numParam = numParam + 1
     
     'D/H SOCIO
-    cDesde = Trim(txtcodigo(86).Text)
-    cHasta = Trim(txtcodigo(87).Text)
+    cDesde = Trim(txtCodigo(86).Text)
+    cHasta = Trim(txtCodigo(87).Text)
     nDesde = txtNombre(86).Text
     nHasta = txtNombre(87).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -19504,8 +19505,8 @@ Dim vcad As String
     End If
     
     'D/H CLASE
-    cDesde = Trim(txtcodigo(81).Text)
-    cHasta = Trim(txtcodigo(82).Text)
+    cDesde = Trim(txtCodigo(81).Text)
+    cHasta = Trim(txtCodigo(82).Text)
     nDesde = txtNombre(81).Text
     nHasta = txtNombre(82).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -19516,8 +19517,8 @@ Dim vcad As String
     End If
     
     'D/H VARIEDAD
-    cDesde = Trim(txtcodigo(84).Text)
-    cHasta = Trim(txtcodigo(85).Text)
+    cDesde = Trim(txtCodigo(84).Text)
+    cHasta = Trim(txtCodigo(85).Text)
     nDesde = txtNombre(84).Text
     nHasta = txtNombre(85).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -19528,8 +19529,8 @@ Dim vcad As String
     End If
 
     'D/H fecha
-    cDesde = Trim(txtcodigo(88).Text)
-    cHasta = Trim(txtcodigo(89).Text)
+    cDesde = Trim(txtCodigo(88).Text)
+    cHasta = Trim(txtCodigo(89).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -19539,8 +19540,8 @@ Dim vcad As String
     End If
             
     'D/H CAMPO
-    cDesde = Trim(txtcodigo(90).Text)
-    cHasta = Trim(txtcodigo(91).Text)
+    cDesde = Trim(txtCodigo(90).Text)
+    cHasta = Trim(txtCodigo(91).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -19623,7 +19624,7 @@ Private Function GeneraFichero() As Boolean
 Dim NFich As Integer
 Dim Rs As ADODB.Recordset
 Dim cad As String
-Dim sql As String
+Dim Sql As String
 Dim i As Integer
 Dim vSocio As cSocio
 Dim v_total As Currency
@@ -19647,21 +19648,21 @@ Dim Banco As Currency
 
     Set Rs = New ADODB.Recordset
     
-    sql = "select cc.codsocio, ss.nomsocio, ss.nifsocio, cc.nrocampo, cc.poligono,cc.parcela, pp.codpobla, pp.nomparti, ppp.despobla, cc.codparti, cc.recintos, cc.codvarie, cc.supcoope, cc.anoplant "
-    sql = sql & " from rcampos cc, rsocios ss, rpartida pp, rpueblos ppp    "
-    sql = sql & " where cc.codsocio = ss.codsocio and cc.codparti = pp.codparti and pp.codpobla = ppp.codpobla "
-    sql = sql & " and cc.fecbajas is null "
+    Sql = "select cc.codsocio, ss.nomsocio, ss.nifsocio, cc.nrocampo, cc.poligono,cc.parcela, pp.codpobla, pp.nomparti, ppp.despobla, cc.codparti, cc.recintos, cc.codvarie, cc.supcoope, cc.anoplant "
+    Sql = Sql & " from rcampos cc, rsocios ss, rpartida pp, rpueblos ppp    "
+    Sql = Sql & " where cc.codsocio = ss.codsocio and cc.codparti = pp.codparti and pp.codpobla = ppp.codpobla "
+    Sql = Sql & " and cc.fecbajas is null "
     
     'rpueblos", "despobla", "codpobla", CodPobla,
     
-    If txtcodigo(171).Text <> "" Then sql = sql & " and cc.codsocio >= " & DBSet(txtcodigo(171).Text, "N")
-    If txtcodigo(172).Text <> "" Then sql = sql & " and cc.codsocio <= " & DBSet(txtcodigo(172).Text, "N")
-    If txtcodigo(177).Text <> "" Then sql = sql & " and cc.codvarie >= " & DBSet(txtcodigo(177).Text, "N")
-    If txtcodigo(178).Text <> "" Then sql = sql & " and cc.codvarie <= " & DBSet(txtcodigo(178).Text, "N")
+    If txtCodigo(171).Text <> "" Then Sql = Sql & " and cc.codsocio >= " & DBSet(txtCodigo(171).Text, "N")
+    If txtCodigo(172).Text <> "" Then Sql = Sql & " and cc.codsocio <= " & DBSet(txtCodigo(172).Text, "N")
+    If txtCodigo(177).Text <> "" Then Sql = Sql & " and cc.codvarie >= " & DBSet(txtCodigo(177).Text, "N")
+    If txtCodigo(178).Text <> "" Then Sql = Sql & " and cc.codvarie <= " & DBSet(txtCodigo(178).Text, "N")
     
-    sql = sql & " order by cc.codsocio "
+    Sql = Sql & " order by cc.codsocio "
     
-    Rs.Open sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     v_lineas = 0
     
@@ -19725,8 +19726,8 @@ Dim Tabla2 As String
 
      '======== FORMULA  ====================================
      'D/H Socio
-     cDesde = Trim(txtcodigo(186).Text)
-     cHasta = Trim(txtcodigo(187).Text)
+     cDesde = Trim(txtCodigo(186).Text)
+     cHasta = Trim(txtCodigo(187).Text)
      nDesde = txtNombre(186).Text
      nHasta = txtNombre(187).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -19737,8 +19738,8 @@ Dim Tabla2 As String
      End If
 
      'D/H Clase
-     cDesde = Trim(txtcodigo(188).Text)
-     cHasta = Trim(txtcodigo(189).Text)
+     cDesde = Trim(txtCodigo(188).Text)
+     cHasta = Trim(txtCodigo(189).Text)
      nDesde = txtNombre(188).Text
      nHasta = txtNombre(189).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -19751,8 +19752,8 @@ Dim Tabla2 As String
      
      
      'D/H fecha
-     cDesde = Trim(txtcodigo(184).Text)
-     cHasta = Trim(txtcodigo(185).Text)
+     cDesde = Trim(txtCodigo(184).Text)
+     cHasta = Trim(txtCodigo(185).Text)
      nDesde = ""
      nHasta = ""
      
@@ -19772,8 +19773,8 @@ Dim Tabla2 As String
      
      
      vSQL = ""
-     If txtcodigo(188).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtcodigo(188).Text, "N")
-     If txtcodigo(189).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtcodigo(189).Text, "N")
+     If txtCodigo(188).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(188).Text, "N")
+     If txtCodigo(189).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(189).Text, "N")
      
      Set frmMens = New frmMensajes
      
@@ -19805,7 +19806,7 @@ Dim Tabla2 As String
 End Sub
 
 Private Sub CmdAcepGene_Click()
-Dim sql As String
+Dim Sql As String
 Dim Ordinal As Long
 
     On Error GoTo eError
@@ -19814,42 +19815,42 @@ Dim Ordinal As Long
 
     If Not DatosOK Then Exit Sub
 
-    sql = "select max(ordinal) from rclasifauto    "
-    sql = sql & " where codsocio = " & DBSet(txtcodigo(83).Text, "N")
-    sql = sql & " and codcampo = " & DBSet(txtcodigo(80).Text, "N")
-    sql = sql & " and codvarie = " & DBSet(RecuperaValor(CadTag, 1), "N")
+    Sql = "select max(ordinal) from rclasifauto    "
+    Sql = Sql & " where codsocio = " & DBSet(txtCodigo(83).Text, "N")
+    Sql = Sql & " and codcampo = " & DBSet(txtCodigo(80).Text, "N")
+    Sql = Sql & " and codvarie = " & DBSet(RecuperaValor(CadTag, 1), "N")
     
-    Ordinal = DevuelveValor(sql) + 1
+    Ordinal = DevuelveValor(Sql) + 1
     
     conn.BeginTrans
     
     
     ' cabecera
-    sql = "insert into rclasifauto (numnotac,codsocio,codcampo,codvarie,fechacla,kilosnet,kilospeq,observac,situacion,porcdest,ordinal) values ("
-    sql = sql & DBSet(1, "N") & "," ' nro clasificacion
-    sql = sql & DBSet(txtcodigo(83).Text, "N") & ","
-    sql = sql & DBSet(txtcodigo(80).Text, "N") & ","
-    sql = sql & DBSet(RecuperaValor(CadTag, 1), "N") & "," ' variedad
-    sql = sql & DBSet(RecuperaValor(CadTag, 2), "F") & "," ' fecha de clasificacion
-    sql = sql & DBSet(RecuperaValor(CadTag, 5), "N") & "," ' kilosnet
-    sql = sql & DBSet(0, "N") & "," 'kilos manuales
-    sql = sql & DBSet(RecuperaValor(CadTag, 6), "T") & "," ' observac
-    sql = sql & DBSet(RecuperaValor(CadTag, 7), "N") & "," ' situacion
-    sql = sql & DBSet(txtcodigo(79).Text, "N") & "," ' porcentaje de destrio
-    sql = sql & DBSet(Ordinal, "N") & ")"
+    Sql = "insert into rclasifauto (numnotac,codsocio,codcampo,codvarie,fechacla,kilosnet,kilospeq,observac,situacion,porcdest,ordinal) values ("
+    Sql = Sql & DBSet(1, "N") & "," ' nro clasificacion
+    Sql = Sql & DBSet(txtCodigo(83).Text, "N") & ","
+    Sql = Sql & DBSet(txtCodigo(80).Text, "N") & ","
+    Sql = Sql & DBSet(RecuperaValor(CadTag, 1), "N") & "," ' variedad
+    Sql = Sql & DBSet(RecuperaValor(CadTag, 2), "F") & "," ' fecha de clasificacion
+    Sql = Sql & DBSet(RecuperaValor(CadTag, 5), "N") & "," ' kilosnet
+    Sql = Sql & DBSet(0, "N") & "," 'kilos manuales
+    Sql = Sql & DBSet(RecuperaValor(CadTag, 6), "T") & "," ' observac
+    Sql = Sql & DBSet(RecuperaValor(CadTag, 7), "N") & "," ' situacion
+    Sql = Sql & DBSet(txtCodigo(79).Text, "N") & "," ' porcentaje de destrio
+    Sql = Sql & DBSet(Ordinal, "N") & ")"
     
-    conn.Execute sql
+    conn.Execute Sql
     
     ' lineas
-    sql = "insert into rclasifauto_clasif (numnotac,codvarie,codcalid,kiloscal,codcampo,codsocio,fechacla,ordinal) "
-    sql = sql & " select 1, codvarie, codcalid, kiloscal," & DBSet(txtcodigo(80).Text, "N") & "," & DBSet(txtcodigo(83).Text, "N") & ", fechacla, " & DBSet(Ordinal, "N")
-    sql = sql & " from rclasifauto_clasif "
-    sql = sql & " where codvarie = " & DBSet(RecuperaValor(CadTag, 1), "N")  ' variedad
-    sql = sql & " and codcampo = 9999"
-    sql = sql & " and codsocio = 999"
-    sql = sql & " and fechacla = " & DBSet(RecuperaValor(CadTag, 2), "F")  ' fecha de clasificacion
+    Sql = "insert into rclasifauto_clasif (numnotac,codvarie,codcalid,kiloscal,codcampo,codsocio,fechacla,ordinal) "
+    Sql = Sql & " select 1, codvarie, codcalid, kiloscal," & DBSet(txtCodigo(80).Text, "N") & "," & DBSet(txtCodigo(83).Text, "N") & ", fechacla, " & DBSet(Ordinal, "N")
+    Sql = Sql & " from rclasifauto_clasif "
+    Sql = Sql & " where codvarie = " & DBSet(RecuperaValor(CadTag, 1), "N")  ' variedad
+    Sql = Sql & " and codcampo = 9999"
+    Sql = Sql & " and codsocio = 999"
+    Sql = Sql & " and fechacla = " & DBSet(RecuperaValor(CadTag, 2), "F")  ' fecha de clasificacion
     
-    conn.Execute sql
+    conn.Execute Sql
     
 eError:
     If Err.Number <> 0 Then
@@ -19874,7 +19875,7 @@ Dim devuelve As String
 Dim B As Boolean
 Dim vSQL As String
 
-    If txtcodigo(135).Text = "" Then
+    If txtCodigo(135).Text = "" Then
         MsgBox "Debe de introducir la fecha de albarán. Reintroduzca.", vbExclamation
         Exit Sub
     End If
@@ -19889,8 +19890,8 @@ Dim vSQL As String
      '======== FORMULA  ====================================
 
     'D/H Fecha de Factura
-    cDesde = Trim(txtcodigo(136).Text)
-    cHasta = Trim(txtcodigo(137).Text)
+    cDesde = Trim(txtCodigo(136).Text)
+    cHasta = Trim(txtCodigo(137).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -19937,8 +19938,8 @@ Dim vSQL As String
 
      '======== FORMULA  ====================================
      'D/H Socio
-     cDesde = Trim(txtcodigo(120).Text)
-     cHasta = Trim(txtcodigo(121).Text)
+     cDesde = Trim(txtCodigo(120).Text)
+     cHasta = Trim(txtCodigo(121).Text)
      nDesde = txtNombre(120).Text
      nHasta = txtNombre(121).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -19949,8 +19950,8 @@ Dim vSQL As String
      End If
 
      'D/H Campo
-     cDesde = Trim(txtcodigo(122).Text)
-     cHasta = Trim(txtcodigo(123).Text)
+     cDesde = Trim(txtCodigo(122).Text)
+     cHasta = Trim(txtCodigo(123).Text)
      nDesde = ""
      nHasta = ""
      If Not (cDesde = "" And cHasta = "") Then
@@ -19962,8 +19963,8 @@ Dim vSQL As String
         
      
     ' D/H Concepto de gastos
-     cDesde = Trim(txtcodigo(124).Text)
-     cHasta = Trim(txtcodigo(125).Text)
+     cDesde = Trim(txtCodigo(124).Text)
+     cHasta = Trim(txtCodigo(125).Text)
      nDesde = txtNombre(124).Text
      nHasta = txtNombre(125).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -19975,8 +19976,8 @@ Dim vSQL As String
         
      
      'D/H fecha
-     cDesde = Trim(txtcodigo(126).Text)
-     cHasta = Trim(txtcodigo(127).Text)
+     cDesde = Trim(txtCodigo(126).Text)
+     cHasta = Trim(txtCodigo(127).Text)
      nDesde = ""
      nHasta = ""
      'devuelve = CadenaDesdeHasta(cDesde, cHasta, "fecalbar", "F")
@@ -20061,8 +20062,8 @@ Dim vSQL As String
 
      '======== FORMULA  ====================================
      'D/H Socio
-     cDesde = Trim(txtcodigo(100).Text)
-     cHasta = Trim(txtcodigo(101).Text)
+     cDesde = Trim(txtCodigo(100).Text)
+     cHasta = Trim(txtCodigo(101).Text)
      nDesde = txtNombre(100).Text
      nHasta = txtNombre(101).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20073,8 +20074,8 @@ Dim vSQL As String
      End If
 
      'D/H Clase
-     cDesde = Trim(txtcodigo(104).Text)
-     cHasta = Trim(txtcodigo(105).Text)
+     cDesde = Trim(txtCodigo(104).Text)
+     cHasta = Trim(txtCodigo(105).Text)
      nDesde = txtNombre(104).Text
      nHasta = txtNombre(105).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20086,8 +20087,8 @@ Dim vSQL As String
         
      
     ' VARIEDAD
-     cDesde = Trim(txtcodigo(102).Text)
-     cHasta = Trim(txtcodigo(103).Text)
+     cDesde = Trim(txtCodigo(102).Text)
+     cHasta = Trim(txtCodigo(103).Text)
      nDesde = txtNombre(102).Text
      nHasta = txtNombre(103).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20099,8 +20100,8 @@ Dim vSQL As String
         
      
      'D/H fecha
-     cDesde = Trim(txtcodigo(98).Text)
-     cHasta = Trim(txtcodigo(99).Text)
+     cDesde = Trim(txtCodigo(98).Text)
+     cHasta = Trim(txtCodigo(99).Text)
      nDesde = ""
      nHasta = ""
      'devuelve = CadenaDesdeHasta(cDesde, cHasta, "fecalbar", "F")
@@ -20113,8 +20114,8 @@ Dim vSQL As String
 
 
     ' CONCEPTO DE GASTOS
-     cDesde = Trim(txtcodigo(96).Text)
-     cHasta = Trim(txtcodigo(97).Text)
+     cDesde = Trim(txtCodigo(96).Text)
+     cHasta = Trim(txtCodigo(97).Text)
      nDesde = txtNombre(96).Text
      nHasta = txtNombre(97).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20130,8 +20131,8 @@ Dim vSQL As String
      tabla = "(" & tabla & ") INNER JOIN rhisfruta_gastos ON rhisfruta.numalbar = rhisfruta_gastos.numalbar "
      
      vSQL = ""
-     If txtcodigo(104).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtcodigo(104).Text, "N")
-     If txtcodigo(105).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtcodigo(105).Text, "N")
+     If txtCodigo(104).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(104).Text, "N")
+     If txtCodigo(105).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(105).Text, "N")
      
      Set frmMens = New frmMensajes
      
@@ -20202,8 +20203,8 @@ Dim Tabla2 As String
 
      '======== FORMULA  ====================================
      'D/H Socio
-     cDesde = Trim(txtcodigo(33).Text)
-     cHasta = Trim(txtcodigo(34).Text)
+     cDesde = Trim(txtCodigo(33).Text)
+     cHasta = Trim(txtCodigo(34).Text)
      nDesde = txtNombre(33).Text
      nHasta = txtNombre(34).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20214,8 +20215,8 @@ Dim Tabla2 As String
      End If
 
      'D/H Clase
-     cDesde = Trim(txtcodigo(35).Text)
-     cHasta = Trim(txtcodigo(36).Text)
+     cDesde = Trim(txtCodigo(35).Text)
+     cHasta = Trim(txtCodigo(36).Text)
      nDesde = txtNombre(35).Text
      nHasta = txtNombre(36).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20227,8 +20228,8 @@ Dim Tabla2 As String
         
      
     ' PRODUCTO
-     cDesde = Trim(txtcodigo(37).Text)
-     cHasta = Trim(txtcodigo(38).Text)
+     cDesde = Trim(txtCodigo(37).Text)
+     cHasta = Trim(txtCodigo(38).Text)
      nDesde = txtNombre(37).Text
      nHasta = txtNombre(38).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20240,8 +20241,8 @@ Dim Tabla2 As String
         
      
      'D/H fecha
-     cDesde = Trim(txtcodigo(39).Text)
-     cHasta = Trim(txtcodigo(40).Text)
+     cDesde = Trim(txtCodigo(39).Text)
+     cHasta = Trim(txtCodigo(40).Text)
      nDesde = ""
      nHasta = ""
      devuelve = CadenaDesdeHasta(cDesde, cHasta, "fecalbar", "F")
@@ -20257,11 +20258,11 @@ Dim Tabla2 As String
      
      
      vSQL = ""
-     If txtcodigo(35).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtcodigo(35).Text, "N")
-     If txtcodigo(36).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtcodigo(36).Text, "N")
+     If txtCodigo(35).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(35).Text, "N")
+     If txtCodigo(36).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(36).Text, "N")
      
-     If txtcodigo(37).Text <> "" Then vSQL = vSQL & " and variedades.codprodu >= " & DBSet(txtcodigo(37).Text, "N")
-     If txtcodigo(38).Text <> "" Then vSQL = vSQL & " and variedades.codprodu <= " & DBSet(txtcodigo(38).Text, "N")
+     If txtCodigo(37).Text <> "" Then vSQL = vSQL & " and variedades.codprodu >= " & DBSet(txtCodigo(37).Text, "N")
+     If txtCodigo(38).Text <> "" Then vSQL = vSQL & " and variedades.codprodu <= " & DBSet(txtCodigo(38).Text, "N")
      
      Set frmMens = New frmMensajes
      
@@ -20333,8 +20334,8 @@ Dim i As Integer
      
      '======== FORMULA  ====================================
      'D/H Socio
-     cDesde = Trim(txtcodigo(153).Text)
-     cHasta = Trim(txtcodigo(154).Text)
+     cDesde = Trim(txtCodigo(153).Text)
+     cHasta = Trim(txtCodigo(154).Text)
      nDesde = txtNombre(153).Text
      nHasta = txtNombre(154).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20345,8 +20346,8 @@ Dim i As Integer
      End If
      
      'D/H Producto
-     cDesde = Trim(txtcodigo(148).Text)
-     cHasta = Trim(txtcodigo(150).Text)
+     cDesde = Trim(txtCodigo(148).Text)
+     cHasta = Trim(txtCodigo(150).Text)
      nDesde = txtNombre(148).Text
      nHasta = txtNombre(150).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20357,8 +20358,8 @@ Dim i As Integer
      End If
      
      'D/H Variedad
-     cDesde = Trim(txtcodigo(151).Text)
-     cHasta = Trim(txtcodigo(152).Text)
+     cDesde = Trim(txtCodigo(151).Text)
+     cHasta = Trim(txtCodigo(152).Text)
      nDesde = txtNombre(151).Text
      nHasta = txtNombre(152).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20400,7 +20401,7 @@ Dim i As Integer
 End Sub
 
 Private Function CargarTemporalAtria(nTabla As String, nSelect As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Rs2 As ADODB.Recordset
 Dim Rs As ADODB.Recordset
@@ -20411,16 +20412,16 @@ Dim Nregs As Integer
     
     CargarTemporalAtria = False
     
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     
     
-    sql = "insert into tmpinformes (codusu, codigo1, nombre1, precio1) select distinct " & vUsu.Codigo & ", rcampos.codsocio, grupopro.codatria, 0 from " & nTabla & " where " & nSelect
-    conn.Execute sql
+    Sql = "insert into tmpinformes (codusu, codigo1, nombre1, precio1) select distinct " & vUsu.Codigo & ", rcampos.codsocio, grupopro.codatria, 0 from " & nTabla & " where " & nSelect
+    conn.Execute Sql
     
-    sql = "select rcampos.*, codatria from " & nTabla & " where " & nSelect
+    Sql = "select rcampos.*, codatria from " & nTabla & " where " & nSelect
     
-    Pb8.Max = TotalRegistrosConsulta(sql)
+    Pb8.Max = TotalRegistrosConsulta(Sql)
     Pb8.visible = True
     Pb8.Value = 0
     
@@ -20428,7 +20429,7 @@ Dim Nregs As Integer
     
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         IncrementarProgresNew Pb8, 1
@@ -20443,20 +20444,20 @@ Dim Nregs As Integer
             While Not Rs2.EOF
                 Has = Round2(Rs!supcoope * DBLet(Rs!Porcentaje, "N") / 100, 4)
                 
-                sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo & " and codigo1 = " & DBSet(Rs2!Codsocio, "N") & " and nombre1 = " & DBSet(Rs!codatria, "T")
-                If TotalRegistros(sql) = 0 Then
-                    sql = "insert into tmpinformes (codusu, codigo1, nombre1, precio1) values (" & vUsu.Codigo & "," & DBSet(Rs2!Codsocio, "N") & "," & DBSet(Rs!codatria, "T") & "," & DBSet(Has, "N") & ")"
+                Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo & " and codigo1 = " & DBSet(Rs2!Codsocio, "N") & " and nombre1 = " & DBSet(Rs!codatria, "T")
+                If TotalRegistros(Sql) = 0 Then
+                    Sql = "insert into tmpinformes (codusu, codigo1, nombre1, precio1) values (" & vUsu.Codigo & "," & DBSet(Rs2!Codsocio, "N") & "," & DBSet(Rs!codatria, "T") & "," & DBSet(Has, "N") & ")"
                 Else
-                    sql = "update tmpinformes set precio1 = precio1 + " & DBSet(Has, "N") & " where codusu = " & vUsu.Codigo & " and codigo1 = " & DBSet(Rs2!Codsocio, "N") & " and nombre1 = " & DBSet(Rs!codatria, "T")
+                    Sql = "update tmpinformes set precio1 = precio1 + " & DBSet(Has, "N") & " where codusu = " & vUsu.Codigo & " and codigo1 = " & DBSet(Rs2!Codsocio, "N") & " and nombre1 = " & DBSet(Rs!codatria, "T")
                 End If
-                conn.Execute sql
+                conn.Execute Sql
                 
                 Rs2.MoveNext
             Wend
             Set Rs2 = Nothing
         Else
-            sql = "update tmpinformes set precio1 = precio1 + " & DBSet(Rs!supcoope, "N") & " where codusu = " & vUsu.Codigo & " and codigo1 = " & DBSet(Rs!Codsocio, "N") & " and nombre1 = " & DBSet(Rs!codatria, "T")
-            conn.Execute sql
+            Sql = "update tmpinformes set precio1 = precio1 + " & DBSet(Rs!supcoope, "N") & " where codusu = " & vUsu.Codigo & " and codigo1 = " & DBSet(Rs!Codsocio, "N") & " and nombre1 = " & DBSet(Rs!codatria, "T")
+            conn.Execute Sql
         End If
     
         Rs.MoveNext
@@ -20474,11 +20475,11 @@ End Function
 
 Private Function TieneCopropietarios(campo As String, Propietario As String) As Boolean
 Dim NroCampo As String
-Dim sql As String
+Dim Sql As String
 
-    sql = "select count(*) from rcampos_cooprop where codcampo = " & DBSet(campo, "N") & " and codsocio <> " & DBSet(Propietario, "N")
+    Sql = "select count(*) from rcampos_cooprop where codcampo = " & DBSet(campo, "N") & " and codsocio <> " & DBSet(Propietario, "N")
     
-    TieneCopropietarios = TotalRegistros(sql) > 0
+    TieneCopropietarios = TotalRegistros(Sql) > 0
 
 End Function
 
@@ -20550,8 +20551,8 @@ Dim vcad As String
     
     '======== FORMULA  ====================================
     'D/H Socio
-    cDesde = Trim(txtcodigo(173).Text)
-    cHasta = Trim(txtcodigo(174).Text)
+    cDesde = Trim(txtCodigo(173).Text)
+    cHasta = Trim(txtCodigo(174).Text)
     nDesde = txtNombre(173).Text
     nHasta = txtNombre(174).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -20562,8 +20563,8 @@ Dim vcad As String
     End If
        
     'D/H producto
-    cDesde = Trim(txtcodigo(175).Text)
-    cHasta = Trim(txtcodigo(176).Text)
+    cDesde = Trim(txtCodigo(175).Text)
+    cHasta = Trim(txtCodigo(176).Text)
     nDesde = txtNombre(175).Text
     nHasta = txtNombre(176).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -20574,8 +20575,8 @@ Dim vcad As String
     End If
     
     'D/H Partida
-    cDesde = Trim(txtcodigo(167).Text)
-    cHasta = Trim(txtcodigo(168).Text)
+    cDesde = Trim(txtCodigo(167).Text)
+    cHasta = Trim(txtCodigo(168).Text)
     nDesde = txtNombre(167).Text
     nHasta = txtNombre(168).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -20586,8 +20587,8 @@ Dim vcad As String
     End If
             
     'D/H Poblacion ( Termino Municipal )
-    cDesde = Trim(txtcodigo(159).Text)
-    cHasta = Trim(txtcodigo(160).Text)
+    cDesde = Trim(txtCodigo(159).Text)
+    cHasta = Trim(txtCodigo(160).Text)
     nDesde = txtNombre(159).Text
     nHasta = txtNombre(160).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -20597,8 +20598,8 @@ Dim vcad As String
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHPueblos= """) Then Exit Sub
     End If
     
-    If txtcodigo(180).Text <> "" Then
-        CadParam = CadParam & "pCampanya=""" & txtcodigo(180).Text & """|"
+    If txtCodigo(180).Text <> "" Then
+        CadParam = CadParam & "pCampanya=""" & txtCodigo(180).Text & """|"
         numParam = numParam + 1
     End If
     
@@ -20614,8 +20615,8 @@ Dim vcad As String
      'Comprobar si hay registros a Mostrar antes de abrir el Informe
     If HayRegParaInforme(tabla, cadSelect) Then
         
-        CadParam = CadParam & "pRevisado=""" & txtcodigo(192).Text & """|"
-        CadParam = CadParam & "pAsesor=""" & txtcodigo(193).Text & """|"
+        CadParam = CadParam & "pRevisado=""" & txtCodigo(192).Text & """|"
+        CadParam = CadParam & "pAsesor=""" & txtCodigo(193).Text & """|"
         numParam = numParam + 2
         
         cadTitulo = "Informe de Registro Aplicación de Fitosanitarios"
@@ -20669,8 +20670,8 @@ Dim vcad As String
 
     '======== FORMULA  ====================================
     'D/H Socio
-    cDesde = Trim(txtcodigo(145).Text)
-    cHasta = Trim(txtcodigo(146).Text)
+    cDesde = Trim(txtCodigo(145).Text)
+    cHasta = Trim(txtCodigo(146).Text)
     nDesde = txtNombre(145).Text
     nHasta = txtNombre(146).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -20766,8 +20767,8 @@ Dim cadena As String
 
      '======== FORMULA  ====================================
      'D/H Socio
-     cDesde = Trim(txtcodigo(54).Text)
-     cHasta = Trim(txtcodigo(55).Text)
+     cDesde = Trim(txtCodigo(54).Text)
+     cHasta = Trim(txtCodigo(55).Text)
      nDesde = txtNombre(54).Text
      nHasta = txtNombre(55).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20778,8 +20779,8 @@ Dim cadena As String
      End If
 
      'D/H Clase
-     cDesde = Trim(txtcodigo(56).Text)
-     cHasta = Trim(txtcodigo(57).Text)
+     cDesde = Trim(txtCodigo(56).Text)
+     cHasta = Trim(txtCodigo(57).Text)
      nDesde = txtNombre(56).Text
      nHasta = txtNombre(57).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20790,12 +20791,12 @@ Dim cadena As String
      End If
         
     vSQL = ""
-    If txtcodigo(56).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtcodigo(56).Text, "N")
-    If txtcodigo(57).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtcodigo(57).Text, "N")
+    If txtCodigo(56).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(56).Text, "N")
+    If txtCodigo(57).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(57).Text, "N")
      
     ' PRODUCTO
-     cDesde = Trim(txtcodigo(50).Text)
-     cHasta = Trim(txtcodigo(51).Text)
+     cDesde = Trim(txtCodigo(50).Text)
+     cHasta = Trim(txtCodigo(51).Text)
      nDesde = txtNombre(50).Text
      nHasta = txtNombre(51).Text
      If Not (cDesde = "" And cHasta = "") Then
@@ -20805,12 +20806,12 @@ Dim cadena As String
          If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHProducto= """) Then Exit Sub
      End If
         
-    If txtcodigo(50).Text <> "" Then vSQL = vSQL & " and variedades.codprodu >= " & DBSet(txtcodigo(50).Text, "N")
-    If txtcodigo(51).Text <> "" Then vSQL = vSQL & " and variedades.codprodu <= " & DBSet(txtcodigo(51).Text, "N")
+    If txtCodigo(50).Text <> "" Then vSQL = vSQL & " and variedades.codprodu >= " & DBSet(txtCodigo(50).Text, "N")
+    If txtCodigo(51).Text <> "" Then vSQL = vSQL & " and variedades.codprodu <= " & DBSet(txtCodigo(51).Text, "N")
      
      'D/H fecha
-     cDesde = Trim(txtcodigo(52).Text)
-     cHasta = Trim(txtcodigo(53).Text)
+     cDesde = Trim(txtCodigo(52).Text)
+     cHasta = Trim(txtCodigo(53).Text)
      nDesde = ""
      nHasta = ""
      devuelve = CadenaDesdeHasta(cDesde, cHasta, "fecalbar", "F")
@@ -20883,7 +20884,7 @@ Dim devuelve As String
 Dim vSQL As String
 Dim nTabla As String
 Dim vcad As String
-Dim sql As String
+Dim Sql As String
 
     InicializarVbles
     
@@ -20893,8 +20894,8 @@ Dim sql As String
     
     '======== FORMULA  ====================================
     'D/H Fecha de Impresion Orden de Recoleccion
-    cDesde = Trim(txtcodigo(139).Text)
-    cHasta = Trim(txtcodigo(140).Text)
+    cDesde = Trim(txtCodigo(139).Text)
+    cHasta = Trim(txtCodigo(140).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -20905,8 +20906,8 @@ Dim sql As String
     End If
     
     'D/H VARIEDAD
-    cDesde = Trim(txtcodigo(143).Text)
-    cHasta = Trim(txtcodigo(144).Text)
+    cDesde = Trim(txtCodigo(143).Text)
+    cHasta = Trim(txtCodigo(144).Text)
     nDesde = txtNombre(143).Text
     nHasta = txtNombre(144).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -20972,17 +20973,17 @@ Dim devuelve As String
 Dim vSQL As String
 Dim nTabla As String
 Dim vcad As String
-Dim sql As String
+Dim Sql As String
 
     InicializarVbles
     
     If Not EsReimpresion Then
         'Bloqueo el proceso pq puede tengo q coger el contador ORR
-        sql = "IMPORD" 'IMPresion ORDenes recoleccion
+        Sql = "IMPORD" 'IMPresion ORDenes recoleccion
         
         'Bloquear para que nadie mas pueda contabilizar
-        DesBloqueoManual (sql)
-        If Not BloqueoManual(sql, "1") Then
+        DesBloqueoManual (Sql)
+        If Not BloqueoManual(Sql, "1") Then
             MsgBox "No se pueden Imprimir Ordenes de Recolección. Hay otro usuario realizándolo.", vbExclamation
             Screen.MousePointer = vbDefault
             Exit Sub
@@ -20992,8 +20993,8 @@ Dim sql As String
     
     If Not DatosOK Then Exit Sub
     
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
  
     
     vSQL = ""
@@ -21004,8 +21005,8 @@ Dim sql As String
     
     '======== FORMULA  ====================================
     'D/H Capataz(Responsable)
-    cDesde = Trim(txtcodigo(147).Text)
-    cHasta = Trim(txtcodigo(147).Text)
+    cDesde = Trim(txtCodigo(147).Text)
+    cHasta = Trim(txtCodigo(147).Text)
     nDesde = txtNombre(147).Text
     nHasta = txtNombre(147).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -21015,11 +21016,11 @@ Dim sql As String
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHResponsable= """) Then Exit Sub
     End If
     
-    vSQL = vSQL & " and rcampos.codcapat = " & DBSet(txtcodigo(147).Text, "N")
+    vSQL = vSQL & " and rcampos.codcapat = " & DBSet(txtCodigo(147).Text, "N")
     
     'D/H VARIEDAD
-    cDesde = Trim(txtcodigo(149).Text)
-    cHasta = Trim(txtcodigo(149).Text)
+    cDesde = Trim(txtCodigo(149).Text)
+    cHasta = Trim(txtCodigo(149).Text)
     nDesde = txtNombre(149).Text
     nHasta = txtNombre(149).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -21029,11 +21030,11 @@ Dim sql As String
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHVariedad=""") Then Exit Sub
     End If
     
-    vSQL = vSQL & " and rcampos.codvarie = " & DBSet(txtcodigo(149).Text, "N")
+    vSQL = vSQL & " and rcampos.codvarie = " & DBSet(txtCodigo(149).Text, "N")
 
     'D/H Partida
-    cDesde = Trim(txtcodigo(142).Text)
-    cHasta = Trim(txtcodigo(142).Text)
+    cDesde = Trim(txtCodigo(142).Text)
+    cHasta = Trim(txtCodigo(142).Text)
     nDesde = txtNombre(142).Text
     nHasta = txtNombre(142).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -21044,8 +21045,8 @@ Dim sql As String
     End If
     
     '[Monica]30/09/2013: dejo que la partida sea opcional
-    If txtcodigo(142).Text <> "" Then
-        vSQL = vSQL & " and rcampos.codparti = " & DBSet(txtcodigo(142).Text, "N")
+    If txtCodigo(142).Text <> "" Then
+        vSQL = vSQL & " and rcampos.codparti = " & DBSet(txtCodigo(142).Text, "N")
     End If
 
     tabla = "rcampos"
@@ -21064,7 +21065,7 @@ Dim sql As String
     
     vSQL = vSQL & " and rcampos.acabadorecol = 0 "
     
-    CadParam = CadParam & "pFecha=""" & txtcodigo(138).Text & """|"
+    CadParam = CadParam & "pFecha=""" & txtCodigo(138).Text & """|"
     numParam = numParam + 1
 
     vSQL = vSQL & " and rcampos.fecbajas is null "
@@ -21146,7 +21147,7 @@ Dim sql As String
         DesBloqueoManual ("IMPORD") 'IMPresion ORDenes de recoleccion
     
     Else
-        cadSelect = " codcampo in (select codcampo from rcampos where nrocampo in (select nrocampo from rordrecogida where nroorden = " & DBSet(txtcodigo(141).Text, "N") & ")) "
+        cadSelect = " codcampo in (select codcampo from rcampos where nrocampo in (select nrocampo from rordrecogida where nroorden = " & DBSet(txtCodigo(141).Text, "N") & ")) "
 
         If InsertarTemporal2(tabla, cadSelect) Then
             cadTitulo = "Reimpresión Orden de Recolección"
@@ -21172,7 +21173,7 @@ Dim sql As String
 End Sub
 
 Private Function ActualizarDatos() As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 
@@ -21195,10 +21196,10 @@ Dim Rs2 As ADODB.Recordset
     Sql2 = "delete from rordrecogida where nroorden = "
     Sql3 = "delete from rordrecogida_incid where nroorden = "
     
-    sql = "select * from tmpinformes where codusu = " & vUsu.Codigo & " order by importe3 desc"
+    Sql = "select * from tmpinformes where codusu = " & vUsu.Codigo & " order by importe3 desc"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rs.EOF
     
     '    CadValues = CadValues & "(" & DBSet(RS!importe2, "N") & "," & DBSet(RS!importe3, "N") & "," & DBSet(txtCodigo(138).Text, "F") & "),"
@@ -21224,7 +21225,7 @@ eActualizarDatos:
 End Function
 
 Private Function InsertarTemporal(cTabla As String, cSelect As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim NumF As Long
@@ -21241,18 +21242,18 @@ Dim Existe As Boolean
     conn.BeginTrans
 
 
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     
-    sql = "insert into tmpinformes (codusu, importe1, importe2) "
-    sql = sql & " select " & vUsu.Codigo & ",nrocampo, codcampo from rcampos where " & cSelect  ' copia 1
+    Sql = "insert into tmpinformes (codusu, importe1, importe2) "
+    Sql = Sql & " select " & vUsu.Codigo & ",nrocampo, codcampo from rcampos where " & cSelect  ' copia 1
 '    SQL = SQL & " group by 1,2,3 "
 '    SQL = SQL & " union "
 '    SQL = SQL & " select " & vUsu.Codigo & ",nrocampo, codcampo from rcampos where " & cSelect ' copia 2
 '    SQL = SQL & " group by 1,2,3 "
-    sql = sql & " order by 1,2,3 "
+    Sql = Sql & " order by 1,2,3 "
     
-    conn.Execute sql
+    conn.Execute Sql
     
     CodTipoMov = "ORR"
     Set vTipoMov = New CTiposMov
@@ -21263,9 +21264,9 @@ Dim Existe As Boolean
         
         PriFact = 0
         
-        sql = "select distinct importe1 from tmpinformes where codusu = " & vUsu.Codigo & " order by 1 "
+        Sql = "select distinct importe1 from tmpinformes where codusu = " & vUsu.Codigo & " order by 1 "
         Set Rs = New ADODB.Recordset
-        Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF
     
@@ -21296,8 +21297,8 @@ Dim Existe As Boolean
             conn.Execute Sql2
             
             Sql2 = "insert into rordrecogida (nroorden, fecimpre, nrocampo, codvarie) values ("
-            Sql2 = Sql2 & DBSet(NumF, "N") & "," & DBSet(txtcodigo(138).Text, "F") & ","
-            Sql2 = Sql2 & DBSet(Rs!importe1, "N") & "," & DBSet(txtcodigo(149).Text, "N") & ")"
+            Sql2 = Sql2 & DBSet(NumF, "N") & "," & DBSet(txtCodigo(138).Text, "F") & ","
+            Sql2 = Sql2 & DBSet(Rs!importe1, "N") & "," & DBSet(txtCodigo(149).Text, "N") & ")"
             
             conn.Execute Sql2
             
@@ -21307,8 +21308,8 @@ Dim Existe As Boolean
             Sql2 = Sql2 & " select distinct " & DBSet(NumF, "N") & ", idplaga, nivel from rordrecogida_incid, rordrecogida aaa "
             Sql2 = Sql2 & " where rordrecogida_incid.nroorden = aaa.nroorden and "
             Sql2 = Sql2 & " aaa.nrocampo = " & DBSet(Rs!importe1, "N") & " and "
-            Sql2 = Sql2 & " aaa.codvarie = " & DBSet(txtcodigo(149).Text, "N") & " and "
-            Sql2 = Sql2 & " aaa.fecimpre in (select  max(fecimpre) from rordrecogida bbb where bbb.nrocampo = " & DBSet(Rs!importe1, "N") & " and bbb.codvarie = " & DBSet(txtcodigo(149).Text, "N") & " and bbb.nroorden <> " & DBSet(NumF, "N") & " ) "
+            Sql2 = Sql2 & " aaa.codvarie = " & DBSet(txtCodigo(149).Text, "N") & " and "
+            Sql2 = Sql2 & " aaa.fecimpre in (select  max(fecimpre) from rordrecogida bbb where bbb.nrocampo = " & DBSet(Rs!importe1, "N") & " and bbb.codvarie = " & DBSet(txtCodigo(149).Text, "N") & " and bbb.nroorden <> " & DBSet(NumF, "N") & " ) "
             
             conn.Execute Sql2
 
@@ -21334,7 +21335,7 @@ End Function
 
 
 Private Function InsertarTemporal2(cTabla As String, cSelect As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim NumF As Long
@@ -21346,16 +21347,16 @@ Dim NumF As Long
     InsertarTemporal2 = False
 
 
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     
-    sql = "insert into tmpinformes (codusu, importe1, importe2) "
-    sql = sql & " select " & vUsu.Codigo & ",nrocampo, codcampo from rcampos where " & cSelect  ' copia 1
-    sql = sql & " order by 1,2,3 "
+    Sql = "insert into tmpinformes (codusu, importe1, importe2) "
+    Sql = Sql & " select " & vUsu.Codigo & ",nrocampo, codcampo from rcampos where " & cSelect  ' copia 1
+    Sql = Sql & " order by 1,2,3 "
     
-    conn.Execute sql
+    conn.Execute Sql
     
-    Sql2 = "update tmpinformes set importe3 = " & DBSet(txtcodigo(141).Text, "N")
+    Sql2 = "update tmpinformes set importe3 = " & DBSet(txtCodigo(141).Text, "N")
     Sql2 = Sql2 & " where codusu = " & vUsu.Codigo
     
     conn.Execute Sql2
@@ -21373,7 +21374,7 @@ End Function
 
 
 
-Private Sub cmdAcepPrecios_Click(Index As Integer)
+Private Sub cmdAcepPrecios_Click(index As Integer)
 Dim cOrden As String
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
@@ -21394,8 +21395,8 @@ Dim vSQL As String
 
 
     'D/H Variedad
-    cDesde = Trim(txtcodigo(155).Text)
-    cHasta = Trim(txtcodigo(156).Text)
+    cDesde = Trim(txtCodigo(155).Text)
+    cHasta = Trim(txtCodigo(156).Text)
     nDesde = txtNombre(155).Text
     nHasta = txtNombre(156).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -21406,8 +21407,8 @@ Dim vSQL As String
     End If
 
     'D/H Fecha de precios
-    cDesde = Trim(txtcodigo(157).Text)
-    cHasta = Trim(txtcodigo(158).Text)
+    cDesde = Trim(txtCodigo(157).Text)
+    cHasta = Trim(txtCodigo(158).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -21467,8 +21468,8 @@ Dim vSQL As String
     numParam = numParam + 1
 
     'D/H Socio
-    cDesde = Trim(txtcodigo(163).Text)
-    cHasta = Trim(txtcodigo(164).Text)
+    cDesde = Trim(txtCodigo(163).Text)
+    cHasta = Trim(txtCodigo(164).Text)
     nDesde = txtNombre(163).Text
     nHasta = txtNombre(164).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -21479,8 +21480,8 @@ Dim vSQL As String
     End If
 
     'D/H VARIEDAD
-    cDesde = Trim(txtcodigo(161).Text)
-    cHasta = Trim(txtcodigo(162).Text)
+    cDesde = Trim(txtCodigo(161).Text)
+    cHasta = Trim(txtCodigo(162).Text)
     nDesde = txtNombre(161).Text
     nHasta = txtNombre(162).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -21491,8 +21492,8 @@ Dim vSQL As String
     End If
 
     'D/H Fecha
-    cDesde = Trim(txtcodigo(165).Text)
-    cHasta = Trim(txtcodigo(166).Text)
+    cDesde = Trim(txtCodigo(165).Text)
+    cHasta = Trim(txtCodigo(166).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -21535,23 +21536,23 @@ Dim vSQL As String
     numParam = numParam + 1
 
 
-    If txtcodigo(62).Text = "" Then
+    If txtCodigo(62).Text = "" Then
         MsgBox "Debe introducir un valor en el campo ejercicio. Revise.", vbExclamation
-        PonerFoco txtcodigo(62)
+        PonerFoco txtCodigo(62)
         Exit Sub
     End If
 
-    If txtcodigo(132).Text = "" Then
+    If txtCodigo(132).Text = "" Then
         MsgBox "Debe introducir una fecha de envio. Revise.", vbExclamation
-        PonerFoco txtcodigo(132)
+        PonerFoco txtCodigo(132)
         Exit Sub
     End If
     
      
      '======== FORMULA  ====================================
     'D/H Socio
-    cDesde = Trim(txtcodigo(58).Text)
-    cHasta = Trim(txtcodigo(59).Text)
+    cDesde = Trim(txtCodigo(58).Text)
+    cHasta = Trim(txtCodigo(59).Text)
     nDesde = txtNombre(58).Text
     nHasta = txtNombre(59).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -21570,8 +21571,8 @@ Dim vSQL As String
     cadSelect1 = cadSelect
 
     'D/H Producto
-    cDesde = Trim(txtcodigo(60).Text)
-    cHasta = Trim(txtcodigo(61).Text)
+    cDesde = Trim(txtCodigo(60).Text)
+    cHasta = Trim(txtCodigo(61).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -21582,8 +21583,8 @@ Dim vSQL As String
     End If
     
     vSQL = ""
-    If txtcodigo(60).Text <> "" Then vSQL = vSQL & " and variedades.codprodu >= " & DBSet(txtcodigo(60).Text, "N")
-    If txtcodigo(61).Text <> "" Then vSQL = vSQL & " and variedades.codprodu <= " & DBSet(txtcodigo(61).Text, "N")
+    If txtCodigo(60).Text <> "" Then vSQL = vSQL & " and variedades.codprodu >= " & DBSet(txtCodigo(60).Text, "N")
+    If txtCodigo(61).Text <> "" Then vSQL = vSQL & " and variedades.codprodu <= " & DBSet(txtCodigo(61).Text, "N")
     
     Set frmMens1 = New frmMensajes
     
@@ -21620,7 +21621,7 @@ Dim vSQL As String
 
 End Sub
 
-Private Sub cmdAceptar_Click(Index As Integer)
+Private Sub cmdAceptar_Click(index As Integer)
 Dim cOrden As String
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
@@ -21645,12 +21646,12 @@ Dim vCadena As String
     CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
-    Select Case Index
+    Select Case index
        Case 0 'frame de campos
             '======== FORMULA  ====================================
             'D/H Socio
-            cDesde = Trim(txtcodigo(2).Text)
-            cHasta = Trim(txtcodigo(3).Text)
+            cDesde = Trim(txtCodigo(2).Text)
+            cHasta = Trim(txtCodigo(3).Text)
             nDesde = txtNombre(2).Text
             nHasta = txtNombre(3).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -21666,8 +21667,8 @@ Dim vCadena As String
             End If
        
             'D/H Clase
-            cDesde = Trim(txtcodigo(0).Text)
-            cHasta = Trim(txtcodigo(1).Text)
+            cDesde = Trim(txtCodigo(0).Text)
+            cHasta = Trim(txtCodigo(1).Text)
             nDesde = txtNombre(0).Text
             nHasta = txtNombre(1).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -21678,12 +21679,12 @@ Dim vCadena As String
             End If
     
             vSQL = ""
-            If txtcodigo(0).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtcodigo(0).Text, "N")
-            If txtcodigo(1).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtcodigo(1).Text, "N")
+            If txtCodigo(0).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(0).Text, "N")
+            If txtCodigo(1).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(1).Text, "N")
             
             'D/H Situacion
-            cDesde = Trim(txtcodigo(4).Text)
-            cHasta = Trim(txtcodigo(5).Text)
+            cDesde = Trim(txtCodigo(4).Text)
+            cHasta = Trim(txtCodigo(5).Text)
             nDesde = txtNombre(4).Text
             nHasta = txtNombre(5).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -21694,8 +21695,8 @@ Dim vCadena As String
             End If
     
             'D/H Capataz(Responsable)
-            cDesde = Trim(txtcodigo(92).Text)
-            cHasta = Trim(txtcodigo(93).Text)
+            cDesde = Trim(txtCodigo(92).Text)
+            cHasta = Trim(txtCodigo(93).Text)
             nDesde = txtNombre(92).Text
             nHasta = txtNombre(93).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -21706,8 +21707,8 @@ Dim vCadena As String
             End If
     
             'D/H Partida
-            cDesde = Trim(txtcodigo(94).Text)
-            cHasta = Trim(txtcodigo(95).Text)
+            cDesde = Trim(txtCodigo(94).Text)
+            cHasta = Trim(txtCodigo(95).Text)
             nDesde = txtNombre(94).Text
             nHasta = txtNombre(95).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -21719,8 +21720,8 @@ Dim vCadena As String
             
             '[Monica]20/03/2013:
             'D/H Zonas
-            cDesde = Trim(txtcodigo(133).Text)
-            cHasta = Trim(txtcodigo(134).Text)
+            cDesde = Trim(txtCodigo(133).Text)
+            cHasta = Trim(txtCodigo(134).Text)
             nDesde = txtNombre(133).Text
             nHasta = txtNombre(134).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -21935,8 +21936,8 @@ Dim vCadena As String
        Case 1 'Frame Informe de socios por seccion
             '======== FORMULA  ====================================
             'D/H Seccion
-            cDesde = Trim(txtcodigo(8).Text)
-            cHasta = Trim(txtcodigo(9).Text)
+            cDesde = Trim(txtCodigo(8).Text)
+            cHasta = Trim(txtCodigo(9).Text)
             nDesde = txtNombre(8).Text
             nHasta = txtNombre(9).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -21947,8 +21948,8 @@ Dim vCadena As String
             End If
             
             'D/H Socio
-            cDesde = Trim(txtcodigo(10).Text)
-            cHasta = Trim(txtcodigo(11).Text)
+            cDesde = Trim(txtCodigo(10).Text)
+            cHasta = Trim(txtCodigo(11).Text)
             nDesde = txtNombre(10).Text
             nHasta = txtNombre(11).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -22097,8 +22098,8 @@ Dim vCadena As String
         Case 2 ' informe de calidades
             '======== FORMULA  ====================================
             'D/H Variedad
-            cDesde = Trim(txtcodigo(18).Text)
-            cHasta = Trim(txtcodigo(19).Text)
+            cDesde = Trim(txtCodigo(18).Text)
+            cHasta = Trim(txtCodigo(19).Text)
             nDesde = txtNombre(18).Text
             nHasta = txtNombre(19).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -22108,16 +22109,31 @@ Dim vCadena As String
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHVariedad= """) Then Exit Sub
             End If
             
-            'D/H Calidad
-            cDesde = Trim(txtcodigo(16).Text)
-            cHasta = Trim(txtcodigo(17).Text)
-            nDesde = txtNombre(16).Text
-            nHasta = txtNombre(17).Text
-            If Not (cDesde = "" And cHasta = "") Then
-                'Cadena para seleccion Desde y Hasta
-                Codigo = "{" & tabla & ".codcalid}"
-                TipCod = "N"
-                If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHCalidad= """) Then Exit Sub
+            If OpcionListado = 12 Then
+                'D/H Calidad
+                cDesde = Trim(txtCodigo(16).Text)
+                cHasta = Trim(txtCodigo(17).Text)
+                nDesde = txtNombre(16).Text
+                nHasta = txtNombre(17).Text
+                If Not (cDesde = "" And cHasta = "") Then
+                    'Cadena para seleccion Desde y Hasta
+                    Codigo = "{" & tabla & ".codcalid}"
+                    TipCod = "N"
+                    If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHCalidad= """) Then Exit Sub
+                End If
+            Else
+                'D/H Calibre
+                cDesde = Trim(txtCodigo(16).Text)
+                cHasta = Trim(txtCodigo(17).Text)
+                nDesde = txtNombre(16).Text
+                nHasta = txtNombre(17).Text
+                If Not (cDesde = "" And cHasta = "") Then
+                    'Cadena para seleccion Desde y Hasta
+                    Codigo = "{" & tabla & ".codcalib}"
+                    TipCod = "N"
+                    If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHCalibre= """) Then Exit Sub
+                End If
+            
             End If
             
             'Obtener el parametro con el ORDEN del Informe
@@ -22126,12 +22142,22 @@ Dim vCadena As String
         '    numOp = PonerGrupo(2, ListView1.ListItems(2).Text)
         ' ### [Monica] 10/11/2006    he sustituido las dos anteriores instrucciones por la siguiente
             If Opcion(2).Value Then numOp = PonerGrupo(1, "Variedad")
-            If Opcion(3).Value Then numOp = PonerGrupo(1, "Calidad")
+            If OpcionListado = 12 Then
+                If Opcion(3).Value Then numOp = PonerGrupo(1, "Calidad")
             
-            cadNombreRPT = "rManVarCalidad.rpt"
+                cadNombreRPT = "rManVarCalidad.rpt"
+                
+                If Opcion(2).Value Then cadTitulo = "Listado de Calidades por Variedad"
+                If Opcion(3).Value Then cadTitulo = "Listado de Calidades"
             
-            If Opcion(2).Value Then cadTitulo = "Listado de Calidades por Variedad"
-            If Opcion(3).Value Then cadTitulo = "Listado de Calidades"
+            Else
+                If Opcion(3).Value Then numOp = PonerGrupo(1, "Calibre")
+                
+                cadNombreRPT = "rManCalibres.rpt"
+                
+                If Opcion(2).Value Then cadTitulo = "Listado de Calibres por Variedad"
+                If Opcion(3).Value Then cadTitulo = "Listado de Calibres"
+            End If
             
             'Comprobar si hay registros a Mostrar antes de abrir el Informe
             If HayRegParaInforme(tabla, cadSelect) Then
@@ -22142,8 +22168,8 @@ Dim vCadena As String
         Case 3 ' informe de entradas de bascula
             '======== FORMULA  ====================================
             'D/H SOCIO
-            cDesde = Trim(txtcodigo(12).Text)
-            cHasta = Trim(txtcodigo(13).Text)
+            cDesde = Trim(txtCodigo(12).Text)
+            cHasta = Trim(txtCodigo(13).Text)
             nDesde = txtNombre(12).Text
             nHasta = txtNombre(13).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -22155,8 +22181,8 @@ Dim vCadena As String
             
             '[Monica]25/11/2011: Modificacion para poder seleccionar los campos de cada socio variedad
             vSql2 = ""
-            If txtcodigo(12).Text <> "" Then vSql2 = vSql2 & " and rcampos.codsocio >= " & DBSet(txtcodigo(12).Text, "N")
-            If txtcodigo(13).Text <> "" Then vSql2 = vSql2 & " and rcampos.codsocio <= " & DBSet(txtcodigo(13).Text, "N")
+            If txtCodigo(12).Text <> "" Then vSql2 = vSql2 & " and rcampos.codsocio >= " & DBSet(txtCodigo(12).Text, "N")
+            If txtCodigo(13).Text <> "" Then vSql2 = vSql2 & " and rcampos.codsocio <= " & DBSet(txtCodigo(13).Text, "N")
             
             '[Monica]17/07/2014: añadido el tipo de socio
             If OpcionListado = 18 Then
@@ -22169,8 +22195,8 @@ Dim vCadena As String
             End If
             
             'D/H CLASE
-            cDesde = Trim(txtcodigo(20).Text)
-            cHasta = Trim(txtcodigo(21).Text)
+            cDesde = Trim(txtCodigo(20).Text)
+            cHasta = Trim(txtCodigo(21).Text)
             nDesde = txtNombre(20).Text
             nHasta = txtNombre(21).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -22181,13 +22207,13 @@ Dim vCadena As String
             End If
             
             vSQL = ""
-            If txtcodigo(20).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtcodigo(20).Text, "N")
-            If txtcodigo(21).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtcodigo(21).Text, "N")
+            If txtCodigo(20).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(20).Text, "N")
+            If txtCodigo(21).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(21).Text, "N")
                         
             
             'D/H VARIEDAD
-            cDesde = Trim(txtcodigo(14).Text)
-            cHasta = Trim(txtcodigo(15).Text)
+            cDesde = Trim(txtCodigo(14).Text)
+            cHasta = Trim(txtCodigo(15).Text)
             nDesde = txtNombre(14).Text
             nHasta = txtNombre(15).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -22197,15 +22223,15 @@ Dim vCadena As String
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHVariedad=""") Then Exit Sub
             End If
             
-            If txtcodigo(14).Text <> "" Then vSQL = vSQL & " and variedades.codvarie >= " & DBSet(txtcodigo(14).Text, "N")
-            If txtcodigo(15).Text <> "" Then vSQL = vSQL & " and variedades.codvarie <= " & DBSet(txtcodigo(15).Text, "N")
+            If txtCodigo(14).Text <> "" Then vSQL = vSQL & " and variedades.codvarie >= " & DBSet(txtCodigo(14).Text, "N")
+            If txtCodigo(15).Text <> "" Then vSQL = vSQL & " and variedades.codvarie <= " & DBSet(txtCodigo(15).Text, "N")
 
             '[Monica]25/11/2011: poder seleccionar los campos
             If vSQL <> "" Then vSql2 = vSql2 & vSQL
 
             'D/H fecha
-            cDesde = Trim(txtcodigo(6).Text)
-            cHasta = Trim(txtcodigo(7).Text)
+            cDesde = Trim(txtCodigo(6).Text)
+            cHasta = Trim(txtCodigo(7).Text)
             nDesde = ""
             nHasta = ""
             If Not (cDesde = "" And cHasta = "") Then
@@ -22539,8 +22565,8 @@ Dim vCadena As String
         Case 4 ' Informe de pesadas
         
             'D/H Pesada
-            cDesde = Trim(txtcodigo(70).Text)
-            cHasta = Trim(txtcodigo(71).Text)
+            cDesde = Trim(txtCodigo(70).Text)
+            cHasta = Trim(txtCodigo(71).Text)
             nDesde = ""
             nHasta = ""
             If Not (cDesde = "" And cHasta = "") Then
@@ -22551,8 +22577,8 @@ Dim vCadena As String
             End If
             
             'D/H CLASE
-            cDesde = Trim(txtcodigo(66).Text)
-            cHasta = Trim(txtcodigo(67).Text)
+            cDesde = Trim(txtCodigo(66).Text)
+            cHasta = Trim(txtCodigo(67).Text)
             nDesde = txtNombre(66).Text
             nHasta = txtNombre(67).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -22563,8 +22589,8 @@ Dim vCadena As String
             End If
             
             'D/H VARIEDAD
-            cDesde = Trim(txtcodigo(68).Text)
-            cHasta = Trim(txtcodigo(69).Text)
+            cDesde = Trim(txtCodigo(68).Text)
+            cHasta = Trim(txtCodigo(69).Text)
             nDesde = txtNombre(68).Text
             nHasta = txtNombre(69).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -22575,8 +22601,8 @@ Dim vCadena As String
             End If
 
             'D/H fecha
-            cDesde = Trim(txtcodigo(72).Text)
-            cHasta = Trim(txtcodigo(73).Text)
+            cDesde = Trim(txtCodigo(72).Text)
+            cHasta = Trim(txtCodigo(73).Text)
             nDesde = ""
             nHasta = ""
             'Cadena para seleccion Desde y Hasta
@@ -22609,7 +22635,7 @@ Dim vCadena As String
 End Sub
 
 Private Function CargarImportes(nTabla As String, nSelect As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim SqlInsert As String
 
     On Error GoTo eCargarImportes
@@ -22617,32 +22643,32 @@ Dim SqlInsert As String
     CargarImportes = False
 
 
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     
     
     nTabla = QuitarCaracterACadena(nTabla, "{")
     nTabla = QuitarCaracterACadena(nTabla, "}")
-    sql = "Select count(*) FROM " & QuitarCaracterACadena(nTabla, "_1")
+    Sql = "Select count(*) FROM " & QuitarCaracterACadena(nTabla, "_1")
     If nSelect <> "" Then
         nSelect = QuitarCaracterACadena(nSelect, "{")
         nSelect = QuitarCaracterACadena(nSelect, "}")
         nSelect = QuitarCaracterACadena(nSelect, "_1")
-        sql = sql & " WHERE " & nSelect
+        Sql = Sql & " WHERE " & nSelect
     End If
     
     
     SqlInsert = "insert into tmpinformes (codusu, codigo1, nombre1, importe1, importe2) "
     
-    sql = "select " & vUsu.Codigo & ", rsocios.codsocio, rsocios.nomsocio, sum(round(coalesce(rcampos.supculti,0) / " & DBSet(vParamAplic.Faneca, "N") & ",2)) hdas, "
-    sql = sql & " round(sum(round(coalesce(rcampos.supculti,0) / " & DBSet(vParamAplic.Faneca, "N") & ",2)) * " & DBSet(vParamAplic.EurCapSocial, "N") & ", 2) importe "
-    sql = sql & " from " & nTabla
-    sql = sql & " where " & nSelect
-    sql = sql & " group by 1,2 "
-    sql = sql & " having sum(round(coalesce(rcampos.supculti,0) / " & DBSet(vParamAplic.Faneca, "N") & ",2)) <> 0 "
-    sql = sql & " order by 1,2 "
+    Sql = "select " & vUsu.Codigo & ", rsocios.codsocio, rsocios.nomsocio, sum(round(coalesce(rcampos.supculti,0) / " & DBSet(vParamAplic.Faneca, "N") & ",2)) hdas, "
+    Sql = Sql & " round(sum(round(coalesce(rcampos.supculti,0) / " & DBSet(vParamAplic.Faneca, "N") & ",2)) * " & DBSet(vParamAplic.EurCapSocial, "N") & ", 2) importe "
+    Sql = Sql & " from " & nTabla
+    Sql = Sql & " where " & nSelect
+    Sql = Sql & " group by 1,2 "
+    Sql = Sql & " having sum(round(coalesce(rcampos.supculti,0) / " & DBSet(vParamAplic.Faneca, "N") & ",2)) <> 0 "
+    Sql = Sql & " order by 1,2 "
     
-    conn.Execute SqlInsert & sql
+    conn.Execute SqlInsert & Sql
     
     CargarImportes = True
     Exit Function
@@ -22657,7 +22683,7 @@ Private Sub cmdBajar_Click()
 End Sub
 
 Private Sub cmdAcepTras_Click()
-Dim sql As String
+Dim Sql As String
 Dim i As Byte
 Dim cadWHERE As String
 Dim B As Boolean
@@ -22718,46 +22744,46 @@ On Error GoTo eError
         Case 0, 9  '******* CATADAU *******
 '             Directorio = GetFolder("Selecciona directorio")
             If Directorio <> "" Then
-                sql = "DROP TABLE IF EXISTS tmpCata; "
-                conn.Execute sql
+                Sql = "DROP TABLE IF EXISTS tmpCata; "
+                conn.Execute Sql
                 
-                sql = "CREATE TEMPORARY TABLE tmpCata ("
-                sql = sql & " codcalid int, kilosnet decimal(10,2)) "
-                conn.Execute sql
+                Sql = "CREATE TEMPORARY TABLE tmpCata ("
+                Sql = Sql & " codcalid int, kilosnet decimal(10,2)) "
+                conn.Execute Sql
                 
                 If Combo1(6).ListIndex = 1 Then ' si calibrador pequeño
                     'creamos la tabla temporal solo si estamos en calibrador pequeño
-                    sql = "DROP TABLE IF EXISTS tmpcalibrador; "
-                    conn.Execute sql
+                    Sql = "DROP TABLE IF EXISTS tmpcalibrador; "
+                    conn.Execute Sql
                     
-                    sql = "CREATE TEMPORARY TABLE `tmpcalibrador` ("
-                    sql = sql & "`numnota` varchar(10) default NULL, "
-                    sql = sql & "`fecnota` varchar(20) default NULL, "
-                    sql = sql & "`albaran` varchar(20) default NULL, "
-                    sql = sql & "`porcen1` varchar(10) default NULL, "
-                    sql = sql & "`porcen2` varchar(10) default NULL, "
-                    sql = sql & "`kilos1` varchar(30) default NULL, "
-                    sql = sql & "`kilos2` varchar(30) default NULL, "
-                    sql = sql & "`kilos3` varchar(30) default NULL, "
-                    sql = sql & "`numnota2` varchar(10) default NULL, "
-                    sql = sql & "`export` varchar(10) default NULL, "
-                    sql = sql & "`nomcalid` varchar(30) default NULL, "
-                    sql = sql & "`kilos4` varchar(30) default NULL, "
-                    sql = sql & "`kilos5` varchar(30) default NULL "
-                    sql = sql & " ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
+                    Sql = "CREATE TEMPORARY TABLE `tmpcalibrador` ("
+                    Sql = Sql & "`numnota` varchar(10) default NULL, "
+                    Sql = Sql & "`fecnota` varchar(20) default NULL, "
+                    Sql = Sql & "`albaran` varchar(20) default NULL, "
+                    Sql = Sql & "`porcen1` varchar(10) default NULL, "
+                    Sql = Sql & "`porcen2` varchar(10) default NULL, "
+                    Sql = Sql & "`kilos1` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos2` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos3` varchar(30) default NULL, "
+                    Sql = Sql & "`numnota2` varchar(10) default NULL, "
+                    Sql = Sql & "`export` varchar(10) default NULL, "
+                    Sql = Sql & "`nomcalid` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos4` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos5` varchar(30) default NULL "
+                    Sql = Sql & " ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
                 
-                    conn.Execute sql
+                    conn.Execute Sql
                     
                     fec = ""
                 Else
-                    If txtcodigo(63).Text <> "" Then
-                        fec = Format(txtcodigo(63).Text, "yyyymmdd")
+                    If txtCodigo(63).Text <> "" Then
+                        fec = Format(txtCodigo(63).Text, "yyyymmdd")
                     End If
                 End If
                 
                 conn.BeginTrans
 
-                B = ProcesarDirectorioCatadau(Directorio & "\", Combo1(6).ListIndex, fec, Pb1, lblProgres(0), lblProgres(1))
+                B = ProcesarDirectorioCatadau(Directorio & "\", Combo1(6).ListIndex, fec, pb1, lblProgres(0), lblProgres(1))
             End If
         
         Case 1 '********* VALSUR *************
@@ -22773,17 +22799,17 @@ On Error GoTo eError
                 numParam = numParam + 1
                 '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
                 If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Then
-                    sql = "DROP TABLE IF EXISTS tmpCata; "
-                    conn.Execute sql
+                    Sql = "DROP TABLE IF EXISTS tmpCata; "
+                    conn.Execute Sql
                     
-                    sql = "CREATE TEMPORARY TABLE tmpCata ("
-                    sql = sql & " codcalid int, kilosnet decimal(10,2)) "
-                    conn.Execute sql
+                    Sql = "CREATE TEMPORARY TABLE tmpCata ("
+                    Sql = Sql & " codcalid int, kilosnet decimal(10,2)) "
+                    conn.Execute Sql
                 End If
     
                 conn.BeginTrans
                 ' resto de casos (incluido catadau, calibrador grande)
-                B = ProcesarFichero(Me.CommonDialog1.FileName, Combo1(6).ListIndex, Me.Pb1, Me.lblProgres(0), Me.lblProgres(1))
+                B = ProcesarFichero(Me.CommonDialog1.FileName, Combo1(6).ListIndex, Me.pb1, Me.lblProgres(0), Me.lblProgres(1))
             Else
                 MsgBox "No ha seleccionado ningún fichero", vbExclamation
                 Exit Sub
@@ -22792,138 +22818,138 @@ On Error GoTo eError
         Case 2 ' ******** PICASSENT **********
             If Directorio <> "" Then
 
-                sql = "DROP TABLE IF EXISTS tmpCata; "
-                conn.Execute sql
+                Sql = "DROP TABLE IF EXISTS tmpCata; "
+                conn.Execute Sql
                 
-                sql = "CREATE TEMPORARY TABLE tmpCata ("
-                sql = sql & " codcalid int, kilosnet decimal(10,2)) "
-                conn.Execute sql
+                Sql = "CREATE TEMPORARY TABLE tmpCata ("
+                Sql = Sql & " codcalid int, kilosnet decimal(10,2)) "
+                conn.Execute Sql
                 
                 
                 If Combo1(6).ListIndex = 0 Then
                     'creamos la tabla temporal solo si estamos en precalibrado
-                    sql = "DROP TABLE IF EXISTS tmpcalibrador; "
-                    conn.Execute sql
+                    Sql = "DROP TABLE IF EXISTS tmpcalibrador; "
+                    conn.Execute Sql
                     
-                    sql = "CREATE TEMPORARY TABLE `tmpcalibrador` ("
-                    sql = sql & "`numnota` varchar(10) default NULL, "
-                    sql = sql & "`fecnota` varchar(20) default NULL, "
-                    sql = sql & "`nomcalid` varchar(30) default NULL, "
-                    sql = sql & "`kilos1` varchar(30) default NULL, "
-                    sql = sql & "`kilos2` varchar(30) default NULL, "
-                    sql = sql & "`kilos3` varchar(30) default NULL, "
-                    sql = sql & "`kilos4` varchar(30) default NULL "
-                    sql = sql & " ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
+                    Sql = "CREATE TEMPORARY TABLE `tmpcalibrador` ("
+                    Sql = Sql & "`numnota` varchar(10) default NULL, "
+                    Sql = Sql & "`fecnota` varchar(20) default NULL, "
+                    Sql = Sql & "`nomcalid` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos1` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos2` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos3` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos4` varchar(30) default NULL "
+                    Sql = Sql & " ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
                 
-                    conn.Execute sql
+                    conn.Execute Sql
                 End If
             
                 conn.BeginTrans
 
-                B = ProcesarDirectorioPicassent(Directorio & "\", Combo1(6).ListIndex, Pb1, lblProgres(0), lblProgres(1))
+                B = ProcesarDirectorioPicassent(Directorio & "\", Combo1(6).ListIndex, pb1, lblProgres(0), lblProgres(1))
             End If
      
         Case 16 ' ******** COOPIC **********
             If Directorio <> "" Then
 
-                sql = "DROP TABLE IF EXISTS tmpCata; "
-                conn.Execute sql
+                Sql = "DROP TABLE IF EXISTS tmpCata; "
+                conn.Execute Sql
                 
-                sql = "CREATE TEMPORARY TABLE tmpCata ("
-                sql = sql & " codcalid int, kilosnet decimal(10,2)) "
-                conn.Execute sql
+                Sql = "CREATE TEMPORARY TABLE tmpCata ("
+                Sql = Sql & " codcalid int, kilosnet decimal(10,2)) "
+                conn.Execute Sql
                 
                 
                 If Combo1(6).ListIndex = 0 Then
                     'creamos la tabla temporal solo si estamos en precalibrado
-                    sql = "DROP TABLE IF EXISTS tmpcalibrador; "
-                    conn.Execute sql
+                    Sql = "DROP TABLE IF EXISTS tmpcalibrador; "
+                    conn.Execute Sql
                     
-                    sql = "CREATE TEMPORARY TABLE `tmpcalibrador` ("
-                    sql = sql & "`numnota` varchar(10) default NULL, "
-                    sql = sql & "`fecnota` varchar(20) default NULL, "
-                    sql = sql & "`nomcalid` varchar(30) default NULL, "
-                    sql = sql & "`kilos1` varchar(30) default NULL, "
-                    sql = sql & "`kilos2` varchar(30) default NULL, "
-                    sql = sql & "`kilos3` varchar(30) default NULL, "
-                    sql = sql & "`kilos4` varchar(30) default NULL "
-                    sql = sql & " ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
+                    Sql = "CREATE TEMPORARY TABLE `tmpcalibrador` ("
+                    Sql = Sql & "`numnota` varchar(10) default NULL, "
+                    Sql = Sql & "`fecnota` varchar(20) default NULL, "
+                    Sql = Sql & "`nomcalid` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos1` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos2` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos3` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos4` varchar(30) default NULL "
+                    Sql = Sql & " ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
                 
-                    conn.Execute sql
+                    conn.Execute Sql
                 End If
             
                 conn.BeginTrans
 
-                B = ProcesarDirectorioCOOPIC(Me.CommonDialog1.FileName, Combo1(6).ListIndex, Pb1, lblProgres(0), lblProgres(1))
+                B = ProcesarDirectorioCOOPIC(Me.CommonDialog1.FileName, Combo1(6).ListIndex, pb1, lblProgres(0), lblProgres(1))
             End If
      
      
         Case 4 ' ******** ALZIRA **********
             If Directorio <> "" Then
 
-                sql = "DROP TABLE IF EXISTS tmpCata; "
-                conn.Execute sql
+                Sql = "DROP TABLE IF EXISTS tmpCata; "
+                conn.Execute Sql
                 
-                sql = "CREATE TEMPORARY TABLE tmpCata ("
-                sql = sql & " codcalid int, kilosnet decimal(10,2)) "
-                conn.Execute sql
+                Sql = "CREATE TEMPORARY TABLE tmpCata ("
+                Sql = Sql & " codcalid int, kilosnet decimal(10,2)) "
+                conn.Execute Sql
                 
                 
                 If Combo1(6).ListIndex = 0 Then
                     'creamos la tabla temporal solo si estamos en precalibrado
-                    sql = "DROP TABLE IF EXISTS tmpcalibrador; "
-                    conn.Execute sql
+                    Sql = "DROP TABLE IF EXISTS tmpcalibrador; "
+                    conn.Execute Sql
                     
-                    sql = "CREATE TEMPORARY TABLE `tmpcalibrador` ("
-                    sql = sql & "`numnota` varchar(10) default NULL, "
-                    sql = sql & "`fecnota` varchar(20) default NULL, "
-                    sql = sql & "`nomcalid` varchar(30) default NULL, "
-                    sql = sql & "`kilos1` varchar(30) default NULL, "
-                    sql = sql & "`kilos2` varchar(30) default NULL, "
-                    sql = sql & "`kilos3` varchar(30) default NULL, "
-                    sql = sql & "`kilos4` varchar(30) default NULL "
-                    sql = sql & " ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
+                    Sql = "CREATE TEMPORARY TABLE `tmpcalibrador` ("
+                    Sql = Sql & "`numnota` varchar(10) default NULL, "
+                    Sql = Sql & "`fecnota` varchar(20) default NULL, "
+                    Sql = Sql & "`nomcalid` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos1` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos2` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos3` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos4` varchar(30) default NULL "
+                    Sql = Sql & " ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
                 
-                    conn.Execute sql
+                    conn.Execute Sql
                 End If
             
                 conn.BeginTrans
 
-                B = ProcesarDirectorioAlzira(Directorio & "\", Combo1(6).ListIndex, Pb1, lblProgres(0), lblProgres(1))
+                B = ProcesarDirectorioAlzira(Directorio & "\", Combo1(6).ListIndex, pb1, lblProgres(0), lblProgres(1))
             End If
     
         Case 5 ' ******** CASTELDUC **********
             If Directorio <> "" Or Combo1(6).ListIndex = 0 Or Combo1(6).ListIndex = 1 Then
 
-                sql = "DROP TABLE IF EXISTS tmpCata; "
-                conn.Execute sql
+                Sql = "DROP TABLE IF EXISTS tmpCata; "
+                conn.Execute Sql
                 
-                sql = "CREATE TEMPORARY TABLE tmpCata ("
-                sql = sql & " codcalid int, kilosnet decimal(10,2)) "
-                conn.Execute sql
+                Sql = "CREATE TEMPORARY TABLE tmpCata ("
+                Sql = Sql & " codcalid int, kilosnet decimal(10,2)) "
+                conn.Execute Sql
                 
                 
                 If Combo1(6).ListIndex = 0 Or Combo1(6).ListIndex = 1 Then
                     'creamos la tabla temporal solo si estamos en precalibrado
-                    sql = "DROP TABLE IF EXISTS tmpcalibrador; "
-                    conn.Execute sql
+                    Sql = "DROP TABLE IF EXISTS tmpcalibrador; "
+                    conn.Execute Sql
                     
-                    sql = "CREATE TEMPORARY TABLE `tmpcalibrador` ("
-                    sql = sql & "`numnota` varchar(10) default NULL, "
-                    sql = sql & "`fecnota` varchar(20) default NULL, "
-                    sql = sql & "`nomcalid` varchar(30) default NULL, "
-                    sql = sql & "`kilos1` varchar(30) default NULL, "
-                    sql = sql & "`kilos2` varchar(30) default NULL, "
-                    sql = sql & "`kilos3` varchar(30) default NULL, "
-                    sql = sql & "`kilos4` varchar(30) default NULL "
-                    sql = sql & " ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
+                    Sql = "CREATE TEMPORARY TABLE `tmpcalibrador` ("
+                    Sql = Sql & "`numnota` varchar(10) default NULL, "
+                    Sql = Sql & "`fecnota` varchar(20) default NULL, "
+                    Sql = Sql & "`nomcalid` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos1` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos2` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos3` varchar(30) default NULL, "
+                    Sql = Sql & "`kilos4` varchar(30) default NULL "
+                    Sql = Sql & " ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
                 
-                    conn.Execute sql
+                    conn.Execute Sql
                 End If
             
                 conn.BeginTrans
 
-                B = ProcesarDirectorioCastelduc(Directorio & "\", Combo1(6).ListIndex, Pb1, lblProgres(0), lblProgres(1), txtcodigo(170).Text, txtcodigo(179).Text)
+                B = ProcesarDirectorioCastelduc(Directorio & "\", Combo1(6).ListIndex, pb1, lblProgres(0), lblProgres(1), txtCodigo(170).Text, txtCodigo(179).Text)
             End If
     
     
@@ -22938,15 +22964,15 @@ eError:
     Else
         conn.CommitTrans
         MsgBox "Proceso realizado correctamente.", vbExclamation
-        Pb1.visible = False
+        pb1.visible = False
         lblProgres(0).Caption = ""
         lblProgres(1).Caption = ""
 '        BorrarArchivo Me.CommonDialog1.FileName
 
         '[Monica]07/06/2017: para el caso de castelduc no quiere que le saquemos del traspaso
         If vParamAplic.Cooperativa = 5 Then
-            txtcodigo(170).Text = ""
-            txtcodigo(179).Text = ""
+            txtCodigo(170).Text = ""
+            txtCodigo(179).Text = ""
         Else
             cmdCancelTras_Click
         End If
@@ -22955,7 +22981,7 @@ eError:
 End Sub
 
 Private Function CargarTablaCalibrador()
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
@@ -22967,7 +22993,7 @@ Dim fecha1 As Date
 
 
 
-    Pb1.visible = False
+    pb1.visible = False
     
     Me.Refresh
     DoEvents
@@ -22975,29 +23001,29 @@ Dim fecha1 As Date
     
     CargarTablaCalibrador = False
 
-    sql = "delete from tmpcalibradorcast where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpcalibradorcast where codusu = " & vUsu.Codigo
+    conn.Execute Sql
 
 
     CadInsert = "insert into tmpcalibradorcast (codusu,numnotac,numcalid,nomcalid,kilos) values "
     CadValues = ""
     
-    sql = "select numero_lot, reference, dechet from lotapport where reference >= " & DBSet(txtcodigo(170).Text, "T") & " and reference <= " & DBSet(txtcodigo(179).Text, "T") '(Date_recolte = CONVERT(DATETIME, '" & Format(txtcodigo(63).Text, "yyyy-mm-dd") & " 00:00:00', 102)) "
-    sql = sql & " order by 1 "
+    Sql = "select numero_lot, reference, dechet from lotapport where reference >= " & DBSet(txtCodigo(170).Text, "T") & " and reference <= " & DBSet(txtCodigo(179).Text, "T") '(Date_recolte = CONVERT(DATETIME, '" & Format(txtcodigo(63).Text, "yyyy-mm-dd") & " 00:00:00', 102)) "
+    Sql = Sql & " order by 1 "
     
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, CnnSqlServer, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Sql, CnnSqlServer, adOpenForwardOnly, adLockOptimistic, adCmdText
 
     While Not Rs.EOF
         lblProgres(0).Caption = "Nota : " & Rs!reference
         Me.Refresh
         DoEvents
     
-        sql = "select * from lotapportresultat where Numero_lot = " & DBSet(Rs!Numero_lot, "N")
+        Sql = "select * from lotapportresultat where Numero_lot = " & DBSet(Rs!Numero_lot, "N")
         
         Set Rs2 = New ADODB.Recordset
-        Rs2.Open sql, CnnSqlServer, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Rs2.Open Sql, CnnSqlServer, adOpenForwardOnly, adLockOptimistic, adCmdText
         
         CadValues = CadValues & "(" & vUsu.Codigo & "," & DBSet(Rs!reference, "N") & ",-1,'DESTRIO',"
         CadValues = CadValues & DBSet(Rs!dechet, "N") & "),"
@@ -23019,7 +23045,7 @@ Dim fecha1 As Date
         conn.Execute CadInsert & Mid(CadValues, 1, Len(CadValues) - 1)
     End If
     
-    Pb1.visible = False
+    pb1.visible = False
     lblProgres(0).visible = False
     
     CargarTablaCalibrador = True
@@ -23035,7 +23061,7 @@ End Function
 
 
 
-Private Sub cmdAcepTrasCoop_Click(Index As Integer)
+Private Sub cmdAcepTrasCoop_Click(index As Integer)
 Dim cOrden As String
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
@@ -23056,12 +23082,12 @@ Dim vSQL As String
 
      '======== FORMULA  ====================================
     ' Cooperativa
-    If Not AnyadirAFormula(cadSelect, "{rsocios.codcoope} = " & DBSet(txtcodigo(45).Text, "N")) Then Exit Sub
-    If Not AnyadirAFormula(cadFormula, "{rsocios.codcoope} = " & DBSet(txtcodigo(45).Text, "N")) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, "{rsocios.codcoope} = " & DBSet(txtCodigo(45).Text, "N")) Then Exit Sub
+    If Not AnyadirAFormula(cadFormula, "{rsocios.codcoope} = " & DBSet(txtCodigo(45).Text, "N")) Then Exit Sub
      
     'D/H Socio
-    cDesde = Trim(txtcodigo(48).Text)
-    cHasta = Trim(txtcodigo(49).Text)
+    cDesde = Trim(txtCodigo(48).Text)
+    cHasta = Trim(txtCodigo(49).Text)
     nDesde = txtNombre(48).Text
     nHasta = txtNombre(49).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -23072,8 +23098,8 @@ Dim vSQL As String
     End If
 
     'D/H Fecha de Factura
-    cDesde = Trim(txtcodigo(43).Text)
-    cHasta = Trim(txtcodigo(44).Text)
+    cDesde = Trim(txtCodigo(43).Text)
+    cHasta = Trim(txtCodigo(44).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -23084,8 +23110,8 @@ Dim vSQL As String
     End If
 
     'D/H Factura
-    cDesde = Trim(txtcodigo(41).Text)
-    cHasta = Trim(txtcodigo(42).Text)
+    cDesde = Trim(txtCodigo(41).Text)
+    cHasta = Trim(txtCodigo(42).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -23105,7 +23131,7 @@ Dim vSQL As String
      If HayRegParaInforme(tabla, cadSelect) Then
         B = GeneraFicheroTraspasoCoop(tabla, cadSelect)
         If B Then
-            If CopiarFicheroCoop(txtcodigo(45).Text) Then
+            If CopiarFicheroCoop(txtCodigo(45).Text) Then
                 MsgBox "Proceso realizado correctamente", vbExclamation
                 cmdCancelTrasCoop_Click
             End If
@@ -23117,7 +23143,7 @@ Dim vSQL As String
 End Sub
 
 Private Sub CmdAcepTrasRetirada_Click()
-Dim sql As String
+Dim Sql As String
 Dim i As Byte
 Dim cadWHERE As String
 Dim B As Boolean
@@ -23157,9 +23183,9 @@ On Error GoTo eError
               cadTabla = "tmpinformes"
               cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
 
-              sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
+              Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
 
-              If TotalRegistros(sql) <> 0 Then
+              If TotalRegistros(Sql) <> 0 Then
                   MsgBox "Hay errores en el Traspaso de albaranes de Retirada. Debe corregirlos previamente.", vbExclamation
                   cadTitulo = "Errores de Traspaso Albaranes Retirada"
                   cadNombreRPT = "rErroresTrasAlbaranes.rpt"
@@ -23180,7 +23206,7 @@ eError:
 End Sub
 
 Private Function ProcesarFichero2(nomFich As String) As String
-Dim sql As String
+Dim Sql As String
 Dim NF As Integer
 Dim cad As String
 Dim i As Long
@@ -23191,8 +23217,8 @@ Dim B As Boolean
 
     ProcesarFichero2 = False
     
-    sql = "delete from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
+    conn.Execute Sql
     
     NF = FreeFile
     Open nomFich For Input As #NF
@@ -23212,7 +23238,7 @@ Dim B As Boolean
 
     B = True
 
-    CifEmpre = DevuelveValor("select cifcoope from rcoope where codcoope = " & DBSet(txtcodigo(169).Text, "N"))
+    CifEmpre = DevuelveValor("select cifcoope from rcoope where codcoope = " & DBSet(txtCodigo(169).Text, "N"))
 
     While Not EOF(NF) And B
         i = i + 1
@@ -23254,7 +23280,7 @@ End Function
 Private Function ComprobarLinea(vCadena As String) As String
 Dim Albaran As String
 Dim Fecha As String
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Mens As String
 Dim Socio As Long
@@ -23268,32 +23294,32 @@ Dim Cifsocio As String
     Albaran = RecuperaValorNew(vCadena, ";", 2)
     Fecha = RecuperaValorNew(vCadena, ";", 4)
     
-    sql = RecuperaValorNew(vCadena, ";", 1) ' cif de la empresa
-    If CifEmpre <> sql Then
-        Mens = "El Cif " & sql & " no es de la cooperativa"
-        sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
+    Sql = RecuperaValorNew(vCadena, ";", 1) ' cif de la empresa
+    If CifEmpre <> Sql Then
+        Mens = "El Cif " & Sql & " no es de la cooperativa"
+        Sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Albaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute sql
+        conn.Execute Sql
     End If
     
 ' me da igual el contador de David, tengo que poner yo mi contador de la cooperativa
     ' albaran
     If Not EsNumerico(Albaran) Then
         Mens = "Albarán no numérico " & Albaran
-        sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
+        Sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Albaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mens, "T") & ")"
 
-        conn.Execute sql
+        conn.Execute Sql
     Else
         If Len(Albaran) > 7 Then
             Mens = "Albarán de más de 7 digitos " & Albaran
-            sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
+            Sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
                   vUsu.Codigo & "," & DBSet(Albaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mens, "T") & ")"
 
-            conn.Execute sql
+            conn.Execute Sql
         Else
-            Select Case txtcodigo(169)
+            Select Case txtCodigo(169)
                 Case 1
                     Albaran = "1" & Mid(Format(Albaran, "0000000"), 2, 6)
                 Case 3
@@ -23302,13 +23328,13 @@ Dim Cifsocio As String
                     Albaran = "5" & Mid(Format(Albaran, "0000000"), 2, 6)
             End Select
         
-            sql = "select count(*) from rbodalbaran where numalbar = " & DBSet(Albaran, "N")
-            If TotalRegistros(sql) <> 0 Then
+            Sql = "select count(*) from rbodalbaran where numalbar = " & DBSet(Albaran, "N")
+            If TotalRegistros(Sql) <> 0 Then
                 Mens = "Albarán ya existe " & Albaran
-                sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
+                Sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
                       vUsu.Codigo & "," & DBSet(Albaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mens, "T") & ")"
     
-                conn.Execute sql
+                conn.Execute Sql
             End If
         End If
     End If
@@ -23317,33 +23343,33 @@ Dim Cifsocio As String
     ' fecha del albaran
     If Not EsFechaOK(Fecha) Then
         Mens = "Fecha incorrecta"
-        sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
+        Sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Albaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute sql
+        conn.Execute Sql
     End If
     
     ' socio
-    sql = RecuperaValorNew(vCadena, ";", 5) ' socio
-    If Not EsNumerico(sql) Then
-        Mens = "Socio no numérico: " & sql
-        sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
+    Sql = RecuperaValorNew(vCadena, ";", 5) ' socio
+    If Not EsNumerico(Sql) Then
+        Mens = "Socio no numérico: " & Sql
+        Sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Albaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute sql
+        conn.Execute Sql
     Else
-        Socio = CInt(sql)
+        Socio = CInt(Sql)
         Cifsocio = RecuperaValorNew(vCadena, ";", 7)
-        Select Case CInt(txtcodigo(169).Text)
+        Select Case CInt(txtCodigo(169).Text)
             Case 1 ' anna
                 Sql2 = "select count(*) from rsocios where codcoope = 1 "  '(codsocio = " & DBSet(Socio + 1000, "N") & " or codsocio = " & DBSet(Socio + 11000, "N") & ")  "
                 Sql2 = Sql2 & " and nifsocio = " & DBSet(Cifsocio, "T")
                 If TotalRegistros(Sql2) = 0 Then
                     Mens = RecuperaValorNew(vCadena, ";", 7) & " " & RecuperaValorNew(vCadena, ";", 6)   '& " o cif erróneo " 'Socio + 1000 & " o " & Socio + 11000 & " o cif erroneo"
-                    sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
+                    Sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
                           vUsu.Codigo & "," & DBSet(Albaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mens, "T") & ")"
                     
-                    conn.Execute sql
+                    conn.Execute Sql
                 End If
             
             Case 3 ' bolbaite
@@ -23352,10 +23378,10 @@ Dim Cifsocio As String
                 If TotalRegistros(Sql2) = 0 Then
 '                    Mens = "Socio no existe: " & Socio & " o cif erróneo " 'Socio  + 3000 & " o cif erroneo"
                     Mens = RecuperaValorNew(vCadena, ";", 7) & " " & RecuperaValorNew(vCadena, ";", 6)  '& " o cif erróneo " 'Socio + 1000 & " o " & Socio + 11000 & " o cif erroneo"
-                    sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
+                    Sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
                           vUsu.Codigo & "," & DBSet(Albaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mens, "T") & ")"
                     
-                    conn.Execute sql
+                    conn.Execute Sql
                 End If
             
             Case 5, 6, 7 ' navarres
@@ -23364,10 +23390,10 @@ Dim Cifsocio As String
                 If TotalRegistros(Sql2) = 0 Then
 '                    Mens = "Socio no existe: " & Socio & " o cif erróneo " 'Socio + 5000 & " o cif erroneo"
                     Mens = RecuperaValorNew(vCadena, ";", 7) & " " & RecuperaValorNew(vCadena, ";", 6)   '& " o cif erróneo " 'Socio + 1000 & " o " & Socio + 11000 & " o cif erroneo"
-                    sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
+                    Sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
                           vUsu.Codigo & "," & DBSet(Albaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mens, "T") & ")"
                     
-                    conn.Execute sql
+                    conn.Execute Sql
                 End If
             
         End Select
@@ -23377,12 +23403,12 @@ Dim Cifsocio As String
     Dim AAA As String
     AAA = RecuperaValorNew(vCadena, ";", 8)
     
-    sql = "select codvarie from variedades where codvarret = " & DBSet(AAA, "T")
+    Sql = "select codvarie from variedades where codvarret = " & DBSet(AAA, "T")
     
     Dim Rs As ADODB.Recordset
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Rs.EOF Then
 '        If Not EsNumerico(Sql) Then
 '            Mens = "Variedad no numérica: " & Sql
@@ -23394,10 +23420,10 @@ Dim Cifsocio As String
 '            Sql2 = "select count(*) from variedades where codvarie = " & DBSet(Sql, "N")
 '            If TotalRegistros(Sql2) = 0 Then
                 Mens = "Variedad no existe: " & AAA
-                sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
+                Sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1) values (" & _
                       vUsu.Codigo & "," & DBSet(Albaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mens, "T") & ")"
                 
-                conn.Execute sql
+                conn.Execute Sql
 '            End If
 '        End If
     End If
@@ -23419,7 +23445,7 @@ Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
@@ -23512,7 +23538,7 @@ Dim Socio As String
 Dim Variedad As String
 Dim cantidad As String
 Dim CodIva As String
-Dim sql As String
+Dim Sql As String
 Dim cSocio As Long
 Dim Cifsocio As String
 Dim Mens As String
@@ -23567,7 +23593,7 @@ Dim devuelve As String
 '    End If
     
     'el numero del albaran es el que me viene cambiando el primer dígito
-    Select Case CInt(txtcodigo(169))
+    Select Case CInt(txtCodigo(169))
         Case 1
             Albaran = "1" & Mid(Format(Albaran, "0000000"), 2, 6)
         Case 3
@@ -23576,43 +23602,43 @@ Dim devuelve As String
             Albaran = "5" & Mid(Format(Albaran, "0000000"), 2, 6)
     End Select
     
-    Select Case CInt(txtcodigo(169).Text)
+    Select Case CInt(txtCodigo(169).Text)
         Case 1 'anna
-            sql = "select codsocio from rsocios where codcoope = 1"
-            sql = sql & " and nifsocio = " & DBSet(Cifsocio, "T")
-            If TotalRegistrosConsulta(sql) <> 0 Then
-                cSocio = CLng(DevuelveValor(sql))
+            Sql = "select codsocio from rsocios where codcoope = 1"
+            Sql = Sql & " and nifsocio = " & DBSet(Cifsocio, "T")
+            If TotalRegistrosConsulta(Sql) <> 0 Then
+                cSocio = CLng(DevuelveValor(Sql))
             End If
         Case 3 'bolbaite
-            sql = "select codsocio from rsocios where codcoope = 3"
-            sql = sql & " and nifsocio = " & DBSet(Cifsocio, "T")
-            If TotalRegistrosConsulta(sql) <> 0 Then
-                cSocio = CLng(DevuelveValor(sql))
+            Sql = "select codsocio from rsocios where codcoope = 3"
+            Sql = Sql & " and nifsocio = " & DBSet(Cifsocio, "T")
+            If TotalRegistrosConsulta(Sql) <> 0 Then
+                cSocio = CLng(DevuelveValor(Sql))
             End If
         Case 5, 6, 7
-            sql = "select codsocio from rsocios where codcoope in (5,6,7)"
-            sql = sql & " and nifsocio = " & DBSet(Cifsocio, "T")
-            If TotalRegistrosConsulta(sql) <> 0 Then
-                cSocio = CLng(DevuelveValor(sql))
+            Sql = "select codsocio from rsocios where codcoope in (5,6,7)"
+            Sql = Sql & " and nifsocio = " & DBSet(Cifsocio, "T")
+            If TotalRegistrosConsulta(Sql) <> 0 Then
+                cSocio = CLng(DevuelveValor(Sql))
             End If
     End Select
     
-    sql = "select count(*) from rbodalbaran where numalbar = " & DBSet(Albaran, "N")
-    If TotalRegistros(sql) = 0 Then
-        sql = "insert into rbodalbaran (numalbar, fechaalb, codsocio, observac) values ("
-        sql = sql & DBSet(Albaran, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(cSocio, "N") & "," & ValorNulo & ")"
+    Sql = "select count(*) from rbodalbaran where numalbar = " & DBSet(Albaran, "N")
+    If TotalRegistros(Sql) = 0 Then
+        Sql = "insert into rbodalbaran (numalbar, fechaalb, codsocio, observac) values ("
+        Sql = Sql & DBSet(Albaran, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(cSocio, "N") & "," & ValorNulo & ")"
             
-        conn.Execute sql
+        conn.Execute Sql
     End If
     
     CodIva = DevuelveValor("select codigiva from variedades where codvarie = " & DBSet(Variedad, "N"))
     
     ' insertamos en la tabla de lineas
-    sql = "insert into rbodalbaran_variedad (numalbar, numlinea, codvarie, unidades, cantidad, precioar, dtolinea, importel, codigiva) values ("
-    sql = sql & DBSet(Albaran, "N") & "," & DBSet(Linea, "N") & "," & DBSet(Variedad, "N") & "," & DBSet(cantidad, "N") & "," & DBSet(cantidad, "N") & ",0,0,0,"
-    sql = sql & DBSet(CodIva, "N") & ")"
+    Sql = "insert into rbodalbaran_variedad (numalbar, numlinea, codvarie, unidades, cantidad, precioar, dtolinea, importel, codigiva) values ("
+    Sql = Sql & DBSet(Albaran, "N") & "," & DBSet(Linea, "N") & "," & DBSet(Variedad, "N") & "," & DBSet(cantidad, "N") & "," & DBSet(cantidad, "N") & ",0,0,0,"
+    Sql = Sql & DBSet(CodIva, "N") & ")"
     
-    conn.Execute sql
+    conn.Execute Sql
     
     AlbaranAnterior = Albaran 'RecuperaValor(vCadena, 2)
     
@@ -23625,7 +23651,7 @@ EInsertarLinea:
 End Function
 
 Private Sub CmdAcepTraza_Click()
-Dim sql As String
+Dim Sql As String
 Dim i As Byte
 Dim cadWHERE As String
 Dim B As Boolean
@@ -23647,21 +23673,21 @@ On Error GoTo eError
         ' la creacion de las tablas temporales se hace dentro de la transaccion
         
 'monica:08052009
-    sql = "DROP TABLE IF EXISTS tmpEntrada; "
-    conn.Execute sql
+    Sql = "DROP TABLE IF EXISTS tmpEntrada; "
+    conn.Execute Sql
     
-    sql = "DROP TABLE IF EXISTS tmpClasific; "
-    conn.Execute sql
+    Sql = "DROP TABLE IF EXISTS tmpClasific; "
+    conn.Execute Sql
     
     
-    sql = "CREATE TEMPORARY TABLE tmpEntrada ("
-    sql = sql & " codsocio int, codcampo int, numalbar int, codvarie int, fecalbar date, "
-    sql = sql & " horalbar datetime, kilosbru int, kilosnet int, numcajon int) "
-    conn.Execute sql
+    Sql = "CREATE TEMPORARY TABLE tmpEntrada ("
+    Sql = Sql & " codsocio int, codcampo int, numalbar int, codvarie int, fecalbar date, "
+    Sql = Sql & " horalbar datetime, kilosbru int, kilosnet int, numcajon int) "
+    conn.Execute Sql
     
-    sql = "CREATE TEMPORARY TABLE tmpClasific ("
-    sql = sql & " numalbar int, codvarie int, codcalir int, porcenta decimal(5,2)) "
-    conn.Execute sql
+    Sql = "CREATE TEMPORARY TABLE tmpClasific ("
+    Sql = Sql & " numalbar int, codvarie int, codcalir int, porcenta decimal(5,2)) "
+    conn.Execute Sql
 '08052009
         
         
@@ -23679,9 +23705,9 @@ On Error GoTo eError
                     cadTabla = "tmpinformes"
                     cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
                     
-                    sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
+                    Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
                     
-                    If TotalRegistros(sql) <> 0 Then
+                    If TotalRegistros(Sql) <> 0 Then
                         MsgBox "Hay errores en el Traspaso de Trazabilidad. Debe corregirlos previamente.", vbExclamation
                         cadTitulo = "Errores de Traspaso de TRAZABILIDAD"
                         cadNombreRPT = "rErroresTraza.rpt"
@@ -23709,7 +23735,7 @@ eError:
     Else
         conn.CommitTrans
         MsgBox "Proceso realizado correctamente.", vbExclamation
-        Pb1.visible = False
+        pb1.visible = False
         lblProgres(0).Caption = ""
         lblProgres(1).Caption = ""
         BorrarArchivo Fichero1
@@ -23739,8 +23765,8 @@ Dim vcad As String
     numParam = numParam + 1
     
     'D/H SOCIO
-    cDesde = Trim(txtcodigo(113).Text)
-    cHasta = Trim(txtcodigo(114).Text)
+    cDesde = Trim(txtCodigo(113).Text)
+    cHasta = Trim(txtCodigo(114).Text)
     nDesde = txtNombre(113).Text
     nHasta = txtNombre(114).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -23751,8 +23777,8 @@ Dim vcad As String
     End If
     
     'D/H CLIENTE
-    cDesde = Trim(txtcodigo(117).Text)
-    cHasta = Trim(txtcodigo(118).Text)
+    cDesde = Trim(txtCodigo(117).Text)
+    cHasta = Trim(txtCodigo(118).Text)
     nDesde = txtNombre(117).Text
     nHasta = txtNombre(118).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -23763,8 +23789,8 @@ Dim vcad As String
     End If
     
     'D/H VARIEDAD
-    cDesde = Trim(txtcodigo(115).Text)
-    cHasta = Trim(txtcodigo(116).Text)
+    cDesde = Trim(txtCodigo(115).Text)
+    cHasta = Trim(txtCodigo(116).Text)
     nDesde = txtNombre(115).Text
     nHasta = txtNombre(116).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -23775,8 +23801,8 @@ Dim vcad As String
     End If
 
     'D/H Fecha
-    cDesde = Trim(txtcodigo(109).Text)
-    cHasta = Trim(txtcodigo(110).Text)
+    cDesde = Trim(txtCodigo(109).Text)
+    cHasta = Trim(txtCodigo(110).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -23811,11 +23837,11 @@ Dim vcad As String
 
 End Sub
 
-Private Sub CmdCan_Click(Index As Integer)
+Private Sub CmdCan_Click(index As Integer)
     Unload Me
 End Sub
 
-Private Sub cmdCancel_Click(Index As Integer)
+Private Sub cmdCancel_Click(index As Integer)
     Unload Me
 End Sub
 
@@ -23856,24 +23882,24 @@ Private Sub CmdCancelTraza_Click()
 End Sub
 
 
-Private Sub Combo1_Click(Index As Integer)
+Private Sub Combo1_Click(index As Integer)
 
-    VisualizarFecha Index
+    VisualizarFecha index
 
 End Sub
 
-Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index = 6 Then
-        VisualizarFecha Index
+Private Sub Combo1_KeyPress(index As Integer, KeyAscii As Integer)
+    If index = 6 Then
+        VisualizarFecha index
     Else
         KEYpress KeyAscii
     End If
 End Sub
 
-Private Sub Combo1_LostFocus(Index As Integer)
+Private Sub Combo1_LostFocus(index As Integer)
 Dim B As Boolean
-    If Index = 3 Then
-        If Combo1(Index).ListIndex = 1 Then ' si el tipo de listado es detalle clasificacion
+    If index = 3 Then
+        If Combo1(index).ListIndex = 1 Then ' si el tipo de listado es detalle clasificacion
             Combo1(2).ListIndex = 1
             Combo1(2).Enabled = False
             cmdAceptar(3).SetFocus
@@ -23893,21 +23919,21 @@ Private Sub Form_Activate()
         PrimeraVez = False
         Select Case OpcionListado
             Case 10 ' Reimpresion de entradas en bascula
-                PonerFoco txtcodigo(12)
+                PonerFoco txtCodigo(12)
             
             Case 11 ' Listado de Entradas de Pesadas
             
             Case 12 ' Listado de Calidades
-                PonerFoco txtcodigo(18)
+                PonerFoco txtCodigo(18)
         
             Case 13 ' Listado de Socios por seccion
-                PonerFoco txtcodigo(8)
+                PonerFoco txtCodigo(8)
                 
             Case 14, 16, 17, 18 '14 = Listado de entradas en bascula
                                 '16 = Listado de Entradas clasificadas
                                 '17 = Reimpresion de Albaranes de Clasificacion
                                 '18 = Informe de Kilos/gastos
-                PonerFoco txtcodigo(12)
+                PonerFoco txtCodigo(12)
                 
                 Select Case OpcionListado
                     Case 17
@@ -23920,120 +23946,120 @@ Private Sub Form_Activate()
                 End Select
                 
             Case 15 ' Listado de campos huertos
-                PonerFoco txtcodigo(2)
+                PonerFoco txtCodigo(2)
                 FrameFechasEnt.Enabled = False ' solo se disabla en el caso de que sea produccion real
                 
             Case 19 ' grabacion de fichero agriweb
-                PonerFoco txtcodigo(23)
-                txtcodigo(27).Text = Format(Year(Now), "0000")
+                PonerFoco txtCodigo(23)
+                txtCodigo(27).Text = Format(Year(Now), "0000")
                 
             Case 20 ' informe de kilos por producto
-                PonerFoco txtcodigo(33)
+                PonerFoco txtCodigo(33)
                 
             Case 21 ' traspaso desde el calibrador
                 Combo1(6).SetFocus
                 
             Case 23 ' baja de socio
-                PonerFoco txtcodigo(46)
+                PonerFoco txtCodigo(46)
             
             Case 24 ' traspaso factura cooperativa
                 Combo1(7).ListIndex = 0
-                PonerFoco txtcodigo(45)
+                PonerFoco txtCodigo(45)
                 
             Case 25 ' informe de kilos recolectados por socio/cooperativa
-                PonerFoco txtcodigo(54)
+                PonerFoco txtCodigo(54)
             
             Case 26 ' traspaso de ROPAS
-                PonerFoco txtcodigo(58)
-                txtcodigo(62).Text = Format(Year(Now), "0000")
-                txtcodigo(132).Text = Format(Now, "dd/mm/yyyy")
+                PonerFoco txtCodigo(58)
+                txtCodigo(62).Text = Format(Year(Now), "0000")
+                txtCodigo(132).Text = Format(Now, "dd/mm/yyyy")
             
             
             Case 28 ' alta masiva de bonificaciones
-                PonerFoco txtcodigo(75)
+                PonerFoco txtCodigo(75)
             
             Case 29 ' baja masiva de bonificaciones
-                PonerFoco txtcodigo(75)
+                PonerFoco txtCodigo(75)
             
             Case 30 ' Generacion automatica de clasificacion (Picassent)
-                PonerFoco txtcodigo(83)
+                PonerFoco txtCodigo(83)
             
             Case 32
-                PonerFoco txtcodigo(86)
+                PonerFoco txtCodigo(86)
             
             Case 33
-                PonerFoco txtcodigo(100)
+                PonerFoco txtCodigo(100)
                 Me.Opcion1(8).Value = True
                 Me.Check11.Value = 1
                 
             Case 34 ' cambio de socio de un campo
-                txtcodigo(106).Text = Format(Now, "dd/mm/yyyy")
-                PonerFoco txtcodigo(111)
+                txtCodigo(106).Text = Format(Now, "dd/mm/yyyy")
+                PonerFoco txtCodigo(111)
             
             Case 35 ' informe de comprobacion de venta fruta
-                PonerFoco txtcodigo(120)
+                PonerFoco txtCodigo(120)
                 ConexionConta
                 
             Case 36 ' informe de comprobacion de venta fruta
-                PonerFoco txtcodigo(129)
+                PonerFoco txtCodigo(129)
         
             Case 38 ' cambio de numero de factura
-                PonerFoco txtcodigo(129)
+                PonerFoco txtCodigo(129)
                 FecFacInicial = DevuelveValor("select fecfactu from rfactsoc where " & NumCod)
-                txtcodigo(131).Text = Format(CDate(FecFacInicial), "dd/mm/yyyy")
+                txtCodigo(131).Text = Format(CDate(FecFacInicial), "dd/mm/yyyy")
                 
             Case 40 ' orden recoleccion
-                PonerFoco txtcodigo(147)
-                txtcodigo(138).Text = Format(Now, "dd/mm/yyyy")
+                PonerFoco txtCodigo(147)
+                txtCodigo(138).Text = Format(Now, "dd/mm/yyyy")
                 
                 Check19.Value = 0
                 EsReimpresion = False
                 
             Case 41 ' informe de ordenes de recoleccion emitidas
-                PonerFoco txtcodigo(139)
+                PonerFoco txtCodigo(139)
                 
             Case 42 ' informe de socios
                 Opcion(8).Value = True
                 Opcion(7).Value = True
-                PonerFoco txtcodigo(145)
+                PonerFoco txtCodigo(145)
                 
             Case 43 ' informe atria
-                PonerFoco txtcodigo(153)
+                PonerFoco txtCodigo(153)
             
             Case 44 ' informe de precios
-                PonerFoco txtcodigo(155)
+                PonerFoco txtCodigo(155)
             
             Case 45 ' informe de revision de campos
-                PonerFoco txtcodigo(163)
+                PonerFoco txtCodigo(163)
         
             Case 46 ' informe de registros fitosanitarios
-                PonerFoco txtcodigo(73)
+                PonerFoco txtCodigo(73)
                 
                 '[Monica]16/05/2017
                 If vParamAplic.Cooperativa = 0 Then
-                    txtcodigo(192).Text = "Juan Catalá González"
-                    txtcodigo(193).Text = "AS10460001587"
+                    txtCodigo(192).Text = "Juan Catalá González"
+                    txtCodigo(193).Text = "AS10460001587"
                 End If
         
             Case 48 ' traspaso de albaranes de retirada para abn
-                PonerFoco txtcodigo(169)
+                PonerFoco txtCodigo(169)
         
             Case 50 ' informe de diferencias
-                PonerFoco txtcodigo(186)
+                PonerFoco txtCodigo(186)
                 Me.Opcion1(14).Value = True
         
             Case 51 ' informe de campos sin entradas
-                PonerFoco txtcodigo(182)
+                PonerFoco txtCodigo(182)
                 
             Case 52 ' informe/carta/pago de socios de baja
                 Option1(0).Value = True
                 
-                txtcodigo(200).Text = Format(DateAdd("yyyy", -1, vParam.FecIniCam), "dd/mm/yyyy")
-                txtcodigo(201).Text = Format(DateAdd("yyyy", -1, vParam.FecFinCam), "dd/mm/yyyy")
+                txtCodigo(200).Text = Format(DateAdd("yyyy", -1, vParam.FecIniCam), "dd/mm/yyyy")
+                txtCodigo(201).Text = Format(DateAdd("yyyy", -1, vParam.FecFinCam), "dd/mm/yyyy")
                 
-                txtcodigo(194).Text = Format(Now, "dd/mm/yyyy")
+                txtCodigo(194).Text = Format(Now, "dd/mm/yyyy")
                 
-                PonerFoco txtcodigo(200)
+                PonerFoco txtCodigo(200)
         End Select
     End If
     Screen.MousePointer = vbDefault
@@ -24152,11 +24178,19 @@ Dim List As Collection
         indFrame = 2
         tabla = "rpesadas"
     
-    Case 12 ' Listado de Calidades
+    Case 12, 121 '12- Listado de Calidades
+                 '121- Listado de calibres
         FrameCalidadesVisible True, H, W
         CargarListViewOrden (2)
         indFrame = 2
-        tabla = "rcalidad"
+        If OpcionListado = 12 Then
+            tabla = "rcalidad"
+        Else
+            tabla = "calibres"
+            Label2(30).Caption = "Calibre"
+            Opcion(3).Caption = "Calibre"
+            Label8.Caption = "Informe de Calibres"
+        End If
     
     Case 13 ' Listado de Socios por Seccion
         FrameSociosSeccionVisible True, H, W
@@ -24335,7 +24369,7 @@ Dim List As Collection
         CargaCombo
         Combo1(6).ListIndex = 0
         FrameTraspasoCalibradorVisible True, H, W
-        Pb1.visible = False
+        pb1.visible = False
         '[Monica]21/04/2016: añadida la fecha para Castellduc (cooperativa=5)
         FrameNota.visible = vParamAplic.Cooperativa = 5
         FrameNota.Enabled = vParamAplic.Cooperativa = 5
@@ -24477,7 +24511,7 @@ Dim List As Collection
     
         PonerFrameVisible FrameRegFitosanitario, True, H, W
         '[Monica]03/05/2016
-        txtcodigo(180).Text = "CAMPAÑA " & Year(CDate(vParam.FecIniCam)) & "/" & Year(CDate(vParam.FecFinCam))
+        txtCodigo(180).Text = "CAMPAÑA " & Year(CDate(vParam.FecIniCam)) & "/" & Year(CDate(vParam.FecFinCam))
             
             
     Case 47 ' traspaso datos a trazabilidad (Castelduc)
@@ -24532,118 +24566,118 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtCodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 Private Sub frmCal_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de calidades
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmCampos_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00000000")
 End Sub
 
 Private Sub frmCConta_DatoSeleccionado(CadenaSeleccion As String)
 'conceptos contables
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000") ' codigo de concepto contable
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000") ' codigo de concepto contable
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
 Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
 Private Sub frmCli_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") ' codigo de cliente
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") ' codigo de cliente
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' nombre del cliente
 End Sub
 
 Private Sub frmCon_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00") ' codigo de concepto
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00") ' codigo de concepto
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion del concepto
 End Sub
 
 Private Sub frmCoop_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00") ' codigo de cooperativa
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00") ' codigo de cooperativa
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion de la cooperativa
 End Sub
 
 Private Sub frmCtaConta_DatoSeleccionado(CadenaSeleccion As String)
 ' cuentas contables
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000") ' codigo de diario
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000") ' codigo de diario
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Cuentas contables
-    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmDConta_DatoSeleccionado(CadenaSeleccion As String)
 ' diario contable
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000") ' codigo de diario
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000") ' codigo de diario
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
 Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de formas de pago de contabilidad
-    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtcodigo(indCodigo).Text = Format(txtcodigo(indCodigo).Text, "000")
+    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtCodigo(indCodigo).Text = Format(txtCodigo(indCodigo).Text, "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmInc_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000") ' codigo de incidencia
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000") ' codigo de incidencia
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion de la incidencia
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
         vSql2 = vSql2 & " and variedades.codvarie in (" & CadenaSeleccion & ")"
     Else
-        sql = " {variedades.codvarie} = -1 "
+        Sql = " {variedades.codvarie} = -1 "
         vSql2 = vSql2 & " and variedades.codvarie is null"
     End If
-    If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
 
 Private Sub frmMens1_DatoSeleccionado(CadenaSeleccion As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
         
-        If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     Else
-        sql = " {rsocios.codsocio} = -1 "
+        Sql = " {rsocios.codsocio} = -1 "
         
-        If Not AnyadirAFormula(cadSelect1, sql) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect1, Sql) Then Exit Sub
     End If
 End Sub
 
 Private Sub frmMens2_DatoSeleccionado(CadenaSeleccion As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        sql = " {rhisfruta.codcampo} in (" & CadenaSeleccion & ")"
+        Sql = " {rhisfruta.codcampo} in (" & CadenaSeleccion & ")"
         Sql2 = " {rhisfruta.codcampo} in [" & CadenaSeleccion & "]"
         
-        If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     Else
         '[Monica]08/04/2014: quito esto para que si es un campo de un coopropietario salga si no tiene campos
         'SQL = " {rhisfruta.codcampo} = -1 "
@@ -24652,79 +24686,79 @@ Dim Sql2 As String
 End Sub
 
 Private Sub frmMens3_datoseleccionado(CadenaSeleccion As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        sql = " {rclasifica.codcampo} in (" & CadenaSeleccion & ")"
+        Sql = " {rclasifica.codcampo} in (" & CadenaSeleccion & ")"
         Sql2 = " {rclasifica.codcampo} in [" & CadenaSeleccion & "]"
         
-        If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     Else
-        sql = " {rclasifica.codcampo} = -1 "
+        Sql = " {rclasifica.codcampo} = -1 "
         
-        If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     End If
 End Sub
 
 Private Sub frmMens4_DatoSeleccionado(CadenaSeleccion As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        sql = " {rsocios.codsitua} in (" & CadenaSeleccion & ")"
+        Sql = " {rsocios.codsitua} in (" & CadenaSeleccion & ")"
         Sql2 = " {rsocios.codsitua} in [" & CadenaSeleccion & "]"
     Else
-        sql = " {rsocios.codsitua} = -1 "
+        Sql = " {rsocios.codsitua} = -1 "
         Sql2 = " {rsocios.codsitua} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
 
 Private Sub frmMens5_DatoSeleccionado(CadenaSeleccion As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     HayRegistros = True
     
     If CadenaSeleccion <> "" Then
-        sql = " {rcampos.nrocampo} in (" & CadenaSeleccion & ")"
+        Sql = " {rcampos.nrocampo} in (" & CadenaSeleccion & ")"
         Sql2 = " {rcampos.nrocampo} in [" & CadenaSeleccion & "]"
     Else
-        sql = " {rcampos.nrocampo} = -1 "
+        Sql = " {rcampos.nrocampo} = -1 "
         Sql2 = " {rcampos.nrocampo} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
 
 Private Sub frmMens6_DatoSeleccionado(CadenaSeleccion As String)
     If CadenaSeleccion <> "" Then
-        txtcodigo(141).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000000")
+        txtCodigo(141).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000000")
     End If
 End Sub
 
 Private Sub frmMens7_datoseleccionado(CadenaSeleccion As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        sql = " {rclasifica.contrato} in (" & CadenaSeleccion & ")"
+        Sql = " {rclasifica.contrato} in (" & CadenaSeleccion & ")"
         Sql2 = " {rclasifica.contrato} in [" & CadenaSeleccion & "]"
         
-        If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     Else
-        sql = " {rclasifica.contrato} = '' "
+        Sql = " {rclasifica.contrato} = '' "
         
-        If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     End If
 End Sub
 
 Private Sub frmMens8_datoseleccionado(CadenaSeleccion As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
@@ -24736,62 +24770,62 @@ End Sub
 
 
 Private Sub frmPar_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmProd_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSit_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSitu_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
 Private Sub frmCapa_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmZon_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmZ1_Actualizar(vCampo As String)
-Dim sql As String
+Dim Sql As String
 
-    sql = "insert into tmpinformes (codusu, text1) values (" & vUsu.Codigo & "," & DBSet(vCampo, "T") & ")"
-    conn.Execute sql
+    Sql = "insert into tmpinformes (codusu, text1) values (" & vUsu.Codigo & "," & DBSet(vCampo, "T") & ")"
+    conn.Execute Sql
     
 End Sub
 
-Private Sub imgAyuda_Click(Index As Integer)
+Private Sub imgAyuda_Click(index As Integer)
 Dim vCadena As String
-    Select Case Index
+    Select Case index
         Case 0
            ' "____________________________________________________________"
             vCadena = "El informe saca los datos de los recintos." & vbCrLf & _
@@ -24836,70 +24870,70 @@ Dim vCadena As String
     
 End Sub
 
-Private Sub imgBuscar_Click(Index As Integer)
-   Select Case Index
+Private Sub imgBuscar_Click(index As Integer)
+   Select Case index
         Case 0, 1, 6, 7, 25, 26, 35, 36  ' Clase
-            AbrirFrmClase (Index)
+            AbrirFrmClase (index)
         
         Case 31, 32 'clase
-            AbrirFrmClase (Index + 25)
+            AbrirFrmClase (index + 25)
         
         Case 55, 56 'clase
-            AbrirFrmClase (Index + 26)
+            AbrirFrmClase (index + 26)
         
         Case 63, 64 'clase
-            AbrirFrmClase (Index + 41)
+            AbrirFrmClase (index + 41)
         
         Case 4, 5 ' Situacion de campo
-            AbrirFrmSituacionCampo (Index)
+            AbrirFrmSituacionCampo (index)
             
         Case 21 ' variedades
-            AbrirFrmVariedad (Index + 54)
+            AbrirFrmVariedad (index + 54)
             
         Case 8, 9 'SECCION
-            AbrirFrmSeccion (Index)
+            AbrirFrmSeccion (index)
         
         Case 2, 3, 10, 11, 12, 13, 23, 24, 33, 34 'SOCIOS
-            AbrirFrmSocios (Index)
+            AbrirFrmSocios (index)
         
         Case 29, 30 'socios
-            AbrirFrmSocios (Index + 19)
+            AbrirFrmSocios (index + 19)
         
         Case 27, 28 'socios
-            AbrirFrmSocios (Index + 27)
+            AbrirFrmSocios (index + 27)
         
         Case 42, 43 'socios
-            AbrirFrmSocios (Index + 16)
+            AbrirFrmSocios (index + 16)
         
         Case 47 'socios
-            AbrirFrmSocios (Index + 53)
+            AbrirFrmSocios (index + 53)
         Case 50 'socios
-            AbrirFrmSocios (Index + 51)
+            AbrirFrmSocios (index + 51)
             
         Case 53, 54 'socios
-            AbrirFrmSocios (Index + 33)
+            AbrirFrmSocios (index + 33)
             
         Case 73, 74 'socios
-            AbrirFrmSocios (Index + 40)
+            AbrirFrmSocios (index + 40)
         
         Case 14, 15, 18, 19 'VARIEDADES
-            AbrirFrmVariedad (Index)
+            AbrirFrmVariedad (index)
     
         Case 51, 52 'VARIEDADES
-            AbrirFrmVariedad (Index + 33)
+            AbrirFrmVariedad (index + 33)
         
         Case 75, 76 'VARIEDADES
-            AbrirFrmVariedad (Index + 40)
+            AbrirFrmVariedad (index + 40)
             
         Case 61, 62 'VARIEDADES
-            AbrirFrmVariedad (Index + 41)
+            AbrirFrmVariedad (index + 41)
         
         Case 77, 78 'CLIENTES
-            indCodigo = Index + 40
+            indCodigo = index + 40
             
             Set frmCli = New frmBasico2
             
-            AyudaClienteCom frmCli, Index + 40
+            AyudaClienteCom frmCli, index + 40
             
             Set frmCli = Nothing
             
@@ -24907,36 +24941,40 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmCooperativa (45)
             
         Case 16, 17 'CALIDADES
-            AbrirFrmCalidad (Index)
+            If OpcionListado = 12 Then
+                AbrirFrmCalidad (index)
+            Else
+                abrirfrmcalibre (index)
+            End If
             
         Case 22, 37, 38 'Producto
-            AbrirFrmProducto (Index)
+            AbrirFrmProducto (index)
             
         Case 39 'Socios
-             AbrirFrmSocios (Index + 44)
+             AbrirFrmSocios (index + 44)
             
         Case 40, 41 'Producto
-            AbrirFrmProducto (Index + 10)
+            AbrirFrmProducto (index + 10)
             
         Case 44, 45 'Producto
-            AbrirFrmProducto (Index + 16)
+            AbrirFrmProducto (index + 16)
         
         Case 46 ' situacion de socio
-            AbrirFrmSituacion (Index)
+            AbrirFrmSituacion (index)
         
         Case 48, 49 'socios
-            AbrirFrmSocios (Index + 16)
+            AbrirFrmSocios (index + 16)
             
         Case 59, 60 'capataz (responsable campo)
-            AbrirFrmCapataz (Index + 33)
+            AbrirFrmCapataz (index + 33)
             
         Case 57, 58 'partidas
-            AbrirFrmPartidas (Index + 37)
+            AbrirFrmPartidas (index + 37)
             
         Case 65 ' Concepto
-            AbrirFrmConceptos (Index + 31)
+            AbrirFrmConceptos (index + 31)
         Case 70 ' Concepto
-            AbrirFrmConceptos (Index + 27)
+            AbrirFrmConceptos (index + 27)
             
         Case 71 'socios
             AbrirFrmSocios (111)
@@ -24945,34 +24983,34 @@ Private Sub imgBuscar_Click(Index As Integer)
 
         ' informe de gastos de pendientes
         Case 90, 91 'socio
-            AbrirFrmSocios (Index + 30)
+            AbrirFrmSocios (index + 30)
             
         Case 94, 95 ' concepto de gastos
-            AbrirFrmConceptos (Index + 30)
+            AbrirFrmConceptos (index + 30)
             
         Case 92, 93 ' campos
-            AbrirFrmCampos (Index + 30)
+            AbrirFrmCampos (index + 30)
         
         ' contabilizacion de gastos de campos
         Case 79 ' diario
-            AbrirFrmDiariosConta (Index + 29)
+            AbrirFrmDiariosConta (index + 29)
         Case 80 ' concepto conta
-            AbrirFrmConceptosConta (Index + 32)
+            AbrirFrmConceptosConta (index + 32)
         Case 81 ' cta de contrapartida
-            AbrirFrmCuentasConta (Index + 47)
+            AbrirFrmCuentasConta (index + 47)
            
         Case 82, 83
-            AbrirFrmZonas (Index + 51)
+            AbrirFrmZonas (index + 51)
            
         'impresion de ordenes de recoleccion
         Case 84 'capataz
-            AbrirFrmCapataz (Index + 63)
+            AbrirFrmCapataz (index + 63)
         
         Case 85 'variedad
-            AbrirFrmVariedad (Index + 64)
+            AbrirFrmVariedad (index + 64)
            
         Case 86 'partida
-            AbrirFrmPartidas (Index + 56)
+            AbrirFrmPartidas (index + 56)
            
         Case 89 'nro de ordenes de recoleccion
             Set frmMens6 = New frmMensajes
@@ -24984,45 +25022,45 @@ Private Sub imgBuscar_Click(Index As Integer)
             Set frmMens6 = Nothing
                     
         Case 87, 88 'VARIEDADES
-            AbrirFrmVariedad (Index + 56)
+            AbrirFrmVariedad (index + 56)
         
         Case 96, 97 'socio
-            AbrirFrmSocios (Index + 49)
+            AbrirFrmSocios (index + 49)
         
         ' Informe de ATRIA
         Case 104, 105 'socio
-            AbrirFrmSocios (Index + 49)
+            AbrirFrmSocios (index + 49)
         Case 98 'Producto
-            AbrirFrmProducto (Index + 50)
+            AbrirFrmProducto (index + 50)
         Case 99 'Producto
-            AbrirFrmProducto (Index + 51)
+            AbrirFrmProducto (index + 51)
         Case 100, 101 'VARIEDADES
-            AbrirFrmVariedad (Index + 51)
+            AbrirFrmVariedad (index + 51)
         
         Case 102, 103 ' variedades
-            AbrirFrmVariedad (Index + 53)
+            AbrirFrmVariedad (index + 53)
         
         ' Informe de Revision Campos
         Case 110, 111 'socio
-            AbrirFrmSocios (Index + 53)
+            AbrirFrmSocios (index + 53)
         Case 108, 109 'VARIEDADES
-            AbrirFrmVariedad (Index + 53)
+            AbrirFrmVariedad (index + 53)
                     
         ' Informe de registro de Fitosanitarios
         Case 118, 119 'socio
-            AbrirFrmSocios (Index + 55)
+            AbrirFrmSocios (index + 55)
         Case 120, 121 'Producto
-            AbrirFrmProducto (Index + 55)
+            AbrirFrmProducto (index + 55)
         Case 112, 113 'partidas
-            AbrirFrmPartidas (Index + 55)
+            AbrirFrmPartidas (index + 55)
         Case 106, 107 'termino municipal
-            AbrirFrmPueblos (Index + 53)
+            AbrirFrmPueblos (index + 53)
             
         ' traspaso de datos a trazabilidad
         Case 114, 115 'socio
-            AbrirFrmSocios (Index + 57)
+            AbrirFrmSocios (index + 57)
         Case 116, 117 'VARIEDADES
-            AbrirFrmVariedad (Index + 61)
+            AbrirFrmVariedad (index + 61)
         
         Case 122 'cooperativa
             AbrirFrmCooperativa (169)
@@ -25034,14 +25072,14 @@ Private Sub imgBuscar_Click(Index As Integer)
                     
         ' informe de diferencia de kilos
         Case 125, 126 'socios
-            AbrirFrmSocios (Index + 61)
+            AbrirFrmSocios (index + 61)
             
         Case 127, 128 'clase
-            AbrirFrmClase (Index + 61)
+            AbrirFrmClase (index + 61)
         
         ' Informe de campos sin entradas
         Case 123, 124 'socios
-            AbrirFrmSocios (Index + 59)
+            AbrirFrmSocios (index + 59)
                     
         Case 130 ' forma de pago de la tesoreria
             Set vSeccion = New CSeccion
@@ -25066,14 +25104,14 @@ Private Sub imgBuscar_Click(Index As Integer)
         
     End Select
     
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub AbrirFrmForpaConta(Indice As Integer)
     indCodigo = Indice
     Set frmFPa = New frmForpaConta
     frmFPa.DatosADevolverBusqueda = "0|1|"
-    frmFPa.CodigoActual = txtcodigo(indCodigo)
+    frmFPa.CodigoActual = txtCodigo(indCodigo)
     frmFPa.Show vbModal
     Set frmFPa = Nothing
 End Sub
@@ -25082,7 +25120,7 @@ Private Sub AbrirFrmCuentas(Indice As Integer)
     indCodigo = Indice
     Set frmCtas = New frmCtasConta
     frmCtas.DatosADevolverBusqueda = "0|1|"
-    frmCtas.CodigoActual = txtcodigo(indCodigo)
+    frmCtas.CodigoActual = txtCodigo(indCodigo)
 '    frmCtas.Conexion = cContaFacSoc
 '    frmCtas.Facturas = False
     frmCtas.Show vbModal
@@ -25092,12 +25130,12 @@ End Sub
 
 
 
-Private Sub imgCheck_Click(Index As Integer)
+Private Sub imgCheck_Click(index As Integer)
 Dim B As Boolean
 Dim TotalArray As Integer
-    If Index < 2 Then
+    If index < 2 Then
         'En el listview3
-        B = Index = 1
+        B = index = 1
         For TotalArray = 1 To ListView1(0).ListItems.Count
             ListView1(0).ListItems(TotalArray).Checked = B
             If (TotalArray Mod 50) = 0 Then DoEvents
@@ -25105,7 +25143,7 @@ Dim TotalArray As Integer
     End If
 End Sub
 
-Private Sub imgFec_Click(Index As Integer)
+Private Sub imgFec_Click(index As Integer)
     Dim esq As Long
     Dim dalt As Long
     Dim menu As Long
@@ -25113,12 +25151,12 @@ Private Sub imgFec_Click(Index As Integer)
 
     Set frmC = New frmCal
 
-    esq = imgFec(Index).Left
-    dalt = imgFec(Index).Top
+    esq = imgFec(index).Left
+    dalt = imgFec(index).Top
 
-    Set obj = imgFec(Index).Container
+    Set obj = imgFec(index).Container
 
-      While imgFec(Index).Parent.Name <> obj.Name
+      While imgFec(index).Parent.Name <> obj.Name
             esq = esq + obj.Left
             dalt = dalt + obj.Top
             Set obj = obj.Container
@@ -25126,20 +25164,20 @@ Private Sub imgFec_Click(Index As Integer)
 
     menu = Me.Height - Me.ScaleHeight 'ací tinc el heigth del menú i de la toolbar
 
-    frmC.Left = esq + imgFec(Index).Parent.Left + 30
-    frmC.Top = dalt + imgFec(Index).Parent.Top + imgFec(Index).Height + menu - 40
+    frmC.Left = esq + imgFec(index).Parent.Left + 30
+    frmC.Top = dalt + imgFec(index).Parent.Top + imgFec(index).Height + menu - 40
 
-    Select Case Index
+    Select Case index
         Case 0, 1
-            Indice = Index + 6
+            Indice = index + 6
         Case 11
             Indice = 30
         Case 2, 3
-            Indice = Index + 37
+            Indice = index + 37
         Case 5
             Indice = 47
         Case 7, 8
-            Indice = Index + 45
+            Indice = index + 45
         Case 9
             Indice = 63
         Case 10
@@ -25149,59 +25187,59 @@ Private Sub imgFec_Click(Index As Integer)
         Case 13
             Indice = 74
         Case 14, 15
-            Indice = Index + 74
+            Indice = index + 74
         Case 16, 17
-            Indice = Index + 82
+            Indice = index + 82
         Case 20
             Indice = 106
         Case 18, 19
-            Indice = Index + 91
+            Indice = index + 91
         Case 21, 22
-            Indice = Index + 105
+            Indice = index + 105
         Case 23
             Indice = 131
         Case 24
             Indice = 132
         Case 25, 26
-            Indice = Index + 111
+            Indice = index + 111
         Case 27
             Indice = 135
         Case 28
             Indice = 138
         Case 29, 30
-            Indice = Index + 110
+            Indice = index + 110
         Case 31, 32
-            Indice = Index + 126
+            Indice = index + 126
         Case 33, 34
-            Indice = Index + 132
+            Indice = index + 132
             
         Case 35, 36
-            Indice = Index + 149
+            Indice = index + 149
     
         Case 37, 38
-            Indice = Index + 153
+            Indice = index + 153
     
         Case 39, 40
-            Indice = Index + 161
+            Indice = index + 161
     
         Case 41
             Indice = 194
             
         '[Monica]11/05/2018: fechas desde/hasta para cuando se selecciona la producccion real
         Case 42, 43
-            Indice = Index + 155
+            Indice = index + 155
     End Select
 
 
     imgFec(0).Tag = Indice '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtcodigo(Indice).Text <> "" Then frmC.NovaData = txtcodigo(Indice).Text
+    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(Indice) '<===
+    PonerFoco txtCodigo(Indice) '<===
     ' ********************************************
 
 End Sub
@@ -25212,13 +25250,13 @@ End Sub
 
 
 
-Private Sub ListView1_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub ListView1_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 
-Private Sub Opcion_Click(Index As Integer)
-    If Index = 0 Then
+Private Sub Opcion_Click(index As Integer)
+    If index = 0 Then
         If vParamAplic.Cooperativa = 0 And Opcion(0).Value Then
             Label2(233).visible = True
             Combo1(15).Enabled = True
@@ -25232,7 +25270,7 @@ Private Sub Opcion_Click(Index As Integer)
     End If
 End Sub
 
-Private Sub Opcion1_Click(Index As Integer)
+Private Sub Opcion1_Click(index As Integer)
     If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
         Check23.Enabled = (Opcion1(1).Value)
     End If
@@ -25253,27 +25291,27 @@ Private Sub Opcion1_Click(Index As Integer)
     
 End Sub
 
-Private Sub Option1_Click(Index As Integer)
-    FrameCarta.visible = (Index = 1) Or (Index = 2)
-    FrameCarta.Enabled = (Index = 1) Or (Index = 2)
-    FramePagos.visible = (Index = 2)
-    FramePagos.Enabled = (Index = 2)
+Private Sub Option1_Click(index As Integer)
+    FrameCarta.visible = (index = 1) Or (index = 2)
+    FrameCarta.Enabled = (index = 1) Or (index = 2)
+    FramePagos.visible = (index = 2)
+    FramePagos.Enabled = (index = 2)
 End Sub
 
-Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+Private Sub txtCodigo_GotFocus(index As Integer)
+    ConseguirFoco txtCodigo(index), 3
 End Sub
 
-Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtCodigo_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
-Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtCodigo_KeyPress(index As Integer, KeyAscii As Integer)
 '15/02/2007
 '    KEYpress KeyAscii
 'ahora
     If KeyAscii = teclaBuscar Then
-        Select Case Index
+        Select Case index
             Case 0: KEYBusqueda KeyAscii, 0 'clase desde
             Case 1: KEYBusqueda KeyAscii, 1 'clase hasta
             
@@ -25545,157 +25583,157 @@ Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
 End Sub
 
 
-Private Sub txtCodigo_LostFocus(Index As Integer)
+Private Sub txtCodigo_LostFocus(index As Integer)
 Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(index).Text = Trim(txtCodigo(index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
 
-    Select Case Index
+    Select Case index
         Case 0, 1, 20, 21, 25, 26, 35, 36, 56, 57, 66, 67, 81, 82, 104, 105, 188, 189 'CLASES
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "clases", "nomclase", "codclase", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "clases", "nomclase", "codclase", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000")
     
         Case 8, 9 'SECCIONES
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rseccion", "nomsecci", "codsecci", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rseccion", "nomsecci", "codsecci", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000")
             
         Case 2, 3, 10, 11, 12, 13, 23, 24, 33, 34, 48, 49, 54, 55, 58, 59, 64, 65, 83, 86, 87, 100, 101, 113, 114, 120, 121, 153, 154, 163, 164, 173, 174, 171, 172, 186, 187, 182, 183 'SOCIOS
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000000")
             
         Case 4, 5, 181 'SITUACION
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsituacioncampo", "nomsitua", "codsitua", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "00")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rsituacioncampo", "nomsitua", "codsitua", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "00")
             
         Case 6, 7, 30, 39, 40, 47, 43, 44, 52, 53, 63, 72, 73, 74, 88, 89, 98, 99, 132, 136, 137, 135, 138, 139, 140, 157, 158, 165, 166, 184, 185, 190, 191, 197, 198 'FECHAS
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
+            If txtCodigo(index).Text <> "" Then PonerFormatoFecha txtCodigo(index)
             
         Case 16, 17 'CALIDADES
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rcalidad", "nomcalid", "codcalid", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "00")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rcalidad", "nomcalid", "codcalid", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "00")
             
         Case 14, 15, 18, 19, 68, 69, 75, 84, 85, 102, 103, 115, 116, 149, 143, 144, 151, 152, 155, 156, 161, 162, 177, 178 'VARIEDADES
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "variedades", "nomvarie", "codvarie", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000000")
         
         Case 22, 37, 38, 50, 51, 60, 61, 148, 150, 175, 176 'PRODUCTOS
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "productos", "nomprodu", "codprodu", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "productos", "nomprodu", "codprodu", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000")
             
         Case 27, 29 ' datos de agroweb
-            txtcodigo(Index).Text = Format(txtcodigo(Index).Text, FormatoCampo(txtcodigo(Index)))
+            txtCodigo(index).Text = Format(txtCodigo(index).Text, FormatoCampo(txtCodigo(index)))
             
         Case 31
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index) = Format(TransformaPuntosComas(txtcodigo(Index).Text), "#,##0.00")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index) = Format(TransformaPuntosComas(txtCodigo(index).Text), "#,##0.00")
             
         Case 32 ' datos de agroweb
-            PonerFormatoDecimal txtcodigo(Index), 4
+            PonerFormatoDecimal txtCodigo(index), 4
     
         Case 45, 169 ' cooperativa
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rcoope", "nomcoope", "codcoope", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "00")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rcoope", "nomcoope", "codcoope", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "00")
         
         Case 46 'SITUACION de socio
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsituacion", "nomsitua", "codsitua", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "00")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rsituacion", "nomsitua", "codsitua", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "00")
     
         Case 62 ' Ejercicio
-            txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "0000")
+            txtCodigo(index).Text = Format(txtCodigo(index).Text, "0000")
     
         Case 70, 71 ' nro de pesada
-            txtcodigo(Index).Text = Format(txtcodigo(Index).Text, FormatoCampo(txtcodigo(Index)))
+            txtCodigo(index).Text = Format(txtCodigo(index).Text, FormatoCampo(txtCodigo(index)))
             
         ' Alta masiva de bonificaciones
         Case 76 ' nro de dias
-            PonerFormatoEntero txtcodigo(Index)
+            PonerFormatoEntero txtCodigo(index)
             
         Case 77 ' porcentaje de aumento
-            PonerFormatoDecimal txtcodigo(Index), 4
+            PonerFormatoDecimal txtCodigo(index), 4
         
         Case 78 ' indice de correccion
-            PonerFormatoDecimal txtcodigo(Index), 4
+            PonerFormatoDecimal txtCodigo(index), 4
     
         Case 79 ' porcentaje de destrio
-            PonerFormatoDecimal txtcodigo(Index), 4
+            PonerFormatoDecimal txtCodigo(index), 4
     
         Case 92, 93, 147 'CAPATAZ
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rcapataz", "nomcapat", "codcapat", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "0000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rcapataz", "nomcapat", "codcapat", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "0000")
     
         Case 94, 95, 142, 167, 168 'Partidas
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rpartida", "nomparti", "codparti", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "0000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rpartida", "nomparti", "codparti", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "0000")
     
         Case 159, 160 'Poblacion
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rpueblos", "despobla", "codpobla", "T")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = txtcodigo(Index).Text
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rpueblos", "despobla", "codpobla", "T")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = txtCodigo(index).Text
     
     
         Case 16, 17, 124, 125 'CONCEPTOS DE GASTOS
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rconcepgasto", "nomgasto", "codgasto", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rconcepgasto", "nomgasto", "codgasto", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000")
     
         Case 106 ' fecha de cambio
-            PonerFormatoFecha txtcodigo(Index)
+            PonerFormatoFecha txtCodigo(index)
             
         Case 107 ' Incidencia
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rincidencia", "nomincid", "codincid", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "0000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rincidencia", "nomincid", "codincid", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "0000")
         
         Case 111 ' socio
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000000")
                     
         Case 117, 118 ' clientes
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "clientes", "nomclien", "codclien", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "clientes", "nomclien", "codclien", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000000")
     
         Case 109, 110, 126, 127  'Fechas
-            PonerFormatoFecha txtcodigo(Index), True
+            PonerFormatoFecha txtCodigo(index), True
     
         Case 112 ' concepto contable
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "conceptos", "nomconce", "codconce", "N", cConta)
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "00")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "conceptos", "nomconce", "codconce", "N", cConta)
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "00")
             
         Case 128 ' Cuentas contables
             If vSeccion Is Nothing Then Exit Sub
         
-            If txtcodigo(Index).Text <> "" Then
-                txtNombre(Index).Text = PonerNombreCuenta(txtcodigo(Index), 2)
-                If txtNombre(Index).Text = "" Then PonerFoco txtcodigo(Index)
+            If txtCodigo(index).Text <> "" Then
+                txtNombre(index).Text = PonerNombreCuenta(txtCodigo(index), 2)
+                If txtNombre(index).Text = "" Then PonerFoco txtCodigo(index)
             Else
                 MsgBox "Número de Cuenta contable no existe en la contabilidad. Reintroduzca.", vbExclamation
             End If
       
         Case 131 ' fecha de cambio
-            PonerFormatoFecha txtcodigo(Index)
+            PonerFormatoFecha txtCodigo(index)
     
         Case 133, 134 ' zonas
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rzonas", "nomzonas", "codzonas", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "0000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rzonas", "nomzonas", "codzonas", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "0000")
     
         Case 141 ' nro de orden de recoleccion
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "0000000")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "0000000")
             
         Case 145, 146 ' socio
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000000")
     
     
         Case 170, 179
-            If Not IsNumeric(txtcodigo(Index)) Then
+            If Not IsNumeric(txtCodigo(index)) Then
                 MsgBox "El número de nota ha de ser numérico. Reintroduzca.", vbExclamation
-                PonerFoco txtcodigo(Index)
+                PonerFoco txtCodigo(index)
             End If
         
         Case 200, 201, 194 ' fecha
-            PonerFormatoFecha txtcodigo(Index)
+            PonerFormatoFecha txtCodigo(index)
     
     
         Case 196 ' FORMA DE PAGO DE LA CONTABILIDAD
@@ -25705,11 +25743,11 @@ Dim cad As String, cadTipo As String 'tipo cliente
                 If vSeccion.AbrirConta Then
         
                     If vParamAplic.ContabilidadNueva Then
-                        If txtcodigo(Index).Text <> "" Then txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtcodigo(3).Text, "N")
+                        If txtCodigo(index).Text <> "" Then txtNombre(index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtCodigo(3).Text, "N")
                     Else
-                        If txtcodigo(Index).Text <> "" Then txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(3).Text, "N")
+                        If txtCodigo(index).Text <> "" Then txtNombre(index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtCodigo(3).Text, "N")
                     End If
-                    If txtNombre(Index).Text = "" Then
+                    If txtNombre(index).Text = "" Then
                         MsgBox "Forma de Pago  no existe en la contabilidad. Reintroduzca.", vbExclamation
                     End If
                 End If
@@ -25722,8 +25760,8 @@ Dim cad As String, cadTipo As String 'tipo cliente
 
             If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
                 If vSeccion.AbrirConta Then
-                    If txtcodigo(Index).Text <> "" Then txtNombre(Index).Text = PonerNombreCuenta(txtcodigo(Index), 2)
-                    If txtNombre(Index).Text = "" Then
+                    If txtCodigo(index).Text <> "" Then txtNombre(index).Text = PonerNombreCuenta(txtCodigo(index), 2)
+                    If txtNombre(index).Text = "" Then
                         MsgBox "Número de Cuenta contable no existe en la contabilidad. Reintroduzca.", vbExclamation
                     End If
                 End If
@@ -26097,38 +26135,38 @@ Private Sub FrameKilosRecolectVisible(visible As Boolean, ByRef H As Integer, By
     End If
 End Sub
 
-Private Sub CargarListViewOrden(Index As Integer)
+Private Sub CargarListViewOrden(index As Integer)
 Dim ItmX As ListItem
 
     'Los encabezados
-    ListView1(Index).ColumnHeaders.Clear
-    ListView1(Index).ColumnHeaders.Add , , "Campo", 1390
+    ListView1(index).ColumnHeaders.Clear
+    ListView1(index).ColumnHeaders.Add , , "Campo", 1390
 
-    Select Case Index
+    Select Case index
         Case 0
-            Set ItmX = ListView1(Index).ListItems.Add
+            Set ItmX = ListView1(index).ListItems.Add
             ItmX.Text = "Codigo"
-            Set ItmX = ListView1(Index).ListItems.Add
+            Set ItmX = ListView1(index).ListItems.Add
             ItmX.Text = "Alfabético"
         Case 1
-            Set ItmX = ListView1(Index).ListItems.Add
+            Set ItmX = ListView1(index).ListItems.Add
             ItmX.Text = "Clase"
-            Set ItmX = ListView1(Index).ListItems.Add
+            Set ItmX = ListView1(index).ListItems.Add
             ItmX.Text = "Producto"
         Case 2
-            Set ItmX = ListView1(Index).ListItems.Add
+            Set ItmX = ListView1(index).ListItems.Add
             ItmX.Text = "Variedad"
-            Set ItmX = ListView1(Index).ListItems.Add
+            Set ItmX = ListView1(index).ListItems.Add
             ItmX.Text = "Calidad"
         Case 3
-            Set ItmX = ListView1(Index).ListItems.Add
+            Set ItmX = ListView1(index).ListItems.Add
             ItmX.Text = "Seccion"
-            Set ItmX = ListView1(Index).ListItems.Add
+            Set ItmX = ListView1(index).ListItems.Add
             ItmX.Text = "Socio"
         Case 4
-            Set ItmX = ListView1(Index).ListItems.Add
+            Set ItmX = ListView1(index).ListItems.Add
             ItmX.Text = "Trabajador"
-            Set ItmX = ListView1(Index).ListItems.Add
+            Set ItmX = ListView1(index).ListItems.Add
             ItmX.Text = "Fecha"
     End Select
         
@@ -26203,8 +26241,8 @@ Private Sub LlamarImprimir()
         .outClaveNombreArchiv = "Resultado"
         .outCodigoCliProv = 0
         If OpcionListado = 17 Then
-            If txtcodigo(12).Text = txtcodigo(13).Text And txtcodigo(12).Text <> "" Then
-                .outCodigoCliProv = txtcodigo(12).Text
+            If txtCodigo(12).Text = txtCodigo(13).Text And txtCodigo(12).Text <> "" Then
+                .outCodigoCliProv = txtCodigo(12).Text
             End If
         End If
         .FormulaSeleccion = cadFormula
@@ -26368,7 +26406,7 @@ Private Sub AbrirFrmProducto(Indice As Integer)
     indCodigo = Indice
     Set frmProd = New frmBasico2
     
-    AyudaProductosCom frmProd, txtcodigo(Indice).Text
+    AyudaProductosCom frmProd, txtCodigo(Indice).Text
     
     Set frmProd = Nothing
 End Sub
@@ -26380,7 +26418,6 @@ Private Sub AbrirFrmCalidad(Indice As Integer)
     frmCal.Show vbModal
     Set frmCal = Nothing
 End Sub
-
 
 Private Sub AbrirFrmSeccion(Indice As Integer)
     indCodigo = Indice
@@ -26500,7 +26537,7 @@ Private Sub AbrirFrmClase(Indice As Integer)
     End If
     Set frmCla = New frmBasico2
     
-    AyudaClasesCom frmCla, txtcodigo(Indice).Text
+    AyudaClasesCom frmCla, txtCodigo(Indice).Text
     
     Set frmCla = Nothing
 End Sub
@@ -26544,7 +26581,7 @@ Dim Ini As Integer
 Dim Fin As Integer
 Dim i As Integer
 Dim Rs As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
@@ -26652,16 +26689,16 @@ Dim sql As String
     
     ' tipo de factura a traspasar
     'tipo de factura
-    sql = "select codtipom, nomtipom from usuarios.stipom where tipodocu > 0 "
+    Sql = "select codtipom, nomtipom from usuarios.stipom where tipodocu > 0 "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     i = 1
     While Not Rs.EOF
 '        Sql = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
-        sql = Rs.Fields(1).Value
-        sql = Rs.Fields(0).Value & " - " & sql
-        Combo1(7).AddItem sql 'campo del codigo
+        Sql = Rs.Fields(1).Value
+        Sql = Rs.Fields(0).Value & " - " & Sql
+        Combo1(7).AddItem Sql 'campo del codigo
         Combo1(7).ItemData(Combo1(7).NewIndex) = i
         i = i + 1
         Rs.MoveNext
@@ -26729,15 +26766,15 @@ Dim sql As String
     Combo1(12).AddItem "Todos" 'campo del codigo
     Combo1(12).ItemData(Combo1(12).NewIndex) = 0
     
-    sql = "select distinct numfases from rsocios_pozos order by 1"
+    Sql = "select distinct numfases from rsocios_pozos order by 1"
 
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     i = 1
     While Not Rs.EOF
 '        Sql = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
-        sql = Rs.Fields(0).Value
-        Combo1(12).AddItem sql 'campo del codigo
+        Sql = Rs.Fields(0).Value
+        Combo1(12).AddItem Sql 'campo del codigo
         Combo1(12).ItemData(Combo1(12).NewIndex) = i
         i = i + 1
         Rs.MoveNext
@@ -26773,26 +26810,26 @@ End Sub
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
 Dim Rs As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 
     ConcatenarCampos = ""
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     
-    sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
     Set Rs = New ADODB.Recordset
     
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
     While Not Rs.EOF
@@ -26807,7 +26844,7 @@ End Function
 
 Private Function CargarTemporal(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 
@@ -26821,26 +26858,26 @@ Dim Sql2 As String
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
     
 '[Monica]14/12/2010: en los siguientes selects anteriormente estaba el sum sobre la tabla rentradas. Ahora lo cambio a rhisfruta
     
     If Opcion1(0) Then ' socios
         Sql1 = "select " & vUsu.Codigo & ",rcampos.codsocio, sum(kilosnet) from rhisfruta right join rcampos on rhisfruta.codcampo = rcampos.codcampo "
-        Sql1 = Sql1 & " where rcampos.codcampo in (" & sql & ")"
+        Sql1 = Sql1 & " where rcampos.codcampo in (" & Sql & ")"
         
         
         '[Monica]11/05/2018: introducimos las fechas que queremos
-        If txtcodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(197).Text, "F")
-        If txtcodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(198).Text, "F")
+        If txtCodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(197).Text, "F")
+        If txtCodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(198).Text, "F")
         
         
         
@@ -26870,11 +26907,11 @@ Dim Sql2 As String
 '            Sql1 = Sql1 & " from rhisfruta right join (rcampos inner join variedades on rcampos.codvarie = variedades.codvarie) on rhisfruta.codcampo = rcampos.codcampo and rhisfruta.codvarie = rcampos.codvarie where rcampos.codcampo in (" & Sql & ")"
 '            Sql1 = Sql1 & " group by 1,2,3 "
             
-            Sql1 = Sql1 & " from rhisfruta inner join variedades on rhisfruta.codvarie = variedades.codvarie where rhisfruta.codcampo in (" & sql & ")"
+            Sql1 = Sql1 & " from rhisfruta inner join variedades on rhisfruta.codvarie = variedades.codvarie where rhisfruta.codcampo in (" & Sql & ")"
             
             '[Monica]11/05/2018: introducimos las fechas que queremos
-            If txtcodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(197).Text, "F")
-            If txtcodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(198).Text, "F")
+            If txtCodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(197).Text, "F")
+            If txtCodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(198).Text, "F")
             
             
             Sql1 = Sql1 & " group by 1,2,3 "
@@ -26885,7 +26922,7 @@ Dim Sql2 As String
             
             '[Monica]28/07/2014: en elcaso de ser por clase si no tiene existencia real tiene que aparecer con 0 y con superficie
             Sql1 = "select " & vUsu.Codigo & ",variedades.codclase, variedades.codvarie, 0, 0, 0"
-            Sql1 = Sql1 & " from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie where rcampos.codcampo in (" & sql & ")"
+            Sql1 = Sql1 & " from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie where rcampos.codcampo in (" & Sql & ")"
             Sql1 = Sql1 & " and not (variedades.codclase, variedades.codvarie) in (select codigo1, importe2 from tmpinformes where codusu = " & vUsu.Codigo & ")"
             Sql1 = Sql1 & " group by 1,2,3 "
             Sql2 = "insert into tmpinformes (codusu, codigo1, importe2, importe1, importe3, precio1) " & Sql1
@@ -26915,7 +26952,7 @@ Dim Sql2 As String
                         Sql1 = Sql1 & "sum(round(rcampos.supculti / " & DBSet(vParamAplic.Faneca, "N") & ",2)) "    '{rcampos.supculti} / 0.0831,2)
                 End Select
             End If
-            Sql1 = Sql1 & " from rcampos where rcampos.codcampo in (" & sql & ") and tmpinformes.importe2 = rcampos.codvarie )"
+            Sql1 = Sql1 & " from rcampos where rcampos.codcampo in (" & Sql & ") and tmpinformes.importe2 = rcampos.codvarie )"
             
             conn.Execute Sql1
             
@@ -26947,7 +26984,7 @@ Dim Sql2 As String
                 End Select
             End If
             
-            Sql1 = Sql1 & " from (rcampos inner join variedades on rcampos.codvarie = variedades.codvarie)  where rcampos.codcampo in (" & sql & ")"
+            Sql1 = Sql1 & " from (rcampos inner join variedades on rcampos.codvarie = variedades.codvarie)  where rcampos.codcampo in (" & Sql & ")"
             Sql1 = Sql1 & " group by 1,2,3,4 "
         
             Sql2 = "insert into tmpinformes (codusu, codigo1, importe2, importe1, importe3, precio1) " & Sql1
@@ -26958,11 +26995,11 @@ Dim Sql2 As String
     End If
     
     If Opcion1(2) Then ' terminos
-        Sql1 = "select " & vUsu.Codigo & ", rpartida.codpobla, sum(kilosnet) from rhisfruta right join (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti)  on rhisfruta.codcampo = rcampos.codcampo where rcampos.codcampo in (" & sql & ")"
+        Sql1 = "select " & vUsu.Codigo & ", rpartida.codpobla, sum(kilosnet) from rhisfruta right join (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti)  on rhisfruta.codcampo = rcampos.codcampo where rcampos.codcampo in (" & Sql & ")"
         
         '[Monica]11/05/2018: introducimos las fechas que queremos
-        If txtcodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(197).Text, "F")
-        If txtcodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(198).Text, "F")
+        If txtCodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(197).Text, "F")
+        If txtCodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(198).Text, "F")
         
         Sql1 = Sql1 & " group by 1,2"
     
@@ -26971,11 +27008,11 @@ Dim Sql2 As String
     End If
     
     If Opcion1(3) Then ' zonas
-        Sql1 = "select " & vUsu.Codigo & ", rpartida.codzonas, sum(kilosnet) from rhisfruta right join (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti)  on rhisfruta.codcampo = rcampos.codcampo where rcampos.codcampo in (" & sql & ")"
+        Sql1 = "select " & vUsu.Codigo & ", rpartida.codzonas, sum(kilosnet) from rhisfruta right join (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti)  on rhisfruta.codcampo = rcampos.codcampo where rcampos.codcampo in (" & Sql & ")"
         
         '[Monica]11/05/2018: introducimos las fechas que queremos
-        If txtcodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(197).Text, "F")
-        If txtcodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(198).Text, "F")
+        If txtCodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(197).Text, "F")
+        If txtCodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(198).Text, "F")
         
         Sql1 = Sql1 & " group by 1,2"
     
@@ -26988,11 +27025,11 @@ Dim Sql2 As String
         If Combo1(1).ListIndex = 1 Then
             Sql1 = "select " & vUsu.Codigo & ", variedades.codvarie, rcampos.codzonas, sum(if(kilosnet is null,0,kilosnet)), 0, 0"
             
-            Sql1 = Sql1 & " from (rhisfruta inner join variedades on rhisfruta.codvarie = variedades.codvarie) inner join rcampos on rhisfruta.codcampo = rcampos.codcampo where rhisfruta.codcampo in (" & sql & ")"
+            Sql1 = Sql1 & " from (rhisfruta inner join variedades on rhisfruta.codvarie = variedades.codvarie) inner join rcampos on rhisfruta.codcampo = rcampos.codcampo where rhisfruta.codcampo in (" & Sql & ")"
             
             '[Monica]11/05/2018: introducimos las fechas que queremos
-            If txtcodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(197).Text, "F")
-            If txtcodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(198).Text, "F")
+            If txtCodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(197).Text, "F")
+            If txtCodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(198).Text, "F")
             
             Sql1 = Sql1 & " group by 1,2,3 "
             
@@ -27002,7 +27039,7 @@ Dim Sql2 As String
             
             '[Monica]28/07/2014: en elcaso de ser por clase si no tiene existencia real tiene que aparecer con 0 y con superficie
             Sql1 = "select " & vUsu.Codigo & ", variedades.codvarie, rcampos.codzonas, 0, 0, 0"
-            Sql1 = Sql1 & " from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie where rcampos.codcampo in (" & sql & ")"
+            Sql1 = Sql1 & " from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie where rcampos.codcampo in (" & Sql & ")"
             Sql1 = Sql1 & " and not (variedades.codvarie, rcampos.codzonas) in (select codigo1, importe2 from tmpinformes where codusu = " & vUsu.Codigo & ")"
             Sql1 = Sql1 & " group by 1,2,3 "
             Sql2 = "insert into tmpinformes (codusu, codigo1, importe2, importe1, importe3, precio1) " & Sql1
@@ -27019,7 +27056,7 @@ Dim Sql2 As String
                 Case 3
                     Sql1 = Sql1 & "sum(round(rcampos.supculti / " & DBSet(vParamAplic.Faneca, "N") & ",2)) "    '{rcampos.supculti} / 0.0831,2)
             End Select
-            Sql1 = Sql1 & " from rcampos where rcampos.codcampo in (" & sql & ") and tmpinformes.importe2 = rcampos.codvarie )"
+            Sql1 = Sql1 & " from rcampos where rcampos.codcampo in (" & Sql & ") and tmpinformes.importe2 = rcampos.codvarie )"
             
             conn.Execute Sql1
             
@@ -27037,7 +27074,7 @@ Dim Sql2 As String
                     Sql1 = Sql1 & "sum(round(rcampos.supculti / " & DBSet(vParamAplic.Faneca, "N") & ",2)) "    '{rcampos.supculti} / 0.0831,2)
             End Select
             
-            Sql1 = Sql1 & " from (rcampos inner join variedades on rcampos.codvarie = variedades.codvarie)  where rcampos.codcampo in (" & sql & ")"
+            Sql1 = Sql1 & " from (rcampos inner join variedades on rcampos.codvarie = variedades.codvarie)  where rcampos.codcampo in (" & Sql & ")"
             Sql1 = Sql1 & " group by 1,2,3,4 "
         
             Sql2 = "insert into tmpinformes (codusu, codigo1, importe2, importe1, importe3, precio1) " & Sql1
@@ -27058,7 +27095,7 @@ End Function
 
 Private Function CargarTemporal2(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
     
@@ -27071,33 +27108,33 @@ Dim Sql2 As String
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "Select rclasifica.numnotac FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rclasifica.numnotac FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     If cWhere <> "" Then
-        sql = "select distinct rclasifica.numnotac  from " & cTabla & " where " & cWhere
+        Sql = "select distinct rclasifica.numnotac  from " & cTabla & " where " & cWhere
     Else
-        sql = "select distinct rclasifica.numnotac  from " & cTabla
+        Sql = "select distinct rclasifica.numnotac  from " & cTabla
     End If
     
     Select Case Combo1(2).ListIndex
         Case 0: 'todas
-            Sql1 = "select " & vUsu.Codigo & ", rclasifica.numnotac, 0 from rclasifica where numnotac in (" & sql & ")"
+            Sql1 = "select " & vUsu.Codigo & ", rclasifica.numnotac, 0 from rclasifica where numnotac in (" & Sql & ")"
         
         Case 1: ' solo clasificadas
             Sql1 = "select " & vUsu.Codigo & ",rclasifica_clasif.numnotac, sum(rclasifica_clasif.kilosnet) from rclasifica_clasif inner join rclasifica on rclasifica_clasif.numnotac = rclasifica.numnotac "
-            Sql1 = Sql1 & " where rclasifica.numnotac in (" & sql & ")"
+            Sql1 = Sql1 & " where rclasifica.numnotac in (" & Sql & ")"
             Sql1 = Sql1 & " group by 1,2 "
             Sql1 = Sql1 & " having not sum(rclasifica_clasif.kilosnet)  is null "
             
         
         Case 2: ' pendientes
             Sql1 = "select " & vUsu.Codigo & ",rclasifica.numnotac, sum(rclasifica_clasif.kilosnet) from rclasifica left join rclasifica_clasif on rclasifica_clasif.numnotac = rclasifica.numnotac "
-            Sql1 = Sql1 & " where rclasifica.numnotac in (" & sql & ")"
+            Sql1 = Sql1 & " where rclasifica.numnotac in (" & Sql & ")"
             Sql1 = Sql1 & " group by 1,2 "
             Sql1 = Sql1 & " having sum(rclasifica_clasif.kilosnet) is null "
     End Select
@@ -27117,7 +27154,7 @@ End Function
 Private Function CargarTemporal3(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim vSQL As String
@@ -27135,22 +27172,22 @@ Dim Clase As String
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "Select rclasifica.numnotac FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rclasifica.numnotac FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     If cWhere <> "" Then
-        sql = "select distinct rclasifica.numnotac  from " & cTabla & " where " & cWhere
+        Sql = "select distinct rclasifica.numnotac  from " & cTabla & " where " & cWhere
     Else
-        sql = "select distinct rclasifica.numnotac  from " & cTabla
+        Sql = "select distinct rclasifica.numnotac  from " & cTabla
     End If
     
   ' solo clasificadas
     Sql1 = "select rclasifica.numnotac, rclasifica.codvarie, rclasifica.codcampo, rclasifica.codsocio,sum(rclasifica_clasif.kilosnet) from rclasifica inner join rclasifica_clasif on rclasifica.numnotac = rclasifica_clasif.numnotac "
-    Sql1 = Sql1 & " where rclasifica.numnotac in (" & sql & ")"
+    Sql1 = Sql1 & " where rclasifica.numnotac in (" & Sql & ")"
     Sql1 = Sql1 & " group by 1,2,3,4 "
     Sql1 = Sql1 & " having not sum(rclasifica_clasif.kilosnet) is null "
         
@@ -27211,7 +27248,7 @@ End Function
 Private Function CargarTemporal4(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim vSQL As String
@@ -27229,20 +27266,20 @@ Dim Clase As String
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "select rhisfruta.numalbar, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta.codsocio, rhisfruta.kilosnet "
-    sql = sql & " from " & cTabla
+    Sql = "select rhisfruta.numalbar, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta.codsocio, rhisfruta.kilosnet "
+    Sql = Sql & " from " & cTabla
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
         
     Set Rs = New ADODB.Recordset
     
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
     While Not Rs.EOF
@@ -27299,7 +27336,7 @@ Private Function CargarTemporal4New(cTabla As String, cWhere As String) As Boole
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim vSQL As String
@@ -27314,8 +27351,8 @@ Dim m As Integer
     
     CargarTemporal4New = False
 
-    sql = "DROP TABLE IF EXISTS tmp; "
-    conn.Execute sql
+    Sql = "DROP TABLE IF EXISTS tmp; "
+    conn.Execute Sql
     
     
     Sql2 = "delete from tmpclasifica2 where codusu = " & vUsu.Codigo
@@ -27323,19 +27360,19 @@ Dim m As Integer
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "select rhisfruta.numalbar, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta.codsocio, rhisfruta.kilosnet "
-    sql = sql & " from " & cTabla
+    Sql = "select rhisfruta.numalbar, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta.codsocio, rhisfruta.kilosnet "
+    Sql = Sql & " from " & cTabla
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     Set Rs = New ADODB.Recordset
     
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
     While Not Rs.EOF
@@ -27380,47 +27417,47 @@ Dim m As Integer
     
     Set Rs = Nothing
     
-    sql = "select codvarie, sum(kilcal1), sum(kilcal2) as kilos2, sum(kilcal3) as kilos3, sum(kilcal4) as kilos4, sum(kilcal5), sum(kilcal6), sum(kilcal7), sum(kilcal8), "
-    sql = sql & " sum(kilcal9), sum(kilcal10), sum(kilcal11), sum(kilcal12), sum(kilcal13), sum(kilcal14), sum(kilcal15), sum(kilcal16),"
-    sql = sql & " sum(kilcal17), sum(kilcal18), sum(kilcal19), sum(kilcal20) from tmpclasifica2 "
-    sql = sql & " where codusu = " & vUsu.Codigo
-    sql = sql & " group by 1 "
+    Sql = "select codvarie, sum(kilcal1), sum(kilcal2) as kilos2, sum(kilcal3) as kilos3, sum(kilcal4) as kilos4, sum(kilcal5), sum(kilcal6), sum(kilcal7), sum(kilcal8), "
+    Sql = Sql & " sum(kilcal9), sum(kilcal10), sum(kilcal11), sum(kilcal12), sum(kilcal13), sum(kilcal14), sum(kilcal15), sum(kilcal16),"
+    Sql = Sql & " sum(kilcal17), sum(kilcal18), sum(kilcal19), sum(kilcal20) from tmpclasifica2 "
+    Sql = Sql & " where codusu = " & vUsu.Codigo
+    Sql = Sql & " group by 1 "
     
     
     Set RS1 = New ADODB.Recordset
     
-    RS1.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not RS1.EOF
         m = 1 ' para evitar que sean todos ceros y haya un bucle infinito
         i = 1
         
         While i < 20 And m < 40
-            sql = "select codvarie, sum(kilcal1), sum(kilcal2) as kilos2, sum(kilcal3) as kilos3, sum(kilcal4) as kilos4, sum(kilcal5), sum(kilcal6), sum(kilcal7), sum(kilcal8), "
-            sql = sql & " sum(kilcal9), sum(kilcal10), sum(kilcal11), sum(kilcal12), sum(kilcal13), sum(kilcal14), sum(kilcal15), sum(kilcal16),"
-            sql = sql & " sum(kilcal17), sum(kilcal18), sum(kilcal19), sum(kilcal20) from tmpclasifica2 "
-            sql = sql & " where codusu = " & vUsu.Codigo
-            sql = sql & " and codvarie = " & DBSet(RS1!codvarie, "N")
-            sql = sql & " group by 1 "
+            Sql = "select codvarie, sum(kilcal1), sum(kilcal2) as kilos2, sum(kilcal3) as kilos3, sum(kilcal4) as kilos4, sum(kilcal5), sum(kilcal6), sum(kilcal7), sum(kilcal8), "
+            Sql = Sql & " sum(kilcal9), sum(kilcal10), sum(kilcal11), sum(kilcal12), sum(kilcal13), sum(kilcal14), sum(kilcal15), sum(kilcal16),"
+            Sql = Sql & " sum(kilcal17), sum(kilcal18), sum(kilcal19), sum(kilcal20) from tmpclasifica2 "
+            Sql = Sql & " where codusu = " & vUsu.Codigo
+            Sql = Sql & " and codvarie = " & DBSet(RS1!codvarie, "N")
+            Sql = Sql & " group by 1 "
         
             Set Rs2 = New ADODB.Recordset
             
-            Rs2.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
             If DBLet(Rs2.Fields(i).Value, "N") = 0 Then
-                sql = "update tmpclasifica2 set kilcal" & i & "=kilcal" & i + 1 & ","
-                sql = sql & " nomcal" & i & "=nomcal" & i + 1
+                Sql = "update tmpclasifica2 set kilcal" & i & "=kilcal" & i + 1 & ","
+                Sql = Sql & " nomcal" & i & "=nomcal" & i + 1
                 
                 For J = i + 1 To 19
-                    sql = sql & ", kilcal" & J & "=kilcal" & J + 1
-                    sql = sql & ", nomcal" & J & "=nomcal" & J + 1
+                    Sql = Sql & ", kilcal" & J & "=kilcal" & J + 1
+                    Sql = Sql & ", nomcal" & J & "=nomcal" & J + 1
                 Next J
                 
-                sql = sql & ", kilcal20=" & ValorNulo
-                sql = sql & ", nomcal20=" & ValorNulo
-                sql = sql & " where codvarie = " & DBSet(RS1.Fields(0).Value, "N")
-                sql = sql & " and codusu = " & vUsu.Codigo
+                Sql = Sql & ", kilcal20=" & ValorNulo
+                Sql = Sql & ", nomcal20=" & ValorNulo
+                Sql = Sql & " where codvarie = " & DBSet(RS1.Fields(0).Value, "N")
+                Sql = Sql & " and codusu = " & vUsu.Codigo
                 
-                conn.Execute sql
+                conn.Execute Sql
                 
             Else
                 i = i + 1
@@ -27449,7 +27486,7 @@ End Function
 Private Function CargarTemporal5(cTabla As String, cWhere As String, cTabla2 As String) As Boolean
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql3 As String
@@ -27484,43 +27521,43 @@ Dim DNroArbol As Long
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
     End If
     
-    sql = "select distinct rcampos.codsocio, rcampos.codcampo "
-    sql = sql & " from " & cTabla
-    sql = sql & " where rcampos.fecbajas is null "
+    Sql = "select distinct rcampos.codsocio, rcampos.codcampo "
+    Sql = Sql & " from " & cTabla
+    Sql = Sql & " where rcampos.fecbajas is null "
     If cWhere <> "" Then
-        sql = sql & " and " & cWhere
+        Sql = Sql & " and " & cWhere
     End If
-    sql = sql & " union "
-    sql = sql & " select distinct rhisfruta.codsocio, rhisfruta.codcampo "
-    sql = sql & " from (" & cTabla & ") inner join rhisfruta on rcampos.codcampo = rhisfruta.codcampo and rcampos.codsocio = rhisfruta.codsocio "
+    Sql = Sql & " union "
+    Sql = Sql & " select distinct rhisfruta.codsocio, rhisfruta.codcampo "
+    Sql = Sql & " from (" & cTabla & ") inner join rhisfruta on rcampos.codcampo = rhisfruta.codcampo and rcampos.codsocio = rhisfruta.codsocio "
     If cWhere <> "" Then
-        sql = sql & " where " & cWhere
+        Sql = Sql & " where " & cWhere
     End If
-    If txtcodigo(39).Text <> "" Then sql = sql & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(39).Text, "F")
-    If txtcodigo(40).Text <> "" Then sql = sql & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(40).Text, "F")
+    If txtCodigo(39).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(39).Text, "F")
+    If txtCodigo(40).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(40).Text, "F")
     
     '[Monica]13/11/2013: faltan los medieros para sacar los kilos de las entradas
-    sql = sql & " union "
-    sql = sql & " select distinct rhisfruta.codsocio, rhisfruta.codcampo "
-    sql = sql & " from (" & cTabla2 & ") inner join rhisfruta on rcampos_cooprop.codcampo = rhisfruta.codcampo and rcampos_cooprop.codsocio = rhisfruta.codsocio "
+    Sql = Sql & " union "
+    Sql = Sql & " select distinct rhisfruta.codsocio, rhisfruta.codcampo "
+    Sql = Sql & " from (" & cTabla2 & ") inner join rhisfruta on rcampos_cooprop.codcampo = rhisfruta.codcampo and rcampos_cooprop.codsocio = rhisfruta.codsocio "
     If cWhere <> "" Then
-        sql = sql & " where " & cWhere
+        Sql = Sql & " where " & cWhere
     End If
-    If txtcodigo(39).Text <> "" Then sql = sql & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(39).Text, "F")
-    If txtcodigo(40).Text <> "" Then sql = sql & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(40).Text, "F")
+    If txtCodigo(39).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(39).Text, "F")
+    If txtCodigo(40).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(40).Text, "F")
     
     
-    sql = sql & " order by 1, 2"
+    Sql = Sql & " order by 1, 2"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql2 = "insert into tmpinfkilos (codusu, codprodu, codsocio, codcampo, kilosnet, porcen,"
     Sql2 = Sql2 & "canaforo, hanegada, hectarea, rdtohane, rdtohecta, nroarbol) values "
@@ -27535,8 +27572,8 @@ Dim DNroArbol As Long
         
         SQLaux = "select sum(kilosnet) from rhisfruta where codsocio = " & DBSet(Rs.Fields(0).Value, "N")
         SQLaux = SQLaux & " and codcampo = " & DBSet(Rs.Fields(1).Value, "N")
-        If txtcodigo(39).Text <> "" Then SQLaux = SQLaux & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(39).Text, "F")
-        If txtcodigo(40).Text <> "" Then SQLaux = SQLaux & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(40).Text, "F")
+        If txtCodigo(39).Text <> "" Then SQLaux = SQLaux & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(39).Text, "F")
+        If txtCodigo(40).Text <> "" Then SQLaux = SQLaux & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(40).Text, "F")
         
         Sql3 = Sql3 & DBSet(DevuelveValor(SQLaux), "N") & ",0," 'kilosnet
         
@@ -27603,41 +27640,41 @@ Dim DNroArbol As Long
     conn.Execute Sql2
     
     '[Monica]13/11/2013: puede que hayan errores en el prorrateo de hectareas, hanegadas, arboles y canaforo, se lo daremos al
-    sql = "select codcampo, sum(canaforo) canaforo, sum(hanegada) hanegada, sum(hectarea) hectarea, sum(nroarbol) nroarbol from tmpinfkilos where codusu = " & vUsu.Codigo & " group by codcampo order by codcampo "
+    Sql = "select codcampo, sum(canaforo) canaforo, sum(hanegada) hanegada, sum(hectarea) hectarea, sum(nroarbol) nroarbol from tmpinfkilos where codusu = " & vUsu.Codigo & " group by codcampo order by codcampo "
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rs.EOF
-        sql = "select codsocio, canaforo, "
+        Sql = "select codsocio, canaforo, "
         Select Case Combo1(5).ListIndex
             Case 0
-                sql = sql & " supcoope, nroarbol"
+                Sql = Sql & " supcoope, nroarbol"
             Case 1
-                sql = sql & " supsigpa, nroarbol"
+                Sql = Sql & " supsigpa, nroarbol"
             Case 2
-                sql = sql & " supcatas, nroarbol"
+                Sql = Sql & " supcatas, nroarbol"
             Case 3
-                sql = sql & " supculti, nroarbol"
+                Sql = Sql & " supculti, nroarbol"
         End Select
-        sql = sql & " from rcampos where codcampo = " & DBSet(Rs!codcampo, "N")
+        Sql = Sql & " from rcampos where codcampo = " & DBSet(Rs!codcampo, "N")
         
         Set RS1 = New ADODB.Recordset
-        RS1.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RS1.EOF Then
             DCanaforo = DBLet(Rs!Canaforo, "N") - DBLet(RS1!Canaforo, "N")
             DHectarea = DBLet(Rs!hectarea, "N") - DBLet(RS1.Fields(2).Value, "N")
             DHanegada = Round2(DHectarea / vParamAplic.Faneca, 2)
             DNroArbol = DBLet(Rs!nroarbol, "N") - DBLet(RS1!nroarbol, "N")
         
-            sql = "update tmpinfkilos set "
-            sql = sql & " canaforo = canaforo + " & DBSet(DCanaforo, "N")
-            sql = sql & " ,hanegada = hanegada + " & DBSet(DHanegada, "N")
-            sql = sql & " ,hectarea = hectarea + " & DBSet(DHectarea, "N")
-            sql = sql & " ,nroarbol = nroarbol + " & DBSet(DNroArbol, "N")
-            sql = sql & " where codusu = " & vUsu.Codigo
-            sql = sql & " and codcampo = " & DBSet(Rs!codcampo, "N")
-            sql = sql & " and codsocio = " & DBSet(RS1!Codsocio, "N")
+            Sql = "update tmpinfkilos set "
+            Sql = Sql & " canaforo = canaforo + " & DBSet(DCanaforo, "N")
+            Sql = Sql & " ,hanegada = hanegada + " & DBSet(DHanegada, "N")
+            Sql = Sql & " ,hectarea = hectarea + " & DBSet(DHectarea, "N")
+            Sql = Sql & " ,nroarbol = nroarbol + " & DBSet(DNroArbol, "N")
+            Sql = Sql & " where codusu = " & vUsu.Codigo
+            Sql = Sql & " and codcampo = " & DBSet(Rs!codcampo, "N")
+            Sql = Sql & " and codsocio = " & DBSet(RS1!Codsocio, "N")
         
-            conn.Execute sql
+            conn.Execute Sql
         End If
         
         Rs.MoveNext
@@ -27653,7 +27690,7 @@ End Function
 
 Private Function CargarTemporalVtaFruta(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SqlValues As String
@@ -27671,16 +27708,16 @@ Dim TipoAlb As Integer
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "select  vtafrutacab.numalbar, vtafrutacab.fecalbar, vtafrutacab.codsocio, vtafrutacab.codclien, vtafrutalin.codvarie, vtafrutalin.descalibre, vtafrutalin.numcajon, vtafrutalin.numpalet, vtafrutalin.pesonetoreal, vtafrutacab.numpalot, vtafrutacab.tarapalot, vtafrutacab.tipoalbaran FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "select  vtafrutacab.numalbar, vtafrutacab.fecalbar, vtafrutacab.codsocio, vtafrutacab.codclien, vtafrutalin.codvarie, vtafrutalin.descalibre, vtafrutalin.numcajon, vtafrutalin.numpalet, vtafrutalin.pesonetoreal, vtafrutacab.numpalot, vtafrutacab.tarapalot, vtafrutacab.tipoalbaran FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     SqlValues = ""
     
@@ -27742,7 +27779,7 @@ End Function
 
 Private Function ActualizarRegistros(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim sql As String
+Dim Sql As String
 
     On Error GoTo eActualizarRegistros
 
@@ -27751,17 +27788,17 @@ Dim sql As String
 '    cTabla = QuitarCaracterACadena(cTabla, "{")
 '    cTabla = QuitarCaracterACadena(cTabla, "}")
 '    SQL = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
-    sql = "update rhisfruta, variedades set rhisfruta.impreso = 1 where rhisfruta.codvarie = variedades.codvarie "
+    Sql = "update rhisfruta, variedades set rhisfruta.impreso = 1 where rhisfruta.codvarie = variedades.codvarie "
 
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
         'SQL = SQL & " WHERE " & cWhere
-        sql = sql & " and " & cWhere
+        Sql = Sql & " and " & cWhere
     End If
     
-    conn.Execute sql
+    conn.Execute Sql
     
     ActualizarRegistros = True
     Exit Function
@@ -27772,14 +27809,14 @@ End Function
 
 
 Private Function NombreCalidad(Var As String, Calid As String) As String
-Dim sql As String
+Dim Sql As String
 
     NombreCalidad = ""
 
-    sql = "select nomcalab from rcalidad where codvarie = " & DBSet(Var, "N")
-    sql = sql & " and codcalid = " & DBSet(Calid, "N")
+    Sql = "select nomcalab from rcalidad where codvarie = " & DBSet(Var, "N")
+    Sql = Sql & " and codcalid = " & DBSet(Calid, "N")
     
-    NombreCalidad = DevuelveValor(sql)
+    NombreCalidad = DevuelveValor(Sql)
     
 End Function
 
@@ -27916,16 +27953,16 @@ Dim cad As String
     'column  63,f_precio using "&&.&&",";",
 
     cad = "C"                                                  'p.1 tipo de registro
-    cad = cad & Format(txtcodigo(27).Text, "0000")             'p.2 año ejercicio
+    cad = cad & Format(txtCodigo(27).Text, "0000")             'p.2 año ejercicio
     cad = cad & "17"                                           'p.6 comunidad autonoma
     cad = cad & RellenaABlancos(vParam.CifEmpresa, True, 9)    'p.8 cif empresa
     cad = cad & "OP"                                           'p.17 tipo de vendedor
-    cad = cad & RellenaABlancos(txtcodigo(28).Text, True, 9)   'p.19 cif industria transformadora
+    cad = cad & RellenaABlancos(txtCodigo(28).Text, True, 9)   'p.19 cif industria transformadora
     cad = cad & RellenaABlancos(Combo1(4).Text, True, 2)       'p.28 producto segun tabla
-    cad = cad & RellenaAceros(ImporteSinFormato(txtcodigo(29).Text), True, 10)    'p.30 kilos contratados
-    cad = cad & Format(txtcodigo(30).Text, "ddmmyyyy")         'p.40 fecha de contratacion
-    cad = cad & RellenaAceros(ImporteSinFormato(CCur(txtcodigo(31).Text) * 100), False, 6)    'p.48 superficie
-    cad = cad & Format(txtcodigo(32).Text, "00.00")            'p.54 precio
+    cad = cad & RellenaAceros(ImporteSinFormato(txtCodigo(29).Text), True, 10)    'p.30 kilos contratados
+    cad = cad & Format(txtCodigo(30).Text, "ddmmyyyy")         'p.40 fecha de contratacion
+    cad = cad & RellenaAceros(ImporteSinFormato(CCur(txtCodigo(31).Text) * 100), False, 6)    'p.48 superficie
+    cad = cad & Format(txtCodigo(32).Text, "00.00")            'p.54 precio
     
     Print #NFich, cad
 End Sub
@@ -27935,11 +27972,11 @@ Dim cad As String
 Dim Areas As Long
 
     cad = "P"                                                'p.1 tipo de registro
-    cad = cad & Format(txtcodigo(27).Text, "0000")           'p.2 año ejercicio
+    cad = cad & Format(txtCodigo(27).Text, "0000")           'p.2 año ejercicio
     cad = cad & "17"                                         'p.6 comunidad autonoma
     cad = cad & RellenaABlancos(vParam.CifEmpresa, True, 9)  'p.8 cif empresa
     cad = cad & "OP"                                         'p.17 tipo de vendedor
-    cad = cad & RellenaABlancos(txtcodigo(28).Text, True, 9) 'p.19 cif de la empresa transformadora
+    cad = cad & RellenaABlancos(txtCodigo(28).Text, True, 9) 'p.19 cif de la empresa transformadora
     cad = cad & RellenaABlancos(Combo1(4).Text, True, 2)     'p.28 codigo del producto
     cad = cad & RellenaABlancos(vSocio.Nombre, True, 40)     'p.30 nombre socio
     cad = cad & RellenaABlancos(vSocio.nif, True, 9)         'p.70 nif socio
@@ -27958,14 +27995,14 @@ Dim Areas As Long
 End Sub
 
 Private Function ProductoCampo(campo As String) As String
-Dim sql As String
+Dim Sql As String
 
     ProductoCampo = ""
     
-    sql = "select variedades.codprodu from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie "
-    sql = sql & " where rcampos.codcampo = " & DBSet(campo, "N")
+    Sql = "select variedades.codprodu from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie "
+    Sql = Sql & " where rcampos.codcampo = " & DBSet(campo, "N")
     
-    ProductoCampo = DevuelveValor(sql)
+    ProductoCampo = DevuelveValor(Sql)
 
 End Function
 
@@ -27981,7 +28018,7 @@ Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
@@ -27996,15 +28033,15 @@ Dim Tipo As Integer
 
     ComprobarErrores = False
     
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     
 
     i = 0
     lblProgres(2).Caption = "Comprobando errores Tabla temporal entradas "
     
-    sql = "select count(*) from tmpentrada"
-    longitud = TotalRegistros(sql)
+    Sql = "select count(*) from tmpentrada"
+    longitud = TotalRegistros(Sql)
 
     pb2.visible = True
     Me.pb2.Max = longitud
@@ -28012,9 +28049,9 @@ Dim Tipo As Integer
     Me.pb2.Value = 0
     DoEvents
     
-    sql = "select * from tmpentrada"
+    Sql = "select * from tmpentrada"
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
 
     B = True
@@ -28028,63 +28065,63 @@ Dim Tipo As Integer
         DoEvents
 
         ' comprobamos que no exista el albaran en rclasifica
-        sql = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!numalbar, "N")
-        If TotalRegistros(sql) > 0 Then
+        Sql = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!numalbar, "N")
+        If TotalRegistros(Sql) > 0 Then
             Mens = "Nro. de Nota ya existe"
-            sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
+            Sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
                   vUsu.Codigo & "," & DBSet("Albarán:" & Rs!numalbar, "T") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute sql
+            conn.Execute Sql
         End If
 
         ' comprobamos que no exista el albaran en el historico
-        sql = "select numalbar from rhisfruta_entradas where numnotac = " & DBSet(Rs!numalbar, "N")
-        If DevuelveValor(sql) <> 0 Then
-            Mens = "Nro.Nota existe en hco. albarán:" & DevuelveValor(sql)
-            sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
+        Sql = "select numalbar from rhisfruta_entradas where numnotac = " & DBSet(Rs!numalbar, "N")
+        If DevuelveValor(Sql) <> 0 Then
+            Mens = "Nro.Nota existe en hco. albarán:" & DevuelveValor(Sql)
+            Sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
                   vUsu.Codigo & "," & DBSet("Albarán:" & Rs!numalbar, "T") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute sql
+            conn.Execute Sql
         End If
 
 
 
         ' comprobamos que exista el socio
-        sql = "select count(*) from rsocios where codsocio = " & DBSet(Rs!Codsocio, "N")
-        If TotalRegistros(sql) = 0 Then
+        Sql = "select count(*) from rsocios where codsocio = " & DBSet(Rs!Codsocio, "N")
+        If TotalRegistros(Sql) = 0 Then
             Mens = "Socio no existe"
-            sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
+            Sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
                   vUsu.Codigo & "," & DBSet("Socio:" & Rs!Codsocio, "T") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute sql
+            conn.Execute Sql
         End If
 
         ' comprobamos que exista la variedad
-        sql = "select count(*) from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
-        If TotalRegistros(sql) = 0 Then
+        Sql = "select count(*) from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+        If TotalRegistros(Sql) = 0 Then
             Mens = "Variedad no existe"
-            sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
+            Sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
                   vUsu.Codigo & "," & DBSet("Variedad:" & Rs!codvarie, "T") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute sql
+            conn.Execute Sql
         End If
 
         ' comprobamos que exista el campo
-        sql = "select count(*) from rcampos where codsocio = " & DBSet(Rs!Codsocio, "N")
-        sql = sql & " and nrocampo = " & DBSet(Rs!codcampo, "N")
-        sql = sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
-        If TotalRegistros(sql) = 0 Then
+        Sql = "select count(*) from rcampos where codsocio = " & DBSet(Rs!Codsocio, "N")
+        Sql = Sql & " and nrocampo = " & DBSet(Rs!codcampo, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        If TotalRegistros(Sql) = 0 Then
             Mens = "Campo no existe"
-            sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
+            Sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
                   vUsu.Codigo & "," & DBSet(("Socio:" & Rs!Codsocio & "-Campo:" & Rs!codcampo) & "-Variedad:" & Rs!codvarie, "T") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute sql
+            conn.Execute Sql
         End If
 
         ' comprobamos que no exista mas de un campo con ese numero de orden campo (scampo.codcampo MB)
-        sql = "select count(*) from rcampos where codsocio = " & DBSet(Rs!Codsocio, "N")
-        sql = sql & " and nrocampo = " & DBSet(Rs!codcampo, "N")
-        sql = sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
-        If TotalRegistros(sql) > 1 Then
+        Sql = "select count(*) from rcampos where codsocio = " & DBSet(Rs!Codsocio, "N")
+        Sql = Sql & " and nrocampo = " & DBSet(Rs!codcampo, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        If TotalRegistros(Sql) > 1 Then
             Mens = "Campo con más de un registro"
-            sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
+            Sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
                   vUsu.Codigo & "," & DBSet(("Socio:" & Rs!Codsocio & "-Campo:" & Rs!codcampo) & "-Variedad:" & Rs!codvarie, "T") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute sql
+            conn.Execute Sql
         End If
 
 ' se activara cuando quite botones de lineas de la clasificacion
@@ -28124,8 +28161,8 @@ Dim Tipo As Integer
     
     lblProgres(2).Caption = "Comprobando errores Tabla temporal clasifica "
     
-    sql = "select count(*) from tmpclasific"
-    longitud = TotalRegistros(sql)
+    Sql = "select count(*) from tmpclasific"
+    longitud = TotalRegistros(Sql)
 
     pb2.visible = True
     Me.pb2.Max = longitud
@@ -28133,9 +28170,9 @@ Dim Tipo As Integer
     Me.pb2.Value = 0
     DoEvents
     
-    sql = "select * from tmpclasific"
+    Sql = "select * from tmpclasific"
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     B = True
     i = 0
@@ -28148,31 +28185,31 @@ Dim Tipo As Integer
         DoEvents
         
         ' comprobamos que no exista el albaran en rclasifica
-        sql = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!numalbar, "N")
-        If TotalRegistros(sql) > 0 Then
+        Sql = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!numalbar, "N")
+        If TotalRegistros(Sql) > 0 Then
             Mens = "Nro. de Nota ya existe"
-            sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
+            Sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
                   vUsu.Codigo & "," & DBSet("Albarán:" & Rs!numalbar, "T") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute sql
+            conn.Execute Sql
         End If
 
         ' comprobamos que exista la variedad
-        sql = "select count(*) from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
-        If TotalRegistros(sql) = 0 Then
+        Sql = "select count(*) from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+        If TotalRegistros(Sql) = 0 Then
             Mens = "Variedad no existe"
-            sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
+            Sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
                   vUsu.Codigo & "," & DBSet("Variedad:" & Rs!codvarie, "T") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute sql
+            conn.Execute Sql
         End If
 
         ' comprobamos que exista la calidad
-        sql = "select count(*) from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N")
-        sql = sql & " and codcalid = " & DBSet(Rs!codcalir, "N")
-        If TotalRegistros(sql) = 0 Then
+        Sql = "select count(*) from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = Sql & " and codcalid = " & DBSet(Rs!codcalir, "N")
+        If TotalRegistros(Sql) = 0 Then
             Mens = "Calidad no existe"
-            sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
+            Sql = "insert into tmpinformes (codusu, nombre1, nombre2) values (" & _
                   vUsu.Codigo & "," & DBSet(("Variedad:" & Rs!codvarie & "-Calidad:" & Rs!codcalir), "T") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute sql
+            conn.Execute Sql
         End If
 
 
@@ -28202,7 +28239,7 @@ Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Total As Long
@@ -28238,8 +28275,8 @@ Dim campo As String
     Me.pb2.Value = 0
     DoEvents
 
-    sql = "insert into tmpentrada(codsocio, codcampo, numalbar, codvarie, fecalbar, "
-    sql = sql & "horalbar, kilosbru, kilosnet, numcajon) values  "
+    Sql = "insert into tmpentrada(codsocio, codcampo, numalbar, codvarie, fecalbar, "
+    Sql = Sql & "horalbar, kilosbru, kilosnet, numcajon) values  "
     Sql2 = ""
 
     While Not EOF(NF)
@@ -28293,8 +28330,8 @@ Dim campo As String
         Sql2 = Sql2 & DBSet(RecuperaValor(cad, 10), "N") & ")," ' numero de cajones
     End If
     
-    sql = sql & Mid(Sql2, 1, Len(Sql2) - 1)
-    conn.Execute sql
+    Sql = Sql & Mid(Sql2, 1, Len(Sql2) - 1)
+    conn.Execute Sql
     
     
     
@@ -28317,7 +28354,7 @@ Dim campo As String
     Me.pb2.Value = 0
     DoEvents
 
-    sql = "insert into tmpclasific(numalbar, codvarie, codcalir, porcenta) values  "
+    Sql = "insert into tmpclasific(numalbar, codvarie, codcalir, porcenta) values  "
     Sql2 = ""
     
     While Not EOF(NF)
@@ -28361,8 +28398,8 @@ Dim campo As String
     End If
     
     
-    sql = sql & Mid(Sql2, 1, Len(Sql2) - 1)
-    conn.Execute sql
+    Sql = Sql & Mid(Sql2, 1, Len(Sql2) - 1)
+    conn.Execute Sql
     
     
     
@@ -28379,7 +28416,7 @@ End Function
 
 
 Private Function CargarClasificacion() As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql3 As String
 Dim Rs As ADODB.Recordset
@@ -28406,8 +28443,8 @@ Dim cadMen As String
     
     lblProgres(2).Caption = "Cargando Entradas"
     
-    sql = "select count(*) from tmpentrada order by numalbar"
-    longitud = TotalRegistros(sql)
+    Sql = "select count(*) from tmpentrada order by numalbar"
+    longitud = TotalRegistros(Sql)
     
     pb2.visible = True
     Me.pb2.Max = longitud
@@ -28416,10 +28453,10 @@ Dim cadMen As String
     DoEvents
     
     
-    sql = "select * from tmpentrada order by numalbar"
+    Sql = "select * from tmpentrada order by numalbar"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         Me.pb2.Value = Me.pb2.Value + 1
@@ -28430,40 +28467,40 @@ Dim cadMen As String
         
         Transporte = 0
     
-        sql = "insert into rclasifica (numnotac,fechaent,horaentr,codvarie,codsocio,codcampo,tipoentr,recolect,codtrans,codcapat,"
-        sql = sql & "codtarif,kilosbru,numcajon,kilosnet,observac,"
-        sql = sql & "imptrans,impacarr,imprecol,imppenal,tiporecol,horastra,numtraba,numalbar,fecalbar,impreso) values "
+        Sql = "insert into rclasifica (numnotac,fechaent,horaentr,codvarie,codsocio,codcampo,tipoentr,recolect,codtrans,codcapat,"
+        Sql = Sql & "codtarif,kilosbru,numcajon,kilosnet,observac,"
+        Sql = Sql & "imptrans,impacarr,imprecol,imppenal,tiporecol,horastra,numtraba,numalbar,fecalbar,impreso) values "
     
         campo = 0
         campo = DevuelveValor("select codcampo from rcampos where nrocampo = " & DBSet(Rs!codcampo, "N") & " and codsocio=" & DBSet(Rs!Codsocio, "N") & " and codvarie=" & DBSet(Rs!codvarie, "N"))
     
-        sql = sql & "(" & DBSet(Rs!numalbar, "N") & ","
-        sql = sql & DBSet(Rs!Fecalbar, "F") & ","
-        sql = sql & DBSet(Rs!horalbar, "FH") & ","
-        sql = sql & DBSet(Rs!codvarie, "N") & ","
-        sql = sql & DBSet(Rs!Codsocio, "N") & ","
+        Sql = Sql & "(" & DBSet(Rs!numalbar, "N") & ","
+        Sql = Sql & DBSet(Rs!Fecalbar, "F") & ","
+        Sql = Sql & DBSet(Rs!horalbar, "FH") & ","
+        Sql = Sql & DBSet(Rs!codvarie, "N") & ","
+        Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
 '        Sql = Sql & DBSet(Rs!codCampo, "N") & ","
-        sql = sql & DBSet(campo, "N") & ","
-        sql = sql & "0," ' tipoentr 0=normal
-        sql = sql & "1," ' recolect 1=socio
-        sql = sql & ValorNulo & "," 'transportista
-        sql = sql & ValorNulo & "," 'capataz
-        sql = sql & ValorNulo & "," 'tarifa
-        sql = sql & DBSet(Rs!KilosBru, "N") & ","
-        sql = sql & DBSet(Rs!Numcajon, "N") & ","
-        sql = sql & DBSet(Rs!KilosNet, "N") & ","
-        sql = sql & ValorNulo & ","
-        sql = sql & DBSet(Transporte, "N") & ","
-        sql = sql & ValorNulo & ","
-        sql = sql & ValorNulo & ","
-        sql = sql & ValorNulo & ","
-        sql = sql & "0," 'tiporecol 0=horas 1=destajo no admite valor nulo
-        sql = sql & ValorNulo & ","
-        sql = sql & ValorNulo & ","
-        sql = sql & DBSet(Rs!numalbar, "N") & ","
-        sql = sql & DBSet(Rs!Fecalbar, "F") & ",0)"
+        Sql = Sql & DBSet(campo, "N") & ","
+        Sql = Sql & "0," ' tipoentr 0=normal
+        Sql = Sql & "1," ' recolect 1=socio
+        Sql = Sql & ValorNulo & "," 'transportista
+        Sql = Sql & ValorNulo & "," 'capataz
+        Sql = Sql & ValorNulo & "," 'tarifa
+        Sql = Sql & DBSet(Rs!KilosBru, "N") & ","
+        Sql = Sql & DBSet(Rs!Numcajon, "N") & ","
+        Sql = Sql & DBSet(Rs!KilosNet, "N") & ","
+        Sql = Sql & ValorNulo & ","
+        Sql = Sql & DBSet(Transporte, "N") & ","
+        Sql = Sql & ValorNulo & ","
+        Sql = Sql & ValorNulo & ","
+        Sql = Sql & ValorNulo & ","
+        Sql = Sql & "0," 'tiporecol 0=horas 1=destajo no admite valor nulo
+        Sql = Sql & ValorNulo & ","
+        Sql = Sql & ValorNulo & ","
+        Sql = Sql & DBSet(Rs!numalbar, "N") & ","
+        Sql = Sql & DBSet(Rs!Fecalbar, "F") & ",0)"
         
-        conn.Execute sql
+        conn.Execute Sql
         
         
         Rs.MoveNext
@@ -28474,29 +28511,29 @@ Dim cadMen As String
 
     ' 21-05-2009: cargamos las clasificacion dependiendo de si es por campo o almacen de aquellas que
     ' no tengan clasificacion
-    sql = "select * from tmpentrada order by numalbar "
+    Sql = "select * from tmpentrada order by numalbar "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rs.EOF
-        sql = "select count(*) from tmpclasific where numalbar = " & DBSet(Rs!numalbar, "N")
-        If TotalRegistros(sql) = 0 Then ' si no hay clasificacion en el fichero metemos la correspondiente
+        Sql = "select count(*) from tmpclasific where numalbar = " & DBSet(Rs!numalbar, "N")
+        If TotalRegistros(Sql) = 0 Then ' si no hay clasificacion en el fichero metemos la correspondiente
             Tipo = DevuelveValor("select tipoclasifica from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
             If Tipo = 0 Then ' clasificacion en campo
                 campo = 0
                 campo = DevuelveValor("select codcampo from rcampos where nrocampo = " & DBSet(Rs!codcampo, "N") & " and codsocio=" & DBSet(Rs!Codsocio, "N") & " and codvarie=" & DBSet(Rs!codvarie, "N"))
 
-                sql = "insert into tmpclasific (numalbar, codvarie, codcalir, porcenta) "
-                sql = sql & " select " & DBSet(Rs!numalbar, "N") & ", codvarie, codcalid, muestra "
-                sql = sql & " from rcampos_clasif where codcampo = " & DBSet(campo, "N")
+                Sql = "insert into tmpclasific (numalbar, codvarie, codcalir, porcenta) "
+                Sql = Sql & " select " & DBSet(Rs!numalbar, "N") & ", codvarie, codcalid, muestra "
+                Sql = Sql & " from rcampos_clasif where codcampo = " & DBSet(campo, "N")
 
-                conn.Execute sql
+                conn.Execute Sql
             Else ' clasificacion en almacen
-                sql = "insert into tmpclasific (numalbar, codvarie, codcalir, porcenta) "
-                sql = sql & " select " & DBSet(Rs!numalbar, "N") & ", codvarie, codcalid, 0 "
-                sql = sql & " from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = "insert into tmpclasific (numalbar, codvarie, codcalir, porcenta) "
+                Sql = Sql & " select " & DBSet(Rs!numalbar, "N") & ", codvarie, codcalid, 0 "
+                Sql = Sql & " from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N")
 
-                conn.Execute sql
+                conn.Execute Sql
             End If
         End If
         Rs.MoveNext
@@ -28507,9 +28544,9 @@ Dim cadMen As String
     
     lblProgres(2).Caption = "Cargando Clasificación"
     
-    sql = "select count(*) from tmpclasific, tmpentrada "
-    sql = sql & " where tmpclasific.numalbar=tmpentrada.numalbar "
-    longitud = TotalRegistros(sql)
+    Sql = "select count(*) from tmpclasific, tmpentrada "
+    Sql = Sql & " where tmpclasific.numalbar=tmpentrada.numalbar "
+    longitud = TotalRegistros(Sql)
     
     pb2.visible = True
     Me.pb2.Max = longitud
@@ -28518,12 +28555,12 @@ Dim cadMen As String
     DoEvents
     
     
-    sql = "select *, tmpentrada.kilosnet as kilosent from tmpclasific, tmpentrada "
-    sql = sql & " where tmpclasific.numalbar=tmpentrada.numalbar "
-    sql = sql & " order by tmpclasific.numalbar, tmpclasific.codcalir"
+    Sql = "select *, tmpentrada.kilosnet as kilosent from tmpclasific, tmpentrada "
+    Sql = Sql & " where tmpclasific.numalbar=tmpentrada.numalbar "
+    Sql = Sql & " order by tmpclasific.numalbar, tmpclasific.codcalir"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         AlbarAnt = DBLet(Rs!numalbar, "N")
@@ -28564,14 +28601,14 @@ Dim cadMen As String
         CalidAnt = DBLet(Rs!codcalir, "N")
         
         
-        sql = "insert into rclasifica_clasif (numnotac,codvarie,codcalid,muestra,kilosnet) values"
-        sql = sql & "(" & DBSet(Rs!numalbar, "N") & ","
-        sql = sql & DBSet(Rs!codvarie, "N") & ","
-        sql = sql & DBSet(Rs!codcalir, "N") & ","
-        sql = sql & DBSet(Rs!porcenta, "N") & ","
-        sql = sql & DBSet(Kilos, "N") & ")"
+        Sql = "insert into rclasifica_clasif (numnotac,codvarie,codcalid,muestra,kilosnet) values"
+        Sql = Sql & "(" & DBSet(Rs!numalbar, "N") & ","
+        Sql = Sql & DBSet(Rs!codvarie, "N") & ","
+        Sql = Sql & DBSet(Rs!codcalir, "N") & ","
+        Sql = Sql & DBSet(Rs!porcenta, "N") & ","
+        Sql = Sql & DBSet(Kilos, "N") & ")"
         
-        conn.Execute sql
+        conn.Execute Sql
         
         Rs.MoveNext
     Wend
@@ -28588,9 +28625,9 @@ Dim cadMen As String
     
     Set Rs = Nothing
     
-    sql = "select rclasifica.* from rclasifica, tmpentrada where rclasifica.numnotac = tmpentrada.numalbar "
+    Sql = "select rclasifica.* from rclasifica, tmpentrada where rclasifica.numnotac = tmpentrada.numalbar "
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
         If Not ActualizarTransporte(Rs, cadMen) Then
             cadMen = "Actualizando gastos de transporte" & cadMen
@@ -28779,7 +28816,7 @@ Dim vWhere As String
         While Not Rs.EOF And B
             Regs = Regs + 1
 
-            B = LineaTraspasoCoop(NFic, txtcodigo(45).Text, Rs)
+            B = LineaTraspasoCoop(NFic, txtCodigo(45).Text, Rs)
             
             Rs.MoveNext
         Wend
@@ -28843,8 +28880,8 @@ Dim FechaEnvio As String
     
     NFic = FreeFile
     
-    FechaEnvio = Mid(txtcodigo(132).Text, 7, 4) & Mid(txtcodigo(132).Text, 4, 2) & Mid(txtcodigo(132).Text, 1, 2)
-    Open App.Path & "\Socios_" & Format(txtcodigo(62).Text, "0000") & "_" & FechaEnvio & "_" & vParam.CifEmpresa & ".csv" For Output As #NFic
+    FechaEnvio = Mid(txtCodigo(132).Text, 7, 4) & Mid(txtCodigo(132).Text, 4, 2) & Mid(txtCodigo(132).Text, 1, 2)
+    Open App.Path & "\Socios_" & Format(txtCodigo(62).Text, "0000") & "_" & FechaEnvio & "_" & vParam.CifEmpresa & ".csv" For Output As #NFic
     
     Set Rs = Nothing
     
@@ -28910,7 +28947,7 @@ Dim FechaEnvio As String
         NFic = FreeFile
         
         
-        Open App.Path & "\Parcela_" & Format(txtcodigo(62).Text, "0000") & "_" & FechaEnvio & "_" & vParam.CifEmpresa & ".csv" For Output As #NFic
+        Open App.Path & "\Parcela_" & Format(txtCodigo(62).Text, "0000") & "_" & FechaEnvio & "_" & vParam.CifEmpresa & ".csv" For Output As #NFic
         
         Set Rs = Nothing
         
@@ -29038,7 +29075,7 @@ Private Function LineaTraspasoCoop(NFich As Integer, Coop As String, ByRef Rs As
 Dim cad As String
 Dim Areas As Long
 Dim Tipo As Integer
-Dim sql As String
+Dim Sql As String
 Dim vSocio As cSocio
 Dim vSeccion As CSeccion
 Dim CodiIVA As String
@@ -29066,18 +29103,18 @@ Dim Gastos As Currency
 
     cad = ""
     
-    sql = "select count(*) from rfactsoc_variedad where codtipom = " & DBSet(Rs!CodTipom, "T")
-    sql = sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+    Sql = "select count(*) from rfactsoc_variedad where codtipom = " & DBSet(Rs!CodTipom, "T")
+    Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
     
-    If TotalRegistros(sql) > 1 Then
+    If TotalRegistros(Sql) > 1 Then
         Producto = "00"
         Variedad = "00"
         NomVar = "Varias Var."
     Else
-        sql = "select rfactsoc_variedad.codvarie  from rfactsoc_variedad where codtipom = " & DBSet(Rs!CodTipom, "T")
-        sql = sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        Sql = "select rfactsoc_variedad.codvarie  from rfactsoc_variedad where codtipom = " & DBSet(Rs!CodTipom, "T")
+        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         
-        codVar = DevuelveValor(sql)
+        codVar = DevuelveValor(Sql)
         
         Producto = Mid(Format(codVar, "0000"), 1, 2)
         Variedad = Mid(Format(codVar, "0000"), 3, 2)
@@ -29098,9 +29135,9 @@ Dim Gastos As Currency
 '        Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!CodVarie, "N"))
         nifSocio = DevuelveValor("select nifsocio from rsocios where codsocio =" & DBSet(Rs!Codsocio, "N"))
         
-        sql = "select sum(kilosnet) from rfactsoc_variedad where codtipom = " & DBSet(Rs!CodTipom, "T")
-        sql = sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
-        Kilos = DevuelveValor(sql)
+        Sql = "select sum(kilosnet) from rfactsoc_variedad where codtipom = " & DBSet(Rs!CodTipom, "T")
+        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        Kilos = DevuelveValor(Sql)
         
         If CInt(Coop) = 3 Or CInt(Coop) = 4 Then
             cad = cad & Format(DBLet(Rs!numfactu, "N"), "000000") & "|"
@@ -29193,11 +29230,11 @@ Dim Gastos As Currency
         vPorcGasto = DevuelveDesdeBDNew(cAgro, "rcoope", "porcgast", "codcoope", CStr(CoopSoc), "N")
         If vPorcGasto = "" Then vPorcGasto = "0"
         
-        sql = "select sum(imporvar) from rfacsoc_variedad where codtipom = " & DBSet(Rs!CodTipom, "T")
-        sql = sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
-        sql = sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        Sql = "select sum(imporvar) from rfacsoc_variedad where codtipom = " & DBSet(Rs!CodTipom, "T")
+        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         
-        vImporte = DevuelveValor(sql)
+        vImporte = DevuelveValor(Sql)
         Gastos = Round2(vImporte * CCur(ImporteSinFormato(vPorcGasto)) / 100, 2)
         
         cad = cad & Format(Round2(CCur(vPorcGasto) * 100, 0), "0000")
@@ -29264,7 +29301,7 @@ End Function
 Private Function CargarTemporal6(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Kilos1 As Long
 Dim Kilos1VC As Long
@@ -29294,29 +29331,29 @@ Dim cadena As String
     Sql2 = "delete from tmpclasifica where codusu = " & vUsu.Codigo
     conn.Execute Sql2
 
-    sql = "Select variedades.codvarie FROM variedades "
+    Sql = "Select variedades.codvarie FROM variedades "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " where " & cWhere
+        Sql = Sql & " where " & cWhere
     End If
 
     vCond = ""
     vCond2 = ""
     
-    If txtcodigo(54).Text <> "" Then vCond = vCond & " and rhisfruta.codsocio >= " & DBSet(txtcodigo(54).Text, "N")
-    If txtcodigo(55).Text <> "" Then vCond = vCond & " and rhisfruta.codsocio <= " & DBSet(txtcodigo(55).Text, "N")
+    If txtCodigo(54).Text <> "" Then vCond = vCond & " and rhisfruta.codsocio >= " & DBSet(txtCodigo(54).Text, "N")
+    If txtCodigo(55).Text <> "" Then vCond = vCond & " and rhisfruta.codsocio <= " & DBSet(txtCodigo(55).Text, "N")
     
-    If txtcodigo(52).Text <> "" Then vCond = vCond & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(52).Text, "F")
-    If txtcodigo(53).Text <> "" Then vCond = vCond & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(53).Text, "F")
+    If txtCodigo(52).Text <> "" Then vCond = vCond & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(52).Text, "F")
+    If txtCodigo(53).Text <> "" Then vCond = vCond & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(53).Text, "F")
     
     If Check7.Value = 1 Then
-        If txtcodigo(54).Text <> "" Then vCond2 = vCond2 & " and rclasifica.codsocio >= " & DBSet(txtcodigo(54).Text, "N")
-        If txtcodigo(55).Text <> "" Then vCond2 = vCond2 & " and rclasifica.codsocio <= " & DBSet(txtcodigo(55).Text, "N")
+        If txtCodigo(54).Text <> "" Then vCond2 = vCond2 & " and rclasifica.codsocio >= " & DBSet(txtCodigo(54).Text, "N")
+        If txtCodigo(55).Text <> "" Then vCond2 = vCond2 & " and rclasifica.codsocio <= " & DBSet(txtCodigo(55).Text, "N")
         
-        If txtcodigo(52).Text <> "" Then vCond2 = vCond2 & " and rclasifica.fechaent >= " & DBSet(txtcodigo(52).Text, "F")
-        If txtcodigo(53).Text <> "" Then vCond2 = vCond2 & " and rclasifica.fechaent <= " & DBSet(txtcodigo(53).Text, "F")
+        If txtCodigo(52).Text <> "" Then vCond2 = vCond2 & " and rclasifica.fechaent >= " & DBSet(txtCodigo(52).Text, "F")
+        If txtCodigo(53).Text <> "" Then vCond2 = vCond2 & " and rclasifica.fechaent <= " & DBSet(txtCodigo(53).Text, "F")
     End If
     
     cadena = ""
@@ -29344,7 +29381,7 @@ Dim cadena As String
     
     ' obtenemos los kilos de cada variedad con las condiciones
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rs.EOF
         
         'KILOS PRODUCCION NORMAL COOPERATIVA --> KILOS1
@@ -29565,7 +29602,7 @@ Private Function LineaTraspasoSocioROPAS(NFich As Integer, ByRef Rs As ADODB.Rec
 Dim cad As String
 Dim Areas As Long
 Dim Tipo As Integer
-Dim sql As String
+Dim Sql As String
 Dim vSocio As cSocio
 Dim vSeccion As CSeccion
 Dim CodiIVA As String
@@ -29592,7 +29629,7 @@ Dim vCaracter As String
     LineaTraspasoSocioROPAS = False
 
     cad = ""
-    cad = cad & Format(txtcodigo(62).Text, "0000") & ";"
+    cad = cad & Format(txtCodigo(62).Text, "0000") & ";"
     cad = cad & RellenaABlancos(vParam.CifEmpresa, True, 12) & ";"
     cad = cad & RellenaABlancos(vParam.CifEmpresa, True, 12) & ";"
     cad = cad & RellenaABlancos(Rs!nifSocio, True, 12) & ";"
@@ -29638,7 +29675,7 @@ Private Function LineaTraspasoCampoROPAS(NFich As Integer, ByRef Rs As ADODB.Rec
 Dim cad As String
 Dim Areas As Long
 Dim Tipo As Integer
-Dim sql As String
+Dim Sql As String
 Dim vSocio As cSocio
 Dim vSeccion As CSeccion
 Dim CodiIVA As String
@@ -29681,13 +29718,13 @@ Dim Rs2 As ADODB.Recordset
     LineaTraspasoCampoROPAS = False
 
 
-    sql = "select * from rcampos_cooprop where codcampo = " & DBSet(Rs!codcampo, "N")
+    Sql = "select * from rcampos_cooprop where codcampo = " & DBSet(Rs!codcampo, "N")
     
     
-    If TotalRegistrosConsulta(sql) <> 0 Then
+    If TotalRegistrosConsulta(Sql) <> 0 Then
     
         Set Rs2 = New ADODB.Recordset
-        Rs2.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
         Pobla = ""
@@ -29695,22 +29732,22 @@ Dim Rs2 As ADODB.Recordset
         
         HectaSig = 0 '  SUPERFICIE TOTAL PARCELA
         
-        sql = "select sum(supsigpa) from rcampos, rpartida where poligono = " & DBSet(Rs!Poligono, "N")
-        sql = sql & " and parcela = " & DBSet(Rs!Parcela, "N")
-        sql = sql & " and rcampos.fecbajas is null "
-        sql = sql & " and rpartida.codpobla = " & DBSet(Pobla, "T")
-        sql = sql & " and rcampos.codparti = rpartida.codparti "
+        Sql = "select sum(supsigpa) from rcampos, rpartida where poligono = " & DBSet(Rs!Poligono, "N")
+        Sql = Sql & " and parcela = " & DBSet(Rs!Parcela, "N")
+        Sql = Sql & " and rcampos.fecbajas is null "
+        Sql = Sql & " and rpartida.codpobla = " & DBSet(Pobla, "T")
+        Sql = Sql & " and rcampos.codparti = rpartida.codparti "
         
-        HectaSig = DevuelveValor(sql)
+        HectaSig = DevuelveValor(Sql)
         
         HectaSigRecinto = 0 '  SUPERFICIE TOTAL RECINTO
         
-        sql = "select sum(supsigpa) from rcampos, rpartida where poligono = " & DBSet(Rs!Poligono, "N")
-        sql = sql & " and parcela = " & DBSet(Rs!Parcela, "N")
-        sql = sql & " and recintos = " & DBSet(Rs!recintos, "N")
-        sql = sql & " and rcampos.fecbajas is null "
-        sql = sql & " and rpartida.codpobla = " & DBSet(Pobla, "T")
-        sql = sql & " and rcampos.codparti = rpartida.codparti "
+        Sql = "select sum(supsigpa) from rcampos, rpartida where poligono = " & DBSet(Rs!Poligono, "N")
+        Sql = Sql & " and parcela = " & DBSet(Rs!Parcela, "N")
+        Sql = Sql & " and recintos = " & DBSet(Rs!recintos, "N")
+        Sql = Sql & " and rcampos.fecbajas is null "
+        Sql = Sql & " and rpartida.codpobla = " & DBSet(Pobla, "T")
+        Sql = Sql & " and rcampos.codparti = rpartida.codparti "
         
         HectaSigRecinto = DBLet(Rs!supsigpa, "N") 'DevuelveValor(Sql)
         
@@ -29727,7 +29764,7 @@ Dim Rs2 As ADODB.Recordset
             If vSocio.LeerDatos(Rs2!Codsocio) Then
                 
                 cad = ""
-                cad = cad & Format(txtcodigo(62).Text, "0000") & ";"
+                cad = cad & Format(txtCodigo(62).Text, "0000") & ";"
                 cad = cad & RellenaABlancos(vParam.CifEmpresa, True, 12) & ";"
                 cad = cad & RellenaABlancos(vSocio.nif, True, 12) & ";ES;"
                 
@@ -29828,7 +29865,7 @@ Dim Rs2 As ADODB.Recordset
     Else
 
         cad = ""
-        cad = cad & Format(txtcodigo(62).Text, "0000") & ";"
+        cad = cad & Format(txtCodigo(62).Text, "0000") & ";"
         cad = cad & RellenaABlancos(vParam.CifEmpresa, True, 12) & ";"
         cad = cad & RellenaABlancos(Rs!nifSocio, True, 12) & ";ES;"
         
@@ -29866,24 +29903,24 @@ Dim Rs2 As ADODB.Recordset
         
         HectaSig = 0 '  SUPERFICIE TOTAL PARCELA
         
-        sql = "select sum(supsigpa) from rcampos, rpartida where poligono = " & DBSet(Rs!Poligono, "N")
-        sql = sql & " and parcela = " & DBSet(Rs!Parcela, "N")
-        sql = sql & " and rcampos.fecbajas is null "
-        sql = sql & " and rpartida.codpobla = " & DBSet(Pobla, "T")
-        sql = sql & " and rcampos.codparti = rpartida.codparti "
+        Sql = "select sum(supsigpa) from rcampos, rpartida where poligono = " & DBSet(Rs!Poligono, "N")
+        Sql = Sql & " and parcela = " & DBSet(Rs!Parcela, "N")
+        Sql = Sql & " and rcampos.fecbajas is null "
+        Sql = Sql & " and rpartida.codpobla = " & DBSet(Pobla, "T")
+        Sql = Sql & " and rcampos.codparti = rpartida.codparti "
         
-        HectaSig = DevuelveValor(sql)
+        HectaSig = DevuelveValor(Sql)
         
         cad = cad & Format(HectaSig, "##0.0000") & ";"
         
         HectaSigRecinto = 0 '  SUPERFICIE TOTAL RECINTO
         
-        sql = "select sum(supsigpa) from rcampos, rpartida where poligono = " & DBSet(Rs!Poligono, "N")
-        sql = sql & " and parcela = " & DBSet(Rs!Parcela, "N")
-        sql = sql & " and recintos = " & DBSet(Rs!recintos, "N")
-        sql = sql & " and rcampos.fecbajas is null "
-        sql = sql & " and rpartida.codpobla = " & DBSet(Pobla, "T")
-        sql = sql & " and rcampos.codparti = rpartida.codparti "
+        Sql = "select sum(supsigpa) from rcampos, rpartida where poligono = " & DBSet(Rs!Poligono, "N")
+        Sql = Sql & " and parcela = " & DBSet(Rs!Parcela, "N")
+        Sql = Sql & " and recintos = " & DBSet(Rs!recintos, "N")
+        Sql = Sql & " and rcampos.fecbajas is null "
+        Sql = Sql & " and rpartida.codpobla = " & DBSet(Pobla, "T")
+        Sql = Sql & " and rcampos.codparti = rpartida.codparti "
         
         HectaSigRecinto = DBLet(Rs!supsigpa, "N") 'DevuelveValor(Sql)
         
@@ -29954,22 +29991,22 @@ On Error GoTo ecopiarfichero
 
     Me.cd1.DefaultExt = "csv"
     
-    FechaEnvio = Mid(txtcodigo(132).Text, 7, 4) & Mid(txtcodigo(132).Text, 4, 2) & Mid(txtcodigo(132).Text, 1, 2)
+    FechaEnvio = Mid(txtCodigo(132).Text, 7, 4) & Mid(txtCodigo(132).Text, 4, 2) & Mid(txtCodigo(132).Text, 1, 2)
     
     cd1.Filter = "Archivos csv|csv|"
     cd1.FilterIndex = 1
     'cd1.FileName = "socios.csv"
-    cd1.FileName = "Socios_" & Format(txtcodigo(62).Text, "0000") & "_" & FechaEnvio & "_" & vParam.CifEmpresa & ".csv"
+    cd1.FileName = "Socios_" & Format(txtCodigo(62).Text, "0000") & "_" & FechaEnvio & "_" & vParam.CifEmpresa & ".csv"
     Me.cd1.ShowSave
     
     If cd1.FileName <> "" Then
         'FileCopy App.Path & "\socios.csv", cd1.FileName
-        FileCopy App.Path & "\Socios_" & Format(txtcodigo(62).Text, "0000") & "_" & FechaEnvio & "_" & vParam.CifEmpresa & ".csv", cd1.FileName
+        FileCopy App.Path & "\Socios_" & Format(txtCodigo(62).Text, "0000") & "_" & FechaEnvio & "_" & vParam.CifEmpresa & ".csv", cd1.FileName
         
         'cd1.FileName = "parcelas.csv"
         'FileCopy App.Path & "\parcelas.csv", cd1.FileName
-        cd1.FileName = "Parcela_" & Format(txtcodigo(62).Text, "0000") & "_" & FechaEnvio & "_" & vParam.CifEmpresa & ".csv"
-        FileCopy App.Path & "\Parcela_" & Format(txtcodigo(62).Text, "0000") & "_" & FechaEnvio & "_" & vParam.CifEmpresa & ".csv", cd1.FileName
+        cd1.FileName = "Parcela_" & Format(txtCodigo(62).Text, "0000") & "_" & FechaEnvio & "_" & vParam.CifEmpresa & ".csv"
+        FileCopy App.Path & "\Parcela_" & Format(txtCodigo(62).Text, "0000") & "_" & FechaEnvio & "_" & vParam.CifEmpresa & ".csv", cd1.FileName
 
     End If
     
@@ -29986,7 +30023,7 @@ End Function
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim vClien As cSocio
 ' añadido
@@ -30002,45 +30039,45 @@ Dim Nregs As Long
     Select Case OpcionListado
         Case 19 ' fichero de agriweb
             If B Then
-                If txtcodigo(27).Text = "" Then
+                If txtCodigo(27).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente el año del ejercicios.", vbExclamation
                     B = False
-                    PonerFoco txtcodigo(26)
+                    PonerFoco txtCodigo(26)
                 End If
             End If
             If B Then
-                If txtcodigo(28).Text = "" Then
+                If txtCodigo(28).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente el CIF de la industria transformadora.", vbExclamation
                     B = False
-                    PonerFoco txtcodigo(28)
+                    PonerFoco txtCodigo(28)
                 End If
             End If
             If B Then
-                If txtcodigo(29).Text = "" Then
+                If txtCodigo(29).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente los kilos contratados.", vbExclamation
                     B = False
-                    PonerFoco txtcodigo(29)
+                    PonerFoco txtCodigo(29)
                 End If
             End If
             If B Then
-                If txtcodigo(30).Text = "" Then
+                If txtCodigo(30).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente la Fecha de formalización.", vbExclamation
                     B = False
-                    PonerFoco txtcodigo(30)
+                    PonerFoco txtCodigo(30)
                 End If
             End If
             If B Then
-                If txtcodigo(31).Text = "" Then
+                If txtCodigo(31).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente la Superficie Total de Contrato.", vbExclamation
                     B = False
-                    PonerFoco txtcodigo(31)
+                    PonerFoco txtCodigo(31)
                 End If
             End If
             If B Then
-                If txtcodigo(32).Text = "" Then
+                If txtCodigo(32).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente el Precio Estipulado de Compra.", vbExclamation
                     B = False
-                    PonerFoco txtcodigo(32)
+                    PonerFoco txtCodigo(32)
                 End If
             End If
             
@@ -30048,87 +30085,87 @@ Dim Nregs As Long
             ' en el caso del calibrador grande de Catadau hemos de introducir
             ' obligatoriamente la fecha
             If (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9) And Combo1(6).ListIndex = 0 Then
-                If txtcodigo(63).Text = "" Then
+                If txtCodigo(63).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente la fecha de calibrado.", vbExclamation
                     B = False
-                    PonerFoco txtcodigo(63)
+                    PonerFoco txtCodigo(63)
                 End If
             End If
              '[Monica]21/04/2016: añadidas las notas para Castellduc
             If vParamAplic.Cooperativa = 5 Then
-                If txtcodigo(170).Text = "" Or txtcodigo(179).Text = "" Then
+                If txtCodigo(170).Text = "" Or txtCodigo(179).Text = "" Then
                     MsgBox "Debe introducir desde hasta notas.", vbExclamation
                     B = False
-                    PonerFoco txtcodigo(170)
+                    PonerFoco txtCodigo(170)
                 End If
             End If
             
         Case 28 ' alta masiva de bonificaciones
-            If txtcodigo(75).Text = "" Then
+            If txtCodigo(75).Text = "" Then
                 MsgBox "Debe introducir obligatoriamente la variedad.", vbExclamation
                 B = False
-                PonerFoco txtcodigo(75)
+                PonerFoco txtCodigo(75)
             End If
             
-            If B And txtcodigo(74).Text = "" Then
+            If B And txtCodigo(74).Text = "" Then
                 MsgBox "Debe introducir obligatoriamente la fecha de inicio.", vbExclamation
                 B = False
-                PonerFoco txtcodigo(74)
+                PonerFoco txtCodigo(74)
             End If
             
             If B And ExistenBonificaciones Then
                 MsgBox "Existen bonificaciones para esa variedad en el rango de fechas. Revise.", vbExclamation
                 B = False
-                PonerFoco txtcodigo(75)
+                PonerFoco txtCodigo(75)
             End If
             
         Case 29 ' baja masiva de bonificaciones
-            If txtcodigo(75).Text = "" Then
+            If txtCodigo(75).Text = "" Then
                 MsgBox "Debe introducir obligatoriamente la variedad.", vbExclamation
                 B = False
-                PonerFoco txtcodigo(75)
+                PonerFoco txtCodigo(75)
             End If
         
         Case 30 ' Generacion de clasificacion (Picassent)
-            If txtcodigo(83).Text = "" Then
+            If txtCodigo(83).Text = "" Then
                 MsgBox "Debe introducir obligatoriamente un socio.", vbExclamation
                 B = False
-                PonerFoco txtcodigo(83)
+                PonerFoco txtCodigo(83)
             Else
-                If EstaSocioDeAlta(txtcodigo(83)) Then
+                If EstaSocioDeAlta(txtCodigo(83)) Then
                     Dim vSocio As cSocio
                     Set vSocio = New cSocio
-                    If Not vSocio.LeerDatosSeccion(txtcodigo(83).Text, vParamAplic.Seccionhorto) Then
+                    If Not vSocio.LeerDatosSeccion(txtCodigo(83).Text, vParamAplic.Seccionhorto) Then
                          MsgBox "El socio no está dado de alta en la sección Hortofrutícola. Revise.", vbExclamation
                          B = False
-                         PonerFoco txtcodigo(83)
+                         PonerFoco txtCodigo(83)
                     End If
                 End If
             End If
             If B Then
-                If txtcodigo(80).Text <> "" Then
-                    sql = "select count(*) from rcampos where codsocio = " & DBSet(txtcodigo(83).Text, "N")
-                    sql = sql & " and nrocampo = " & DBSet(txtcodigo(80).Text, "N")
-                    sql = sql & " and codvarie = " & DBSet(RecuperaValor(CadTag, 1), "N")
-                    Nregs = TotalRegistros(sql)
+                If txtCodigo(80).Text <> "" Then
+                    Sql = "select count(*) from rcampos where codsocio = " & DBSet(txtCodigo(83).Text, "N")
+                    Sql = Sql & " and nrocampo = " & DBSet(txtCodigo(80).Text, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(RecuperaValor(CadTag, 1), "N")
+                    Nregs = TotalRegistros(Sql)
                     If Nregs = 0 Then
                         MsgBox "No existe el campo de ese socio variedad. Revise.", vbExclamation
                         B = False
-                        PonerFoco txtcodigo(80)
+                        PonerFoco txtCodigo(80)
                     Else
                         If Nregs > 1 Then
                             MsgBox "Hay más de un campo. Revise.", vbExclamation
                             B = False
-                            PonerFoco txtcodigo(80)
+                            PonerFoco txtCodigo(80)
                         End If
                     End If
                 End If
             End If
             If B Then
-                If txtcodigo(79).Text = "" Then
+                If txtCodigo(79).Text = "" Then
                     MsgBox "Debe de introducir un valor en Porcentaje de Destrio.", vbExclamation
                     B = False
-                    PonerFoco txtcodigo(79)
+                    PonerFoco txtCodigo(79)
                 End If
             End If
     
@@ -30136,13 +30173,13 @@ Dim Nregs As Long
             If txtNombre(147).Text = "" And Not EsReimpresion Then
                 MsgBox "Debe introducir obligatoriamente un responsable.", vbExclamation
                 B = False
-                PonerFoco txtcodigo(147)
+                PonerFoco txtCodigo(147)
             End If
             If B Then
                 If txtNombre(149).Text = "" And Not EsReimpresion Then
                     MsgBox "Debe introducir obligatoriamente una variedad.", vbExclamation
                     B = False
-                    PonerFoco txtcodigo(149)
+                    PonerFoco txtCodigo(149)
                 End If
             End If
 '[Monica]30/09/2013: dejo que no metan la partida
@@ -30154,26 +30191,26 @@ Dim Nregs As Long
 '                End If
 '            End If
             If B Then
-                If txtcodigo(138).Text = "" And Not EsReimpresion Then
+                If txtCodigo(138).Text = "" And Not EsReimpresion Then
                     MsgBox "Debe de introducir una Fecha.", vbExclamation
                     B = False
-                    PonerFoco txtcodigo(138)
+                    PonerFoco txtCodigo(138)
                 End If
             End If
             
             If B And EsReimpresion Then
-                If txtcodigo(141).Text = "" Then
+                If txtCodigo(141).Text = "" Then
                     MsgBox "Si es reimpresión, debe de introducir el nro de orden.", vbExclamation
                     B = False
-                    PonerFoco txtcodigo(141)
+                    PonerFoco txtCodigo(141)
                 End If
             End If
             
         Case 48 ' traspaso de albaranes de retirada
-            If txtcodigo(169).Text = "" Then
+            If txtCodigo(169).Text = "" Then
                 MsgBox "Debe seleccionar una cooperativa. Reintroduzca.", vbExclamation
                 B = False
-                PonerFoco txtcodigo(169)
+                PonerFoco txtCodigo(169)
             End If
     End Select
     DatosOK = B
@@ -30207,8 +30244,8 @@ Dim vSQL As String
 
      '======== FORMULA  ====================================
     'D/H Socio
-    cDesde = Trim(txtcodigo(64).Text)
-    cHasta = Trim(txtcodigo(65).Text)
+    cDesde = Trim(txtCodigo(64).Text)
+    cHasta = Trim(txtCodigo(65).Text)
     nDesde = txtNombre(64).Text
     nHasta = txtNombre(65).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -30380,7 +30417,7 @@ Private Sub VisualizarFecha(Indice As Integer)
         If Combo1(6).ListIndex = 0 Then
             FrameFecha.Enabled = True
             FrameFecha.visible = True
-            PonerFoco txtcodigo(63)
+            PonerFoco txtCodigo(63)
         Else
             FrameFecha.Enabled = False
             FrameFecha.visible = False
@@ -30392,35 +30429,35 @@ Private Sub VisualizarFecha(Indice As Integer)
     If Indice = 1 Then
         FrameFechasEnt.Enabled = (Combo1(Indice).ListIndex = 1) Or Opcion1(4).Value
         If Not FrameFechasEnt.Enabled Then
-            txtcodigo(197).Text = ""
-            txtcodigo(198).Text = ""
+            txtCodigo(197).Text = ""
+            txtCodigo(198).Text = ""
         End If
     End If
     
 End Sub
 
 Private Function ExistenBonificaciones() As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Dias As Long
 Dim UltimaFecha As Date
 
     ExistenBonificaciones = False
 
-    Dias = CCur(ComprobarCero(txtcodigo(76).Text))
+    Dias = CCur(ComprobarCero(txtCodigo(76).Text))
     
-    UltimaFecha = DateAdd("d", Dias, CDate(txtcodigo(74).Text))
+    UltimaFecha = DateAdd("d", Dias, CDate(txtCodigo(74).Text))
     
-    sql = "select count(*) from rbonifentradas where codvarie = " & DBSet(txtcodigo(75).Text, "N")
-    sql = sql & " and fechaent >= " & DBSet(txtcodigo(74).Text, "F") & " and fechaent < " & DBSet(UltimaFecha, "F")
+    Sql = "select count(*) from rbonifentradas where codvarie = " & DBSet(txtCodigo(75).Text, "N")
+    Sql = Sql & " and fechaent >= " & DBSet(txtCodigo(74).Text, "F") & " and fechaent < " & DBSet(UltimaFecha, "F")
 
-    ExistenBonificaciones = (TotalRegistros(sql) <> 0)
+    ExistenBonificaciones = (TotalRegistros(Sql) <> 0)
 
 End Function
 
 
 
 Private Function InsertarBonificaciones() As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Porcentaje As Currency
 Dim i As Long
@@ -30430,18 +30467,18 @@ Dim Fecha As Date
         
     InsertarBonificaciones = False
         
-    sql = "insert into rbonifentradas (codvarie, fechaent, porcbonif) values "
+    Sql = "insert into rbonifentradas (codvarie, fechaent, porcbonif) values "
     
     Sql2 = ""
-    Fecha = CDate(txtcodigo(74).Text)
-    Porcentaje = CCur(ImporteSinFormato(txtcodigo(77).Text))
-    For i = 1 To CCur(txtcodigo(76).Text)
+    Fecha = CDate(txtCodigo(74).Text)
+    Porcentaje = CCur(ImporteSinFormato(txtCodigo(77).Text))
+    For i = 1 To CCur(txtCodigo(76).Text)
     
-        Sql2 = Sql2 & "(" & DBSet(txtcodigo(75).Text, "N") & "," & DBSet(Fecha, "F") & ","
+        Sql2 = Sql2 & "(" & DBSet(txtCodigo(75).Text, "N") & "," & DBSet(Fecha, "F") & ","
         Sql2 = Sql2 & DBSet(Porcentaje, "N") & "),"
         
         ' le sumamos el indice de correccion al porcentaje
-        Porcentaje = Porcentaje + CCur(ImporteSinFormato(txtcodigo(78).Text))
+        Porcentaje = Porcentaje + CCur(ImporteSinFormato(txtCodigo(78).Text))
         Fecha = DateAdd("d", 1, Fecha)
         
         
@@ -30451,8 +30488,8 @@ Dim Fecha As Date
         'quitamos la ultima coma
         Sql2 = Mid(Sql2, 1, Len(Sql2) - 1)
         
-        sql = sql & Sql2
-        conn.Execute sql
+        Sql = Sql & Sql2
+        conn.Execute Sql
     End If
 
     InsertarBonificaciones = True
@@ -30465,7 +30502,7 @@ End Function
 
 
 Private Function EliminarBonificaciones() As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Porcentaje As Currency
 
@@ -30473,9 +30510,9 @@ Dim Porcentaje As Currency
         
     EliminarBonificaciones = False
         
-    sql = "delete from rbonifentradas where codvarie = " & DBSet(txtcodigo(75).Text, "N")
+    Sql = "delete from rbonifentradas where codvarie = " & DBSet(txtCodigo(75).Text, "N")
     
-    conn.Execute sql
+    conn.Execute Sql
 
     EliminarBonificaciones = True
     Exit Function
@@ -30487,7 +30524,7 @@ End Function
 
 
 Private Function CargarTemporalDatosDestrio(vtabla As String, vWhere As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim KilosTot As Currency
 Dim KilosMan As Currency
 Dim KilosPixat As Currency
@@ -30499,22 +30536,22 @@ Dim Rs2 As ADODB.Recordset
     CargarTemporalDatosDestrio = True
 
 
-    sql = "delete from tmpexcel where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpexcel where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     
-    sql = "select rcontrol.codvarie, codsocio, codcampo, fechacla from " & QuitarCaracterACadena(vtabla, "_1")
+    Sql = "select rcontrol.codvarie, codsocio, codcampo, fechacla from " & QuitarCaracterACadena(vtabla, "_1")
     If vWhere <> "" Then
         vWhere = QuitarCaracterACadena(vWhere, "{")
         vWhere = QuitarCaracterACadena(vWhere, "}")
         vWhere = QuitarCaracterACadena(vWhere, "_1")
-        sql = sql & " WHERE " & vWhere
+        Sql = Sql & " WHERE " & vWhere
     End If
-    sql = sql & " group by 1,2,3,4"
-    sql = sql & " order by 1,2,3,4"
+    Sql = Sql & " group by 1,2,3,4"
+    Sql = Sql & " order by 1,2,3,4"
     
     
     Pb4.visible = True
-    Pb4.Max = TotalRegistrosConsulta(sql)
+    Pb4.Max = TotalRegistrosConsulta(Sql)
     'Me.Refresh
     'DoEvents
     
@@ -30522,7 +30559,7 @@ Dim Rs2 As ADODB.Recordset
     Label2(117).visible = True
     
     Set Rs2 = New ADODB.Recordset
-    Rs2.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs2.EOF
     
@@ -30530,73 +30567,73 @@ Dim Rs2 As ADODB.Recordset
         DoEvents
         Me.Refresh
 
-        sql = "select idplaga, (sum(kilosplaga1) + sum(kilosplaga2) + sum(kilosplaga3) + sum(kilosplaga4) + "
-        sql = sql & " sum(kilosplaga5) + sum(kilosplaga6) + sum(kilosplaga7) + sum(kilosplaga8) + "
-        sql = sql & " sum(kilosplaga9) + sum(kilosplaga10) + sum(kilosplaga11)) as Total  "
-        sql = sql & " from rcontrol_plagas "
-        sql = sql & " where codvarie = " & DBSet(Rs2!codvarie, "N")
-        sql = sql & " and codsocio = " & DBSet(Rs2!Codsocio, "N")
-        sql = sql & " and codcampo = " & DBSet(Rs2!codcampo, "N")
-        sql = sql & " and fechacla = " & DBSet(Rs2!fechacla, "F")
-        sql = sql & " group by 1 "
-        sql = sql & " order by 1 "
+        Sql = "select idplaga, (sum(kilosplaga1) + sum(kilosplaga2) + sum(kilosplaga3) + sum(kilosplaga4) + "
+        Sql = Sql & " sum(kilosplaga5) + sum(kilosplaga6) + sum(kilosplaga7) + sum(kilosplaga8) + "
+        Sql = Sql & " sum(kilosplaga9) + sum(kilosplaga10) + sum(kilosplaga11)) as Total  "
+        Sql = Sql & " from rcontrol_plagas "
+        Sql = Sql & " where codvarie = " & DBSet(Rs2!codvarie, "N")
+        Sql = Sql & " and codsocio = " & DBSet(Rs2!Codsocio, "N")
+        Sql = Sql & " and codcampo = " & DBSet(Rs2!codcampo, "N")
+        Sql = Sql & " and fechacla = " & DBSet(Rs2!fechacla, "F")
+        Sql = Sql & " group by 1 "
+        Sql = Sql & " order by 1 "
     '    Sql = Sql & " and rcontrol_plagas.idplaga <> 2"
        
         Set Rs = New ADODB.Recordset
-        Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        sql = "select sum(kilosman) from rcontrol "
-        sql = sql & " where codvarie = " & DBSet(Rs2!codvarie, "N")
-        sql = sql & " and codsocio = " & DBSet(Rs2!Codsocio, "N")
-        sql = sql & " and codcampo = " & DBSet(Rs2!codcampo, "N")
-        sql = sql & " and fechacla = " & DBSet(Rs2!fechacla, "F")
+        Sql = "select sum(kilosman) from rcontrol "
+        Sql = Sql & " where codvarie = " & DBSet(Rs2!codvarie, "N")
+        Sql = Sql & " and codsocio = " & DBSet(Rs2!Codsocio, "N")
+        Sql = Sql & " and codcampo = " & DBSet(Rs2!codcampo, "N")
+        Sql = Sql & " and fechacla = " & DBSet(Rs2!fechacla, "F")
         
-        KilosMan = DevuelveValor(sql)
+        KilosMan = DevuelveValor(Sql)
         
         KilosTot = 0
         While Not Rs.EOF
-            sql = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,calidad1,calidad2) values ( "
-            sql = sql & vUsu.Codigo & ","
-            sql = sql & DBLet(Rs!idplaga, "N") & ","
-            sql = sql & DBSet(Rs2!fechacla, "F") & ","
-            sql = sql & DBSet(Rs2!codvarie, "N") & ","
-            sql = sql & DBSet(Rs2!Codsocio, "N") & ","
-            sql = sql & DBSet(Rs2!codcampo, "N") & ","
-            sql = sql & DBSet(Rs!Total, "N") & ","
-            sql = sql & DBSet(KilosMan, "N") & ")"
+            Sql = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,calidad1,calidad2) values ( "
+            Sql = Sql & vUsu.Codigo & ","
+            Sql = Sql & DBLet(Rs!idplaga, "N") & ","
+            Sql = Sql & DBSet(Rs2!fechacla, "F") & ","
+            Sql = Sql & DBSet(Rs2!codvarie, "N") & ","
+            Sql = Sql & DBSet(Rs2!Codsocio, "N") & ","
+            Sql = Sql & DBSet(Rs2!codcampo, "N") & ","
+            Sql = Sql & DBSet(Rs!Total, "N") & ","
+            Sql = Sql & DBSet(KilosMan, "N") & ")"
             
-            conn.Execute sql
+            conn.Execute Sql
             If DBLet(Rs!idplaga, "N") <> 2 Then KilosTot = KilosTot + DBLet(Rs!Total, "N")
             Rs.MoveNext
         Wend
         Set Rs = Nothing
         
-        sql = "update tmpexcel set kilosnet = " & DBSet(KilosTot, "N") & " where codusu = " & vUsu.Codigo
-        sql = sql & " and codvarie = " & DBSet(Rs2!codvarie, "N")
-        sql = sql & " and codsocio = " & DBSet(Rs2!Codsocio, "N")
-        sql = sql & " and codcampo = " & DBSet(Rs2!codcampo, "N")
-        sql = sql & " and fecalbar = " & DBSet(Rs2!fechacla, "F")
+        Sql = "update tmpexcel set kilosnet = " & DBSet(KilosTot, "N") & " where codusu = " & vUsu.Codigo
+        Sql = Sql & " and codvarie = " & DBSet(Rs2!codvarie, "N")
+        Sql = Sql & " and codsocio = " & DBSet(Rs2!Codsocio, "N")
+        Sql = Sql & " and codcampo = " & DBSet(Rs2!codcampo, "N")
+        Sql = Sql & " and fecalbar = " & DBSet(Rs2!fechacla, "F")
         
-        conn.Execute sql
+        conn.Execute Sql
         
         '[Monica]26/01/2017: tema de pixat
         If SeAplicaPixat(DBLet(Rs2!codvarie), DBLet(Rs2!fechacla)) Then
-            sql = "select sum(calidad1) from tmpexcel where codusu= " & vUsu.Codigo
-            sql = sql & " and codvarie = " & DBSet(Rs2!codvarie, "N")
-            sql = sql & " and codsocio = " & DBSet(Rs2!Codsocio, "N")
-            sql = sql & " and codcampo = " & DBSet(Rs2!codcampo, "N")
-            sql = sql & " and fecalbar = " & DBSet(Rs2!fechacla, "F")
-            sql = sql & " and numalbar = 15 "
+            Sql = "select sum(calidad1) from tmpexcel where codusu= " & vUsu.Codigo
+            Sql = Sql & " and codvarie = " & DBSet(Rs2!codvarie, "N")
+            Sql = Sql & " and codsocio = " & DBSet(Rs2!Codsocio, "N")
+            Sql = Sql & " and codcampo = " & DBSet(Rs2!codcampo, "N")
+            Sql = Sql & " and fecalbar = " & DBSet(Rs2!fechacla, "F")
+            Sql = Sql & " and numalbar = 15 "
             
-            KilosPixat = DevuelveValor(sql)
+            KilosPixat = DevuelveValor(Sql)
             
-            sql = "update tmpexcel set calidad3 = " & DBSet(KilosPixat, "N") & " where codusu = " & vUsu.Codigo
-            sql = sql & " and codvarie = " & DBSet(Rs2!codvarie, "N")
-            sql = sql & " and codsocio = " & DBSet(Rs2!Codsocio, "N")
-            sql = sql & " and codcampo = " & DBSet(Rs2!codcampo, "N")
-            sql = sql & " and fecalbar = " & DBSet(Rs2!fechacla, "F")
+            Sql = "update tmpexcel set calidad3 = " & DBSet(KilosPixat, "N") & " where codusu = " & vUsu.Codigo
+            Sql = Sql & " and codvarie = " & DBSet(Rs2!codvarie, "N")
+            Sql = Sql & " and codsocio = " & DBSet(Rs2!Codsocio, "N")
+            Sql = Sql & " and codcampo = " & DBSet(Rs2!codcampo, "N")
+            Sql = Sql & " and fecalbar = " & DBSet(Rs2!fechacla, "F")
             
-            conn.Execute sql
+            conn.Execute Sql
         
         End If
         
@@ -30622,7 +30659,7 @@ End Function
 
 Private Function CargarTemporalCampos(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim vCampAnt As CCampAnt
@@ -30639,21 +30676,21 @@ Dim KilosAnt As Long
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
         
-    Sql1 = "select " & vUsu.Codigo & ", rcampos.codcampo, 0,0,sum(kilosnet) from rhisfruta right join (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti)  on rhisfruta.codcampo = rcampos.codcampo where rcampos.codcampo in (" & sql & ")"
+    Sql1 = "select " & vUsu.Codigo & ", rcampos.codcampo, 0,0,sum(kilosnet) from rhisfruta right join (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti)  on rhisfruta.codcampo = rcampos.codcampo where rcampos.codcampo in (" & Sql & ")"
     
     '[Monica]11/05/2018: introducimos las fechas que queremos
-    If txtcodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(197).Text, "F")
-    If txtcodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(198).Text, "F")
+    If txtCodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(197).Text, "F")
+    If txtCodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(198).Text, "F")
     
     
     
@@ -30678,11 +30715,11 @@ Dim KilosAnt As Long
     End If
         
         
-    sql = "select * from tmpinformes where codusu = " & vUsu.Codigo
+    Sql = "select * from tmpinformes where codusu = " & vUsu.Codigo
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    pb5.Max = TotalRegistrosConsulta(sql)
+    pb5.Max = TotalRegistrosConsulta(Sql)
     pb5.visible = True
     Label2(136).visible = True
     pb5.Value = 0
@@ -30694,32 +30731,32 @@ Dim KilosAnt As Long
         KilosAnt = 0
         KilosAntAnterior = 0
         If vCampAnt.BaseDatos <> "" Then
-            sql = "select sum(kilosnet) from " & vCampAnt.BaseDatos & ".rhisfruta where codcampo = " & DBSet(Rs!importe1, "N")
+            Sql = "select sum(kilosnet) from " & vCampAnt.BaseDatos & ".rhisfruta where codcampo = " & DBSet(Rs!importe1, "N")
         
             '[Monica]11/05/2018: introducimos las fechas que queremos
-            If txtcodigo(197).Text <> "" Then sql = sql & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(197).Text, "F")
-            If txtcodigo(198).Text <> "" Then sql = sql & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(198).Text, "F")
+            If txtCodigo(197).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(197).Text, "F")
+            If txtCodigo(198).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(198).Text, "F")
         
-            KilosAnt = DevuelveValor(sql)
+            KilosAnt = DevuelveValor(Sql)
         End If
 
         If BdAntAnterior <> "" Then
-            sql = "select sum(kilosnet) from " & BdAntAnterior & ".rhisfruta where codcampo = " & DBSet(Rs!importe1, "N")
+            Sql = "select sum(kilosnet) from " & BdAntAnterior & ".rhisfruta where codcampo = " & DBSet(Rs!importe1, "N")
         
             '[Monica]11/05/2018: introducimos las fechas que queremos
-            If txtcodigo(197).Text <> "" Then sql = sql & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(197).Text, "F")
-            If txtcodigo(198).Text <> "" Then sql = sql & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(198).Text, "F")
+            If txtCodigo(197).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(197).Text, "F")
+            If txtCodigo(198).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(198).Text, "F")
         
-            KilosAntAnterior = DevuelveValor(sql)
+            KilosAntAnterior = DevuelveValor(Sql)
         End If
 
         ' actualizamos el registro del campo actual
-        sql = "update tmpinformes set importe2 = " & DBSet(KilosAntAnterior, "N")
-        sql = sql & " , importe3 = " & DBSet(KilosAnt, "N")
-        sql = sql & " where codusu = " & DBSet(vUsu.Codigo, "N")
-        sql = sql & " and importe1 = " & DBSet(Rs!importe1, "N")
+        Sql = "update tmpinformes set importe2 = " & DBSet(KilosAntAnterior, "N")
+        Sql = Sql & " , importe3 = " & DBSet(KilosAnt, "N")
+        Sql = Sql & " where codusu = " & DBSet(vUsu.Codigo, "N")
+        Sql = Sql & " and importe1 = " & DBSet(Rs!importe1, "N")
 
-        conn.Execute sql
+        conn.Execute Sql
 
         Rs.MoveNext
     Wend
@@ -30770,7 +30807,7 @@ On Error GoTo EComprobar
     ComprobarFechasConta = False
     
     
-    If txtcodigo(ind).Text <> "" Then
+    If txtCodigo(ind).Text <> "" Then
         FechaIni = "Select fechaini,fechafin From parametros"
         Set Rs = New ADODB.Recordset
         Rs.Open FechaIni, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -30782,12 +30819,12 @@ On Error GoTo EComprobar
             Orden1 = FechaIni
             Orden2 = FechaFin
         
-            If Not EntreFechas(FechaIni, txtcodigo(ind).Text, FechaFin) Then
+            If Not EntreFechas(FechaIni, txtCodigo(ind).Text, FechaFin) Then
                  cad = "El período de contabilización debe estar dentro del ejercicio:" & vbCrLf & vbCrLf
                  cad = cad & "    Desde: " & FechaIni & vbCrLf
                  cad = cad & "    Hasta: " & FechaFin
                  MsgBox cad, vbExclamation
-                 txtcodigo(ind).Text = ""
+                 txtCodigo(ind).Text = ""
             Else
                 ComprobarFechasConta = True
             End If
@@ -30811,11 +30848,11 @@ Dim Orden1 As String
 Dim Orden2 As String
 Dim FFin As Date
 Dim cta As String
-Dim sql As String
+Dim Sql As String
 
    B = True
 
-   If txtcodigo(108).Text = "" Then
+   If txtCodigo(108).Text = "" Then
         MsgBox "No se puede contabilizar, el gasto no tiene fecha. Revise.", vbExclamation
         B = False
    Else
@@ -30827,7 +30864,7 @@ Dim sql As String
          Orden2 = DevuelveDesdeBDNew(cConta, "parametros", "fechafin", "", "", "", "", "", "", "", "", "", "")
          FIni = CDate(Orden1)
          FFin = CDate(Orden2)
-         If Not (CDate(Orden1) <= CDate(txtcodigo(108).Text) And CDate(txtcodigo(108).Text) < CDate(Day(FIni) & "/" & Month(FIni) & "/" & Year(FIni) + 2)) Then
+         If Not (CDate(Orden1) <= CDate(txtCodigo(108).Text) And CDate(txtCodigo(108).Text) < CDate(Day(FIni) & "/" & Month(FIni) & "/" & Year(FIni) + 2)) Then
             MsgBox "La Fecha del gasto no es del ejercicio actual ni del siguiente. Revise.", vbExclamation
             B = False
          End If
@@ -30837,17 +30874,17 @@ Dim sql As String
    
    'cta contable de contrapartida
    If B Then
-        If txtcodigo(128).Text = "" Then
+        If txtCodigo(128).Text = "" Then
              MsgBox "Introduzca la Cta.Contable Contrapartida para contabilizar.", vbExclamation
              B = False
-             PonerFoco txtcodigo(128)
+             PonerFoco txtCodigo(128)
         Else
              cta = ""
-             cta = DevuelveDesdeBDNew(cConta, "cuentas", "codmacta", "codmacta", txtcodigo(128).Text, "T")
+             cta = DevuelveDesdeBDNew(cConta, "cuentas", "codmacta", "codmacta", txtCodigo(128).Text, "T")
              If cta = "" Then
                  MsgBox "La cuenta contable de Contrapartida no existe. Reintroduzca.", vbExclamation
                  B = False
-                 PonerFoco txtcodigo(128)
+                 PonerFoco txtCodigo(128)
              End If
         End If
     End If
@@ -30873,18 +30910,18 @@ Dim sql As String
 End Function
 
 
-Private Sub CmdAcepCambioNro_Click(Index As Integer)
-Dim sql As String
+Private Sub CmdAcepCambioNro_Click(index As Integer)
+Dim Sql As String
 
-    If txtcodigo(129).Text = "" Or txtcodigo(130).Text = "" Then
+    If txtCodigo(129).Text = "" Or txtCodigo(130).Text = "" Then
         MsgBox "Debe introducir un valor en el Número de Factura", vbExclamation
-        PonerFoco txtcodigo(129)
+        PonerFoco txtCodigo(129)
     Else
-        If txtcodigo(129).Text <> txtcodigo(130).Text Then
+        If txtCodigo(129).Text <> txtCodigo(130).Text Then
             MsgBox "El Número de Factura no coincide con la confirmación. Reintroduzca.", vbExclamation
-            PonerFoco txtcodigo(129)
+            PonerFoco txtCodigo(129)
         Else
-            If CambioNroFactura(txtcodigo(130).Text, txtcodigo(131).Text) Then
+            If CambioNroFactura(txtCodigo(130).Text, txtCodigo(131).Text) Then
                 MsgBox "Proceso realizado correctamente", vbExclamation
                 cmdCancel_Click (15)
             End If
@@ -30893,7 +30930,7 @@ Dim sql As String
 End Sub
 
 Private Function CambioNroFactura(NuevoNro As String, NuevaFecha As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Mens As String
 Dim Concepto As String
 Dim Rs2 As ADODB.Recordset
@@ -30908,11 +30945,11 @@ Dim Sql3 As String
     conn.BeginTrans
     
     ' por si estuviera en una factura rectificativa se cambia primero en la rectificativa
-    sql = "update rfactsoc aaaa, rfactsoc bbbb set "
+    Sql = "update rfactsoc aaaa, rfactsoc bbbb set "
 '    Sql = Sql & " aaaa.rectif_numfactu = " & DBSet(NuevoNro, "N")
-    sql = sql & " aaaa.rectif_fecfactu = " & DBSet(NuevaFecha, "F")
-    sql = sql & " where aaaa.rectif_codtipom = bbbb.codtipom and aaaa.rectif_numfactu = bbbb.numfactu and aaaa.rectif_fecfactu = bbbb.fecfactu "
-    conn.Execute sql
+    Sql = Sql & " aaaa.rectif_fecfactu = " & DBSet(NuevaFecha, "F")
+    Sql = Sql & " where aaaa.rectif_codtipom = bbbb.codtipom and aaaa.rectif_numfactu = bbbb.numfactu and aaaa.rectif_fecfactu = bbbb.fecfactu "
+    conn.Execute Sql
     
     
     '[Monica]02/12/2014: en el caso de picassent, preguntamos si quiere insertar en ringresos
@@ -30943,11 +30980,11 @@ Dim Sql3 As String
                 Concepto = "FRA." & Trim(NuevoNro) & " DE " & NuevaFecha
                 
                 While Not Rs2.EOF
-                    sql = "insert into ringresos (codsocio,codvarie,concepto,importe) values "
-                    sql = sql & "(" & DBSet(Rs2!Codsocio, "N") & "," & DBSet(Rs2!codvarie, "N") & "," & DBSet(Concepto, "T") & ","
-                    sql = sql & DBSet(Rs2!imporvar, "N") & ")"
+                    Sql = "insert into ringresos (codsocio,codvarie,concepto,importe) values "
+                    Sql = Sql & "(" & DBSet(Rs2!Codsocio, "N") & "," & DBSet(Rs2!codvarie, "N") & "," & DBSet(Concepto, "T") & ","
+                    Sql = Sql & DBSet(Rs2!imporvar, "N") & ")"
                     
-                    conn.Execute sql
+                    conn.Execute Sql
                     
                     Rs2.MoveNext
                 Wend
@@ -30959,13 +30996,13 @@ Dim Sql3 As String
     Set rs3 = Nothing
     
     ' cabecera rfactsoc
-    sql = "update rfactsoc set fecfactu = " & DBSet(NuevaFecha, "F")
-    sql = sql & " ,contabilizado = 0 "
-    sql = sql & " ,pdtenrofact = 2 "
-    sql = sql & " ,numfacrec = " & DBSet(NuevoNro, "T")
-    sql = sql & " where " & NumCod
+    Sql = "update rfactsoc set fecfactu = " & DBSet(NuevaFecha, "F")
+    Sql = Sql & " ,contabilizado = 0 "
+    Sql = Sql & " ,pdtenrofact = 2 "
+    Sql = Sql & " ,numfacrec = " & DBSet(NuevoNro, "T")
+    Sql = Sql & " where " & NumCod
     
-    conn.Execute sql
+    conn.Execute Sql
     
     
     
@@ -30980,7 +31017,7 @@ eCambioNroFactura:
 End Function
 
 Private Function CargarVotos(vtabla As String, vSelect As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim SqlValues As String
 Dim Sql2 As String
@@ -30991,26 +31028,26 @@ Dim Votos As Long
     
     CargarVotos = False
     
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     
     '[Monica]15/01/2013: el cálculo de campos se hace con rcampos en lugar de con rpozos
                                             'codsocio,hanegadas,votos
     Sql2 = "insert into tmpinformes (codusu, codigo1, precio1, importe2) values "
     
     '[Monica]13/03/2014: enlazamos con el propietario
-    sql = "select rcampos.codpropiet, sum(rcampos.supcoope / " & DBSet(vParamAplic.Faneca, "N") & ") hanegadas from (" & vtabla & ") INNER JOIN  rcampos ON rsocios.codsocio = rcampos.codpropiet "
-    If vSelect <> "" Then sql = sql & " where " & vSelect
-    If sql <> "" Then
-        sql = sql & " and rsocios_seccion.fecbaja is null "
+    Sql = "select rcampos.codpropiet, sum(rcampos.supcoope / " & DBSet(vParamAplic.Faneca, "N") & ") hanegadas from (" & vtabla & ") INNER JOIN  rcampos ON rsocios.codsocio = rcampos.codpropiet "
+    If vSelect <> "" Then Sql = Sql & " where " & vSelect
+    If Sql <> "" Then
+        Sql = Sql & " and rsocios_seccion.fecbaja is null "
     Else
-        sql = sql & " where rsocios_seccion.fecbaja is null "
+        Sql = Sql & " where rsocios_seccion.fecbaja is null "
     End If
-    sql = sql & " and rcampos.fecbajas is null "
-    sql = sql & " group by 1 order by 1 "
+    Sql = Sql & " and rcampos.fecbajas is null "
+    Sql = Sql & " group by 1 order by 1 "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     SqlValues = ""
     
@@ -31036,7 +31073,7 @@ eCargarVotos:
 End Function
 
 Private Function CalculoVotos(Hanegadas As Currency) As Long
-Dim sql As String
+Dim Sql As String
 Dim Votos As Currency
     
     On Error Resume Next
@@ -31076,7 +31113,7 @@ Dim AntParcela As Long
 Dim AntRecintos As Long
 
 Dim AntCodconse As Long
-Dim sql As String
+Dim Sql As String
 
 
 Dim cad As String
@@ -31092,17 +31129,17 @@ Dim Sql3 As String
 
     
     '[Monica]02/04/2014: trabajamos con la tabla intermedia para sumar supcultcatas y canaforo posteriormente
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     '                                       campo,    codconse, poligono, parcela,  recinto
-    sql = "insert into tmpinformes (codusu, importe1, importe2, importe3, importe4, importe5) "
-    sql = sql & "select " & vUsu.Codigo & ",rcampos.codcampo, variedades.codconse, rcampos_parcelas.poligono, rcampos_parcelas.parcela, rcampos_parcelas.recintos "
-    sql = sql & " from (" & cTabla & ") INNER JOIN rcampos_parcelas ON rcampos.codcampo = rcampos_parcelas.codcampo "
+    Sql = "insert into tmpinformes (codusu, importe1, importe2, importe3, importe4, importe5) "
+    Sql = Sql & "select " & vUsu.Codigo & ",rcampos.codcampo, variedades.codconse, rcampos_parcelas.poligono, rcampos_parcelas.parcela, rcampos_parcelas.recintos "
+    Sql = Sql & " from (" & cTabla & ") INNER JOIN rcampos_parcelas ON rcampos.codcampo = rcampos_parcelas.codcampo "
     
     If vWhere <> "" Then
-        sql = sql & " where " & vWhere
+        Sql = Sql & " where " & vWhere
     End If
-    conn.Execute sql
+    conn.Execute Sql
 
 
 
@@ -31214,7 +31251,7 @@ Private Function LineaTraspasoCampoROPASPicassent(NFich As Integer, ByRef Rs As 
 Dim cad As String
 Dim Areas As Long
 Dim Tipo As Integer
-Dim sql As String
+Dim Sql As String
 Dim vSocio As cSocio
 Dim vSeccion As CSeccion
 Dim CodiIVA As String
@@ -31262,7 +31299,7 @@ Dim Total As Currency
     LineaTraspasoCampoROPASPicassent = False
 
     cad = ""
-    cad = cad & Format(txtcodigo(62).Text, "0000") & ";"
+    cad = cad & Format(txtCodigo(62).Text, "0000") & ";"
     cad = cad & RellenaABlancos(vParam.CifEmpresa, True, 12) & ";"
     cad = cad & RellenaABlancos(Rs!nifSocio, True, 12) & ";ES;"
     
@@ -31404,7 +31441,7 @@ Dim Total As Variant
 
 Dim cTabla As String
 Dim vWhere As String
-Dim sql As String
+Dim Sql As String
 
     On Error GoTo EGen
     
@@ -31426,51 +31463,51 @@ Dim sql As String
     End If
     
         
-    sql = "insert into rhisfrutasin (numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr,recolect,kilosbru,numcajon,kilosnet,impreso,impentrada,cobradosn, "
-    sql = sql & " transportadopor,kilostra,esbonifespecial,estarepcooprop) "
-    sql = sql & " select aaa.numfactu + 9000000, " & DBSet(txtcodigo(135).Text, "F") & ", bbb.codvarie, aaa.codsocio,  bbb.codcampo, 0,0, sum(bbb.kilosnet) bruto,round(sum(bbb.kilosnet) / 20,0) cajas,"
-    sql = sql & " sum(bbb.kilosnet),0,0,0,0,sum(bbb.kilosnet),0,0"
-    sql = sql & " from (rfactsoc aaa inner join rfactsoc_variedad bbb on aaa.CodTipom = bbb.CodTipom And aaa.numfactu = bbb.numfactu "
-    sql = sql & " and aaa.fecfactu = bbb.fecfactu) inner join rfactsoc_calidad ccc"
-    sql = sql & " on aaa.codtipom = ccc.codtipom and aaa.numfactu = ccc.numfactu and aaa.fecfactu = ccc.fecfactu and "
-    sql = sql & " bbb.CodVarie = ccc.CodVarie And bbb.CodCampo = ccc.CodCampo"
-    sql = sql & " where " & vWhere
-    sql = sql & " group by 1,2,3,4,5,6,7 "
+    Sql = "insert into rhisfrutasin (numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr,recolect,kilosbru,numcajon,kilosnet,impreso,impentrada,cobradosn, "
+    Sql = Sql & " transportadopor,kilostra,esbonifespecial,estarepcooprop) "
+    Sql = Sql & " select aaa.numfactu + 9000000, " & DBSet(txtCodigo(135).Text, "F") & ", bbb.codvarie, aaa.codsocio,  bbb.codcampo, 0,0, sum(bbb.kilosnet) bruto,round(sum(bbb.kilosnet) / 20,0) cajas,"
+    Sql = Sql & " sum(bbb.kilosnet),0,0,0,0,sum(bbb.kilosnet),0,0"
+    Sql = Sql & " from (rfactsoc aaa inner join rfactsoc_variedad bbb on aaa.CodTipom = bbb.CodTipom And aaa.numfactu = bbb.numfactu "
+    Sql = Sql & " and aaa.fecfactu = bbb.fecfactu) inner join rfactsoc_calidad ccc"
+    Sql = Sql & " on aaa.codtipom = ccc.codtipom and aaa.numfactu = ccc.numfactu and aaa.fecfactu = ccc.fecfactu and "
+    Sql = Sql & " bbb.CodVarie = ccc.CodVarie And bbb.CodCampo = ccc.CodCampo"
+    Sql = Sql & " where " & vWhere
+    Sql = Sql & " group by 1,2,3,4,5,6,7 "
 
-    conn.Execute sql
+    conn.Execute Sql
 
 
-    sql = "insert into rhisfrutasin_entradas (numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,kilosnet,kilostra,tiporecol) "
-    sql = sql & " select aaa.numfactu + 9000000, aaa.numfactu + 9000000, DATE('" & Format(txtcodigo(135).Text, "yyyy-mm-dd") & " 09:02:00' + INTERVAL aaa.numfactu / 3 * RAND() HOUR) fecha, "
-    sql = sql & " ('" & Format(txtcodigo(135).Text, "yyyy-mm-dd") & " 06:02:00' + INTERVAL aaa.numfactu * RAND() MINUTE) hora, bbb.kilosnet, round(bbb.kilosnet / 20,0),bbb.KilosNet , bbb.KilosNet, 0"
-    sql = sql & " from rfactsoc aaa inner join rfactsoc_variedad bbb on   aaa.codtipom = bbb.codtipom and aaa.numfactu = bbb.numfactu "
-    sql = sql & " and aaa.fecfactu = bbb.fecfactu where " & vWhere
+    Sql = "insert into rhisfrutasin_entradas (numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,kilosnet,kilostra,tiporecol) "
+    Sql = Sql & " select aaa.numfactu + 9000000, aaa.numfactu + 9000000, DATE('" & Format(txtCodigo(135).Text, "yyyy-mm-dd") & " 09:02:00' + INTERVAL aaa.numfactu / 3 * RAND() HOUR) fecha, "
+    Sql = Sql & " ('" & Format(txtCodigo(135).Text, "yyyy-mm-dd") & " 06:02:00' + INTERVAL aaa.numfactu * RAND() MINUTE) hora, bbb.kilosnet, round(bbb.kilosnet / 20,0),bbb.KilosNet , bbb.KilosNet, 0"
+    Sql = Sql & " from rfactsoc aaa inner join rfactsoc_variedad bbb on   aaa.codtipom = bbb.codtipom and aaa.numfactu = bbb.numfactu "
+    Sql = Sql & " and aaa.fecfactu = bbb.fecfactu where " & vWhere
     
-    conn.Execute sql
+    conn.Execute Sql
 
 
-    sql = "Update rhisfrutasin_entradas"
-    sql = sql & " set rhisfrutasin_entradas.horaentr = concat(rhisfrutasin_entradas.fechaent, ' ', time(rhisfrutasin_entradas.horaentr))"
-    sql = sql & " where rhisfrutasin_entradas.numalbar >= 9000000;"
+    Sql = "Update rhisfrutasin_entradas"
+    Sql = Sql & " set rhisfrutasin_entradas.horaentr = concat(rhisfrutasin_entradas.fechaent, ' ', time(rhisfrutasin_entradas.horaentr))"
+    Sql = Sql & " where rhisfrutasin_entradas.numalbar >= 9000000;"
 
-    conn.Execute sql
+    conn.Execute Sql
 
-    sql = "insert into rhisfrutasin_clasif (numalbar,codvarie,codcalid,kilosnet) "
-    sql = sql & " select aaa.numfactu + 9000000, bbb.codvarie, ccc.codcalid, ccc.kilosnet "
-    sql = sql & " from (rfactsoc aaa inner join rfactsoc_variedad bbb on aaa.CodTipom = bbb.CodTipom And aaa.numfactu = bbb.numfactu "
-    sql = sql & " and aaa.fecfactu = bbb.fecfactu) inner join rfactsoc_calidad ccc on aaa.codtipom = ccc.codtipom and aaa.numfactu = ccc.numfactu and aaa.fecfactu = ccc.fecfactu and "
-    sql = sql & " bbb.CodVarie = ccc.CodVarie And bbb.CodCampo = ccc.CodCampo "
-    sql = sql & " where " & vWhere
+    Sql = "insert into rhisfrutasin_clasif (numalbar,codvarie,codcalid,kilosnet) "
+    Sql = Sql & " select aaa.numfactu + 9000000, bbb.codvarie, ccc.codcalid, ccc.kilosnet "
+    Sql = Sql & " from (rfactsoc aaa inner join rfactsoc_variedad bbb on aaa.CodTipom = bbb.CodTipom And aaa.numfactu = bbb.numfactu "
+    Sql = Sql & " and aaa.fecfactu = bbb.fecfactu) inner join rfactsoc_calidad ccc on aaa.codtipom = ccc.codtipom and aaa.numfactu = ccc.numfactu and aaa.fecfactu = ccc.fecfactu and "
+    Sql = Sql & " bbb.CodVarie = ccc.CodVarie And bbb.CodCampo = ccc.CodCampo "
+    Sql = Sql & " where " & vWhere
 
-    conn.Execute sql
+    conn.Execute Sql
 
 
-    sql = "update rhisfrutasin_entradas aaa, rhisfrutasin bbb "
-    sql = sql & " set aaa.horaentr = concat(bbb.fecalbar, ' ', time(aaa.horaentr)), "
-    sql = sql & " aaa.FechaEnt = bbb.fecalbar"
-    sql = sql & " Where aaa.Numalbar >= 9000000 And aaa.Numalbar = bbb.Numalbar And aaa.FechaEnt > bbb.fecalbar"
+    Sql = "update rhisfrutasin_entradas aaa, rhisfrutasin bbb "
+    Sql = Sql & " set aaa.horaentr = concat(bbb.fecalbar, ' ', time(aaa.horaentr)), "
+    Sql = Sql & " aaa.FechaEnt = bbb.fecalbar"
+    Sql = Sql & " Where aaa.Numalbar >= 9000000 And aaa.Numalbar = bbb.Numalbar And aaa.FechaEnt > bbb.fecalbar"
 
-    conn.Execute sql
+    conn.Execute Sql
     
     conn.CommitTrans
     
@@ -31484,7 +31521,7 @@ End Function
 
 Private Function CargarTemporalMiembros(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql3 As String
@@ -31498,15 +31535,15 @@ Dim Sql3 As String
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "Select rsocios.codsocio FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rsocios.codsocio FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    Sql3 = "select " & vUsu.Codigo & ",2, 1, codsocio, nifmiembro, nommiembro, votos, capital from rsocios_miembros where codsocio in (" & sql & ")"
+    Sql3 = "select " & vUsu.Codigo & ",2, 1, codsocio, nifmiembro, nommiembro, votos, capital from rsocios_miembros where codsocio in (" & Sql & ")"
     
     ' miembros                              'miembro,productor,socio, nif,     nombre,  votos,    capital
     Sql2 = "insert into tmpinformes (codusu, campo1, campo2, codigo1, nombre1, nombre2, importe1, importe2) "
@@ -31529,7 +31566,7 @@ End Function
 Private Function CargarTemporal7(cTabla As String, cWhere As String, cTabla2 As String) As Boolean
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql3 As String
@@ -31569,50 +31606,50 @@ Dim B As Boolean
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
     End If
     
-    sql = "select distinct rcampos.codsocio, rcampos.codcampo "
-    sql = sql & " from " & cTabla
-    sql = sql & " where (rcampos.fecbajas is null or rcampos.fecbajas = '') "
+    Sql = "select distinct rcampos.codsocio, rcampos.codcampo "
+    Sql = Sql & " from " & cTabla
+    Sql = Sql & " where (rcampos.fecbajas is null or rcampos.fecbajas = '') "
     If cWhere <> "" Then
-        sql = sql & " and " & cWhere
+        Sql = Sql & " and " & cWhere
     End If
-    sql = sql & " union "
-    sql = sql & " select distinct rhisfruta.codsocio, rhisfruta.codcampo "
-    sql = sql & " from (" & cTabla & ") inner join rhisfruta on rcampos.codcampo = rhisfruta.codcampo and rcampos.codsocio = rhisfruta.codsocio "
+    Sql = Sql & " union "
+    Sql = Sql & " select distinct rhisfruta.codsocio, rhisfruta.codcampo "
+    Sql = Sql & " from (" & cTabla & ") inner join rhisfruta on rcampos.codcampo = rhisfruta.codcampo and rcampos.codsocio = rhisfruta.codsocio "
     If cWhere <> "" Then
-        sql = sql & " where " & cWhere
+        Sql = Sql & " where " & cWhere
     End If
-    If txtcodigo(184).Text <> "" Then sql = sql & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(184).Text, "F")
-    If txtcodigo(185).Text <> "" Then sql = sql & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(185).Text, "F")
+    If txtCodigo(184).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(184).Text, "F")
+    If txtCodigo(185).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(185).Text, "F")
     
     '[Monica]13/11/2013: faltan los medieros para sacar los kilos de las entradas
-    sql = sql & " union "
-    sql = sql & " select distinct rhisfruta.codsocio, rhisfruta.codcampo "
-    sql = sql & " from (" & cTabla2 & ") inner join rhisfruta on rcampos_cooprop.codcampo = rhisfruta.codcampo and rcampos_cooprop.codsocio = rhisfruta.codsocio "
+    Sql = Sql & " union "
+    Sql = Sql & " select distinct rhisfruta.codsocio, rhisfruta.codcampo "
+    Sql = Sql & " from (" & cTabla2 & ") inner join rhisfruta on rcampos_cooprop.codcampo = rhisfruta.codcampo and rcampos_cooprop.codsocio = rhisfruta.codsocio "
     If cWhere <> "" Then
-        sql = sql & " where " & cWhere
+        Sql = Sql & " where " & cWhere
     End If
-    If txtcodigo(184).Text <> "" Then sql = sql & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(184).Text, "F")
-    If txtcodigo(185).Text <> "" Then sql = sql & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(185).Text, "F")
+    If txtCodigo(184).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(184).Text, "F")
+    If txtCodigo(185).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(185).Text, "F")
     
     
-    sql = sql & " order by 1, 2"
+    Sql = Sql & " order by 1, 2"
     
     
     pb11.visible = True
     Label2(267).visible = True
     
-    Sql4 = "select count(*) from (" & sql & ") aaaa"
+    Sql4 = "select count(*) from (" & Sql & ") aaaa"
     CargarProgres pb11, DevuelveValor(Sql4)
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql2 = "insert into tmpinfkilos (codusu, codsocio, codcampo, kilosnet, "
     Sql2 = Sql2 & "canaforo, nroarbol) values "
@@ -31644,22 +31681,22 @@ Dim B As Boolean
         If Me.Check30.Value = 1 Then
              SQLaux = "select sum(kilosnet) from " & vCant.BaseDatos & ".rhisfruta where codsocio = " & DBSet(Rs.Fields(0).Value, "N")
              SQLaux = SQLaux & " and codcampo = " & DBSet(Rs.Fields(1).Value, "N")
-             If txtcodigo(184).Text <> "" Then SQLaux = SQLaux & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(184).Text, "F")
-             If txtcodigo(185).Text <> "" Then SQLaux = SQLaux & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(185).Text, "F")
+             If txtCodigo(184).Text <> "" Then SQLaux = SQLaux & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(184).Text, "F")
+             If txtCodigo(185).Text <> "" Then SQLaux = SQLaux & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(185).Text, "F")
              
              KilosTot = DevuelveValor(SQLaux)
              
              SQLaux = "select sum(kilosnet) from " & vCant.BaseDatos & ".rclasifica where codsocio = " & DBSet(Rs.Fields(0).Value, "N")
              SQLaux = SQLaux & " and codcampo = " & DBSet(Rs.Fields(1).Value, "N")
-             If txtcodigo(184).Text <> "" Then SQLaux = SQLaux & " and rclasifica.fechaent >= " & DBSet(txtcodigo(184).Text, "F")
-             If txtcodigo(185).Text <> "" Then SQLaux = SQLaux & " and rclasifica.fechaent <= " & DBSet(txtcodigo(185).Text, "F")
+             If txtCodigo(184).Text <> "" Then SQLaux = SQLaux & " and rclasifica.fechaent >= " & DBSet(txtCodigo(184).Text, "F")
+             If txtCodigo(185).Text <> "" Then SQLaux = SQLaux & " and rclasifica.fechaent <= " & DBSet(txtCodigo(185).Text, "F")
              
              KilosTot = KilosTot + DevuelveValor(SQLaux)
              
              SQLaux = "select sum(kilosnet) from " & vCant.BaseDatos & ".rentradas where codsocio = " & DBSet(Rs.Fields(0).Value, "N")
              SQLaux = SQLaux & " and codcampo = " & DBSet(Rs.Fields(1).Value, "N")
-             If txtcodigo(184).Text <> "" Then SQLaux = SQLaux & " and rentradas.fechaent >= " & DBSet(txtcodigo(184).Text, "F")
-             If txtcodigo(185).Text <> "" Then SQLaux = SQLaux & " and rentradas.fechaent <= " & DBSet(txtcodigo(185).Text, "F")
+             If txtCodigo(184).Text <> "" Then SQLaux = SQLaux & " and rentradas.fechaent >= " & DBSet(txtCodigo(184).Text, "F")
+             If txtCodigo(185).Text <> "" Then SQLaux = SQLaux & " and rentradas.fechaent <= " & DBSet(txtCodigo(185).Text, "F")
              
              KilosTot = KilosTot + DevuelveValor(SQLaux)
             
@@ -31667,22 +31704,22 @@ Dim B As Boolean
         Else
              SQLaux = "select sum(kilosnet) from rhisfruta where codsocio = " & DBSet(Rs.Fields(0).Value, "N")
              SQLaux = SQLaux & " and codcampo = " & DBSet(Rs.Fields(1).Value, "N")
-             If txtcodigo(184).Text <> "" Then SQLaux = SQLaux & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(184).Text, "F")
-             If txtcodigo(185).Text <> "" Then SQLaux = SQLaux & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(185).Text, "F")
+             If txtCodigo(184).Text <> "" Then SQLaux = SQLaux & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(184).Text, "F")
+             If txtCodigo(185).Text <> "" Then SQLaux = SQLaux & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(185).Text, "F")
              
              KilosTot = DevuelveValor(SQLaux)
              
              SQLaux = "select sum(kilosnet) from rclasifica where codsocio = " & DBSet(Rs.Fields(0).Value, "N")
              SQLaux = SQLaux & " and codcampo = " & DBSet(Rs.Fields(1).Value, "N")
-             If txtcodigo(184).Text <> "" Then SQLaux = SQLaux & " and rclasifica.fechaent >= " & DBSet(txtcodigo(184).Text, "F")
-             If txtcodigo(185).Text <> "" Then SQLaux = SQLaux & " and rclasifica.fechaent <= " & DBSet(txtcodigo(185).Text, "F")
+             If txtCodigo(184).Text <> "" Then SQLaux = SQLaux & " and rclasifica.fechaent >= " & DBSet(txtCodigo(184).Text, "F")
+             If txtCodigo(185).Text <> "" Then SQLaux = SQLaux & " and rclasifica.fechaent <= " & DBSet(txtCodigo(185).Text, "F")
              
              KilosTot = KilosTot + DevuelveValor(SQLaux)
              
              SQLaux = "select sum(kilosnet) from rentradas where codsocio = " & DBSet(Rs.Fields(0).Value, "N")
              SQLaux = SQLaux & " and codcampo = " & DBSet(Rs.Fields(1).Value, "N")
-             If txtcodigo(184).Text <> "" Then SQLaux = SQLaux & " and rentradas.fechaent >= " & DBSet(txtcodigo(184).Text, "F")
-             If txtcodigo(185).Text <> "" Then SQLaux = SQLaux & " and rentradas.fechaent <= " & DBSet(txtcodigo(185).Text, "F")
+             If txtCodigo(184).Text <> "" Then SQLaux = SQLaux & " and rentradas.fechaent >= " & DBSet(txtCodigo(184).Text, "F")
+             If txtCodigo(185).Text <> "" Then SQLaux = SQLaux & " and rentradas.fechaent <= " & DBSet(txtCodigo(185).Text, "F")
              
              KilosTot = KilosTot + DevuelveValor(SQLaux)
              
@@ -31742,27 +31779,27 @@ Dim B As Boolean
     conn.Execute Sql2
     
     '[Monica]13/11/2013: puede que hayan errores en el prorrateo de arboles y canaforo, se lo daremos al
-    sql = "select codcampo, sum(canaforo) canaforo, sum(nroarbol) kilosase from tmpinfkilos where codusu = " & vUsu.Codigo & " group by codcampo order by codcampo "
+    Sql = "select codcampo, sum(canaforo) canaforo, sum(nroarbol) kilosase from tmpinfkilos where codusu = " & vUsu.Codigo & " group by codcampo order by codcampo "
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rs.EOF
-        sql = "select codsocio, canaforo, kilosase "
-        sql = sql & " from rcampos where codcampo = " & DBSet(Rs!codcampo, "N")
+        Sql = "select codsocio, canaforo, kilosase "
+        Sql = Sql & " from rcampos where codcampo = " & DBSet(Rs!codcampo, "N")
         
         Set RS1 = New ADODB.Recordset
-        RS1.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RS1.EOF Then
             DCanaforo = DBLet(Rs!Canaforo, "N") - DBLet(RS1!Canaforo, "N")
             DkilosAse = DBLet(Rs!KilosAse, "N") - DBLet(RS1.Fields(2).Value, "N")
         
-            sql = "update tmpinfkilos set "
-            sql = sql & " canaforo = canaforo + " & DBSet(DCanaforo, "N")
-            sql = sql & " ,nroarbol = nroarbol + " & DBSet(DkilosAse, "N")
-            sql = sql & " where codusu = " & vUsu.Codigo
-            sql = sql & " and codcampo = " & DBSet(Rs!codcampo, "N")
-            sql = sql & " and codsocio = " & DBSet(RS1!Codsocio, "N")
+            Sql = "update tmpinfkilos set "
+            Sql = Sql & " canaforo = canaforo + " & DBSet(DCanaforo, "N")
+            Sql = Sql & " ,nroarbol = nroarbol + " & DBSet(DkilosAse, "N")
+            Sql = Sql & " where codusu = " & vUsu.Codigo
+            Sql = Sql & " and codcampo = " & DBSet(Rs!codcampo, "N")
+            Sql = Sql & " and codsocio = " & DBSet(RS1!Codsocio, "N")
         
-            conn.Execute sql
+            conn.Execute Sql
         End If
         
         Rs.MoveNext
@@ -31784,7 +31821,7 @@ End Function
 
 
 Private Sub EnviarEMailMultiAlbaranes(cadWHERE As String, cadFormula As String, cadRpt As String, cadTabla As String)
-Dim sql As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim Cad1 As String, Cad2 As String, lista As String
 Dim cont As Integer
@@ -31794,25 +31831,25 @@ On Error GoTo EEnviar
     Screen.MousePointer = vbHourglass
     
     'seleccionamos todos los socios a los que queremos enviar e-mail
-    sql = "SELECT distinct rsocios.codsocio,nomsocio,maisocio, maisocio "
-    sql = sql & "FROM rsocios where codsocio in (select rhisfruta.codsocio from " & cadTabla
-    sql = sql & " WHERE " & cadWHERE & ")"
+    Sql = "SELECT distinct rsocios.codsocio,nomsocio,maisocio, maisocio "
+    Sql = Sql & "FROM rsocios where codsocio in (select rhisfruta.codsocio from " & cadTabla
+    Sql = Sql & " WHERE " & cadWHERE & ")"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     ' Primero la borro por si acaso
-    sql = " DROP TABLE IF EXISTS tmpMail;"
-    conn.Execute sql
+    Sql = " DROP TABLE IF EXISTS tmpMail;"
+    conn.Execute Sql
     
     'creamos una temporal donde guardamos para cada proveedor que SI tiene
     'e-mail, el mail1 o el mail2 al que vamos a enviar
-    sql = "CREATE TEMPORARY TABLE tmpMail ( "
-    sql = sql & "codusu INT(7) UNSIGNED  DEFAULT '0' NOT NULL, "
-    sql = sql & "codprove INT(6) UNSIGNED  DEFAULT '0' NOT NULL, "
-    sql = sql & "nomprove varchar(40)  DEFAULT '' NOT NULL, "
-    sql = sql & "email varchar(40)  DEFAULT '' NOT NULL) "
-    conn.Execute sql
+    Sql = "CREATE TEMPORARY TABLE tmpMail ( "
+    Sql = Sql & "codusu INT(7) UNSIGNED  DEFAULT '0' NOT NULL, "
+    Sql = Sql & "codprove INT(6) UNSIGNED  DEFAULT '0' NOT NULL, "
+    Sql = Sql & "nomprove varchar(40)  DEFAULT '' NOT NULL, "
+    Sql = Sql & "email varchar(40)  DEFAULT '' NOT NULL) "
+    conn.Execute Sql
     
     cont = 0
     lista = ""
@@ -31840,10 +31877,10 @@ On Error GoTo EEnviar
                 .OtrosParametros = CadParam
                 .NumeroParametros = numParam
                 
-                sql = cadFormula & " and {rhisfruta.codsocio}=" & Rs.Fields(0)
+                Sql = cadFormula & " and {rhisfruta.codsocio}=" & Rs.Fields(0)
                 .Opcion = 22
                 
-                .FormulaSeleccion = sql
+                .FormulaSeleccion = Sql
                 .EnvioEMail = True
                 CadenaDesdeOtroForm = "GENERANDO"
                 .Titulo = "Impresión de Albaranes"
@@ -31853,9 +31890,9 @@ On Error GoTo EEnviar
 
                 If CadenaDesdeOtroForm = "" Then
                 'si se ha generado el .pdf para enviar
-                    sql = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
-                    sql = sql & " VALUES (" & vUsu.Codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
-                    conn.Execute sql
+                    Sql = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
+                    Sql = Sql & " VALUES (" & vUsu.Codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
+                    conn.Execute Sql
             
                     Me.Refresh
                     DoEvents
@@ -31863,8 +31900,8 @@ On Error GoTo EEnviar
                     cont = cont + 1
                     'Se ha generado bien el documento
                     'Lo copiamos sobre app.path & \temp
-                    sql = Rs.Fields(0) & ".pdf"
-                    FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & sql
+                    Sql = Rs.Fields(0) & ".pdf"
+                    FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & Sql
                 End If
             End With
             Label2(286).Caption = ""
@@ -31879,38 +31916,38 @@ On Error GoTo EEnviar
       
     If cont > 0 Then
         espera 0.4
-         sql = "Albaranes de entrada "
-         sql = sql & "|"
+         Sql = "Albaranes de entrada "
+         Sql = Sql & "|"
          
-         sql = sql & "Albaranes  "
-         If txtcodigo(6).Text <> "" Or txtcodigo(7).Text <> "" Then
-            sql = sql & " Fecha "
-            If txtcodigo(6).Text <> "" Then sql = sql & " desde " & txtcodigo(6).Text
-            If txtcodigo(7).Text <> "" Then sql = sql & " hasta " & txtcodigo(7).Text
+         Sql = Sql & "Albaranes  "
+         If txtCodigo(6).Text <> "" Or txtCodigo(7).Text <> "" Then
+            Sql = Sql & " Fecha "
+            If txtCodigo(6).Text <> "" Then Sql = Sql & " desde " & txtCodigo(6).Text
+            If txtCodigo(7).Text <> "" Then Sql = Sql & " hasta " & txtCodigo(7).Text
          End If
-         If txtcodigo(20).Text <> "" Or txtcodigo(21).Text <> "" Then
-            sql = sql & " Clase "
-            If txtcodigo(20).Text <> "" Then sql = sql & " desde " & txtcodigo(20).Text & " " & txtNombre(20).Text
-            If txtcodigo(21).Text <> "" Then sql = sql & " hasta " & txtcodigo(21).Text & " " & txtNombre(21).Text
+         If txtCodigo(20).Text <> "" Or txtCodigo(21).Text <> "" Then
+            Sql = Sql & " Clase "
+            If txtCodigo(20).Text <> "" Then Sql = Sql & " desde " & txtCodigo(20).Text & " " & txtNombre(20).Text
+            If txtCodigo(21).Text <> "" Then Sql = Sql & " hasta " & txtCodigo(21).Text & " " & txtNombre(21).Text
          End If
-         If txtcodigo(14).Text <> "" Or txtcodigo(15).Text <> "" Then
-            sql = sql & " Variedad "
-            If txtcodigo(14).Text <> "" Then sql = sql & " desde " & txtcodigo(14).Text & " " & txtNombre(14).Text
-            If txtcodigo(15).Text <> "" Then sql = sql & " hasta " & txtcodigo(15).Text & " " & txtNombre(15).Text
+         If txtCodigo(14).Text <> "" Or txtCodigo(15).Text <> "" Then
+            Sql = Sql & " Variedad "
+            If txtCodigo(14).Text <> "" Then Sql = Sql & " desde " & txtCodigo(14).Text & " " & txtNombre(14).Text
+            If txtCodigo(15).Text <> "" Then Sql = Sql & " hasta " & txtCodigo(15).Text & " " & txtNombre(15).Text
          End If
          
          
-         sql = sql & "|"
+         Sql = Sql & "|"
     
        
         frmEMail.Opcion = 2
-        frmEMail.DatosEnvio = sql
+        frmEMail.DatosEnvio = Sql
         frmEMail.Ficheros = ""
         frmEMail.Show vbModal
 
         'Borrar la tabla temporal
-        sql = " DROP TABLE IF EXISTS tmpMail;"
-        conn.Execute sql
+        Sql = " DROP TABLE IF EXISTS tmpMail;"
+        conn.Execute Sql
         
         'Borrar la carpeta con temporales
         Kill App.Path & "\temp\*.pdf"
@@ -31928,15 +31965,15 @@ EEnviar:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Enviando Informe por e-mail", Err.Description
         'Borrar la tabla temporal
-        sql = " DROP TABLE IF EXISTS tmpMail;"
-        conn.Execute sql
+        Sql = " DROP TABLE IF EXISTS tmpMail;"
+        conn.Execute Sql
     End If
 End Sub
 
 
 
 Private Function InsertarPagoBajaSocio() As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim NumLin As Integer
 Dim vMens As String
@@ -31972,9 +32009,9 @@ Dim MenError As String
             ConnConta.BeginTrans
             
             '[Monica]14/03/2018: insertamos un movimiento de baja de socio
-            sql = "insert into rsocios_movim(codsocio,numlinea,codcampo,supcoope,fecmovim,importe,causa,numerodoc, intconta ) "
+            Sql = "insert into rsocios_movim(codsocio,numlinea,codcampo,supcoope,fecmovim,importe,causa,numerodoc, intconta ) "
             
-            Sql2 = "select tmpinformes.codigo1, max(coalesce(numlinea,0)) + 1,  importe1," & DBSet(txtcodigo(194).Text, "F")
+            Sql2 = "select tmpinformes.codigo1, max(coalesce(numlinea,0)) + 1,  importe1," & DBSet(txtCodigo(194).Text, "F")
             Sql2 = Sql2 & ",importe2 importe, 'Baja Socio' from tmpinformes left join rsocios_movim on tmpinformes.codigo1 = rsocios_movim.codsocio "
             Sql2 = Sql2 & " where tmpinformes.codusu = " & vUsu.Codigo
             Sql2 = Sql2 & " group by 1,3,4,5,6 order by 1 "
@@ -31993,12 +32030,12 @@ Dim MenError As String
                 ContabilizadoOk = False
                 
                 MenError = "Insertando en tesoreria: "
-                If InsertarEnTesoreriaBajaSocios(MenError, CStr(vCont), txtcodigo(194).Text, txtcodigo(196).Text, txtcodigo(195).Text, Rs.Fields(0)) Then
+                If InsertarEnTesoreriaBajaSocios(MenError, CStr(vCont), txtCodigo(194).Text, txtCodigo(196).Text, txtCodigo(195).Text, Rs.Fields(0)) Then
                     Sql2 = DBSet(Rs.Fields(0).Value, "N") & "," & DBSet(Rs.Fields(1).Value, "N") & ",0," & DBSet(Rs.Fields(2).Value, "N") & ","
                     Sql2 = Sql2 & DBSet(Rs.Fields(3).Value, "F") & "," & DBSet(Rs.Fields(4).Value, "N") & "," & DBSet(Rs.Fields(5).Value, "T") & ","
                     Sql2 = Sql2 & DBSet(vCont, "N") & ",1"
                     
-                    conn.Execute sql & " values (" & Sql2 & ")"
+                    conn.Execute Sql & " values (" & Sql2 & ")"
                 
                 Else
                     B = False
@@ -32070,16 +32107,16 @@ Dim vCadena As String
     CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
-    If txtcodigo(200).Text = "" Or txtcodigo(201).Text = "" Then
+    If txtCodigo(200).Text = "" Or txtCodigo(201).Text = "" Then
         MsgBox "Debe introducir la fecha desde y la fecha hasta. Revise.", vbExclamation
-        PonerFoco txtcodigo(200)
+        PonerFoco txtCodigo(200)
         Exit Sub
     End If
 
 
     'D/H fecha
-    cDesde = Trim(txtcodigo(200).Text)
-    cHasta = Trim(txtcodigo(201).Text)
+    cDesde = Trim(txtCodigo(200).Text)
+    cHasta = Trim(txtCodigo(201).Text)
     nDesde = ""
     nHasta = ""
     'Cadena para seleccion Desde y Hasta
@@ -32090,8 +32127,8 @@ Dim vCadena As String
     End If
 
     'D/H fecha
-    cDesde = Trim(txtcodigo(200).Text)
-    cHasta = Trim(txtcodigo(201).Text)
+    cDesde = Trim(txtCodigo(200).Text)
+    cHasta = Trim(txtCodigo(201).Text)
     nDesde = ""
     nHasta = ""
     'Cadena para seleccion Desde y Hasta
@@ -32130,12 +32167,12 @@ Dim vCadena As String
         End If
         'carta
         If Option1(1).Value Then
-            CadParam = CadParam & "pFecha=""" & txtcodigo(194).Text & """|"
+            CadParam = CadParam & "pFecha=""" & txtCodigo(194).Text & """|"
             numParam = numParam + 1
-            If Year(txtcodigo(200).Text) <> Year(txtcodigo(201).Text) Then
-                CadParam = CadParam & "pDesdeFecha=""" & Year(txtcodigo(200).Text) & "-" & Year(txtcodigo(201).Text) & """|"
+            If Year(txtCodigo(200).Text) <> Year(txtCodigo(201).Text) Then
+                CadParam = CadParam & "pDesdeFecha=""" & Year(txtCodigo(200).Text) & "-" & Year(txtCodigo(201).Text) & """|"
             Else
-                CadParam = CadParam & "pDesdeFecha=""" & Year(txtcodigo(200).Text) & """|"
+                CadParam = CadParam & "pDesdeFecha=""" & Year(txtCodigo(200).Text) & """|"
             End If
             numParam = numParam + 1
             
@@ -32163,7 +32200,7 @@ Dim vCadena As String
 End Sub
 
 Private Function HayMovimientosBaja() As Boolean
-Dim sql As String
+Dim Sql As String
 Dim SqlInsert As String
 Dim Rs As ADODB.Recordset
 
@@ -32171,12 +32208,12 @@ Dim Rs As ADODB.Recordset
 
     SociosDeBaja = ""
 
-    sql = "select distinct tmpinformes.codigo1 from tmpinformes, rsocios_movim where codusu = " & vUsu.Codigo
-    sql = sql & " and tmpinformes.codigo1 = rsocios_movim.codsocio "
-    sql = sql & " and rsocios_movim.codcampo = 0 and rsocios_movim.causa = 'Baja Socio'"
+    Sql = "select distinct tmpinformes.codigo1 from tmpinformes, rsocios_movim where codusu = " & vUsu.Codigo
+    Sql = Sql & " and tmpinformes.codigo1 = rsocios_movim.codsocio "
+    Sql = Sql & " and rsocios_movim.codcampo = 0 and rsocios_movim.causa = 'Baja Socio'"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         SociosDeBaja = SociosDeBaja & "," & Rs.Fields(0).Value
@@ -32199,7 +32236,7 @@ End Function
 
 Private Function CargarProduccionReal(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim vCampAnt As CCampAnt
@@ -32216,21 +32253,21 @@ Dim KilosAnt As Long
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
         
-    Sql1 = "select " & vUsu.Codigo & ", rcampos.codcampo, sum(coalesce(kilosnet,0)), round(sum(coalesce(kilosnet,0)) / 12.78,0) from rhisfruta right join (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti)  on rhisfruta.codcampo = rcampos.codcampo where rcampos.codcampo in (" & sql & ")"
+    Sql1 = "select " & vUsu.Codigo & ", rcampos.codcampo, sum(coalesce(kilosnet,0)), round(sum(coalesce(kilosnet,0)) / 12.78,0) from rhisfruta right join (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti)  on rhisfruta.codcampo = rcampos.codcampo where rcampos.codcampo in (" & Sql & ")"
     
     '[Monica]11/05/2018: introducimos las fechas que queremos
-    If txtcodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtcodigo(197).Text, "F")
-    If txtcodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtcodigo(198).Text, "F")
+    If txtCodigo(197).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(197).Text, "F")
+    If txtCodigo(198).Text <> "" Then Sql1 = Sql1 & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(198).Text, "F")
     
     
     

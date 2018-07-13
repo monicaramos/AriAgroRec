@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "18:05"
+            TextSave        =   "13:46"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1942,8 +1942,8 @@ Private Sub MDIForm_Unload(Cancel As Integer)
     End
 End Sub
 
-Private Sub mnE_Aport_Click(Index As Integer)
-    SubmnC_RecoleccionG_Aport_Click (Index)
+Private Sub mnE_Aport_Click(index As Integer)
+    SubmnC_RecoleccionG_Aport_Click (index)
 End Sub
 
 Private Sub mnE_Soporte3_Click()
@@ -1966,167 +1966,167 @@ Private Sub mnE_Soporte4_Click()
     MsgBox "Hola" & vbCrLf & "Qué tal?", vbQuestion + vbYesNo + vbDefaultButton2
 End Sub
 
-Private Sub mnP_PreNomCateg_Click(Index As Integer)
-    SubmnP_PreNominasCateg_click (Index)
+Private Sub mnP_PreNomCateg_Click(index As Integer)
+    SubmnP_PreNominasCateg_click (index)
 End Sub
 
-Private Sub mnP_PreNominas_Click(Index As Integer)
-    SubmnP_PreNominas_click (Index)
+Private Sub mnP_PreNominas_Click(index As Integer)
+    SubmnP_PreNominas_click (index)
 End Sub
 
-Private Sub mnRec_ADV_Click(Index As Integer)
-    SubmnC_RecoleccionG_ADV_Click (Index)
+Private Sub mnRec_ADV_Click(index As Integer)
+    SubmnC_RecoleccionG_ADV_Click (index)
 End Sub
 
-Private Sub mnRec_Almaz_Click(Index As Integer)
-    SubmnC_RecoleccionG_Almz1_Click (Index)
+Private Sub mnRec_Almaz_Click(index As Integer)
+    SubmnC_RecoleccionG_Almz1_Click (index)
 End Sub
 
-Private Sub mnRec_Almazara_Click(Index As Integer)
-    SubmnC_RecoleccionG_Almz_Click (Index)
+Private Sub mnRec_Almazara_Click(index As Integer)
+    SubmnC_RecoleccionG_Almz_Click (index)
 End Sub
 
-Private Sub mnRec_AlmTrasCampos_Click(Index As Integer)
-    SubmnC_RecoleccionG_Almz0_Click (Index)
+Private Sub mnRec_AlmTrasCampos_Click(index As Integer)
+    SubmnC_RecoleccionG_Almz0_Click (index)
 End Sub
 
-Private Sub mnRec_AlmzAnticipos_Click(Index As Integer)
-    SubmnC_RecoleccionG_AlmzAnticipos_Click (Index)
+Private Sub mnRec_AlmzAnticipos_Click(index As Integer)
+    SubmnC_RecoleccionG_AlmzAnticipos_Click (index)
 End Sub
 
-Private Sub mnRec_AlmzLiquidacion_Click(Index As Integer)
-    SubmnC_RecoleccionG_AlmzLiquidacion_Click (Index)
+Private Sub mnRec_AlmzLiquidacion_Click(index As Integer)
+    SubmnC_RecoleccionG_AlmzLiquidacion_Click (index)
 End Sub
 
-Private Sub mnRec_AnticiposGene_Click(Index As Integer)
-    SubmnC_RecoleccionG_AnticiposGene_Click (Index)
+Private Sub mnRec_AnticiposGene_Click(index As Integer)
+    SubmnC_RecoleccionG_AnticiposGene_Click (index)
 End Sub
 
-Private Sub mnRec_Bod1_Click(Index As Integer)
-    SubmnC_RecoleccionG_Bod1_Click (Index)
+Private Sub mnRec_Bod1_Click(index As Integer)
+    SubmnC_RecoleccionG_Bod1_Click (index)
 End Sub
 
-Private Sub mnRec_BodAnticipos_Click(Index As Integer)
-    SubmnC_RecoleccionG_BodAnticipos_Click (Index)
+Private Sub mnRec_BodAnticipos_Click(index As Integer)
+    SubmnC_RecoleccionG_BodAnticipos_Click (index)
 End Sub
 
-Private Sub mnRec_BodLiquidacion_Click(Index As Integer)
-    SubmnC_RecoleccionG_BodLiquidacion_Click (Index)
-End Sub
-
-
-Private Sub mnRec_Bodega_Click(Index As Integer)
-    SubmnC_RecoleccionG_Bodega_Click (Index)
-End Sub
-
-Private Sub mnRec_AlmazaraTras_Click(Index As Integer)
-    SubmnC_RecoleccionG_Almazara_Click (Index)
-End Sub
-
-Private Sub mnRec_Anticipos_Click(Index As Integer)
-    SubmnC_RecoleccionG_Anticipos_Click (Index)
-End Sub
-
-Private Sub mnRec_AnticiposGastos_Click(Index As Integer)
-    SubmnC_RecoleccionG_AnticiposGastos_Click (Index)
-End Sub
-
-Private Sub mnRec_Clasifica_Click(Index As Integer)
-    SubmnC_RecoleccionG_Clasifica_Click (Index)
-End Sub
-
-Private Sub mnRec_DifPozos_Click(Index As Integer)
-    SubmnC_RecoleccionPOZOS_Click (Index)
-End Sub
-
-Private Sub mnRec_Entradas_Click(Index As Integer)
-    SubmnC_RecoleccionG_Entradas_Click (Index)
-End Sub
-
-Private Sub mnRec_EntradasOrd_Click(Index As Integer)
-    SubmnC_RecoleccionG_EntradasOrd_Click (Index)
-End Sub
-
-Private Sub mnRec_EntradasP_Click(Index As Integer)
-    SubmnC_RecoleccionG_EntradasP_Click (Index)
-End Sub
-
-Private Sub mnRec_FacturasSocios_click(Index As Integer)
-    SubmnC_RecoleccionG_FacturasSocios_Click (Index)
-End Sub
-
-Private Sub mnRec_FacturasTerceros_click(Index As Integer)
-    SubmnC_RecoleccionG_FacturasTerceros_Click (Index)
+Private Sub mnRec_BodLiquidacion_Click(index As Integer)
+    SubmnC_RecoleccionG_BodLiquidacion_Click (index)
 End Sub
 
 
-Private Sub mnRec_FacturasVarias_Click(Index As Integer)
-    SubmnC_RecoleccionG_FacturasVarias_Click (Index)
+Private Sub mnRec_Bodega_Click(index As Integer)
+    SubmnC_RecoleccionG_Bodega_Click (index)
 End Sub
 
-Private Sub mnRec_FacturasVariasPr_Click(Index As Integer)
-    SubmnC_RecoleccionG_FacturasVariasProv_Click (Index)
+Private Sub mnRec_AlmazaraTras_Click(index As Integer)
+    SubmnC_RecoleccionG_Almazara_Click (index)
 End Sub
 
-Private Sub mnRec_Infor_Click(Index As Integer)
-    SubmnC_RecoleccionG_Infor_Click (Index)
+Private Sub mnRec_Anticipos_Click(index As Integer)
+    SubmnC_RecoleccionG_Anticipos_Click (index)
 End Sub
 
-Private Sub mnRec_Infor2_Click(Index As Integer)
-    SubmnC_RecoleccionG_Infor2_Click (Index)
+Private Sub mnRec_AnticiposGastos_Click(index As Integer)
+    SubmnC_RecoleccionG_AnticiposGastos_Click (index)
 End Sub
 
-Private Sub mnRec_InforOfi_Click(Index As Integer)
-    SubmnC_RecoleccionG_InforOfi_Click (Index)
+Private Sub mnRec_Clasifica_Click(index As Integer)
+    SubmnC_RecoleccionG_Clasifica_Click (index)
 End Sub
 
-Private Sub mnRec_Liqudaciones_Click(Index As Integer)
-    SubmnC_RecoleccionG_Liquidaciones_Click (Index)
+Private Sub mnRec_DifPozos_Click(index As Integer)
+    SubmnC_RecoleccionPOZOS_Click (index)
 End Sub
 
-Private Sub mnRec_LiquFO_Click(Index As Integer)
-    SubmnC_RecoleccionG_LiquidFO_Click (Index)
+Private Sub mnRec_Entradas_Click(index As Integer)
+    SubmnC_RecoleccionG_Entradas_Click (index)
 End Sub
 
-Private Sub mnRec_LiquIndustria_Click(Index As Integer)
-    SubmnC_RecoleccionG_LiquIndustria_Click (Index)
+Private Sub mnRec_EntradasOrd_Click(index As Integer)
+    SubmnC_RecoleccionG_EntradasOrd_Click (index)
 End Sub
 
-Private Sub mnRec_Monast_Click(Index As Integer)
-    SubmnC_RecoleccionG_PozosMonast_Click (Index)
+Private Sub mnRec_EntradasP_Click(index As Integer)
+    SubmnC_RecoleccionG_EntradasP_Click (index)
+End Sub
+
+Private Sub mnRec_FacturasSocios_click(index As Integer)
+    SubmnC_RecoleccionG_FacturasSocios_Click (index)
+End Sub
+
+Private Sub mnRec_FacturasTerceros_click(index As Integer)
+    SubmnC_RecoleccionG_FacturasTerceros_Click (index)
 End Sub
 
 
-Private Sub mnRec_PagoSocios_Click(Index As Integer)
-    SubmnC_RecoleccionG_PagoSocios_Click (Index)
+Private Sub mnRec_FacturasVarias_Click(index As Integer)
+    SubmnC_RecoleccionG_FacturasVarias_Click (index)
 End Sub
 
-Private Sub mnRec_Pozos_Click(Index As Integer)
-    SubmnC_RecoleccionG_Pozos_Click (Index)
+Private Sub mnRec_FacturasVariasPr_Click(index As Integer)
+    SubmnC_RecoleccionG_FacturasVariasProv_Click (index)
 End Sub
 
-Private Sub mnRec_Toma_Click(Index As Integer)
-    SubmnC_RecoleccionG_TomaDatos_Click (Index)
+Private Sub mnRec_Infor_Click(index As Integer)
+    SubmnC_RecoleccionG_Infor_Click (index)
 End Sub
 
-Private Sub mnRec_Transporte_Click(Index As Integer)
-    SubmnC_RecoleccionG_Transporte_Click (Index)
+Private Sub mnRec_Infor2_Click(index As Integer)
+    SubmnC_RecoleccionG_Infor2_Click (index)
 End Sub
 
-Private Sub mnRec_Transporte1_Click(Index As Integer)
-    SubmnC_RecoleccionG_Transporte1_Click (Index)
+Private Sub mnRec_InforOfi_Click(index As Integer)
+    SubmnC_RecoleccionG_InforOfi_Click (index)
 End Sub
 
-Private Sub mnRec_Traza1_Click(Index As Integer)
-     SubmnC_RecoleccionG_Traza1_Click (Index)
+Private Sub mnRec_Liqudaciones_Click(index As Integer)
+    SubmnC_RecoleccionG_Liquidaciones_Click (index)
 End Sub
 
-Private Sub mnRec_Trazabilidad_Click(Index As Integer)
-    SubmnC_RecoleccionG_Trazabilidad_Click (Index)
+Private Sub mnRec_LiquFO_Click(index As Integer)
+    SubmnC_RecoleccionG_LiquidFO_Click (index)
 End Sub
 
-Private Sub mnRecG_Admon_Click(Index As Integer)
-    SubmnC_RecoleccionG_Admon_Click (Index)
+Private Sub mnRec_LiquIndustria_Click(index As Integer)
+    SubmnC_RecoleccionG_LiquIndustria_Click (index)
+End Sub
+
+Private Sub mnRec_Monast_Click(index As Integer)
+    SubmnC_RecoleccionG_PozosMonast_Click (index)
+End Sub
+
+
+Private Sub mnRec_PagoSocios_Click(index As Integer)
+    SubmnC_RecoleccionG_PagoSocios_Click (index)
+End Sub
+
+Private Sub mnRec_Pozos_Click(index As Integer)
+    SubmnC_RecoleccionG_Pozos_Click (index)
+End Sub
+
+Private Sub mnRec_Toma_Click(index As Integer)
+    SubmnC_RecoleccionG_TomaDatos_Click (index)
+End Sub
+
+Private Sub mnRec_Transporte_Click(index As Integer)
+    SubmnC_RecoleccionG_Transporte_Click (index)
+End Sub
+
+Private Sub mnRec_Transporte1_Click(index As Integer)
+    SubmnC_RecoleccionG_Transporte1_Click (index)
+End Sub
+
+Private Sub mnRec_Traza1_Click(index As Integer)
+     SubmnC_RecoleccionG_Traza1_Click (index)
+End Sub
+
+Private Sub mnRec_Trazabilidad_Click(index As Integer)
+    SubmnC_RecoleccionG_Trazabilidad_Click (index)
+End Sub
+
+Private Sub mnRecG_Admon_Click(index As Integer)
+    SubmnC_RecoleccionG_Admon_Click (index)
 End Sub
 
 Private Sub mnE_Soporte1_Click()
@@ -2136,8 +2136,8 @@ Private Sub mnE_Soporte1_Click()
     Screen.MousePointer = vbDefault
 End Sub
 
-Private Sub mnE_Util_Click(Index As Integer)
-    SubmnE_Util_Click (Index)
+Private Sub mnE_Util_Click(index As Integer)
+    SubmnE_Util_Click (index)
 End Sub
 
 
@@ -2146,11 +2146,11 @@ Private Sub mnE_Soporte2_Click()
     frmMensaje.Show vbModal
 End Sub
 
-Private Sub mnP_Generales_Click(Index As Integer)
-    If Index = 7 Then
+Private Sub mnP_Generales_Click(index As Integer)
+    If index = 7 Then
         mnCambioEmpresa_Click
     Else
-        SubmnP_Generales_Click (Index)
+        SubmnP_Generales_Click (index)
     End If
 End Sub
 
@@ -2173,7 +2173,7 @@ End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
+    Select Case Button.index
         Case 1 ' cooperativa
             SubmnC_RecoleccionG_Admon_Click (1)
         Case 2 'Socios
@@ -2392,7 +2392,7 @@ Private Function DevuelveCadenaMenu(ByRef T As Control) As String
 
 On Error GoTo EDevuelveCadenaMenu
     DevuelveCadenaMenu = T.Name & "|"
-    DevuelveCadenaMenu = DevuelveCadenaMenu & T.Index '& "|"   Monica:con esto no funcionaba
+    DevuelveCadenaMenu = DevuelveCadenaMenu & T.index '& "|"   Monica:con esto no funcionaba
     Exit Function
 EDevuelveCadenaMenu:
     Err.Clear
