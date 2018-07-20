@@ -505,7 +505,7 @@ Begin VB.Form frmManSocios
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   6
+      Tab             =   3
       TabsPerRow      =   8
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -549,17 +549,27 @@ Begin VB.Form frmManSocios
       Tab(2).ControlCount=   1
       TabCaption(3)   =   "Documentos"
       TabPicture(3)   =   "frmManSocios.frx":0060
-      Tab(3).ControlEnabled=   0   'False
+      Tab(3).ControlEnabled=   -1  'True
       Tab(3).Control(0)=   "Label16"
+      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).Control(1)=   "Label17"
+      Tab(3).Control(1).Enabled=   0   'False
       Tab(3).Control(2)=   "imgFec(3)"
+      Tab(3).Control(2).Enabled=   0   'False
       Tab(3).Control(3)=   "Toolbar4"
+      Tab(3).Control(3).Enabled=   0   'False
       Tab(3).Control(4)=   "Frame5"
+      Tab(3).Control(4).Enabled=   0   'False
       Tab(3).Control(5)=   "Toolbar3"
+      Tab(3).Control(5).Enabled=   0   'False
       Tab(3).Control(6)=   "lw1"
+      Tab(3).Control(6).Enabled=   0   'False
       Tab(3).Control(7)=   "Toolbar2"
+      Tab(3).Control(7).Enabled=   0   'False
       Tab(3).Control(8)=   "Text3(0)"
+      Tab(3).Control(8).Enabled=   0   'False
       Tab(3).Control(9)=   "Frame8"
+      Tab(3).Control(9).Enabled=   0   'False
       Tab(3).ControlCount=   10
       TabCaption(4)   =   "Pozos"
       TabPicture(4)   =   "frmManSocios.frx":007C
@@ -573,9 +583,8 @@ Begin VB.Form frmManSocios
       Tab(5).ControlCount=   1
       TabCaption(6)   =   "Movimientos"
       TabPicture(6)   =   "frmManSocios.frx":00B4
-      Tab(6).ControlEnabled=   -1  'True
+      Tab(6).ControlEnabled=   0   'False
       Tab(6).Control(0)=   "FrameAux4"
-      Tab(6).Control(0).Enabled=   0   'False
       Tab(6).ControlCount=   1
       Begin VB.Frame FrameAux4 
          BorderStyle     =   0  'None
@@ -589,7 +598,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   5430
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   181
          Top             =   510
          Width           =   12360
@@ -1288,9 +1297,9 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   4395
-         Left            =   -65100
+         Left            =   9900
          TabIndex        =   147
-         Top             =   420
+         Top             =   405
          Visible         =   0   'False
          Width           =   3465
          Begin VB.CommandButton cmdAccCRM 
@@ -1947,7 +1956,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   -63660
+         Left            =   11340
          TabIndex        =   123
          Text            =   "Text4"
          Top             =   1050
@@ -4376,7 +4385,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   4350
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   120
          Top             =   450
          Width           =   615
@@ -4444,7 +4453,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.ListView lw1 
          Height          =   3855
-         Left            =   -74040
+         Left            =   960
          TabIndex        =   121
          Top             =   420
          Width           =   8745
@@ -4474,7 +4483,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.Toolbar Toolbar3 
          Height          =   2370
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   127
          Top             =   480
          Visible         =   0   'False
@@ -4532,7 +4541,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   1005
-         Left            =   -64980
+         Left            =   10020
          TabIndex        =   130
          Top             =   1440
          Width           =   2760
@@ -4573,7 +4582,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.Toolbar Toolbar4 
          Height          =   390
-         Left            =   -64860
+         Left            =   10140
          TabIndex        =   129
          Top             =   1590
          Visible         =   0   'False
@@ -4598,7 +4607,7 @@ Begin VB.Form frmManSocios
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   3
-         Left            =   -64140
+         Left            =   10860
          Picture         =   "frmManSocios.frx":1C77
          ToolTipText     =   "Buscar fecha"
          Top             =   1050
@@ -4616,7 +4625,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -64860
+         Left            =   10140
          TabIndex        =   126
          Top             =   1050
          Width           =   735
@@ -4634,7 +4643,7 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   300
-         Left            =   -64920
+         Left            =   10080
          TabIndex        =   122
          Top             =   510
          Width           =   2865
@@ -6155,23 +6164,19 @@ Private Sub frmCoop_DatoSeleccionado(CadenaSeleccion As String)
     Text2(21).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre cooperativa
 End Sub
 
+
 Private Sub frmGlo_DatoSeleccionado(CadenaSeleccion As String)
     Text1(26).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo globalgap
     Text2(26).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre globalgap
 End Sub
 
+
 Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
     txtAux1(1).Text = RecuperaValor(CadenaSeleccion, 1) 'codseccion
     FormateaCampo txtAux1(1)
     txtAux2(1).Text = RecuperaValor(CadenaSeleccion, 2) 'nomseccion
-    
-'    Set vSeccion = New CSeccion
-'    If vSeccion.LeerDatos(txtaux1(1).Text) Then
-'        b = vSeccion.AbrirConta
-'    Else
-'        Set vSeccion = Nothing
-'    End If
 End Sub
+
 
 Private Sub frmSit_DatoSeleccionado(CadenaSeleccion As String)
     Text1(15).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo situacion
