@@ -803,7 +803,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim tabla As String
+Dim Tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -823,18 +823,18 @@ Dim cerrar As Boolean
 End Sub
 
 Private Sub Check1_Click(Index As Integer)
-Dim I As Integer
+Dim i As Integer
     Select Case Index
         Case 2
-            For I = 0 To 1
-                Check1(I).Enabled = (Check1(2).Value = 0)
-            Next I
+            For i = 0 To 1
+                Check1(i).Enabled = (Check1(2).Value = 0)
+            Next i
 '[Monica]05/01/2012: SegSoc pasa a ser porcentaje daba error y lo he comentado
 '            Check1(3).Enabled = (Check1(2).Value = 0)
         Case 3
-            For I = 0 To 2
-                Check1(I).Enabled = (Check1(3).Value = 0)
-            Next I
+            For i = 0 To 2
+                Check1(i).Enabled = (Check1(3).Value = 0)
+            Next i
     End Select
 End Sub
 
@@ -914,7 +914,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
             CadParam = CadParam & "pSeccion=""" & Me.Combo1(1).Text & """|"
             numParam = numParam + 1
             '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
-            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
+            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 18 Then
                 indRPT = 55 'Informe de horas mensual
                 If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                   
@@ -922,7 +922,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
                 cadNombreRPT = nomDocu
                 
                 frmImprimir.NombreRPT = cadNombreRPT '"rInfHorasMensNatural.rpt"
-                tabla = "(rrecibosnomina INNER JOIN straba ON rrecibosnomina.codtraba = straba.codtraba) "
+                Tabla = "(rrecibosnomina INNER JOIN straba ON rrecibosnomina.codtraba = straba.codtraba) "
                 
                 cadSelect = Replace(cadSelect, "horas.fecharec", "rrecibosnomina.fechahora")
                 cadFormula = Replace(cadFormula, "horas.fecharec", "rrecibosnomina.fechahora")
@@ -942,7 +942,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
                     numParam = numParam + 1
                     
                     
-                    tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) "
+                    Tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) "
                                
                     If Me.Check1(0).Value = 0 Then
                         frmImprimir.NombreRPT = "rInfHorasMens.rpt"
@@ -954,8 +954,8 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
                     
                 Else
                     ' detallamos los costes de los partes
-                    tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) "
-                    tabla = "(" & tabla & ") INNER JOIN rpartes_trabajador ON horas.nroparte = rpartes_trabajador.nroparte and rpartes_trabajador.codtraba = horas.codtraba "
+                    Tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) "
+                    Tabla = "(" & Tabla & ") INNER JOIN rpartes_trabajador ON horas.nroparte = rpartes_trabajador.nroparte and rpartes_trabajador.codtraba = horas.codtraba "
                     
                     frmImprimir.NombreRPT = "rInfHorasMensDetalle.rpt"
                 
@@ -969,7 +969,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     End Select
     
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(tabla, cadSelect) Then
+    If HayRegParaInforme(Tabla, cadSelect) Then
         LlamarImprimir
     End If
 
@@ -999,7 +999,7 @@ End Sub
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
-Dim I As Integer
+Dim i As Integer
 
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -1046,15 +1046,15 @@ Dim I As Integer
     W = 6795
     FrameHorasTrabajadasVisible True, H, W
     indFrame = 0
-    tabla = "horas"
+    Tabla = "horas"
         
     CargaCombo
         
-    For I = 0 To Check1.Count - 1
+    For i = 0 To Check1.Count - 1
         '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
-        Check1(I).Enabled = (vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 9)
-        Check1(I).visible = (vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 9)
-    Next I
+        Check1(i).Enabled = (vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 9)
+        Check1(i).visible = (vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 9)
+    Next i
         
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
@@ -1315,7 +1315,7 @@ End Sub
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim I As Integer
+Dim i As Integer
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
 '    For I = 0 To Combo1.Count - 1

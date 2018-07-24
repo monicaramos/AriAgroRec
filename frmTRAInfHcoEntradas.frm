@@ -603,7 +603,7 @@ Private ConSubInforme As Boolean
 
 
 
-Dim tabla As String
+Dim Tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -635,7 +635,7 @@ End Sub
 
 
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 Dim B As Boolean
 Dim SQL As String
 Dim Sql2 As String
@@ -655,7 +655,7 @@ Dim tipoMov As String
 '                b = False
 '                PonerFoco txtcodigo(6)
 '            End If
-    DatosOK = B
+    DatosOk = B
 
 End Function
 
@@ -698,7 +698,7 @@ Dim Sql2 As String
     CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
-    If DatosOK Then
+    If DatosOk Then
         '======== FORMULA  ====================================
         'D/H TRANSPORTISTA
         cDesde = Trim(txtCodigo(12).Text)
@@ -835,7 +835,7 @@ End Sub
 
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
-Dim I As Integer
+Dim i As Integer
 Dim indFrame As Single
 
     'Icono del formulario
@@ -848,12 +848,12 @@ Dim indFrame As Single
     Me.FrameFacturar.visible = False
     
     
-    For I = 12 To 13
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
-    For I = 20 To 21
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
+    For i = 12 To 13
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
+    For i = 20 To 21
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
 
     ' Necesitamos la conexion a la contabilidad de la seccion de adv
     ' para sacar los porcentajes de iva de los articulos y calcular
@@ -871,12 +871,12 @@ Dim indFrame As Single
     
     
     '[Monica]04/11/2013: no mostramos el socio cuando el informe es para el transportista (solo catadau)
-    Me.Check1.visible = (vParamAplic.Cooperativa = 0)
-    Me.Check1.Enabled = (vParamAplic.Cooperativa = 0)
+    Me.Check1.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
+    Me.Check1.Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
     
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdcancel.Cancel = True
+    Me.cmdCancel.Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
         
@@ -1168,8 +1168,8 @@ End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim devuelve As String
-Dim codcampo As String, nomCampo As String
-Dim tabla As String
+Dim codCampo As String, nomCampo As String
+Dim Tabla As String
       
     Select Case Index
         Case 0, 1, 12, 13 'transportistas
@@ -1199,9 +1199,9 @@ Dim tabla As String
         Case 40, 41  'Cod. Socio
             If PonerFormatoEntero(txtCodigo(Index)) Then
                 nomCampo = "nomsocio"
-                tabla = "rsocios"
-                codcampo = "codsocio"
-                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), tabla, nomCampo, codcampo, "N")
+                Tabla = "rsocios"
+                codCampo = "codsocio"
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), Tabla, nomCampo, codCampo, "N")
                 If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
             Else
                 txtNombre(Index).Text = ""

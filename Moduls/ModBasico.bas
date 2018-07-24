@@ -273,12 +273,54 @@ Public Sub AyudaVariedad(frmBas As frmBasico2, Optional CodActual As String, Opt
     frmBas.FrameBotonGnral.Enabled = True
     ' hasta aqui
     
+    frmBas.Show vbModal
+
     
+End Sub
+
+
+Public Sub AyudaVariedadPrevio(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|1205|;S|txtAux(1)|T|Descripción|2700|;S|txtAux(2)|T|Producto|2595|;S|txtAux(3)|T|Clase|1000|;S|txtAux(3)|T|Nombre|2500|;"
+    frmBas.CadenaConsulta = "SELECT variedades.codvarie, variedades.nomvarie, productos.nomprodu, variedades.codclase, clases.nomclase  "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM (variedades inner join productos on variedades.codprodu = productos.codprodu) inner join clases on variedades.codclase = clases.codclase "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Código |N|N|||variedades|codvarie|000000|S|"
+    frmBas.Tag2 = "Descripción|T|N|||variedades|nomvarie|||"
+    frmBas.Tag3 = "Producto|T|N|||variedades|nomprodu|||"
+    frmBas.Tag4 = "Clase|N|N|||variedades|codclase|000000||"
+    frmBas.Tag3 = "Nombre Clase|T|N|||clases|nomclase|||"
+    
+    frmBas.Maxlen1 = 6
+    frmBas.Maxlen2 = 30
+    frmBas.Maxlen3 = 40
+    frmBas.Maxlen4 = 6
+    frmBas.Maxlen5 = 30
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.Tabla = "variedades"
+    frmBas.CampoCP = "codvarie"
+    frmBas.Caption = "Variedades"
+    frmBas.DeConsulta = True
+    
+    frmBas.DatosADevolverBusqueda = "0|1|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 3000
     
     frmBas.Show vbModal
 
     
 End Sub
+
+
+
+
+
+
 
 Public Sub AyudaCuadrillas(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
     frmBas.CadenaTots = "S|txtAux(0)|T|Código|1405|;S|txtAux(1)|T|Capataz|1200|;S|txtAux(2)|T|Nombre|4395|;"
@@ -586,6 +628,7 @@ Public Sub AyudaFamiliasCom(frmCom As frmBasico2, Optional CodActual As String, 
     
     frmCom.Show vbModal
 End Sub
+
 Public Sub AyudaFrasTerceros(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
 ' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
     
@@ -1017,7 +1060,7 @@ Private Sub Redimensiona(frmBas As frmBasico2, Cant As Integer)
     frmBas.Width = frmBas.Width + Cant
     frmBas.DataGrid1.Width = frmBas.DataGrid1.Width + Cant
     frmBas.cmdAceptar.Left = frmBas.cmdAceptar.Left + Cant
-    frmBas.CmdCancelar.Left = frmBas.CmdCancelar.Left + Cant
+    frmBas.cmdCancelar.Left = frmBas.cmdCancelar.Left + Cant
     frmBas.cmdRegresar.Left = frmBas.cmdRegresar.Left + Cant
 
 End Sub

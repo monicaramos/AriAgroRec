@@ -572,7 +572,7 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
         
         Case 10:
                 '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
-                If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Then
+                If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 18 Then
                     frmManHorasDestajo.Show vbModal 'mantenimiento de horas de destajo
                 Else
                     If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
@@ -589,14 +589,13 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                     frmManHorasNat.Show vbModal  'Entrada de Horas de trabajadores para natural de montaña
                 Else
                     If vParamAplic.Cooperativa = 2 Then 'Or vParamAplic.Cooperativa = 0 Then
-                        If vParamAplic.Cooperativa = 0 Then frmManHorasPica.Caption = "Entrada de Horas"
                         frmManHorasPica.Show vbModal  'Entrada de Horas de trabajadores para picassent
                     Else
                         '[Monica]14/12/2017: catadau va a tener el mto de horas de coopic
                         If vParamAplic.Cooperativa = 16 Then
                             frmManHorasCoopic.Show vbModal ' entradas horas coopic
                         Else
-                            If vParamAplic.Cooperativa = 0 Then
+                            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
                                 frmManHorasCata.Show vbModal ' entradas horas catadau
                             Else
                                 frmManHoras.Show vbModal  'Entrada de Horas de trabajadores
@@ -607,14 +606,10 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                 
         Case 14:
                 '[Monica]14/12/2017: para que Catadau funcione como Coopic
-                If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
+                If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
                     frmPagoAnticiposCoopic.Show vbModal
                 Else
-                    If vParamAplic.Cooperativa = 0 Then
-                        frmPagoAnticiposCoopic.Show vbModal
-                    Else
-                        frmImpRecibos.Show vbModal 'Impresión de Recibos
-                    End If
+                    frmImpRecibos.Show vbModal 'Impresión de Recibos
                 End If
         Case 16:
                 '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
@@ -623,7 +618,7 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                     frmPagoRecibos.Show vbModal 'Pago de Recibos
                  Else
                     '[Monica]29/01/2018: para el caso de Catadau igual que coopic
-                    If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
+                    If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
                         AbrirListadoNominas (37)
                     Else
                        'caso de valsur y de alzira
@@ -1162,13 +1157,13 @@ Dim i As Integer
 '    MDIppal.mnE_Util(6).visible = (vParamAplic.Cooperativa = 3)
 '
     'traspaso a almazara solo para catadau
-    MDIppal.mnRec_Almazara(1).Enabled = (vParamAplic.Cooperativa = 0)
-    MDIppal.mnRec_Almazara(1).visible = (vParamAplic.Cooperativa = 0)
+    MDIppal.mnRec_Almazara(1).Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
+    MDIppal.mnRec_Almazara(1).visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
     
     '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
     ' mantenimiento de calibradores solo para catadau , alzira, castelduc y picassent
-    MDIppal.mnRecG_Admon(25).Enabled = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9) Or (vParamAplic.Cooperativa = 16))
-    MDIppal.mnRecG_Admon(25).visible = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9) Or (vParamAplic.Cooperativa = 16))
+    MDIppal.mnRecG_Admon(25).Enabled = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9) Or (vParamAplic.Cooperativa = 16) Or (vParamAplic.Cooperativa = 18))
+    MDIppal.mnRecG_Admon(25).visible = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9) Or (vParamAplic.Cooperativa = 16) Or (vParamAplic.Cooperativa = 18))
     
     
     MDIppal.mnRec_AlmzLiquidacion(4).Enabled = vParamAplic.Cooperativa = 1
@@ -1281,8 +1276,8 @@ Dim i As Integer
     MDIppal.mnE_Aport(9).visible = (vParamAplic.Cooperativa = 14)
 
     '[Monica]29/04/2013: bloqueo de pago de facturas terceros + facturas socios, solo para montifrut
-    MDIppal.mnRec_PagoSocios(20).Enabled = (vParamAplic.Cooperativa = 12)
-    MDIppal.mnRec_PagoSocios(20).visible = (vParamAplic.Cooperativa = 12)
+    MDIppal.mnRec_PagoSocios(20).Enabled = (vParamAplic.Cooperativa = 12 Or vParamAplic.Cooperativa = 18)
+    MDIppal.mnRec_PagoSocios(20).visible = (vParamAplic.Cooperativa = 12 Or vParamAplic.Cooperativa = 18)
 
 
     MDIppal.mnRec_Entradas(21).Enabled = (vParamAplic.Cooperativa = 12)
@@ -1301,13 +1296,13 @@ Dim i As Integer
     MDIppal.mnRec_InforOfi(2).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)
     
     '[Monica]12/12/2013: el informe de fitosanitarios solo para catadau
-    MDIppal.mnRec_InforOfi(3).Enabled = (vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 4)
-    MDIppal.mnRec_InforOfi(3).visible = (vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 4)
+    MDIppal.mnRec_InforOfi(3).Enabled = (vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 18)
+    MDIppal.mnRec_InforOfi(3).visible = (vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 18)
     
     
     '[Monica]07/12/2016: informe de diferencias de kilos
-    MDIppal.mnRec_InforOfi(4).Enabled = (vParamAplic.Cooperativa = 0)
-    MDIppal.mnRec_InforOfi(4).visible = (vParamAplic.Cooperativa = 0)
+    MDIppal.mnRec_InforOfi(4).Enabled = (vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 18)
+    MDIppal.mnRec_InforOfi(4).visible = (vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 18)
     
     
     '[Monica]04/05/2015: traspaso de ropas solo para Castelduc
@@ -1329,7 +1324,7 @@ Dim i As Integer
     MDIppal.mnRec_AlmTrasCampos(1).Enabled = (vParamAplic.Cooperativa = 1)
     MDIppal.mnRec_AlmTrasCampos(1).visible = (vParamAplic.Cooperativa = 1)
     
-    If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
+    If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
         MDIppal.mnP_PreNominas(5).Enabled = False
         MDIppal.mnP_PreNominas(5).visible = False
         MDIppal.mnP_PreNominas(10).Enabled = False
@@ -1370,8 +1365,8 @@ Dim i As Integer
     MDIppal.mnRec_Traza1(1).visible = (vParamAplic.Cooperativa = 9)
     
     '[Monica]02/02/2018: categorias de catadau
-    MDIppal.mnP_PreNomCateg(1).Enabled = (vParamAplic.Cooperativa = 0)
-    MDIppal.mnP_PreNomCateg(1).visible = (vParamAplic.Cooperativa = 0)
+    MDIppal.mnP_PreNomCateg(1).Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
+    MDIppal.mnP_PreNomCateg(1).visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
     
     
 End Sub
@@ -1410,7 +1405,7 @@ Private Sub AbrirFormularioGlobalGAP()
     frmBas.Tag2 = "Descripción|T|N|||rglobalgap|descripcion|||"
     frmBas.Maxlen1 = 4
     frmBas.Maxlen2 = 40
-    frmBas.tabla = "rglobalgap"
+    frmBas.Tabla = "rglobalgap"
     frmBas.CampoCP = "codigo"
     frmBas.Report = "rManGlobalGap.rpt"
     frmBas.Caption = "GlobalGap"

@@ -762,7 +762,7 @@ Dim cadSelect1 As String
 Dim cadSelect2 As String
 
 
-Dim tabla As String
+Dim Tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -785,11 +785,11 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 End Sub
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 Dim B As Boolean
     B = True
     
-    DatosOK = B
+    DatosOk = B
 
 End Function
 
@@ -852,7 +852,7 @@ Dim vcad As String
     CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
-    If DatosOK Then
+    If DatosOk Then
         '======== FORMULA  ====================================
         'D/H Socios
         cDesde = Trim(txtCodigo(12).Text)
@@ -1114,14 +1114,14 @@ End Sub
 
 Private Sub Combo1_Click(Index As Integer)
     If Index = 0 Then
-        Check6.Enabled = (Combo1(0).ListIndex = 1) And vParamAplic.Cooperativa = 0
+        Check6.Enabled = (Combo1(0).ListIndex = 1) And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
         If Not Check6.Enabled Then Check6.Value = 0
     End If
 End Sub
 
 Private Sub Combo1_Validate(Index As Integer, Cancel As Boolean)
     If Index = 0 Then
-        Check6.Enabled = (Combo1(0).ListIndex = 1) And vParamAplic.Cooperativa = 0
+        Check6.Enabled = (Combo1(0).ListIndex = 1) And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
         If Not Check6.Enabled Then Check6.Value = 0
     End If
 End Sub
@@ -1131,7 +1131,7 @@ Private Sub Form_Activate()
         PrimeraVez = False
         PonerFoco txtCodigo(12)
         Combo1(0).ListIndex = 0
-        Check6.Enabled = (vParamAplic.Cooperativa = 0 And Combo1(0).ListIndex = 1)
+        Check6.Enabled = ((vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18) And Combo1(0).ListIndex = 1)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -1139,7 +1139,7 @@ End Sub
 
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
-Dim I As Integer
+Dim i As Integer
 Dim indFrame As Single
 
     'Icono del formulario
@@ -1152,12 +1152,12 @@ Dim indFrame As Single
     Me.FrameFacturar.visible = False
     
     
-    For I = 12 To 13
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
-    For I = 20 To 21
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
+    For i = 12 To 13
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
+    For i = 20 To 21
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
 
     
     NomTabla = "rhisfruta"
@@ -1179,8 +1179,8 @@ Dim indFrame As Single
     CargaCombo
     
     '[Monica]14/03/2017: solo en el caso de catadau agrupamos por codigo productor (codigoggap)
-    Check6.Enabled = (vParamAplic.Cooperativa = 0 And Combo1(0).ListIndex = 1)
-    Check6.visible = (vParamAplic.Cooperativa = 0)
+    Check6.Enabled = ((vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18) And Combo1(0).ListIndex = 1)
+    Check6.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
     
     
     
@@ -1192,14 +1192,14 @@ Dim indFrame As Single
 End Sub
 
 Private Sub CargaCombo()
-Dim I As Integer
+Dim i As Integer
 Dim Rs As ADODB.Recordset
 Dim SQL As String
 
    ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
-    For I = 0 To Combo1.Count - 1
-        Combo1(I).Clear
-    Next I
+    For i = 0 To Combo1.Count - 1
+        Combo1(i).Clear
+    Next i
     
     If vParamAplic.Cooperativa = 16 Then
         Combo1(0).AddItem "Todos"
@@ -1459,8 +1459,8 @@ End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim devuelve As String
-Dim codcampo As String, nomCampo As String
-Dim tabla As String
+Dim codCampo As String, nomCampo As String
+Dim Tabla As String
       
     Select Case Index
         'FECHA Desde Hasta
@@ -1478,9 +1478,9 @@ Dim tabla As String
         Case 12, 13  'Cod. Socio
             If PonerFormatoEntero(txtCodigo(Index)) Then
                 nomCampo = "nomsocio"
-                tabla = "rsocios"
-                codcampo = "codsocio"
-                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), tabla, nomCampo, codcampo, "N")
+                Tabla = "rsocios"
+                codCampo = "codsocio"
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), Tabla, nomCampo, codCampo, "N")
                 If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
             Else
                 txtNombre(Index).Text = ""

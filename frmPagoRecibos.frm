@@ -885,7 +885,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim tabla As String
+Dim Tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -918,7 +918,7 @@ Dim cTabla As String
 Dim SQL As String
 
     
-    If Not DatosOK Then Exit Sub
+    If Not DatosOk Then Exit Sub
     
     cadSelect = ""
     'Fecha de Recibo
@@ -933,9 +933,9 @@ Dim SQL As String
         AnyadirAFormula cadSelect, "forpago.tipoforp = 1"
     End If
     
-    tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
+    Tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
                
-    cTabla = tabla
+    cTabla = Tabla
     cadSelect1 = cadSelect
     cadSelect2 = cadSelect
     
@@ -955,8 +955,8 @@ Dim SQL As String
         AnyadirAFormula cadSelect, "horas.intconta = 0"
 
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
-        If HayRegParaInforme(tabla, cadSelect) Then
-            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
+        If HayRegParaInforme(Tabla, cadSelect) Then
+            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
                 ProcesarCambiosPicassent (cadSelect)
             Else
                 ProcesarCambios (cadSelect)
@@ -964,7 +964,7 @@ Dim SQL As String
         Else
             Repetir = True
             If MsgBox("¿Desea repetir el proceso?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then ' si la cooperativa es picassent repite norma como natural
+                If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then ' si la cooperativa es picassent repite norma como natural
                     RepetirNormaPicassent cadSelect
                 Else
                     '[Monica]03/11/2010: anteriormente en Alzira no grababamos en rrecibosnomina, ahora sí
@@ -984,7 +984,7 @@ Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim HayReg As Integer
 Dim B As Boolean
 Dim Rs As ADODB.Recordset
@@ -1023,8 +1023,8 @@ On Error GoTo eProcesarCambios
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    Pb1.visible = True
-    CargarProgres Pb1, Rs.Fields(0).Value
+    pb1.visible = True
+    CargarProgres pb1, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -1045,7 +1045,7 @@ On Error GoTo eProcesarCambios
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        IncrementarProgres Pb1, 1
+        IncrementarProgres pb1, 1
         Mens = "Calculando Importes" & vbCrLf & vbCrLf & "Trabajador: " & Rs!CodTraba & vbCrLf
         
         Sql2 = "select salarios.impsalar, salarios.imphorae, straba.dtosirpf, straba.dtosegso, straba.porc_antig from salarios, straba where straba.codtraba = " & DBSet(Rs!CodTraba, "N")
@@ -1183,7 +1183,7 @@ Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim HayReg As Integer
 Dim B As Boolean
 Dim Rs As ADODB.Recordset
@@ -1493,7 +1493,7 @@ Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim HayReg As Integer
 Dim B As Boolean
 Dim Rs As ADODB.Recordset
@@ -1651,7 +1651,7 @@ Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim HayReg As Integer
 Dim B As Boolean
 Dim Rs As ADODB.Recordset
@@ -1829,7 +1829,7 @@ Dim cTabla As String
 Dim SQL As String
 
     
-    If Not DatosOK Then Exit Sub
+    If Not DatosOk Then Exit Sub
     
     cadSelect = ""
     'Fecha de Recibo
@@ -1844,9 +1844,9 @@ Dim SQL As String
         AnyadirAFormula cadSelect, "forpago.tipoforp = 1"
     End If
     
-    tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
+    Tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
                
-    cTabla = tabla
+    cTabla = Tabla
     cadSelect1 = cadSelect
     cadSelect2 = cadSelect
     
@@ -1866,10 +1866,10 @@ Dim SQL As String
         AnyadirAFormula cadSelect, "horas.intconta = 0"
 
         '[Monica]06/05/2015: comprobamos que todos los trabajadores tengan direccion
-        If Not DireccionesOk(tabla, cadSelect) Then Exit Sub
+        If Not DireccionesOk(Tabla, cadSelect) Then Exit Sub
 
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
-        If HayRegParaInforme(tabla, cadSelect) Then
+        If HayRegParaInforme(Tabla, cadSelect) Then
             ProcesarCambiosNatural (cadSelect)
         Else
             Repetir = True
@@ -2010,16 +2010,16 @@ Dim List As Collection
             W = 6660
             FrameHorasTrabajadasVisible True, H, W
             indFrame = 0
-            Me.cmdCancel(0).Cancel = True
+            Me.CmdCancel(0).Cancel = True
         Case 2
             H = 7530
             W = 6660
             FramePagoRecibosNaturalVisible True, H, W
             indFrame = 0
-            Me.cmdCancel(1).Cancel = True
+            Me.CmdCancel(1).Cancel = True
     End Select
         
-    tabla = "horas"
+    Tabla = "horas"
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
     Me.Width = W + 70
@@ -2032,7 +2032,7 @@ Dim List As Collection
     End If
     
     
-    Pb1.visible = False
+    pb1.visible = False
     Pb2.visible = False
 End Sub
 
@@ -2178,7 +2178,7 @@ End Sub
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim cad As String
-Dim tabla As String
+Dim Tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
@@ -2206,7 +2206,7 @@ Dim Titulo As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = cad
-        frmB.vtabla = tabla
+        frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -2337,26 +2337,26 @@ Dim nomCampo As String
         
         'Informe de variedades
         Case "Clase"
-            CadParam = CadParam & campo & "{" & tabla & ".codclase}" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codclase}" & "|"
             CadParam = CadParam & nomCampo & " {" & "clases" & ".nomclase}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Producto""" & "|"
             numParam = numParam + 3
             
         Case "Producto"
-            CadParam = CadParam & campo & "{" & tabla & ".codprodu}" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codprodu}" & "|"
             CadParam = CadParam & nomCampo & " {" & "productos" & ".nomprodu}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Clase""" & "|"
             numParam = numParam + 3
 
         'Informe de calibres
         Case "Variedad"
-            CadParam = CadParam & campo & "{" & tabla & ".codvarie}" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codvarie}" & "|"
             CadParam = CadParam & nomCampo & " {" & "variedades" & ".nomvarie}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Variedad""" & "|"
             numParam = numParam + 3
             
         Case "Calibre"
-            CadParam = CadParam & campo & "{" & tabla & ".codcalib}" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codcalib}" & "|"
             CadParam = CadParam & nomCampo & " {" & "calibres" & ".nomcalib}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Calibre""" & "|"
             numParam = numParam + 3
@@ -2387,7 +2387,7 @@ Dim nomCampo As String
 
     Select Case cadgrupo
         Case "Codigo"
-            CadParam = CadParam & "Orden" & "= {" & tabla
+            CadParam = CadParam & "Orden" & "= {" & Tabla
             Select Case OpcionListado
                 Case 10
                     CadParam = CadParam & ".codclien}|"
@@ -2396,7 +2396,7 @@ Dim nomCampo As String
             End Select
             Tipo = "Código"
         Case "Alfabético"
-            CadParam = CadParam & "Orden" & "= {" & tabla
+            CadParam = CadParam & "Orden" & "= {" & Tabla
             Select Case OpcionListado
                 Case 10
                     CadParam = CadParam & ".nomclien}|"
@@ -2443,7 +2443,7 @@ End Sub
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim I As Integer
+Dim i As Integer
 
 ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
 '    For I = 0 To Combo1.Count - 1
@@ -2488,7 +2488,7 @@ Dim I As Integer
     
 End Sub
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 Dim B As Boolean
 Dim SQL As String
 'Dim Datos As String
@@ -2545,14 +2545,14 @@ Dim SQL As String
     End Select
     
     
-    DatosOK = B
+    DatosOk = B
     
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Function
 
 
-Private Function ActualizarRegistros(tabla As String, cWhere As String) As Boolean
+Private Function ActualizarRegistros(Tabla As String, cWhere As String) As Boolean
 Dim SQL As String
     On Error GoTo eActualizarRegistros
     
@@ -2685,7 +2685,7 @@ Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim HayReg As Integer
 Dim B As Boolean
 Dim Rs As ADODB.Recordset
@@ -2966,7 +2966,7 @@ On Error GoTo eProcesarCambiosPicassent
     End If
     
     '[Monica]02/02/2018: Catadau ha de generar el fichero
-    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Then
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
         If vEmpresa.AplicarNorma19_34Nueva = 1 Then
             If HayXML Then
                 B = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
@@ -2989,7 +2989,7 @@ On Error GoTo eProcesarCambiosPicassent
     If B Then
         Mens = "Copiar fichero"
         '[Monica]02/02/2018: Catadau pasa a funcionar como Picassent
-        If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Then
+        If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
             CopiarFichero
         Else
             CopiarFicheroA3
