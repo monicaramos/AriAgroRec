@@ -2267,7 +2267,7 @@ Dim B As Boolean
     
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
+    CmdCancelar.visible = B
     cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos

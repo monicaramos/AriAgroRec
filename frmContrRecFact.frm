@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmContrRecFact 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Facturación de Entradas"
-   ClientHeight    =   9405
+   ClientHeight    =   11085
    ClientLeft      =   45
    ClientTop       =   4035
    ClientWidth     =   16170
@@ -13,7 +13,7 @@ Begin VB.Form frmContrRecFact
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   9405
+   ScaleHeight     =   11085
    ScaleWidth      =   16170
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -61,7 +61,7 @@ Begin VB.Form frmContrRecFact
       Height          =   375
       Left            =   13845
       TabIndex        =   18
-      Top             =   8910
+      Top             =   10395
       Width           =   1065
    End
    Begin VB.CommandButton cmdCancelar 
@@ -79,14 +79,14 @@ Begin VB.Form frmContrRecFact
       Height          =   375
       Left            =   15045
       TabIndex        =   87
-      Top             =   8910
+      Top             =   10395
       Width           =   1065
    End
    Begin VB.Frame FrameFactura 
-      Height          =   4830
+      Height          =   5010
       Left            =   11205
       TabIndex        =   28
-      Top             =   3930
+      Top             =   5190
       Width           =   4895
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -813,11 +813,11 @@ Begin VB.Form frmContrRecFact
       TabIndex        =   79
       Tag             =   "Base Imponible 2 |N|N|0||scafac|baseimp2|#,###,###,##0.00|N|"
       Text            =   "Text1 7"
-      Top             =   4275
+      Top             =   5715
       Width           =   1485
    End
    Begin VB.Frame FrameIntro 
-      Height          =   3105
+      Height          =   4365
       Left            =   120
       TabIndex        =   20
       Top             =   765
@@ -839,7 +839,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   6
          TabIndex        =   9
          Text            =   "Text1"
-         Top             =   2550
+         Top             =   3630
          Width           =   870
       End
       Begin VB.TextBox Text2 
@@ -861,7 +861,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   40
          TabIndex        =   98
          Text            =   "Text2"
-         Top             =   2550
+         Top             =   3630
          Width           =   5400
       End
       Begin VB.TextBox Text1 
@@ -881,7 +881,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   15
          TabIndex        =   10
          Text            =   "Text1"
-         Top             =   2520
+         Top             =   3645
          Width           =   1380
       End
       Begin VB.TextBox Text1 
@@ -901,7 +901,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   15
          TabIndex        =   8
          Text            =   "Text1"
-         Top             =   2160
+         Top             =   3105
          Width           =   1380
       End
       Begin VB.TextBox Text2 
@@ -923,7 +923,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   40
          TabIndex        =   93
          Text            =   "Text2"
-         Top             =   2190
+         Top             =   3090
          Width           =   5400
       End
       Begin VB.TextBox Text1 
@@ -943,7 +943,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   6
          TabIndex        =   7
          Text            =   "Text1"
-         Top             =   2190
+         Top             =   3090
          Width           =   870
       End
       Begin VB.TextBox Text1 
@@ -963,7 +963,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   6
          TabIndex        =   6
          Text            =   "Text1"
-         Top             =   1830
+         Top             =   2550
          Width           =   870
       End
       Begin VB.TextBox Text2 
@@ -985,7 +985,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   40
          TabIndex        =   89
          Text            =   "Text2"
-         Top             =   1830
+         Top             =   2550
          Width           =   5400
       End
       Begin VB.TextBox Text1 
@@ -1005,7 +1005,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   6
          TabIndex        =   16
          Text            =   "Text1"
-         Top             =   1320
+         Top             =   2040
          Width           =   570
       End
       Begin VB.TextBox Text1 
@@ -1025,7 +1025,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   8
          TabIndex        =   15
          Text            =   "Text1"
-         Top             =   1320
+         Top             =   2040
          Width           =   1170
       End
       Begin VB.ComboBox Combo1 
@@ -1044,7 +1044,7 @@ Begin VB.Form frmContrRecFact
          Style           =   2  'Dropdown List
          TabIndex        =   13
          Tag             =   "Tipo IRPF|N|N|0|2|rsocios|tipoirpf||N|"
-         Top             =   660
+         Top             =   840
          Width           =   1935
       End
       Begin VB.ComboBox Combo1 
@@ -1122,7 +1122,7 @@ Begin VB.Form frmContrRecFact
          Index           =   2
          Left            =   13650
          TabIndex        =   17
-         Top             =   2160
+         Top             =   3105
          Width           =   1710
       End
       Begin VB.TextBox Text2 
@@ -1144,7 +1144,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   40
          TabIndex        =   77
          Text            =   "Text2"
-         Top             =   1050
+         Top             =   1410
          Width           =   5400
       End
       Begin VB.TextBox Text1 
@@ -1164,7 +1164,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   4
          TabIndex        =   4
          Text            =   "Text1"
-         Top             =   1050
+         Top             =   1410
          Width           =   870
       End
       Begin VB.TextBox Text1 
@@ -1184,7 +1184,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   15
          TabIndex        =   14
          Text            =   "Text1"
-         Top             =   1320
+         Top             =   2040
          Width           =   1380
       End
       Begin VB.CheckBox Check1 
@@ -1202,7 +1202,7 @@ Begin VB.Form frmContrRecFact
          Index           =   1
          Left            =   13650
          TabIndex        =   19
-         Top             =   1800
+         Top             =   2745
          Visible         =   0   'False
          Width           =   1935
       End
@@ -1223,7 +1223,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   10
          TabIndex        =   3
          Tag             =   "Fecha Recepción|F|N|||tcafpc|fecrecep|dd/mm/yyyy|N|"
-         Top             =   660
+         Top             =   840
          Width           =   1380
       End
       Begin VB.TextBox Text2 
@@ -1245,7 +1245,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   40
          TabIndex        =   25
          Text            =   "Text2"
-         Top             =   1440
+         Top             =   1980
          Width           =   5400
       End
       Begin VB.TextBox Text1 
@@ -1265,7 +1265,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   5
          TabIndex        =   5
          Text            =   "Text1"
-         Top             =   1440
+         Top             =   1980
          Width           =   870
       End
       Begin VB.TextBox Text1 
@@ -1306,7 +1306,7 @@ Begin VB.Form frmContrRecFact
          MaxLength       =   10
          TabIndex        =   2
          Tag             =   "Fecha Factura|F|N|||tcafpc|fecfactu|dd/mm/yyyy|S|"
-         Top             =   660
+         Top             =   840
          Width           =   1305
       End
       Begin VB.TextBox Text1 
@@ -1327,7 +1327,7 @@ Begin VB.Form frmContrRecFact
          TabIndex        =   1
          Tag             =   "Nº Factura|T|N|||tcafpc|numfactu||S|"
          Text            =   "Text1 7"
-         Top             =   660
+         Top             =   840
          Width           =   1245
       End
       Begin VB.CheckBox Check1 
@@ -1336,7 +1336,7 @@ Begin VB.Form frmContrRecFact
          Index           =   0
          Left            =   9720
          TabIndex        =   53
-         Top             =   720
+         Top             =   810
          Value           =   1  'Checked
          Visible         =   0   'False
          Width           =   1095
@@ -1356,7 +1356,7 @@ Begin VB.Form frmContrRecFact
          Index           =   27
          Left            =   120
          TabIndex        =   100
-         Top             =   2580
+         Top             =   3660
          Width           =   1395
       End
       Begin VB.Image imgBuscar 
@@ -1364,7 +1364,7 @@ Begin VB.Form frmContrRecFact
          Index           =   6
          Left            =   1530
          ToolTipText     =   "Buscar concepto"
-         Top             =   2580
+         Top             =   3660
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -1382,7 +1382,7 @@ Begin VB.Form frmContrRecFact
          Index           =   26
          Left            =   8250
          TabIndex        =   99
-         Top             =   2535
+         Top             =   3660
          Width           =   1590
       End
       Begin VB.Label Label1 
@@ -1400,7 +1400,7 @@ Begin VB.Form frmContrRecFact
          Index           =   24
          Left            =   8250
          TabIndex        =   95
-         Top             =   2175
+         Top             =   3120
          Width           =   1185
       End
       Begin VB.Image imgBuscar 
@@ -1408,7 +1408,7 @@ Begin VB.Form frmContrRecFact
          Index           =   5
          Left            =   1530
          ToolTipText     =   "Buscar concepto"
-         Top             =   2220
+         Top             =   3120
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -1426,7 +1426,7 @@ Begin VB.Form frmContrRecFact
          Index           =   23
          Left            =   120
          TabIndex        =   94
-         Top             =   2220
+         Top             =   3120
          Width           =   1440
       End
       Begin VB.Label Label1 
@@ -1444,7 +1444,7 @@ Begin VB.Form frmContrRecFact
          Index           =   11
          Left            =   120
          TabIndex        =   90
-         Top             =   1860
+         Top             =   2580
          Width           =   945
       End
       Begin VB.Image imgBuscar 
@@ -1452,7 +1452,7 @@ Begin VB.Form frmContrRecFact
          Index           =   4
          Left            =   1530
          ToolTipText     =   "Buscar variedad"
-         Top             =   1860
+         Top             =   2580
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -1470,7 +1470,7 @@ Begin VB.Form frmContrRecFact
          Index           =   9
          Left            =   12720
          TabIndex        =   88
-         Top             =   2580
+         Top             =   3705
          Width           =   2250
       End
       Begin VB.Image imgDoc 
@@ -1478,7 +1478,7 @@ Begin VB.Form frmContrRecFact
          Index           =   1
          Left            =   15045
          ToolTipText     =   "Documentos"
-         Top             =   2475
+         Top             =   3600
          Width           =   510
       End
       Begin VB.Label Label1 
@@ -1496,7 +1496,7 @@ Begin VB.Form frmContrRecFact
          Index           =   22
          Left            =   13890
          TabIndex        =   85
-         Top             =   1335
+         Top             =   2055
          Width           =   1065
       End
       Begin VB.Label Label1 
@@ -1514,7 +1514,7 @@ Begin VB.Form frmContrRecFact
          Index           =   21
          Left            =   11700
          TabIndex        =   84
-         Top             =   1335
+         Top             =   2055
          Width           =   1035
       End
       Begin VB.Label Label1 
@@ -1532,7 +1532,7 @@ Begin VB.Form frmContrRecFact
          Index           =   20
          Left            =   8250
          TabIndex        =   83
-         Top             =   1335
+         Top             =   2055
          Width           =   1440
       End
       Begin VB.Label Label1 
@@ -1550,7 +1550,7 @@ Begin VB.Form frmContrRecFact
          Index           =   19
          Left            =   12165
          TabIndex        =   82
-         Top             =   690
+         Top             =   870
          Width           =   1215
       End
       Begin VB.Label Label1 
@@ -1586,7 +1586,7 @@ Begin VB.Form frmContrRecFact
          Index           =   17
          Left            =   120
          TabIndex        =   76
-         Top             =   1080
+         Top             =   1440
          Width           =   1245
       End
       Begin VB.Image imgBuscar 
@@ -1594,7 +1594,7 @@ Begin VB.Form frmContrRecFact
          Index           =   3
          Left            =   1530
          ToolTipText     =   "Buscar forma pago"
-         Top             =   1080
+         Top             =   1440
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -1621,7 +1621,7 @@ Begin VB.Form frmContrRecFact
          Left            =   9420
          Picture         =   "frmContrRecFact.frx":000C
          ToolTipText     =   "Buscar fecha"
-         Top             =   690
+         Top             =   870
          Width           =   240
       End
       Begin VB.Image imgFecha 
@@ -1630,7 +1630,7 @@ Begin VB.Form frmContrRecFact
          Left            =   6540
          Picture         =   "frmContrRecFact.frx":0097
          ToolTipText     =   "Buscar fecha"
-         Top             =   660
+         Top             =   840
          Width           =   240
       End
       Begin VB.Image imgBuscar 
@@ -1638,7 +1638,7 @@ Begin VB.Form frmContrRecFact
          Index           =   2
          Left            =   1530
          ToolTipText     =   "Buscar banco propio"
-         Top             =   1470
+         Top             =   2010
          Width           =   240
       End
       Begin VB.Image imgBuscar 
@@ -1664,7 +1664,7 @@ Begin VB.Form frmContrRecFact
          Index           =   3
          Left            =   8250
          TabIndex        =   26
-         Top             =   720
+         Top             =   900
          Width           =   1140
       End
       Begin VB.Label Label1 
@@ -1682,7 +1682,7 @@ Begin VB.Form frmContrRecFact
          Index           =   2
          Left            =   120
          TabIndex        =   24
-         Top             =   1470
+         Top             =   2010
          Width           =   1215
       End
       Begin VB.Label Label1 
@@ -1718,7 +1718,7 @@ Begin VB.Form frmContrRecFact
          Index           =   29
          Left            =   4980
          TabIndex        =   22
-         Top             =   690
+         Top             =   870
          Width           =   1545
       End
       Begin VB.Label Label1 
@@ -1736,15 +1736,15 @@ Begin VB.Form frmContrRecFact
          Index           =   28
          Left            =   120
          TabIndex        =   21
-         Top             =   690
+         Top             =   870
          Width           =   1095
       End
    End
    Begin VB.Frame FrameAux0 
-      Height          =   4830
+      Height          =   5010
       Left            =   120
       TabIndex        =   63
-      Top             =   3930
+      Top             =   5190
       Width           =   11020
       Begin VB.TextBox txtaux 
          Alignment       =   1  'Right Justify
@@ -2171,7 +2171,7 @@ Begin VB.Form frmContrRecFact
       Index           =   8
       Left            =   11250
       TabIndex        =   80
-      Top             =   4275
+      Top             =   5715
       Width           =   1215
    End
    Begin VB.Label Label1 
@@ -2342,8 +2342,8 @@ Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub DataGridAux_RowColChange(Index As Integer, LastRow As Variant, ByVal LastCol As Integer)
-    If Not AdoAux(0).Recordset.EOF Then _
-        Me.lblIndicador.Caption = AdoAux(0).Recordset.AbsolutePosition & " de " & AdoAux(0).Recordset.RecordCount
+    If Not Adoaux(0).Recordset.EOF Then _
+        Me.lblIndicador.Caption = Adoaux(0).Recordset.AbsolutePosition & " de " & Adoaux(0).Recordset.RecordCount
 End Sub
 
 Private Sub Form_Activate()
@@ -3006,8 +3006,8 @@ On Error GoTo EPonerModo
         
     cmdAceptar.visible = (ModoLineas = 2)
     cmdAceptar.Enabled = (ModoLineas = 2)
-    cmdCancelar.visible = (ModoLineas = 2)
-    cmdCancelar.Enabled = (ModoLineas = 2)
+    CmdCancelar.visible = (ModoLineas = 2)
+    CmdCancelar.Enabled = (ModoLineas = 2)
     
 '    'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
 '    'Si estamos en Insertar además limpia los campos Text1
@@ -3054,9 +3054,9 @@ On Error GoTo EPonerModo
                     
 '    Me.chkVistaPrevia.Enabled = (Modo <= 2)
     
-    For i = 0 To txtaux.Count - 1
-        BloquearTxt txtaux(i), True
-        txtaux(i).visible = False
+    For i = 0 To txtAux.Count - 1
+        BloquearTxt txtAux(i), True
+        txtAux(i).visible = False
     Next i
         
     Me.FrameIntro.Enabled = (Modo = 3)
@@ -3255,7 +3255,7 @@ Dim vSeccion As CSeccion
 '++monica:03/12/2008
     'comprobamos que hay lineas para facturar: o albaranes o portes de vuelta
     If cadWHERE = "" And (Combo1(0).ListIndex = 0 And Combo1(1).ListIndex = 0) Then
-        If AdoAux(0).Recordset.RecordCount = 0 Then
+        If Adoaux(0).Recordset.RecordCount = 0 Then
             MsgBox "No hay albaranes para incluir en la factura. Revise.", vbExclamation
             Exit Function
         End If
@@ -3405,8 +3405,8 @@ Dim i As Integer
     
     Me.cmdAceptar.visible = True
     Me.cmdAceptar.Enabled = True
-    Me.cmdCancelar.visible = True
-    Me.cmdCancelar.Enabled = True
+    Me.CmdCancelar.visible = True
+    Me.CmdCancelar.Enabled = True
     
     
     PonerFoco Text1(3)
@@ -3497,8 +3497,8 @@ Private Sub InicializarListView()
     ListView1.ColumnHeaders.Clear
     ListView1.ColumnHeaders.Add , , "Albarán", 1200
     ListView1.ColumnHeaders.Add , , "Fecha", 1400, 2
-    ListView1.ColumnHeaders.Add , , "Variedad", 1400
-    ListView1.ColumnHeaders.Add , , "Socio", 1450
+    ListView1.ColumnHeaders.Add , , "Variedad", 1700
+    ListView1.ColumnHeaders.Add , , "Socio", 1150
     ListView1.ColumnHeaders.Add , , "Nombre", 3850
     ListView1.ColumnHeaders.Add , , "Kilos", 1150, 1
 '    ListView1.ColumnHeaders.Add , , "Precio", 800, 1
@@ -5368,8 +5368,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim i As Integer
     Dim J As Integer
     
-    If AdoAux(Index).Recordset.EOF Then Exit Sub
-    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If Adoaux(Index).Recordset.EOF Then Exit Sub
+    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
     
     ModoLineas = 2 'Modificar llínia
        
@@ -5405,20 +5405,20 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         ' *** valor per defecte al modificar dels camps del grid ***
         Case 0 'importes
-            txtaux(0).Text = DataGridAux(Index).Columns(0).Text
-            txtaux(1).Text = DataGridAux(Index).Columns(1).Text
-            txtaux(6).Text = DataGridAux(Index).Columns(2).Text
+            txtAux(0).Text = DataGridAux(Index).Columns(0).Text
+            txtAux(1).Text = DataGridAux(Index).Columns(1).Text
+            txtAux(6).Text = DataGridAux(Index).Columns(2).Text
             Text2(2).Text = DataGridAux(Index).Columns(3).Text
-            txtaux(3).Text = DataGridAux(Index).Columns(4).Text
-            txtaux(2).Text = DataGridAux(Index).Columns(5).Text
-            txtaux(4).Text = DataGridAux(Index).Columns(6).Text
-            txtaux(5).Text = DataGridAux(Index).Columns(7).Text
+            txtAux(3).Text = DataGridAux(Index).Columns(4).Text
+            txtAux(2).Text = DataGridAux(Index).Columns(5).Text
+            txtAux(4).Text = DataGridAux(Index).Columns(6).Text
+            txtAux(5).Text = DataGridAux(Index).Columns(7).Text
             
             For i = 0 To 3
-                BloquearTxt txtaux(i), True
+                BloquearTxt txtAux(i), True
             Next i
-            BloquearTxt txtaux(4), False
-            BloquearTxt txtaux(5), True
+            BloquearTxt txtAux(4), False
+            BloquearTxt txtAux(5), True
        
     End Select
     
@@ -5427,7 +5427,7 @@ Private Sub BotonModificarLinea(Index As Integer)
     ' *** foco al 1r camp visible de les llinies en grids que no siga PK (en o sense tab) ***
     Select Case Index
         Case 0 'importes
-            PonerFoco txtaux(4)
+            PonerFoco txtAux(4)
     End Select
     ' ***************************************************************************************
     lblIndicador.Caption = "INSERTAR IMPORTE"
@@ -5442,7 +5442,7 @@ Dim tots As String
 
     tots = MontaSQLCarga(Index, enlaza)
 
-    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
     
     
     Select Case Index
@@ -5458,13 +5458,13 @@ Dim tots As String
             DataGridAux(0).Columns(5).Alignment = dbgRight
         
             B = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
-            BloquearTxt txtaux(3), Not B
+            BloquearTxt txtAux(3), Not B
 
     End Select
     DataGridAux(Index).ScrollBars = dbgAutomatic
     
-    If Not AdoAux(0).Recordset.EOF Then
-        Me.lblIndicador.Caption = AdoAux(0).Recordset.AbsolutePosition & " de " & AdoAux(0).Recordset.RecordCount
+    If Not Adoaux(0).Recordset.EOF Then
+        Me.lblIndicador.Caption = Adoaux(0).Recordset.AbsolutePosition & " de " & Adoaux(0).Recordset.RecordCount
     Else
         Me.lblIndicador.Caption = ""
     End If
@@ -5817,7 +5817,7 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & " numalbar=" & Val(txtaux(0).Text)
+    vWhere = vWhere & " numalbar=" & Val(txtAux(0).Text)
     ' *******************************************************
     
     ObtenerWhereCab = vWhere
@@ -5828,11 +5828,11 @@ Private Sub PosicionarData()
 Dim cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    cad = "numalbar = " & AdoAux(0).Recordset!numalbar
+    cad = "numalbar = " & Adoaux(0).Recordset!numalbar
     ' ***************************************
     
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
-    If SituarData(AdoAux(0), cad, Indicador) Then
+    If SituarData(Adoaux(0), cad, Indicador) Then
         lblIndicador.Caption = Indicador
     End If
     ' ***********************************************************************************
@@ -5850,13 +5850,13 @@ Dim B As Boolean
     B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
     Select Case Index
         Case 0 'albaranes
-            txtaux(0).visible = False
-            txtaux(1).visible = False
-            txtaux(2).visible = False
-            txtaux(3).visible = False
+            txtAux(0).visible = False
+            txtAux(1).visible = False
+            txtAux(2).visible = False
+            txtAux(3).visible = False
             For jj = 4 To 4
-                txtaux(jj).visible = B
-                txtaux(jj).Top = alto
+                txtAux(jj).visible = B
+                txtAux(jj).Top = alto
             Next jj
             
             Text2(2).visible = False
@@ -5887,7 +5887,7 @@ Dim cad As String
             If cadWHERE <> "" Then BloqueaRegistro "rhisfruta", cadWHERE
 
             If NumTabMto <> 3 Then
-                V = AdoAux(NumTabMto).Recordset.Fields(0) 'el 2 es el nº de llinia
+                V = Adoaux(NumTabMto).Recordset.Fields(0) 'el 2 es el nº de llinia
                 CargaGrid NumTabMto, True
             End If
 
@@ -5897,7 +5897,7 @@ Dim cad As String
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             If NumTabMto <> 3 Then
                 DataGridAux(NumTabMto).SetFocus
-                AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(0).Name & " =" & V)
+                Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(0).Name & " =" & V)
             End If
             ' ***********************************************************
 
@@ -5916,8 +5916,8 @@ Dim CPostal As String, desProvi As String, desPais As String
     PonerCamposForma2 Me, Data1, 1 'opcio=1: posa el format o els camps de la capçalera
     
     CargaGrid i, True
-    If Not AdoAux(i).Recordset.EOF Then _
-        PonerCamposForma2 Me, AdoAux(i), 2, "FrameAux" & i
+    If Not Adoaux(i).Recordset.EOF Then _
+        PonerCamposForma2 Me, Adoaux(i), 2, "FrameAux" & i
     
     '-- Esto permanece para saber donde estamos
     lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
@@ -5958,7 +5958,7 @@ Dim i As Byte
     B = (Modo = 3 Or Modo = 4 Or Modo = 2)
     For i = 0 To ToolAux.Count - 1
         ToolAux(i).Buttons(1).Enabled = B
-        If B Then bAux = (B And Me.AdoAux(i).Recordset.RecordCount > 0)
+        If B Then bAux = (B And Me.Adoaux(i).Recordset.RecordCount > 0)
         ToolAux(i).Buttons(2).Enabled = bAux
         ToolAux(i).Buttons(3).Enabled = bAux
     Next i
@@ -5978,7 +5978,7 @@ Dim i As Byte
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtaux(Index), Modo
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -6001,18 +6001,18 @@ Dim Unidades As String
 Dim cantidad As String
 
     If Index = 2 Then
-        If PonerFormatoDecimal(txtaux(Index), 8) Then
+        If PonerFormatoDecimal(txtAux(Index), 8) Then
 '            'actualizarRegistro
 '            Sql = "update rhisfruta set prestimado = " & DBSet(txtaux(2).Text, "N")
 '            Sql = Sql & " where numalbar = " & DBSet(txtaux(2).ToolTipText, "N")
 '
 '            conn.Execute Sql
             
-            ListView1.SelectedItem.SubItems(6) = txtaux(2).Text
+            ListView1.SelectedItem.SubItems(6) = txtAux(2).Text
         End If
         
-        txtaux(2).visible = False
-        txtaux(2).Enabled = False
+        txtAux(2).visible = False
+        txtAux(2).Enabled = False
         
 '        ListView1.Refresh
 
@@ -6024,23 +6024,23 @@ Dim cantidad As String
     
 
     'Quitar espacios en blanco
-    If Not PerderFocoGnralLineas(txtaux(Index), ModoLineas) Then Exit Sub
+    If Not PerderFocoGnralLineas(txtAux(Index), ModoLineas) Then Exit Sub
     
     Select Case Index
         Case 4 ' Importe
-            If txtaux(Index).Text <> "" Then PonerFormatoDecimal txtaux(Index), 1
+            If txtAux(Index).Text <> "" Then PonerFormatoDecimal txtAux(Index), 1
             
             
         Case 2
-            If PonerFormatoDecimal(txtaux(Index), 8) Then
+            If PonerFormatoDecimal(txtAux(Index), 8) Then
                 'actualizarRegistro
 '                Sql = "update rhisfruta set prestimado = " & DBSet(txtaux(2).Text, "N")
 '                Sql = Sql & " where numalbar = " & DBSet(txtaux(2).ToolTipText, "N")
 '
 '                conn.Execute Sql
                 
-                txtaux(2).visible = False
-                txtaux(2).Enabled = False
+                txtAux(2).visible = False
+                txtAux(2).Enabled = False
             
             End If
             

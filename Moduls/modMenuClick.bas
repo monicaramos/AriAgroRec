@@ -1159,11 +1159,12 @@ Dim i As Integer
     'traspaso a almazara solo para catadau
     MDIppal.mnRec_Almazara(1).Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
     MDIppal.mnRec_Almazara(1).visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
-    
-    '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
-    ' mantenimiento de calibradores solo para catadau , alzira, castelduc y picassent
-    MDIppal.mnRecG_Admon(25).Enabled = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9) Or (vParamAplic.Cooperativa = 16) Or (vParamAplic.Cooperativa = 18))
-    MDIppal.mnRecG_Admon(25).visible = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9) Or (vParamAplic.Cooperativa = 16) Or (vParamAplic.Cooperativa = 18))
+
+'[Monica]26/07/2018: el mantenimiento de calibradores está en el mantenimiento de variedades
+'    '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
+'    ' mantenimiento de calibradores solo para catadau , alzira, castelduc y picassent
+'    MDIppal.mnRecG_Admon(25).Enabled = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9) Or (vParamAplic.Cooperativa = 16) Or (vParamAplic.Cooperativa = 18))
+'    MDIppal.mnRecG_Admon(25).visible = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9) Or (vParamAplic.Cooperativa = 16) Or (vParamAplic.Cooperativa = 18))
     
     
     MDIppal.mnRec_AlmzLiquidacion(4).Enabled = vParamAplic.Cooperativa = 1

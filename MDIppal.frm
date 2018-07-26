@@ -17,8 +17,8 @@ Begin VB.MDIForm MDIppal
       Left            =   0
       TabIndex        =   0
       Top             =   0
-      Width           =   18960
-      _ExtentX        =   33443
+      Width           =   12120
+      _ExtentX        =   21378
       _ExtentY        =   635
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -92,9 +92,9 @@ Begin VB.MDIForm MDIppal
       Height          =   585
       Left            =   0
       TabIndex        =   1
-      Top             =   12330
-      Width           =   18960
-      _ExtentX        =   33443
+      Top             =   7275
+      Width           =   12120
+      _ExtentX        =   21378
       _ExtentY        =   1032
       _Version        =   393216
       BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
@@ -112,7 +112,7 @@ Begin VB.MDIForm MDIppal
          EndProperty
          BeginProperty Panel3 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
-            Object.Width           =   16854
+            Object.Width           =   4789
          EndProperty
          BeginProperty Panel4 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Alignment       =   1
@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "11:28"
+            TextSave        =   "10:02"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -312,7 +312,9 @@ Begin VB.MDIForm MDIppal
       End
       Begin VB.Menu mnRecG_Admon 
          Caption         =   "Calibradores"
+         Enabled         =   0   'False
          Index           =   25
+         Visible         =   0   'False
       End
       Begin VB.Menu mnRecG_Admon 
          Caption         =   "Depósitos"
@@ -326,7 +328,9 @@ Begin VB.MDIForm MDIppal
       End
       Begin VB.Menu mnRecG_Admon 
          Caption         =   "&Bonificaciones"
+         Enabled         =   0   'False
          Index           =   28
+         Visible         =   0   'False
       End
       Begin VB.Menu mnRecG_Admon 
          Caption         =   "&GlobalGap"
@@ -2328,14 +2332,14 @@ End Sub
 ' añadida esta parte para la personalizacion de menus
 
 Private Sub LeerEditorMenus()
-Dim Sql As String
+Dim SQL As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     TieneEditorDeMenus = False
-    Sql = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
+    SQL = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         If Not IsNull(miRsAux.Fields(0)) Then
             If miRsAux.Fields(0) > 0 Then TieneEditorDeMenus = True
@@ -2354,33 +2358,33 @@ End Sub
 
 Private Sub PoneMenusDelEditor()
 Dim T As Control
-Dim Sql As String
+Dim SQL As String
 Dim C As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     
-    Sql = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
+    SQL = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Sql = ""
+    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = ""
 
     While Not miRsAux.EOF
         If Not IsNull(miRsAux.Fields(3)) Then
-            Sql = Sql & miRsAux.Fields(3) & "·"
+            SQL = SQL & miRsAux.Fields(3) & "·"
         End If
         miRsAux.MoveNext
     Wend
     miRsAux.Close
         
    
-    If Sql <> "" Then
-        Sql = "·" & Sql
+    If SQL <> "" Then
+        SQL = "·" & SQL
         For Each T In Me.Controls
             If TypeOf T Is menu Then
                 C = DevuelveCadenaMenu(T)
                 C = "·" & C & "·"
-                If InStr(1, Sql, C) > 0 Then T.visible = False
+                If InStr(1, SQL, C) > 0 Then T.visible = False
            
             End If
         Next
