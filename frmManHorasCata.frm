@@ -8,13 +8,13 @@ Begin VB.Form frmManHorasCata
    ClientHeight    =   10320
    ClientLeft      =   195
    ClientTop       =   180
-   ClientWidth     =   19770
+   ClientWidth     =   19005
    Icon            =   "frmManHorasCata.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   10320
-   ScaleWidth      =   19770
+   ScaleWidth      =   19005
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
@@ -814,9 +814,9 @@ Begin VB.Form frmManHorasCata
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   17280
+      Left            =   16650
       TabIndex        =   13
-      Top             =   9570
+      Top             =   9540
       Visible         =   0   'False
       Width           =   1035
    End
@@ -833,9 +833,9 @@ Begin VB.Form frmManHorasCata
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   18450
+      Left            =   17820
       TabIndex        =   15
-      Top             =   9585
+      Top             =   9540
       Visible         =   0   'False
       Width           =   1095
    End
@@ -888,8 +888,8 @@ Begin VB.Form frmManHorasCata
       Left            =   90
       TabIndex        =   17
       Top             =   780
-      Width           =   19505
-      _ExtentX        =   34396
+      Width           =   18805
+      _ExtentX        =   33179
       _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -964,7 +964,7 @@ Begin VB.Form frmManHorasCata
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   18450
+      Left            =   17820
       TabIndex        =   18
       Top             =   9540
       Visible         =   0   'False
@@ -1058,7 +1058,7 @@ Begin VB.Form frmManHorasCata
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   19170
+      Left            =   18405
       TabIndex        =   39
       Top             =   180
       Width           =   405
@@ -1108,7 +1108,7 @@ Begin VB.Form frmManHorasCata
       Height          =   270
       Left            =   2880
       TabIndex        =   44
-      Top             =   9855
+      Top             =   9810
       Width           =   945
    End
    Begin VB.Label Label5 
@@ -1126,7 +1126,7 @@ Begin VB.Form frmManHorasCata
       Height          =   225
       Left            =   2880
       TabIndex        =   42
-      Top             =   9495
+      Top             =   9450
       Width           =   945
    End
    Begin VB.Label Label4 
@@ -1327,7 +1327,7 @@ Dim B As Boolean
     chkAux(1).visible = Not B
 
     cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -2073,12 +2073,12 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     tots = "S|txtAux(1)|T|Fecha|1400|;S|btnBuscar(0)|B||195|;"
     tots = tots & "S|txtAux(6)|T|Variedad|1100|;S|btnBuscar(3)|B||195|;N|txtAux2(6)|T|Variedad|1600|;"
     tots = tots & "S|txtAux(7)|T|Codigo|1000|;S|btnBuscar(4)|B||195|;S|txtAux2(7)|T|Trabajador|2700|;"
-    tots = tots & "S|txtAux(0)|T|Capataz|830|;S|btnBuscar(1)|B||195|;N|txtAux2(0)|T|Capataz|1400|;"
+    tots = tots & "S|txtAux(0)|T|Capataz|850|;S|btnBuscar(1)|B||195|;N|txtAux2(0)|T|Capataz|1400|;"
     tots = tots & "S|txtAux(11)|T|Categoria|1100|;S|btnBuscar(5)|B||195|;N|txtAux2(11)|T|Categoria|1400|;"
     tots = tots & "S|txtAux(4)|T|Horas|800|;S|txtAux(12)|T|Kilos|1200|;"
     tots = tots & "S|txtAux(2)|T|Importe|1200|;"
-    tots = tots & "S|txtAux(3)|T|Complemento|1500|;"
-    tots = tots & "S|txtAux(13)|T|Kilómetros(€)|1400|;"
+    tots = tots & "S|txtAux(3)|T|Complem.|1100|;"
+    tots = tots & "S|txtAux(13)|T|Kms(€)|1100|;"
     tots = tots & "S|txtAux(9)|T|Penalización|1400|;"
     tots = tots & "S|txtAux(5)|T|F.Recibo|1400|;S|btnBuscar(2)|B||195|;N||||0|;S|chkAux(1)|CB|Cap|460|;N||||0|;S|chkAux(0)|CB|IC|360|;N|txtAux(8)|T|Almacen|800|;"
     tots = tots & "S|txtAux(10)|T|Nro.Parte|1100|;"

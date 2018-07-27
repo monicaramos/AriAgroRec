@@ -689,7 +689,7 @@ Begin VB.Form frmManClasifica
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   7560
+         Left            =   7530
          Style           =   2  'Dropdown List
          TabIndex        =   10
          Tag             =   "Tipo Entrada|N|N|0|3|rclasifica|tipoentr||N|"
