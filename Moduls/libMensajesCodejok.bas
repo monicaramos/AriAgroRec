@@ -597,7 +597,7 @@ Dim BtnPorDefecto As Long
 
     Load frmMenBoxAriadna
 
-    frmMenBoxAriadna.Limpiar
+    frmMenBoxAriadna.limpiar
     
     If Titulo <> "" Then frmMenBoxAriadna.Caption = Titulo
     
@@ -653,7 +653,7 @@ Dim BtnPorDefecto As Long
             'frmMenBox.TaskDialog1.CommonButtons = frmMenBox.TaskDialog1.CommonButtons Or xtpTaskButtonOk
             'frmMenBox.TaskDialog1.DefaultButton = xtpTaskButtonOk
                 frmMenBoxAriadna.cmdOkvisible = True
-                frmMenBoxAriadna.cmdOK.Default = True
+                frmMenBoxAriadna.cmdOk.Default = True
                 
         Else
            'Dependera de lo que hay enviado en botones
@@ -665,7 +665,7 @@ Dim BtnPorDefecto As Long
             If (Botones And 0) > 0 Then
                 'frmMenBox.TaskDialog1.CommonButtons = frmMenBox.TaskDialog1.CommonButtons Or xtpTaskButtonOk
                 frmMenBoxAriadna.cmdOkvisible = True
-                frmMenBoxAriadna.cmdOK.Default = True
+                frmMenBoxAriadna.cmdOk.Default = True
                 BtnPorDefecto = xtpTaskButtonOk
             End If
             B = (Botones And 4) = 4 Or (Botones And 3) = 3
@@ -682,7 +682,7 @@ Dim BtnPorDefecto As Long
                 'frmMenBox.TaskDialog1.CommonButtons = frmMenBox.TaskDialog1.CommonButtons Or xtpTaskButtonNo
                 frmMenBoxAriadna.cmdNovisible = True
                 If BtnPorDefecto < 0 Then
-                    frmMenBoxAriadna.CmdNo.Default = True
+                    frmMenBoxAriadna.cmdNo.Default = True
                     BtnPorDefecto = xtpTaskButtonNo
                 End If
             End If
@@ -699,7 +699,7 @@ Dim BtnPorDefecto As Long
 
             If BtnPorDefecto = -1 Then
                 frmMenBoxAriadna.cmdOkvisible = True
-                frmMenBoxAriadna.cmdOK.Default = True
+                frmMenBoxAriadna.cmdOk.Default = True
             End If
         End If
         
@@ -726,7 +726,7 @@ Dim BtnPorDefecto As Long
                 frmMenBoxAriadna.cmdCancel.Default = True
             Else
                 'frmMenBox.TaskDialog1.DefaultButton = xtpTaskButtonNo
-                frmMenBoxAriadna.CmdNo.Default = True
+                frmMenBoxAriadna.cmdNo.Default = True
             End If
                   
         Else

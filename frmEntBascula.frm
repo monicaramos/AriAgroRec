@@ -4047,24 +4047,31 @@ Dim SQL As String
                         Text1(Index).Text = ""
                         PonerFoco Text1(Index)
                     Else
-                        If Not EsCampoSocioVariedad(Text1(Index).Text, Text1(1).Text, Text1(2).Text) Then
-                            MsgBox "El campo no es del Socio Variedad. Reintroduzca.", vbExclamation
+                        '[Monica]13/08/2018: No se permiten entradas de tratamiento
+                        If Not EsCampoDeTratamiento(Text1(Index)) Then
+                            MsgBox "El campo es de tratamiento. Reintroduzca.", vbExclamation
+                            Text1(Index).Text = ""
                             PonerFoco Text1(Index)
                         Else
-                            '[Monica]10/02/2015: no se permite la entrada si la ficha de cultivo no ha sido entregada
-                            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
-                                If EntregadaFichaCultivo(Text1(5).Text) Then
-                                    MsgBox "No se ha entregado la ficha de cultivo. No se permiten entradas a este campo.", vbExclamation
-                                    PonerFoco Text1(Index)
-                                End If
+                            If Not EsCampoSocioVariedad(Text1(Index).Text, Text1(1).Text, Text1(2).Text) Then
+                                MsgBox "El campo no es del Socio Variedad. Reintroduzca.", vbExclamation
+                                PonerFoco Text1(Index)
                             Else
-                                PonerDatosCampo (Text1(Index))
-                                If Modo = 3 Then
-                                    Combo1(1).ListIndex = DevuelveValor("select recolect from rcampos where codcampo = " & DBSet(Text1(5).Text, "N"))
+                                '[Monica]10/02/2015: no se permite la entrada si la ficha de cultivo no ha sido entregada
+                                If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+                                    If EntregadaFichaCultivo(Text1(5).Text) Then
+                                        MsgBox "No se ha entregado la ficha de cultivo. No se permiten entradas a este campo.", vbExclamation
+                                        PonerFoco Text1(Index)
+                                    End If
+                                Else
+                                    PonerDatosCampo (Text1(Index))
+                                    If Modo = 3 Then
+                                        Combo1(1).ListIndex = DevuelveValor("select recolect from rcampos where codcampo = " & DBSet(Text1(5).Text, "N"))
+                                    End If
                                 End If
                             End If
                         End If
-                    End If
+                   End If
                 End If
             End If
         
@@ -5490,8 +5497,8 @@ Dim Rs As ADODB.Recordset
     '[Monica]13/10/2016:
     If CampoAnt <> Text1(5).Text And CampoAnt <> "" Then Exit Sub
 
-
-    cad = "rcampos.codsocio = " & DBSet(Text1(1).Text, "N") & " and rcampos.fecbajas is null"
+    '[Monica]13/08/2018: añadimos la condicion de que el campo no sea un tratamiento
+    cad = "rcampos.codsocio = " & DBSet(Text1(1).Text, "N") & " and rcampos.fecbajas is null and rcampos.tipocampo <> 3"
     cad = cad & " and rcampos.codvarie = " & DBSet(Text1(2).Text, "N")
      
     Cad1 = "select count(*) from rcampos where " & cad
@@ -5512,7 +5519,8 @@ Dim Rs As ADODB.Recordset
         Set frmMens = New frmMensajes
         frmMens.cadWHERE = " and " & cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
         frmMens.campo = Text1(5).Text
-        frmMens.vCampos = " and rcampos.codsocio = " & DBSet(Text1(1).Text, "N") & " and rcampos.fecbajas is null"
+        '[Monica]13/08/2018: añadimos la condicion de que el campo no sea un tratamiento
+        frmMens.vCampos = " and rcampos.codsocio = " & DBSet(Text1(1).Text, "N") & " and rcampos.fecbajas is null and rcampos.tipocampo <> 3"
         frmMens.OpcionMensaje = 6
         frmMens.Show vbModal
         Set frmMens = Nothing
@@ -5530,8 +5538,9 @@ Dim Rs As ADODB.Recordset
     If campo = "" Then Exit Sub
     
 '    If Not (Modo = 3 Or Modo = 4) Then Exit Sub
-
-    cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
+    
+    '[Monica]13/08/2018: añadimos la condicion de que el campo no sea un tratamiento
+    cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null and rcampos.tipocampo <> 3"
      
     Cad1 = "select rcampos.codparti, rpartida.nomparti, rpartida.codzonas, rzonas.nomzonas, "
     Cad1 = Cad1 & " rpueblos.despobla, rcampos.nrocampo, rcampos.codvarie, variedades.nomvarie from rcampos, rpartida, rzonas, rpueblos, variedades "

@@ -3578,6 +3578,17 @@ Dim SQL As String
 
 End Function
 
+Public Function EsCampoDeTratamiento(campo As String) As Boolean
+Dim SQL As String
+
+    SQL = "select count(*) from rcampos where codcampo = " & DBSet(campo, "N")
+    SQL = SQL & " and tipocampo = 3"
+    
+    EsCampoDeTratamiento = (TotalRegistros(SQL) > 0)
+
+End Function
+
+
 Public Function EstaSocioDeAltaSeccion(Socio As String, Secc As String) As Boolean
 Dim SQL As String
 

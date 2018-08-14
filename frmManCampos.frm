@@ -601,13 +601,13 @@ Begin VB.Form frmManCampos
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmManCampos.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame10"
-      Tab(1).Control(1)=   "Frame9"
-      Tab(1).Control(2)=   "Frame8"
+      Tab(1).Control(0)=   "Frame3"
+      Tab(1).Control(1)=   "Frame5"
+      Tab(1).Control(2)=   "Frame6"
       Tab(1).Control(3)=   "Frame7"
-      Tab(1).Control(4)=   "Frame6"
-      Tab(1).Control(5)=   "Frame5"
-      Tab(1).Control(6)=   "Frame3"
+      Tab(1).Control(4)=   "Frame8"
+      Tab(1).Control(5)=   "Frame9"
+      Tab(1).Control(6)=   "Frame10"
       Tab(1).ControlCount=   7
       TabCaption(2)   =   "Coopropietarios"
       TabPicture(2)   =   "frmManCampos.frx":0044
@@ -642,8 +642,8 @@ Begin VB.Form frmManCampos
       TabCaption(8)   =   "Ordenes Rec."
       TabPicture(8)   =   "frmManCampos.frx":00EC
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "ListView4"
-      Tab(8).Control(1)=   "FrameAux6"
+      Tab(8).Control(0)=   "FrameAux6"
+      Tab(8).Control(1)=   "ListView4"
       Tab(8).ControlCount=   2
       TabCaption(9)   =   "Registro Visitas"
       TabPicture(9)   =   "frmManCampos.frx":0108
@@ -4817,7 +4817,7 @@ Begin VB.Form frmManCampos
             Left            =   5250
             Style           =   2  'Dropdown List
             TabIndex        =   18
-            Tag             =   "Tipo Campo|N|N|0|1|rcampos|tipocampo||N|"
+            Tag             =   "Tipo Campo|N|N|0|3|rcampos|tipocampo||N|"
             Top             =   2025
             Width           =   2160
          End
@@ -5145,6 +5145,16 @@ Begin VB.Form frmManCampos
             TabIndex        =   32
             Top             =   975
             Width           =   2445
+         End
+         Begin VB.Image imgAyuda 
+            Height          =   240
+            Index           =   0
+            Left            =   7425
+            MousePointer    =   4  'Icon
+            Tag             =   "-1"
+            ToolTipText     =   "Ayuda"
+            Top             =   2070
+            Width           =   240
          End
          Begin VB.Image imgDoc 
             Enabled         =   0   'False
@@ -7141,6 +7151,11 @@ Dim i As Integer
         Me.imgZoom(i).Picture = frmPpal.imgListImages16.ListImages(3).Picture
     Next i
     
+    '[Monica]13/08/2018: no se permiten entradas sobre campos de tratamiento
+    For i = 0 To imgAyuda.Count - 1
+        imgAyuda(i).Picture = frmPpal.ImageListB.ListImages(10).Picture
+    Next i
+    
     '[Monica]28/11/2011: cliente de ariges
     If vParamAplic.BDAriges <> "" Then
         If Not AbrirConexionAriges Then
@@ -7911,6 +7926,17 @@ Private Sub frmZon_DatoSeleccionado(CadenaSeleccion As String)
     Text1(37).Text = RecuperaValor(CadenaSeleccion, 1) 'codzona
     FormateaCampo Text1(Indice)
     Text4(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomzona
+End Sub
+
+Private Sub imgAyuda_Click(Index As Integer)
+Dim vCadena As String
+    Select Case Index
+        Case 0
+           ' "____________________________________________________________"
+            vCadena = "Si el campo es de tratamiento no se permiten hacer entradas sobre él." & vbCrLf & vbCrLf
+    End Select
+    MsgBoxA vCadena, vbInformation, "Descripción de Ayuda"
+    
 End Sub
 
 Private Sub imgDoc_Click(Index As Integer)
@@ -11389,6 +11415,9 @@ Dim Rs As ADODB.Recordset
     Combo1(3).ItemData(Combo1(3).NewIndex) = 1
     Combo1(3).AddItem "Industria"
     Combo1(3).ItemData(Combo1(3).NewIndex) = 2
+    '[Monica]13/08/2018: nuevo tipo de campo, en este tipo de campo no se pueden hacer entradas
+    Combo1(3).AddItem "Tratamientos"
+    Combo1(3).ItemData(Combo1(3).NewIndex) = 3
     
     
     'TIPO DE SISTEMA DE RIEGO

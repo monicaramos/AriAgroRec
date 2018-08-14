@@ -1,1 +1,0 @@
-OKu have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2011-06-15 09:47':00', SYSDATE(), 2057, 0, 1, 1, '0034', '84.123.28.50', 0, 1, 1' at line 1

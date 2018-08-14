@@ -1685,7 +1685,14 @@ Dim B As Boolean
     B = True
 
     While Not Rs.EOF And B
-        SQL = DevuelveDesdeBDNew(cConta, "cabccost", "codccost", "codccost", DBLet(Rs.Fields(0).Value), "T")
+    
+        '[Monica]14/08/2018: no es la mismaz tabla
+        If Not vParamAplic.ContabilidadNueva Then
+            SQL = DevuelveDesdeBDNew(cConta, "cabccost", "codccost", "codccost", DBLet(Rs.Fields(0).Value), "T")
+        Else
+            SQL = DevuelveDesdeBDNew(cConta, "ccoste", "codccost", "codccost", DBLet(Rs.Fields(0).Value), "T")
+        End If
+        
         If SQL = "" Then
             B = False
             Sql2 = "Centro de Coste: " & Rs.Fields(0)
@@ -3206,7 +3213,7 @@ Dim NumDigitAnt As String
 Dim NumDigit3 As String
 
 Dim NumeroIVA As Byte
-Dim K As Byte
+Dim k As Byte
 Dim HayQueAjustar As Boolean
 Dim ImpImva As Currency
 Dim ImpREC As Currency
@@ -3307,9 +3314,9 @@ Dim EsIntracom As Boolean
         '$$$
        'Vemos que tipo de IVA es en el vector de importes
         NumeroIVA = 127
-        For K = 0 To 2
-            If Rs!Codigiva = vTipoIva(K) Then
-                NumeroIVA = K
+        For k = 0 To 2
+            If Rs!Codigiva = vTipoIva(k) Then
+                NumeroIVA = k
                 Exit For
             End If
         Next
@@ -3584,7 +3591,7 @@ Dim NumDigit3 As String
 
 
 Dim NumeroIVA As Byte
-Dim K As Integer
+Dim k As Integer
 Dim HayQueAjustar As Boolean
 Dim ImpImva As Currency
 Dim ImpREC As Currency
@@ -3655,9 +3662,9 @@ Dim ImpREC As Currency
         
         'Vemos que tipo de IVA es en el vector de importes
         NumeroIVA = 127
-        For K = 0 To 2
-            If Rs!Codigiva = vTipoIva(K) Then
-                NumeroIVA = K
+        For k = 0 To 2
+            If Rs!Codigiva = vTipoIva(k) Then
+                NumeroIVA = k
                 Exit For
             End If
         Next
@@ -3940,7 +3947,7 @@ Dim NumDigitAnt As String
 Dim NumDigit3 As String
 
 Dim NumeroIVA As Byte
-Dim K As Integer
+Dim k As Integer
 Dim HayQueAjustar As Boolean
 
 Dim ImpImva As Currency
@@ -4030,9 +4037,9 @@ Dim ImpREC As Currency
         
         'Vemos que tipo de IVA es en el vector de importes
         NumeroIVA = 127
-        For K = 0 To 2
-            If Rs!Codigiva = vTipoIva(K) Then
-                NumeroIVA = K
+        For k = 0 To 2
+            If Rs!Codigiva = vTipoIva(k) Then
+                NumeroIVA = k
                 Exit For
             End If
         Next
@@ -8939,7 +8946,7 @@ Dim v_hanegada As Long
 Dim v_brazas As Currency
 
 Dim J As Integer
-Dim K As Integer
+Dim k As Integer
 Dim vPorcen As String
 
 Dim Referencia As String
@@ -9068,12 +9075,12 @@ Dim cad As String
                         If Len(Hidrantes) > 27 Then
                             J = InStr(1, Hidrantes, " ")
                             Hidrantes2 = Mid(Hidrantes, 1, J - 1)
-                            K = InStr(J + 1, Hidrantes, " ")
-                            While Len(Hidrantes2) < 27 And K <> 0
+                            k = InStr(J + 1, Hidrantes, " ")
+                            While Len(Hidrantes2) < 27 And k <> 0
                                 Hidrantes3 = Hidrantes2
-                                Hidrantes2 = Hidrantes2 & " " & Mid(Hidrantes, J + 1, K - J - 1)
-                                J = K
-                                K = InStr(J + 1, Hidrantes, " ")
+                                Hidrantes2 = Hidrantes2 & " " & Mid(Hidrantes, J + 1, k - J - 1)
+                                J = k
+                                k = InStr(J + 1, Hidrantes, " ")
                             Wend
                             If Len(Hidrantes2) > 27 Then
                                 Text42csb = "CONTADORES : " & Hidrantes3
@@ -9683,7 +9690,7 @@ End Function
 Private Function ParteCadena(Origen As String, NroSubcadenas As Integer, longitud) As String
 Dim J As Integer
 Dim i As Integer
-Dim K As Integer
+Dim k As Integer
 Dim cad As String
 
     On Error Resume Next
@@ -9692,7 +9699,7 @@ Dim cad As String
 
     J = 1
     cad = ""
-    For K = 1 To NroSubcadenas
+    For k = 1 To NroSubcadenas
         i = J + longitud - 1
         If Len(Origen) - J > 0 Then
             If Len(Mid(Origen, J + 1, Len(Origen) - J)) > longitud Then
@@ -9705,7 +9712,7 @@ Dim cad As String
             End If
             J = i + 1
         End If
-    Next K
+    Next k
     
     ParteCadena = cad
     
@@ -11216,7 +11223,7 @@ Dim vImpIvaAux As Currency
 
 
 Dim NumeroIVA As Byte
-Dim K As Integer
+Dim k As Integer
 Dim HayQueAjustar As Boolean
 
 Dim ImpImva As Currency
@@ -12995,7 +13002,7 @@ Dim NumDigitAnt As String
 Dim NumDigit3 As String
 
 Dim NumeroIVA As Byte
-Dim K As Integer
+Dim k As Integer
 Dim HayQueAjustar As Boolean
 
 Dim ImpImva As Currency
@@ -13082,9 +13089,9 @@ Dim ImpREC As Currency
         
         'Vemos que tipo de IVA es en el vector de importes
         NumeroIVA = 127
-        For K = 0 To 2
-            If Rs!TipoIVA = vTipoIva(K) Then
-                NumeroIVA = K
+        For k = 0 To 2
+            If Rs!TipoIVA = vTipoIva(k) Then
+                NumeroIVA = k
                 Exit For
             End If
         Next

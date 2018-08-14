@@ -8,7 +8,6 @@ Begin VB.Form frmIdentifica
    ClientTop       =   0
    ClientWidth     =   7965
    LinkTopic       =   "Form1"
-   Picture         =   "frmIdentifica.frx":0000
    ScaleHeight     =   5550
    ScaleWidth      =   7965
    ShowInTaskbar   =   0   'False
@@ -82,6 +81,7 @@ Begin VB.Form frmIdentifica
       Width           =   7305
    End
    Begin VB.Label Label2 
+      BackStyle       =   0  'Transparent
       Caption         =   "Label2"
       BeginProperty Font 
          Name            =   "Tahoma"
@@ -92,11 +92,11 @@ Begin VB.Form frmIdentifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00400000&
+      ForeColor       =   &H00FFFFFF&
       Height          =   195
-      Left            =   870
+      Left            =   3420
       TabIndex        =   5
-      Top             =   5250
+      Top             =   1080
       Width           =   1725
    End
    Begin VB.Label Label1 
@@ -130,7 +130,7 @@ Begin VB.Form frmIdentifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00800000&
+      ForeColor       =   &H00FFFFFF&
       Height          =   375
       Index           =   1
       Left            =   4920
@@ -150,7 +150,7 @@ Begin VB.Form frmIdentifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00800000&
+      ForeColor       =   &H00FFFFFF&
       Height          =   375
       Index           =   0
       Left            =   4920

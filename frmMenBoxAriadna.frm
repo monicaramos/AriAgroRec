@@ -333,17 +333,19 @@ Dim LFin As Integer
         End If
         
         '[Monica]
-        If MaxLin < 20 Then
-            W = 4680
-        ElseIf MaxLin < 40 Then
-            W = 5680
-        ElseIf MaxLin < 50 Then
-            W = 7680
-        ElseIf MaxLin < 100 Then
-            W = 8500
+        If MaxLin <> 0 Then
+            If MaxLin < 20 Then
+                W = 4680
+            ElseIf MaxLin < 40 Then
+                W = 5680
+            ElseIf MaxLin < 50 Then
+                W = 7680
+            ElseIf MaxLin < 100 Then
+                W = 8500
+            End If
+            Me.lblTexto.Width = W - 200
+            Me.Shape1.Width = W
         End If
-        Me.lblTexto.Width = W - 200
-        Me.Shape1.Width = W
         ' hasta aqui
         
         If lblPie.Caption <> "" Then H = H + 300
