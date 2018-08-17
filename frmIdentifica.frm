@@ -94,9 +94,9 @@ Begin VB.Form frmIdentifica
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
-      Left            =   3420
+      Left            =   4275
       TabIndex        =   5
-      Top             =   1080
+      Top             =   1305
       Width           =   1725
    End
    Begin VB.Label Label1 
