@@ -1114,14 +1114,14 @@ End Sub
 
 Private Sub Combo1_Click(Index As Integer)
     If Index = 0 Then
-        Check6.Enabled = (Combo1(0).ListIndex = 1) And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
+        Check6.Enabled = (Combo1(0).ListIndex = 1) And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
         If Not Check6.Enabled Then Check6.Value = 0
     End If
 End Sub
 
 Private Sub Combo1_Validate(Index As Integer, Cancel As Boolean)
     If Index = 0 Then
-        Check6.Enabled = (Combo1(0).ListIndex = 1) And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
+        Check6.Enabled = (Combo1(0).ListIndex = 1) And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
         If Not Check6.Enabled Then Check6.Value = 0
     End If
 End Sub
@@ -1131,7 +1131,7 @@ Private Sub Form_Activate()
         PrimeraVez = False
         PonerFoco txtCodigo(12)
         Combo1(0).ListIndex = 0
-        Check6.Enabled = ((vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18) And Combo1(0).ListIndex = 1)
+        Check6.Enabled = ((vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19) And Combo1(0).ListIndex = 1)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -1179,8 +1179,8 @@ Dim indFrame As Single
     CargaCombo
     
     '[Monica]14/03/2017: solo en el caso de catadau agrupamos por codigo productor (codigoggap)
-    Check6.Enabled = ((vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18) And Combo1(0).ListIndex = 1)
-    Check6.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
+    Check6.Enabled = ((vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19) And Combo1(0).ListIndex = 1)
+    Check6.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
     
     
     

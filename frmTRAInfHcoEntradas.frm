@@ -871,8 +871,8 @@ Dim indFrame As Single
     
     
     '[Monica]04/11/2013: no mostramos el socio cuando el informe es para el transportista (solo catadau)
-    Me.Check1.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
-    Me.Check1.Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
+    Me.Check1.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+    Me.Check1.Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
     
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda

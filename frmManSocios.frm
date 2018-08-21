@@ -567,16 +567,16 @@ Begin VB.Form frmManSocios
       TabCaption(3)   =   "Documentos"
       TabPicture(3)   =   "frmManSocios.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Label16"
-      Tab(3).Control(1)=   "Label17"
-      Tab(3).Control(2)=   "imgFec(3)"
-      Tab(3).Control(3)=   "Toolbar4"
-      Tab(3).Control(4)=   "Frame5"
-      Tab(3).Control(5)=   "Toolbar3"
-      Tab(3).Control(6)=   "lw1"
-      Tab(3).Control(7)=   "Toolbar2"
-      Tab(3).Control(8)=   "Text3(0)"
-      Tab(3).Control(9)=   "Frame8"
+      Tab(3).Control(0)=   "Frame8"
+      Tab(3).Control(1)=   "Text3(0)"
+      Tab(3).Control(2)=   "Toolbar2"
+      Tab(3).Control(3)=   "lw1"
+      Tab(3).Control(4)=   "Toolbar3"
+      Tab(3).Control(5)=   "Frame5"
+      Tab(3).Control(6)=   "Toolbar4"
+      Tab(3).Control(7)=   "imgFec(3)"
+      Tab(3).Control(8)=   "Label17"
+      Tab(3).Control(9)=   "Label16"
       Tab(3).ControlCount=   10
       TabCaption(4)   =   "Pozos"
       TabPicture(4)   =   "frmManSocios.frx":007C
@@ -5094,7 +5094,7 @@ Private Sub cmdAccCRM_Click(Index As Integer)
 End Sub
 
 Private Sub EliminarImagen()
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
     
     On Error GoTo eEliminarImagen
@@ -5102,8 +5102,8 @@ Dim Mens As String
     Mens = "Va a proceder a eliminar la imágen de la lista correspondiente al socio. " & vbCrLf & vbCrLf & "¿ Desea continuar ?" & vbCrLf & vbCrLf
     
     If MsgBox(Mens, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
-        Sql = "delete from rfichdocs where codsocio = " & DBSet(Text1(0).Text, "N") & " and codigo = " & Me.lw1.SelectedItem.SubItems(3)
-        conn.Execute Sql
+        SQL = "delete from rfichdocs where codsocio = " & DBSet(Text1(0).Text, "N") & " and codigo = " & Me.lw1.SelectedItem.SubItems(3)
+        conn.Execute SQL
         
         CargaDatosLW
         
@@ -5217,25 +5217,25 @@ End Sub
 
 
 Private Function GeneraCadenaUpdate() As String
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "UPDATE rsocios SET "
-    Sql = Sql & "nomsocio=" & DBSet(Text1(1), "T")
-    Sql = Sql & ",dirsocio=" & DBSet(Text1(3), "T")
-    Sql = Sql & ",codpostal=" & DBSet(Text1(4), "T")
-    Sql = Sql & ",pobsocio=" & DBSet(Text1(5), "T")
-    Sql = Sql & ",prosocio=" & DBSet(Text1(6), "T")
-    Sql = Sql & ",nifsocio= " & DBSet(Text1(2), "T")
-    Sql = Sql & " WHERE codsocio=" & DBSet(ComprobarCero(Text1(0).Text) + cMaxSocio, "N")
+    SQL = "UPDATE rsocios SET "
+    SQL = SQL & "nomsocio=" & DBSet(Text1(1), "T")
+    SQL = SQL & ",dirsocio=" & DBSet(Text1(3), "T")
+    SQL = SQL & ",codpostal=" & DBSet(Text1(4), "T")
+    SQL = SQL & ",pobsocio=" & DBSet(Text1(5), "T")
+    SQL = SQL & ",prosocio=" & DBSet(Text1(6), "T")
+    SQL = SQL & ",nifsocio= " & DBSet(Text1(2), "T")
+    SQL = SQL & " WHERE codsocio=" & DBSet(ComprobarCero(Text1(0).Text) + cMaxSocio, "N")
 
-    GeneraCadenaUpdate = Sql
+    GeneraCadenaUpdate = SQL
 
 End Function
 
 
 
 Private Function PushSocio(Codigo As String, Operacion As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
 
     On Error GoTo ePushSocio
@@ -5248,47 +5248,47 @@ Dim Sql As String
 
     Select Case Operacion
         Case "I" ' insertar
-            Sql = DevuelveDesdeBDNew(cAgro, "aripush.usuariospush", "comunid", "comunid", Text1(0).Text, "N")
-            If Sql = "" Then
-                Sql = "insert into aripush.usuariospush (nif,nombre,comunId,ariagroId,tiendaId,gasolineraId,telefoniaId,tratamientosId,login,"
-                Sql = Sql & "password,email,playerId,direccion,codPostal,poblacion,provincia,telefono1,telefono2,iban)"
-                Sql = Sql & " values ("
-                Sql = Sql & DBSet(Text1(2), "T") & "," ' nif
-                Sql = Sql & DBSet(Text1(1), "T") & "," 'nombre
-                Sql = Sql & DBSet(Text1(0), "N") & "," 'codsocio
-                Sql = Sql & DBSet(Text1(0), "N") & "," 'ariagroid
-                Sql = Sql & DBSet(Text1(0), "N") & "," 'tiendaid
-                Sql = Sql & DBSet(Text1(0), "N") & "," 'gasolineraid
-                Sql = Sql & DBSet(Text1(0), "N") & "," 'telefoniaid
-                Sql = Sql & DBSet(Text1(0), "N") & "," 'tratamientosid
-                Sql = Sql & DBSet(Text1(0), "N") & "," 'login
-                Sql = Sql & DBSet(Text1(2), "T") & "," 'password el nif
-                Sql = Sql & DBSet(Text1(12), "T") & "," 'email
-                Sql = Sql & ValorNulo & "," 'playerid
-                Sql = Sql & DBSet(Text1(3), "T") & "," 'dirsocio (direccion fiscal)
-                Sql = Sql & DBSet(Text1(4), "T") & "," 'codigo postal
-                Sql = Sql & DBSet(Text1(5), "T") & "," 'poblacion
-                Sql = Sql & DBSet(Text1(6), "T") & "," 'provincia
-                Sql = Sql & DBSet(Text1(8), "T") & "," 'telefono1
-                Sql = Sql & DBSet(Text1(9), "T") & "," 'telefono2
-                Sql = Sql & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
-                Sql = Sql & ")"
+            SQL = DevuelveDesdeBDNew(cAgro, "aripush.usuariospush", "comunid", "comunid", Text1(0).Text, "N")
+            If SQL = "" Then
+                SQL = "insert into aripush.usuariospush (nif,nombre,comunId,ariagroId,tiendaId,gasolineraId,telefoniaId,tratamientosId,login,"
+                SQL = SQL & "password,email,playerId,direccion,codPostal,poblacion,provincia,telefono1,telefono2,iban)"
+                SQL = SQL & " values ("
+                SQL = SQL & DBSet(Text1(2), "T") & "," ' nif
+                SQL = SQL & DBSet(Text1(1), "T") & "," 'nombre
+                SQL = SQL & DBSet(Text1(0), "N") & "," 'codsocio
+                SQL = SQL & DBSet(Text1(0), "N") & "," 'ariagroid
+                SQL = SQL & DBSet(Text1(0), "N") & "," 'tiendaid
+                SQL = SQL & DBSet(Text1(0), "N") & "," 'gasolineraid
+                SQL = SQL & DBSet(Text1(0), "N") & "," 'telefoniaid
+                SQL = SQL & DBSet(Text1(0), "N") & "," 'tratamientosid
+                SQL = SQL & DBSet(Text1(0), "N") & "," 'login
+                SQL = SQL & DBSet(Text1(2), "T") & "," 'password el nif
+                SQL = SQL & DBSet(Text1(12), "T") & "," 'email
+                SQL = SQL & ValorNulo & "," 'playerid
+                SQL = SQL & DBSet(Text1(3), "T") & "," 'dirsocio (direccion fiscal)
+                SQL = SQL & DBSet(Text1(4), "T") & "," 'codigo postal
+                SQL = SQL & DBSet(Text1(5), "T") & "," 'poblacion
+                SQL = SQL & DBSet(Text1(6), "T") & "," 'provincia
+                SQL = SQL & DBSet(Text1(8), "T") & "," 'telefono1
+                SQL = SQL & DBSet(Text1(9), "T") & "," 'telefono2
+                SQL = SQL & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
+                SQL = SQL & ")"
             Else
-                Sql = "update aripush.usuariospush set "
-                Sql = Sql & " nif = " & DBSet(Text1(2), "T")
-                Sql = Sql & ",nombre = " & DBSet(Text1(1).Text, "T")
-                Sql = Sql & ",email = " & DBSet(Text1(12).Text, "T")
-                Sql = Sql & ",direccion = " & DBSet(Text1(3), "T")  'dirsocio (direccion fiscal)
-                Sql = Sql & ",codpostal = " & DBSet(Text1(4), "T")  'codigo postal
-                Sql = Sql & ",poblacion = " & DBSet(Text1(5), "T")  'poblacion
-                Sql = Sql & ",provincia = " & DBSet(Text1(6), "T")  'provincia
-                Sql = Sql & ",telefono1 = " & DBSet(Text1(8), "T")  'telefono1
-                Sql = Sql & ",telefono2 = " & DBSet(Text1(9), "T")  'telefono2
-                Sql = Sql & ",iban = " & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
-                Sql = Sql & " where comunId = " & DBSet(Text1(0).Text, "N")
+                SQL = "update aripush.usuariospush set "
+                SQL = SQL & " nif = " & DBSet(Text1(2), "T")
+                SQL = SQL & ",nombre = " & DBSet(Text1(1).Text, "T")
+                SQL = SQL & ",email = " & DBSet(Text1(12).Text, "T")
+                SQL = SQL & ",direccion = " & DBSet(Text1(3), "T")  'dirsocio (direccion fiscal)
+                SQL = SQL & ",codpostal = " & DBSet(Text1(4), "T")  'codigo postal
+                SQL = SQL & ",poblacion = " & DBSet(Text1(5), "T")  'poblacion
+                SQL = SQL & ",provincia = " & DBSet(Text1(6), "T")  'provincia
+                SQL = SQL & ",telefono1 = " & DBSet(Text1(8), "T")  'telefono1
+                SQL = SQL & ",telefono2 = " & DBSet(Text1(9), "T")  'telefono2
+                SQL = SQL & ",iban = " & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
+                SQL = SQL & " where comunId = " & DBSet(Text1(0).Text, "N")
             End If
 
-            conn.Execute Sql
+            conn.Execute SQL
             
         
         Case "M" ' modificar
@@ -5297,20 +5297,20 @@ Dim Sql As String
                PoblaAnt <> Text1(5).Text Or ProviAnt <> Text1(6).Text Or NifAnt <> Text1(2).Text Or EMaiAnt <> Text1(12).Text Or _
                Tel1Ant <> Text1(8).Text Or Tel2Ant <> Text1(9).Text Then
 
-                    Sql = "update aripush.usuariospush set "
-                    Sql = Sql & " nif = " & DBSet(Text1(2), "T")
-                    Sql = Sql & ",nombre = " & DBSet(Text1(1).Text, "T")
-                    Sql = Sql & ",email = " & DBSet(Text1(12).Text, "T")
-                    Sql = Sql & ",direccion = " & DBSet(Text1(3), "T") 'dirsocio (direccion fiscal)
-                    Sql = Sql & ",codpostal = " & DBSet(Text1(4), "T") 'codigo postal
-                    Sql = Sql & ",poblacion = " & DBSet(Text1(5), "T") 'poblacion
-                    Sql = Sql & ",provincia = " & DBSet(Text1(6), "T") 'provincia
-                    Sql = Sql & ",telefono1 = " & DBSet(Text1(8), "T") 'telefono1
-                    Sql = Sql & ",telefono2 = " & DBSet(Text1(9), "T") 'telefono2
-                    Sql = Sql & ",iban = " & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
-                    Sql = Sql & " where comunId = " & DBSet(Text1(0).Text, "N")
+                    SQL = "update aripush.usuariospush set "
+                    SQL = SQL & " nif = " & DBSet(Text1(2), "T")
+                    SQL = SQL & ",nombre = " & DBSet(Text1(1).Text, "T")
+                    SQL = SQL & ",email = " & DBSet(Text1(12).Text, "T")
+                    SQL = SQL & ",direccion = " & DBSet(Text1(3), "T") 'dirsocio (direccion fiscal)
+                    SQL = SQL & ",codpostal = " & DBSet(Text1(4), "T") 'codigo postal
+                    SQL = SQL & ",poblacion = " & DBSet(Text1(5), "T") 'poblacion
+                    SQL = SQL & ",provincia = " & DBSet(Text1(6), "T") 'provincia
+                    SQL = SQL & ",telefono1 = " & DBSet(Text1(8), "T") 'telefono1
+                    SQL = SQL & ",telefono2 = " & DBSet(Text1(9), "T") 'telefono2
+                    SQL = SQL & ",iban = " & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
+                    SQL = SQL & " where comunId = " & DBSet(Text1(0).Text, "N")
                     
-                    conn.Execute Sql
+                    conn.Execute SQL
             End If
         
         Case "E" ' eliminar
@@ -5326,15 +5326,15 @@ End Function
 
 
 Private Function ExisteAripush() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo eExisteAripush
 
-    Sql = "select * from aripush.usuariospush "
+    SQL = "select * from aripush.usuariospush "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Set Rs = Nothing
     
@@ -5461,7 +5461,7 @@ Private Sub ImprimirDocALTABaja(NroDoc As Long, esAlta As Boolean)
 Dim vAux As String
 Dim vCampos As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim indRPT As Byte
 Dim nomDocu As String
 
@@ -5469,10 +5469,10 @@ Dim nomDocu As String
         vCampos = ""
         '[Monica]08/06/2018: ahora miramos de aportaciones
         'Sql = "select codcampo from rsocios_movim where numerodoc = " & DBSet(NroDoc, "N")
-        Sql = "select numfactu from raportacion where nrodocum = " & DBSet(NroDoc, "N")
+        SQL = "select numfactu from raportacion where nrodocum = " & DBSet(NroDoc, "N")
         
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not Rs.EOF
             vCampos = vCampos & Rs.Fields(0).Value & ","
             Rs.MoveNext
@@ -5686,9 +5686,9 @@ Dim i As Integer
     CargaCombo
     
     '[Monica]08/04/2015: sólo Catadau ve el nro de asociado
-    Label36.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
-    Text1(30).visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
-    Text1(30).Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
+    Label36.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+    Text1(30).visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+    Text1(30).Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
     
     
     If DatosADevolverBusqueda = "" Then
@@ -5882,8 +5882,8 @@ Dim B As Boolean
         CargaGrid 4, False
     End If
     
-    Me.imgDoc(0).Enabled = (Modo = 2 And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 18))
-    Me.imgDoc(0).visible = (Modo = 2 And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 18))
+    Me.imgDoc(0).Enabled = (Modo = 2 And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19))
+    Me.imgDoc(0).visible = (Modo = 2 And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19))
     
     
     B = (Modo = 4) Or (Modo = 2)
@@ -6065,78 +6065,78 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim Sql As String
+Dim SQL As String
 Dim Tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 0 'telefonos
             Tabla = "rsocios_telefonos"
-            Sql = "SELECT rsocios_telefonos.codsocio, rsocios_telefonos.idtelefono, rsocios_telefonos.nif, "
-            Sql = Sql & " rsocios_telefonos.imei, rsocios_telefonos.codpostal, rsocios_telefonos.nombre, "
-            Sql = Sql & " rsocios_telefonos.direccion, rsocios_telefonos.poblacion, rsocios_telefonos.provincia, "
-            Sql = Sql & " rsocios_telefonos.telefono1, rsocios_telefonos.sim, rsocios_telefonos.mail, rsocios_telefonos.codbanco, "
-            Sql = Sql & " rsocios_telefonos.codsucur, rsocios_telefonos.digcontr, rsocios_telefonos.cuentaba, "
-            Sql = Sql & " rsocios_telefonos.observaciones,  rsocios_telefonos.inactivo "
-            Sql = Sql & " FROM " & Tabla
+            SQL = "SELECT rsocios_telefonos.codsocio, rsocios_telefonos.idtelefono, rsocios_telefonos.nif, "
+            SQL = SQL & " rsocios_telefonos.imei, rsocios_telefonos.codpostal, rsocios_telefonos.nombre, "
+            SQL = SQL & " rsocios_telefonos.direccion, rsocios_telefonos.poblacion, rsocios_telefonos.provincia, "
+            SQL = SQL & " rsocios_telefonos.telefono1, rsocios_telefonos.sim, rsocios_telefonos.mail, rsocios_telefonos.codbanco, "
+            SQL = SQL & " rsocios_telefonos.codsucur, rsocios_telefonos.digcontr, rsocios_telefonos.cuentaba, "
+            SQL = SQL & " rsocios_telefonos.observaciones,  rsocios_telefonos.inactivo "
+            SQL = SQL & " FROM " & Tabla
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab(True)
+                SQL = SQL & ObtenerWhereCab(True)
             Else
-                Sql = Sql & " WHERE codsocio = -1"
+                SQL = SQL & " WHERE codsocio = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".idtelefono "
+            SQL = SQL & " ORDER BY " & Tabla & ".idtelefono "
             
             
        Case 1 ' secciones
             Tabla = "rsocios_seccion"
-             Sql = "SELECT rsocios_seccion.codsocio, rsocios_seccion.codsecci, rseccion.nomsecci, rsocios_seccion.fecalta, "
-             Sql = Sql & " rsocios_seccion.fecbaja, rsocios_seccion.codmaccli, rsocios_seccion.codmacpro, rsocios_seccion.codiva "
-            Sql = Sql & " FROM " & Tabla & " INNER JOIN rseccion ON rsocios_seccion.codsecci = rseccion.codsecci "
+             SQL = "SELECT rsocios_seccion.codsocio, rsocios_seccion.codsecci, rseccion.nomsecci, rsocios_seccion.fecalta, "
+             SQL = SQL & " rsocios_seccion.fecbaja, rsocios_seccion.codmaccli, rsocios_seccion.codmacpro, rsocios_seccion.codiva "
+            SQL = SQL & " FROM " & Tabla & " INNER JOIN rseccion ON rsocios_seccion.codsecci = rseccion.codsecci "
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab(True)
+                SQL = SQL & ObtenerWhereCab(True)
             Else
-                Sql = Sql & " WHERE codsocio = -1"
+                SQL = SQL & " WHERE codsocio = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".codsecci "
+            SQL = SQL & " ORDER BY " & Tabla & ".codsecci "
             
        Case 2 ' pozos
             Tabla = "rsocios_pozos"
-            Sql = "SELECT rsocios_pozos.codsocio, rsocios_pozos.numfases, rsocios_pozos.acciones, rsocios_pozos.observac "
-            Sql = Sql & " FROM " & Tabla
+            SQL = "SELECT rsocios_pozos.codsocio, rsocios_pozos.numfases, rsocios_pozos.acciones, rsocios_pozos.observac "
+            SQL = SQL & " FROM " & Tabla
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab(True)
+                SQL = SQL & ObtenerWhereCab(True)
             Else
-                Sql = Sql & " WHERE codsocio = -1"
+                SQL = SQL & " WHERE codsocio = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numfases "
+            SQL = SQL & " ORDER BY " & Tabla & ".numfases "
             
        Case 3 ' miembros de entidades
             Tabla = "rsocios_miembros"
-            Sql = "SELECT rsocios_miembros.codsocio, rsocios_miembros.numlinea, rsocios_miembros.nifmiembro, rsocios_miembros.nommiembro, rsocios_miembros.votos, rsocios_miembros.capital "
-            Sql = Sql & " FROM " & Tabla
+            SQL = "SELECT rsocios_miembros.codsocio, rsocios_miembros.numlinea, rsocios_miembros.nifmiembro, rsocios_miembros.nommiembro, rsocios_miembros.votos, rsocios_miembros.capital "
+            SQL = SQL & " FROM " & Tabla
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab(True)
+                SQL = SQL & ObtenerWhereCab(True)
             Else
-                Sql = Sql & " WHERE codsocio = -1"
+                SQL = SQL & " WHERE codsocio = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+            SQL = SQL & " ORDER BY " & Tabla & ".numlinea "
             
        Case 4 ' movimientos
             Tabla = "rsocios_movim"
-            Sql = "SELECT rsocios_movim.codsocio, rsocios_movim.numlinea, rsocios_movim.codcampo, rsocios_movim.supcoope, rsocios_movim.fecmovim, rsocios_movim.importe, rsocios_movim.causa, rsocios_movim.numerodoc "
-            Sql = Sql & " FROM " & Tabla
+            SQL = "SELECT rsocios_movim.codsocio, rsocios_movim.numlinea, rsocios_movim.codcampo, rsocios_movim.supcoope, rsocios_movim.fecmovim, rsocios_movim.importe, rsocios_movim.causa, rsocios_movim.numerodoc "
+            SQL = SQL & " FROM " & Tabla
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab(True)
+                SQL = SQL & ObtenerWhereCab(True)
             Else
-                Sql = Sql & " WHERE codsocio = -1"
+                SQL = SQL & " WHERE codsocio = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+            SQL = SQL & " ORDER BY " & Tabla & ".numlinea "
             
             
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = Sql
+    MontaSQLCarga = SQL
 End Function
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
@@ -6986,10 +6986,10 @@ Dim CPostal As String, desProvi As String, desPais As String
 End Sub
 
 Private Function SituacionBloqueo(Situ As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select bloqueo from rsituacion where codsitua = " & DBSet(Situ, "N")
-    SituacionBloqueo = (DevuelveValor(Sql) = 1)
+    SQL = "select bloqueo from rsituacion where codsitua = " & DBSet(Situ, "N")
+    SituacionBloqueo = (DevuelveValor(SQL) = 1)
 
 End Function
 
@@ -7126,7 +7126,7 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim cta As String
 Dim cadMen As String
 'Dim Datos As String
@@ -7210,9 +7210,9 @@ Dim cadMen As String
             If Text1(26).Text <> "" Then
                 '[Monica]12/04/2017: solo en el caso de que no sea natural dejamos introducir un codigo, añadida la condicion
                 If vParamAplic.Cooperativa <> 9 Then
-                    Sql = "select count(*) from rsocios where codsocio <> " & DBSet(Text1(0).Text, "N") & " and codigoggap = " & DBSet(Text1(26).Text, "T")
+                    SQL = "select count(*) from rsocios where codsocio <> " & DBSet(Text1(0).Text, "N") & " and codigoggap = " & DBSet(Text1(26).Text, "T")
                     
-                    If TotalRegistros(Sql) <> 0 Then
+                    If TotalRegistros(SQL) <> 0 Then
                         MsgBox "Este código de GlobalGap ya está asignado a otro socio. Revise.", vbExclamation
                         PonerFoco Text1(26)
                     End If
@@ -7223,8 +7223,8 @@ Dim cadMen As String
         '[Monica]29/09/2014: comprobamos si vamos a dar de baja que no tenga fecha de alta en programa operativo en ninguno de sus campos
         If B Then
             If Text1(14).Text <> "" Then
-                Sql = "select count(*) from rcampos where codsocio = " & DBSet(Text1(0).Text, "N") & " and not fecaltapropera is null "
-                If TotalRegistros(Sql) <> 0 Then
+                SQL = "select count(*) from rcampos where codsocio = " & DBSet(Text1(0).Text, "N") & " and not fecaltapropera is null "
+                If TotalRegistros(SQL) <> 0 Then
                     MsgBox "Este socio tiene algún campo dado de alta en el programa operativo." & vbCrLf & vbCrLf & "No puede darlo de baja. Revise.", vbExclamation
                     PonerFoco Text1(14)
                     B = False
@@ -7323,7 +7323,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
-Dim Sql As String
+Dim SQL As String
 
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
 
@@ -7462,9 +7462,9 @@ Dim Sql As String
                         '[Monica]12/04/2017: solo en el caso de que no sea natural dejamos introducir un codigo, añadida la condicion
                         If vParamAplic.Cooperativa <> 9 Then
                     
-                            Sql = "select count(*) from rsocios where codsocio <> " & DBSet(Text1(0).Text, "N") & " and codigoggap = " & DBSet(Text1(Index).Text, "T")
+                            SQL = "select count(*) from rsocios where codsocio <> " & DBSet(Text1(0).Text, "N") & " and codigoggap = " & DBSet(Text1(Index).Text, "T")
                             
-                            If TotalRegistros(Sql) <> 0 Then
+                            If TotalRegistros(SQL) <> 0 Then
                                 MsgBox "Este código de GlobalGap ya está asignado a otro socio. Revise.", vbExclamation
                                 PonerFoco Text1(Index)
                             End If
@@ -7603,7 +7603,7 @@ End Sub
 
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim Sql As String
+Dim SQL As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -7630,12 +7630,12 @@ Dim Eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 0 'telefonos
-            Sql = "¿Seguro que desea eliminar el telefono?"
-            Sql = Sql & vbCrLf & "Teléfono: " & Adoaux(Index).Recordset!idtelefono & " - " & Adoaux(Index).Recordset!imei
-            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+            SQL = "¿Seguro que desea eliminar el telefono?"
+            SQL = SQL & vbCrLf & "Teléfono: " & Adoaux(Index).Recordset!idtelefono & " - " & Adoaux(Index).Recordset!imei
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                Sql = "DELETE FROM rsocios_telefonos"
-                Sql = Sql & vWhere & " AND idtelefono= " & DBLet(Adoaux(Index).Recordset!idtelefono, "T")
+                SQL = "DELETE FROM rsocios_telefonos"
+                SQL = SQL & vWhere & " AND idtelefono= " & DBLet(Adoaux(Index).Recordset!idtelefono, "T")
                 
                 
                 CadenaCambio = "DELETE FROM rsocios_telefonos " & vWhere
@@ -7649,12 +7649,12 @@ Dim Eliminar As Boolean
                 
             End If
         Case 1 'secciones
-            Sql = "¿Seguro que desea eliminar la sección?"
-            Sql = Sql & vbCrLf & "Sección: " & Adoaux(Index).Recordset!codsecci & " - " & Adoaux(Index).Recordset!nomsecci
-            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+            SQL = "¿Seguro que desea eliminar la sección?"
+            SQL = SQL & vbCrLf & "Sección: " & Adoaux(Index).Recordset!codsecci & " - " & Adoaux(Index).Recordset!nomsecci
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                Sql = "DELETE FROM rsocios_seccion"
-                Sql = Sql & vWhere & " AND codsecci= " & DBLet(Adoaux(Index).Recordset!codsecci, "N")
+                SQL = "DELETE FROM rsocios_seccion"
+                SQL = SQL & vWhere & " AND codsecci= " & DBLet(Adoaux(Index).Recordset!codsecci, "N")
             
                 CadenaCambio = "DELETE FROM rsocios_seccion " & vWhere
                 '------------------------------------------------------------------------------
@@ -7667,12 +7667,12 @@ Dim Eliminar As Boolean
             
             End If
         Case 2 'pozos
-            Sql = "¿Seguro que desea eliminar el registro?"
-            Sql = Sql & vbCrLf & "Numero Fase: " & Adoaux(Index).Recordset!numfases
-            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+            SQL = "¿Seguro que desea eliminar el registro?"
+            SQL = SQL & vbCrLf & "Numero Fase: " & Adoaux(Index).Recordset!numfases
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                Sql = "DELETE FROM rsocios_pozos"
-                Sql = Sql & vWhere & " AND numfases= " & DBLet(Adoaux(Index).Recordset!numfases, "N")
+                SQL = "DELETE FROM rsocios_pozos"
+                SQL = SQL & vWhere & " AND numfases= " & DBLet(Adoaux(Index).Recordset!numfases, "N")
                 
                 CadenaCambio = "DELETE FROM rsocios_pozos " & vWhere
                 '------------------------------------------------------------------------------
@@ -7684,12 +7684,12 @@ Dim Eliminar As Boolean
                 '-----------------------------------------------------------------------------
             End If
         Case 3 'miembros
-            Sql = "¿Seguro que desea eliminar el miembro?"
-            Sql = Sql & vbCrLf & "NIF: " & Adoaux(Index).Recordset!nifmiembro
-            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+            SQL = "¿Seguro que desea eliminar el miembro?"
+            SQL = SQL & vbCrLf & "NIF: " & Adoaux(Index).Recordset!nifmiembro
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                Sql = "DELETE FROM rsocios_miembros"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                SQL = "DELETE FROM rsocios_miembros"
+                SQL = SQL & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
                 
                 CadenaCambio = "DELETE FROM rsocios_miembros " & vWhere
                 '------------------------------------------------------------------------------
@@ -7702,12 +7702,12 @@ Dim Eliminar As Boolean
             End If
         
         Case 4 'movimientos
-            Sql = "¿Seguro que desea eliminar el campo de baja?"
-            Sql = Sql & vbCrLf & "Campo: " & Adoaux(Index).Recordset!codCampo
-            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+            SQL = "¿Seguro que desea eliminar el campo de baja?"
+            SQL = SQL & vbCrLf & "Campo: " & Adoaux(Index).Recordset!codCampo
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                Sql = "DELETE FROM rsocios_movim"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                SQL = "DELETE FROM rsocios_movim"
+                SQL = SQL & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
                 
                 CadenaCambio = "DELETE FROM rsocios_miembros " & vWhere
                 '------------------------------------------------------------------------------
@@ -7726,7 +7726,7 @@ Dim Eliminar As Boolean
     If Eliminar Then
         NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute Sql
+        conn.Execute SQL
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Index <> 4 Then _
             CargaGrid Index, True
@@ -8215,7 +8215,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -8231,9 +8231,9 @@ Dim vFact As Byte, vDocum As Byte
     
     
     If B And NumTabMto = 2 And ModoLineas = 1 Then
-        Sql = ""
-        Sql = DevuelveDesdeBDNew(cAgro, "rsocios_pozos", "acciones", "codsocio", txtAux3(0).Text, "N", , "numfases", txtAux3(1).Text, "N")
-        If Sql <> "" Then
+        SQL = ""
+        SQL = DevuelveDesdeBDNew(cAgro, "rsocios_pozos", "acciones", "codsocio", txtAux3(0).Text, "N", , "numfases", txtAux3(1).Text, "N")
+        If SQL <> "" Then
             MsgBox "El número de fase ya existe. Reintroduzca.", vbExclamation
             B = False
             PonerFoco txtAux3(1)
@@ -8241,9 +8241,9 @@ Dim vFact As Byte, vDocum As Byte
     End If
     
     If B And NumTabMto = 3 And ModoLineas = 1 Then
-        Sql = ""
-        Sql = DevuelveDesdeBDNew(cAgro, "rsocios_miembros", "nifmiembro", "codsocio", txtAux4(0).Text, "N", , "nifmiembro", txtAux4(2).Text)
-        If Sql <> "" Then
+        SQL = ""
+        SQL = DevuelveDesdeBDNew(cAgro, "rsocios_miembros", "nifmiembro", "codsocio", txtAux4(0).Text, "N", , "nifmiembro", txtAux4(2).Text)
+        If SQL <> "" Then
             MsgBox "El nif ya existe para este socio. Reintroduzca.", vbExclamation
             B = False
             PonerFoco txtAux4(2)
@@ -9757,7 +9757,7 @@ End Sub
 
 
 Private Sub ModificarDatosCuentaContable()
-Dim Sql As String
+Dim SQL As String
 Dim cad As String
 Dim vSeccion As CSeccion
 Dim vSocio As cSocio
@@ -9805,42 +9805,42 @@ Dim vIban As String
                     If vSeccion.AbrirConta Then
                         ConnConta.BeginTrans
                         
-                        Sql = "update cuentas set nommacta = " & DBSet(Trim(Text1(1).Text), "T")
-                        Sql = Sql & ", razosoci = " & DBSet(Trim(Text1(1).Text), "T")
-                        Sql = Sql & ", dirdatos = " & DBSet(Trim(Text1(3).Text), "T")
-                        Sql = Sql & ", codposta = " & DBSet(Trim(Text1(4).Text), "T")
-                        Sql = Sql & ", despobla = " & DBSet(Trim(Text1(5).Text), "T")
-                        Sql = Sql & ", desprovi = " & DBSet(Trim(Text1(6).Text), "T")
-                        Sql = Sql & ", nifdatos = " & DBSet(Trim(Text1(2).Text), "T")
-                        Sql = Sql & ", maidatos = " & DBSet(Trim(Text1(12).Text), "T")
+                        SQL = "update cuentas set nommacta = " & DBSet(Trim(Text1(1).Text), "T")
+                        SQL = SQL & ", razosoci = " & DBSet(Trim(Text1(1).Text), "T")
+                        SQL = SQL & ", dirdatos = " & DBSet(Trim(Text1(3).Text), "T")
+                        SQL = SQL & ", codposta = " & DBSet(Trim(Text1(4).Text), "T")
+                        SQL = SQL & ", despobla = " & DBSet(Trim(Text1(5).Text), "T")
+                        SQL = SQL & ", desprovi = " & DBSet(Trim(Text1(6).Text), "T")
+                        SQL = SQL & ", nifdatos = " & DBSet(Trim(Text1(2).Text), "T")
+                        SQL = SQL & ", maidatos = " & DBSet(Trim(Text1(12).Text), "T")
                         
                         If Not vParamAplic.ContabilidadNueva Then
-                            Sql = Sql & ", entidad = " & DBSet(Trim(Text1(16).Text), "T", "S")
-                            Sql = Sql & ", oficina = " & DBSet(Trim(Text1(17).Text), "T", "S")
-                            Sql = Sql & ", cc = " & DBSet(Trim(Text1(18).Text), "T", "S")
-                            Sql = Sql & ", cuentaba = " & DBSet(Trim(Text1(19).Text), "T", "S")
+                            SQL = SQL & ", entidad = " & DBSet(Trim(Text1(16).Text), "T", "S")
+                            SQL = SQL & ", oficina = " & DBSet(Trim(Text1(17).Text), "T", "S")
+                            SQL = SQL & ", cc = " & DBSet(Trim(Text1(18).Text), "T", "S")
+                            SQL = SQL & ", cuentaba = " & DBSet(Trim(Text1(19).Text), "T", "S")
                             '[Monica]22/11/2013: tema iban
                             If vEmpresa.HayNorma19_34Nueva = 1 Then
-                                Sql = Sql & ", iban = " & DBSet(Trim(Text1(27).Text), "T", "S")
+                                SQL = SQL & ", iban = " & DBSet(Trim(Text1(27).Text), "T", "S")
                             End If
                         Else
                             vIban = MiFormat(Text1(27).Text, "") & MiFormat(Text1(16).Text, "0000") & MiFormat(Text1(17).Text, "0000") & MiFormat(Text1(18).Text, "00") & MiFormat(Text1(19).Text, "0000000000")
                         
-                            Sql = Sql & ", iban = " & DBSet(vIban, "T")
+                            SQL = SQL & ", iban = " & DBSet(vIban, "T")
 '[Monica]09/06/2017: el codigo de pais no lo voy a modificar se queda el de la cuenta contable
 '                            Sql = Sql & ", codpais = 'ES' "
                         
                         End If
-                        Sql = Sql & " where codmacta = "
+                        SQL = SQL & " where codmacta = "
                         
                         Cuentas = ""
                         
                         If vSocio.CtaClien <> "" Then
-                            ConnConta.Execute Sql & DBSet(Trim(vSocio.CtaClien), "T")
+                            ConnConta.Execute SQL & DBSet(Trim(vSocio.CtaClien), "T")
                             Cuentas = Cuentas & DBSet(Trim(vSocio.CtaClien), "T") & ","
                         End If
                         If vSocio.CtaProv <> "" Then
-                            ConnConta.Execute Sql & DBSet(Trim(vSocio.CtaProv), "T")
+                            ConnConta.Execute SQL & DBSet(Trim(vSocio.CtaProv), "T")
                             Cuentas = Cuentas & DBSet(Trim(vSocio.CtaProv), "T") & ","
                         End If
                         

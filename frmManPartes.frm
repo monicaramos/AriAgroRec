@@ -3424,7 +3424,7 @@ Dim NumF As String
         End If
         
         '[Monica]25/09/2012: añadido si es Catadau tenemos que sacar los kilos sin clasificar
-        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
             SQL = SQL & " union "
             SQL = SQL & "select " & Data1.Recordset.Fields(0).Value & ",rclasifica.numnotac, rclasifica.codvarie, rclasifica.horastra, "
             SQL = SQL & " rclasifica.kilosnet kilosnet " ' los kilostra
@@ -3672,13 +3672,13 @@ Dim Importe As Currency
             NroTrabajadores2 = NroTrabajadores - TotalRegistros(Sql4)
         
             '[Monica]29/02/2012: Para el caso de Catadau el precio es eursegsoc
-            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                 Precio = DevuelveValor("select eursegsoc from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
             Else
                 Precio = DevuelveValor("select eurdesta from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
             End If
             ' si es Picassent
-            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 18 Then
+            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                 KilosTrab = Round(KilosRec / NroTrabajadores2, 0)
                 ImporteTrab = Round2(KilosRec / NroTrabajadores2 * Precio, 2)
             Else
@@ -4384,7 +4384,7 @@ Dim B As Boolean
     
     '---------------------------------------------
     B = (Modo <> 0 And Modo <> 2)
-    cmdCancelar.visible = B
+    CmdCancelar.visible = B
     cmdAceptar.visible = B
     
     BloquearImgBuscar Me, Modo, ModificaLineas
@@ -4827,7 +4827,7 @@ Private Sub PonerBotonCabecera(B As Boolean)
     On Error Resume Next
 
     Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
+    Me.CmdCancelar.visible = Not B
     Me.cmdRegresar.visible = B
     Me.cmdRegresar.Caption = "Cabecera"
     If B Then
@@ -5508,7 +5508,7 @@ Dim ImporteTrab As Currency
                '    si me modifican los kilos he de calcular el importe=kilos*precio
             If Combo1(0).ListIndex = 0 Then
                 '[Monica]17/06/2013: añadida la condicion de si es un parte a destajo
-                If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+                If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                     Precio = DevuelveValor("select eursegsoc from variedades where codvarie = " & DBSet(txtAux3(5).Text, "N"))
                 Else
                     Precio = DevuelveValor("select eurdesta from variedades where codvarie = " & DBSet(txtAux3(5).Text, "N"))

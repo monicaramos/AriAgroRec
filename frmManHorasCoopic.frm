@@ -1084,8 +1084,8 @@ Dim B As Boolean
     chkAux(0).visible = Not B
     chkAux(1).visible = Not B
 
-    CmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    cmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -1638,7 +1638,7 @@ Private Sub Form_Load()
     End With
 
     '[Monica]14/12/2017: para el caso de Catadau
-    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         Me.Caption = "Entrada de horas"
     End If
 

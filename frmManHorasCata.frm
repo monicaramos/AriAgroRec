@@ -1890,7 +1890,7 @@ Private Sub Form_Load()
     End With
 
     '[Monica]14/12/2017: para el caso de Catadau
-    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         Me.Caption = "Entrada de horas"
     End If
 

@@ -956,7 +956,7 @@ Dim SQL As String
 
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
         If HayRegParaInforme(Tabla, cadSelect) Then
-            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                 ProcesarCambiosPicassent (cadSelect)
             Else
                 ProcesarCambios (cadSelect)
@@ -964,7 +964,7 @@ Dim SQL As String
         Else
             Repetir = True
             If MsgBox("¿Desea repetir el proceso?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then ' si la cooperativa es picassent repite norma como natural
+                If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then ' si la cooperativa es picassent repite norma como natural
                     RepetirNormaPicassent cadSelect
                 Else
                     '[Monica]03/11/2010: anteriormente en Alzira no grababamos en rrecibosnomina, ahora sí
@@ -1023,8 +1023,8 @@ On Error GoTo eProcesarCambios
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    pb1.visible = True
-    CargarProgres pb1, Rs.Fields(0).Value
+    Pb1.visible = True
+    CargarProgres Pb1, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -1045,7 +1045,7 @@ On Error GoTo eProcesarCambios
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        IncrementarProgres pb1, 1
+        IncrementarProgres Pb1, 1
         Mens = "Calculando Importes" & vbCrLf & vbCrLf & "Trabajador: " & Rs!CodTraba & vbCrLf
         
         Sql2 = "select salarios.impsalar, salarios.imphorae, straba.dtosirpf, straba.dtosegso, straba.porc_antig from salarios, straba where straba.codtraba = " & DBSet(Rs!CodTraba, "N")
@@ -2010,13 +2010,13 @@ Dim List As Collection
             W = 6660
             FrameHorasTrabajadasVisible True, H, W
             indFrame = 0
-            Me.CmdCancel(0).Cancel = True
+            Me.cmdCancel(0).Cancel = True
         Case 2
             H = 7530
             W = 6660
             FramePagoRecibosNaturalVisible True, H, W
             indFrame = 0
-            Me.CmdCancel(1).Cancel = True
+            Me.cmdCancel(1).Cancel = True
     End Select
         
     Tabla = "horas"
@@ -2032,7 +2032,7 @@ Dim List As Collection
     End If
     
     
-    pb1.visible = False
+    Pb1.visible = False
     Pb2.visible = False
 End Sub
 
@@ -2966,7 +2966,7 @@ On Error GoTo eProcesarCambiosPicassent
     End If
     
     '[Monica]02/02/2018: Catadau ha de generar el fichero
-    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         If vEmpresa.AplicarNorma19_34Nueva = 1 Then
             If HayXML Then
                 B = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
@@ -2989,7 +2989,7 @@ On Error GoTo eProcesarCambiosPicassent
     If B Then
         Mens = "Copiar fichero"
         '[Monica]02/02/2018: Catadau pasa a funcionar como Picassent
-        If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+        If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
             CopiarFichero
         Else
             CopiarFicheroA3

@@ -226,7 +226,7 @@ End Function
 
 
 'Insertar Linea de factura (albaran)
-Public Function InsertLineaAlbaran(tipoMov As String, numfactu As String, FecFac As String, ByRef Rs As ADODB.Recordset, Precio As String, Importe As String, Optional codcampo As String) As Boolean
+Public Function InsertLineaAlbaran(tipoMov As String, numfactu As String, FecFac As String, ByRef Rs As ADODB.Recordset, Precio As String, Importe As String, Optional codCampo As String) As Boolean
 '(rfactsoc_albaran)
 'codcampo tiene valor cuando venimos de almazara que hemos tenido que buscarlo porque en el cursor Rs no lo tenemos
 Dim GastosAlb As Currency
@@ -254,10 +254,10 @@ Dim Tipo As String
     SQL = SQL & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
     SQL = SQL & DBSet(Rs!numalbar, "N") & "," & DBSet(Rs!Fecalbar, "F") & "," & DBSet(Rs!codvarie, "N") & ","
     
-    If Not IsNull(codcampo) And codcampo <> "" Then
-        SQL = SQL & DBSet(codcampo, "N") & ","
+    If Not IsNull(codCampo) And codCampo <> "" Then
+        SQL = SQL & DBSet(codCampo, "N") & ","
     Else
-        SQL = SQL & DBSet(Rs!codcampo, "N") & ","
+        SQL = SQL & DBSet(Rs!codCampo, "N") & ","
     End If
     SQL = SQL & DBSet(Rs!KilosBru, "N") & "," & DBSet(Rs!KilosNet, "N") & ","
     SQL = SQL & DBSet(Rs!PrEstimado, "N") & "," & DBSet(Precio, "N") & "," & DBSet(Importe, "N") & ","
@@ -497,12 +497,12 @@ Dim vPrecio As Currency
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -553,7 +553,7 @@ Dim vPrecio As Currency
     While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
@@ -855,12 +855,12 @@ Dim vPrecio As Currency
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -916,7 +916,7 @@ Dim vPrecio As Currency
     While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
@@ -1269,12 +1269,12 @@ Dim PorcComi As Currency
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -1326,7 +1326,7 @@ Dim PorcComi As Currency
     While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
@@ -1459,7 +1459,7 @@ Dim PorcComi As Currency
                         PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                         
                         '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
+                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codCampo, "N"))
                         If CCur(PorcComi) <> 0 Then
                             PreCoop = PreCoop - Round2(PreCoop * PorcComi / 100, 4)
                         End If
@@ -1474,7 +1474,7 @@ Dim PorcComi As Currency
                         PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                         
                         '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
+                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codCampo, "N"))
                         If CCur(PorcComi) <> 0 Then
                             PreSocio = PreSocio - Round2(PreSocio * PorcComi / 100, 4)
                         End If
@@ -2228,11 +2228,11 @@ Dim Existe As Boolean
         baseimpo = baseimpo + DBLet(Rs!Importe, "N")
         
         ' insertar linea de variedad, campo
-        B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Rs!codvarie, "N")), CStr(DBLet(Rs!codcampo, "N")), CStr(DBLet(Rs!KilosNet, "N")), CStr(DBLet(Rs!Importe, "N")), 0)
+        B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Rs!codvarie, "N")), CStr(DBLet(Rs!codCampo, "N")), CStr(DBLet(Rs!KilosNet, "N")), CStr(DBLet(Rs!Importe, "N")), 0)
         
         '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
         If B Then
-            B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Rs!Codsocio, "N")), CStr(DBLet(Rs!codvarie, "N")), CStr(DBLet(Rs!codcampo, "N")), cTabla, cWhere, 2)
+            B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Rs!Codsocio, "N")), CStr(DBLet(Rs!codvarie, "N")), CStr(DBLet(Rs!codCampo, "N")), cTabla, cWhere, 2)
         End If
         
         If B Then
@@ -2244,7 +2244,7 @@ Dim Existe As Boolean
             RS1.Open Sql2, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
             
             If Not RS1.EOF Then
-                B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Rs!codvarie, "N")), CStr(DBLet(Rs!codcampo, "N")), CStr(DBLet(RS1!codcalid, "N")), CStr(DBLet(Rs!KilosNet, "N")), CStr(DBLet(Rs!Importe, "N")))
+                B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Rs!codvarie, "N")), CStr(DBLet(Rs!codCampo, "N")), CStr(DBLet(RS1!codcalid, "N")), CStr(DBLet(Rs!KilosNet, "N")), CStr(DBLet(Rs!Importe, "N")))
             End If
             Set RS1 = Nothing
         End If
@@ -2269,7 +2269,7 @@ Dim Existe As Boolean
             
             Sql2 = Sql2 & " and rfactsoc.codsocio = " & DBSet(Rs!Codsocio, "N")
             Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
-            Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+            Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codCampo, "N")
             Sql2 = Sql2 & " and rfactsoc_variedad.descontado = 0"
             
             Set RS1 = New ADODB.Recordset
@@ -2291,7 +2291,7 @@ Dim Existe As Boolean
                 
                 Sql3 = Sql3 & " and numfactu = " & DBSet(RS1!numfactu, "N")
                 Sql3 = Sql3 & " and fecfactu = " & DBSet(RS1!fecfactu, "F") & " and codvarie = " & DBSet(Rs!codvarie, "N")
-                Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+                Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codCampo, "N")
                 
                 conn.Execute Sql3
                 
@@ -2310,7 +2310,7 @@ Dim Existe As Boolean
                     Sql3 = Sql3 & DBSet(vSocio.CodTipomAntVC, "T") & "," ' antes era 'FAC'
                 End If
                 Sql3 = Sql3 & DBSet(RS1!numfactu, "N") & "," & DBSet(RS1!fecfactu, "F") & ","
-                Sql3 = Sql3 & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!codcampo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
+                Sql3 = Sql3 & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!codCampo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
                 
                 conn.Execute Sql3
                 
@@ -3071,12 +3071,12 @@ Dim vPorcGasto As String
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -3128,7 +3128,7 @@ Dim vPorcGasto As String
     While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
@@ -3624,12 +3624,12 @@ Dim vPorcGasto As String
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -3686,7 +3686,7 @@ Dim vPorcGasto As String
     While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
@@ -4195,7 +4195,7 @@ Dim Precio As Currency
         Sql2 = Sql2 & " and numfactu = " & DBSet(Factu, "N")
         Sql2 = Sql2 & " and fecfactu = " & DBSet(FecFac, "F")
         Sql2 = Sql2 & " and codvarie = " & DBSet(RS1!codvarie, "N")
-        Sql2 = Sql2 & " and codcampo = " & DBSet(RS1!codcampo, "N")
+        Sql2 = Sql2 & " and codcampo = " & DBSet(RS1!codCampo, "N")
         Sql2 = Sql2 & " and precio <> 0 "
         Sql2 = Sql2 & " order by codcalid "
     
@@ -4224,7 +4224,7 @@ Dim Precio As Currency
             Sql3 = Sql3 & " and numfactu = " & DBSet(Factu, "N")
             Sql3 = Sql3 & " and fecfactu = " & DBSet(FecFac, "F")
             Sql3 = Sql3 & " and codvarie = " & DBSet(RS1!codvarie, "N")
-            Sql3 = Sql3 & " and codcampo = " & DBSet(RS1!codcampo, "N")
+            Sql3 = Sql3 & " and codcampo = " & DBSet(RS1!codCampo, "N")
             Sql3 = Sql3 & " and codcalid = " & DBSet(Rs2!codcalid, "N")
             
             conn.Execute Sql3
@@ -4247,7 +4247,7 @@ Dim Precio As Currency
             Sql3 = Sql3 & " and numfactu = " & DBSet(Factu, "N")
             Sql3 = Sql3 & " and fecfactu = " & DBSet(FecFac, "F")
             Sql3 = Sql3 & " and codvarie = " & DBSet(RS1!codvarie, "N")
-            Sql3 = Sql3 & " and codcampo = " & DBSet(RS1!codcampo, "N")
+            Sql3 = Sql3 & " and codcampo = " & DBSet(RS1!codCampo, "N")
             Sql3 = Sql3 & " and codcalid = " & DBSet(UltCalid, "N")
             
             conn.Execute Sql3
@@ -4310,7 +4310,7 @@ Dim Calidad As Currency
             SQL = SQL & " and numfactu = " & DBSet(Factu, "N")
             SQL = SQL & " and fecfactu = " & DBSet(FecFac, "F")
             SQL = SQL & " and codvarie = " & DBSet(RS1!codvarie, "N")
-            SQL = SQL & " and codcampo = " & DBSet(RS1!codcampo, "N")
+            SQL = SQL & " and codcampo = " & DBSet(RS1!codCampo, "N")
             TotCalidad = DevuelveValor(SQL) + Diferencia
         
         
@@ -4319,7 +4319,7 @@ Dim Calidad As Currency
             SQL = SQL & " and numfactu = " & DBSet(Factu, "N")
             SQL = SQL & " and fecfactu = " & DBSet(FecFac, "F")
             SQL = SQL & " and codvarie = " & DBSet(RS1!codvarie, "N")
-            SQL = SQL & " and codcampo = " & DBSet(RS1!codcampo, "N")
+            SQL = SQL & " and codcampo = " & DBSet(RS1!codCampo, "N")
             
             conn.Execute SQL
             
@@ -4328,7 +4328,7 @@ Dim Calidad As Currency
             SQL = SQL & " and numfactu = " & DBSet(Factu, "N")
             SQL = SQL & " and fecfactu = " & DBSet(FecFac, "F")
             SQL = SQL & " and codvarie = " & DBSet(RS1!codvarie, "N")
-            SQL = SQL & " and codcampo = " & DBSet(RS1!codcampo, "N")
+            SQL = SQL & " and codcampo = " & DBSet(RS1!codCampo, "N")
             TotCalidad = DevuelveValor(SQL)
             
             SQL = "update tmpFact_variedad  set preciomed = round(imporvar / kilosnet,4) "
@@ -4336,7 +4336,7 @@ Dim Calidad As Currency
             SQL = SQL & " and numfactu = " & DBSet(Factu, "N")
             SQL = SQL & " and fecfactu = " & DBSet(FecFac, "F")
             SQL = SQL & " and codvarie = " & DBSet(RS1!codvarie, "N")
-            SQL = SQL & " and codcampo = " & DBSet(RS1!codcampo, "N")
+            SQL = SQL & " and codcampo = " & DBSet(RS1!codCampo, "N")
             
             conn.Execute SQL
             
@@ -4550,12 +4550,12 @@ Dim ConGastos As Byte
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -4605,7 +4605,7 @@ Dim ConGastos As Byte
     
     While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         
@@ -4829,7 +4829,7 @@ Dim AntKilosNet As Currency
         Sql2 = Sql2 & " and numfactu = " & DBSet(Rs!numfactu, "N")
         Sql2 = Sql2 & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
-        Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+        Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codCampo, "N")
         ' solo esto
         Sql2 = Sql2 & " and codcalid in (select codcalid from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N") & " and gastosrec = 1)"
         
@@ -4839,7 +4839,7 @@ Dim AntKilosNet As Currency
         Sql2 = Sql2 & " and numfactu = " & DBSet(Rs!numfactu, "N")
         Sql2 = Sql2 & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
-        Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+        Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codCampo, "N")
         ' solo esto
         Sql2 = Sql2 & " and codcalid in (select codcalid from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N") & " and gastosrec = 1)"
         
@@ -4864,7 +4864,7 @@ Dim AntKilosNet As Currency
             Sql3 = Sql3 & " and numfactu = " & DBSet(Rs!numfactu, "N")
             Sql3 = Sql3 & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
             Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
-            Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+            Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codCampo, "N")
             Sql3 = Sql3 & " and codcalid = " & DBSet(Rs2!codcalid, "N")
             
             conn.Execute Sql3
@@ -4885,7 +4885,7 @@ Dim AntKilosNet As Currency
             Sql3 = Sql3 & " and numfactu = " & DBSet(Rs!numfactu, "N")
             Sql3 = Sql3 & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
             Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
-            Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+            Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codCampo, "N")
             Sql3 = Sql3 & " and codcalid = " & DBSet(AntCodcalid, "N")
             
             conn.Execute Sql3
@@ -4896,7 +4896,7 @@ Dim AntKilosNet As Currency
             Sql3 = Sql3 & " and numfactu = " & DBSet(Rs!numfactu, "N")
             Sql3 = Sql3 & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
             Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
-            Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+            Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codCampo, "N")
             Sql3 = Sql3 & " and codcalid = " & DBSet(AntCodcalid, "N")
             
             conn.Execute Sql3
@@ -5473,12 +5473,12 @@ Dim vPorcGasto As String
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -5541,7 +5541,7 @@ Dim vPorcGasto As String
     While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
@@ -6110,12 +6110,12 @@ Dim vPrecio As Currency
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -6176,7 +6176,7 @@ Dim vPrecio As Currency
     While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
@@ -6539,12 +6539,12 @@ Dim Gastos As Currency
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -6596,7 +6596,7 @@ Dim Gastos As Currency
     While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
@@ -7157,11 +7157,11 @@ Dim vPrecio As Currency
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
    
         Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
@@ -7225,7 +7225,7 @@ Dim vPrecio As Currency
     
     While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
 '29/10/2010
@@ -7360,7 +7360,7 @@ Dim vPrecio As Currency
         KilosCal = KilosCal + DBLet(Rs!KilosNet, "N") ' kilogrados
         Kilos2 = Kilos2 + DBLet(Rs!Kilosnet2, "N") ' kilos netos
         
-        B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, DBLet(Rs!codcampo, "N"), CStr(DBLet(Rs!Kilosnet2, "N")), CStr(Round2(DBLet(Rs!KilosNet, "N") * Rs!precioindustria, 2)), "0", CStr(DBLet(Rs!KilosNet, "N")))
+        B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, DBLet(Rs!codCampo, "N"), CStr(DBLet(Rs!Kilosnet2, "N")), CStr(Round2(DBLet(Rs!KilosNet, "N") * Rs!precioindustria, 2)), "0", CStr(DBLet(Rs!KilosNet, "N")))
 '        AntVarie = ActVarie
 '        AntCampo = actCampo
 '
@@ -7557,12 +7557,12 @@ Dim vPorcGasto As String
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntAlbar = CStr(DBLet(Rs!numalbar, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActAlbar = CStr(DBLet(Rs!numalbar, "N"))
         Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
@@ -7619,7 +7619,7 @@ Dim vPorcGasto As String
     
     While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         
@@ -8934,12 +8934,12 @@ On Error GoTo EFacturacionTransporte
         AntTrans = CStr(DBLet(Rs!codTrans, "T"))
         AntAlbar = CStr(DBLet(Rs!numalbar, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         
         ActTrans = CStr(DBLet(Rs!codTrans, "T"))
         ActAlbar = CStr(DBLet(Rs!numalbar, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
     
         Set vTrans = New CTransportista
         If vTrans.LeerDatos(ActTrans) Then
@@ -9012,7 +9012,7 @@ On Error GoTo EFacturacionTransporte
         ActTrans = DBLet(Rs!codTrans, "T")
         ActAlbar = DBSet(Rs!numalbar, "N")
         ActVarie = DBSet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         
 '        If (ActVarie <> AntVarie Or ActCampo <> AntCampo Or ActAlbar <> AntAlbar Or ActTrans <> AntTrans) Then
 '
@@ -9331,7 +9331,7 @@ Dim Precio As Currency
     SQL = "insert into tmpFact_albarantra (codtipom, numfactu, fecfactu, numalbar, fecalbar, codvarie, codcampo, "
     SQL = SQL & "kilosbru, kilosnet, precio, importe, codtrans, fechaent) values ("
     SQL = SQL & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
-    SQL = SQL & DBSet(Rs!numalbar, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!codcampo, "N") & ","
+    SQL = SQL & DBSet(Rs!numalbar, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!codCampo, "N") & ","
     If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
         SQL = SQL & DBSet(DBLet(Rs!NumNotac, "N"), "N") & "," & DBSet(DBLet(Rs!KilosTra, "N"), "N") & ","
     Else
@@ -10681,12 +10681,12 @@ On Error GoTo EFacturacionTransporteSocio
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntAlbar = CStr(DBLet(Rs!NumNotac, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActAlbar = CStr(DBLet(Rs!NumNotac, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
     
         Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
@@ -10742,7 +10742,7 @@ On Error GoTo EFacturacionTransporteSocio
         ActSocio = DBLet(Rs!Codsocio, "N")
         ActAlbar = DBSet(Rs!NumNotac, "N")
         ActVarie = DBSet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         
         If ActSocio <> AntSocio Or ActVarie <> AntVarie Or actCampo <> AntCampo Then
             If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(AntVarie, "N")), CStr(DBLet(AntCampo, "N")), CStr(KilosLin), CStr(ImporteLin), 0)
@@ -11073,7 +11073,7 @@ Dim Tipo As String
     SQL = SQL & "codvarie, codcampo, kilosbru, kilosnet, grado, precio, importe, imporgasto, imppenal) values ("
     SQL = SQL & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
     SQL = SQL & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & ","
-    SQL = SQL & DBSet(Rs!codcampo, "N") & ","
+    SQL = SQL & DBSet(Rs!codCampo, "N") & ","
     SQL = SQL & DBSet(Kilos, "N") & "," & DBSet(Kilos, "N") & ","
     SQL = SQL & DBSet(0, "N") & "," & DBSet(Precio, "N") & "," & DBSet(Importe, "N") & ","
     '[Monica]19/11/2010: En la columna de gastos metemos los gastos de acarreo, en importe tenemos acarreo + recoleccion
@@ -11197,7 +11197,7 @@ Dim SqlValues As String
     
         SqlValues = SqlValues & "('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
         SqlValues = SqlValues & DBSet(Rs2!numalbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Variedad, "N") & ","
-        SqlValues = SqlValues & DBSet(Rs2!codcampo, "N") & ",0," & DBSet(Rs2!KilosNet, "N") & "," & DBSet(Rs2!PrEstimado, "N") & ","
+        SqlValues = SqlValues & DBSet(Rs2!codCampo, "N") & ",0," & DBSet(Rs2!KilosNet, "N") & "," & DBSet(Rs2!PrEstimado, "N") & ","
         SqlValues = SqlValues & DBSet(Rs2!precioindustria, "N") & "," & DBSet(Importe, "N") & ",0),"
     
         Rs2.MoveNext
@@ -11227,7 +11227,7 @@ Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Sql2 As String
 Dim Porcen As Currency
 Dim Grado As Currency
@@ -11257,12 +11257,12 @@ Dim Grado As Currency
         IncrementarProgresNew Pb1, 1
         DoEvents
         
-        Sql1 = "select porcentaje from rbonifica_lineas where codvarie = " & DBSet(Rs!codvarie, "N")
-        Sql1 = Sql1 & " and desdegrado <= " & DBSet(Rs!PrEstimado, "N")
-        Sql1 = Sql1 & " and " & DBSet(Rs!PrEstimado, "N") & " <= hastagrado "
+        SQL1 = "select porcentaje from rbonifica_lineas where codvarie = " & DBSet(Rs!codvarie, "N")
+        SQL1 = SQL1 & " and desdegrado <= " & DBSet(Rs!PrEstimado, "N")
+        SQL1 = SQL1 & " and " & DBSet(Rs!PrEstimado, "N") & " <= hastagrado "
         
         Set RS1 = New ADODB.Recordset
-        RS1.Open Sql1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS1.Open SQL1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         If Not RS1.EOF Then
             Porcen = DBLet(RS1.Fields(0).Value, "N")
@@ -11288,10 +11288,10 @@ Dim Grado As Currency
             
         End If
         
-        Sql1 = "update rhisfruta set kgradobonif = " & DBSet(Grado + Round2(Grado * Porcen / 100, 2), "N")
-        Sql1 = Sql1 & " where numalbar = " & DBSet(Rs!numalbar, "N")
+        SQL1 = "update rhisfruta set kgradobonif = " & DBSet(Grado + Round2(Grado * Porcen / 100, 2), "N")
+        SQL1 = SQL1 & " where numalbar = " & DBSet(Rs!numalbar, "N")
         
-        conn.Execute Sql1
+        conn.Execute SQL1
     
         Rs.MoveNext
     Wend
@@ -11315,7 +11315,7 @@ Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Sql2 As String
 Dim Porcen As Currency
 Dim Grado As Currency
@@ -11896,12 +11896,12 @@ Dim PorcComi As Currency
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -11958,7 +11958,7 @@ Dim PorcComi As Currency
     While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
@@ -12201,7 +12201,7 @@ Dim PorcComi As Currency
                         PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                         
                         '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
+                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codCampo, "N"))
                         If CCur(PorcComi) <> 0 Then
                             PreCoop = PreCoop - Round2(PreCoop * PorcComi / 100, 4)
                         End If
@@ -12216,7 +12216,7 @@ Dim PorcComi As Currency
                         PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                         
                         '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
+                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codCampo, "N"))
                         If CCur(PorcComi) <> 0 Then
                             PreSocio = PreSocio - Round2(PreSocio * PorcComi / 100, 4)
                         End If
@@ -13976,12 +13976,12 @@ Dim vPorcGasto As String
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -14038,7 +14038,7 @@ Dim vPorcGasto As String
     While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
@@ -14390,31 +14390,34 @@ End Function
 
 
 
-Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As Variant, ByRef Tipiva As Variant, ByRef Impbas As Variant, ByRef impiva As Variant, ByRef PorIva As Variant, ByRef TotFac As Currency, ByRef ImpREC As Variant, ByRef PorRec As Variant, ByRef PorRet As Variant, ByRef ImpRet As Variant, Optional Socio As String, Optional Tipo As String)
+Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As Variant, ByRef Tipiva As Variant, ByRef Impbas As Variant, ByRef impiva As Variant, ByRef PorIva As Variant, ByRef TotFac As Currency, ByRef ImpREC As Variant, ByRef PorRec As Variant, ByRef PorRet As Variant, ByRef ImpRet As Variant, TipoRetencion As Integer, Optional Socio As String, Optional Tipo As String)
 
-    Dim I As Integer
+    Dim i As Integer
     Dim SQL As String
     Dim baseimpo As Dictionary
     Dim CodIva As Integer
     Dim totimp As Currency
     Dim Base As Currency
     
+    
+    
     Set baseimpo = New Dictionary
 
     ' inicializamos los importes de los totales de la cabecera
+    
     TotFac = 0
     totimp = 0
     Base = 0
     ImpRet = 0
-    For I = 0 To 2
-         Tipiva(I) = 0
-         ImpTot(I) = 0
-         Impbas(I) = 0
-         impiva(I) = 0
-         PorIva(I) = 0
-         PorRec(I) = 0
-         ImpREC(I) = 0
-    Next I
+    For i = 0 To 2
+         Tipiva(i) = 0
+         ImpTot(i) = 0
+         Impbas(i) = 0
+         impiva(i) = 0
+         PorIva(i) = 0
+         PorRec(i) = 0
+         ImpREC(i) = 0
+    Next i
 
     ' recorremos todas las lineas de la factura
     If Not Rs.EOF Then Rs.MoveFirst
@@ -14425,17 +14428,17 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
         Rs.MoveNext
     Wend
 
-    For I = 0 To baseimpo.Count - 1
-        If I <= 2 Then
-            Tipiva(I) = baseimpo.Keys(I)
-            Impbas(I) = baseimpo.Items(I)
+    For i = 0 To baseimpo.Count - 1
+        If i <= 2 Then
+            Tipiva(i) = baseimpo.Keys(i)
+            Impbas(i) = baseimpo.Items(i)
  
-            PorIva(I) = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", CStr(Tipiva(I)), "N")
-            PorRec(I) = DevuelveDesdeBDNew(cConta, "tiposiva", "porcerec", "codigiva", CStr(Tipiva(I)), "N")
-            impiva(I) = DBLet(Round2(Impbas(I) * PorIva(I) / 100, 2), "N")
-            ImpREC(I) = DBLet(Round2(Impbas(I) * PorRec(I) / 100, 2), "N")
-            ImpTot(I) = Impbas(I) + impiva(I) + ImpREC(I)
-            TotFac = TotFac + ImpTot(I)
+            PorIva(i) = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", CStr(Tipiva(i)), "N")
+            PorRec(i) = DevuelveDesdeBDNew(cConta, "tiposiva", "porcerec", "codigiva", CStr(Tipiva(i)), "N")
+            impiva(i) = DBLet(Round2(Impbas(i) * PorIva(i) / 100, 2), "N")
+            ImpREC(i) = DBLet(Round2(Impbas(i) * PorRec(i) / 100, 2), "N")
+            ImpTot(i) = Impbas(i) + impiva(i) + ImpREC(i)
+            TotFac = TotFac + ImpTot(i)
  
 'antes el iva estaba incluido
 '            PorIva(i) = DevuelveDesdeBDNewFac(cConta, "tiposiva", "porceiva", "codigiva", CStr(Tipiva(i)), "N")
@@ -14445,7 +14448,7 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
         
         
         End If
-    Next I
+    Next i
     'si hay retencion la calculamos
     If PorRet <> 0 Then
         Base = 0
@@ -14455,21 +14458,29 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
             If Socio <> "" Then SQL = DevuelveValor("select tipoirpf from rsocios where codsocio = " & DBSet(Socio, "N"))
             Select Case SQL
                 Case 0
-                    For I = 0 To baseimpo.Count - 1
-                        Base = Base + Impbas(I) + impiva(I)
-                    Next I
+                    For i = 0 To baseimpo.Count - 1
+                        Base = Base + Impbas(i) + impiva(i)
+                    Next i
                 Case 1
-                    For I = 0 To baseimpo.Count - 1
-                        Base = Base + Impbas(I)
-                    Next I
+                    For i = 0 To baseimpo.Count - 1
+                        Base = Base + Impbas(i)
+                    Next i
                 Case 2
                 
             End Select
         
         Else
-            For I = 0 To baseimpo.Count - 1
-                Base = Base + Impbas(I)
-            Next I
+            Dim TipoRet As Integer
+            TipoRet = DevuelveValor("select tipo from usuarios.wtiporeten where codigo = " & DBSet(TipoRetencion, "N"))
+        
+            For i = 0 To baseimpo.Count - 1
+                Base = Base + Impbas(i)
+                
+                '[Monica]20/08/2018: añadido lo del tipo de retencion
+                If TipoRet = 1 Then
+                    Base = Base + impiva(i)
+                End If
+            Next i
         End If
         ImpRet = Round2(Base * PorRet / 100, 2)
         TotFac = TotFac - ImpRet
@@ -15144,12 +15155,12 @@ Dim HayPrecio As Boolean
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -15205,7 +15216,7 @@ Dim HayPrecio As Boolean
     While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
@@ -15358,7 +15369,7 @@ Dim HayPrecio As Boolean
                 PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                 
                 '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
+                PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codCampo, "N"))
                 If CCur(PorcComi) <> 0 Then
                     Precio = Precio - Round2(Precio * PorcComi / 100, 4)
                 End If
@@ -15381,7 +15392,7 @@ Dim HayPrecio As Boolean
         Set Rs9 = Nothing
         
         '[Monica]20/03/2014: miramos si hay precio para la calidad
-        Sql9 = "select count(*) from tmpinformes2 where importe5 = " & DBSet(Rs!codcampo, "N") & " and importe2 = " & DBSet(Rs!codvarie, "N") & " and importeb1 = " & DBSet(Rs!Codsocio, "N")
+        Sql9 = "select count(*) from tmpinformes2 where importe5 = " & DBSet(Rs!codCampo, "N") & " and importe2 = " & DBSet(Rs!codvarie, "N") & " and importeb1 = " & DBSet(Rs!Codsocio, "N")
         Sql9 = Sql9 & " and importe3  = " & DBSet(Rs!codcalid, "N") & " and codusu = " & vUsu.Codigo
         HayPrecio = (TotalRegistros(Sql9) <> 0)
         
@@ -15622,12 +15633,12 @@ Dim Concepto As String
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
-        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCampo = CStr(DBLet(Rs!codCampo, "N"))
         AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
-        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        actCampo = CStr(DBLet(Rs!codCampo, "N"))
         ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
@@ -15688,7 +15699,7 @@ Dim Concepto As String
     While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
-        actCampo = DBSet(Rs!codcampo, "N")
+        actCampo = DBSet(Rs!codCampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
@@ -16002,7 +16013,7 @@ Dim Concepto As String
                 PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                 
                 '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
+                PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codCampo, "N"))
                 If CCur(PorcComi) <> 0 Then
                     Precio = Precio - Round2(Precio * PorcComi / 100, 4)
                 End If
@@ -16029,7 +16040,7 @@ Dim Concepto As String
         Set Rs9 = Nothing
         
         '[Monica]20/03/2014: miramos si hay precio para la calidad
-        Sql9 = "select count(*) from tmpinformes2 where importe5 = " & DBSet(Rs!codcampo, "N") & " and importe2 = " & DBSet(Rs!codvarie, "N") & " and importeb1 = " & DBSet(Rs!Codsocio, "N")
+        Sql9 = "select count(*) from tmpinformes2 where importe5 = " & DBSet(Rs!codCampo, "N") & " and importe2 = " & DBSet(Rs!codvarie, "N") & " and importeb1 = " & DBSet(Rs!Codsocio, "N")
         Sql9 = Sql9 & " and importe3  = " & DBSet(Rs!codcalid, "N") & " and codusu = " & vUsu.Codigo
         HayPrecio = (TotalRegistros(Sql9) <> 0)
         

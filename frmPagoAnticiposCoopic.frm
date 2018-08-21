@@ -693,7 +693,7 @@ Dim SQL As String
     '[Monica]08/02/2017: los que han trabajado y se dan de baja no se anticipan, se manda la nomina hasta el momento
     AnyadirAFormula cadSelect, "(straba.fechabaja is null or straba.fechabaja = '')"
     
-    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         AnyadirAFormula cadSelect, "straba.codforpa in (select codforpa from forpago where forpago.tipoforp = 1)"
         
         '[Monica]20/04/2018: solo vamos a anticipar a los del banco que toque y los que no tengan categoria
@@ -776,7 +776,7 @@ On Error GoTo eRepetirProcesoCoopic
         Mens = "No hay anticipos, debe realizar el proceso."
         B = False
     Else
-        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         
             SQL = "select * from rrecibosnomina where idcontador = " & DBSet(IdContador, "N")
             
@@ -858,7 +858,7 @@ On Error GoTo eRepetirProcesoCoopic
     
     If B Then
         Mens = "Copiar Fichero"
-        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
             If CopiarFichero Then
                 B = True
             Else
@@ -970,7 +970,7 @@ Dim List As Collection
     H = 5700
     W = 6435
     
-    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then H = H + 1200
+    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then H = H + 1200
     
     FrameHorasTrabajadasVisible True, H, W
     indFrame = 0
@@ -984,11 +984,11 @@ Dim List As Collection
     
     Me.Combo1(1).ListIndex = 0
     
-    Me.FramePago.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
-    Me.FramePago.Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
+    Me.FramePago.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+    Me.FramePago.Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
     
     If vParamAplic.Cooperativa <> 0 Then
-        Me.CmdAceptar(0).Top = Me.CmdAceptar(0).Top - 1200
+        Me.cmdAceptar(0).Top = Me.cmdAceptar(0).Top - 1200
         Me.cmdCancel(0).Top = Me.cmdCancel(0).Top - 1200
         Me.Pb2.Top = Me.Pb2.Top - 1200
     End If
@@ -1448,7 +1448,7 @@ Dim SQL As String
     End If
     
     '[Monica]05/02/2018: para Catadau metemos los datos de banco pq hacen transferencia
-    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         If txtCodigo(0).Text = "" Then
             MsgBox "Debe introducir un Banco.", vbExclamation
             txtCodigo(0).Text = ""
@@ -1839,7 +1839,7 @@ On Error GoTo eProcesarCambiosCoopic
     End If
     
     ' generamos el fichero plano del anticipo
-    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
 '*************
         '[Monica]22/11/2013: iban
         SQL = "select codbanco, codsucur, digcontr, cuentaba, codorden34, iban from banpropi where codbanpr = " & DBSet(txtCodigo(0).Text, "N")
@@ -1891,7 +1891,7 @@ On Error GoTo eProcesarCambiosCoopic
     If B Then
         Mens = "Copiar fichero"
         
-        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
             CopiarFichero
         Else
             CopiarFicheroA3 "AnticipoA3.txt", txtCodigo(20).Text
@@ -1903,7 +1903,7 @@ On Error GoTo eProcesarCambiosCoopic
             numParam = 4
             
             '[Monica]23/04/2018: mostramos el banco
-            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                 CadParam = CadParam & "pBanco=""" & txtCodigo(0).Text & " " & txtNombre(0).Text & """|"
                 numParam = numParam + 1
             End If
@@ -1922,7 +1922,7 @@ On Error GoTo eProcesarCambiosCoopic
                 CadParam = CadParam & "pFechaRecibo=""" & txtCodigo(20).Text & """|pFechaPago=""" & txtCodigo(20).Text & """|" & "pImpagados=1|"
                 numParam = 4
                 '[Monica]23/04/2018: mostramos el banco
-                If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+                If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                     CadParam = CadParam & "pBanco=""" & txtCodigo(0).Text & " " & txtNombre(0).Text & """|"
                     numParam = numParam + 1
                 End If

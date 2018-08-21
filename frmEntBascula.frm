@@ -2809,7 +2809,7 @@ Dim B As Boolean
     DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
+    CmdCancelar.visible = B
     cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
@@ -3834,7 +3834,7 @@ Dim SQL As String
         '[Monica]10/02/2015: no se permite la entrada si la ficha de cultivo no ha sido entregada
         If B Then
             ' si el nro de nota es manual comprobamos que no exita en ningun sitio
-            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                 If EntregadaFichaCultivo(Text1(5).Text) Then
                     MsgBox "No se ha entregado la ficha de cultivo. No se permiten entradas a este campo.", vbExclamation
                     B = False
@@ -4058,7 +4058,7 @@ Dim SQL As String
                                 PonerFoco Text1(Index)
                             Else
                                 '[Monica]10/02/2015: no se permite la entrada si la ficha de cultivo no ha sido entregada
-                                If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+                                If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                                     If EntregadaFichaCultivo(Text1(5).Text) Then
                                         MsgBox "No se ha entregado la ficha de cultivo. No se permiten entradas a este campo.", vbExclamation
                                         PonerFoco Text1(Index)

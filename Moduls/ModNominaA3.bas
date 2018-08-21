@@ -31,7 +31,7 @@ Dim FecPag As String
 
     cad = "03" & "00017" & "00000" ' tipo de registro + codigo de empresa + centro o codigo de trabajador
     '[Monica]29/01/2018: en el caso de catadau el codigo de empresa no es 17, lo parametrizo
-    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         cad = "03" & Format(vParamAplic.CodEmpreA3, "00000") & "00000"
     End If
     
@@ -140,7 +140,7 @@ Dim FecPag As String
 
     cad = "03" & "00017" & "00000" ' tipo de registro + codigo de empresa + centro o codigo de trabajador
     '[Monica]29/01/2018: en el caso de catadau el codigo de empresa no es 17, lo parametrizo
-    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         cad = "03" & Format(vParamAplic.CodEmpreA3, "00000") & "00000"
     End If
     
@@ -168,7 +168,7 @@ Dim FecPag As String
         Importe = Importe & "000000000+"
         
         '[Monica]29/01/2018: para el caso de Catadau damos el codigo de asesoria,
-        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
             Dim CodAse As String
             CodAse = DevuelveValor("select codasesoria from straba where codtraba = " & DBLet(Rs!Codigo1, "N"))
             RegImpBruto = cad & Format(CodAse, "000000") & FecPag & "001" & "001" & Importe 'cad+codtraba+fecha+incidencia+001+importe bruto
@@ -180,7 +180,7 @@ Dim FecPag As String
         ' dias trabajados
         Dias = Format(Int(DBLet(Rs!importe2, "N")), "00")
         
-        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
             RegDias = cad & Format(CodAse, "000000") & FecPag & "016" & Format(Dias, "00") & "00" & Left(DBLet(Rs!Nombre1, "T") & "NNN", 31) & "00000000000000" 'cad+codtraba+fecha+016+dias+00+SSNNS..+"
         Else
             RegDias = cad & Format(Rs!Codigo1, "000000") & FecPag & "016" & Format(Dias, "00") & "00" & Left(DBLet(Rs!Nombre1, "T") & "NNN", 31) & "00000000000000" 'cad+codtraba+fecha+016+dias+00+SSNNS..+"

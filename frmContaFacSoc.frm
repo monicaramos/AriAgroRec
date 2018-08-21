@@ -1771,7 +1771,7 @@ Dim CCoste As String
     Me.Refresh
     DoEvents
     
-    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         Me.lblProgres(1).Caption = "Comprobando Cuentas Contables asociados en contabilidad ..."
         
         B = ComprobarCtaContable_new(cadTabla, 14, , CInt(txtCodigo(2).Text))

@@ -914,7 +914,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
             CadParam = CadParam & "pSeccion=""" & Me.Combo1(1).Text & """|"
             numParam = numParam + 1
             '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
-            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 18 Then
+            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                 indRPT = 55 'Informe de horas mensual
                 If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                   

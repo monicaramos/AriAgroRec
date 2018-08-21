@@ -1038,7 +1038,7 @@ Dim B As Boolean
     
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
+    CmdCancelar.visible = B
     cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
@@ -1079,11 +1079,11 @@ Dim B As Boolean
     DataGridAux(1).Enabled = B
     'clasificacion
     B = (Modo = 5) And (NumTabMto = 1) 'And (ModoLineas <> 3)
-    For i = 1 To txtaux1.Count - 1
-        BloquearTxt txtaux1(i), Not B
+    For i = 1 To txtAux1.Count - 1
+        BloquearTxt txtAux1(i), Not B
     Next i
     B = (Modo = 5) And (NumTabMto = 1) And ModoLineas = 2
-    BloquearTxt txtaux1(2), B
+    BloquearTxt txtAux1(2), B
      '-----------------------------
     PonerModoOpcionesMenu (Modo) 'Activar opcions menú según modo
     PonerOpcionesMenu   'Activar opcions de menú según nivell
@@ -1599,9 +1599,9 @@ Dim V
                         ' ***  bloquejar i huidar els camps que estan fora del datagrid ***
                         Select Case NumTabMto
                             Case 1 'secciones
-                                For i = 0 To txtaux1.Count - 1
-                                    txtaux1(i).Text = ""
-                                    BloquearTxt txtaux1(i), True
+                                For i = 0 To txtAux1.Count - 1
+                                    txtAux1(i).Text = ""
+                                    BloquearTxt txtAux1(i), True
                                 Next i
                         End Select
                     ' *** els tabs que no tenen datagrid ***
@@ -1691,7 +1691,7 @@ Dim cad As String
     '[Monica] 24/09/2009 Si es catadau controlamos que no se puedan solapar fechas
     ' para el caso de Valsur dejamos que se solapen pq obligo a introducir el rango exacto y cojo el maximo contador
     '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
-    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 18 Then ' caso de Catadau
+    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then ' caso de Catadau
         If B And (Modo = 3 Or Modo = 4) Then
 '            b = ComprobacionRangoFechas(Text1(0).Text, CStr(Combo1(0).ListIndex), Text1(1).Text, Text1(2).Text, Text1(3).Text)
     
@@ -1986,16 +1986,16 @@ Dim i As Integer
             Select Case Index
                 ' *** valor per defecte a l'insertar i formateig de tots els camps ***
                 Case 1 'calidades
-                    For i = 0 To txtaux1.Count - 1
-                        txtaux1(i).Text = ""
+                    For i = 0 To txtAux1.Count - 1
+                        txtAux1(i).Text = ""
                     Next i
-                    txtaux1(0).Text = Text1(0).Text 'codvariedad
-                    txtaux1(2).Text = NumF  'tipo de factura
-                    PonerFormatoEntero txtaux1(2)
-                    txtaux1(1).Text = "" 'desde
-                    txtaux1(3).Text = ""
-                    txtaux1(4).Text = ""
-                    PonerFoco txtaux1(2)
+                    txtAux1(0).Text = Text1(0).Text 'codvariedad
+                    txtAux1(2).Text = NumF  'tipo de factura
+                    PonerFormatoEntero txtAux1(2)
+                    txtAux1(1).Text = "" 'desde
+                    txtAux1(3).Text = ""
+                    txtAux1(4).Text = ""
+                    PonerFoco txtAux1(2)
 
             End Select
 
@@ -2046,11 +2046,11 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         ' *** valor per defecte al modificar dels camps del grid ***
         Case 1 'lineas
-            txtaux1(0).Text = DataGridAux(Index).Columns(0).Text
-            txtaux1(2).Text = DataGridAux(Index).Columns(1).Text
-            txtaux1(3).Text = DataGridAux(Index).Columns(2).Text 'desde grado
-            txtaux1(4).Text = DataGridAux(Index).Columns(3).Text 'hasta grado
-            txtaux1(1).Text = DataGridAux(Index).Columns(4).Text 'porcentaje de bonificacion
+            txtAux1(0).Text = DataGridAux(Index).Columns(0).Text
+            txtAux1(2).Text = DataGridAux(Index).Columns(1).Text
+            txtAux1(3).Text = DataGridAux(Index).Columns(2).Text 'desde grado
+            txtAux1(4).Text = DataGridAux(Index).Columns(3).Text 'hasta grado
+            txtAux1(1).Text = DataGridAux(Index).Columns(4).Text 'porcentaje de bonificacion
             
     End Select
 
@@ -2059,7 +2059,7 @@ Private Sub BotonModificarLinea(Index As Integer)
     ' *** foco al 1r camp visible de les llinies en grids que no siga PK (en o sense tab) ***
     Select Case Index
         Case 1 'lineas de bonificacion
-            PonerFoco txtaux1(3)
+            PonerFoco txtAux1(3)
     End Select
     ' ***************************************************************************************
 End Sub
@@ -2076,9 +2076,9 @@ Dim B As Boolean
     B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
     Select Case Index
         Case 1 'calidad
-            For jj = 1 To txtaux1.Count - 1
-                txtaux1(jj).visible = B
-                txtaux1(jj).Top = alto
+            For jj = 1 To txtAux1.Count - 1
+                txtAux1(jj).visible = B
+                txtAux1(jj).Top = alto
             Next jj
 
     End Select
@@ -2106,10 +2106,10 @@ Dim vFact As Byte, vDocum As Byte
     
     If B Then   'insertar
         'comprobar si existe ya el cod. de la calidad para ese campo
-        B = ComprobacionRangoGrado(txtaux1(0).Text, txtaux1(3).Text, txtaux1(4).Text, txtaux1(2).Text)
+        B = ComprobacionRangoGrado(txtAux1(0).Text, txtAux1(3).Text, txtAux1(4).Text, txtAux1(2).Text)
         If Not B Then
             MsgBox "Este rango de grados se solapa con otro de la variedad. Revise.", vbExclamation
-            PonerFoco txtaux1(1)
+            PonerFoco txtAux1(1)
             B = False
         End If
     End If
@@ -2345,7 +2345,7 @@ Dim tots As String
 '                End If
             Else
                 For i = 0 To 4
-                    txtaux1(i).Text = ""
+                    txtAux1(i).Text = ""
                 Next i
 '                Me.MSChart1.visible = False
             End If
@@ -2520,7 +2520,7 @@ Private Sub txtAux1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
 
-    If Not PerderFocoGnral(txtaux1(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux1(Index), Modo) Then Exit Sub
 
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -2530,12 +2530,12 @@ Dim Nuevo As Boolean
     ' ******* configurar el LostFocus dels camps de llínies (dins i fora grid) ********
     Select Case Index
         Case 3, 4 'desde y hasta
-            PonerFormatoDecimal txtaux1(Index), 3
+            PonerFormatoDecimal txtAux1(Index), 3
         Case 2 'numlinea
-            PonerFormatoEntero txtaux1(Index)
+            PonerFormatoEntero txtAux1(Index)
             
         Case 1 'porcentaje
-            If PonerFormatoDecimal(txtaux1(Index), 4) Then
+            If PonerFormatoDecimal(txtAux1(Index), 4) Then
                 cmdAceptar.SetFocus
             End If
         
@@ -2545,15 +2545,15 @@ Dim Nuevo As Boolean
 End Sub
 
 Private Sub txtAux1_GotFocus(Index As Integer)
-   If Not txtaux1(Index).MultiLine Then ConseguirFocoLin txtaux1(Index)
+   If Not txtAux1(Index).MultiLine Then ConseguirFocoLin txtAux1(Index)
 End Sub
 
 Private Sub txtAux1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-    If Not txtaux1(Index).MultiLine Then KEYdown KeyCode
+    If Not txtAux1(Index).MultiLine Then KEYdown KeyCode
 End Sub
 
 Private Sub txtAux1_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Not txtaux1(Index).MultiLine Then
+    If Not txtAux1(Index).MultiLine Then
         If KeyAscii = teclaBuscar Then
             If Modo = 5 And (ModoLineas = 1 Or ModoLineas = 2) Then
                 Select Case Index

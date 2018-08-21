@@ -3160,7 +3160,7 @@ Dim vSQL As String
      End If
      
      '[Monica]08/04/2015: nuevo informe solo para catadau donde dadas 2 fechas saca por variedades agrupadas los kilos y la fecha de abocamiento
-     If (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18) And Check5.Value Then
+     If (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19) And Check5.Value Then
         If CargarTemporalAbocamiento Then
             If HayRegistros("trztmp_palets_lineas_cargas", "codusu=" & vUsu.Codigo) Then
                 cadTitulo = "Resumen Origenes Palets Confeccionados"
@@ -3759,8 +3759,8 @@ Dim List As Collection
         Me.Label5.Caption = "Informe de Palets de Entrada"
         
         '[Monica]08/05/2015: solo para el caso de catadau quieren un listado diferente
-        Me.Check5.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
-        Me.Check5.Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
+        Me.Check5.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+        Me.Check5.Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
         
     
     Case 6   '6- Manejo de Cargas de Confeccion

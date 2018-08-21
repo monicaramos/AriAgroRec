@@ -664,7 +664,7 @@ Dim B As Boolean
     btnBuscar(1).visible = Not B
 
     cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -1199,7 +1199,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     tots = tots & "S|txtAux(2)|T|Linea|900|;"
     ' este programa solo lo ven catadau(0) y alzira(4)
     '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
-    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 18 Then
+    If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         tots = tots & "S|txtAux(3)|T|Calibrador 1|2000|;S|txtAux(4)|T|Calibrador 2|2000|;"
         tots = tots & "S|txtAux(5)|T|Calibrador 3|2000|;"
     Else

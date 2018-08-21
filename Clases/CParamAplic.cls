@@ -324,7 +324,7 @@ Private mvarHayFVarias As Byte  'Hay Facturas Varias
 Private mvarPathFacturaE As String  'FacturaE
 
 
-Private sql As String  'Para la sentencia
+Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
 
 Private mvarConsumoMinPoz As Long ' Consumo minimo de pozos
@@ -2221,6 +2221,8 @@ Public Property Get PathEntradas() As String
 End Property
 
 
+
+
 '[Monica]03/11/2016: si hay contabilidad nueva
 Public Property Get ContabilidadNueva() As Boolean
      ContabilidadNueva = mvarContabilidadNueva
@@ -2267,9 +2269,9 @@ Public Function Leer() As Byte
 Dim Rs As ADODB.Recordset
 On Error GoTo Err3
     
-    sql = "SELECT * FROM rparam "
+    SQL = "SELECT * FROM rparam "
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockOptimistic
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic
 
     If Rs.EOF Then
         Leer = 1
@@ -2586,17 +2588,17 @@ End Function
 
 
 Private Function ExisteBDApp() As Boolean
-Dim vSql As String
+Dim vSQL As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo eExisteBDApp
     
     ExisteBDApp = False
     
-    vSql = "select * from aripush.usuariospush"
+    vSQL = "select * from aripush.usuariospush"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open vSql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Set Rs = Nothing
     
     ExisteBDApp = True
@@ -2613,306 +2615,307 @@ Public Function Modificar() As Byte
 'Modifica la Tabla: sparam, BD: Arigasol
 On Error GoTo eModificar
 
-    sql = "UPDATE rparam SET "
-    sql = sql & " serconta= '" & mvarSerConta & "'"
-    sql = sql & ", usuconta= " & DBSet(mvarUsuConta, "T")
-    sql = sql & ", pasconta= " & DBSet(mvarPasConta, "T")
-    sql = sql & ", numconta= " & DBSet(mvarNumConta, "N", "S")
-    sql = sql & ", websoporte= " & DBSet(mvarWebSoporte, "T")
-    sql = sql & ", diremail= " & DBSet(mvarDireMail, "T")
-    sql = sql & ", smtphost= " & DBSet(mvarSmtphost, "T")
-    sql = sql & ", smtpuser= " & DBSet(mvarSmtpUser, "T")
-    sql = sql & ", smtppass= " & DBSet(mvarSmtpPass, "T")
+    SQL = "UPDATE rparam SET "
+    SQL = SQL & " serconta= '" & mvarSerConta & "'"
+    SQL = SQL & ", usuconta= " & DBSet(mvarUsuConta, "T")
+    SQL = SQL & ", pasconta= " & DBSet(mvarPasConta, "T")
+    SQL = SQL & ", numconta= " & DBSet(mvarNumConta, "N", "S")
+    SQL = SQL & ", websoporte= " & DBSet(mvarWebSoporte, "T")
+    SQL = SQL & ", diremail= " & DBSet(mvarDireMail, "T")
+    SQL = SQL & ", smtphost= " & DBSet(mvarSmtphost, "T")
+    SQL = SQL & ", smtpuser= " & DBSet(mvarSmtpUser, "T")
+    SQL = SQL & ", smtppass= " & DBSet(mvarSmtpPass, "T")
     
     '[Monica]06/02/2012: arigesmail
-    sql = sql & ", EnvioDesdeOutlook = " & DBSet(Me.EnvioDesdeOutlook, "B")
-    sql = sql & ", arigesmail = " & DBSet(ExeEnvioMail, "T", "S")
+    SQL = SQL & ", EnvioDesdeOutlook = " & DBSet(Me.EnvioDesdeOutlook, "B")
+    SQL = SQL & ", arigesmail = " & DBSet(ExeEnvioMail, "T", "S")
     
-    sql = sql & ", smsemail= " & DBSet(mvarSMSemail, "T")
-    sql = sql & ", smsclave= " & DBSet(mvarSMSclave, "T")
-    sql = sql & ", smsremitente= " & DBSet(mvarSMSremitente, "T")
+    SQL = SQL & ", smsemail= " & DBSet(mvarSMSemail, "T")
+    SQL = SQL & ", smsclave= " & DBSet(mvarSMSclave, "T")
+    SQL = SQL & ", smsremitente= " & DBSet(mvarSMSremitente, "T")
     
     'entrada en bascula
-    sql = sql & ", setaratractor= " & DBSet(mvarSeTaraTractor, "B")
-    sql = sql & ", agruparnotas= " & DBSet(mvarSeAgrupanNotas, "B")
-    sql = sql & ", serespetanota= " & DBSet(mvarSeRespetaNota, "B")
-    sql = sql & ", haytraza= " & DBSet(mvarHayTraza, "B")
-    sql = sql & ", nronotamanual= " & DBSet(mvarNroNotaManual, "B")
-    sql = sql & ", cooproentradas= " & DBSet(mvarCooproenEntradas, "B")
-    sql = sql & ", cajasporpalet= " & DBSet(mvarCajasporPalet, "N")
+    SQL = SQL & ", setaratractor= " & DBSet(mvarSeTaraTractor, "B")
+    SQL = SQL & ", agruparnotas= " & DBSet(mvarSeAgrupanNotas, "B")
+    SQL = SQL & ", serespetanota= " & DBSet(mvarSeRespetaNota, "B")
+    SQL = SQL & ", haytraza= " & DBSet(mvarHayTraza, "B")
+    SQL = SQL & ", nronotamanual= " & DBSet(mvarNroNotaManual, "B")
+    SQL = SQL & ", cooproentradas= " & DBSet(mvarCooproenEntradas, "B")
+    SQL = SQL & ", cajasporpalet= " & DBSet(mvarCajasporPalet, "N")
     
     
-    sql = sql & ", tipocaja1= " & DBSet(mvarTipoCaja1, "T")
-    sql = sql & ", tipocaja2= " & DBSet(mvarTipoCaja2, "T")
-    sql = sql & ", tipocaja3= " & DBSet(mvarTipoCaja3, "T")
-    sql = sql & ", tipocaja4= " & DBSet(mvarTipoCaja4, "T")
-    sql = sql & ", tipocaja5= " & DBSet(mvarTipoCaja5, "T")
+    SQL = SQL & ", tipocaja1= " & DBSet(mvarTipoCaja1, "T")
+    SQL = SQL & ", tipocaja2= " & DBSet(mvarTipoCaja2, "T")
+    SQL = SQL & ", tipocaja3= " & DBSet(mvarTipoCaja3, "T")
+    SQL = SQL & ", tipocaja4= " & DBSet(mvarTipoCaja4, "T")
+    SQL = SQL & ", tipocaja5= " & DBSet(mvarTipoCaja5, "T")
     
-    sql = sql & ", pesocaja1= " & DBSet(mvarPesoCaja1, "N")
-    sql = sql & ", pesocaja2= " & DBSet(mvarPesoCaja2, "N")
-    sql = sql & ", pesocaja3= " & DBSet(mvarPesoCaja3, "N")
-    sql = sql & ", pesocaja4= " & DBSet(mvarPesoCaja4, "N")
-    sql = sql & ", pesocaja5= " & DBSet(mvarPesoCaja5, "N")
+    SQL = SQL & ", pesocaja1= " & DBSet(mvarPesoCaja1, "N")
+    SQL = SQL & ", pesocaja2= " & DBSet(mvarPesoCaja2, "N")
+    SQL = SQL & ", pesocaja3= " & DBSet(mvarPesoCaja3, "N")
+    SQL = SQL & ", pesocaja4= " & DBSet(mvarPesoCaja4, "N")
+    SQL = SQL & ", pesocaja5= " & DBSet(mvarPesoCaja5, "N")
     
-    sql = sql & ", pesocaja11= " & DBSet(mvarPesoCaja11, "N")
-    sql = sql & ", pesocaja12= " & DBSet(mvarPesoCaja12, "N")
-    sql = sql & ", pesocaja13= " & DBSet(mvarPesoCaja13, "N")
-    sql = sql & ", pesocaja14= " & DBSet(mvarPesoCaja14, "N")
-    sql = sql & ", pesocaja15= " & DBSet(mvarPesoCaja15, "N")
+    SQL = SQL & ", pesocaja11= " & DBSet(mvarPesoCaja11, "N")
+    SQL = SQL & ", pesocaja12= " & DBSet(mvarPesoCaja12, "N")
+    SQL = SQL & ", pesocaja13= " & DBSet(mvarPesoCaja13, "N")
+    SQL = SQL & ", pesocaja14= " & DBSet(mvarPesoCaja14, "N")
+    SQL = SQL & ", pesocaja15= " & DBSet(mvarPesoCaja15, "N")
     
     
-    sql = sql & ", pesocajallena= " & DBSet(mvarPesoCajaLlena, "N")
+    SQL = SQL & ", pesocajallena= " & DBSet(mvarPesoCajaLlena, "N")
     
-    sql = sql & ", escaja1= " & DBSet(mvarEsCaja1, "B")
-    sql = sql & ", escaja2= " & DBSet(mvarEsCaja2, "B")
-    sql = sql & ", escaja3= " & DBSet(mvarEsCaja3, "B")
-    sql = sql & ", escaja4= " & DBSet(mvarEsCaja4, "B")
-    sql = sql & ", escaja5= " & DBSet(mvarEsCaja5, "B")
+    SQL = SQL & ", escaja1= " & DBSet(mvarEsCaja1, "B")
+    SQL = SQL & ", escaja2= " & DBSet(mvarEsCaja2, "B")
+    SQL = SQL & ", escaja3= " & DBSet(mvarEsCaja3, "B")
+    SQL = SQL & ", escaja4= " & DBSet(mvarEsCaja4, "B")
+    SQL = SQL & ", escaja5= " & DBSet(mvarEsCaja5, "B")
     
-    sql = sql & ", esvtafruta1= " & DBSet(mvarEsVtaFruta1, "B")
-    sql = sql & ", esvtafruta2= " & DBSet(mvarEsVtaFruta2, "B")
-    sql = sql & ", esvtafruta3= " & DBSet(mvarEsVtaFruta3, "B")
-    sql = sql & ", esvtafruta4= " & DBSet(mvarEsVtaFruta4, "B")
-    sql = sql & ", esvtafruta5= " & DBSet(mvarEsVtaFruta5, "B")
+    SQL = SQL & ", esvtafruta1= " & DBSet(mvarEsVtaFruta1, "B")
+    SQL = SQL & ", esvtafruta2= " & DBSet(mvarEsVtaFruta2, "B")
+    SQL = SQL & ", esvtafruta3= " & DBSet(mvarEsVtaFruta3, "B")
+    SQL = SQL & ", esvtafruta4= " & DBSet(mvarEsVtaFruta4, "B")
+    SQL = SQL & ", esvtafruta5= " & DBSet(mvarEsVtaFruta5, "B")
     
-    sql = sql & ", kiloscajamin= " & DBSet(mvarKilosCajaMin, "N")
-    sql = sql & ", kiloscajamax= " & DBSet(mvarKilosCajaMax, "N")
+    SQL = SQL & ", kiloscajamin= " & DBSet(mvarKilosCajaMin, "N")
+    SQL = SQL & ", kiloscajamax= " & DBSet(mvarKilosCajaMax, "N")
     
-    sql = sql & ", impresoraentradas= " & DBSet(mvarImpresoraEntradas, "T")
-    sql = sql & ", codincidplaga= " & DBSet(mvarCodIncidPlaga, "N") ' codigo de incidencia de plagas en entradas bascula de quatretonda
+    SQL = SQL & ", impresoraentradas= " & DBSet(mvarImpresoraEntradas, "T")
+    SQL = SQL & ", codincidplaga= " & DBSet(mvarCodIncidPlaga, "N") ' codigo de incidencia de plagas en entradas bascula de quatretonda
     
-    sql = sql & ", porcincreaforo= " & DBSet(mvarPorcIncreAforo, "N") 'porcentaje de incremento / decremento de aforo
+    SQL = SQL & ", porcincreaforo= " & DBSet(mvarPorcIncreAforo, "N") 'porcentaje de incremento / decremento de aforo
     
     'aridoc
-    sql = sql & ", hayaridoc= " & DBSet(mvarHayAridoc, "N") ' hay aridoc
-    sql = sql & ", codcarpetaanti = " & DBSet(mvarCarpetaAnt, "N") 'carpeta anticipo
-    sql = sql & ", codcarpetaliqu = " & DBSet(mvarCarpetaLiq, "N") 'carpeta liquidacion
-    sql = sql & ", codcarpetarecalm = " & DBSet(mvarCarpetaRecAlmacen, "N") 'carpeta recibo almacen
-    sql = sql & ", codcarpetareccamp = " & DBSet(mvarCarpetaRecCampo, "N") 'carpeta recibo campo
-    sql = sql & ", codcarpetaadv = " & DBSet(mvarCarpetaADV, "N") 'carpeta adv
+    SQL = SQL & ", hayaridoc= " & DBSet(mvarHayAridoc, "N") ' hay aridoc
+    SQL = SQL & ", codcarpetaanti = " & DBSet(mvarCarpetaAnt, "N") 'carpeta anticipo
+    SQL = SQL & ", codcarpetaliqu = " & DBSet(mvarCarpetaLiq, "N") 'carpeta liquidacion
+    SQL = SQL & ", codcarpetarecalm = " & DBSet(mvarCarpetaRecAlmacen, "N") 'carpeta recibo almacen
+    SQL = SQL & ", codcarpetareccamp = " & DBSet(mvarCarpetaRecCampo, "N") 'carpeta recibo campo
+    SQL = SQL & ", codcarpetaadv = " & DBSet(mvarCarpetaADV, "N") 'carpeta adv
     
-    sql = sql & ", codcarpetaalmz = " & DBSet(mvarCarpetaAlmz, "N") 'carpeta almazara
-    sql = sql & ", codcarpetabode = " & DBSet(mvarCarpetaBOD, "N") 'carpeta bodega
+    SQL = SQL & ", codcarpetaalmz = " & DBSet(mvarCarpetaAlmz, "N") 'carpeta almazara
+    SQL = SQL & ", codcarpetabode = " & DBSet(mvarCarpetaBOD, "N") 'carpeta bodega
     
-    sql = sql & ", codcarpetatran = " & DBSet(mvarCarpetaTra, "N") 'carpeta transportista
+    SQL = SQL & ", codcarpetatran = " & DBSet(mvarCarpetaTra, "N") 'carpeta transportista
     
-    sql = sql & ", codextension = " & DBSet(mvarExtension, "N") 'extension documento
-    sql = sql & ", c1antiaridoc = " & DBSet(mvarC1Anticipo, "N") 'campo 1 anticipo
-    sql = sql & ", c2antiaridoc = " & DBSet(mvarC2Anticipo, "N") 'campo 2 anticipo
-    sql = sql & ", c3antiaridoc = " & DBSet(mvarC3Anticipo, "N") 'campo 3 anticipo
-    sql = sql & ", c4antiaridoc = " & DBSet(mvarC4Anticipo, "N") 'campo 4 anticipo
+    SQL = SQL & ", codextension = " & DBSet(mvarExtension, "N") 'extension documento
+    SQL = SQL & ", c1antiaridoc = " & DBSet(mvarC1Anticipo, "N") 'campo 1 anticipo
+    SQL = SQL & ", c2antiaridoc = " & DBSet(mvarC2Anticipo, "N") 'campo 2 anticipo
+    SQL = SQL & ", c3antiaridoc = " & DBSet(mvarC3Anticipo, "N") 'campo 3 anticipo
+    SQL = SQL & ", c4antiaridoc = " & DBSet(mvarC4Anticipo, "N") 'campo 4 anticipo
     
-    sql = sql & ", c1liquaridoc = " & DBSet(mvarC1Liquidacion, "N") 'campo 1 liquidacion
-    sql = sql & ", c2liquaridoc = " & DBSet(mvarC2Liquidacion, "N") 'campo 2 liquidacion
-    sql = sql & ", c3liquaridoc = " & DBSet(mvarC3Liquidacion, "N") 'campo 3 liquidacion
-    sql = sql & ", c4liquaridoc = " & DBSet(mvarC4Liquidacion, "N") 'campo 4 liquidacion
+    SQL = SQL & ", c1liquaridoc = " & DBSet(mvarC1Liquidacion, "N") 'campo 1 liquidacion
+    SQL = SQL & ", c2liquaridoc = " & DBSet(mvarC2Liquidacion, "N") 'campo 2 liquidacion
+    SQL = SQL & ", c3liquaridoc = " & DBSet(mvarC3Liquidacion, "N") 'campo 3 liquidacion
+    SQL = SQL & ", c4liquaridoc = " & DBSet(mvarC4Liquidacion, "N") 'campo 4 liquidacion
     
-    sql = sql & ", c1advaridoc = " & DBSet(mvarC1ADV, "N") 'campo 1 adv
-    sql = sql & ", c2advaridoc = " & DBSet(mvarC2ADV, "N") 'campo 2 adv
-    sql = sql & ", c3advaridoc = " & DBSet(mvarC3ADV, "N") 'campo 3 adv
-    sql = sql & ", c4advaridoc = " & DBSet(mvarC4ADV, "N") 'campo 4 adv
+    SQL = SQL & ", c1advaridoc = " & DBSet(mvarC1ADV, "N") 'campo 1 adv
+    SQL = SQL & ", c2advaridoc = " & DBSet(mvarC2ADV, "N") 'campo 2 adv
+    SQL = SQL & ", c3advaridoc = " & DBSet(mvarC3ADV, "N") 'campo 3 adv
+    SQL = SQL & ", c4advaridoc = " & DBSet(mvarC4ADV, "N") 'campo 4 adv
     
-    sql = sql & ", c1recaridoc = " & DBSet(mvarC1Recibo, "N") 'campo 1 recibo
-    sql = sql & ", c2recaridoc = " & DBSet(mvarC2Recibo, "N") 'campo 2 recibo
-    sql = sql & ", c3recaridoc = " & DBSet(mvarC3Recibo, "N") 'campo 3 recibo
-    sql = sql & ", c4recaridoc = " & DBSet(mvarC4Recibo, "N") 'campo 4 recibo
+    SQL = SQL & ", c1recaridoc = " & DBSet(mvarC1Recibo, "N") 'campo 1 recibo
+    SQL = SQL & ", c2recaridoc = " & DBSet(mvarC2Recibo, "N") 'campo 2 recibo
+    SQL = SQL & ", c3recaridoc = " & DBSet(mvarC3Recibo, "N") 'campo 3 recibo
+    SQL = SQL & ", c4recaridoc = " & DBSet(mvarC4Recibo, "N") 'campo 4 recibo
     
-    sql = sql & ", c1almzaridoc = " & DBSet(mvarC1Almazara, "N") 'campo 1 almazara
-    sql = sql & ", c2almzaridoc = " & DBSet(mvarC2Almazara, "N") 'campo 2 almazara
-    sql = sql & ", c3almzaridoc = " & DBSet(mvarC3Almazara, "N") 'campo 3 almazara
-    sql = sql & ", c4almzaridoc = " & DBSet(mvarC4Almazara, "N") 'campo 4 almazara
+    SQL = SQL & ", c1almzaridoc = " & DBSet(mvarC1Almazara, "N") 'campo 1 almazara
+    SQL = SQL & ", c2almzaridoc = " & DBSet(mvarC2Almazara, "N") 'campo 2 almazara
+    SQL = SQL & ", c3almzaridoc = " & DBSet(mvarC3Almazara, "N") 'campo 3 almazara
+    SQL = SQL & ", c4almzaridoc = " & DBSet(mvarC4Almazara, "N") 'campo 4 almazara
     
-    sql = sql & ", c1bodearidoc = " & DBSet(mvarC1Bodega, "N") 'campo 1 bodega
-    sql = sql & ", c2bodearidoc = " & DBSet(mvarC2Bodega, "N") 'campo 2 bodega
-    sql = sql & ", c3bodearidoc = " & DBSet(mvarC3Bodega, "N") 'campo 3 bodega
-    sql = sql & ", c4bodearidoc = " & DBSet(mvarC4Bodega, "N") 'campo 4 bodega
+    SQL = SQL & ", c1bodearidoc = " & DBSet(mvarC1Bodega, "N") 'campo 1 bodega
+    SQL = SQL & ", c2bodearidoc = " & DBSet(mvarC2Bodega, "N") 'campo 2 bodega
+    SQL = SQL & ", c3bodearidoc = " & DBSet(mvarC3Bodega, "N") 'campo 3 bodega
+    SQL = SQL & ", c4bodearidoc = " & DBSet(mvarC4Bodega, "N") 'campo 4 bodega
     
-    sql = sql & ", c1tranaridoc = " & DBSet(mvarC1Transporte, "N") 'campo 1 Transporte
-    sql = sql & ", c2tranaridoc = " & DBSet(mvarC2Transporte, "N") 'campo 2 Transporte
-    sql = sql & ", c3tranaridoc = " & DBSet(mvarC3Transporte, "N") 'campo 3 Transporte
-    sql = sql & ", c4tranaridoc = " & DBSet(mvarC4Transporte, "N") 'campo 4 Transporte
+    SQL = SQL & ", c1tranaridoc = " & DBSet(mvarC1Transporte, "N") 'campo 1 Transporte
+    SQL = SQL & ", c2tranaridoc = " & DBSet(mvarC2Transporte, "N") 'campo 2 Transporte
+    SQL = SQL & ", c3tranaridoc = " & DBSet(mvarC3Transporte, "N") 'campo 3 Transporte
+    SQL = SQL & ", c4tranaridoc = " & DBSet(mvarC4Transporte, "N") 'campo 4 Transporte
     
     
-    sql = sql & ", costehora= " & DBSet(mvarCosteHora, "N") 'coste hora
-    sql = sql & ", costesegso= " & DBSet(mvarCosteSegSo, "N") 'coste seguridad social
+    SQL = SQL & ", costehora= " & DBSet(mvarCosteHora, "N") 'coste hora
+    SQL = SQL & ", costesegso= " & DBSet(mvarCosteSegSo, "N") 'coste seguridad social
     If mvarSeccionHorto = "" Then
-        sql = sql & ", seccionhorto= null "
+        SQL = SQL & ", seccionhorto= null "
     Else
-        sql = sql & ", seccionhorto= " & DBSet(mvarSeccionHorto, "N") 'seccion hortofruticola
+        SQL = SQL & ", seccionhorto= " & DBSet(mvarSeccionHorto, "N") 'seccion hortofruticola
     End If
     If mvarSeccionPozos = "" Then
-        sql = sql & ", seccionpozos= null "
+        SQL = SQL & ", seccionpozos= null "
     Else
-        sql = sql & ", seccionpozos= " & DBSet(mvarSeccionPozos, "N") 'seccion pozos
+        SQL = SQL & ", seccionpozos= " & DBSet(mvarSeccionPozos, "N") 'seccion pozos
     End If
     If mvarSeccionAlmaz = "" Then
-        sql = sql & ", seccionalmaz= null "
+        SQL = SQL & ", seccionalmaz= null "
     Else
-        sql = sql & ", seccionalmaz= " & DBSet(mvarSeccionAlmaz, "N") 'seccion almazara
+        SQL = SQL & ", seccionalmaz= " & DBSet(mvarSeccionAlmaz, "N") 'seccion almazara
     End If
     If mvarSeccionADV = "" Then
-        sql = sql & ", seccionadv= null "
+        SQL = SQL & ", seccionadv= null "
     Else
-        sql = sql & ", seccionadv= " & DBSet(mvarSeccionADV, "N") 'seccion adv
+        SQL = SQL & ", seccionadv= " & DBSet(mvarSeccionADV, "N") 'seccion adv
     End If
     If mvarSeccionSumi = "" Then
-        sql = sql & ", seccionsumi= null "
+        SQL = SQL & ", seccionsumi= null "
     Else
-        sql = sql & ", seccionsumi= " & DBSet(mvarSeccionSumi, "N") 'seccion suministros
+        SQL = SQL & ", seccionsumi= " & DBSet(mvarSeccionSumi, "N") 'seccion suministros
     End If
     If mvarSeccionBodega = "" Then
-        sql = sql & ", seccionbodega= null "
+        SQL = SQL & ", seccionbodega= null "
     Else
-        sql = sql & ", seccionbodega= " & DBSet(mvarSeccionBodega, "N") 'seccion bodega
+        SQL = SQL & ", seccionbodega= " & DBSet(mvarSeccionBodega, "N") 'seccion bodega
     End If
     
-    sql = sql & ", faneca= " & DBSet(mvarFaneca, "N") ' constante faneca
-    sql = sql & ", porcretenfacsoc= " & DBSet(mvarPorcReteFacSoc, "N", "S")
-    sql = sql & ", primfactant= " & DBSet(mvarPrimFactAnt, "N", "S") ' primera factura anticipos
-    sql = sql & ", ultfactant= " & DBSet(mvarUltFactAnt, "N", "S")   ' ultima factura anticipos
-    sql = sql & ", primfactantvc= " & DBSet(mvarPrimFactAntVC, "N", "S") ' primera factura anticipos venta campo
-    sql = sql & ", ultfactantvc= " & DBSet(mvarUltFactAntVC, "N", "S")   ' ultima factura anticipos venta campo
-    sql = sql & ", primfactliq= " & DBSet(mvarPrimFactLiq, "N", "S") ' primera factura liquidacion
-    sql = sql & ", ultfactliq= " & DBSet(mvarUltFactLiq, "N", "S")   ' ultima factura liquidacion
-    sql = sql & ", primfactliqvc= " & DBSet(mvarPrimFactLiqVC, "N", "S") ' primera factura liquidacion venta campo
-    sql = sql & ", ultfactliqvc= " & DBSet(mvarUltFactLiqVC, "N", "S")   ' ultima factura liquidacion venta campo
-    sql = sql & ", porcenafo= " & DBSet(mvarPorcenAFO, "N", "S") ' porcentaje de fondo operativo
-    sql = sql & ", texttomadatos= " & DBSet(mvarTTomaDatos, "T", "S") ' texto de impresion de toma de datos
-    sql = sql & ", pietomadatos= " & DBSet(mvarPieTomaDatos, "T", "S") ' texto de impresion de toma de datos
+    SQL = SQL & ", faneca= " & DBSet(mvarFaneca, "N") ' constante faneca
+    SQL = SQL & ", porcretenfacsoc= " & DBSet(mvarPorcReteFacSoc, "N", "S")
+    SQL = SQL & ", primfactant= " & DBSet(mvarPrimFactAnt, "N", "S") ' primera factura anticipos
+    SQL = SQL & ", ultfactant= " & DBSet(mvarUltFactAnt, "N", "S")   ' ultima factura anticipos
+    SQL = SQL & ", primfactantvc= " & DBSet(mvarPrimFactAntVC, "N", "S") ' primera factura anticipos venta campo
+    SQL = SQL & ", ultfactantvc= " & DBSet(mvarUltFactAntVC, "N", "S")   ' ultima factura anticipos venta campo
+    SQL = SQL & ", primfactliq= " & DBSet(mvarPrimFactLiq, "N", "S") ' primera factura liquidacion
+    SQL = SQL & ", ultfactliq= " & DBSet(mvarUltFactLiq, "N", "S")   ' ultima factura liquidacion
+    SQL = SQL & ", primfactliqvc= " & DBSet(mvarPrimFactLiqVC, "N", "S") ' primera factura liquidacion venta campo
+    SQL = SQL & ", ultfactliqvc= " & DBSet(mvarUltFactLiqVC, "N", "S")   ' ultima factura liquidacion venta campo
+    SQL = SQL & ", porcenafo= " & DBSet(mvarPorcenAFO, "N", "S") ' porcentaje de fondo operativo
+    SQL = SQL & ", texttomadatos= " & DBSet(mvarTTomaDatos, "T", "S") ' texto de impresion de toma de datos
+    SQL = SQL & ", pietomadatos= " & DBSet(mvarPieTomaDatos, "T", "S") ' texto de impresion de toma de datos
     
-    sql = sql & ", cooperativa= " & DBSet(mvarCooperativa, "N") ' cooperativa en la que estoy
+    SQL = SQL & ", cooperativa= " & DBSet(mvarCooperativa, "N") ' cooperativa en la que estoy
                                                                 '0=catadau   1=valsur    2=catadau
-    sql = sql & ", codivaintracom= " & DBSet(mvarCodIvaIntra, "T") ' codigo de iva intracomunitario
-    sql = sql & ", ctaterreten= " & DBSet(mvarCtaTerReten, "T") ' cuenta contable de retencion de facturas de terceros
-    sql = sql & ", ctatrareten= " & DBSet(mvarCtaTraReten, "T") ' cuenta contable de retencion de facturas de transporte
+    SQL = SQL & ", codivaintracom= " & DBSet(mvarCodIvaIntra, "T") ' codigo de iva intracomunitario
+    SQL = SQL & ", ctaterreten= " & DBSet(mvarCtaTerReten, "T") ' cuenta contable de retencion de facturas de terceros
+    SQL = SQL & ", ctatrareten= " & DBSet(mvarCtaTraReten, "T") ' cuenta contable de retencion de facturas de transporte
     
-    sql = sql & ", directoriotraza= " & DBSet(Replace(mvarPathTraza, "\", "\\"), "T") ' path ficheros para edicom
+    SQL = SQL & ", directoriotraza= " & DBSet(Replace(mvarPathTraza, "\", "\\"), "T") ' path ficheros para edicom
     
-    sql = sql & ", sigpac= " & DBSet(Replace(mvarSigpac, "\", "\\"), "T") ' direccion de sigpac
-    sql = sql & ", goolzoom= " & DBSet(Replace(mvarGoolZoom, "\", "\\"), "T") ' direccion de goolzoom
+    SQL = SQL & ", sigpac= " & DBSet(Replace(mvarSigpac, "\", "\\"), "T") ' direccion de sigpac
+    SQL = SQL & ", goolzoom= " & DBSet(Replace(mvarGoolZoom, "\", "\\"), "T") ' direccion de goolzoom
     
-    sql = sql & ", ctaretensoc= " & DBSet(mvarCtaRetenSoc, "T") ' cuenta contable de retencion facturas socios
-    sql = sql & ", ctaaportasoc= " & DBSet(mvarCtaAportaSoc, "T") ' cuenta contable de aportacion facturas socios
-    sql = sql & ", ctabanco= " & DBSet(mvarCtaBancoSoc, "T") ' cuenta contable de banco de facturas socios
-    sql = sql & ", codforpaposi= " & DBSet(mvarForpaPosi, "N") ' forma de pago de facturas de socio positivas
-    sql = sql & ", codforpanega= " & DBSet(mvarForpaNega, "N") ' forma de pago de facturas de socio negativas
+    SQL = SQL & ", ctaretensoc= " & DBSet(mvarCtaRetenSoc, "T") ' cuenta contable de retencion facturas socios
+    SQL = SQL & ", ctaaportasoc= " & DBSet(mvarCtaAportaSoc, "T") ' cuenta contable de aportacion facturas socios
+    SQL = SQL & ", ctabanco= " & DBSet(mvarCtaBancoSoc, "T") ' cuenta contable de banco de facturas socios
+    SQL = SQL & ", codforpaposi= " & DBSet(mvarForpaPosi, "N") ' forma de pago de facturas de socio positivas
+    SQL = SQL & ", codforpanega= " & DBSet(mvarForpaNega, "N") ' forma de pago de facturas de socio negativas
     
     ' almazara
-    sql = sql & ", ctaretenalmz= " & DBSet(mvarCtaRetenAlmz, "T") ' cuenta contable de retencion almazara
-    sql = sql & ", ctabancoalmz= " & DBSet(mvarCtaBancoAlmz, "T") ' cuenta contable de banco de almazara
-    sql = sql & ", ctaventasalmz= " & DBSet(mvarCtaVentasAlmz, "T") ' cuenta contable de ventas almazara
-    sql = sql & ", ctagastosalmz= " & DBSet(mvarCtaGastosAlmz, "T") ' cuenta contable de gastos almazara
-    sql = sql & ", codforpaposalmz= " & DBSet(mvarForpaPosiAlmz, "N") ' forma de pago de facturas de almazara positivas
-    sql = sql & ", codforpanegalmz= " & DBSet(mvarForpaNegaAlmz, "N") ' forma de pago de facturas de almazara negativas
-    sql = sql & ", letraseriealmz= " & DBSet(mvarLetraSerieAlmz, "T") ' letra de serie de almazara facturas de almazara
-    sql = sql & ", codgastoalmz= " & DBSet(mvarCodGastoAlmz, "N") ' codigo de gasto para liquidacion de almazara
-    sql = sql & ", gtomoltura= " & DBSet(mvarGtoMoltura, "N") ' precio por kilo de gastos de molturacion
-    sql = sql & ", gtoenvasado= " & DBSet(mvarGtoEnvasado, "N") ' precio por litro de gastos de envasado
+    SQL = SQL & ", ctaretenalmz= " & DBSet(mvarCtaRetenAlmz, "T") ' cuenta contable de retencion almazara
+    SQL = SQL & ", ctabancoalmz= " & DBSet(mvarCtaBancoAlmz, "T") ' cuenta contable de banco de almazara
+    SQL = SQL & ", ctaventasalmz= " & DBSet(mvarCtaVentasAlmz, "T") ' cuenta contable de ventas almazara
+    SQL = SQL & ", ctagastosalmz= " & DBSet(mvarCtaGastosAlmz, "T") ' cuenta contable de gastos almazara
+    SQL = SQL & ", codforpaposalmz= " & DBSet(mvarForpaPosiAlmz, "N") ' forma de pago de facturas de almazara positivas
+    SQL = SQL & ", codforpanegalmz= " & DBSet(mvarForpaNegaAlmz, "N") ' forma de pago de facturas de almazara negativas
+    SQL = SQL & ", letraseriealmz= " & DBSet(mvarLetraSerieAlmz, "T") ' letra de serie de almazara facturas de almazara
+    SQL = SQL & ", codgastoalmz= " & DBSet(mvarCodGastoAlmz, "N") ' codigo de gasto para liquidacion de almazara
+    SQL = SQL & ", gtomoltura= " & DBSet(mvarGtoMoltura, "N") ' precio por kilo de gastos de molturacion
+    SQL = SQL & ", gtoenvasado= " & DBSet(mvarGtoEnvasado, "N") ' precio por litro de gastos de envasado
     
     
-    sql = sql & ", primfactantalmz= " & DBSet(mvarPrimFactAntAlmz, "N", "S") ' primera factura anticipos almazara
-    sql = sql & ", ultfactantalmz= " & DBSet(mvarUltFactAntAlmz, "N", "S")   ' ultima factura anticipos almazara
-    sql = sql & ", primfactliqalmz= " & DBSet(mvarPrimFactLiqAlmz, "N", "S") ' primera factura liquidacion almazara
-    sql = sql & ", ultfactliqalmz= " & DBSet(mvarUltFactLiqAlmz, "N", "S")   ' ultima factura liquidacion almazara
+    SQL = SQL & ", primfactantalmz= " & DBSet(mvarPrimFactAntAlmz, "N", "S") ' primera factura anticipos almazara
+    SQL = SQL & ", ultfactantalmz= " & DBSet(mvarUltFactAntAlmz, "N", "S")   ' ultima factura anticipos almazara
+    SQL = SQL & ", primfactliqalmz= " & DBSet(mvarPrimFactLiqAlmz, "N", "S") ' primera factura liquidacion almazara
+    SQL = SQL & ", ultfactliqalmz= " & DBSet(mvarUltFactLiqAlmz, "N", "S")   ' ultima factura liquidacion almazara
     
     
     'adv
-    sql = sql & ", codalmacadv= " & DBSet(mvarAlmacenADV, "N") ' codigo de almacen de adv
-    sql = sql & ", ctabancoadv= " & DBSet(mvarCtaBancoADV, "T") ' cuenta contable de banco de adv
-    sql = sql & ", codivaexeadv= " & DBSet(mvarCodIvaExeADV, "N") ' codigo de iva de facturas internas de adv
+    SQL = SQL & ", codalmacadv= " & DBSet(mvarAlmacenADV, "N") ' codigo de almacen de adv
+    SQL = SQL & ", ctabancoadv= " & DBSet(mvarCtaBancoADV, "T") ' cuenta contable de banco de adv
+    SQL = SQL & ", codivaexeadv= " & DBSet(mvarCodIvaExeADV, "N") ' codigo de iva de facturas internas de adv
     
     'suministros
-    sql = sql & ", bdariges= " & DBSet(mvarBDAriges, "T") ' bd ariges si tiene
+    SQL = SQL & ", bdariges= " & DBSet(mvarBDAriges, "T") ' bd ariges si tiene
     
     'bodega
-    sql = sql & ", albretiradabodman= " & DBSet(mvarAlbRetiradaManual, "B")
-    sql = sql & ", ctabancobod= " & DBSet(mvarCtaBancoBOD, "T") ' cuenta contable prevista de banco de bodega
-    sql = sql & ", ctaventasbod= " & DBSet(mvarCtaVentasBOD, "T") ' cuenta contable de ventas de bodega
-    sql = sql & ", bodporcenmant= " & DBSet(mvarPorcGtoMantBOD, "T") ' porcentaje de gasto de mantenimiento para liquidacion de bodega
-    sql = sql & ", codgastobod= " & DBSet(mvarCodGastoBOD, "N") ' codigo de gasto para liquidacion de bodega
+    SQL = SQL & ", albretiradabodman= " & DBSet(mvarAlbRetiradaManual, "B")
+    SQL = SQL & ", ctabancobod= " & DBSet(mvarCtaBancoBOD, "T") ' cuenta contable prevista de banco de bodega
+    SQL = SQL & ", ctaventasbod= " & DBSet(mvarCtaVentasBOD, "T") ' cuenta contable de ventas de bodega
+    SQL = SQL & ", bodporcenmant= " & DBSet(mvarPorcGtoMantBOD, "T") ' porcentaje de gasto de mantenimiento para liquidacion de bodega
+    SQL = SQL & ", codgastobod= " & DBSet(mvarCodGastoBOD, "N") ' codigo de gasto para liquidacion de bodega
    
-    sql = sql & ", primfactantbod= " & DBSet(mvarPrimFactAntBOD, "N", "S") ' primera factura anticipos bodega
-    sql = sql & ", ultfactantbod= " & DBSet(mvarUltFactAntBOD, "N", "S")   ' ultima factura anticipos bodega
-    sql = sql & ", primfactliqbod= " & DBSet(mvarPrimFactLiqBOD, "N", "S") ' primera factura liquidacion bodega
-    sql = sql & ", ultfactliqbod= " & DBSet(mvarUltFactLiqBOD, "N", "S")   ' ultima factura liquidacion bodega
-    sql = sql & ", porckilosbod= " & DBSet(mvarPorcKilosBOD, "N", "S") ' porcentaje de incremento de kilos neto sde entradas de bodega (mogente)
+    SQL = SQL & ", primfactantbod= " & DBSet(mvarPrimFactAntBOD, "N", "S") ' primera factura anticipos bodega
+    SQL = SQL & ", ultfactantbod= " & DBSet(mvarUltFactAntBOD, "N", "S")   ' ultima factura anticipos bodega
+    SQL = SQL & ", primfactliqbod= " & DBSet(mvarPrimFactLiqBOD, "N", "S") ' primera factura liquidacion bodega
+    SQL = SQL & ", ultfactliqbod= " & DBSet(mvarUltFactLiqBOD, "N", "S")   ' ultima factura liquidacion bodega
+    SQL = SQL & ", porckilosbod= " & DBSet(mvarPorcKilosBOD, "N", "S") ' porcentaje de incremento de kilos neto sde entradas de bodega (mogente)
     
     'telefonia
-    sql = sql & ", letraserietel= " & DBSet(mvarLetraSerieTel, "T") ' letra de serie de facturas de telefonia
-    sql = sql & ", ctaventastel= " & DBSet(mvarCtaVentasTel, "T") ' cuenta contable de ventas de telefonia
+    SQL = SQL & ", letraserietel= " & DBSet(mvarLetraSerieTel, "T") ' letra de serie de facturas de telefonia
+    SQL = SQL & ", ctaventastel= " & DBSet(mvarCtaVentasTel, "T") ' cuenta contable de ventas de telefonia
    
     'gestion de nominas
-    sql = sql & ", codalmacnomi= " & DBSet(mvarAlmacenNOMI, "N") ' codigo de almacen de gestion de nominas
-    sql = sql & ", eurostrabdia= " & DBSet(mvarEurosTrabdiaNOMI, "N") 'euros por trabajador dia nominas
-    sql = sql & ", porcsegso1= " & DBSet(mvarPorcSegSo1NOMI, "N") ' Porcentaje de seguridad social 1
-    sql = sql & ", porcsegso2= " & DBSet(mvarPorcSegSo2NOMI, "N") ' Porcentaje de seguridad social 2
-    sql = sql & ", porcirpf= " & DBSet(mvarPorcIRPFNOMI, "N") ' Porcentaje de irpf
-    sql = sql & ", porcjornada= " & DBSet(mvarPorcJornadaNOMI, "N") ' Porcentaje de jornadas nomina
-    sql = sql & ", nromaxjornadas= " & DBSet(mvarMaxJornadasNOMI, "N") ' Porcentaje de jornadas nomina
+    SQL = SQL & ", codalmacnomi= " & DBSet(mvarAlmacenNOMI, "N") ' codigo de almacen de gestion de nominas
+    SQL = SQL & ", eurostrabdia= " & DBSet(mvarEurosTrabdiaNOMI, "N") 'euros por trabajador dia nominas
+    SQL = SQL & ", porcsegso1= " & DBSet(mvarPorcSegSo1NOMI, "N") ' Porcentaje de seguridad social 1
+    SQL = SQL & ", porcsegso2= " & DBSet(mvarPorcSegSo2NOMI, "N") ' Porcentaje de seguridad social 2
+    SQL = SQL & ", porcirpf= " & DBSet(mvarPorcIRPFNOMI, "N") ' Porcentaje de irpf
+    SQL = SQL & ", porcjornada= " & DBSet(mvarPorcJornadaNOMI, "N") ' Porcentaje de jornadas nomina
+    SQL = SQL & ", nromaxjornadas= " & DBSet(mvarMaxJornadasNOMI, "N") ' Porcentaje de jornadas nomina
    
     ' pozos
-    sql = sql & ", hastametcub1poz= " & DBSet(mvarConsumo1POZ, "N") ' hasta m3 del primer rango
-    sql = sql & ", hastametcub2poz= " & DBSet(mvarConsumo2POZ, "N") ' hasta m3 del segundo rango
-    sql = sql & ", hastametcub3poz= " & DBSet(mvarConsumo3POZ, "N") ' hasta m3 del tercer rango
-    sql = sql & ", precio1poz= " & DBSet(mvarPrecio1POZ, "N") ' precio del rango 1
-    sql = sql & ", precio2poz= " & DBSet(mvarPrecio2POZ, "N") ' precio del rango 2
-    sql = sql & ", precio3poz= " & DBSet(mvarPrecio3POZ, "N") ' precio del rango 3
-    sql = sql & ", codivapoz= " & DBSet(mvarCodIvaPOZ, "N") ' codigo de iva de pozos
-    sql = sql & ", imporcuotapoz= " & DBSet(mvarCuotaPOZ, "N") ' importe de cuota
-    sql = sql & ", imporderramapoz= " & DBSet(mvarDerramaPOZ, "N") ' importe derrama
-    sql = sql & ", imporcanonpoz= " & DBSet(mvarCanonPOZ, "N") ' importe canon contador monasterios
-    sql = sql & ", coefconsumopoz= " & DBSet(mvarCoefConsumoPOZ, "N") ' coeficiente consumo pozos  monasterios
-    sql = sql & ", coefsuministropoz= " & DBSet(mvarCoefSuministroPOZ, "N") ' coeficiente suministro pozos monasterios
-    sql = sql & ", ctaventasconspoz= " & DBSet(mvarCtaVentasConsPOZ, "T") ' cuenta contable de ventas consumo pozos
-    sql = sql & ", ctaventascuopoz= " & DBSet(mvarCtaVentasCuoPOZ, "T") ' cuenta contable de ventas cuotas pozos
-    sql = sql & ", ctaventastalpoz= " & DBSet(mvarCtaVentasTalPOZ, "T") ' cuenta contable de ventas talla pozos
-    sql = sql & ", ctaventasmtopoz= " & DBSet(mvarCtaVentasMtoPOZ, "T") ' cuenta contable de ventas mantenimiento pozos
-    sql = sql & ", ctaventasmantapoz= " & DBSet(mvarCtaVentasMantaPOZ, "T") ' cuenta contable de ventas consumo a manta pozos
+    SQL = SQL & ", hastametcub1poz= " & DBSet(mvarConsumo1POZ, "N") ' hasta m3 del primer rango
+    SQL = SQL & ", hastametcub2poz= " & DBSet(mvarConsumo2POZ, "N") ' hasta m3 del segundo rango
+    SQL = SQL & ", hastametcub3poz= " & DBSet(mvarConsumo3POZ, "N") ' hasta m3 del tercer rango
+    SQL = SQL & ", precio1poz= " & DBSet(mvarPrecio1POZ, "N") ' precio del rango 1
+    SQL = SQL & ", precio2poz= " & DBSet(mvarPrecio2POZ, "N") ' precio del rango 2
+    SQL = SQL & ", precio3poz= " & DBSet(mvarPrecio3POZ, "N") ' precio del rango 3
+    SQL = SQL & ", codivapoz= " & DBSet(mvarCodIvaPOZ, "N") ' codigo de iva de pozos
+    SQL = SQL & ", imporcuotapoz= " & DBSet(mvarCuotaPOZ, "N") ' importe de cuota
+    SQL = SQL & ", imporderramapoz= " & DBSet(mvarDerramaPOZ, "N") ' importe derrama
+    SQL = SQL & ", imporcanonpoz= " & DBSet(mvarCanonPOZ, "N") ' importe canon contador monasterios
+    SQL = SQL & ", coefconsumopoz= " & DBSet(mvarCoefConsumoPOZ, "N") ' coeficiente consumo pozos  monasterios
+    SQL = SQL & ", coefsuministropoz= " & DBSet(mvarCoefSuministroPOZ, "N") ' coeficiente suministro pozos monasterios
+    SQL = SQL & ", ctaventasconspoz= " & DBSet(mvarCtaVentasConsPOZ, "T") ' cuenta contable de ventas consumo pozos
+    SQL = SQL & ", ctaventascuopoz= " & DBSet(mvarCtaVentasCuoPOZ, "T") ' cuenta contable de ventas cuotas pozos
+    SQL = SQL & ", ctaventastalpoz= " & DBSet(mvarCtaVentasTalPOZ, "T") ' cuenta contable de ventas talla pozos
+    SQL = SQL & ", ctaventasmtopoz= " & DBSet(mvarCtaVentasMtoPOZ, "T") ' cuenta contable de ventas mantenimiento pozos
+    SQL = SQL & ", ctaventasmantapoz= " & DBSet(mvarCtaVentasMantaPOZ, "T") ' cuenta contable de ventas consumo a manta pozos
     '[Monica]21/01/2016: cuenta de recargos (escalona)
-    sql = sql & ", ctarecargospoz= " & DBSet(mvarCtaRecargosPOZ, "T") ' cuenta contable de recargos de pozos
+    SQL = SQL & ", ctarecargospoz= " & DBSet(mvarCtaRecargosPOZ, "T") ' cuenta contable de recargos de pozos
     
-    sql = sql & ", codccostpoz= " & DBSet(mvarCodCCostPoz, "T") ' centro de coste pozos
-    sql = sql & ", forpaconpoz= " & DBSet(mvarForpaConPOZ, "N") ' forma de pago de contado de pozos
-    sql = sql & ", forparecpoz= " & DBSet(mvarForpaRecPOZ, "N") ' forma de pago de recibos de pozos
+    SQL = SQL & ", codccostpoz= " & DBSet(mvarCodCCostPoz, "T") ' centro de coste pozos
+    SQL = SQL & ", forpaconpoz= " & DBSet(mvarForpaConPOZ, "N") ' forma de pago de contado de pozos
+    SQL = SQL & ", forparecpoz= " & DBSet(mvarForpaRecPOZ, "N") ' forma de pago de recibos de pozos
    
-    sql = sql & ", tipolecturapoz= " & DBSet(mvarTipoLecturaPoz, "N") ' tipo de lectura de contador de Escalona (0=lectura_equipo 1=lectura_bd)
-    sql = sql & ", codcartapoz= " & DBSet(mvarCartaPOZ, "N") ' codigo de carta de reclamacion de cartas de pozos
-    sql = sql & ", nomzonapoz= " & DBSet(mvarNomZonaPOZ, "T") ' nombre de la zona para escalona y utxera
+    SQL = SQL & ", tipolecturapoz= " & DBSet(mvarTipoLecturaPoz, "N") ' tipo de lectura de contador de Escalona (0=lectura_equipo 1=lectura_bd)
+    SQL = SQL & ", codcartapoz= " & DBSet(mvarCartaPOZ, "N") ' codigo de carta de reclamacion de cartas de pozos
+    SQL = SQL & ", nomzonapoz= " & DBSet(mvarNomZonaPOZ, "T") ' nombre de la zona para escalona y utxera
    
     ' transporte
-    sql = sql & ", tratipoportes= " & DBSet(mvarTipoPortesTRA, "N") ' tipo de portes de transporte
-    sql = sql & ", tracodtarif= " & DBSet(mvarCodTarifTRA, "N") ' codigo de tarifa de transporte de tipo 1
-    sql = sql & ", tracodtarif2= " & DBSet(mvarCodTarifTRA2, "N") ' codigo de tarifa de transporte de tipo 2
-    sql = sql & ", tracodgasto= " & DBSet(mvarCodGastoTRA, "N") ' codigo de gasto de transporte
-    sql = sql & ", porcretenfactra= " & DBSet(mvarPorcReteFacTra, "N", "S")
-    sql = sql & ", preciotra= " & DBSet(mvarPreciokgTra, "N") ' precio por kilo de transporte
-    sql = sql & ", tratipocontador= " & DBSet(mvarTipoContadorTRA, "N") ' tipo de contador de transporte
+    SQL = SQL & ", tratipoportes= " & DBSet(mvarTipoPortesTRA, "N") ' tipo de portes de transporte
+    SQL = SQL & ", tracodtarif= " & DBSet(mvarCodTarifTRA, "N") ' codigo de tarifa de transporte de tipo 1
+    SQL = SQL & ", tracodtarif2= " & DBSet(mvarCodTarifTRA2, "N") ' codigo de tarifa de transporte de tipo 2
+    SQL = SQL & ", tracodgasto= " & DBSet(mvarCodGastoTRA, "N") ' codigo de gasto de transporte
+    SQL = SQL & ", porcretenfactra= " & DBSet(mvarPorcReteFacTra, "N", "S")
+    SQL = SQL & ", preciotra= " & DBSet(mvarPreciokgTra, "N") ' precio por kilo de transporte
+    SQL = SQL & ", tratipocontador= " & DBSet(mvarTipoContadorTRA, "N") ' tipo de contador de transporte
     
     '[Monica]09/05/2013:
-    sql = sql & ", consumominpoz= " & DBSet(mvarConsumoMinPoz, "N") 'consumo minimo de pozos
+    SQL = SQL & ", consumominpoz= " & DBSet(mvarConsumoMinPoz, "N") 'consumo minimo de pozos
     '[Monica]11/06/2013:
-    sql = sql & ", consumomaxpoz= " & DBSet(mvarConsumoMaxPoz, "N") 'consumo maximo de pozos
+    SQL = SQL & ", consumomaxpoz= " & DBSet(mvarConsumoMaxPoz, "N") 'consumo maximo de pozos
     
     '[Monica]02/12/2014:
-    sql = sql & ", claveacceso= " & DBSet(mvarClaveAcceso, "T") ' Clave de Acceso
+    SQL = SQL & ", claveacceso= " & DBSet(mvarClaveAcceso, "T") ' Clave de Acceso
     
     '[Monica]21/04/2016:
-    sql = sql & ", sqlserver= " & DBSet(mvarSqlServer, "T") ' SqlServer de Castellduc CASTELLDUCS1-O5
-    sql = sql & ", sqlserver1= " & DBSet(mvarSqlServer1, "T") ' SqlServer 1 de Castellduc CASTELLDUCS2-O5
+    SQL = SQL & ", sqlserver= " & DBSet(mvarSqlServer, "T") ' SqlServer de Castellduc CASTELLDUCS1-O5
+    SQL = SQL & ", sqlserver1= " & DBSet(mvarSqlServer1, "T") ' SqlServer 1 de Castellduc CASTELLDUCS2-O5
     
     '[Monica]17/10/2016: directorio de impresion de entradas
-    sql = sql & ", directorioentradas= " & DBSet(Replace(mvarPathEntradas, "\", "\\"), "T") ' path ficheros de impresino de entradas
+    SQL = SQL & ", directorioentradas= " & DBSet(Replace(mvarPathEntradas, "\", "\\"), "T") ' path ficheros de impresino de entradas
     
     '[Monica]29/01/2018: codigo de empresa de a3
-    sql = sql & ", codemprea3 = " & DBSet(mvarCodEmpreA3, "N")
+    SQL = SQL & ", codemprea3 = " & DBSet(mvarCodEmpreA3, "N")
     
     '[Monica]12/03/2018: euros de capital social
-    sql = sql & ", eurcapsocial = " & DBSet(mvarEurCapSocial, "N")
+    SQL = SQL & ", eurcapsocial = " & DBSet(mvarEurCapSocial, "N")
+    
     
     
 '    SQL = SQL & " WHERE codparam =" & Codigo & ";"
 
-    conn.Execute sql
+    conn.Execute SQL
 
     Modificar = 1
     Exit Function

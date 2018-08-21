@@ -7146,7 +7146,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     cadTitulo = "Informe para Asesoria Mensual"
     If Me.Check2.Value = 1 Then cadNombreRPT = Replace(cadNombreRPT, ".rpt", "1.rpt") '"rInfAsesoriaNomiMes1.rpt"
                                     '[Monica]29/01/2018: tb catadau
-    If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+    If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         
         cadNombreRPT = nomDocu '"rInfAsesoriaNomiMes.rpt"
         cadTitulo = "Informe de Generacion de Nómina"
@@ -7177,13 +7177,13 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     End If
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
     If HayRegParaInforme(Tabla, cadSelect) Then
-        If (vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18) And Me.Check2.Value = 1 Then
+        If (vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19) And Me.Check2.Value = 1 Then
             
             If vParamAplic.Cooperativa = 4 Then  ' Alzira
                 Shell App.Path & "\nomina.exe /E|" & vUsu.CadenaConexion & "|" & vUsu.Codigo & "|", vbNormalFocus
             Else
                 '[Monica]29/01/2018: para el caso de Catadau
-                If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+                If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                     '[Monica]07/02/2017: modificacion para los dados de baja
                     Dim Fec1 As Date
                     Dim mes As Integer
@@ -7200,7 +7200,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
                     
                     If GeneraNominaA3(Fec1) Then
                         '[Monica]04/05/2018: generamos 2 ficheros
-                        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+                        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                             ' cargamos las hojas excel
                             
                             If Dir(App.Path & "\nomina.z") <> "" Then Kill App.Path & "\nomina.z"
@@ -7314,7 +7314,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
             End If
             
             '[Monica]07/06/2018: para el caso de catadau el informe resumido por dias es otro rpt
-            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                 If Check7.Value = 1 Then nomDocu = Replace(nomDocu, ".rpt", "1.rpt")
             End If
             
@@ -7483,7 +7483,7 @@ Dim SQL As String
     numParam = numParam + 1
     
     '[Monica]25/05/2018: Añado Catadau
-    If vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then
+    If vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         '======== FORMULA  ====================================
         'D/H TRABAJADOR
         cDesde = Trim(txtCodigo(62).Text)
@@ -7664,7 +7664,7 @@ Dim Prevision As Boolean
                         Else
                             '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
                             '                    Natural no tiene partes
-                            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then ' catadau
+                            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then ' catadau
                                 If ProcesoCargaHorasCatadau(cTabla, cadSelect) Then
                                     MsgBox "Proceso realizado correctamente.", vbExclamation
                                     cmdCancel_Click (0)
@@ -8405,8 +8405,8 @@ Dim List As Collection
         Tabla = "horas"
     
         '[Monica]07/06/2018: Catadau tb quiere un resumen por trabajador
-        Check7.visible = (vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
-        Check7.Enabled = (vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
+        Check7.visible = (vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+        Check7.Enabled = (vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
     
     Case 29 ' Informe de Entradas Capataz
         FrameEntradasCapatazVisible True, H, W
@@ -8433,9 +8433,9 @@ Dim List As Collection
     
     Case 37 ' Informe de horas mensual para asesoria
     
-        If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then Label15.Caption = "Pago Nómina"
+        If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then Label15.Caption = "Pago Nómina"
     
-        FechaBajaVisible vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18
+        FechaBajaVisible vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19
     
         CargaCombo
     
@@ -8443,7 +8443,7 @@ Dim List As Collection
         indFrame = 0
         Tabla = "rrecasesoria"
         
-        If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Then Check2.Caption = "Generar Fichero A3"
+        If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then Check2.Caption = "Generar Fichero A3"
     
     Case 38 ' Rendimiento por Capataz
         Label12.Caption = "Rendimiento por Capataz"
@@ -8481,7 +8481,7 @@ Dim List As Collection
         
     End Select
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.CmdCancel(0).Cancel = True
+    Me.cmdCancel(0).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
 End Sub
@@ -11278,8 +11278,8 @@ On Error GoTo eProcesoPaseABanco
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    pb1.visible = True
-    CargarProgres pb1, Rs.Fields(0).Value
+    Pb1.visible = True
+    CargarProgres Pb1, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -11289,7 +11289,7 @@ On Error GoTo eProcesoPaseABanco
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        IncrementarProgres pb1, 1
+        IncrementarProgres Pb1, 1
         
         '[Monica]23/03/2016: si el importe es negativo no entra
         If DBLet(Rs!Importe) >= 0 Then
@@ -11844,8 +11844,8 @@ On Error GoTo eProcesoPaseABanco
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    pb1.visible = True
-    CargarProgres pb1, Rs.Fields(0).Value
+    Pb1.visible = True
+    CargarProgres Pb1, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -11855,7 +11855,7 @@ On Error GoTo eProcesoPaseABanco
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        IncrementarProgres pb1, 1
+        IncrementarProgres Pb1, 1
         
         '[Monica]23/03/2016: si el importe es negativo no entra
         If DBLet(Rs!Importe) >= 0 Then

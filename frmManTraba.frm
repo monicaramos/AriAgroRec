@@ -2209,10 +2209,10 @@ Dim i As Integer
     End If
     
     '[Monica]07/05/2018: banco propio que es la categoria
-    Label31.Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
-    Label31.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
-    Text1(35).Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
-    Text1(35).visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18)
+    Label31.Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+    Label31.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+    Text1(35).Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+    Text1(35).visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
     
     
 End Sub
@@ -2943,7 +2943,7 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim cadMen As String
 Dim cta As String
 Dim TipoForp As String
@@ -3026,14 +3026,14 @@ Dim TipoForp As String
     'control de costes
     If B And vParamAplic.HayCCostes Then
         If Modo = 3 Or Modo = 4 Then
-            Sql = "select count(*) from straba where codtraba <> " & DBSet(Text1(0).Text, "N")
+            SQL = "select count(*) from straba where codtraba <> " & DBSet(Text1(0).Text, "N")
             If Text1(31).Text <> "" Then
-                Sql = Sql & " and idtarjeta = " & DBSet(Text1(31).Text, "N")
+                SQL = SQL & " and idtarjeta = " & DBSet(Text1(31).Text, "N")
             Else
-                Sql = Sql & " and idtarjeta is null "
+                SQL = SQL & " and idtarjeta is null "
             End If
     
-            If DevuelveValor(Sql) <> 0 Then
+            If DevuelveValor(SQL) <> 0 Then
                 If MsgBox("Hay otro trabajador con el mismo Nro.Tarjeta asignado." & vbCrLf & vbCrLf & "               ¿Desea Continuar?.", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
                     B = False
                 End If
@@ -3125,7 +3125,7 @@ Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
 Dim campo2 As String
-Dim Sql As String
+Dim SQL As String
 
 
 
@@ -3168,9 +3168,9 @@ Dim Sql As String
                 Else ' traemos el porcentaje de irpf y de seguridad social
                     If Modo = 3 Or Modo = 4 Then
                         campo2 = "dtosegso"
-                        Sql = DevuelveDesdeBDNew(cAgro, "salarios", "dtosirpf", "codcateg", Text1(9).Text, "N", campo2)
-                        If Sql <> "" Then
-                            If Text1(9).Text <> CategAnt Then Text1(25).Text = Format(ImporteSinFormato(Sql), "##0.00")
+                        SQL = DevuelveDesdeBDNew(cAgro, "salarios", "dtosirpf", "codcateg", Text1(9).Text, "N", campo2)
+                        If SQL <> "" Then
+                            If Text1(9).Text <> CategAnt Then Text1(25).Text = Format(ImporteSinFormato(SQL), "##0.00")
                             If Text1(9).Text <> CategAnt Then Text1(26).Text = Format(ImporteSinFormato(campo2), "##0.00")
                             If Text1(9).Text <> CategAnt Then Text1(27).Text = DevuelveDesdeBDNew(cAgro, "salarios", "pluscapataz", "codcateg", Text1(9).Text, "N")
                             If Text1(9).Text <> CategAnt Then Text1(27).Text = Format(ImporteSinFormato(Text1(27).Text), "###,##0.00")
@@ -3559,14 +3559,14 @@ Dim i As Integer
 End Sub
 
 Private Function SepuedeBorrar() As Boolean
-Dim Sql As String
+Dim SQL As String
 
     SepuedeBorrar = False
     
     ' *** si cal comprovar alguna cosa abans de borrar ***
-    Sql = ""
-    Sql = DevuelveDesdeBDNew(cAgro, "horas", "codtraba", "codtraba", Data1.Recordset!CodTraba, "N")
-    If Sql <> "" Then
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "horas", "codtraba", "codtraba", Data1.Recordset!CodTraba, "N")
+    If SQL <> "" Then
         MsgBox "No puede borrar el trabajador porque tiene horas asignadas.", vbExclamation
         Exit Function
     End If
@@ -3582,7 +3582,7 @@ End Sub
 
 
 Private Function PushTrabajador(Codigo As String, Operacion As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
 
     On Error GoTo ePushTrabajador
@@ -3595,49 +3595,49 @@ Dim Sql As String
 
     Select Case Operacion
         Case "I" ' insertar
-            Sql = DevuelveDesdeBDNew(cAgro, "aripush.usuariospush", "login", "login", "C" & CLng(Text1(0).Text), "T")
-            If Sql = "" Then
-                Sql = "insert into aripush.usuariospush (nif,nombre,comunId,ariagroId,tiendaId,gasolineraId,telefoniaId,tratamientosId,login,"
-                Sql = Sql & "password,email,playerId,direccion,codPostal,poblacion,provincia,telefono1,telefono2,iban, solomensajes, estrabajador)"
-                Sql = Sql & " values ("
-                Sql = Sql & DBSet(Text1(3), "T") & "," ' nif
-                Sql = Sql & DBSet(Text1(2), "T") & "," 'nombre
-                Sql = Sql & ValorNulo & "," 'codtraba
-                Sql = Sql & ValorNulo & "," 'ariagroid
-                Sql = Sql & ValorNulo & "," 'tiendaid
-                Sql = Sql & ValorNulo & "," 'gasolineraid
-                Sql = Sql & ValorNulo & "," 'telefoniaid
-                Sql = Sql & ValorNulo & "," 'tratamientosid
-                Sql = Sql & DBSet("C" & CLng(Text1(0)), "T") & "," 'login
-                Sql = Sql & DBSet(Text1(3), "T") & "," 'password el nif
-                Sql = Sql & DBSet(Text1(14), "T") & "," 'email
-                Sql = Sql & ValorNulo & "," 'playerid
-                Sql = Sql & DBSet(Text1(4), "T") & "," 'dirsocio (direccion fiscal)
-                Sql = Sql & DBSet(Text1(5), "T") & "," 'codigo postal
-                Sql = Sql & DBSet(Text1(18), "T") & "," 'poblacion
-                Sql = Sql & DBSet(Text1(22), "T") & "," 'provincia
-                Sql = Sql & DBSet(Text1(11), "T") & "," 'telefono1
-                Sql = Sql & DBSet(Text1(12), "T") & "," 'telefono2
-                Sql = Sql & DBSet(Text1(34).Text & Text1(1).Text & Text1(19).Text & Text1(8).Text & Text1(7).Text, "T") & ","
-                Sql = Sql & "1,1)"
+            SQL = DevuelveDesdeBDNew(cAgro, "aripush.usuariospush", "login", "login", "C" & CLng(Text1(0).Text), "T")
+            If SQL = "" Then
+                SQL = "insert into aripush.usuariospush (nif,nombre,comunId,ariagroId,tiendaId,gasolineraId,telefoniaId,tratamientosId,login,"
+                SQL = SQL & "password,email,playerId,direccion,codPostal,poblacion,provincia,telefono1,telefono2,iban, solomensajes, estrabajador)"
+                SQL = SQL & " values ("
+                SQL = SQL & DBSet(Text1(3), "T") & "," ' nif
+                SQL = SQL & DBSet(Text1(2), "T") & "," 'nombre
+                SQL = SQL & ValorNulo & "," 'codtraba
+                SQL = SQL & ValorNulo & "," 'ariagroid
+                SQL = SQL & ValorNulo & "," 'tiendaid
+                SQL = SQL & ValorNulo & "," 'gasolineraid
+                SQL = SQL & ValorNulo & "," 'telefoniaid
+                SQL = SQL & ValorNulo & "," 'tratamientosid
+                SQL = SQL & DBSet("C" & CLng(Text1(0)), "T") & "," 'login
+                SQL = SQL & DBSet(Text1(3), "T") & "," 'password el nif
+                SQL = SQL & DBSet(Text1(14), "T") & "," 'email
+                SQL = SQL & ValorNulo & "," 'playerid
+                SQL = SQL & DBSet(Text1(4), "T") & "," 'dirsocio (direccion fiscal)
+                SQL = SQL & DBSet(Text1(5), "T") & "," 'codigo postal
+                SQL = SQL & DBSet(Text1(18), "T") & "," 'poblacion
+                SQL = SQL & DBSet(Text1(22), "T") & "," 'provincia
+                SQL = SQL & DBSet(Text1(11), "T") & "," 'telefono1
+                SQL = SQL & DBSet(Text1(12), "T") & "," 'telefono2
+                SQL = SQL & DBSet(Text1(34).Text & Text1(1).Text & Text1(19).Text & Text1(8).Text & Text1(7).Text, "T") & ","
+                SQL = SQL & "1,1)"
             Else
-                Sql = "update aripush.usuariospush set "
-                Sql = Sql & " nif = " & DBSet(Text1(3), "T")
-                Sql = Sql & ",nombre = " & DBSet(Text1(2).Text, "T")
-                Sql = Sql & ",email = " & DBSet(Text1(14).Text, "T")
-                Sql = Sql & ",direccion = " & DBSet(Text1(4), "T")  'dirsocio (direccion fiscal)
-                Sql = Sql & ",codpostal = " & DBSet(Text1(5), "T")  'codigo postal
-                Sql = Sql & ",poblacion = " & DBSet(Text1(18), "T")  'poblacion
-                Sql = Sql & ",provincia = " & DBSet(Text1(22), "T")  'provincia
-                Sql = Sql & ",telefono1 = " & DBSet(Text1(11), "T")  'telefono1
-                Sql = Sql & ",telefono2 = " & DBSet(Text1(12), "T")  'telefono2
-                Sql = Sql & ",iban = " & DBSet(Text1(34).Text & Text1(1).Text & Text1(19).Text & Text1(8).Text & Text1(7).Text, "T")
-                Sql = Sql & ",solomensajes = 1"
-                Sql = Sql & ",estrabajador = 1"
-                Sql = Sql & " where login = " & DBSet("C" & CLng(Text1(0).Text), "T")
+                SQL = "update aripush.usuariospush set "
+                SQL = SQL & " nif = " & DBSet(Text1(3), "T")
+                SQL = SQL & ",nombre = " & DBSet(Text1(2).Text, "T")
+                SQL = SQL & ",email = " & DBSet(Text1(14).Text, "T")
+                SQL = SQL & ",direccion = " & DBSet(Text1(4), "T")  'dirsocio (direccion fiscal)
+                SQL = SQL & ",codpostal = " & DBSet(Text1(5), "T")  'codigo postal
+                SQL = SQL & ",poblacion = " & DBSet(Text1(18), "T")  'poblacion
+                SQL = SQL & ",provincia = " & DBSet(Text1(22), "T")  'provincia
+                SQL = SQL & ",telefono1 = " & DBSet(Text1(11), "T")  'telefono1
+                SQL = SQL & ",telefono2 = " & DBSet(Text1(12), "T")  'telefono2
+                SQL = SQL & ",iban = " & DBSet(Text1(34).Text & Text1(1).Text & Text1(19).Text & Text1(8).Text & Text1(7).Text, "T")
+                SQL = SQL & ",solomensajes = 1"
+                SQL = SQL & ",estrabajador = 1"
+                SQL = SQL & " where login = " & DBSet("C" & CLng(Text1(0).Text), "T")
             End If
 
-            conn.Execute Sql
+            conn.Execute SQL
             
         
         Case "M" ' modificar
@@ -3646,20 +3646,20 @@ Dim Sql As String
                PoblaAnt <> Text1(18).Text Or ProviAnt <> Text1(22).Text Or NifAnt <> Text1(3).Text Or EMaiAnt <> Text1(14).Text Or _
                Tel1Ant <> Text1(11).Text Or Tel2Ant <> Text1(12).Text Then
 
-                    Sql = "update aripush.usuariospush set "
-                    Sql = Sql & " nif = " & DBSet(Text1(3), "T")
-                    Sql = Sql & ",nombre = " & DBSet(Text1(2).Text, "T")
-                    Sql = Sql & ",email = " & DBSet(Text1(14).Text, "T")
-                    Sql = Sql & ",direccion = " & DBSet(Text1(4), "T") 'dirsocio (direccion fiscal)
-                    Sql = Sql & ",codpostal = " & DBSet(Text1(5), "T") 'codigo postal
-                    Sql = Sql & ",poblacion = " & DBSet(Text1(18), "T") 'poblacion
-                    Sql = Sql & ",provincia = " & DBSet(Text1(22), "T") 'provincia
-                    Sql = Sql & ",telefono1 = " & DBSet(Text1(11), "T") 'telefono1
-                    Sql = Sql & ",telefono2 = " & DBSet(Text1(12), "T") 'telefono2
-                    Sql = Sql & ",iban = " & DBSet(Text1(34).Text & Text1(1).Text & Text1(19).Text & Text1(8).Text & Text1(7).Text, "T")
-                    Sql = Sql & " where login = " & DBSet("C" & CLng(Text1(0).Text), "T")
+                    SQL = "update aripush.usuariospush set "
+                    SQL = SQL & " nif = " & DBSet(Text1(3), "T")
+                    SQL = SQL & ",nombre = " & DBSet(Text1(2).Text, "T")
+                    SQL = SQL & ",email = " & DBSet(Text1(14).Text, "T")
+                    SQL = SQL & ",direccion = " & DBSet(Text1(4), "T") 'dirsocio (direccion fiscal)
+                    SQL = SQL & ",codpostal = " & DBSet(Text1(5), "T") 'codigo postal
+                    SQL = SQL & ",poblacion = " & DBSet(Text1(18), "T") 'poblacion
+                    SQL = SQL & ",provincia = " & DBSet(Text1(22), "T") 'provincia
+                    SQL = SQL & ",telefono1 = " & DBSet(Text1(11), "T") 'telefono1
+                    SQL = SQL & ",telefono2 = " & DBSet(Text1(12), "T") 'telefono2
+                    SQL = SQL & ",iban = " & DBSet(Text1(34).Text & Text1(1).Text & Text1(19).Text & Text1(8).Text & Text1(7).Text, "T")
+                    SQL = SQL & " where login = " & DBSet("C" & CLng(Text1(0).Text), "T")
                     
-                    conn.Execute Sql
+                    conn.Execute SQL
             End If
         
         Case "E" ' eliminar
@@ -3675,15 +3675,15 @@ End Function
 
 
 Private Function ExisteAripush() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo eExisteAripush
 
-    Sql = "select * from aripush.usuariospush "
+    SQL = "select * from aripush.usuariospush "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Set Rs = Nothing
     

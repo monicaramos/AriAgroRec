@@ -8,13 +8,13 @@ Begin VB.Form frmFVARConceptos
    ClientHeight    =   10650
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   12945
+   ClientWidth     =   13950
    Icon            =   "frmFVARConceptos.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   10650
-   ScaleWidth      =   12945
+   ScaleWidth      =   13950
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral 
@@ -240,7 +240,7 @@ Begin VB.Form frmFVARConceptos
       Left            =   105
       TabIndex        =   14
       Top             =   8985
-      Width           =   12600
+      Width           =   13600
       Begin VB.TextBox txtAux 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -253,11 +253,11 @@ Begin VB.Form frmFVARConceptos
          EndProperty
          Height          =   360
          Index           =   11
-         Left            =   3945
+         Left            =   4170
          MaxLength       =   30
          TabIndex        =   28
          Top             =   495
-         Width           =   3810
+         Width           =   4080
       End
       Begin VB.TextBox txtAux 
          BeginProperty Font 
@@ -271,7 +271,7 @@ Begin VB.Form frmFVARConceptos
          EndProperty
          Height          =   360
          Index           =   9
-         Left            =   10500
+         Left            =   11355
          MaxLength       =   30
          TabIndex        =   23
          Top             =   495
@@ -289,7 +289,7 @@ Begin VB.Form frmFVARConceptos
          EndProperty
          Height          =   360
          Index           =   7
-         Left            =   9900
+         Left            =   10755
          MaxLength       =   30
          TabIndex        =   20
          Top             =   495
@@ -307,11 +307,11 @@ Begin VB.Form frmFVARConceptos
          EndProperty
          Height          =   360
          Index           =   5
-         Left            =   7800
+         Left            =   8295
          MaxLength       =   30
          TabIndex        =   18
          Top             =   495
-         Width           =   2055
+         Width           =   2460
       End
       Begin VB.TextBox txtAux 
          BeginProperty Font 
@@ -328,8 +328,8 @@ Begin VB.Form frmFVARConceptos
          Left            =   150
          MaxLength       =   30
          TabIndex        =   15
-         Top             =   510
-         Width           =   3750
+         Top             =   495
+         Width           =   3930
       End
       Begin VB.Label Label5 
          Caption         =   "Cuenta Contable Proveedor"
@@ -343,7 +343,7 @@ Begin VB.Form frmFVARConceptos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   195
-         Left            =   3930
+         Left            =   4155
          TabIndex        =   29
          Top             =   240
          Width           =   2925
@@ -360,7 +360,7 @@ Begin VB.Form frmFVARConceptos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Left            =   10500
+         Left            =   11355
          TabIndex        =   24
          Top             =   240
          Width           =   1905
@@ -377,7 +377,7 @@ Begin VB.Form frmFVARConceptos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Left            =   9900
+         Left            =   10755
          TabIndex        =   21
          Top             =   225
          Width           =   525
@@ -394,7 +394,7 @@ Begin VB.Form frmFVARConceptos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   7800
+         Left            =   8295
          TabIndex        =   19
          Top             =   225
          Width           =   1935
@@ -564,7 +564,7 @@ Begin VB.Form frmFVARConceptos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10515
+      Left            =   11505
       TabIndex        =   7
       Top             =   10095
       Visible         =   0   'False
@@ -583,7 +583,7 @@ Begin VB.Form frmFVARConceptos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   11640
+      Left            =   12630
       TabIndex        =   8
       Top             =   10095
       Visible         =   0   'False
@@ -595,8 +595,8 @@ Begin VB.Form frmFVARConceptos
       Left            =   120
       TabIndex        =   11
       Top             =   810
-      Width           =   12565
-      _ExtentX        =   22172
+      Width           =   13565
+      _ExtentX        =   23918
       _ExtentY        =   14367
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -671,9 +671,9 @@ Begin VB.Form frmFVARConceptos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   11640
+      Left            =   12630
       TabIndex        =   12
-      Top             =   10050
+      Top             =   10095
       Visible         =   0   'False
       Width           =   1095
    End
@@ -930,7 +930,7 @@ Dim i As Integer
     
     ' ********************************************************
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -1123,7 +1123,7 @@ Dim i As Integer
 End Sub
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1138,17 +1138,17 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*** canviar la pregunta, els noms dels camps i el DELETE; repasar codEmpre ***
-    Sql = "¿Seguro que desea eliminar el Concepto?"
+    SQL = "¿Seguro que desea eliminar el Concepto?"
     'SQL = SQL & vbCrLf & "Código: " & Format(adodc1.Recordset.Fields(0), "000")
-    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    Sql = Sql & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'N'hi ha que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from fvarconce where codconce = " & adodc1.Recordset!codConce
+        SQL = "Delete from fvarconce where codconce = " & adodc1.Recordset!codConce
         
-        conn.Execute Sql
+        conn.Execute SQL
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1295,7 +1295,7 @@ Dim i As Long
             End If
         
         Case 3 'INSERTAR
-            If DatosOK Then
+            If DatosOk Then
                 'If InsertarDesdeForm(Me) Then
                 If InsertarDesdeForm2(Me, 0) Then
                     CargaGrid
@@ -1321,7 +1321,7 @@ Dim i As Long
             End If
             
         Case 4 'MODIFICAR
-            If DatosOK Then
+            If DatosOk Then
                 'If ModificaDesdeFormulario(Me) Then
                 If ModificaDesdeFormulario2(Me, 0) Then
                     i = adodc1.Recordset.AbsolutePosition
@@ -1595,25 +1595,25 @@ End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
     Dim i As Integer
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " WHERE " & vSQL  ' ### [Monica] 08/09/2006: antes habia AND
+        SQL = CadenaConsulta & " WHERE " & vSQL  ' ### [Monica] 08/09/2006: antes habia AND
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
     'SQL = SQL & " ORDER BY codempre, codsupdt"
-    Sql = Sql & " ORDER BY codconce"
+    SQL = SQL & " ORDER BY codconce"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, False
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, False
        
        
     ' *** posar només els controls del grid ***
-    tots = "S|txtAux(0)|T|Código|850|;S|txtAux(1)|T|Denominación|3300|;S|txtAux(2)|T|Seccion|1000|;S|btnBuscar(3)|B|||;"
-    tots = tots & "S|txtAux2(1)|T|Nombre|2150|;S|txtAux(3)|T|Cta.Ventas|1400|;S|btnBuscar(0)|B|||;"
+    tots = "S|txtAux(0)|T|Código|850|;S|txtAux(1)|T|Denominación|3800|;S|txtAux(2)|T|Seccion|1000|;S|btnBuscar(3)|B|||;"
+    tots = tots & "S|txtAux2(1)|T|Nombre|2640|;S|txtAux(3)|T|Cta.Ventas|1400|;S|btnBuscar(0)|B|||;"
     tots = tots & "S|txtAux(10)|T|Cta.Compras|1400|;S|btnBuscar(4)|B|||;S|txtAux(4)|T|Iva|1000|;"
     tots = tots & "S|btnBuscar(1)|B|||;S|txtAux(8)|T|C.Coste|900|;S|btnBuscar(2)|B|||;"
     
@@ -1804,7 +1804,7 @@ Dim cadMen As String
 End Sub
 
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 Dim Datos As String
 Dim B As Boolean
 ' *** només per ad este manteniment ***
@@ -1870,7 +1870,7 @@ Dim cad As String
         
     ' *********************************************
 
-    DatosOK = B
+    DatosOk = B
 End Function
 
 
