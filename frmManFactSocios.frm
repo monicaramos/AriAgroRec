@@ -198,7 +198,6 @@ Begin VB.Form frmManFactSocios
       _ExtentY        =   7805
       _Version        =   393216
       Tabs            =   5
-      Tab             =   2
       TabsPerRow      =   5
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -212,10 +211,13 @@ Begin VB.Form frmManFactSocios
       EndProperty
       TabCaption(0)   =   "Variedad/Calidad"
       TabPicture(0)   =   "frmManFactSocios.frx":000C
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "FrameAnticipos"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Frame4"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "Frame3"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Gastos a Pie"
       TabPicture(1)   =   "frmManFactSocios.frx":0028
@@ -224,7 +226,7 @@ Begin VB.Form frmManFactSocios
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Albaranes"
       TabPicture(2)   =   "frmManFactSocios.frx":0044
-      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "FrameAlbaranes"
       Tab(2).Control(0).Enabled=   0   'False
       Tab(2).ControlCount=   1
@@ -787,7 +789,7 @@ Begin VB.Form frmManFactSocios
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   2190
-         Left            =   -74955
+         Left            =   45
          TabIndex        =   80
          Top             =   360
          Width           =   13390
@@ -1473,7 +1475,7 @@ Begin VB.Form frmManFactSocios
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   3720
-         Left            =   45
+         Left            =   -74955
          TabIndex        =   53
          Top             =   360
          Width           =   13390
@@ -1901,7 +1903,7 @@ Begin VB.Form frmManFactSocios
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   1755
-         Left            =   -74910
+         Left            =   90
          TabIndex        =   94
          Top             =   2520
          Width           =   13345
@@ -2261,11 +2263,11 @@ Begin VB.Form frmManFactSocios
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   1755
-         Left            =   -74910
+         Left            =   90
          TabIndex        =   107
          Top             =   2520
          Visible         =   0   'False
-         Width           =   10345
+         Width           =   13365
          Begin VB.TextBox txtAux4 
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
@@ -2519,8 +2521,8 @@ Begin VB.Form frmManFactSocios
             Left            =   150
             TabIndex        =   118
             Top             =   270
-            Width           =   10105
-            _ExtentX        =   17833
+            Width           =   13105
+            _ExtentX        =   23125
             _ExtentY        =   2461
             _Version        =   393216
             AllowUpdate     =   0   'False
@@ -4309,11 +4311,11 @@ Dim i As Integer
             HacerBusqueda
 
         Case 3  'AÑADIR
-            If DatosOK Then InsertarCabecera
+            If DatosOk Then InsertarCabecera
         
 
         Case 4  'MODIFICAR
-            If DatosOK Then
+            If DatosOk Then
                 '[Monica]18/01/2017: solo en el caso de Montifrut no recalculo totales pq lo hacia incorrecto
                 If vParamAplic.Cooperativa <> 12 Then CalcularTotales
                 If ModificaCabecera Then
@@ -5377,15 +5379,15 @@ End Sub
 
 Private Function BloqueaAlbxFac() As Boolean
 'bloquea todos los albaranes de la factura
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EBloqueaAlb
     
     BloqueaAlbxFac = False
     'bloquear cabecera albaranes x factura
-    Sql = "select * FROM scafac1 "
-    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute Sql, , adCmdText
+    SQL = "select * FROM scafac1 "
+    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute SQL, , adCmdText
     BloqueaAlbxFac = True
 
 EBloqueaAlb:
@@ -5395,15 +5397,15 @@ End Function
 
 Private Function BloqueaLineasFac() As Boolean
 'bloquea todas las lineas de la factura
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EBloqueaLin
 
     BloqueaLineasFac = False
     'bloquear cabecera albaranes x factura
-    Sql = "select * FROM slifac "
-    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute Sql, , adCmdText
+    SQL = "select * FROM slifac "
+    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute SQL, , adCmdText
     BloqueaLineasFac = True
 
 EBloqueaLin:
@@ -5468,7 +5470,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim devuelve As String
 Dim cadMen As String
-Dim Sql As String
+Dim SQL As String
 Dim vSeccion As CSeccion
 Dim vSocio As cSocio
 
@@ -5579,7 +5581,7 @@ End Sub
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim cad As String
-Dim tabla As String
+Dim Tabla As String
 Dim Titulo As String
 Dim Desc As String, devuelve As String
     'Llamamos a al form
@@ -5592,8 +5594,8 @@ Dim Desc As String, devuelve As String
     cad = cad & "Fecha|rfactsoc.fecfactu|F||15·"
     cad = cad & "Socio|rfactsoc.codsocio|N||10·"
     cad = cad & "Nombre Socio|rsocios.nomsocio|T||35·"
-    tabla = NombreTabla & " INNER JOIN rsocios ON rfactsoc.codsocio=rsocios.codsocio "
-    tabla = "(" & tabla & ") INNER JOIN usuarios.stipom stipom ON rfactsoc.codtipom = stipom.codtipom "
+    Tabla = NombreTabla & " INNER JOIN rsocios ON rfactsoc.codsocio=rsocios.codsocio "
+    Tabla = "(" & Tabla & ") INNER JOIN usuarios.stipom stipom ON rfactsoc.codtipom = stipom.codtipom "
     Titulo = "Facturas Socios"
     devuelve = "1|2|3|"
            
@@ -5601,7 +5603,7 @@ Dim Desc As String, devuelve As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = cad
-        frmB.vtabla = tabla
+        frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -5895,7 +5897,7 @@ Dim b1 As Boolean
     '---------------------------------------------
     B = (Modo <> 0 And Modo <> 2)
     CmdCancelar.visible = B
-    CmdAceptar.visible = B
+    cmdAceptar.visible = B
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     BloquearImgFec Me, 0, Modo
@@ -5965,14 +5967,14 @@ Private Sub PonerLongCampos()
 End Sub
 
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 'Comprobar que los datos de la cabecera son correctos antes de Insertar o Modificar
 'la cabecera del Pedido
 Dim B As Boolean
 
     On Error GoTo EDatosOK
 
-    DatosOK = False
+    DatosOk = False
     
 '    ComprobarDatosTotales
     If Modo = 3 Then
@@ -5992,7 +5994,7 @@ Dim B As Boolean
     B = CompForm2(Me, 2, "Frame2") ' , 1) 'Comprobar formato datos ok de la cabecera: opcion=1
     If Not B Then Exit Function
     
-    DatosOK = B
+    DatosOk = B
     
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -6028,7 +6030,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -6036,7 +6038,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     End If
 End Sub
 
@@ -6120,7 +6122,7 @@ End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
 Dim cad As String
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EEliminarLinea
 
@@ -6345,7 +6347,7 @@ Private Sub PonerBotonCabecera(B As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
     On Error Resume Next
 
-    Me.CmdAceptar.visible = Not B
+    Me.cmdAceptar.visible = Not B
     Me.CmdCancelar.visible = Not B
     Me.cmdRegresar.visible = B
     Me.cmdRegresar.Caption = "Cabecera"
@@ -6365,7 +6367,7 @@ End Sub
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
 Dim B As Boolean
 Dim Opcion As Byte
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo ECargaGrid
 
@@ -6385,8 +6387,8 @@ Dim Sql As String
             Opcion = 6
     End Select
     
-    Sql = MontaSQLCarga(enlaza, Opcion)
-    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez
+    SQL = MontaSQLCarga(enlaza, Opcion)
+    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
     
     vDataGrid.RowHeight = 270
     
@@ -6515,7 +6517,7 @@ End Sub
 
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim cadMen As String
-Dim Sql As String
+Dim SQL As String
 
     'Quitar espacios en blanco
     If Not PerderFocoGnralLineas(txtAux(Index), ModificaLineas) Then Exit Sub
@@ -6549,7 +6551,7 @@ Dim Sql As String
         Case 7 'peso neto
             If txtAux(Index) <> "" Then
                 PonerFormatoEntero txtAux(Index)
-                CmdAceptar.SetFocus
+                cmdAceptar.SetFocus
             End If
 
     End Select
@@ -6560,7 +6562,7 @@ End Sub
 
 
 Private Function Eliminar() As Boolean
-Dim Sql As String, LEtra As String, Sql2 As String
+Dim SQL As String, LEtra As String, Sql2 As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
 Dim Mens As String
@@ -6572,7 +6574,7 @@ Dim Mens As String
     conn.BeginTrans
         
         
-    Sql = " " & ObtenerWhereCP(True)
+    SQL = " " & ObtenerWhereCP(True)
         
         
     '------------------------------------------------------------------------------
@@ -6590,51 +6592,51 @@ Dim Mens As String
     '------------------------------------------
     
     'Lineas de calidades (rfactsoc_calidad)
-    conn.Execute "Delete from rfactsoc_calidad " & Sql
+    conn.Execute "Delete from rfactsoc_calidad " & SQL
     
     'Lineas de albaranes de bodega (rfactsoc_albaran)
-    conn.Execute "Delete from rfactsoc_albaran " & Sql
+    conn.Execute "Delete from rfactsoc_albaran " & SQL
     
     'Lineas de variedades (rfactsoc_variedad)
-    conn.Execute "Delete from rfactsoc_variedad " & Sql
+    conn.Execute "Delete from rfactsoc_variedad " & SQL
     
     'Antes de borrar anticipos desmarcarlos como liquidados
-    conn.Execute "update rfactsoc_variedad set descontado = 0 where (codtipom, numfactu, fecfactu, codvarie, codcampo) in (select codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti from rfactsoc_anticipos " & Sql & ")"
+    conn.Execute "update rfactsoc_variedad set descontado = 0 where (codtipom, numfactu, fecfactu, codvarie, codcampo) in (select codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti from rfactsoc_anticipos " & SQL & ")"
     
     'Lineas de anticipos (rfactsoc_anticipos)
-    conn.Execute "Delete from rfactsoc_anticipos " & Sql
+    conn.Execute "Delete from rfactsoc_anticipos " & SQL
     
     '[Monica]05/12/2011: anticipos de retirada de quatretonda
     'Antes de borrar retirada desmarcarlos como liquidados
-    conn.Execute "update rfactsoc_variedad set descontado = 0 where (codtipom, numfactu, fecfactu, codvarie, codcampo) in (select codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti from rfactsoc_retirada " & Sql & ")"
+    conn.Execute "update rfactsoc_variedad set descontado = 0 where (codtipom, numfactu, fecfactu, codvarie, codcampo) in (select codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti from rfactsoc_retirada " & SQL & ")"
         
     'Lineas de retirada (rfactsoc_retirada)
-    conn.Execute "Delete from rfactsoc_retirada " & Sql
+    conn.Execute "Delete from rfactsoc_retirada " & SQL
     
     'Lineas de gastos a pie de la factura (rfactsoc_gastos)
-    conn.Execute "Delete from rfactsoc_gastos " & Sql
+    conn.Execute "Delete from rfactsoc_gastos " & SQL
     
     
     '[Monica]15/04/2013: antes de descontar las facturas varias hemos de desmarcarlas como que han sido descontadas
-    conn.Execute "update fvarcabfact set intliqui = 0 where (codtipom,numfactu,fecfactu) in (select codtipomfvar,numfactufvar,fecfactufvar from rfactsoc_fvarias " & Sql & ")"
+    conn.Execute "update fvarcabfact set intliqui = 0 where (codtipom,numfactu,fecfactu) in (select codtipomfvar,numfactufvar,fecfactufvar from rfactsoc_fvarias " & SQL & ")"
     
     'facturas varias a descontar
-    conn.Execute "Delete from rfactsoc_fvarias " & Sql
+    conn.Execute "Delete from rfactsoc_fvarias " & SQL
     
     '[Monica]10/04/2017: incrementos de factura en la liquidacion de Picassent y Coopic
     'incrementos de factura
     Dim vAux As String
     vAux = "insert into ringresos (codsocio,codvarie,concepto,importe) " & _
-                " select aa.codsocio, rfactsoc_ingresos.codvarie, rfactsoc_ingresos.concepto, rfactsoc_ingresos.importe  from rfactsoc_ingresos , (select codsocio from rfactsoc  " & Sql & ") aa " & _
-                "  " & Sql
+                " select aa.codsocio, rfactsoc_ingresos.codvarie, rfactsoc_ingresos.concepto, rfactsoc_ingresos.importe  from rfactsoc_ingresos , (select codsocio from rfactsoc  " & SQL & ") aa " & _
+                "  " & SQL
      
     conn.Execute vAux
     
-    conn.Execute "Delete from rfactsoc_ingresos " & Sql
+    conn.Execute "Delete from rfactsoc_ingresos " & SQL
     
     
     'Cabecera de factura (rfactsoc)
-    conn.Execute "Delete from " & NombreTabla & Sql
+    conn.Execute "Delete from " & NombreTabla & SQL
     
     'Decrementar contador si borramos el ultima factura
     Set vTipoMov = New CTiposMov
@@ -6657,7 +6659,7 @@ FinEliminar:
 End Function
 
 Private Function EliminarLinea(Aux As Integer) As Boolean
-Dim Sql As String, LEtra As String
+Dim SQL As String, LEtra As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
 Dim Mens As String
@@ -6684,17 +6686,17 @@ Dim cadena As String
             Set LOG = Nothing
             '-----------------------------------------------------------------------------
             
-            Sql = " where codtipom = '" & Data3.Recordset.Fields(0) & "'"
-            Sql = Sql & " and numfactu = " & Data3.Recordset.Fields(1)
-            Sql = Sql & " and fecfactu = " & DBSet(Data3.Recordset.Fields(2), "F")
-            Sql = Sql & " and codvarie = " & Data3.Recordset.Fields(3)
-            Sql = Sql & " and codcampo = " & Data3.Recordset.Fields(5)
+            SQL = " where codtipom = '" & Data3.Recordset.Fields(0) & "'"
+            SQL = SQL & " and numfactu = " & Data3.Recordset.Fields(1)
+            SQL = SQL & " and fecfactu = " & DBSet(Data3.Recordset.Fields(2), "F")
+            SQL = SQL & " and codvarie = " & Data3.Recordset.Fields(3)
+            SQL = SQL & " and codcampo = " & Data3.Recordset.Fields(5)
             
             'Lineas de calidad (rfactsoc_calidad)
-            conn.Execute "Delete from rfactsoc_calidad " & Sql
+            conn.Execute "Delete from rfactsoc_calidad " & SQL
         
             'Lineas de variedades
-            conn.Execute "Delete from rfactsoc_variedad " & Sql
+            conn.Execute "Delete from rfactsoc_variedad " & SQL
     
         Case 1 ' linea de gastos a pie de pagina
             'Eliminar en tablas de gastos a pie
@@ -6715,13 +6717,13 @@ Dim cadena As String
             
             Mens = ""
             
-            Sql = " where codtipom = '" & Data5.Recordset.Fields(0) & "'"
-            Sql = Sql & " and numfactu = " & Data5.Recordset.Fields(1)
-            Sql = Sql & " and fecfactu = " & DBSet(Data5.Recordset.Fields(2), "F")
-            Sql = Sql & " and numlinea = " & DBSet(Data5.Recordset.Fields(3), "N")
+            SQL = " where codtipom = '" & Data5.Recordset.Fields(0) & "'"
+            SQL = SQL & " and numfactu = " & Data5.Recordset.Fields(1)
+            SQL = SQL & " and fecfactu = " & DBSet(Data5.Recordset.Fields(2), "F")
+            SQL = SQL & " and numlinea = " & DBSet(Data5.Recordset.Fields(3), "N")
             
             'Lineas de gastos (rfactsoc_gastos)
-            conn.Execute "Delete from rfactsoc_gastos " & Sql
+            conn.Execute "Delete from rfactsoc_gastos " & SQL
         
     End Select
     
@@ -6775,16 +6777,16 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim Sql As String
+Dim SQL As String
 
     On Error Resume Next
     
-    Sql = " codtipom= '" & Text1(12).Text & "'"
-    Sql = Sql & " and numfactu = " & Text1(0).Text
-    Sql = Sql & " and fecfactu = " & DBSet(Text1(1).Text, "F")
+    SQL = " codtipom= '" & Text1(12).Text & "'"
+    SQL = SQL & " and numfactu = " & Text1(0).Text
+    SQL = SQL & " and fecfactu = " & DBSet(Text1(1).Text, "F")
 
-    If conWhere Then Sql = " WHERE " & Sql
-    ObtenerWhereCP = Sql
+    If conWhere Then SQL = " WHERE " & SQL
+    ObtenerWhereCP = SQL
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Obteniendo cadena WHERE.", Err.Description
 End Function
@@ -6799,79 +6801,79 @@ Private Function MontaSQLCarga(enlaza As Boolean, Opcion As Byte) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim Sql As String
+Dim SQL As String
     
     Select Case Opcion
     Case 1  ' calidades
-        Sql = "SELECT rfactsoc_calidad.codtipom, rfactsoc_calidad.numfactu, rfactsoc_calidad.fecfactu,"
-        Sql = Sql & " rfactsoc_calidad.codvarie, rfactsoc_calidad.codcampo, rfactsoc_calidad.codcalid,"
-        Sql = Sql & " rcalidad.nomcalid, rfactsoc_calidad.kilosnet, rfactsoc_calidad.precio, rfactsoc_calidad.imporcal, "
-        Sql = Sql & " rfactsoc_calidad.preciocalidad "
-        Sql = Sql & " FROM rfactsoc_calidad, rcalidad WHERE rfactsoc_calidad.codvarie = rcalidad.codvarie "
-        Sql = Sql & " and rfactsoc_calidad.codcalid = rcalidad.codcalid "
+        SQL = "SELECT rfactsoc_calidad.codtipom, rfactsoc_calidad.numfactu, rfactsoc_calidad.fecfactu,"
+        SQL = SQL & " rfactsoc_calidad.codvarie, rfactsoc_calidad.codcampo, rfactsoc_calidad.codcalid,"
+        SQL = SQL & " rcalidad.nomcalid, rfactsoc_calidad.kilosnet, rfactsoc_calidad.precio, rfactsoc_calidad.imporcal, "
+        SQL = SQL & " rfactsoc_calidad.preciocalidad "
+        SQL = SQL & " FROM rfactsoc_calidad, rcalidad WHERE rfactsoc_calidad.codvarie = rcalidad.codvarie "
+        SQL = SQL & " and rfactsoc_calidad.codcalid = rcalidad.codcalid "
     Case 2  ' variedades
-        Sql = "SELECT rfactsoc_variedad.codtipom, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu, "
-        Sql = Sql & " rfactsoc_variedad.codvarie, variedades.nomvarie, rfactsoc_variedad.codcampo, "
-        Sql = Sql & " rfactsoc_variedad.kilosnet, rfactsoc_variedad.preciomed, rfactsoc_variedad.imporvar, rfactsoc_variedad.imporgasto,"
-        Sql = Sql & " rfactsoc_variedad.descontado, IF(descontado=1,'*','') as ddescontado "
-        Sql = Sql & " FROM rfactsoc_variedad, variedades " 'lineas de variedad de la factura socio
-        Sql = Sql & " WHERE rfactsoc_variedad.codvarie = variedades.codvarie "
+        SQL = "SELECT rfactsoc_variedad.codtipom, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu, "
+        SQL = SQL & " rfactsoc_variedad.codvarie, variedades.nomvarie, rfactsoc_variedad.codcampo, "
+        SQL = SQL & " rfactsoc_variedad.kilosnet, rfactsoc_variedad.preciomed, rfactsoc_variedad.imporvar, rfactsoc_variedad.imporgasto,"
+        SQL = SQL & " rfactsoc_variedad.descontado, IF(descontado=1,'*','') as ddescontado "
+        SQL = SQL & " FROM rfactsoc_variedad, variedades " 'lineas de variedad de la factura socio
+        SQL = SQL & " WHERE rfactsoc_variedad.codvarie = variedades.codvarie "
     Case 3  ' anticipos de venta campo
-        Sql = "SELECT rfactsoc_anticipos.codtipom, rfactsoc_anticipos.numfactu, rfactsoc_anticipos.fecfactu, "
+        SQL = "SELECT rfactsoc_anticipos.codtipom, rfactsoc_anticipos.numfactu, rfactsoc_anticipos.fecfactu, "
 '        SQL = SQL & " CASE rfactsoc_anticipos.codtipomanti WHEN ""FAC"" THEN ""Anticipo V.Campo"" WHEN ""FAA"" THEN ""Anticipo"" END as codtipomanti,"
-        Sql = Sql & " rfactsoc_anticipos.codtipomanti, "
-        Sql = Sql & " rfactsoc_anticipos.numfactuanti, rfactsoc_anticipos.fecfactuanti, "
-        Sql = Sql & " rfactsoc_anticipos.codvarieanti, variedades.nomvarie, rfactsoc_anticipos.codcampoanti, "
-        Sql = Sql & " rfactsoc_anticipos.baseimpo "
-        Sql = Sql & " FROM rfactsoc_anticipos, variedades " 'lineas de variedad de la factura socio
-        Sql = Sql & " WHERE rfactsoc_anticipos.codvarieanti = variedades.codvarie "
+        SQL = SQL & " rfactsoc_anticipos.codtipomanti, "
+        SQL = SQL & " rfactsoc_anticipos.numfactuanti, rfactsoc_anticipos.fecfactuanti, "
+        SQL = SQL & " rfactsoc_anticipos.codvarieanti, variedades.nomvarie, rfactsoc_anticipos.codcampoanti, "
+        SQL = SQL & " rfactsoc_anticipos.baseimpo "
+        SQL = SQL & " FROM rfactsoc_anticipos, variedades " 'lineas de variedad de la factura socio
+        SQL = SQL & " WHERE rfactsoc_anticipos.codvarieanti = variedades.codvarie "
     Case 4  ' gastos de pie de pagina
-        Sql = "SELECT rfactsoc_gastos.codtipom, rfactsoc_gastos.numfactu, rfactsoc_gastos.fecfactu, "
-        Sql = Sql & " rfactsoc_gastos.numlinea, rfactsoc_gastos.codgasto, rconcepgasto.nomgasto, "
-        Sql = Sql & " rfactsoc_gastos.importe "
-        Sql = Sql & " FROM rfactsoc_gastos, rconcepgasto " 'lineas de gastos de la factura socio
-        Sql = Sql & " WHERE rfactsoc_gastos.codgasto = rconcepgasto.codgasto "
+        SQL = "SELECT rfactsoc_gastos.codtipom, rfactsoc_gastos.numfactu, rfactsoc_gastos.fecfactu, "
+        SQL = SQL & " rfactsoc_gastos.numlinea, rfactsoc_gastos.codgasto, rconcepgasto.nomgasto, "
+        SQL = SQL & " rfactsoc_gastos.importe "
+        SQL = SQL & " FROM rfactsoc_gastos, rconcepgasto " 'lineas de gastos de la factura socio
+        SQL = SQL & " WHERE rfactsoc_gastos.codgasto = rconcepgasto.codgasto "
     Case 5  ' albaranes de almazara y de bodega
-        Sql = "SELECT rfactsoc_albaran.codtipom, rfactsoc_albaran.numfactu, rfactsoc_albaran.fecfactu, "
-        Sql = Sql & " rfactsoc_albaran.numalbar, rfactsoc_albaran.fecalbar, rfactsoc_albaran.codvarie, "
-        Sql = Sql & " variedades.nomvarie, rfactsoc_albaran.codcampo, rfactsoc_albaran.kilosnet, "
-        Sql = Sql & " rfactsoc_albaran.grado, rfactsoc_albaran.precio, rfactsoc_albaran.importe, "
-        Sql = Sql & " rfactsoc_albaran.imporgasto "
-        Sql = Sql & " FROM rfactsoc_albaran, variedades " 'lineas de albaranes de la factura socio
-        Sql = Sql & " WHERE rfactsoc_albaran.codvarie = variedades.codvarie "
+        SQL = "SELECT rfactsoc_albaran.codtipom, rfactsoc_albaran.numfactu, rfactsoc_albaran.fecfactu, "
+        SQL = SQL & " rfactsoc_albaran.numalbar, rfactsoc_albaran.fecalbar, rfactsoc_albaran.codvarie, "
+        SQL = SQL & " variedades.nomvarie, rfactsoc_albaran.codcampo, rfactsoc_albaran.kilosnet, "
+        SQL = SQL & " rfactsoc_albaran.grado, rfactsoc_albaran.precio, rfactsoc_albaran.importe, "
+        SQL = SQL & " rfactsoc_albaran.imporgasto "
+        SQL = SQL & " FROM rfactsoc_albaran, variedades " 'lineas de albaranes de la factura socio
+        SQL = SQL & " WHERE rfactsoc_albaran.codvarie = variedades.codvarie "
     Case 6 ' facturas varias descontadas
-        Sql = "SELECT rfactsoc_fvarias.codtipom, rfactsoc_fvarias.numfactu, rfactsoc_fvarias.fecfactu, "
-        Sql = Sql & " rfactsoc_fvarias.codtipomfvar, rfactsoc_fvarias.numfactufvar, rfactsoc_fvarias.fecfactufvar, "
-        Sql = Sql & " fvarcabfact.codforpa, forpago.nomforpa, fvarcabfact.totalfac "
-        Sql = Sql & " FROM rfactsoc_fvarias, fvarcabfact, forpago " 'lineas de facturas varias que se descuentan
-        Sql = Sql & " WHERE rfactsoc_fvarias.codtipomfvar = fvarcabfact.codtipom and "
-        Sql = Sql & " rfactsoc_fvarias.numfactufvar = fvarcabfact.numfactu and "
-        Sql = Sql & " rfactsoc_fvarias.fecfactufvar = fvarcabfact.fecfactu and "
-        Sql = Sql & " fvarcabfact.codforpa = forpago.codforpa "
+        SQL = "SELECT rfactsoc_fvarias.codtipom, rfactsoc_fvarias.numfactu, rfactsoc_fvarias.fecfactu, "
+        SQL = SQL & " rfactsoc_fvarias.codtipomfvar, rfactsoc_fvarias.numfactufvar, rfactsoc_fvarias.fecfactufvar, "
+        SQL = SQL & " fvarcabfact.codforpa, forpago.nomforpa, fvarcabfact.totalfac "
+        SQL = SQL & " FROM rfactsoc_fvarias, fvarcabfact, forpago " 'lineas de facturas varias que se descuentan
+        SQL = SQL & " WHERE rfactsoc_fvarias.codtipomfvar = fvarcabfact.codtipom and "
+        SQL = SQL & " rfactsoc_fvarias.numfactufvar = fvarcabfact.numfactu and "
+        SQL = SQL & " rfactsoc_fvarias.fecfactufvar = fvarcabfact.fecfactu and "
+        SQL = SQL & " fvarcabfact.codforpa = forpago.codforpa "
     End Select
     
     If enlaza Then
         If Opcion = 6 Then
-            Sql = Sql & " and rfactsoc_fvarias.codtipom= '" & Text1(12).Text & "'"
-            Sql = Sql & " and rfactsoc_fvarias.numfactu = " & Text1(0).Text
-            Sql = Sql & " and rfactsoc_fvarias.fecfactu = " & DBSet(Text1(1).Text, "F")
+            SQL = SQL & " and rfactsoc_fvarias.codtipom= '" & Text1(12).Text & "'"
+            SQL = SQL & " and rfactsoc_fvarias.numfactu = " & Text1(0).Text
+            SQL = SQL & " and rfactsoc_fvarias.fecfactu = " & DBSet(Text1(1).Text, "F")
         Else
-            Sql = Sql & " and " & ObtenerWhereCP(False)
+            SQL = SQL & " and " & ObtenerWhereCP(False)
         End If
         If Opcion = 1 Then
-            Sql = Sql & " AND rfactsoc_calidad.codvarie=" & Data3.Recordset.Fields!Codvarie
-            Sql = Sql & " AND rfactsoc_calidad.codcampo=" & Data3.Recordset.Fields!codcampo
+            SQL = SQL & " AND rfactsoc_calidad.codvarie=" & Data3.Recordset.Fields!codvarie
+            SQL = SQL & " AND rfactsoc_calidad.codcampo=" & Data3.Recordset.Fields!codCampo
         End If
     Else
         If Opcion = 6 Then
-            Sql = Sql & " and rfactsoc_fvarias.numfactu = -1 "
+            SQL = SQL & " and rfactsoc_fvarias.numfactu = -1 "
         Else
-            Sql = Sql & " and numfactu = -1"
+            SQL = SQL & " and numfactu = -1"
         End If
     End If
-    Sql = Sql & " ORDER BY numfactu"
-    If Opcion = 5 Then Sql = Sql & ", fecalbar "
-    MontaSQLCarga = Sql
+    SQL = SQL & " ORDER BY numfactu"
+    If Opcion = 5 Then SQL = SQL & ", fecalbar "
+    MontaSQLCarga = SQL
 End Function
 
 
@@ -7178,7 +7180,7 @@ Dim cadMen As String
     
         Case 16 ' importe
             If txtAux3(Index) <> "" Then
-                If PonerFormatoDecimal(txtAux3(Index), 3) Then CmdAceptar.SetFocus
+                If PonerFormatoDecimal(txtAux3(Index), 3) Then cmdAceptar.SetFocus
             End If
         
     End Select
@@ -7189,7 +7191,7 @@ End Sub
 
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim i As Byte
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
@@ -7198,16 +7200,16 @@ Dim i As Byte
     Next i
     
     'tipo de factura
-    Sql = "select codtipom, nomtipom from usuarios.stipom where tipodocu > 0 and tipodocu < 12"
+    SQL = "select codtipom, nomtipom from usuarios.stipom where tipodocu > 0 and tipodocu < 12"
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     i = 1
     While Not Rs.EOF
 '        Sql = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
-        Sql = Rs.Fields(1).Value
-        Sql = Rs.Fields(0).Value & " - " & Sql
-        Combo1(0).AddItem Sql 'campo del codigo
+        SQL = Rs.Fields(1).Value
+        SQL = Rs.Fields(0).Value & " - " & SQL
+        Combo1(0).AddItem SQL 'campo del codigo
         Combo1(0).ItemData(Combo1(0).NewIndex) = i
         i = i + 1
         Rs.MoveNext
@@ -7234,16 +7236,16 @@ Dim i As Byte
     
 
     'tipo de factura
-    Sql = "select codtipom, nomtipom from usuarios.stipom where tipodocu > 0 and tipodocu <> 11"
+    SQL = "select codtipom, nomtipom from usuarios.stipom where tipodocu > 0 and tipodocu <> 11"
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     i = 1
     While Not Rs.EOF
 '        Sql = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
-        Sql = Rs.Fields(1).Value
-        Sql = Rs.Fields(0).Value & " - " & Sql
-        Combo1(2).AddItem Sql 'campo del codigo
+        SQL = Rs.Fields(1).Value
+        SQL = Rs.Fields(0).Value & " - " & SQL
+        Combo1(2).AddItem SQL 'campo del codigo
         Combo1(2).ItemData(Combo1(2).NewIndex) = i
         i = i + 1
         Rs.MoveNext
@@ -7257,7 +7259,7 @@ End Sub
 Private Function ModificaCabecera() As Boolean
 Dim B As Boolean
 Dim MenError As String
-Dim Sql As String
+Dim SQL As String
 Dim cadena As String
 
 
@@ -7287,12 +7289,12 @@ Dim cadena As String
     
     '[Monica]25/07/2013: cambio de la fecha de la factura
     If Text1(1).Text <> FecAnterior Then
-        Sql = "update rfactsoc set fecfactu = " & DBSet(Text1(1).Text, "F")
-        Sql = Sql & " where codtipom= '" & Text1(12).Text & "'"
-        Sql = Sql & " and numfactu = " & Text1(0).Text
-        Sql = Sql & " and fecfactu = " & DBSet(FecAnterior, "F")
+        SQL = "update rfactsoc set fecfactu = " & DBSet(Text1(1).Text, "F")
+        SQL = SQL & " where codtipom= '" & Text1(12).Text & "'"
+        SQL = SQL & " and numfactu = " & Text1(0).Text
+        SQL = SQL & " and fecfactu = " & DBSet(FecAnterior, "F")
     
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     B = ModificaDesdeFormulario2(Me, 2, "Frame2")
@@ -7316,16 +7318,16 @@ End Function
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EInsertarCab
     
     Set vTipoMov = New CTiposMov
     If vTipoMov.Leer(CodTipoMov) Then
         Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
-        Sql = CadenaInsertarDesdeForm(Me)
-        If Sql <> "" Then
-            If InsertarOferta(Sql, vTipoMov) Then
+        SQL = CadenaInsertarDesdeForm(Me)
+        If SQL <> "" Then
+            If InsertarOferta(SQL, vTipoMov) Then
                 CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
                 PonerCadenaBusqueda
                 PonerModo 2
@@ -7557,7 +7559,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -7620,30 +7622,30 @@ End Sub
 Private Sub CalcularTotales()
 Dim Importe  As Currency
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Anticipos As Currency
 
 '15/01/2015: los anticipos van por variedad campo. CORREGIDO
-    Sql = "select codvarie, codcampo, sum(imporvar) from rfactsoc_variedad where codtipom = " & DBSet(Data1.Recordset.Fields(0).Value, "T")
-    Sql = Sql & " and numfactu = " & Data1.Recordset.Fields(1).Value
-    Sql = Sql & " and fecfactu = " & DBSet(Data1.Recordset.Fields(2).Value, "F")
-    Sql = Sql & " group by 1,2 "
-    Sql = Sql & " order by 1,2 "
+    SQL = "select codvarie, codcampo, sum(imporvar) from rfactsoc_variedad where codtipom = " & DBSet(Data1.Recordset.Fields(0).Value, "T")
+    SQL = SQL & " and numfactu = " & Data1.Recordset.Fields(1).Value
+    SQL = SQL & " and fecfactu = " & DBSet(Data1.Recordset.Fields(2).Value, "F")
+    SQL = SQL & " group by 1,2 "
+    SQL = SQL & " order by 1,2 "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Importe = 0
     While Not Rs.EOF
         Importe = Importe + DBLet(Rs.Fields(2).Value, "N") 'Solo es para saber que hay registros que mostrar
         
-        Sql = "select sum(imporvar) from rfactsoc_variedad where (codtipom, numfactu, fecfactu) in (select codtipomanti,numfactuanti,fecfactuanti from rfactsoc_anticipos where codtipom = " & DBSet(Data1.Recordset.Fields(0).Value, "T")
-        Sql = Sql & " and numfactu = " & Data1.Recordset.Fields(1).Value
-        Sql = Sql & " and fecfactu = " & DBSet(Data1.Recordset.Fields(2).Value, "F") & ")"
-        Sql = Sql & " and codvarie = " & DBSet(Rs.Fields(0).Value, "N")
-        Sql = Sql & " and codcampo = " & DBSet(Rs.Fields(1).Value, "N")
+        SQL = "select sum(imporvar) from rfactsoc_variedad where (codtipom, numfactu, fecfactu) in (select codtipomanti,numfactuanti,fecfactuanti from rfactsoc_anticipos where codtipom = " & DBSet(Data1.Recordset.Fields(0).Value, "T")
+        SQL = SQL & " and numfactu = " & Data1.Recordset.Fields(1).Value
+        SQL = SQL & " and fecfactu = " & DBSet(Data1.Recordset.Fields(2).Value, "F") & ")"
+        SQL = SQL & " and codvarie = " & DBSet(Rs.Fields(0).Value, "N")
+        SQL = SQL & " and codcampo = " & DBSet(Rs.Fields(1).Value, "N")
     
-        Anticipos = DevuelveValor(Sql)
+        Anticipos = DevuelveValor(SQL)
         
         Importe = Importe - Anticipos
         
@@ -7795,15 +7797,15 @@ End Sub
 Private Sub CalcularGastos()
 Dim ImporteGastos  As Currency
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim ImporteFVarias As Currency
 
-    Sql = "select sum(importe) from rfactsoc_gastos where codtipom = " & DBSet(Data1.Recordset.Fields(0).Value, "T")
-    Sql = Sql & " and numfactu = " & Data1.Recordset.Fields(1).Value
-    Sql = Sql & " and fecfactu = " & DBSet(Data1.Recordset.Fields(2).Value, "F")
+    SQL = "select sum(importe) from rfactsoc_gastos where codtipom = " & DBSet(Data1.Recordset.Fields(0).Value, "T")
+    SQL = SQL & " and numfactu = " & Data1.Recordset.Fields(1).Value
+    SQL = SQL & " and fecfactu = " & DBSet(Data1.Recordset.Fields(2).Value, "F")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     ImporteGastos = 0
     If Not Rs.EOF Then                 '[Monica]09/07/2013: añadida la condicion de montifrut pq los dtos tienen iva
@@ -7814,12 +7816,12 @@ Dim ImporteFVarias As Currency
 
 
     '[Monica]26/02/2013: calculamos el importe de facturas varias que se van a descontar del importe de factura
-    Sql = "select sum(totalfac) from fvarcabfact where (codtipom, numfactu, fecfactu) in "
-    Sql = Sql & " (select codtipomfvar, numfactufvar, fecfactufvar from rfactsoc_fvarias where codtipom = " & DBSet(Data1.Recordset.Fields(0).Value, "T")
-    Sql = Sql & " and numfactu = " & Data1.Recordset.Fields(1).Value
-    Sql = Sql & " and fecfactu = " & DBSet(Data1.Recordset.Fields(2).Value, "F") & ")"
+    SQL = "select sum(totalfac) from fvarcabfact where (codtipom, numfactu, fecfactu) in "
+    SQL = SQL & " (select codtipomfvar, numfactufvar, fecfactufvar from rfactsoc_fvarias where codtipom = " & DBSet(Data1.Recordset.Fields(0).Value, "T")
+    SQL = SQL & " and numfactu = " & Data1.Recordset.Fields(1).Value
+    SQL = SQL & " and fecfactu = " & DBSet(Data1.Recordset.Fields(2).Value, "F") & ")"
         
-    ImporteFVarias = DevuelveValor(Sql)
+    ImporteFVarias = DevuelveValor(SQL)
     ImporteGastos = ImporteGastos + ImporteFVarias
     
     Text1(15).Text = Format(ImporteGastos, "###,##0.00")
@@ -7855,7 +7857,7 @@ Dim cadMen As String
 End Sub
 
 Private Function AsignarAlbaranes() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim cadWHERE As String
 
 
@@ -7863,15 +7865,15 @@ Dim cadWHERE As String
 
     AsignarAlbaranes = False
 
-    Sql = "select * from rhisfruta where codsocio = " & DBSet(Text1(2).Text, "N")
-    Sql = Sql & " and rhisfruta.codvarie in (select distinct codvarie from rfactsoc_variedad where codtipom = " & DBSet(Data1.Recordset!CodTipom, "T")
-    Sql = Sql & " and numfactu = " & Data1.Recordset!numfactu & " and fecfactu = " & DBSet(Data1.Recordset!fecfactu, "F") & ")"
+    SQL = "select * from rhisfruta where codsocio = " & DBSet(Text1(2).Text, "N")
+    SQL = SQL & " and rhisfruta.codvarie in (select distinct codvarie from rfactsoc_variedad where codtipom = " & DBSet(Data1.Recordset!CodTipom, "T")
+    SQL = SQL & " and numfactu = " & Data1.Recordset!numfactu & " and fecfactu = " & DBSet(Data1.Recordset!fecfactu, "F") & ")"
     
     cadWHERE = "codsocio = " & DBSet(Text1(2).Text, "N")
     cadWHERE = cadWHERE & " and rhisfruta.codvarie in (select distinct codvarie from rfactsoc_variedad where codtipom = " & DBSet(Data1.Recordset!CodTipom, "T")
     cadWHERE = cadWHERE & " and numfactu = " & Data1.Recordset!numfactu & " and fecfactu = " & DBSet(Data1.Recordset!fecfactu, "F") & ")"
     
-    If TotalRegistrosConsulta(Sql) <> 0 Then
+    If TotalRegistrosConsulta(SQL) <> 0 Then
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 47
@@ -7893,7 +7895,7 @@ End Function
 
 
 Private Function InsertarAlbaranes(Albaranes As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim TotalKilos As Currency
@@ -7919,9 +7921,9 @@ Dim Rs2 As ADODB.Recordset
     CadValues = ""
     While Not Rs.EOF
         TotalKilos = DBLet(Rs!KilosNet, "N")
-        ImporteVar = DevuelveValor("select imporvar from rfactsoc_variedad where " & ObtenerWhereCP(False) & " and codvarie = " & DBSet(Rs!Codvarie, "N"))
+        ImporteVar = DevuelveValor("select imporvar from rfactsoc_variedad where " & ObtenerWhereCP(False) & " and codvarie = " & DBSet(Rs!codvarie, "N"))
     
-        Sql2 = "select * from rhisfruta where numalbar in (" & Albaranes & ") and codvarie = " & DBSet(Rs!Codvarie, "N")
+        Sql2 = "select * from rhisfruta where numalbar in (" & Albaranes & ") and codvarie = " & DBSet(Rs!codvarie, "N")
         Set Rs2 = New ADODB.Recordset
         
         Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -7930,7 +7932,7 @@ Dim Rs2 As ADODB.Recordset
             PrecioAlb = Round2(ImporteAlb / Rs2!KilosNet, 4)
             
             CadValues = CadValues & "(" & DBSet(Text1(12).Text, "T") & "," & DBSet(Text1(0).Text, "N") & "," & DBSet(Text1(1).Text, "F") & ","
-            CadValues = CadValues & DBSet(Rs2!numalbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Rs2!Codvarie, "N") & ",0," & DBSet(Rs2!KilosBru, "N") & ","
+            CadValues = CadValues & DBSet(Rs2!numalbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Rs2!codvarie, "N") & ",0," & DBSet(Rs2!KilosBru, "N") & ","
             CadValues = CadValues & DBSet(Rs2!KilosNet, "N") & ",0," & DBSet(PrecioAlb, "N") & "," & DBSet(ImporteAlb, "N") & ",0,0,0,0),"
             
             Rs2.MoveNext
@@ -7940,20 +7942,20 @@ Dim Rs2 As ADODB.Recordset
         'actualizamos rfactsoc_variedad
         PrecioAlb = Round2(ImporteVar / TotalKilos, 4)
         
-        Sql = "update rfactsoc_variedad set kilosnet = " & DBSet(TotalKilos, "N")
-        Sql = Sql & ", preciomed = " & DBSet(PrecioAlb, "N")
-        Sql = Sql & " where " & ObtenerWhereCP(False)
-        Sql = Sql & " and codvarie = " & DBSet(Rs!Codvarie, "N")
+        SQL = "update rfactsoc_variedad set kilosnet = " & DBSet(TotalKilos, "N")
+        SQL = SQL & ", preciomed = " & DBSet(PrecioAlb, "N")
+        SQL = SQL & " where " & ObtenerWhereCP(False)
+        SQL = SQL & " and codvarie = " & DBSet(Rs!codvarie, "N")
         
-        conn.Execute Sql
+        conn.Execute SQL
         
         'actualizamos rfactsoc_calidad
-        Sql = "update rfactsoc_calidad set kilosnet = " & DBSet(TotalKilos, "N")
-        Sql = Sql & ", precio = " & DBSet(PrecioAlb, "N")
-        Sql = Sql & " where " & ObtenerWhereCP(False)
-        Sql = Sql & " and codvarie = " & DBSet(Rs!Codvarie, "N")
+        SQL = "update rfactsoc_calidad set kilosnet = " & DBSet(TotalKilos, "N")
+        SQL = SQL & ", precio = " & DBSet(PrecioAlb, "N")
+        SQL = SQL & " where " & ObtenerWhereCP(False)
+        SQL = SQL & " and codvarie = " & DBSet(Rs!codvarie, "N")
         
-        conn.Execute Sql
+        conn.Execute SQL
         
         
         Rs.MoveNext
@@ -7964,10 +7966,10 @@ Dim Rs2 As ADODB.Recordset
         CadValues = Mid(CadValues, 1, Len(CadValues) - 1)
     
         ' igual que el insert pero reemplaza las columnas existentes
-        Sql = "replace into rfactsoc_albaran (codtipom,numfactu,fecfactu,numalbar,fecalbar,codvarie,codcampo,kilosbru,"
-        Sql = Sql & "kilosnet,grado,precio,importe,imporgasto,prretirada,prmoltura,prenvasado) values "
+        SQL = "replace into rfactsoc_albaran (codtipom,numfactu,fecfactu,numalbar,fecalbar,codvarie,codcampo,kilosbru,"
+        SQL = SQL & "kilosnet,grado,precio,importe,imporgasto,prretirada,prmoltura,prenvasado) values "
     
-        conn.Execute Sql & CadValues
+        conn.Execute SQL & CadValues
         
     End If
     conn.CommitTrans

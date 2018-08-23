@@ -343,9 +343,9 @@ Begin VB.Form frmManTraba
          Height          =   360
          Index           =   30
          Left            =   4095
-         MaxLength       =   4
+         MaxLength       =   5
          TabIndex        =   31
-         Tag             =   "Cod.Asesoria|N|S|||straba|codasesoria|0000||"
+         Tag             =   "Cod.Asesoria|N|S|||straba|codasesoria|00000||"
          Top             =   3630
          Width           =   1020
       End
@@ -524,7 +524,7 @@ Begin VB.Form frmManTraba
          TabIndex        =   20
          Tag             =   "Seguridad Social|T|N|||straba|segsocial|||"
          Top             =   2055
-         Width           =   1560
+         Width           =   1785
       End
       Begin VB.TextBox text2 
          BackColor       =   &H80000018&
