@@ -247,6 +247,7 @@ Private mvarPrimFactLiqBOD As String ' primera factura de Liquidación bodega
 Private mvarUltFactLiqBOD As String ' ultima factura de Liquidación bodega
 
 Private mvarPorcKilosBOD As String ' porcentaje de incremento de kilos entrados de bodega (Para Mogente)
+Private mvarPorcKilosBOD2 As String ' porcentaje de incremento de kilos entrados de bodega (Para Mogente)
 
 'Telefonia
 Private mvarLetraSerieTel As String ' letra de serie de telefonia
@@ -1705,6 +1706,17 @@ Public Property Get PorcKilosBOD() As String
      PorcKilosBOD = mvarPorcKilosBOD
 End Property
 
+' Porcentaje de incremento de kilos netos 2
+Public Property Let PorcKilosBOD2(ByVal vData As String)
+     mvarPorcKilosBOD2 = vData
+End Property
+
+Public Property Get PorcKilosBOD2() As String
+     PorcKilosBOD2 = mvarPorcKilosBOD2
+End Property
+
+
+
 
 '*************************
 '      SUMINISTROS
@@ -2473,6 +2485,7 @@ On Error GoTo Err3
         mvarPrimFactLiqBOD = DBLet(Rs!PrimFactLiqBOD, "N") 'primera factura de liquidacion bodega
         mvarUltFactLiqBOD = DBLet(Rs!UltFactLiqBOD, "N") 'ultima factura de liquidacion bodega
         mvarPorcKilosBOD = DBLet(Rs!PorcKilosBOD, "N") 'porcentaje de incremento de kilos netos de entradas de bodega
+        mvarPorcKilosBOD2 = DBLet(Rs!PorcKilosBOD2, "N") 'porcentaje de incremento de kilos netos de entradas de bodega
         
         'telefonia
         mvarLetraSerieTel = DBLet(Rs!LetraSerieTel, "T") ' letra de serie de telefonia
@@ -2838,6 +2851,7 @@ On Error GoTo eModificar
     SQL = SQL & ", primfactliqbod= " & DBSet(mvarPrimFactLiqBOD, "N", "S") ' primera factura liquidacion bodega
     SQL = SQL & ", ultfactliqbod= " & DBSet(mvarUltFactLiqBOD, "N", "S")   ' ultima factura liquidacion bodega
     SQL = SQL & ", porckilosbod= " & DBSet(mvarPorcKilosBOD, "N", "S") ' porcentaje de incremento de kilos neto sde entradas de bodega (mogente)
+    SQL = SQL & ", porckilosbod2= " & DBSet(mvarPorcKilosBOD2, "N", "S") ' porcentaje de incremento de kilos neto sde entradas de bodega (mogente)
     
     'telefonia
     SQL = SQL & ", letraserietel= " & DBSet(mvarLetraSerieTel, "T") ' letra de serie de facturas de telefonia

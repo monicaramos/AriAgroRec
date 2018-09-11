@@ -2775,7 +2775,7 @@ Private WithEvents frmSec As frmManSeccion 'Secciones
 Attribute frmSec.VB_VarHelpID = -1
 Private WithEvents frmSoc As frmManSocios 'Socios
 Attribute frmSoc.VB_VarHelpID = -1
-Private WithEvents frmVar As frmComVar 'Variedades de comercial
+Private WithEvents frmVar As frmManVariedad 'frmComVar 'Variedades de comercial
 Attribute frmVar.VB_VarHelpID = -1
 Private WithEvents frmCal As frmManCalidades 'Calidades
 Attribute frmCal.VB_VarHelpID = -1
@@ -4263,7 +4263,7 @@ End Sub
 
 Private Sub AbrirFrmVariedad(Indice As Integer)
     indCodigo = Indice
-    Set frmVar = New frmComVar
+    Set frmVar = New frmManVariedad 'frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
     frmVar.Show vbModal
     Set frmVar = Nothing
@@ -4504,7 +4504,7 @@ Dim HayReg As Boolean
                 SQL = "select * from trzlineas_cargas, trzpalets " & _
                         "where 1=1 " & _
                         " and trzlineas_cargas.idpalet = trzpalets.idpalet " & _
-                        " and trzpalets.codvarie = " & DBSet(Rs!codvarie, "N") & _
+                        " and trzpalets.codvarie = " & DBSet(Rs!Codvarie, "N") & _
                         " and fechahora >= " & DBSet(DFecHoraPalet, "FH") & _
                         " and fechahora <= " & DBSet(HFecHoraPalet, "FH")
                 Set Rs2 = New ADODB.Recordset
@@ -4532,7 +4532,7 @@ Dim HayReg As Boolean
 '                    Sql = Sql & CStr(Rs!codvarie) & ","
 '24/05/2010:  ahora puede ser por variedad o por linea
                     If Option1(0).Value Then ' si es por variedad
-                        SQL = SQL & CStr(Rs!codvarie) & ","
+                        SQL = SQL & CStr(Rs!Codvarie) & ","
                     Else
                         SQL = SQL & CStr(Rs2!Linea) & ","
                     End If
@@ -4735,7 +4735,7 @@ Dim HayReg As Boolean
                 SQL = "select * from trzlineas_cargas, trzpalets " & _
                         "where 1=1 " & _
                         " and trzlineas_cargas.idpalet = trzpalets.idpalet " & _
-                        " and trzpalets.codvarie = " & DBSet(Rs!codvarie, "N") & _
+                        " and trzpalets.codvarie = " & DBSet(Rs!Codvarie, "N") & _
                         " and fechahora >= " & DBSet(DFecHoraPalet, "FH") & _
                         " and fechahora <= " & DBSet(HFecHoraPalet, "FH")
                 Set Rs2 = New ADODB.Recordset
@@ -4759,7 +4759,7 @@ Dim HayReg As Boolean
                     SQL = SQL & CStr(Rs!NumPalet) & ","
                     
                     If Option1(0).Value Then ' si es por variedad
-                        SQL = SQL & CStr(Rs!codvarie) & ","
+                        SQL = SQL & CStr(Rs!Codvarie) & ","
                     Else
                         SQL = SQL & CStr(Rs2!Linea) & ","
                     End If
@@ -4975,14 +4975,14 @@ Dim vCodigo As Long
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        Sql2 = "select sum(kilos) from trzmovim where numalbar is null and codvarie = " & DBSet(Rs!codvarie, "N") & " and esmerma = 0 "
+        Sql2 = "select sum(kilos) from trzmovim where numalbar is null and codvarie = " & DBSet(Rs!Codvarie, "N") & " and esmerma = 0 "
         
         KilosVar = DBLet(Rs!PesoNeto)
         If DevuelveValor(Sql2) < DBLet(Rs!PesoNeto) Then
-            MsgBox "No hay suficiente existencias de la variedad " & DBLet(Rs!codvarie), vbExclamation
+            MsgBox "No hay suficiente existencias de la variedad " & DBLet(Rs!Codvarie), vbExclamation
             Exit Function
         Else
-            Sql2 = "select * from trzmovim where numalbar is null and codvarie = " & DBSet(Rs!codvarie, "N") & " and esmerma = 0 "
+            Sql2 = "select * from trzmovim where numalbar is null and codvarie = " & DBSet(Rs!Codvarie, "N") & " and esmerma = 0 "
             Sql2 = Sql2 & " order by fecha asc "
             
             Set Rs2 = New ADODB.Recordset
@@ -5027,7 +5027,7 @@ Dim vCodigo As Long
                         vCodigo = vCodigo + 1
                         
                         SQL = "insert into trzmovim (codigo, numpalet, fecha, codvarie, kilos) values "
-                        SQL = SQL & "(" & DBSet(vCodigo, "N") & "," & DBSet(Rs2!NumPalet, "N") & "," & DBSet(Rs2!Fecha, "F") & "," & DBSet(Rs!codvarie, "N") & ","
+                        SQL = SQL & "(" & DBSet(vCodigo, "N") & "," & DBSet(Rs2!NumPalet, "N") & "," & DBSet(Rs2!Fecha, "F") & "," & DBSet(Rs!Codvarie, "N") & ","
                         SQL = SQL & DBSet(resto, "N") & ")"
                         
                         conn.Execute SQL
@@ -5109,17 +5109,17 @@ Dim vCodigo As Long
         RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         If Not RS1.EOF Then
-            Calibre = DevuelveValor("select min(codcalib) from calibres where codvarie = " & DBSet(RS1!codvarie, "N"))
+            Calibre = DevuelveValor("select min(codcalib) from calibres where codvarie = " & DBSet(RS1!Codvarie, "N"))
             
             
             'palets_variedad
-            SqlValues = "(" & DBSet(NroPalet, "N") & ",1," & DBSet(RS1!codvarie, "N") & "," & DBSet(RS1!codvarie, "N") & "," & DBSet(Marca, "N") & ","
+            SqlValues = "(" & DBSet(NroPalet, "N") & ",1," & DBSet(RS1!Codvarie, "N") & "," & DBSet(RS1!Codvarie, "N") & "," & DBSet(Marca, "N") & ","
             SqlValues = SqlValues & DBSet(Forfait, "T") & "," & DBSet(RS1!NumKilos, "N") & "," & DBSet(RS1!NumKilos, "N") & "," & DBSet(RS1!NumCajones, "N") & ")"
             
             conn.Execute SqlInsert2 & SqlValues
             
             'palets_calibre
-            SqlValues = "(" & DBSet(NroPalet, "N") & ",1,1," & DBSet(RS1!codvarie, "N") & "," & DBSet(Calibre, "N") & "," & DBSet(RS1!NumCajones, "N") & ")"
+            SqlValues = "(" & DBSet(NroPalet, "N") & ",1,1," & DBSet(RS1!Codvarie, "N") & "," & DBSet(Calibre, "N") & "," & DBSet(RS1!NumCajones, "N") & ")"
             
             conn.Execute SqlInsert3 & SqlValues
         End If
@@ -5128,7 +5128,7 @@ Dim vCodigo As Long
         vCodigo = vCodigo + 1
         
         SQL = "insert into trzmovim (codigo, numpalet, fecha, codvarie, kilos) values "
-        SQL = SQL & "(" & DBSet(vCodigo, "N") & "," & DBSet(NroPalet, "N") & "," & DBSet(txtCodigo(16).Text, "F") & "," & DBSet(RS1!codvarie, "N") & ","
+        SQL = SQL & "(" & DBSet(vCodigo, "N") & "," & DBSet(NroPalet, "N") & "," & DBSet(txtCodigo(16).Text, "F") & "," & DBSet(RS1!Codvarie, "N") & ","
         SQL = SQL & DBSet(RS1!NumKilos, "N") & ")"
         
         conn.Execute SQL
@@ -5205,7 +5205,7 @@ Dim CadValues As String
         SqlValues = ""
         While Not Rs.EOF
             CadValues = CadValues & "(" & vUsu.Codigo & "," & DBSet(Rs!NumPalet, "N") & "," & DBSet(Rs!FechaIni, "F") & ","
-            CadValues = CadValues & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codCampo, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+            CadValues = CadValues & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codCampo, "N") & "," & DBSet(Rs!Codvarie, "N") & ","
             CadValues = CadValues & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!numalbar, "N") & "),"
         
             Rs.MoveNext

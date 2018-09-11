@@ -601,13 +601,13 @@ Begin VB.Form frmManCampos
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmManCampos.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame10"
-      Tab(1).Control(1)=   "Frame9"
-      Tab(1).Control(2)=   "Frame8"
+      Tab(1).Control(0)=   "Frame3"
+      Tab(1).Control(1)=   "Frame5"
+      Tab(1).Control(2)=   "Frame6"
       Tab(1).Control(3)=   "Frame7"
-      Tab(1).Control(4)=   "Frame6"
-      Tab(1).Control(5)=   "Frame5"
-      Tab(1).Control(6)=   "Frame3"
+      Tab(1).Control(4)=   "Frame8"
+      Tab(1).Control(5)=   "Frame9"
+      Tab(1).Control(6)=   "Frame10"
       Tab(1).ControlCount=   7
       TabCaption(2)   =   "Coopropietarios"
       TabPicture(2)   =   "frmManCampos.frx":0044
@@ -642,8 +642,8 @@ Begin VB.Form frmManCampos
       TabCaption(8)   =   "Ordenes Rec."
       TabPicture(8)   =   "frmManCampos.frx":00EC
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "ListView4"
-      Tab(8).Control(1)=   "FrameAux6"
+      Tab(8).Control(0)=   "FrameAux6"
+      Tab(8).Control(1)=   "ListView4"
       Tab(8).ControlCount=   2
       TabCaption(9)   =   "Registro Visitas"
       TabPicture(9)   =   "frmManCampos.frx":0108
@@ -6539,7 +6539,7 @@ Private WithEvents frmPar As frmManPartidas 'partidas
 Attribute frmPar.VB_VarHelpID = -1
 Private WithEvents frmZon As frmManZonas 'zonas
 Attribute frmZon.VB_VarHelpID = -1
-Private WithEvents frmVar As frmComVar 'variedades
+Private WithEvents frmVar As frmManVariedad 'frmComVar 'variedades
 Attribute frmVar.VB_VarHelpID = -1
 Private WithEvents frmSit As frmManSituCamp 'situaciones de campos
 Attribute frmSit.VB_VarHelpID = -1
@@ -7349,6 +7349,12 @@ Dim B As Boolean
     imgBuscar(1).Enabled = (Modo = 1 Or Modo = 3)
     imgBuscar(1).visible = (Modo = 1 Or Modo = 3)
     
+    '[Monica]03/09/2018: para el caso de Alzira no se permite modificar la variedad
+    If vParamAplic.Cooperativa = 4 Then
+        BloquearTxt Text1(2), Not (Modo = 1 Or Modo = 3)
+        imgBuscar(2).Enabled = (Modo = 1 Or Modo = 3)
+        imgBuscar(2).visible = (Modo = 1 Or Modo = 3)
+    End If
     
     PonerLongCampos
 
@@ -7513,8 +7519,9 @@ Dim vCodCam As String
     Me.mnChequeoNroOrden.Enabled = (Modo = 0 Or Modo = 2) And vParamAplic.Cooperativa = 4
      
     'Cambio de socio de un campo
-    Toolbar2.Buttons(5).Enabled = B And EsCampoCooperativa(vCodCam)
-    Me.mnCambioSocio.Enabled = B And EsCampoCooperativa(vCodCam)
+    '[Monica]04/09/2018: No se puede modificar un socio de un campo para el caso de ALZIRA, añadida condicion
+    Toolbar2.Buttons(5).Enabled = B And EsCampoCooperativa(vCodCam) And vParamAplic.Cooperativa <> 4
+    Me.mnCambioSocio.Enabled = B And EsCampoCooperativa(vCodCam) And vParamAplic.Cooperativa <> 4
     
     'Gastos Pendientes de Integrar
     Toolbar2.Buttons(6).Enabled = B And EsCampoCooperativa(vCodCam)
@@ -9724,7 +9731,7 @@ Dim Eliminar As Boolean
             If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 SQL = "DELETE FROM rcampos_clasif"
-                SQL = SQL & vWhere & " AND codvarie= " & DBLet(Adoaux(Index).Recordset!codvarie, "N")
+                SQL = SQL & vWhere & " AND codvarie= " & DBLet(Adoaux(Index).Recordset!Codvarie, "N")
                 SQL = SQL & " and codcalid = " & DBLet(Adoaux(Index).Recordset!codcalid, "N")
             End If
     
@@ -10539,7 +10546,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             PonerFoco Text1(Indice)
     
        Case 2 'Variedades
-            Set frmVar = New frmComVar
+            Set frmVar = New frmManVariedad 'frmComVar
 '            frmVar.DeConsulta = True
             frmVar.DatosADevolverBusqueda = "0|1|"
 '            frmVar.CodigoActual = Text1(2).Text
@@ -11717,7 +11724,7 @@ Dim SQL As String
     End If
 
     SQL = ""
-    SQL = DevuelveDesdeBDNew(cAgro, "variedades", "tipoclasifica", "codvarie", Data1.Recordset!codvarie, "N")
+    SQL = DevuelveDesdeBDNew(cAgro, "variedades", "tipoclasifica", "codvarie", Data1.Recordset!Codvarie, "N")
     
     SSTab1.TabEnabled(3) = (SQL = "0")
     SSTab1.TabVisible(3) = (SQL = "0")

@@ -2907,7 +2907,7 @@ Attribute frmInc.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes ' mensajes para sacar campos
 Attribute frmMens.VB_VarHelpID = -1
 
-Private WithEvents frmVar As frmComVar 'Form Mto de variedades de comercial
+Private WithEvents frmVar As frmManVariedad 'frmComVar 'Form Mto de variedades de comercial
 Attribute frmVar.VB_VarHelpID = -1
 Private WithEvents frmSoc As frmManSocios 'Form Mto de socios
 Attribute frmSoc.VB_VarHelpID = -1
@@ -3936,7 +3936,7 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 0 'Variedad
             Indice = 2
             PonerFoco Text1(Indice)
-            Set frmVar = New frmComVar
+            Set frmVar = New frmManVariedad 'frmComVar
             frmVar.DatosADevolverBusqueda = "0|1|"
             frmVar.Show vbModal
             Set frmVar = Nothing
