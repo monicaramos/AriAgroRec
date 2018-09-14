@@ -339,6 +339,7 @@ Form=frmMSG.frm
 Form=frmMenBoxAriadna.frm
 Module=TraspCooperativas; Moduls\TraspCooperativas.bas
 Form=frmCopiaCalibCalid.frm
+Form=frmCodEAN.frm
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""

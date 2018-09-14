@@ -4657,14 +4657,14 @@ End Sub
 Private Sub CalculoPesoNeto()
 Dim Neto As Long
 Dim Bruto As Long
-Dim Cajas As Long
+Dim cajas As Long
 Dim Palets As Long
     
     Bruto = ComprobarCero(Text1(9).Text)
-    Cajas = ComprobarCero(Text1(11).Text)
+    cajas = ComprobarCero(Text1(11).Text)
     Palets = ComprobarCero(Text1(25).Text)
 
-    Neto = Bruto - Round2(Cajas * vParamAplic.PesoCaja1, 0) - Round2(vParamAplic.PesoCaja3 * Palets, 0)
+    Neto = Bruto - Round2(cajas * vParamAplic.PesoCaja1, 0) - Round2(vParamAplic.PesoCaja3 * Palets, 0)
 
     Text1(10).Text = Format(Neto, "###,###,##0")
 End Sub
@@ -6373,7 +6373,7 @@ End Function
 Private Sub mnImpresionEtiquetas_Click()
 Dim SQL As String
 Dim Rs As ADODB.Recordset
-Dim Cajas As Currency
+Dim cajas As Currency
 Dim cad As String
 Dim nroPalets As Long
 Dim crear As Byte
@@ -6400,7 +6400,7 @@ Dim Resp As String
     
     B = True
     If crear = 1 Then
-        Resp = InputBox("Nro de Palets:", "Número de Palets", ComprobarCero(Text1(25).Text))
+        Resp = InputBox("Nro de Palets:", "Número de Palets", 0) 'ComprobarCero(Text1(25).Text))
         If Resp <> "" Then
             nroPalets = Resp
             B = InsertarPalets(CStr(Data1.Recordset!NumNotac), nroPalets, CStr(Data1.Recordset!Numcajon), CStr(Data1.Recordset!KilosNet), Data1.Recordset!FechaEnt, CStr(Data1.Recordset!Codsocio), CStr(Data1.Recordset!Codvarie), CStr(Data1.Recordset!codCampo))
@@ -6419,7 +6419,7 @@ End Sub
 Private Function InsertarPalets(Albaran As String, Palets As Long, NumCajones As Long, NumKilos As Long, Fecha As Date, Socio As String, Variedad As String, campo As String)
 Dim nroPalets As Long
 Dim Kilos As Long
-Dim Cajas As Long
+Dim cajas As Long
 Dim i As Long
 Dim CRFID As String
 Dim NroCRFID As String
@@ -6499,7 +6499,7 @@ Dim TotKilos As Long
     If Palets > 0 Then
         nroPalets = Palets
         Kilos = NumKilos \ nroPalets
-        Cajas = Val(NumCajones) \ nroPalets
+        cajas = Val(NumCajones) \ nroPalets
         
         CRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000")
         Hora = Mid(Format(Now, "dd/mm/yyyy hh:mm:ss"), 12, 8)
@@ -6513,7 +6513,7 @@ Dim TotKilos As Long
             
             SQL = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
             SQL = SQL & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
-            SQL = SQL & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(Cajas, "N") & ","
+            SQL = SQL & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(cajas, "N") & ","
             SQL = SQL & DBSet(Kilos, "N") & "," & DBSet(Socio, "N") & "," & DBSet(campo, "N") & ","
             SQL = SQL & DBSet(Variedad, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
             SQL = SQL & DBSet(Albaran, "N") & "," & DBSet(NroCRFID, "T") & ")"
@@ -6521,7 +6521,7 @@ Dim TotKilos As Long
             conn.Execute SQL
         Next i
         
-        SQL = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (Cajas * nroPalets))
+        SQL = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (cajas * nroPalets))
         SQL = SQL & ", numkilos = numkilos + " & CCur(NumKilos) - (Kilos * nroPalets)
         SQL = SQL & " where numnotac = " & DBSet(Albaran, "N")
         SQL = SQL & " and idpalet = " & DBSet(NumF, "N")

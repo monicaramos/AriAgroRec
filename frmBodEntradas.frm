@@ -6,16 +6,16 @@ Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form frmBodEntradas 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Entradas de Bodega"
-   ClientHeight    =   8310
+   ClientHeight    =   8940
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   10425
+   ClientWidth     =   10470
    Icon            =   "frmBodEntradas.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8310
-   ScaleWidth      =   10425
+   ScaleHeight     =   8940
+   ScaleWidth      =   10470
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral 
@@ -168,7 +168,7 @@ Begin VB.Form frmBodEntradas
       Width           =   1515
    End
    Begin VB.Frame Frame2 
-      Height          =   4185
+      Height          =   4725
       Index           =   0
       Left            =   120
       TabIndex        =   22
@@ -190,7 +190,7 @@ Begin VB.Form frmBodEntradas
          Style           =   2  'Dropdown List
          TabIndex        =   8
          Tag             =   "Tolva|N|N|0|3|rhisfruta|tolva||N|"
-         Top             =   2910
+         Top             =   3315
          Width           =   1350
       End
       Begin VB.TextBox Text1 
@@ -229,7 +229,7 @@ Begin VB.Form frmBodEntradas
          MaxLength       =   4
          TabIndex        =   7
          Tag             =   "Código Trabajador|N|N|0|9999|rhisfruta|codtraba|0000||"
-         Top             =   2490
+         Top             =   2850
          Width           =   825
       End
       Begin VB.TextBox Text2 
@@ -248,7 +248,7 @@ Begin VB.Form frmBodEntradas
          Index           =   12
          Left            =   2385
          TabIndex        =   65
-         Top             =   2490
+         Top             =   2850
          Width           =   4110
       End
       Begin VB.TextBox Text1 
@@ -268,7 +268,7 @@ Begin VB.Form frmBodEntradas
          MaxLength       =   7
          TabIndex        =   13
          Tag             =   "Tara|N|S|||rhisfruta|tarabodega|###,##0||"
-         Top             =   1380
+         Top             =   1515
          Width           =   1840
       End
       Begin VB.CheckBox Check1 
@@ -287,7 +287,7 @@ Begin VB.Form frmBodEntradas
          Left            =   3900
          TabIndex        =   9
          Tag             =   "Con Bonificacion Especial|N|N|0|1|rhisfruta|esbonifespecial|0||"
-         Top             =   2985
+         Top             =   3390
          Width           =   2550
       End
       Begin VB.TextBox Text1 
@@ -307,7 +307,7 @@ Begin VB.Form frmBodEntradas
          MaxLength       =   12
          TabIndex        =   16
          Tag             =   "Grado|N|S|||rhisfruta|kgradobonif|###,##0.00||"
-         Top             =   2490
+         Top             =   2850
          Width           =   1840
       End
       Begin VB.TextBox Text2 
@@ -327,7 +327,7 @@ Begin VB.Form frmBodEntradas
          Index           =   2
          Left            =   7875
          TabIndex        =   42
-         Top             =   2910
+         Top             =   3360
          Width           =   1840
       End
       Begin VB.TextBox Text1 
@@ -347,7 +347,7 @@ Begin VB.Form frmBodEntradas
          MaxLength       =   12
          TabIndex        =   15
          Tag             =   "Grado|N|S|||rhisfruta|prestimado|###,##0.00||"
-         Top             =   2115
+         Top             =   2385
          Width           =   1840
       End
       Begin VB.TextBox Text2 
@@ -367,7 +367,7 @@ Begin VB.Form frmBodEntradas
          Left            =   1530
          TabIndex        =   39
          Text            =   "12345678901234567890"
-         Top             =   1755
+         Top             =   1935
          Width           =   4950
       End
       Begin VB.TextBox Text2 
@@ -387,7 +387,7 @@ Begin VB.Form frmBodEntradas
          Left            =   2610
          TabIndex        =   38
          Text            =   "12345678901234567890"
-         Top             =   1380
+         Top             =   1515
          Width           =   3885
       End
       Begin VB.TextBox Text1 
@@ -445,7 +445,7 @@ Begin VB.Form frmBodEntradas
          Style           =   2  'Dropdown List
          TabIndex        =   11
          Tag             =   "Recolectado|N|N|0|1|rhisfruta|recolect||N|"
-         Top             =   570
+         Top             =   615
          Width           =   1840
       End
       Begin VB.TextBox Text2 
@@ -464,7 +464,7 @@ Begin VB.Form frmBodEntradas
          Index           =   6
          Left            =   2385
          TabIndex        =   33
-         Top             =   2115
+         Top             =   2385
          Width           =   4110
       End
       Begin VB.TextBox Text1 
@@ -484,7 +484,7 @@ Begin VB.Form frmBodEntradas
          MaxLength       =   4
          TabIndex        =   6
          Tag             =   "Código Depósito|N|N|0|9999|rhisfruta|coddeposito|0000||"
-         Top             =   2115
+         Top             =   2385
          Width           =   825
       End
       Begin VB.TextBox Text1 
@@ -505,7 +505,7 @@ Begin VB.Form frmBodEntradas
          TabIndex        =   5
          Tag             =   "Campo|N|N|||rhisfruta|codcampo|00000000||"
          Text            =   "12345678"
-         Top             =   1380
+         Top             =   1515
          Width           =   1050
       End
       Begin VB.TextBox Text2 
@@ -525,7 +525,7 @@ Begin VB.Form frmBodEntradas
          Left            =   2385
          TabIndex        =   31
          Text            =   "12345678901234567890"
-         Top             =   975
+         Top             =   1065
          Width           =   4110
       End
       Begin VB.TextBox Text1 
@@ -545,7 +545,7 @@ Begin VB.Form frmBodEntradas
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   17
-         Top             =   3555
+         Top             =   4005
          Width           =   9510
       End
       Begin VB.TextBox Text2 
@@ -565,7 +565,7 @@ Begin VB.Form frmBodEntradas
          Left            =   2385
          TabIndex        =   28
          Text            =   "12345678901234567890"
-         Top             =   570
+         Top             =   615
          Width           =   4110
       End
       Begin VB.TextBox Text1 
@@ -586,7 +586,7 @@ Begin VB.Form frmBodEntradas
          TabIndex        =   3
          Tag             =   "Variedad|N|N|0|999999|rhisfruta|codvarie|000000||"
          Text            =   "123456"
-         Top             =   570
+         Top             =   615
          Width           =   825
       End
       Begin VB.TextBox Text1 
@@ -606,7 +606,7 @@ Begin VB.Form frmBodEntradas
          MaxLength       =   7
          TabIndex        =   14
          Tag             =   "Peso Neto|N|N|||rhisfruta|kilosnet|###,##0||"
-         Top             =   1755
+         Top             =   1935
          Width           =   1840
       End
       Begin VB.TextBox Text1 
@@ -626,7 +626,7 @@ Begin VB.Form frmBodEntradas
          MaxLength       =   7
          TabIndex        =   12
          Tag             =   "Peso Bruto|N|N|||rhisfruta|kilosbru|###,##0||"
-         Top             =   975
+         Top             =   1065
          Width           =   1840
       End
       Begin VB.TextBox Text1 
@@ -647,7 +647,7 @@ Begin VB.Form frmBodEntradas
          TabIndex        =   4
          Tag             =   "Socio|N|N|||rhisfruta|codsocio|000000||"
          Text            =   "123456"
-         Top             =   975
+         Top             =   1065
          Width           =   825
       End
       Begin VB.TextBox Text1 
@@ -711,7 +711,7 @@ Begin VB.Form frmBodEntradas
          Height          =   255
          Left            =   180
          TabIndex        =   67
-         Top             =   2955
+         Top             =   3315
          Width           =   705
       End
       Begin VB.Image imgBuscar 
@@ -719,7 +719,7 @@ Begin VB.Form frmBodEntradas
          Index           =   4
          Left            =   1260
          ToolTipText     =   "Buscar Trabajador"
-         Top             =   2520
+         Top             =   2880
          Width           =   240
       End
       Begin VB.Label Label4 
@@ -736,7 +736,7 @@ Begin VB.Form frmBodEntradas
          Height          =   255
          Left            =   180
          TabIndex        =   66
-         Top             =   2535
+         Top             =   2865
          Width           =   1050
       End
       Begin VB.Label Label1 
@@ -754,7 +754,7 @@ Begin VB.Form frmBodEntradas
          Index           =   6
          Left            =   6570
          TabIndex        =   64
-         Top             =   1380
+         Top             =   1515
          Width           =   870
       End
       Begin VB.Label Label1 
@@ -772,7 +772,7 @@ Begin VB.Form frmBodEntradas
          Index           =   4
          Left            =   6570
          TabIndex        =   63
-         Top             =   2520
+         Top             =   2880
          Width           =   1320
       End
       Begin VB.Label Label1 
@@ -790,7 +790,7 @@ Begin VB.Form frmBodEntradas
          Index           =   0
          Left            =   6570
          TabIndex        =   43
-         Top             =   2940
+         Top             =   3390
          Width           =   1185
       End
       Begin VB.Label Label1 
@@ -808,7 +808,7 @@ Begin VB.Form frmBodEntradas
          Index           =   5
          Left            =   6570
          TabIndex        =   41
-         Top             =   2130
+         Top             =   2400
          Width           =   1185
       End
       Begin VB.Label Label6 
@@ -826,7 +826,7 @@ Begin VB.Form frmBodEntradas
          Index           =   2
          Left            =   180
          TabIndex        =   40
-         Top             =   1770
+         Top             =   1975
          Width           =   1080
       End
       Begin VB.Label Label14 
@@ -888,7 +888,7 @@ Begin VB.Form frmBodEntradas
          Index           =   3
          Left            =   6570
          TabIndex        =   35
-         Top             =   600
+         Top             =   645
          Width           =   1305
       End
       Begin VB.Label Label23 
@@ -905,7 +905,7 @@ Begin VB.Form frmBodEntradas
          Height          =   255
          Left            =   180
          TabIndex        =   34
-         Top             =   2160
+         Top             =   2420
          Width           =   975
       End
       Begin VB.Image imgBuscar 
@@ -913,7 +913,7 @@ Begin VB.Form frmBodEntradas
          Index           =   3
          Left            =   1260
          ToolTipText     =   "Buscar Depósito"
-         Top             =   2145
+         Top             =   2415
          Width           =   240
       End
       Begin VB.Image imgBuscar 
@@ -921,7 +921,7 @@ Begin VB.Form frmBodEntradas
          Index           =   2
          Left            =   1260
          ToolTipText     =   "Buscar Campo"
-         Top             =   1380
+         Top             =   1560
          Width           =   240
       End
       Begin VB.Label Label6 
@@ -939,7 +939,7 @@ Begin VB.Form frmBodEntradas
          Index           =   0
          Left            =   180
          TabIndex        =   32
-         Top             =   1380
+         Top             =   1530
          Width           =   690
       End
       Begin VB.Image imgBuscar 
@@ -947,7 +947,7 @@ Begin VB.Form frmBodEntradas
          Index           =   1
          Left            =   1260
          ToolTipText     =   "Buscar Socio"
-         Top             =   1005
+         Top             =   1095
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -982,7 +982,7 @@ Begin VB.Form frmBodEntradas
          Height          =   255
          Left            =   180
          TabIndex        =   29
-         Top             =   570
+         Top             =   640
          Width           =   960
       End
       Begin VB.Image imgBuscar 
@@ -990,7 +990,7 @@ Begin VB.Form frmBodEntradas
          Index           =   0
          Left            =   1260
          ToolTipText     =   "Buscar Variedad"
-         Top             =   630
+         Top             =   675
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -1008,7 +1008,7 @@ Begin VB.Form frmBodEntradas
          Index           =   2
          Left            =   6570
          TabIndex        =   27
-         Top             =   1755
+         Top             =   1935
          Width           =   1095
       End
       Begin VB.Label Label1 
@@ -1026,7 +1026,7 @@ Begin VB.Form frmBodEntradas
          Index           =   1
          Left            =   6570
          TabIndex        =   26
-         Top             =   1005
+         Top             =   1095
          Width           =   1185
       End
       Begin VB.Label Label6 
@@ -1044,7 +1044,7 @@ Begin VB.Form frmBodEntradas
          Index           =   1
          Left            =   180
          TabIndex        =   25
-         Top             =   975
+         Top             =   1085
          Width           =   690
       End
       Begin VB.Label Label29 
@@ -1061,7 +1061,7 @@ Begin VB.Form frmBodEntradas
          Height          =   255
          Left            =   180
          TabIndex        =   24
-         Top             =   3315
+         Top             =   3720
          Width           =   1485
       End
       Begin VB.Image imgZoom 
@@ -1069,7 +1069,7 @@ Begin VB.Form frmBodEntradas
          Index           =   0
          Left            =   1710
          ToolTipText     =   "Zoom descripción"
-         Top             =   3285
+         Top             =   3735
          Width           =   240
       End
    End
@@ -1077,8 +1077,8 @@ Begin VB.Form frmBodEntradas
       Height          =   2490
       Left            =   120
       TabIndex        =   44
-      Top             =   5040
-      Width           =   10030
+      Top             =   5670
+      Width           =   10035
       _ExtentX        =   17701
       _ExtentY        =   4392
       _Version        =   393216
@@ -1716,7 +1716,7 @@ Begin VB.Form frmBodEntradas
       Index           =   0
       Left            =   120
       TabIndex        =   20
-      Top             =   7575
+      Top             =   8250
       Width           =   2865
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -1752,7 +1752,7 @@ Begin VB.Form frmBodEntradas
       Height          =   375
       Left            =   9120
       TabIndex        =   19
-      Top             =   7785
+      Top             =   8370
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
@@ -1769,7 +1769,7 @@ Begin VB.Form frmBodEntradas
       Height          =   375
       Left            =   8010
       TabIndex        =   18
-      Top             =   7785
+      Top             =   8370
       Width           =   1035
    End
    Begin MSAdodcLib.Adodc Data1 
@@ -1833,7 +1833,7 @@ Begin VB.Form frmBodEntradas
       Height          =   375
       Left            =   9120
       TabIndex        =   23
-      Top             =   7785
+      Top             =   8370
       Visible         =   0   'False
       Width           =   1035
    End
@@ -2877,7 +2877,7 @@ End Sub
 Private Sub mnTarar_Click()
 Dim SQL As String
 Dim Rs As ADODB.Recordset
-Dim Cajas As Currency
+Dim cajas As Currency
 Dim cad As String
 
 '    ?????????????????

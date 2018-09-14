@@ -2348,7 +2348,7 @@ Dim Mens As String
                     End If
                     
                     '[Monica]08/02/2012: Si han modificado variedad socio o campo actualizamos en traza
-                    If Data1.Recordset!codvarie <> CLng(Text1(2).Text) Or Data1.Recordset!Codsocio <> CLng(Text1(1).Text) Or Data1.Recordset!codCampo <> CLng(Text1(5).Text) Or _
+                    If Data1.Recordset!Codvarie <> CLng(Text1(2).Text) Or Data1.Recordset!Codsocio <> CLng(Text1(1).Text) Or Data1.Recordset!codCampo <> CLng(Text1(5).Text) Or _
                        Data1.Recordset!FechaEnt <> Text1(10).Text Or Data1.Recordset!horaentr <> Text1(4).Text Then
                          Mens = "No se han realizado los cambios en Trazabilidad. " & vbCrLf
                          If Not ActualizarTraza(Text1(0).Text, Text1(2).Text, Text1(1).Text, Text1(5).Text, Text1(10).Text, Text1(4).Text, Mens) Then
@@ -2771,7 +2771,7 @@ Dim B As Boolean
     
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
+    CmdCancelar.visible = B
     cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
@@ -3277,7 +3277,7 @@ End Sub
 Private Sub mnPaletizacion_Click()
 Dim SQL As String
 Dim Rs As ADODB.Recordset
-Dim Cajas As Currency
+Dim cajas As Currency
 Dim cad As String
 Dim crear As Integer
 Dim Imprimir As Integer
@@ -3401,7 +3401,7 @@ End Sub
 Private Function InsertarPalets(Albaran As String, Palets As Long, NumCajones As Long, NumKilos As Long, Fecha As Date, Socio As String, Variedad As String, ByRef IdPalets As String)
 Dim nroPalets As Long
 Dim Kilos As Long
-Dim Cajas As Long
+Dim cajas As Long
 Dim i As Long
 Dim CRFID As String
 Dim NroCRFID As String
@@ -3483,7 +3483,7 @@ Dim TotKilos As Long
     If Palets > 0 Then
         nroPalets = Palets
         Kilos = NumKilos \ nroPalets
-        Cajas = Val(NumCajones) \ nroPalets
+        cajas = Val(NumCajones) \ nroPalets
         
         CRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000")
         Hora = Mid(Format(Now, "dd/mm/yyyy hh:mm:ss"), 12, 8)
@@ -3497,7 +3497,7 @@ Dim TotKilos As Long
             
             SQL = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
             SQL = SQL & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
-            SQL = SQL & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(Cajas, "N") & ","
+            SQL = SQL & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(cajas, "N") & ","
             SQL = SQL & DBSet(Kilos, "N") & "," & DBSet(Socio, "N") & "," & DBSet(Text1(5).Text, "N") & ","
             SQL = SQL & DBSet(Variedad, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
             SQL = SQL & DBSet(Albaran, "N") & "," & DBSet(NroCRFID, "T") & ")"
@@ -3507,7 +3507,7 @@ Dim TotKilos As Long
             IdPalets = IdPalets & DBSet(NumF, "N") & ","
         Next i
         
-        SQL = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (Cajas * nroPalets))
+        SQL = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (cajas * nroPalets))
         SQL = SQL & ", numkilos = numkilos + " & CCur(NumKilos) - (Kilos * nroPalets)
         SQL = SQL & " where numnotac = " & DBSet(Albaran, "N")
         SQL = SQL & " and idpalet = " & DBSet(NumF, "N")
@@ -5435,7 +5435,7 @@ End Sub
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim i As Integer, K As Integer
+Dim i As Integer, k As Integer
 Dim SQL As String
 Dim Rs As ADODB.Recordset
 
@@ -5485,10 +5485,10 @@ Dim Rs As ADODB.Recordset
     i = 1
     While Not Rs.EOF
 '        Sql = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
-        For K = 0 To 4
-            Combo15(K).AddItem Rs.Fields(1).Value 'campo del codigo
-            Combo15(K).ItemData(Combo15(K).NewIndex) = Rs.Fields(0).Value
-        Next K
+        For k = 0 To 4
+            Combo15(k).AddItem Rs.Fields(1).Value 'campo del codigo
+            Combo15(k).ItemData(Combo15(k).NewIndex) = Rs.Fields(0).Value
+        Next k
         
         i = i + 1
         Rs.MoveNext
@@ -6179,7 +6179,7 @@ Private Sub ImprimirEntradaDirectaPrinter(NumNota As String, Copias As Integer)
     Dim Situacion As String
     Dim Clase As String
     Dim Tara As Currency
-    Dim Cajas As Currency
+    Dim cajas As Currency
     
 On Error GoTo EImpTickD
 
@@ -6269,14 +6269,14 @@ On Error GoTo EImpTickD
             Situacion = ""
             Situacion = DevuelveValor("select nomsitua from rsituacioncampo, rcampos where rcampos.codsitua = rsituacioncampo.codsitua and rcampos.codsitua <> 0 and rcampos.codcampo = " & DBSet(Rs!codCampo, "N"))
             
-            Lin = RellenaABlancos("Variedad: " & Format(Rs!codvarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43) & _
+            Lin = RellenaABlancos("Variedad: " & Format(Rs!Codvarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43) & _
                   Space(2) & _
-                  RellenaABlancos("Variedad: " & Format(Rs!codvarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43)
+                  RellenaABlancos("Variedad: " & Format(Rs!Codvarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43)
             Printer.Print Lin
 
             ' LINEA 8
             Clase = ""
-            Clase = DevuelveValor("select nomclase from clases, variedades where variedades.codvarie = " & DBSet(Rs!codvarie, "N") & " and variedades.codclase = clases.codclase ")
+            Clase = DevuelveValor("select nomclase from clases, variedades where variedades.codvarie = " & DBSet(Rs!Codvarie, "N") & " and variedades.codclase = clases.codclase ")
             
             Lin = RellenaABlancos("Grupo   : " & Clase, True, 43) & Space(2) & RellenaABlancos("Grupo   : " & Clase, True, 43) & Space(2)
             Printer.Print Lin
@@ -6287,19 +6287,19 @@ On Error GoTo EImpTickD
             
             ' LINEA 10
 '            Cajas = DBLet(Rs!numcajo1, "N") + DBLet(Rs!numcajo2, "N") + DBLet(Rs!numcajo3, "N") + DBLet(Rs!numcajo4, "N") + DBLet(Rs!numcajo5, "N")
-            Cajas = 0
-            If EsCaja(CStr(DBLet(Rs!tipocajo1, "N"))) Then Cajas = Cajas + DBLet(Rs!numcajo1, "N")
-            If EsCaja(CStr(DBLet(Rs!tipocajo2, "N"))) Then Cajas = Cajas + DBLet(Rs!numcajo2, "N")
-            If EsCaja(CStr(DBLet(Rs!tipocajo3, "N"))) Then Cajas = Cajas + DBLet(Rs!numcajo3, "N")
-            If EsCaja(CStr(DBLet(Rs!tipocajo4, "N"))) Then Cajas = Cajas + DBLet(Rs!numcajo4, "N")
-            If EsCaja(CStr(DBLet(Rs!tipocajo5, "N"))) Then Cajas = Cajas + DBLet(Rs!numcajo5, "N")
+            cajas = 0
+            If EsCaja(CStr(DBLet(Rs!tipocajo1, "N"))) Then cajas = cajas + DBLet(Rs!numcajo1, "N")
+            If EsCaja(CStr(DBLet(Rs!tipocajo2, "N"))) Then cajas = cajas + DBLet(Rs!numcajo2, "N")
+            If EsCaja(CStr(DBLet(Rs!tipocajo3, "N"))) Then cajas = cajas + DBLet(Rs!numcajo3, "N")
+            If EsCaja(CStr(DBLet(Rs!tipocajo4, "N"))) Then cajas = cajas + DBLet(Rs!numcajo4, "N")
+            If EsCaja(CStr(DBLet(Rs!tipocajo5, "N"))) Then cajas = cajas + DBLet(Rs!numcajo5, "N")
 
             Tara = DBLet(Rs!taracaja1, "N") + DBLet(Rs!taracaja2, "N") + DBLet(Rs!taracaja3, "N") + DBLet(Rs!taracaja4, "N") + DBLet(Rs!taracaja5, "N") + DBLet(Rs!TaraVehi, "N")
             
             
-            Lin = RellenaABlancos("Nro.Cajas : " & RellenaABlancos(Format(Cajas, "###,##0"), False, 6) & "    " & "Total Tara: " & RellenaABlancos(Format(Tara, "###,##0"), False, 6), True, 43) & _
+            Lin = RellenaABlancos("Nro.Cajas : " & RellenaABlancos(Format(cajas, "###,##0"), False, 6) & "    " & "Total Tara: " & RellenaABlancos(Format(Tara, "###,##0"), False, 6), True, 43) & _
                   Space(2) & _
-                  RellenaABlancos("Nro.Cajas : " & RellenaABlancos(Format(Cajas, "###,##0"), False, 6) & "    " & "Total Tara: " & RellenaABlancos(Format(Tara, "###,##0"), False, 6), True, 43)
+                  RellenaABlancos("Nro.Cajas : " & RellenaABlancos(Format(cajas, "###,##0"), False, 6) & "    " & "Total Tara: " & RellenaABlancos(Format(Tara, "###,##0"), False, 6), True, 43)
 
             Printer.Print Lin
             
@@ -6363,7 +6363,7 @@ Private Sub ImprimirEntradaDirectaLPT(NumNota As String, Copias As Integer)
     Dim Situacion As String
     Dim Clase As String
     Dim Tara As Currency
-    Dim Cajas As Currency
+    Dim cajas As Currency
     
     
 On Error GoTo EImpTickD
@@ -6406,7 +6406,7 @@ Dim Partida As String
 Dim Situacion As String
 Dim Clase As String
 Dim Tara As Currency
-Dim Cajas As Currency
+Dim cajas As Currency
 Dim GGN As String
     
     On Error GoTo eCargarLineas
@@ -6481,14 +6481,14 @@ Dim GGN As String
             Situacion = ""
             Situacion = DevuelveValor("select nomsitua from rsituacioncampo, rcampos where rcampos.codsitua = rsituacioncampo.codsitua and rcampos.codsitua <> 0 and rcampos.codcampo = " & DBSet(Rs!codCampo, "N"))
             
-            Lin = RellenaABlancos("Variedad: " & Format(Rs!codvarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43) & _
+            Lin = RellenaABlancos("Variedad: " & Format(Rs!Codvarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43) & _
                   Space(2) & _
-                  RellenaABlancos("Variedad: " & Format(Rs!codvarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43)
+                  RellenaABlancos("Variedad: " & Format(Rs!Codvarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43)
             Lineas.Add Lin
 
             ' LINEA 8
             Clase = ""
-            Clase = DevuelveValor("select nomclase from clases, variedades where variedades.codvarie = " & DBSet(Rs!codvarie, "N") & " and variedades.codclase = clases.codclase ")
+            Clase = DevuelveValor("select nomclase from clases, variedades where variedades.codvarie = " & DBSet(Rs!Codvarie, "N") & " and variedades.codclase = clases.codclase ")
             
             Lin = RellenaABlancos("Grupo   : " & Clase, True, 43) & Space(2) & RellenaABlancos("Grupo   : " & Clase, True, 43) & Space(2)
             Lineas.Add Lin
@@ -6499,18 +6499,18 @@ Dim GGN As String
             
             ' LINEA 10
             'Cajas = DBLet(Rs!numcajo1, "N") + DBLet(Rs!numcajo2, "N") + DBLet(Rs!numcajo3, "N") + DBLet(Rs!numcajo4, "N") + DBLet(Rs!numcajo5, "N")
-            Cajas = 0
-            If EsCaja(CStr(DBLet(Rs!tipocajo1, "N"))) Then Cajas = Cajas + DBLet(Rs!numcajo1, "N")
-            If EsCaja(CStr(DBLet(Rs!tipocajo2, "N"))) Then Cajas = Cajas + DBLet(Rs!numcajo2, "N")
-            If EsCaja(CStr(DBLet(Rs!tipocajo3, "N"))) Then Cajas = Cajas + DBLet(Rs!numcajo3, "N")
-            If EsCaja(CStr(DBLet(Rs!tipocajo4, "N"))) Then Cajas = Cajas + DBLet(Rs!numcajo4, "N")
-            If EsCaja(CStr(DBLet(Rs!tipocajo5, "N"))) Then Cajas = Cajas + DBLet(Rs!numcajo5, "N")
+            cajas = 0
+            If EsCaja(CStr(DBLet(Rs!tipocajo1, "N"))) Then cajas = cajas + DBLet(Rs!numcajo1, "N")
+            If EsCaja(CStr(DBLet(Rs!tipocajo2, "N"))) Then cajas = cajas + DBLet(Rs!numcajo2, "N")
+            If EsCaja(CStr(DBLet(Rs!tipocajo3, "N"))) Then cajas = cajas + DBLet(Rs!numcajo3, "N")
+            If EsCaja(CStr(DBLet(Rs!tipocajo4, "N"))) Then cajas = cajas + DBLet(Rs!numcajo4, "N")
+            If EsCaja(CStr(DBLet(Rs!tipocajo5, "N"))) Then cajas = cajas + DBLet(Rs!numcajo5, "N")
             
             Tara = DBLet(Rs!taracaja1, "N") + DBLet(Rs!taracaja2, "N") + DBLet(Rs!taracaja3, "N") + DBLet(Rs!taracaja4, "N") + DBLet(Rs!taracaja5, "N") + DBLet(Rs!TaraVehi, "N")
             
-            Lin = RellenaABlancos("Nro.Cajas : " & RellenaABlancos(Format(Cajas, "###,##0"), False, 6) & "    " & "Total Tara: " & RellenaABlancos(Format(Tara, "###,##0"), False, 6), True, 43) & _
+            Lin = RellenaABlancos("Nro.Cajas : " & RellenaABlancos(Format(cajas, "###,##0"), False, 6) & "    " & "Total Tara: " & RellenaABlancos(Format(Tara, "###,##0"), False, 6), True, 43) & _
                   Space(2) & _
-                  RellenaABlancos("Nro.Cajas : " & RellenaABlancos(Format(Cajas, "###,##0"), False, 6) & "    " & "Total Tara: " & RellenaABlancos(Format(Tara, "###,##0"), False, 6), True, 43)
+                  RellenaABlancos("Nro.Cajas : " & RellenaABlancos(Format(cajas, "###,##0"), False, 6) & "    " & "Total Tara: " & RellenaABlancos(Format(Tara, "###,##0"), False, 6), True, 43)
             Lineas.Add Lin
 
             
@@ -6560,12 +6560,12 @@ Dim NumF As String
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     If Not Rs.EOF Then
-        Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
+        Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!Codvarie, "N"))
         
         cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!NumNotac, "N"), "######0") & """"
         cadena = cadena & " fechaent=" & """" & Format(Rs!FechaEnt, "yyyymmdd") & """"
         cadena = cadena & " codprodu=" & """" & Format(DBLet(Producto, "N"), "#####0") & """"
-        cadena = cadena & " codvarie=" & """" & Format(DBLet(Rs!codvarie, "N"), "#####0") & """"
+        cadena = cadena & " codvarie=" & """" & Format(DBLet(Rs!Codvarie, "N"), "#####0") & """"
         cadena = cadena & " codsocio=" & """" & Format(DBLet(Rs!Codsocio, "N"), "#####0") & """"
         cadena = cadena & " codcampo=" & """" & Format(DBLet(Rs!codCampo, "N"), "#######0") & """"
         cadena = cadena & " kilosbru=" & """" & Format(DBLet(Rs!KilosBru, "N"), "###0") & """"

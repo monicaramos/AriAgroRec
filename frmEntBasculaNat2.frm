@@ -609,7 +609,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 Dim OK As Boolean
 
 Private Sub PonerModo(vModo)
@@ -624,12 +624,12 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not B
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not B
+    Next i
     
     cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -699,9 +699,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 1 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
@@ -720,9 +720,9 @@ Private Sub BotonBuscar()
     CargaGrid "rdeposito.coddeposito = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
 '    PosicionarCombo Combo1, "724"
     LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
@@ -730,13 +730,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -770,14 +770,14 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     ' ### [Monica] 12/09/2006
 End Sub
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -792,16 +792,16 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar el Palet?"
-    Sql = Sql & vbCrLf & "IDPalet: " & adodc1.Recordset.Fields(0)
+    SQL = "¿Seguro que desea eliminar el Palet?"
+    SQL = SQL & vbCrLf & "IDPalet: " & adodc1.Recordset.Fields(0)
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
         
-        Sql = "Delete from trzpalets where idpalet=" & adodc1.Recordset!IdPalet
-        conn.Execute Sql
+        SQL = "Delete from trzpalets where idpalet=" & adodc1.Recordset!IdPalet
+        conn.Execute SQL
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -831,8 +831,8 @@ Private Sub PonerLongCampos()
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As Integer
-
+    Dim i As Long
+    
     Select Case Modo
         Case 1 'BUSQUEDA
             CadB = ObtenerBusqueda(Me)
@@ -844,7 +844,7 @@ Private Sub cmdAceptar_Click()
             End If
             
         Case 3 'INSERTAR
-            If DatosOK Then
+            If DatosOk Then
                 If InsertarDesdeForm(Me) Then
                     CargaGrid
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
@@ -864,12 +864,12 @@ Private Sub cmdAceptar_Click()
         Case 4 'MODIFICAR
             OK = False
             
-            If DatosOK Then
+            If DatosOk Then
                 If ModificaDesdeFormulario(Me) Then
                     OK = True
                     
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(0)
+                    i = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
 '                    If CadB <> "" Then
@@ -879,7 +879,7 @@ Private Sub cmdAceptar_Click()
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -887,7 +887,7 @@ Private Sub cmdAceptar_Click()
 End Sub
 
 Private Function PonerKilos() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim TotalKilos As Long
 Dim IdCodigo As Long
 Dim NumCajas As Long
@@ -896,22 +896,22 @@ Dim NumCajas As Long
 
     PonerKilos = False
     
-    Sql = "select sum(numkilos) from trzpalets where " & NuevoCodigo
+    SQL = "select sum(numkilos) from trzpalets where " & NuevoCodigo
     
-    TotalKilos = DevuelveValor(Sql)
+    TotalKilos = DevuelveValor(SQL)
     
-    Sql = "select min(idpalet) from trzpalets where " & NuevoCodigo
-    IdCodigo = DevuelveValor(Sql)
+    SQL = "select min(idpalet) from trzpalets where " & NuevoCodigo
+    IdCodigo = DevuelveValor(SQL)
     
     If TotalKilos <> NumKilos Then
-        Sql = "update trzpalets set numkilos = numkilos + " & DBSet(TotalKilos - NumKilos, "N")
-        Sql = Sql & " where idpalet = " & DBSet(IdCodigo, "N")
+        SQL = "update trzpalets set numkilos = numkilos + " & DBSet(TotalKilos - NumKilos, "N")
+        SQL = SQL & " where idpalet = " & DBSet(IdCodigo, "N")
         
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
-    Sql = "select sum(numcajones) from trzpalets where " & NuevoCodigo
-    NumCajas = DevuelveValor(Sql)
+    SQL = "select sum(numcajones) from trzpalets where " & NuevoCodigo
+    NumCajas = DevuelveValor(SQL)
     
     If NumCajas <> NumCajones Then
         MsgBox "El nro de cajas no coincide con el de la entrada. Revise.", vbExclamation
@@ -955,7 +955,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -964,16 +964,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -1132,20 +1132,20 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    Sql = Sql & " ORDER BY trzpalets.idpalet"
+    SQL = SQL & " ORDER BY trzpalets.idpalet"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|IdPalet|1400|;S|txtAux(1)|T|Cajas|1750|;S|txtAux(2)|T|Kilos|1700|;S|txtAux(3)|T|CRFID|2400|;"
@@ -1156,7 +1156,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     DataGrid1.Columns(0).Alignment = dbgRight
 '   DataGrid1.Columns(2).Alignment = dbgRight
 
-    CalcularTotales Sql
+    CalcularTotales SQL
 
 
 
@@ -1193,10 +1193,10 @@ Private Sub txtAux_LostFocus(Index As Integer)
     
 End Sub
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
 
 
@@ -1207,7 +1207,7 @@ Dim Mens As String
          If ExisteCP(txtAux(0)) Then B = False
     End If
     
-    DatosOK = B
+    DatosOk = B
 End Function
 
 Private Sub PonerOpcionesMenu()
@@ -1367,19 +1367,19 @@ End Sub
 
 Private Sub CalcularTotales(cadena As String)
 Dim Kilos  As Currency
-Dim Cajas As Currency
+Dim cajas As Currency
 Dim Compleme As Currency
 Dim Penaliza As Currency
 
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     On Error Resume Next
     
-    Sql = "select sum(numkilos) kilos, sum(numcajones) cajones from (" & cadena & ") aaaaa"
+    SQL = "select sum(numkilos) kilos, sum(numcajones) cajones from (" & cadena & ") aaaaa"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     txtAux2(0).Text = ""
     txtAux2(1).Text = ""
@@ -1387,10 +1387,10 @@ Dim Sql As String
     If TotalRegistrosConsulta(cadena) = 0 Then Exit Sub
     
     If Not Rs.EOF Then
-        If Rs.Fields(0).Value <> 0 Then Cajas = DBLet(Rs.Fields(1).Value, "N") 'Solo es para saber que hay registros que mostrar
+        If Rs.Fields(0).Value <> 0 Then cajas = DBLet(Rs.Fields(1).Value, "N") 'Solo es para saber que hay registros que mostrar
         If Rs.Fields(1).Value <> 0 Then Kilos = DBLet(Rs.Fields(0).Value, "N") 'Solo es para saber que hay registros que mostrar
     
-        txtAux2(0).Text = Format(Cajas, "###,###,###,##0")
+        txtAux2(0).Text = Format(cajas, "###,###,###,##0")
         txtAux2(1).Text = Format(Kilos, "###,###,###,##0")
     End If
     Rs.Close

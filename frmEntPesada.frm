@@ -2688,11 +2688,11 @@ Dim V As Integer
                     InsertarLinea
                 Case 2 'modificar llínies
                     If ModificarLinea Then
-                        V = AdoAux(1).Recordset.Fields(1) 'el 2 es el nº de llinia
-                        CargaGrid DataGrid3, AdoAux(1), True
+                        V = Adoaux(1).Recordset.Fields(1) 'el 2 es el nº de llinia
+                        CargaGrid DataGrid3, Adoaux(1), True
                 
                         DataGrid3.SetFocus
-                        AdoAux(1).Recordset.Find (AdoAux(1).Recordset.Fields(1).Name & " =" & V)
+                        Adoaux(1).Recordset.Find (Adoaux(1).Recordset.Fields(1).Name & " =" & V)
                 
                         LLamaLineas ModificaLineas, 0, "DataGrid3"
                         
@@ -2730,7 +2730,7 @@ Private Sub cmdCancelar_Click()
             If ModificaLineas = 1 Then 'INSERTAR
                 ModificaLineas = 0
                 DataGrid3.AllowAddNew = False
-                If Not AdoAux(1).Recordset.EOF Then AdoAux(1).Recordset.MoveFirst
+                If Not Adoaux(1).Recordset.EOF Then Adoaux(1).Recordset.MoveFirst
             End If
             ModificaLineas = 0
             LLamaLineas Modo, 0, "DataGrid3"
@@ -2896,7 +2896,7 @@ Dim J As Byte
 
     
     vWhere = ObtenerWhereCP(False)
-    vWhere = vWhere & " and numlinea=" & AdoAux(1).Recordset!numlinea
+    vWhere = vWhere & " and numlinea=" & Adoaux(1).Recordset!numlinea
     If Not BloqueaRegistro("rentradas", vWhere) Then
         TerminaBloquear
         Exit Sub
@@ -2995,7 +2995,7 @@ eSalirNotas:
     If B Then
         conn.CommitTrans
         ModificaLineas = 0
-        CargaGrid DataGrid3, AdoAux(1), True
+        CargaGrid DataGrid3, Adoaux(1), True
         PonerModo 2
     Else
         conn.RollbackTrans
@@ -3136,12 +3136,12 @@ Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid3_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Not AdoAux(1).Recordset.EOF And ModificaLineas <> 1 Then
-        If Not IsNull(AdoAux(1).Recordset.Fields(0).Value) Then
-            Text2(6).Text = DevuelveDesdeBDNew(cAgro, "rsocios", "nomsocio", "codsocio", AdoAux(1).Recordset!Codsocio, "N")
-            Text2(0).Text = DevuelveDesdeBDNew(cAgro, "rcapataz", "nomcapat", "codcapat", AdoAux(1).Recordset!codcapat, "N")
-            Text2(8).Text = DevuelveDesdeBDNew(cAgro, "rtarifatra", "nomtarif", "codtarif", AdoAux(1).Recordset!Codtarif, "N")
-            PonerDatosCampo CStr(AdoAux(1).Recordset!codCampo)
+    If Not Adoaux(1).Recordset.EOF And ModificaLineas <> 1 Then
+        If Not IsNull(Adoaux(1).Recordset.Fields(0).Value) Then
+            Text2(6).Text = DevuelveDesdeBDNew(cAgro, "rsocios", "nomsocio", "codsocio", Adoaux(1).Recordset!Codsocio, "N")
+            Text2(0).Text = DevuelveDesdeBDNew(cAgro, "rcapataz", "nomcapat", "codcapat", Adoaux(1).Recordset!codcapat, "N")
+            Text2(8).Text = DevuelveDesdeBDNew(cAgro, "rtarifatra", "nomtarif", "codtarif", Adoaux(1).Recordset!Codtarif, "N")
+            PonerDatosCampo CStr(Adoaux(1).Recordset!codCampo)
         End If
     Else
         Text2(6).Text = ""
@@ -3848,15 +3848,15 @@ Dim i As Integer
     Screen.MousePointer = vbHourglass
     
     If Data1.Recordset.RecordCount > 0 Then
-        CargaGrid DataGrid3, AdoAux(1), True
+        CargaGrid DataGrid3, Adoaux(1), True
     Else
-        CargaGrid DataGrid3, AdoAux(1), False
+        CargaGrid DataGrid3, Adoaux(1), False
     End If
-    If Not AdoAux(1).Recordset.EOF Then
-        Text2(6).Text = DevuelveDesdeBDNew(cAgro, "rsocios", "nomsocio", "codsocio", AdoAux(1).Recordset!Codsocio, "N")
-        Text2(0).Text = DevuelveDesdeBDNew(cAgro, "rcapataz", "nomcapat", "codcapat", AdoAux(1).Recordset!codcapat, "N")
-        Text2(8).Text = DevuelveDesdeBDNew(cAgro, "rtarifatra", "nomtarif", "codtarif", AdoAux(1).Recordset!Codtarif, "N")
-        PonerDatosCampo CStr(AdoAux(1).Recordset!codCampo)
+    If Not Adoaux(1).Recordset.EOF Then
+        Text2(6).Text = DevuelveDesdeBDNew(cAgro, "rsocios", "nomsocio", "codsocio", Adoaux(1).Recordset!Codsocio, "N")
+        Text2(0).Text = DevuelveDesdeBDNew(cAgro, "rcapataz", "nomcapat", "codcapat", Adoaux(1).Recordset!codcapat, "N")
+        Text2(8).Text = DevuelveDesdeBDNew(cAgro, "rtarifatra", "nomtarif", "codtarif", Adoaux(1).Recordset!Codtarif, "N")
+        PonerDatosCampo CStr(Adoaux(1).Recordset!codCampo)
     Else
         Text2(6).Text = ""
         Text2(0).Text = ""
@@ -3990,7 +3990,7 @@ Dim B As Boolean
     '---------------------------------------------
 '    b = (Modo <> 0 And Modo <> 2) Or (Modo = 5 And ModificaLineas <> 0)
     B = (Modo = 1) Or Modo = 3 Or Modo = 4 Or (Modo = 5 And ModificaLineas <> 0)
-    cmdCancelar.visible = B
+    CmdCancelar.visible = B
     cmdAceptar.visible = B
     
     BloquearImgBuscar Me, Modo, ModificaLineas
@@ -4177,20 +4177,20 @@ Dim B As Boolean
 
     ' *************** canviar la pregunta ****************
     cad = "¿Seguro que desea eliminar la Nota de la Pesada?"
-    cad = cad & vbCrLf & "Pesada: " & AdoAux(1).Recordset.Fields(0)
-    cad = cad & vbCrLf & "Nota: " & AdoAux(1).Recordset.Fields(2)
+    cad = cad & vbCrLf & "Pesada: " & Adoaux(1).Recordset.Fields(0)
+    cad = cad & vbCrLf & "Nota: " & Adoaux(1).Recordset.Fields(2)
     
     If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         On Error GoTo EEliminarLinea
         Screen.MousePointer = vbHourglass
-        NumRegElim = AdoAux(1).Recordset.AbsolutePosition
+        NumRegElim = Adoaux(1).Recordset.AbsolutePosition
         
         If Not EliminarLinea Then
             Screen.MousePointer = vbDefault
             Exit Sub
         Else
 '            CalcularDatosAlbaran
-            If SituarDataTrasEliminar(AdoAux(1), NumRegElim) Then
+            If SituarDataTrasEliminar(Adoaux(1), NumRegElim) Then
                 PonerCampos
             Else
                 PonerCampos
@@ -4597,7 +4597,7 @@ Dim NumF As Long
             SQL1 = "insert into chivato (numorden, basedato, nomtabla, operacio, fechadia, separado,"
             SQL1 = SQL1 & "claveant, clavenue, nombmemo, nombmem1, nombmem2, horaproc, nombmem3, nombmem4) values ("
             SQL1 = SQL1 & DBSet(NumF, "N") & ","
-            SQL1 = SQL1 & "'agro','sentba','D'," & DBSet(Now, "F") & ",'&'," & DBLet(AdoAux(1).Recordset.Fields(2).Value, "N") & ","
+            SQL1 = SQL1 & "'agro','sentba','D'," & DBSet(Now, "F") & ",'&'," & DBLet(Adoaux(1).Recordset.Fields(2).Value, "N") & ","
             SQL1 = SQL1 & ValorNulo & ","
             SQL1 = SQL1 & ValorNulo & ","
             SQL1 = SQL1 & ValorNulo & ","
@@ -4664,7 +4664,7 @@ Dim Linea As Long
     On Error GoTo FinEliminar
 
     B = False
-    If AdoAux(1).Recordset.EOF Then Exit Function
+    If Adoaux(1).Recordset.EOF Then Exit Function
         
     conn.BeginTrans
         
@@ -4674,8 +4674,8 @@ Dim Linea As Long
     
     'Eliminar en tablas de slialb
     '------------------------------------------
-    SQL = " where nropesada = " & AdoAux(1).Recordset.Fields(0)
-    SQL = SQL & " and numlinea = " & AdoAux(1).Recordset.Fields(1)
+    SQL = " where nropesada = " & Adoaux(1).Recordset.Fields(0)
+    SQL = SQL & " and numlinea = " & Adoaux(1).Recordset.Fields(1)
 
     ' Insertamos en el chivato
     Linea = SugerirCodigoSiguienteStr("chivato", "numorden")
@@ -4685,7 +4685,7 @@ Dim Linea As Long
     SQL1 = SQL1 & DBSet(Linea, "N") & ","
     SQL1 = SQL1 & "'agro','sentba','D',"
     SQL1 = SQL1 & DBSet(Now, "F") & ",'&',"
-    SQL1 = SQL1 & DBLet(AdoAux(1).Recordset.Fields(2), "N") & ","
+    SQL1 = SQL1 & DBLet(Adoaux(1).Recordset.Fields(2), "N") & ","
     SQL1 = SQL1 & ValorNulo & ","
     SQL1 = SQL1 & ValorNulo & ","
     SQL1 = SQL1 & ValorNulo & ","
@@ -4734,7 +4734,7 @@ Private Sub LimpiarDataGrids()
 'Pone los Grids sin datos, apuntando a ningún registro
 On Error Resume Next
 
-    CargaGrid DataGrid3, Me.AdoAux(1), False 'nro de notas
+    CargaGrid DataGrid3, Me.Adoaux(1), False 'nro de notas
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -4845,7 +4845,7 @@ Dim i As Integer
         ToolAux(i).Buttons(4).Enabled = B
         
         If B Then
-            bAux = (B And Me.AdoAux(1).Recordset.RecordCount > 0)
+            bAux = (B And Me.Adoaux(1).Recordset.RecordCount > 0)
         End If
         ToolAux(i).Buttons(2).Enabled = bAux
         ToolAux(i).Buttons(3).Enabled = bAux
@@ -5065,7 +5065,7 @@ Dim Mens As String
         If InsertarLineaEnv(txtAux(3).Text) Then
 '            CalcularDatosAlbaran
             B = BloqueaRegistro("rpesadas", "nropesada = " & Data1.Recordset!nropesada)
-            CargaGrid DataGrid3, AdoAux(1), True
+            CargaGrid DataGrid3, Adoaux(1), True
             If B Then BotonAnyadirLinea 1
         End If
     End If
@@ -5103,7 +5103,7 @@ Dim i As Integer
     NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
     ' ***************************************************************
 
-    AnyadirLinea DataGrid3, AdoAux(1)
+    AnyadirLinea DataGrid3, Adoaux(1)
 
     anc = DataGrid3.Top
     If DataGrid3.Row < 0 Then
@@ -5350,7 +5350,7 @@ Dim Rs As ADODB.Recordset
 
     cad = "rcampos.codsocio = " & DBSet(txtAux(6).Text, "N") & " and rcampos.fecbajas is null"
     '[Monica]13/08/2018: no se permiten entradas de campos de tratamiento
-    cad = cad & " and rcampo.tipocampo <> 3 "
+    cad = cad & " and rcampos.tipocampo <> 3 "
     cad = cad & " and rcampos.codvarie = " & DBSet(txtAux(5), "N")
      
     Cad1 = "select count(*) from rcampos where " & cad
@@ -5623,7 +5623,7 @@ End Sub
 Private Sub CalcularPesoNetoPicassent()
 Dim KgsCajon As String
 Dim TotalCaj As Currency
-Dim Cajas As Currency
+Dim cajas As Currency
 Dim TotalNeto As Currency
 
     On Error GoTo eCalcularPesoNeto
@@ -5631,15 +5631,15 @@ Dim TotalNeto As Currency
 
     TotalCaj = ComprobarCero(Text1(22).Text)
     TotalNeto = ComprobarCero(Text1(12).Text)
-    Cajas = ComprobarCero(txtAux(9).Text)
+    cajas = ComprobarCero(txtAux(9).Text)
     
     If TotalCaj <> 0 Then
-        txtAux(10).Text = Round2(Cajas * Data1.Recordset!KilosNet / TotalCaj, 0)
+        txtAux(10).Text = Round2(cajas * Data1.Recordset!KilosNet / TotalCaj, 0)
         PonerFormatoEntero txtAux(10)
-        txtAux(2).Text = Round2(Cajas * Data1.Recordset!KilosBrut / TotalCaj, 0)
+        txtAux(2).Text = Round2(cajas * Data1.Recordset!KilosBrut / TotalCaj, 0)
         
         '[Monica]19/10/2016: hacemos que los kilostrans sean los mismos que los netos
-        txtAux(11).Text = Round2(Cajas * Data1.Recordset!KilosNet / TotalCaj, 0)
+        txtAux(11).Text = Round2(cajas * Data1.Recordset!KilosNet / TotalCaj, 0)
     Else
         txtAux(10).Text = "0"
         txtAux(2).Text = "0"
@@ -5714,8 +5714,8 @@ Dim SQL1 As String
         SQL1 = SQL1 & DBSet(txtAux(1).Text, "N") & ","
         SQL1 = SQL1 & DBSet(txtAux(4).Text, "N") & ","
     Else
-        SQL1 = SQL1 & DBLet(AdoAux(1).Recordset.Fields(0), "N") & ","
-        SQL1 = SQL1 & DBLet(AdoAux(1).Recordset.Fields(2), "N") & ","
+        SQL1 = SQL1 & DBLet(Adoaux(1).Recordset.Fields(0), "N") & ","
+        SQL1 = SQL1 & DBLet(Adoaux(1).Recordset.Fields(2), "N") & ","
     End If
     SQL1 = SQL1 & DBSet(Linea, "N") & ")"
 
@@ -5751,12 +5751,12 @@ Dim Producto As String
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
+        Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!Codvarie, "N"))
     
         cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!NumNotac, "N"), "######0") & """"
         cadena = cadena & " fechaent=" & """" & Format(Text1(1).Text, "yyyymmdd") & """"
         cadena = cadena & " codprodu=" & """" & Format(DBLet(Producto, "N"), "#####0") & """"
-        cadena = cadena & " codvarie=" & """" & Format(DBLet(Rs!codvarie, "N"), "#####0") & """"
+        cadena = cadena & " codvarie=" & """" & Format(DBLet(Rs!Codvarie, "N"), "#####0") & """"
         cadena = cadena & " codsocio=" & """" & Format(DBLet(Rs!Codsocio, "N"), "#####0") & """"
         cadena = cadena & " codcampo=" & """" & Format(DBLet(Rs!codCampo, "N"), "#######0") & """"
         cadena = cadena & " kilosbru=" & """" & Format(DBLet(Rs!KilosBru, "N"), "###0") & """"
@@ -5847,12 +5847,12 @@ Dim NumF As String
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     While Not Rs.EOF
-        Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
+        Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!Codvarie, "N"))
         
         cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!NumNotac, "N"), "######0") & """"
         cadena = cadena & " fechaent=" & """" & Format(Rs!FechaEnt, "yyyymmdd") & """"
         cadena = cadena & " codprodu=" & """" & Format(DBLet(Producto, "N"), "#####0") & """"
-        cadena = cadena & " codvarie=" & """" & Format(DBLet(Rs!codvarie, "N"), "#####0") & """"
+        cadena = cadena & " codvarie=" & """" & Format(DBLet(Rs!Codvarie, "N"), "#####0") & """"
         cadena = cadena & " codsocio=" & """" & Format(DBLet(Rs!Codsocio, "N"), "#####0") & """"
         cadena = cadena & " codcampo=" & """" & Format(DBLet(Rs!codCampo, "N"), "#######0") & """"
         cadena = cadena & " kilosbru=" & """" & Format(DBLet(Rs!KilosBru, "N"), "###0") & """"
@@ -5964,7 +5964,7 @@ Dim MaxNota As String
         Set Rs = New ADODB.Recordset
         Rs.Open SQL, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
         While Not Rs.EOF
-            txtAux(5).Text = DBLet(Rs!codvarie, "N")
+            txtAux(5).Text = DBLet(Rs!Codvarie, "N")
             txtAux(9).Text = DBLet(Rs!numcajo1, "N")
             If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
                 CalcularPesoNetoPicassent
