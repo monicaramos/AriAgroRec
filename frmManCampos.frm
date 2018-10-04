@@ -6762,7 +6762,7 @@ Dim codpro As Long
             SQL = SQL & "(" & DBSet(codsoc, "N") & ","
             SQL = SQL & DBSet(vSocio.Nombre, "T") & "," & DBSet(vSocio.Direccion, "T") & "," & DBSet(vSocio.CPostal, "T") & ","
             SQL = SQL & DBSet(vSocio.Poblacion, "T") & "," & DBSet(vSocio.Provincia, "T") & ","
-            SQL = SQL & "'','','','',1,0,0,0,0,'1900-01-01'," & DBSet(vSocio.nif, "T") & ")"
+            SQL = SQL & "'','','','',9,0,0,0,0,'1900-01-01'," & DBSet(vSocio.nif, "T") & ")"
             
             ComunicaCooperativa "rsocios", SQL, "I"
             
@@ -7307,8 +7307,8 @@ Dim B As Boolean
     
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
-    CmdCancelar.visible = B
-    cmdAceptar.visible = B
+    cmdCancelar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -10346,7 +10346,7 @@ Dim Nuevo As Boolean
             
         Case 3 'porcentaje de
             PonerFormatoDecimal txtAux3(Index), 4
-            If txtAux3(2).Text <> "" Then cmdAceptar.SetFocus
+            If txtAux3(2).Text <> "" Then CmdAceptar.SetFocus
     
     End Select
 
@@ -11500,7 +11500,7 @@ Dim Nuevo As Boolean
 
         Case 3 ' muestra debe sumar el 100%
             If PonerFormatoDecimal(txtAux1(Index), 4) Then
-                cmdAceptar.SetFocus
+                CmdAceptar.SetFocus
             End If
 
 '        Case 2, 3 'fecha de alta y de baja
@@ -11798,9 +11798,9 @@ Dim Nuevo As Boolean
         Case 7, 8, 9, 10 'superficies en hectareas
             If Modo = 1 Then Exit Sub
             If PonerFormatoDecimal(txtAux4(Index), 7) Then
-                If Index = 10 Then cmdAceptar.SetFocus
+                If Index = 10 Then CmdAceptar.SetFocus
             Else
-                If Index = 10 And txtAux4(Index) = "" Then cmdAceptar.SetFocus
+                If Index = 10 And txtAux4(Index) = "" Then CmdAceptar.SetFocus
             End If
             
 
@@ -12057,7 +12057,7 @@ Dim Nuevo As Boolean
             End If
         
         Case 4 ' Importe
-            If PonerFormatoDecimal(txtaux7(Index), 3) Then cmdAceptar.SetFocus
+            If PonerFormatoDecimal(txtaux7(Index), 3) Then CmdAceptar.SetFocus
         
     End Select
 
@@ -12304,7 +12304,7 @@ Dim Nuevo As Boolean
     ' ******* configurar el LostFocus dels camps de llínies (dins i fora grid) ********
     Select Case Index
         Case 2 'fecha de impresion
-            If PonerFormatoFecha(txtaux8(Index), True) Then cmdAceptar.SetFocus
+            If PonerFormatoFecha(txtaux8(Index), True) Then CmdAceptar.SetFocus
         
     End Select
 
@@ -12441,7 +12441,7 @@ Dim Nuevo As Boolean
         Case 2 'fecha de revision
             PonerFormatoFecha txtAux9(Index), True
         Case 4 ' observaciones
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
     End Select
 
     ' ******************************************************************************

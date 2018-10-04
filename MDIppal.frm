@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "10:02"
+            TextSave        =   "18:22"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -947,6 +947,14 @@ Begin VB.MDIForm MDIppal
       Begin VB.Menu mnRec_Transporte 
          Caption         =   "&Integración Aridoc"
          Index           =   7
+      End
+      Begin VB.Menu mnRec_Transporte 
+         Caption         =   "-"
+         Index           =   8
+      End
+      Begin VB.Menu mnRec_Transporte 
+         Caption         =   "&Envases Retornables"
+         Index           =   9
       End
    End
    Begin VB.Menu mnGestPrenom 
@@ -2359,7 +2367,7 @@ End Sub
 Private Sub PoneMenusDelEditor()
 Dim T As Control
 Dim SQL As String
-Dim C As String
+Dim c As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
@@ -2382,9 +2390,9 @@ Dim miRsAux As ADODB.Recordset
         SQL = "·" & SQL
         For Each T In Me.Controls
             If TypeOf T Is menu Then
-                C = DevuelveCadenaMenu(T)
-                C = "·" & C & "·"
-                If InStr(1, SQL, C) > 0 Then T.visible = False
+                c = DevuelveCadenaMenu(T)
+                c = "·" & c & "·"
+                If InStr(1, SQL, c) > 0 Then T.visible = False
            
             End If
         Next

@@ -30,7 +30,7 @@ Option Explicit
 
 Public Sub AbrirListadoPOZ(numero As Byte)
     Screen.MousePointer = vbHourglass
-    frmPOZListado.OpcionListado = numero
+    frmPOZListado.Opcionlistado = numero
     frmPOZListado.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
@@ -38,70 +38,80 @@ End Sub
 
 Public Sub AbrirListadoBodEntradas(numero As Byte)
     Screen.MousePointer = vbHourglass
-    frmBodListEntradas.OpcionListado = numero
+    frmBodListEntradas.Opcionlistado = numero
     frmBodListEntradas.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
 
 Public Sub AbrirListadoBodAnticipos(numero As Byte)
     Screen.MousePointer = vbHourglass
-    frmBodListAnticipos.OpcionListado = numero
+    frmBodListAnticipos.Opcionlistado = numero
     frmBodListAnticipos.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
 
 Public Sub AbrirListadoAnticipos(numero As Byte)
     Screen.MousePointer = vbHourglass
-    frmListAnticipos.OpcionListado = numero
+    frmListAnticipos.Opcionlistado = numero
     frmListAnticipos.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
 
 Public Sub AbrirListadoTomaDatos(numero As Byte)
     Screen.MousePointer = vbHourglass
-    frmListTomaDatos.OpcionListado = numero
+    frmListTomaDatos.Opcionlistado = numero
     frmListTomaDatos.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
 
 Public Sub AbrirListadoTrazabilidad(numero As Byte)
     Screen.MousePointer = vbHourglass
-    frmListTrazabilidad.OpcionListado = numero
+    frmListTrazabilidad.Opcionlistado = numero
     frmListTrazabilidad.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
 
 Public Sub AbrirListadoTraza(numero As Byte)
     Screen.MousePointer = vbHourglass
-    frmListTraza.OpcionListado = numero
+    frmListTraza.Opcionlistado = numero
     frmListTraza.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
 
 Public Sub AbrirListadoAPOR(numero As Byte)
     Screen.MousePointer = vbHourglass
-    frmAPOListados.OpcionListado = numero
+    frmAPOListados.Opcionlistado = numero
     frmAPOListados.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
 
 Public Sub AbrirListado(numero As Byte)
     Screen.MousePointer = vbHourglass
-    frmListado.OpcionListado = numero
+    frmListado.Opcionlistado = numero
     frmListado.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
 
+
+Public Sub AbrirListadoComer(numero As Byte)
+    Screen.MousePointer = vbHourglass
+    frmListadoComer.Opcionlistado = numero
+    frmListadoComer.Show vbModal
+    Screen.MousePointer = vbDefault
+End Sub
+
+
+
 Public Sub AbrirListadoFVarias(numero As Byte)
     Screen.MousePointer = vbHourglass
-    frmFVARListados.OpcionListado = numero
+    frmFVARListados.Opcionlistado = numero
     frmFVARListados.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
 
 Public Sub AbrirListadoNominas(numero As Byte)
     Screen.MousePointer = vbHourglass
-    frmListNomina.OpcionListado = numero
+    frmListNomina.Opcionlistado = numero
     frmListNomina.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
@@ -109,14 +119,14 @@ End Sub
 Public Sub AbrirListadoOfer(numero As Integer)
 'Abre el Form con los listados de Ofertas
     Screen.MousePointer = vbHourglass
-    frmListadoOfer.OpcionListado = numero
+    frmListadoOfer.Opcionlistado = numero
     frmListadoOfer.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
 
 Public Sub AbrirListadoADV(numero As Byte)
     Screen.MousePointer = vbHourglass
-    frmADVListados.OpcionListado = numero
+    frmADVListados.Opcionlistado = numero
     frmADVListados.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
@@ -409,57 +419,57 @@ Dim Aux As String
 End Function
 
 
-Public Function PonerParamRPT(Indice As Byte, CadParam As String, numParam As Byte, nomDocu As String, Optional EsAridoc As Boolean, Optional ImprimeDirecto As Integer) As Boolean
+Public Function PonerParamRPT(indice As Byte, cadParam As String, numParam As Byte, nomDocu As String, Optional EsAridoc As Boolean, Optional ImprimeDirecto As Integer) As Boolean
 'EsAridoc = false usamos el nomdocum normal
 '           true usamos el rpt para aridoc
 'ImprimeDirecto = false usamos el crystal
 '                 true usamos el print
 
 Dim vParamRpt As CParamRpt 'Tipos de Documentos
-Dim cad As String
+Dim Cad As String
 
     Set vParamRpt = New CParamRpt
 
-    If vParamRpt.Leer(Indice) = 1 Then
-        cad = "No se han podido cargar los Parámetros de Tipos de Documentos." & vbCrLf
-        MsgBox cad & "Debe configurar la aplicación.", vbExclamation
+    If vParamRpt.Leer(indice) = 1 Then
+        Cad = "No se han podido cargar los Parámetros de Tipos de Documentos." & vbCrLf
+        MsgBox Cad & "Debe configurar la aplicación.", vbExclamation
         Set vParamRpt = Nothing
         PonerParamRPT = False
         Exit Function
     Else
-        If CadParam = "" Then
-            cad = "|"
+        If cadParam = "" Then
+            Cad = "|"
         Else
-            cad = ""
+            Cad = ""
         End If
-        cad = cad & "pCodigoISO=""" & vParamRpt.CodigoISO & """|"
+        Cad = Cad & "pCodigoISO=""" & vParamRpt.CodigoISO & """|"
         If vParamRpt.CodigoRevision = -1 Then
-            cad = cad & "pCodigoRev=""" & "" & """|"
+            Cad = Cad & "pCodigoRev=""" & "" & """|"
         Else
-            cad = cad & "pCodigoRev=""" & Format(vParamRpt.CodigoRevision, "00") & """|"
+            Cad = Cad & "pCodigoRev=""" & Format(vParamRpt.CodigoRevision, "00") & """|"
         End If
         numParam = numParam + 2
         If vParamRpt.LineaPie1 <> "" Then
-            cad = cad & "pLinea1=""" & vParamRpt.LineaPie1 & """|"
+            Cad = Cad & "pLinea1=""" & vParamRpt.LineaPie1 & """|"
             numParam = numParam + 1
         End If
         If vParamRpt.LineaPie2 <> "" Then
-            cad = cad & "pLinea2=""" & vParamRpt.LineaPie2 & """|"
+            Cad = Cad & "pLinea2=""" & vParamRpt.LineaPie2 & """|"
             numParam = numParam + 1
         End If
         If vParamRpt.LineaPie3 <> "" Then
-            cad = cad & "pLinea3=""" & vParamRpt.LineaPie3 & """|"
+            Cad = Cad & "pLinea3=""" & vParamRpt.LineaPie3 & """|"
             numParam = numParam + 1
         End If
         If vParamRpt.LineaPie4 <> "" Then
-            cad = cad & "pLinea4=""" & vParamRpt.LineaPie4 & """|"
+            Cad = Cad & "pLinea4=""" & vParamRpt.LineaPie4 & """|"
             numParam = numParam + 1
         End If
         If vParamRpt.LineaPie5 <> "" Then
-            cad = cad & "pLinea5=""" & vParamRpt.LineaPie5 & """|"
+            Cad = Cad & "pLinea5=""" & vParamRpt.LineaPie5 & """|"
             numParam = numParam + 1
         End If
-        CadParam = CadParam & cad
+        cadParam = cadParam & Cad
         If Not EsAridoc Then
             nomDocu = vParamRpt.Documento
         Else
@@ -488,23 +498,23 @@ Public Sub PonerFrameVisible(ByRef vFrame As Frame, visible As Boolean, H As Int
 End Sub
 
 
-Public Function PonerParamEmpresa(CadParam As String, numParam As Byte) As Boolean
+Public Function PonerParamEmpresa(cadParam As String, numParam As Byte) As Boolean
 Dim DomiEmp As String
 Dim WebEmp As String
-Dim cad As String
+Dim Cad As String
 
         DomiEmp = vParam.DomicilioEmpresa & " - " & vParam.CPostal & " " & vParam.Poblacion
         If vParam.Provincia <> vParam.Poblacion Then DomiEmp = DomiEmp & " " & vParam.Provincia
         DomiEmp = DomiEmp & " - Telf. " & vParam.Telefono & " - Fax. " & vParam.Fax
         WebEmp = "Internet: " & vParam.WebEmpresa & " - E-mail: " & vParam.MailEmpresa
         'Resto parametros
-        cad = ""
-        cad = cad & "pNomEmpre=""" & vParam.NombreEmpresa & """|"
-        cad = cad & "pDomEmpre=""" & DomiEmp & """|"
-        cad = cad & "pWebEmpre=""" & WebEmp & """|"
+        Cad = ""
+        Cad = Cad & "pNomEmpre=""" & vParam.NombreEmpresa & """|"
+        Cad = Cad & "pDomEmpre=""" & DomiEmp & """|"
+        Cad = Cad & "pWebEmpre=""" & WebEmp & """|"
         
         numParam = numParam + 3
-        CadParam = CadParam & cad
+        cadParam = cadParam & Cad
         PonerParamEmpresa = True
 End Function
 

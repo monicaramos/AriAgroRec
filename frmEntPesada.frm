@@ -1966,9 +1966,9 @@ Begin VB.Form frmEntPesada
          Height          =   360
          Index           =   8
          Left            =   7920
-         MaxLength       =   2
+         MaxLength       =   3
          TabIndex        =   28
-         Tag             =   "Código Tarifa|N|S|0|99|rentradas|codtarif|00||"
+         Tag             =   "Código Tarifa|N|S|0|999|rentradas|codtarif|000||"
          Text            =   "ta"
          Top             =   2250
          Visible         =   0   'False
@@ -3990,8 +3990,8 @@ Dim B As Boolean
     '---------------------------------------------
 '    b = (Modo <> 0 And Modo <> 2) Or (Modo = 5 And ModificaLineas <> 0)
     B = (Modo = 1) Or Modo = 3 Or Modo = 4 Or (Modo = 5 And ModificaLineas <> 0)
-    CmdCancelar.visible = B
-    cmdAceptar.visible = B
+    cmdCancelar.visible = B
+    CmdAceptar.visible = B
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     BloquearImgFec Me, 0, Modo

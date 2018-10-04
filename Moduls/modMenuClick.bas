@@ -538,6 +538,9 @@ Public Sub SubmnC_RecoleccionG_Transporte_Click(Index As Integer)
                 frmImpAridoc.Caption = "Exportar Facturas Transporte a Aridoc"
                 frmImpAridoc.Label4(16).Caption = "Fecha Factura"
                 frmImpAridoc.Show vbModal 'vbModalConstruc("Integracion aridoc")
+                
+        Case 9: frmAlmEnvRet.Show vbModal
+                
     End Select
 End Sub
 
@@ -1277,8 +1280,8 @@ Dim i As Integer
     MDIppal.mnE_Aport(9).visible = (vParamAplic.Cooperativa = 14)
 
     '[Monica]29/04/2013: bloqueo de pago de facturas terceros + facturas socios, solo para montifrut
-    MDIppal.mnRec_PagoSocios(20).Enabled = (vParamAplic.Cooperativa = 12 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
-    MDIppal.mnRec_PagoSocios(20).visible = (vParamAplic.Cooperativa = 12 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+    MDIppal.mnRec_PagoSocios(20).Enabled = (vParamAplic.Cooperativa = 12 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Or vParamAplic.Cooperativa = 5)
+    MDIppal.mnRec_PagoSocios(20).visible = (vParamAplic.Cooperativa = 12 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Or vParamAplic.Cooperativa = 5)
 
 
     MDIppal.mnRec_Entradas(21).Enabled = (vParamAplic.Cooperativa = 12)
@@ -1368,6 +1371,11 @@ Dim i As Integer
     '[Monica]02/02/2018: categorias de catadau
     MDIppal.mnP_PreNomCateg(1).Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
     MDIppal.mnP_PreNomCateg(1).visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+    
+    
+    '[Monica]21/09/2018: envases retornables solo para ribercaqui
+    MDIppal.mnRec_Transporte(9).Enabled = (vParamAplic.Cooperativa = 19)
+    MDIppal.mnRec_Transporte(9).visible = (vParamAplic.Cooperativa = 19)
     
     
 End Sub

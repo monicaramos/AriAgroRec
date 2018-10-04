@@ -3329,6 +3329,34 @@ Dim SQL As String
 End Function
 
 
+Public Function CalidadMaximaNormal(Variedad As String, Nota As String, Optional ConKilos As Boolean) As String
+'conkilos = true --> miramos que el registro de esa clasificacion tenga kilos <> 0
+Dim Rs As ADODB.Recordset
+Dim SQL As String
+
+    CalidadMaximaNormal = ""
+    
+    If Trim(Variedad) = "" Then Exit Function
+
+    SQL = "select rclasifica_clasif.codcalid from rclasifica_clasif inner join rcalidad on rclasifica_clasif.codvarie = rcalidad.codvarie and rclasifica_clasif.codcalid = rcalidad.codcalid "
+    SQL = SQL & " where rclasifica_clasif.numnotac = " & DBSet(Nota, "N")
+    
+    If ConKilos Then
+        SQL = SQL & " and rclasifica_clasif.kilosnet <> 0"
+    End If
+    
+    SQL = SQL & " and tipcalid = 0 "
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    
+    If Not Rs.EOF Then
+        CalidadMaximaNormal = DBLet(Rs.Fields(0).Value, "N")
+    End If
+    
+    Set Rs = Nothing
+    
+End Function
 
 
 Public Function HorasDecimal(cantidad As String) As Currency
@@ -4242,6 +4270,21 @@ Dim SQL As String
     
 End Function
 
+Public Function EsCalidadPequeño(Variedad As String, Calidad As String) As Boolean
+Dim Rs As ADODB.Recordset
+Dim SQL As String
+
+    EsCalidadPequeño = False
+    
+    If Trim(Variedad) = "" Or Trim(Calidad) = "" Then Exit Function
+
+    SQL = "select tipcalid from rcalidad "
+    SQL = SQL & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and rcalidad.codcalid = " & DBSet(Calidad, "N")
+    
+    EsCalidadPequeño = (DevuelveValor(SQL) = 4)
+    
+End Function
 
 
 
@@ -4636,4 +4679,14 @@ Dim SQL As String
 
 End Function
 
+
+Public Function EsArticuloRetornable(Codigo As String) As Boolean
+Dim SQL As String
+
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "stipar", "esretornable", "codtipar", Codigo, "T")
+
+    EsArticuloRetornable = (SQL = "1")
+
+End Function
 

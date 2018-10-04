@@ -3004,10 +3004,10 @@ On Error GoTo EPonerModo
     '=========================================
     B = (Modo = 2)
         
-    cmdAceptar.visible = (ModoLineas = 2)
-    cmdAceptar.Enabled = (ModoLineas = 2)
-    CmdCancelar.visible = (ModoLineas = 2)
-    CmdCancelar.Enabled = (ModoLineas = 2)
+    CmdAceptar.visible = (ModoLineas = 2)
+    CmdAceptar.Enabled = (ModoLineas = 2)
+    cmdCancelar.visible = (ModoLineas = 2)
+    cmdCancelar.Enabled = (ModoLineas = 2)
     
 '    'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
 '    'Si estamos en Insertar además limpia los campos Text1
@@ -3403,10 +3403,10 @@ Dim i As Integer
     'desBloqueo Manual de las tablas
 '    DesBloqueoManual ("scaalp")
     
-    Me.cmdAceptar.visible = True
-    Me.cmdAceptar.Enabled = True
-    Me.CmdCancelar.visible = True
-    Me.CmdCancelar.Enabled = True
+    Me.CmdAceptar.visible = True
+    Me.CmdAceptar.Enabled = True
+    Me.cmdCancelar.visible = True
+    Me.cmdCancelar.Enabled = True
     
     
     PonerFoco Text1(3)
@@ -4906,7 +4906,25 @@ Dim i As Long
 '        End If
 '    End If
     
-    tipoMov = vSocio.CodTipomLiq
+    '[Monica]01/10/2018: para el resto de cooperativas, frutas inma y castelduc
+    If vParamAplic.Cooperativa = 12 Then
+        tipoMov = vSocio.CodTipomLiq
+    Else
+        If Combo1(0).ListIndex = 1 Then
+            If Combo1(1).ListIndex = 0 Then
+                tipoMov = vSocio.CodTipomAnt
+            Else
+                tipoMov = vSocio.CodTipomAntVC
+            End If
+        Else
+            If Combo1(1).ListIndex = 0 Then
+                tipoMov = vSocio.CodTipomLiq
+            Else
+                tipoMov = vSocio.CodTipomLiqVC
+            End If
+        End If
+    End If
+    
     
     Set vTipoMov = New CTiposMov
     
@@ -5165,8 +5183,9 @@ Dim SQL As String
     MensError = ""
     Precio = 0
     
-    SQL = "select codvarie, sum(kilosfactu) kilos, sum(impentrada) importe from rhisfruta where numalbar in (" & Albaranes & ")"
-    SQL = SQL & " group by 1 order by 1"
+    '[Monica]01/10/2018: metemos el codigo de campo
+    SQL = "select codvarie, codcampo, sum(kilosfactu) kilos, sum(impentrada) importe from rhisfruta where numalbar in (" & Albaranes & ")"
+    SQL = SQL & " group by 1,2 order by 1,2"
     
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -5179,7 +5198,7 @@ Dim SQL As String
         End If
     
         CadValues = CadValues & "('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
-        CadValues = CadValues & DBSet(Rs!codvarie, "N") & ",0,"
+        CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!codCampo, "N") & "," '[Monica]01/10/2018: antes 0
         CadValues = CadValues & DBSet(ImporteSinFormato(Rs!Kilos), "N") & "," & DBSet(Precio, "N") & ","
         CadValues = CadValues & DBSet(ImporteSinFormato(Rs!Importe), "N")
         CadValues = CadValues & ",0,0," & DBSet(Text1(27).Text, "N") & " ),"
@@ -5206,14 +5225,23 @@ Dim SQL As String
 '    sql = sql & " and fecfactu = " & DBSet(FecFac, "F")
 '    sql = sql & " group by 1,2,3,4,5,7,8,9 "
 '    sql = sql & " order by 1,2,3,4,5,7,8,9 "
-    SQL = SQL & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ", codvarie, 0, codcalid, sum(kilosnet), round(sum(precio) / count(*),4), round(sum(kilosnet) * round(sum(precio) / count(*),4),2)  "
-    SQL = SQL & " from rhisfruta_clasif "
-    SQL = SQL & " where numalbar in (" & Albaranes & ")"
+
+    '[Monica]01/10/2018: antes era 0 codcampo
+    SQL = SQL & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ", rhisfruta_clasif.codvarie, rhisfruta.codcampo, codcalid, sum(rhisfruta_clasif.kilosnet), round(sum(rhisfruta_clasif.precio) / count(*),4), round(sum(rhisfruta_clasif.kilosnet) * round(sum(rhisfruta_clasif.precio) / count(*),4),2)  "
+    SQL = SQL & " from rhisfruta_clasif inner join rhisfruta on rhisfruta_clasif.numalbar = rhisfruta.numalbar "
+    SQL = SQL & " where rhisfruta_clasif.numalbar in (" & Albaranes & ")"
     SQL = SQL & " group by 1,2,3,4,5,6 "
     SQL = SQL & " order by 1,2,3,4,5,6 "
 
     conn.Execute SQL
     
+    '[Monica]01/10/2018: añadimos esto
+    If vParamAplic.Cooperativa = 5 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
+        SQL = "update rfactsoc_calidad set preciocalidad = precio, imporcalidad = imporcal where codtipom = " & DBSet(tipoMov, "T")
+        SQL = SQL & " and numfactu = " & DBSet(numfactu, "N") & " and fecfactu = " & DBSet(FecFac, "F")
+        
+        conn.Execute SQL
+    End If
     
     InsertarLineasFactura = True
     Exit Function
@@ -5308,7 +5336,13 @@ Dim EsVtaCampo As Byte
     SQL = SQL & "0,0,0,"
     
     '0,0,0,"
-    SQL = SQL & DBSet(EsAnticipo, "N") & "," & DBSet(EsVtaCampo, "N") & ",0,"
+    '[Monica]01/10/2018:caso de frutas inma y castelduc
+    If vParamAplic.Cooperativa = 12 Then
+        SQL = SQL & DBSet(EsAnticipo, "N") & "," & DBSet(EsVtaCampo, "N") & ",0,"
+    Else
+        SQL = SQL & "0,0,0,"
+    End If
+    
     
     SQL = SQL & DBSet(Text1(4).Text, "N") & "," & DBSet(Text1(28).Text, "N") & "," & Combo1(2).ListIndex & ")"
     

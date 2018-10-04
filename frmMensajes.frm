@@ -5816,7 +5816,7 @@ Dim SQL As String
         While Not Rs.EOF
             Set ItmX = ListView5.ListItems.Add
             ItmX.Text = Format(Rs!NumNotac, "000000")
-            ItmX.SubItems(1) = Format(Rs!codvarie, "000000")
+            ItmX.SubItems(1) = Format(Rs!Codvarie, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = "Variedad sin calidad venta campo"
             
@@ -5859,7 +5859,7 @@ Dim ItmX As ListItem
         While Not Rs.EOF
             Set ItmX = ListView7.ListItems.Add
             ItmX.Text = Format(Rs!NumNotac, "0000000")
-            ItmX.SubItems(1) = Format(Rs!codvarie, "000000")
+            ItmX.SubItems(1) = Format(Rs!Codvarie, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = "Entradas sin CRFID."
             Rs.MoveNext
@@ -6356,7 +6356,7 @@ Dim It As ListItem
         End If
         
         If Opcion = 0 Or Opcion = 2 Then
-            It.SubItems(1) = Format(Rs!codvarie, "000000")
+            It.SubItems(1) = Format(Rs!Codvarie, "000000")
             It.SubItems(2) = Rs!nomvarie
             It.SubItems(3) = Rs!nomparti
             It.SubItems(4) = Rs!Poligono
@@ -6405,7 +6405,7 @@ Dim It As ListItem
                             It.SubItems(6) = DBLet(Rs!SubParce, "T")
                             It.SubItems(7) = Rs!NroCampo
                             It.SubItems(8) = Rs!Hdas
-                            It.SubItems(9) = Rs!codvarie
+                            It.SubItems(9) = Rs!Codvarie
                             It.SubItems(10) = Rs!nomvarie
                         End If
                     End If
@@ -6478,7 +6478,7 @@ Dim It As ListItem
     While Not Rs.EOF
         Set It = ListView6.ListItems.Add
             
-        It.Text = Format(DBLet(Rs!codvarie, "N"), "000000")
+        It.Text = Format(DBLet(Rs!Codvarie, "N"), "000000")
         It.SubItems(1) = DBLet(Rs!nomvarie, "T")
         If DadoProducto Then
             It.SubItems(2) = Format(DBLet(Rs!codprodu, "N"), "000")
@@ -6537,7 +6537,7 @@ Dim Consumido As Currency
     While Not Rs.EOF
         Set It = ListView8.ListItems.Add
             
-        It.Text = Format(DBLet(Rs!codvarie, "N"), "000000")
+        It.Text = Format(DBLet(Rs!Codvarie, "N"), "000000")
         It.SubItems(1) = DBLet(Rs!nomvarie, "T")
         It.SubItems(2) = Format(DBLet(Rs!Unidades, "N"), "###,##0.00")
         It.SubItems(3) = Format(DBLet(Rs!cantidad, "N"), "###,##0.00")
@@ -6845,7 +6845,7 @@ Dim NomFic As String
             
         'It.Tag = DevNombreSQL(RS!codCampo)
         It.Text = DBLet(Rs!numalbar, "T")
-        It.SubItems(1) = Format(Rs!codvarie, "000000")
+        It.SubItems(1) = Format(Rs!Codvarie, "000000")
         It.SubItems(2) = Format(Rs!Codsocio, "000000")
         It.SubItems(3) = Format(Rs!codCampo, "00000000")
         Select Case DBLet(Rs!TipoEntr, "N")
@@ -7045,7 +7045,7 @@ Dim It As ListItem
     
     ListView6.ColumnHeaders.Clear
     
-    ListView6.ColumnHeaders.Add , , "Código", 1000.0631
+    ListView6.ColumnHeaders.Add , , "Código", 1500.0631
     ListView6.ColumnHeaders.Add , , "Trabajador", 4200.2522, 0
     
     
@@ -7387,7 +7387,7 @@ Dim It As ListItem
         It.Text = DBLet(Rs!NumNotac, "N")
         It.SubItems(1) = Format(Rs!FechaEnt, "dd/mm/yyyy")
         It.SubItems(2) = Format(Rs!horaentr, "hh:mm:ss")
-        It.SubItems(3) = Format(Rs!codvarie, "000000")
+        It.SubItems(3) = Format(Rs!Codvarie, "000000")
         It.SubItems(4) = Rs!nomvarie
         It.SubItems(5) = Format(Rs!Codsocio, "000000")
         It.SubItems(6) = Rs!nomsocio
@@ -7490,7 +7490,7 @@ Dim It As ListItem
         It.Text = DBLet(Rs!numalbar, "N")
         It.SubItems(1) = Format(Rs!Fecalbar, "dd/mm/yyyy")
         It.SubItems(2) = Format(Rs!horaentr, "hh:mm:ss")
-        It.SubItems(3) = Format(Rs!codvarie, "000000")
+        It.SubItems(3) = Format(Rs!Codvarie, "000000")
         It.SubItems(4) = Rs!nomvarie
         It.SubItems(5) = Format(Rs!Codsocio, "000000")
         It.SubItems(6) = Rs!nomsocio

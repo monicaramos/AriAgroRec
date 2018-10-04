@@ -567,16 +567,16 @@ Begin VB.Form frmManSocios
       TabCaption(3)   =   "Documentos"
       TabPicture(3)   =   "frmManSocios.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Frame8"
-      Tab(3).Control(1)=   "Text3(0)"
-      Tab(3).Control(2)=   "Toolbar2"
-      Tab(3).Control(3)=   "lw1"
-      Tab(3).Control(4)=   "Toolbar3"
-      Tab(3).Control(5)=   "Frame5"
-      Tab(3).Control(6)=   "Toolbar4"
-      Tab(3).Control(7)=   "imgFec(3)"
-      Tab(3).Control(8)=   "Label17"
-      Tab(3).Control(9)=   "Label16"
+      Tab(3).Control(0)=   "Label16"
+      Tab(3).Control(1)=   "Label17"
+      Tab(3).Control(2)=   "imgFec(3)"
+      Tab(3).Control(3)=   "Toolbar4"
+      Tab(3).Control(4)=   "Frame5"
+      Tab(3).Control(5)=   "Toolbar3"
+      Tab(3).Control(6)=   "lw1"
+      Tab(3).Control(7)=   "Toolbar2"
+      Tab(3).Control(8)=   "Text3(0)"
+      Tab(3).Control(9)=   "Frame8"
       Tab(3).ControlCount=   10
       TabCaption(4)   =   "Pozos"
       TabPicture(4)   =   "frmManSocios.frx":007C
@@ -5248,7 +5248,7 @@ Dim SQL As String
 
     Select Case Operacion
         Case "I" ' insertar
-            SQL = DevuelveDesdeBDNew(cAgro, "aripush.usuariospush", "comunid", "comunid", Text1(0).Text, "N")
+            SQL = DevuelveDesdeBDNew(cAgro, "aripush.usuariospush", "ariagroid", "ariagroid", Text1(0).Text, "N")
             If SQL = "" Then
                 SQL = "insert into aripush.usuariospush (nif,nombre,comunId,ariagroId,tiendaId,gasolineraId,telefoniaId,tratamientosId,login,"
                 SQL = SQL & "password,email,playerId,direccion,codPostal,poblacion,provincia,telefono1,telefono2,iban)"
@@ -5285,33 +5285,28 @@ Dim SQL As String
                 SQL = SQL & ",telefono1 = " & DBSet(Text1(8), "T")  'telefono1
                 SQL = SQL & ",telefono2 = " & DBSet(Text1(9), "T")  'telefono2
                 SQL = SQL & ",iban = " & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
-                SQL = SQL & " where comunId = " & DBSet(Text1(0).Text, "N")
+                SQL = SQL & " where ariagroId = " & DBSet(Text1(0).Text, "N")
             End If
 
             conn.Execute SQL
             
         
         Case "M" ' modificar
-            If NombreAnt <> Text1(1).Text Or IbanAnt <> Text1(27).Text Or BancoAnt <> Text1(16).Text Or SucurAnt <> Text1(17).Text Or _
-               DigitoAnt <> Text1(18).Text Or CuentaAnt <> Text1(19).Text Or DirecAnt <> Text1(3).Text Or cPostalAnt <> Text1(4).Text Or _
-               PoblaAnt <> Text1(5).Text Or ProviAnt <> Text1(6).Text Or NifAnt <> Text1(2).Text Or EMaiAnt <> Text1(12).Text Or _
-               Tel1Ant <> Text1(8).Text Or Tel2Ant <> Text1(9).Text Then
 
-                    SQL = "update aripush.usuariospush set "
-                    SQL = SQL & " nif = " & DBSet(Text1(2), "T")
-                    SQL = SQL & ",nombre = " & DBSet(Text1(1).Text, "T")
-                    SQL = SQL & ",email = " & DBSet(Text1(12).Text, "T")
-                    SQL = SQL & ",direccion = " & DBSet(Text1(3), "T") 'dirsocio (direccion fiscal)
-                    SQL = SQL & ",codpostal = " & DBSet(Text1(4), "T") 'codigo postal
-                    SQL = SQL & ",poblacion = " & DBSet(Text1(5), "T") 'poblacion
-                    SQL = SQL & ",provincia = " & DBSet(Text1(6), "T") 'provincia
-                    SQL = SQL & ",telefono1 = " & DBSet(Text1(8), "T") 'telefono1
-                    SQL = SQL & ",telefono2 = " & DBSet(Text1(9), "T") 'telefono2
-                    SQL = SQL & ",iban = " & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
-                    SQL = SQL & " where comunId = " & DBSet(Text1(0).Text, "N")
-                    
-                    conn.Execute SQL
-            End If
+            SQL = "update aripush.usuariospush set "
+            SQL = SQL & " nif = " & DBSet(Text1(2), "T")
+            SQL = SQL & ",nombre = " & DBSet(Text1(1).Text, "T")
+            SQL = SQL & ",email = " & DBSet(Text1(12).Text, "T")
+            SQL = SQL & ",direccion = " & DBSet(Text1(3), "T") 'dirsocio (direccion fiscal)
+            SQL = SQL & ",codpostal = " & DBSet(Text1(4), "T") 'codigo postal
+            SQL = SQL & ",poblacion = " & DBSet(Text1(5), "T") 'poblacion
+            SQL = SQL & ",provincia = " & DBSet(Text1(6), "T") 'provincia
+            SQL = SQL & ",telefono1 = " & DBSet(Text1(8), "T") 'telefono1
+            SQL = SQL & ",telefono2 = " & DBSet(Text1(9), "T") 'telefono2
+            SQL = SQL & ",iban = " & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
+            SQL = SQL & " where ariagroId = " & DBSet(Text1(0).Text, "N")
+            
+            conn.Execute SQL
         
         Case "E" ' eliminar
     End Select
@@ -5817,8 +5812,8 @@ Dim B As Boolean
     
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
-    CmdCancelar.visible = B
-    cmdAceptar.visible = B
+    cmdCancelar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -8182,7 +8177,7 @@ Dim Nuevo As Boolean
             PonerFormatoEntero txtAux(Index)
             
         Case 16
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
     End Select
     
     ' ******************************************************************************
@@ -8974,7 +8969,7 @@ Dim cadena As String
             If Not vSeccion Is Nothing Then
                   txtAux2(0).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", txtAux1(Index).Text, "N")
             End If
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
 
     End Select
     
@@ -9033,7 +9028,7 @@ Dim cadena As String
             PonerFormatoDecimal txtAux3(Index), 10
         
         Case 3 'observaciones
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
 
     End Select
     
@@ -10047,7 +10042,7 @@ Dim cadena As String
         
         Case 5 ' capital
             If PonerFormatoDecimal(txtAux4(Index), 1) Then
-                cmdAceptar.SetFocus
+                CmdAceptar.SetFocus
             End If
 
     End Select

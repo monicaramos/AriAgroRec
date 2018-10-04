@@ -2333,8 +2333,8 @@ Dim B As Boolean
     '---------------------------------------------
     
     B = Modo <> 0 And Modo <> 2
-    CmdCancelar.visible = B
-    cmdAceptar.visible = B
+    cmdCancelar.visible = B
+    CmdAceptar.visible = B
        
     ' añado el tag para engañar para que lo ponga en amarillo
     Text1(8).Tag = "A"
@@ -3857,7 +3857,7 @@ Dim Nuevo As Boolean
                     End If
                     PonerFoco txtAux(Index)
                 Else
-                    cmdAceptar.SetFocus
+                    CmdAceptar.SetFocus
                 End If
             Else
                 txtAux2(Index).Text = ""
@@ -3894,7 +3894,7 @@ Dim Nuevo As Boolean
     
         Case 8 ' importe
             If txtAux(Index) <> "" Then
-                If PonerFormatoDecimal(txtAux(Index), 3) Then cmdAceptar.SetFocus
+                If PonerFormatoDecimal(txtAux(Index), 3) Then CmdAceptar.SetFocus
             End If
         
             
@@ -4262,133 +4262,6 @@ Private Sub LimpiarCamposFrame(Index As Integer)
 '
     If Err.Number <> 0 Then Err.Clear
 End Sub
-
-'' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
-'Private Sub DataGridAux_GotFocus(Index As Integer)
-'  WheelHook DataGridAux(Index)
-'End Sub
-'Private Sub DataGridAux_LostFocus(Index As Integer)
-'  WheelUnHook
-'End Sub
-
-
-Private Sub CalcularGastos()
-Dim Rs As ADODB.Recordset
-Dim SQL As String
-Dim TotalEnvases As String
-Dim TotalCostes As String
-Dim Valor As Currency
-Dim GasRecol As Currency
-Dim GasAcarreo As Currency
-Dim KilosTria As Long
-Dim KilosNet As Long
-Dim EurDesta As Currency
-Dim EurRecol As Currency
-Dim PrecAcarreo As Currency
-Dim i As Integer
-
-    On Error Resume Next
-    
-    GasRecol = 0
-    GasAcarreo = 0
-    
-    If Combo1(0).ListIndex = 1 Then
-        For i = 14 To 19
-            Text1(i).Text = ""
-        Next i
-        Exit Sub
-    End If
-    
-    
-    SQL = "select eurdesta, eurecole from variedades where codvarie = " & DBSet(Text1(3).Text, "N")
-    
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    
-    If Not Rs.EOF Then
-        EurDesta = DBLet(Rs.Fields(0).Value, "N")
-        EurRecol = DBLet(Rs.Fields(1).Value, "N")
-    End If
-
-    Set Rs = Nothing
-
-'    Sql = "select sum(kilosnet) from rclasifica_clasif where numnotac = " & DBSet(Text1(0).Text, "N")
-'    KilosNet = TotalRegistros(Sql)
-
-    KilosNet = CLng(ImporteSinFormato(Text1(10).Text))
-
-    'recolecta socio
-    If Combo1(1).ListIndex = 1 Then
-        SQL = "select sum(kilosnet) from rclasifica_clasif, rcalidad  where numnotac = " & DBSet(Text1(0).Text, "N")
-        SQL = SQL & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
-        SQL = SQL & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
-        SQL = SQL & " and rcalidad.gastosrec = 1"
-        
-        KilosTria = TotalRegistros(SQL)
-        
-        GasRecol = Round2(KilosTria * EurRecol, 2)
-    Else
-    'recolecta cooperativa
-        If Combo1(2).ListIndex = 0 Then
-            'horas
-            'gastosrecol = horas * personas * rparam.(costeshora + costesegso)
-            GasRecol = Round2(HorasDecimal(Text1(18).Text) * CCur(Text1(19).Text) * (vParamAplic.CosteHora + vParamAplic.CosteSegSo), 2)
-        Else
-            'destajo
-            GasRecol = Round2(KilosNet * EurDesta, 2)
-        End If
-    End If
-    
-'12/05/2009
-'    If Text1(8).Text <> "" Then
-'        sql = DevuelveDesdeBDNew(cAgro, "rtarifatra", "preciokg", "codtarif", Text1(8).Text, "N")
-'        PrecAcarreo = CCur(sql)
-'    Else
-'        PrecAcarreo = 0
-'    End If
-'12/05/2009 cambiado por esto pq si que hay tarifa 0
-
-    PrecAcarreo = 0
-    SQL = ""
-    SQL = DevuelveDesdeBDNew(cAgro, "rtarifatra", "preciokg", "codtarif", Text1(8).Text, "N")
-    If SQL <> "" Then
-        PrecAcarreo = CCur(SQL)
-    End If
-    
-    GasAcarreo = Round2(PrecAcarreo * KilosNet, 2)
-    
-    Text1(16).Text = Format(GasRecol, "#,##0.00")
-    Text1(15).Text = Format(GasAcarreo, "#,##0.00")
-    
-
-End Sub
-
-'Private Function HorasDecimal(cantidad As String) As Currency
-'Dim Entero As Long
-'Dim vCantidad As String
-'Dim vDecimal As String
-'Dim vEntero As String
-'Dim vHoras As Currency
-'Dim J As Integer
-'    HorasDecimal = 0
-'
-'    vCantidad = ImporteSinFormato(cantidad)
-'
-'    J = InStr(1, vCantidad, ",")
-'
-'    If J > 0 Then
-'        vEntero = Mid(vCantidad, 1, J - 1)
-'        vDecimal = Mid(vCantidad, J + 1, Len(vCantidad))
-'    Else
-'        vEntero = vCantidad
-'        vDecimal = ""
-'    End If
-'
-'    vHoras = (CLng(vEntero) * 60) + CLng(vDecimal)
-'
-'    HorasDecimal = Round2(vHoras / 60, 2)
-'
-'End Function
 
 
 Private Sub PasarSigReg()

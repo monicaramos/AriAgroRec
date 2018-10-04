@@ -17,6 +17,26 @@ Begin VB.Form frmManClasifica
    ScaleWidth      =   16725
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox Text3 
+      Alignment       =   1  'Right Justify
+      Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Index           =   2
+      Left            =   6615
+      TabIndex        =   106
+      Text            =   "Text3"
+      Top             =   9405
+      Width           =   1000
+   End
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   120
@@ -187,11 +207,11 @@ Begin VB.Form frmManClasifica
       EndProperty
       Height          =   360
       Index           =   1
-      Left            =   5280
+      Left            =   4995
       TabIndex        =   94
       Text            =   "Text3"
       Top             =   9405
-      Width           =   1865
+      Width           =   1575
    End
    Begin VB.Frame Frame2 
       Height          =   4605
@@ -849,9 +869,9 @@ Begin VB.Form frmManClasifica
          Height          =   360
          Index           =   8
          Left            =   1320
-         MaxLength       =   2
+         MaxLength       =   3
          TabIndex        =   8
-         Tag             =   "Código Tarifa|N|S|0|99|rclasifica|codtarif|00||"
+         Tag             =   "Código Tarifa|N|S|0|999|rclasifica|codtarif|000||"
          Top             =   3495
          Width           =   555
       End
@@ -1584,11 +1604,11 @@ Begin VB.Form frmManClasifica
       EndProperty
       Height          =   360
       Index           =   0
-      Left            =   7170
+      Left            =   7670
       TabIndex        =   57
       Text            =   "Text3"
       Top             =   9405
-      Width           =   2025
+      Width           =   1750
    End
    Begin VB.Frame FrameAux1 
       Caption         =   "Incidencias"
@@ -1868,6 +1888,29 @@ Begin VB.Form frmManClasifica
       TabIndex        =   37
       Top             =   5460
       Width           =   9705
+      Begin VB.TextBox txtAux2 
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000018&
+         BorderStyle     =   0  'None
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   1
+         Left            =   5895
+         TabIndex        =   105
+         Text            =   "Porc"
+         Top             =   2565
+         Visible         =   0   'False
+         Width           =   555
+      End
       Begin VB.TextBox txtAux 
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
@@ -1883,7 +1926,7 @@ Begin VB.Form frmManClasifica
          EndProperty
          Height          =   290
          Index           =   4
-         Left            =   5805
+         Left            =   6525
          MaxLength       =   7
          TabIndex        =   63
          Tag             =   "Kilos Neto|N|S|||rclasifica_clasif|kilosnet|###,##0||"
@@ -2159,8 +2202,8 @@ Begin VB.Form frmManClasifica
          Left            =   150
          TabIndex        =   41
          Top             =   630
-         Width           =   9200
-         _ExtentX        =   16219
+         Width           =   9400
+         _ExtentX        =   16589
          _ExtentY        =   4842
          _Version        =   393216
          AllowUpdate     =   0   'False
@@ -2383,7 +2426,7 @@ Begin VB.Form frmManClasifica
       ForeColor       =   &H00800000&
       Height          =   240
       Index           =   0
-      Left            =   3990
+      Left            =   3600
       TabIndex        =   58
       Top             =   9435
       Width           =   1365
@@ -3198,11 +3241,14 @@ Dim Tabla As String
                
         Case 0 'CLASIFICACION
             SQL = "SELECT rclasifica_clasif.numnotac, rclasifica_clasif.codvarie, variedades.nomvarie, rclasifica_clasif.codcalid,"
-            SQL = SQL & " rcalidad.nomcalid, rclasifica_clasif.muestra, rclasifica_clasif.kilosnet "
-            SQL = SQL & " from rclasifica_clasif, variedades, rcalidad "
             If enlaza Then
+                SQL = SQL & " rcalidad.nomcalid, rclasifica_clasif.muestra,round(rclasifica_clasif.kilosnet * 100 / KN.kilosnet,2), rclasifica_clasif.kilosnet "
+                SQL = SQL & " from rclasifica_clasif, variedades, rcalidad "
+                SQL = SQL & ", (select kilosnet from rclasifica where " & ObtenerWhereCab(False) & ") KN "
                 SQL = SQL & ObtenerWhereCab(True)
             Else
+                SQL = SQL & " rcalidad.nomcalid, rclasifica_clasif.muestra, null, rclasifica_clasif.kilosnet "
+                SQL = SQL & " from rclasifica_clasif, variedades, rcalidad "
                 SQL = SQL & " WHERE rclasifica_clasif.numnotac = -1"
             End If
             SQL = SQL & " and rclasifica_clasif.codvarie = variedades.codvarie "
@@ -4666,7 +4712,7 @@ Dim Palets As Long
 
     Neto = Bruto - Round2(cajas * vParamAplic.PesoCaja1, 0) - Round2(vParamAplic.PesoCaja3 * Palets, 0)
 
-    Text1(10).Text = Format(Neto, "###,###,##0")
+    Text1(23).Text = Format(Neto, "###,###,##0")
 End Sub
 
 
@@ -4991,7 +5037,7 @@ Dim B As Boolean
                 txtAux(jj).visible = B
                 txtAux(jj).Top = alto
             Next jj
-            For jj = 2 To 2
+            For jj = 1 To 2
                 txtAux2(jj).visible = B
                 txtAux2(jj).Top = alto
             Next jj
@@ -5460,15 +5506,17 @@ Dim tots As String
             tots = "N||||0|;" 'numnotac
             tots = tots & "N|txtAux(1)|T|Variedad|800|;N|btnBuscar(0)|B|||;N|txtAux2(0)|T|Nombre|2000|;"
             tots = tots & "S|txtAux(2)|T|Calidad|1200|;S|btnBuscar(2)|B|||;S|txtAux2(2)|T|Nombre|3500|;"
-            tots = tots & "S|txtAux(3)|T|Muestra|1900|;S|txtAux(4)|T|Peso Neto|2000|;"
+            tots = tots & "S|txtAux(3)|T|Muestra|1400|;S|txtAux2(1)|T|Porcen|1000|;S|txtAux(4)|T|Peso Neto|1730|;"
             
             arregla tots, DataGridAux(Index), Me, 350
             
             DataGridAux(0).Columns(3).Alignment = dbgLeft
             DataGridAux(0).Columns(5).NumberFormat = "###,##0.00"
             DataGridAux(0).Columns(5).Alignment = dbgRight
-            DataGridAux(0).Columns(6).NumberFormat = "###,##0"
+            DataGridAux(0).Columns(6).NumberFormat = "##0.00"
             DataGridAux(0).Columns(6).Alignment = dbgRight
+            DataGridAux(0).Columns(7).NumberFormat = "###,##0"
+            DataGridAux(0).Columns(7).Alignment = dbgRight
         
             B = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
             
@@ -5646,6 +5694,7 @@ Dim Valor As Currency
     If Data1.Recordset.EOF Or Modo = 1 Then
         Text3(0).Text = ""
         Text3(1).Text = ""
+        Text3(2).Text = ""
         Exit Sub
     End If
 
@@ -5675,6 +5724,11 @@ Dim Valor As Currency
         Text3(1).Text = ""
     End If
     
+    If ComprobarCero(Text1(10)) <> 0 Then
+        Valor = Round(CCur(TransformaPuntosComas(Text3(0).Text)) * 100 / CCur(TransformaPuntosComas(ComprobarCero(Text1(10).Text))), 2)
+        
+        Text3(2).Text = Format(Valor, "###,###,##0.00")
+    End If
     
     
     If Err.Number <> 0 Then
@@ -5884,6 +5938,14 @@ Dim KilosNetos As Long
 '        SQL = SQL & " and codcalid not in (select codcalid from rcalidad where codvarie = " & Me.Data1.Recordset!CodVarie
 '        SQL = SQL & " and tipcalid in (1,3)) " ' muestras que no sean de destrio ni de merma
 '    End If
+
+    '[Monica]04/10/2018: para el caso de Coopic, si es destrio, podrido o standard lo que se pone en muestra son los kilos resultantes
+    If vParamAplic.Cooperativa = 16 And EsVariedadComercializada(CStr(Me.Data1.Recordset!Codvarie)) Then
+        SQL = SQL & " and codcalid not in (select codcalid from rcalidad where codvarie = " & Me.Data1.Recordset!Codvarie
+        SQL = SQL & " and tipcalid in (1,3,4)) " ' muestras que no sean de destrio ni de merma
+    End If
+
+
     
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -5920,6 +5982,10 @@ Dim KilosNetos As Long
 '    If vParamAplic.Cooperativa = 0 Then
 '        KilosNetos = Me.Data1.Recordset!KilosNet - DevuelveValor("select sum(muestra) from rclasifica_clasif where numnotac = " & Me.Data1.Recordset!numnotac & " and codcalid in (select codcalid from rcalidad where codvarie = " & Data1.Recordset!CodVarie & " and tipcalid in (1,3))")
 '    End If
+    '[Monica]04/10/2018: el muestreo se hace sobre las calidades que no son destrion podrido o standard
+    If vParamAplic.Cooperativa = 16 And EsVariedadComercializada(CStr(Me.Data1.Recordset!Codvarie)) Then
+        KilosNetos = Me.Data1.Recordset!KilosNet - DevuelveValor("select sum(muestra) from rclasifica_clasif where numnotac = " & Me.Data1.Recordset!NumNotac & " and codcalid in (select codcalid from rcalidad where codvarie = " & Data1.Recordset!Codvarie & " and tipcalid in (1,3,4))")
+    End If
     
     While Not Rs.EOF
 '[Monica]14/10/2011: se queda como estaba
@@ -5933,10 +5999,23 @@ Dim KilosNetos As Long
 '               KilosNet = Round2(DBLet(RS!Muestra, "N") * KilosNetos / TotalMuestra, 0)
 '            End If
 '        Else
+
+        '[Monica]04/10/2018: para el caso de coopic los kilos de destrio podrido y standard se ponen todos
+        If vParamAplic.Cooperativa = 16 And EsVariedadComercializada(CStr(Me.Data1.Recordset!Codvarie)) Then
+            If EsCalidadDestrio(CStr(Me.Data1.Recordset!Codvarie), CStr(DBLet(Rs.Fields!codcalid, "N"))) Or _
+               EsCalidadMerma(CStr(Me.Data1.Recordset!Codvarie), CStr(DBLet(Rs.Fields!codcalid, "N"))) Or _
+               EsCalidadPequeño(CStr(Me.Data1.Recordset!Codvarie), CStr(DBLet(Rs.Fields!codcalid, "N"))) Then
+               
+               KilosNet = DBLet(Rs!Muestra, "N")
+            Else
+               KilosNet = Round2(DBLet(Rs!Muestra, "N") * KilosNetos / TotalMuestra, 0)
+            End If
+        Else
+
             ' como estaba para todos
             KilosNet = Round2(DBLet(Rs!Muestra, "N") * Me.Data1.Recordset!KilosNet / TotalMuestra, 0)
             
-'        End If
+        End If
         
         TotalKilos = TotalKilos + KilosNet
         Calidad = DBLet(Rs!codcalid, "N")
@@ -5961,7 +6040,11 @@ Dim KilosNetos As Long
         If vParamAplic.Cooperativa = 7 Then
             vSQL = CalidadMaximaMuestraenClasificacion(Me.Data1.Recordset!Codvarie, Me.Data1.Recordset!NumNotac, True)
         Else
-            vSQL = CalidadDestrioenClasificacion(Me.Data1.Recordset!Codvarie, Me.Data1.Recordset!NumNotac, True)
+            If vParamAplic.Cooperativa = 16 And EsVariedadComercializada(Me.Data1.Recordset!Codvarie) Then
+                vSQL = CalidadMaximaNormal(CStr(Me.Data1.Recordset!Codvarie), CStr(Me.Data1.Recordset!NumNotac), True)
+            Else
+                vSQL = CalidadDestrioenClasificacion(Me.Data1.Recordset!Codvarie, Me.Data1.Recordset!NumNotac, True)
+            End If
         End If
         
         If vSQL <> "" Then Calidad = CInt(vSQL)

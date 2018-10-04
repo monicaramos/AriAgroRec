@@ -338,6 +338,9 @@ Private mvarClaveAcceso As String ' Clave de acceso
 Private mvarSqlServer As String ' Servidor de SqlServer de Castellduc CASTELLDUCS1-O5
 Private mvarSqlServer1 As String ' Servidor de SqlServer de Castellduc CASTELLDUCS2-O5
 
+'[Monica]02/10/2018: base de datos del sql server
+Private mvarSqlServerBD As String ' Servidor de SqlServer de Castellduc CASTELLDUCS2-O5
+
 '[Monica]10/10/2016: hay resumen por variedad de cajas, kilos e importes en el mto de partes de trabajo
 Private mvarHayResumenCajas As Byte
 
@@ -2211,6 +2214,16 @@ Public Property Get SqlServer1() As String
      SqlServer1 = mvarSqlServer1
 End Property
 
+Public Property Let SqlServerBD(ByVal vData As String)
+     mvarSqlServerBD = vData
+End Property
+
+Public Property Get SqlServerBD() As String
+     SqlServerBD = mvarSqlServerBD
+End Property
+
+
+
 ' Hay facturas varias
 Public Property Let HayResumenCajas(ByVal vData As Byte)
      mvarHayResumenCajas = vData
@@ -2559,6 +2572,9 @@ On Error GoTo Err3
         '[Monica]21/04/2016:
         mvarSqlServer = DBLet(Rs!SqlServer, "T") ' SqlServer CASTELLDUCS1-O5
         mvarSqlServer1 = DBLet(Rs!SqlServer1, "T") ' SqlServer1 CASTELLDUCS2-O5
+        
+        '[Monica]02/10/2018: bd de sql server
+        mvarSqlServerBD = DBLet(Rs!SqlServerBD, "T") ' BD sqlserver
         
         '[Monica]10/10/2016: resumen de cajas en el mto de partes de trabajo
         mvarHayResumenCajas = DBLet(Rs!HayResumenCajas, "N") ' Hay Resumen Cajas
@@ -2915,6 +2931,9 @@ On Error GoTo eModificar
     '[Monica]21/04/2016:
     SQL = SQL & ", sqlserver= " & DBSet(mvarSqlServer, "T") ' SqlServer de Castellduc CASTELLDUCS1-O5
     SQL = SQL & ", sqlserver1= " & DBSet(mvarSqlServer1, "T") ' SqlServer 1 de Castellduc CASTELLDUCS2-O5
+    
+    SQL = SQL & ", sqlserverbd= " & DBSet(mvarSqlServerBD, "T") ' base de datos de sql server
+    
     
     '[Monica]17/10/2016: directorio de impresion de entradas
     SQL = SQL & ", directorioentradas= " & DBSet(Replace(mvarPathEntradas, "\", "\\"), "T") ' path ficheros de impresino de entradas

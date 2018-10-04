@@ -2944,7 +2944,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim tabla As String
+Dim Tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -3003,7 +3003,7 @@ Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cOrden As String
 Dim cadMen As String
-Dim I As Byte
+Dim i As Byte
 Dim SQL As String
 Dim Tipo As Byte
 Dim Nregs As Long
@@ -3012,10 +3012,13 @@ Dim cWhere As String
     
     InicializarVbles
     
-    If Not DatosOK Then Exit Sub
+    If Not DatosOk Then Exit Sub
             
             
     If Check1(0).Value = 0 Then
+        '[Monica]21/09/2018: se borra la tabla intermedia
+        SQL = "delete from tmpfactvarias where codusu = " & DBSet(vUsu.Codigo, "N")
+        conn.Execute SQL
             
         If Option1(0).Value Then
             cadTabla = "rsocios"
@@ -3149,7 +3152,7 @@ eError:
         Set vSeccion = Nothing
     End If
     
-    pb1.visible = False
+    Pb1.visible = False
     lblProgres(0).Caption = ""
     lblProgres(1).Caption = ""
     
@@ -3159,22 +3162,22 @@ End Sub
 
 Private Sub cmdAceptar_Click()
 Dim SQL As String
-Dim I As Byte
+Dim i As Byte
 Dim cadWHERE As String
 Dim cDesde As String
 Dim cHasta As String
 
-    If Not DatosOK Then Exit Sub
+    If Not DatosOk Then Exit Sub
 
-    cadSelect = tabla & ".intconta=0 "
-    cadSelect = cadSelect & " and " & tabla & ".codtipom = " & DBSet(Mid(Combo1(1).Text, 1, 3), "T")
+    cadSelect = Tabla & ".intconta=0 "
+    cadSelect = cadSelect & " and " & Tabla & ".codtipom = " & DBSet(Mid(Combo1(1).Text, 1, 3), "T")
 
     'D/H Fecha factura
     cDesde = Trim(txtCodigo(9).Text)
     cHasta = Trim(txtCodigo(10).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".fecfactu}"
+        Codigo = "{" & Tabla & ".fecfactu}"
         TipCod = "F"
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHfechaFac= """) Then Exit Sub
     End If
@@ -3184,14 +3187,14 @@ Dim cHasta As String
     cHasta = Trim(txtCodigo(8).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".numfactu}"
+        Codigo = "{" & Tabla & ".numfactu}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHColec= """) Then Exit Sub
     End If
 
-    If Not HayRegParaInforme(tabla, cadSelect) Then Exit Sub
+    If Not HayRegParaInforme(Tabla, cadSelect) Then Exit Sub
 
-    ContabilizarFacturas tabla, cadSelect
+    ContabilizarFacturas Tabla, cadSelect
      'Eliminar la tabla TMP
     BorrarTMPFacturas
     'Desbloqueamos ya no estamos contabilizando facturas
@@ -3202,7 +3205,7 @@ eError:
         MuestraError Err.Number, "No se ha realizado el proceso de contabilización de facturas varias. Llame a soporte."
     End If
 
-    pb2.visible = False
+    Pb2.visible = False
     lblProgres(2).Caption = ""
     lblProgres(3).Caption = ""
     cmdCancel_Click (1)
@@ -3213,7 +3216,7 @@ Private Sub cmdAceptarReimp_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -3225,7 +3228,7 @@ Dim CadRes As String
 
     InicializarVbles
     
-    If Not DatosOK Then Exit Sub
+    If Not DatosOk Then Exit Sub
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
@@ -3236,11 +3239,11 @@ Dim CadRes As String
     'Tipo de movimiento:
     If OpcionListado = 1 Or OpcionListado = 3 Then
         Tipos = ""
-        For I = 1 To ListView1(0).ListItems.Count
-            If ListView1(0).ListItems(I).Checked Then
-                Tipos = Tipos & DBSet(ListView1(0).ListItems(I).Key, "T") & ","
+        For i = 1 To ListView1(0).ListItems.Count
+            If ListView1(0).ListItems(i).Checked Then
+                Tipos = Tipos & DBSet(ListView1(0).ListItems(i).Key, "T") & ","
             End If
-        Next I
+        Next i
         
         If Tipos = "" Then
             MsgBox "Debe seleccionar al menos un tipo de factura.", vbExclamation
@@ -3261,7 +3264,7 @@ Dim CadRes As String
     nHasta = txtNombre(65).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".codsecci}"
+        Codigo = "{" & Tabla & ".codsecci}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSeccion= """) Then Exit Sub
     End If
@@ -3273,7 +3276,7 @@ Dim CadRes As String
     nHasta = txtNombre(1).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".codsocio}"
+        Codigo = "{" & Tabla & ".codsocio}"
         TipCod = "N"
  '       If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio= """) Then Exit Sub
         CadParam = CadParam & AnyadirParametroDH("pDHSocio= """, cDesde, cHasta, nDesde, nHasta)
@@ -3288,7 +3291,7 @@ Dim CadRes As String
         nHasta = txtNombre(63).Text
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".codclien}"
+            Codigo = "{" & Tabla & ".codclien}"
             TipCod = "N"
     '        If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHCliente= """) Then Exit Sub
             CadParam = CadParam & AnyadirParametroDH("pDHCliente= """, cDesde, cHasta, nDesde, nHasta)
@@ -3297,22 +3300,22 @@ Dim CadRes As String
     End If
     
     CadSocios = ""
-    If txtCodigo(0).Text <> "" Then CadSocios = CadSocios & "{" & tabla & ".codsocio}>= " & txtCodigo(0).Text
-    If txtCodigo(1).Text <> "" Then CadSocios = CadSocios & " and {" & tabla & ".codsocio}<= " & txtCodigo(1).Text
+    If txtCodigo(0).Text <> "" Then CadSocios = CadSocios & "{" & Tabla & ".codsocio}>= " & txtCodigo(0).Text
+    If txtCodigo(1).Text <> "" Then CadSocios = CadSocios & " and {" & Tabla & ".codsocio}<= " & txtCodigo(1).Text
     If CadSocios <> "" Then
         CadSocios = "(" & CadSocios & ")"
     Else
-        CadSocios = "({" & tabla & ".codsocio}>=0 and {" & tabla & ".codsocio}<=9999999)"
+        CadSocios = "({" & Tabla & ".codsocio}>=0 and {" & Tabla & ".codsocio}<=9999999)"
     End If
     
     If OpcionListado = 1 Or OpcionListado = 3 Then
         CadClien = ""
-        If txtCodigo(62).Text <> "" Then CadClien = CadClien & "{" & tabla & ".codclien}>= " & txtCodigo(62).Text
-        If txtCodigo(63).Text <> "" Then CadClien = CadClien & " and {" & tabla & ".codclien}<= " & txtCodigo(63).Text
+        If txtCodigo(62).Text <> "" Then CadClien = CadClien & "{" & Tabla & ".codclien}>= " & txtCodigo(62).Text
+        If txtCodigo(63).Text <> "" Then CadClien = CadClien & " and {" & Tabla & ".codclien}<= " & txtCodigo(63).Text
         If CadClien <> "" Then
             CadClien = "(" & CadClien & ")"
         Else
-            CadClien = "({" & tabla & ".codclien}>=0 and {" & tabla & ".codclien}<=999999)"
+            CadClien = "({" & Tabla & ".codclien}>=0 and {" & Tabla & ".codclien}<=999999)"
         End If
     End If
     
@@ -3336,7 +3339,7 @@ Dim CadRes As String
     cHasta = Trim(txtCodigo(5).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".numfactu}"
+        Codigo = "{" & Tabla & ".numfactu}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFactura= """) Then Exit Sub
     End If
@@ -3346,12 +3349,12 @@ Dim CadRes As String
     cHasta = Trim(txtCodigo(3).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".fecfactu}"
+        Codigo = "{" & Tabla & ".fecfactu}"
         TipCod = "F"
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHFecha= """) Then Exit Sub
     End If
     
-    If HayRegistros(tabla, cadSelect) Then
+    If HayRegistros(Tabla, cadSelect) Then
         If CargarTemporal(cadSelect) Then
             cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
         
@@ -3402,13 +3405,13 @@ Dim SQL As String
     conn.Execute "delete from tmpinformes where codusu = " & vUsu.Codigo
     
     SQL = "insert into tmpinformes (codusu, campo1, importe2, codigo1, nombre1,importe1, fecha1) "
-    SQL = SQL & " select " & vUsu.Codigo & ",0,codsocio, codsecci, codtipom, numfactu, fecfactu from " & tabla
+    SQL = SQL & " select " & vUsu.Codigo & ",0,codsocio, codsecci, codtipom, numfactu, fecfactu from " & Tabla
     SQL = SQL & " where not codsocio is null and codsocio <> 0 "
     If cadSelect <> "" Then SQL = SQL & " and " & cadSelect
     
     If OpcionListado = 1 Or OpcionListado = 3 Then
         SQL = SQL & " union "
-        SQL = SQL & " select " & vUsu.Codigo & ",1,codclien, codsecci, codtipom, numfactu, fecfactu from " & tabla
+        SQL = SQL & " select " & vUsu.Codigo & ",1,codclien, codsecci, codtipom, numfactu, fecfactu from " & Tabla
         SQL = SQL & " where not codclien is null and codclien <> 0 "
         If cadSelect <> "" Then SQL = SQL & " and " & cadSelect
     End If
@@ -3479,7 +3482,7 @@ End Sub
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
-Dim I As Integer
+Dim i As Integer
 
 
     'Icono del formulario
@@ -3520,7 +3523,7 @@ Dim I As Integer
     Case 1, 3   '1= Reimpresion de facturas VARIAS
                 '3= Diario de facturacion
         FrameReimpresionVisible True, H, W
-        tabla = "fvarcabfact"
+        Tabla = "fvarcabfact"
         CargarListView (0)
         
         If OpcionListado = 1 Then
@@ -3540,7 +3543,7 @@ Dim I As Integer
     
     
         CargaCombo
-        Me.pb1.visible = False
+        Me.Pb1.visible = False
         Me.lblProgres(0).visible = False
         Me.lblProgres(1).visible = False
     
@@ -3548,10 +3551,10 @@ Dim I As Integer
               '7 = integracion contable registro iva proveedor
         If OpcionListado = 4 Then
             frmFVARListados.Caption = "Contabilización de Facturas Varias"
-            tabla = "fvarcabfact"
+            Tabla = "fvarcabfact"
         Else
             frmFVARListados.Caption = "Contabilización de Facturas Varias Proveedores"
-            tabla = "fvarcabfactpro"
+            Tabla = "fvarcabfactpro"
         End If
         
         FrameIntContaVisible True, H, W
@@ -3593,23 +3596,23 @@ Dim I As Integer
     Case 5, 6  '5= Reimpresion de facturas VARIAS Proveedor
                '6=  Diario de Facturacion
         FrameReimpresionVisible True, H, W
-        tabla = "fvarcabfactpro"
+        Tabla = "fvarcabfactpro"
         
         FrameTipoFactura.visible = False
         FrameTipoFactura.Enabled = False
         
         'escondemos d/h cliente
-        For I = 50 To 52
-            Label4(I).visible = False
-        Next I
-        For I = 62 To 63
-            imgBuscar(I).visible = False
-            imgBuscar(I).Enabled = False
-            txtCodigo(I).visible = False
-            txtCodigo(I).Enabled = False
-            txtNombre(I).visible = False
-            txtNombre(I).Enabled = False
-        Next I
+        For i = 50 To 52
+            Label4(i).visible = False
+        Next i
+        For i = 62 To 63
+            imgBuscar(i).visible = False
+            imgBuscar(i).Enabled = False
+            txtCodigo(i).visible = False
+            txtCodigo(i).Enabled = False
+            txtNombre(i).visible = False
+            txtNombre(i).Enabled = False
+        Next i
         
         'subimos botones de aceptar y cancelar
         cmdAceptarReimp.Top = 5300
@@ -3790,7 +3793,7 @@ End Sub
 
 
 Private Sub Image1_Click(Index As Integer)
-Dim I As Integer
+Dim i As Integer
 Dim TotalCant As Currency
 Dim TotalImporte As Currency
 
@@ -3799,22 +3802,22 @@ Dim TotalImporte As Currency
     Select Case Index
         ' reimpresion de facturas socios
         Case 0
-            For I = 1 To ListView1(0).ListItems.Count
-                ListView1(0).ListItems(I).Checked = True
-            Next I
+            For i = 1 To ListView1(0).ListItems.Count
+                ListView1(0).ListItems(i).Checked = True
+            Next i
         Case 1
-            For I = 1 To ListView1(0).ListItems.Count
-                ListView1(0).ListItems(I).Checked = False
-            Next I
+            For i = 1 To ListView1(0).ListItems.Count
+                ListView1(0).ListItems(i).Checked = False
+            Next i
         ' informe de resultados y listado de retenciones
         Case 2
-            For I = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(I).Checked = True
-            Next I
+            For i = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(i).Checked = True
+            Next i
         Case 3
-            For I = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(I).Checked = False
-            Next I
+            For i = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(i).Checked = False
+            Next i
     End Select
     
     Screen.MousePointer = vbDefault
@@ -4298,7 +4301,7 @@ Private Sub AbrirEMail()
 End Sub
 
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 Dim B As Boolean
 Dim SQL As String
 Dim Sql2 As String
@@ -4315,7 +4318,7 @@ Dim cad As String
     B = True
     Select Case OpcionListado
         Case 2 ' carga masiva de facturas varias
-            DatosOK = False
+            DatosOk = False
         
             If txtCodigo(52).Text = "" Then
                 MsgBox "Debe introducir obligatoriamente una Sección.", vbExclamation
@@ -4405,10 +4408,10 @@ Dim cad As String
                 End If
             End If
             
-            DatosOK = True
+            DatosOk = True
          
         Case 4 ' integracion contable de facturas varias
-            DatosOK = False
+            DatosOk = False
         
             If txtCodigo(6).Text = "" Then
                 MsgBox "Debe introducir obligatoriamente una Sección.", vbExclamation
@@ -4443,7 +4446,7 @@ Dim cad As String
          
          
     End Select
-    DatosOK = B
+    DatosOk = B
 
 End Function
 
@@ -4452,7 +4455,7 @@ End Function
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
 Dim Rs As ADODB.Recordset
 Dim SQL As String
-Dim Sql1 As String
+Dim SQL1 As String
 
     ConcatenarCampos = ""
 
@@ -4472,14 +4475,14 @@ Dim Sql1 As String
     
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    Sql1 = ""
+    SQL1 = ""
     While Not Rs.EOF
-        Sql1 = Sql1 & DBLet(Rs.Fields(0).Value, "N") & ","
+        SQL1 = SQL1 & DBLet(Rs.Fields(0).Value, "N") & ","
         Rs.MoveNext
     Wend
     Set Rs = Nothing
     'quitamos el ultimo or
-    ConcatenarCampos = Mid(Sql1, 1, Len(Sql1) - 1)
+    ConcatenarCampos = Mid(SQL1, 1, Len(SQL1) - 1)
     
 End Function
 
@@ -4526,12 +4529,12 @@ End Function
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
 Dim SQL As String
-Dim I As Byte
+Dim i As Byte
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
-    For I = 0 To Combo1.Count - 1
-        Combo1(I).Clear
-    Next I
+    For i = 0 To Combo1.Count - 1
+        Combo1(i).Clear
+    Next i
     
     'tipo de factura
     SQL = "select codtipom, nomtipom from usuarios.stipom where tipodocu = 12"
@@ -4544,18 +4547,18 @@ Dim I As Byte
 
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    I = 1
+    i = 1
     While Not Rs.EOF
         SQL = Rs.Fields(1).Value
         SQL = Rs.Fields(0).Value & " - " & SQL
         
         Combo1(0).AddItem SQL 'campo del codigo
-        Combo1(0).ItemData(Combo1(0).NewIndex) = I
+        Combo1(0).ItemData(Combo1(0).NewIndex) = i
         
         Combo1(1).AddItem SQL 'campo del codigo
-        Combo1(1).ItemData(Combo1(1).NewIndex) = I
+        Combo1(1).ItemData(Combo1(1).NewIndex) = i
         
-        I = I + 1
+        i = i + 1
         Rs.MoveNext
     Wend
 
@@ -4615,7 +4618,7 @@ End Sub
 
 
 
-Private Function ComprobarTiposIVA(tabla As String, cSelect As String) As Boolean
+Private Function ComprobarTiposIVA(Tabla As String, cSelect As String) As Boolean
 Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim vSeccion As CSeccion
@@ -4631,7 +4634,7 @@ Dim B As Boolean
         If vSeccion.AbrirConta Then
             
             SQL = "select distinct codiva from rsocios_seccion where codsecci = " & vParamAplic.Seccionhorto
-            SQL = SQL & " and codsocio in (select rhisfruta.codsocio from " & Trim(tabla) & " where " & Trim(cSelect) & ")"
+            SQL = SQL & " and codsocio in (select rhisfruta.codsocio from " & Trim(Tabla) & " where " & Trim(cSelect) & ")"
             SQL = SQL & " group by 1 "
             SQL = SQL & " order by 1 "
             
@@ -4722,12 +4725,12 @@ Dim CodTipoMov As String
 '    If Not B Then Exit Sub
             
     'Visualizar la barra de Progreso
-    Me.pb1.visible = True
+    Me.Pb1.visible = True
     
     NumF = DevuelveValor("select count(*) from tmpfactvarias where codusu = " & vUsu.Codigo)
     
     Me.lblProgres(0).Caption = "Comprobaciones: "
-    CargarProgresNew Me.pb1, CInt(NumF)
+    CargarProgresNew Me.Pb1, CInt(NumF)
         
     SQL = "select * from tmpfactvarias where codusu = " & DBSet(vUsu.Codigo, "N") & " order by codsoccli"
     
@@ -4736,7 +4739,7 @@ Dim CodTipoMov As String
         
     While Not Rs.EOF
     
-        IncrementarProgresNew Me.pb1, 1
+        IncrementarProgresNew Me.Pb1, 1
         Me.lblProgres(1).Caption = "Procesando Código ..."
         Me.Refresh
         DoEvents
@@ -5006,9 +5009,9 @@ Dim CCoste As String
 
 
     'Visualizar la barra de Progreso
-    Me.pb2.visible = True
+    Me.Pb2.visible = True
     Me.lblProgres(2).Caption = "Comprobaciones: "
-    CargarProgres Me.pb2, 100
+    CargarProgres Me.Pb2, 100
 
 
     'comprobar que todas las LETRAS SERIE existen en la contabilidad y en Ariagrorec
@@ -5017,7 +5020,7 @@ Dim CCoste As String
         Me.lblProgres(3).Caption = "Comprobando letras de serie ..."
         B = ComprobarLetraSerie(cadTabla)
     End If
-    IncrementarProgres Me.pb2, 10
+    IncrementarProgres Me.Pb2, 10
     Me.Refresh
     DoEvents
     
@@ -5030,7 +5033,7 @@ Dim CCoste As String
     Me.lblProgres(3).Caption = "Comprobando Cuentas Contables socios en contabilidad ..."
     
     B = ComprobarCtaContable_new(cadTabla, 1, 0, CInt(txtCodigo(6).Text))
-    IncrementarProgres Me.pb2, 30
+    IncrementarProgres Me.Pb2, 30
     Me.Refresh
     DoEvents
     If Not B Then Exit Sub
@@ -5042,7 +5045,7 @@ Dim CCoste As String
     '-----------------------------------------------------------------------------
     Me.lblProgres(3).Caption = "Comprobando Cuentas Contables Conceptos en contabilidad ..."
     B = ComprobarCtaContable_new(cadTabla, 2, , CInt(txtCodigo(6).Text))
-    IncrementarProgres Me.pb2, 10
+    IncrementarProgres Me.Pb2, 10
     Me.Refresh
     DoEvents
     
@@ -5050,7 +5053,7 @@ Dim CCoste As String
     
 '    'comprobar que todas las CUENTAS de gastos a pie de factura
 '    b = ComprobarCtaContable_new(cadTabla, 12, tipo, CInt(txtcodigo(2).Text))
-    IncrementarProgres Me.pb2, 10
+    IncrementarProgres Me.Pb2, 10
     Me.Refresh
     DoEvents
     
@@ -5061,7 +5064,7 @@ Dim CCoste As String
     '--------------------------------------------------------------------------
     Me.lblProgres(3).Caption = "Comprobando Tipos de IVA en contabilidad ..."
     B = ComprobarTiposIVA2(cadTabla)
-    IncrementarProgres Me.pb2, 10
+    IncrementarProgres Me.Pb2, 10
     Me.Refresh
     DoEvents
     
@@ -5070,7 +5073,7 @@ Dim CCoste As String
 
     Me.lblProgres(1).Caption = "Comprobando Forma de Pago ..."
     B = ComprobarFormadePago(cadTabla)
-    IncrementarProgres Me.pb2, 10
+    IncrementarProgres Me.Pb2, 10
     Me.Refresh
     DoEvents
     
@@ -5096,7 +5099,7 @@ Dim CCoste As String
        '[Monica]19/12/2013
        If Not B Then Exit Sub
     End If
-    IncrementarProgres Me.pb2, 20
+    IncrementarProgres Me.Pb2, 20
     Me.Refresh
     DoEvents
 
@@ -5109,7 +5112,7 @@ Dim CCoste As String
     Else
         Me.lblProgres(2).Caption = "Contabilizar Facturas Varias Proveedor: "
     End If
-    CargarProgres Me.pb2, 10
+    CargarProgres Me.Pb2, 10
     Me.lblProgres(3).Caption = "Insertando Facturas en Contabilidad..."
 
 
@@ -5176,7 +5179,7 @@ Private Function PasarFacturasAContab(cadTabla As String, CCoste As String) As B
 Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim B As Boolean
-Dim I As Integer
+Dim i As Integer
 Dim numfactu As Integer
 Dim Codigo1 As String
 
@@ -5223,7 +5226,7 @@ Dim Codigo1 As String
 
     '---- Pasar cada una de las facturas seleccionadas a la Conta
     If numfactu > 0 Then
-        CargarProgres Me.pb2, numfactu
+        CargarProgres Me.Pb2, numfactu
 
         'seleccinar todas las facturas que hemos insertado en la temporal (las que vamos a contabilizar)
         SQL = "SELECT * "
@@ -5231,7 +5234,7 @@ Dim Codigo1 As String
 
         Set Rs = New ADODB.Recordset
         Rs.Open SQL, conn, adOpenStatic, adLockPessimistic, adCmdText
-        I = 1
+        i = 1
 
         B = True
         'pasar a contabilidad cada una de las facturas seleccionadas
@@ -5263,12 +5266,12 @@ Dim Codigo1 As String
             End If
             '----
 
-            IncrementarProgres Me.pb2, 1
-            Me.lblProgres(1).Caption = "Insertando Facturas en Contabilidad...   (" & I & " de " & numfactu & ")"
+            IncrementarProgres Me.Pb2, 1
+            Me.lblProgres(1).Caption = "Insertando Facturas en Contabilidad...   (" & i & " de " & numfactu & ")"
             Me.Refresh
             DoEvents
             
-            I = I + 1
+            i = i + 1
             Rs.MoveNext
         Wend
 
@@ -5298,7 +5301,7 @@ Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim RSconta As ADODB.Recordset
 Dim B As Boolean
-Dim I As Byte
+Dim i As Byte
 'Dim CodigIVA As String
 
     On Error GoTo ECompIVA
@@ -5312,11 +5315,11 @@ Dim I As Byte
 
     If Not RSconta.EOF Then
         'Seleccionamos los distintos tipos de IVA de las facturas a Contabilizar
-        For I = 1 To 3
-            SQL = "SELECT DISTINCT " & vtabla & ".tipoiva" & I
+        For i = 1 To 3
+            SQL = "SELECT DISTINCT " & vtabla & ".tipoiva" & i
             SQL = SQL & " FROM " & vtabla
             SQL = SQL & " INNER JOIN tmpfactu ON " & vtabla & ".codtipom=tmpfactu.codtipom AND " & vtabla & ".numfactu=tmpfactu.numfactu AND " & vtabla & ".fecfactu=tmpfactu.fecfactu "
-            SQL = SQL & " WHERE not isnull(tipoiva" & I & ")"
+            SQL = SQL & " WHERE not isnull(tipoiva" & i & ")"
 
             Set Rs = New ADODB.Recordset
             Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -5343,7 +5346,7 @@ Dim I As Byte
             Else
                 ComprobarTiposIVA2 = True
             End If
-        Next I
+        Next i
     End If
     RSconta.Close
     Set RSconta = Nothing
@@ -5362,7 +5365,7 @@ Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim RSconta As ADODB.Recordset
 Dim B As Boolean
-Dim I As Byte
+Dim i As Byte
 'Dim CodigIVA As String
 
     On Error GoTo ECompIVA
@@ -5461,7 +5464,7 @@ On Error GoTo EComprobar
             
     '[Monica]20/06/2017: solo para el caso de Montifrut la fecha de recepcion es la de factura, en el resto es la de recepcion
     If ComprobarFechasConta Then
-        If tabla = "fvarcabfactpro" Then
+        If Tabla = "fvarcabfactpro" Then
             ResultadoFechaContaOK = EsFechaOKConta(CDate(txtCodigo(15)))
             If ResultadoFechaContaOK > 0 Then
                 If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
@@ -5512,6 +5515,7 @@ Dim CodTipoMov As String
 '            conn.Execute Sql
 '        End If
 '    End If
+
     
     
     SQL = "insert into tmpfactvarias (codusu,codconce,ampliaci,precio,cantidad,importe,codsoccli)  "
@@ -5581,9 +5585,9 @@ Dim CCoste As String
     '==========================================================
 
     'Visualizar la barra de Progreso
-    Me.pb1.visible = True
+    Me.Pb1.visible = True
     Me.lblProgres(0).Caption = "Comprobaciones: "
-    CargarProgres Me.pb1, 100
+    CargarProgres Me.Pb1, 100
 
 
     'comprobar que todas las LETRAS SERIE existen en la contabilidad y en Ariagrorec
@@ -5591,7 +5595,7 @@ Dim CCoste As String
     Me.lblProgres(0).Caption = "Comprobando letras de serie ..."
     B = ComprobarLetraSerie("tmpfactvarias")
     
-    IncrementarProgres Me.pb1, 10
+    IncrementarProgres Me.Pb1, 10
     Me.Refresh
     DoEvents
     
@@ -5610,7 +5614,7 @@ Dim CCoste As String
     If cadTabla = "rsocios" Then Tipo = 0
     
     B = ComprobarCtaContable_new("tmpfactvarias", 1, Tipo, CInt(txtCodigo(52).Text))
-    IncrementarProgres Me.pb1, 30
+    IncrementarProgres Me.Pb1, 30
     Me.Refresh
     DoEvents
     
@@ -5622,7 +5626,7 @@ Dim CCoste As String
     '-----------------------------------------------------------------------------
     Me.lblProgres(0).Caption = "Comprobando Cuentas Contables Conceptos en contabilidad ..."
     B = ComprobarCtaContable_new("tmpfactvarias", 2, , CInt(txtCodigo(52).Text))
-    IncrementarProgres Me.pb1, 30
+    IncrementarProgres Me.Pb1, 30
     Me.Refresh
     DoEvents
     
@@ -5630,7 +5634,7 @@ Dim CCoste As String
     
 '    'comprobar que todas las CUENTAS de gastos a pie de factura
 '    b = ComprobarCtaContable_new(cadTabla, 12, tipo, CInt(txtcodigo(2).Text))
-    IncrementarProgres Me.pb1, 10
+    IncrementarProgres Me.Pb1, 10
     Me.Refresh
     DoEvents
     
@@ -5641,7 +5645,7 @@ Dim CCoste As String
     '--------------------------------------------------------------------------
     Me.lblProgres(0).Caption = "Comprobando Tipos de IVA en contabilidad ..."
     B = ComprobarTiposIVA3()
-    IncrementarProgres Me.pb1, 20
+    IncrementarProgres Me.Pb1, 20
     Me.Refresh
     DoEvents
     
@@ -5652,7 +5656,7 @@ Dim CCoste As String
     'CONTABILIZAR FACTURAS
     '===========================================================================
     Me.lblProgres(0).Caption = "Contabilizar Cobros Facturas Varias: "
-    CargarProgres Me.pb1, 10
+    CargarProgres Me.Pb1, 10
 
 
     '------------------------------------------------------------------------------
@@ -5678,7 +5682,7 @@ Private Function ProcesarCobros() As Boolean
 Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim B As Boolean
-Dim I As Integer
+Dim i As Integer
 Dim numfactu As Integer
 Dim Codigo1 As String
 
@@ -5714,7 +5718,7 @@ Dim Codigo1 As String
 
     '---- Pasar cada una de las facturas seleccionadas a la Conta
     If numfactu > 0 Then
-        CargarProgres Me.pb1, numfactu
+        CargarProgres Me.Pb1, numfactu
 
         'seleccinar todas las facturas que hemos insertado en la temporal (las que vamos a contabilizar)
         SQL = "SELECT * "
@@ -5722,7 +5726,7 @@ Dim Codigo1 As String
 
         Set Rs = New ADODB.Recordset
         Rs.Open SQL, conn, adOpenStatic, adLockPessimistic, adCmdText
-        I = 1
+        i = 1
 
         B = True
         'pasar a contabilidad cada una de las facturas seleccionadas
@@ -5740,12 +5744,12 @@ Dim Codigo1 As String
                 If InsertarEnTesoreriaNewFVARPagos(SQL, MenError) = False And B Then B = False
             End If
 
-            IncrementarProgres Me.pb1, 1
-            Me.lblProgres(1).Caption = "Insertando Cobros ...   (" & I & " de " & numfactu & ")"
+            IncrementarProgres Me.Pb1, 1
+            Me.lblProgres(1).Caption = "Insertando Cobros ...   (" & i & " de " & numfactu & ")"
             Me.Refresh
             DoEvents
             
-            I = I + 1
+            i = i + 1
             Rs.MoveNext
         Wend
 
@@ -5780,7 +5784,7 @@ Dim rsVenci As ADODB.Recordset
 
 Dim CadValues As String, cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim I As Long
+Dim i As Long
 Dim DigConta As String
 Dim CC As String
 
@@ -5926,7 +5930,7 @@ Dim TotalFact As Currency
                 
                         CadValuesAux2 = "('" & Trim(letraser) & "', " & DBSet(NumFact, "N") & ", " & DBSet(txtCodigo(11).Text, "F") & ", "
                         '-------- Primer Vencimiento
-                        I = 1
+                        i = 1
                         'FECHA VTO
                         FecVenci = txtCodigo(13).Text
                         '=== Laura 23/01/2007
@@ -5934,7 +5938,7 @@ Dim TotalFact As Currency
                         FecVenci = DateAdd("d", DBLet(rsVenci!primerve, "N"), FecVenci)
                         '===
                         
-                        CadValues2 = CadValuesAux2 & I & ", "
+                        CadValues2 = CadValuesAux2 & i & ", "
                         
                         '[Monica]03/07/2013: añado trim(codmacta)
                         CadValues2 = CadValues2 & DBSet(Trim(Codmacta), "T") & ", " & DBSet(txtCodigo(46).Text, "N") & ", " & DBSet(FecVenci, "F") & ", "
@@ -5981,14 +5985,14 @@ Dim TotalFact As Currency
                     
                         'Resto Vencimientos
                         '--------------------------------------------------------------------
-                        For I = 2 To rsVenci!numerove
+                        For i = 2 To rsVenci!numerove
                            'FECHA Resto Vencimientos
                             '=== Laura 23/01/2007
                             'FecVenci = FecVenci + DBSet(rsVenci!restoven, "N")
                             FecVenci = DateAdd("d", DBLet(rsVenci!restoven, "N"), FecVenci)
                             '===
                                 
-                            CadValues2 = CadValues2 & CadValuesAux2 & I & ", " & DBSet(Trim(Rs4!Codmacta), "T") & ", " & DBSet(txtCodigo(46).Text, "N") & ", '" & Format(FecVenci, FormatoFecha) & "', "
+                            CadValues2 = CadValues2 & CadValuesAux2 & i & ", " & DBSet(Trim(Rs4!Codmacta), "T") & ", " & DBSet(txtCodigo(46).Text, "N") & ", '" & Format(FecVenci, FormatoFecha) & "', "
                             
                             'IMPORTE Resto de Vendimientos
                             ImpVenci = Round2(TotalFact / rsVenci!numerove, 2)
@@ -6019,7 +6023,7 @@ Dim TotalFact As Currency
                                     CadValues2 = CadValues2 & DBSet(Rs4!CodPobla, "T") & "," & DBSet(Rs4!proclien, "T") & "," & DBSet(Rs4!cifclien, "T") & ",'ES'),"
                                 End If
                             End If
-                        Next I
+                        Next i
                         ' quitamos la ultima coma
                         CadValues2 = Mid(CadValues2, 1, Len(CadValues2) - 1)
                             
@@ -6080,7 +6084,7 @@ Dim rsVenci As ADODB.Recordset
 
 Dim CadValues As String, cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim I As Long
+Dim i As Long
 Dim DigConta As String
 Dim CC As String
 
@@ -6176,8 +6180,8 @@ Dim Text42csb As String
                     CadValuesAux2 = CadValuesAux2 & "'" & Trim(vSoc.CtaProv) & "', " & DBSet(NumFact, "T") & ", '" & Format(txtCodigo(11).Text, FormatoFecha) & "', "
             
                     '------------------------------------------------------------
-                    I = 1
-                    CadValues2 = CadValuesAux2 & I
+                    i = 1
+                    CadValues2 = CadValuesAux2 & i
                     
                     CadValues2 = CadValues2 & ", " & DBSet(txtCodigo(46), "N") & ", '" & Format(txtCodigo(13).Text, FormatoFecha) & "', "
                     CadValues2 = CadValues2 & DBSet(Rsx!Importe, "N") & ", " & DBSet(txtCodigo(12).Text, "T") & ","

@@ -682,7 +682,7 @@ Dim B As Boolean
     chkAux(0).visible = Not B
 
     CmdAceptar.visible = Not B
-    CmdCancelar.visible = Not B
+    cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -705,8 +705,8 @@ Dim B As Boolean
 '    btnBuscar(2).visible = (Modo = 1)
 '    btnBuscar(2).Enabled = (Modo = 1)
     
-    BloquearChk Me.chkAux(0), (Modo = 4) Or (Modo = 3)
-    Me.chkAux(0).visible = (Modo = 1)
+    BloquearChk Me.chkAux(0), (Modo = 4 And vParamAplic.Cooperativa <> 0) Or (Modo = 3)
+    Me.chkAux(0).visible = ((Modo = 1) Or (Modo = 4 And vParamAplic.Cooperativa = 0))
     
     'El nro de parte unicamente lo podemos buscar
 '    txtAux(8).Enabled = (Modo = 1)
@@ -868,7 +868,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -883,17 +883,17 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar el Registro?"
-    Sql = Sql & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
+    SQL = "¿Seguro que desea eliminar el Registro?"
+    SQL = SQL & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from horasanticipos where codtraba=" & adodc1.Recordset!CodTraba
-        Sql = Sql & " and fecharec = " & DBSet(adodc1.Recordset!Fecharec, "F")
+        SQL = "Delete from horasanticipos where codtraba=" & adodc1.Recordset!CodTraba
+        SQL = SQL & " and fecharec = " & DBSet(adodc1.Recordset!Fecharec, "F")
         
-        conn.Execute Sql
+        conn.Execute SQL
         CargaGrid CadB
         
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
@@ -1006,7 +1006,7 @@ Private Sub cmdAceptar_Click()
             End If
             
         Case 3 'INSERTAR
-            If DatosOK Then
+            If DatosOk Then
                 If InsertarDesdeForm(Me) Then
                     CargaGrid CadB
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
@@ -1024,7 +1024,7 @@ Private Sub cmdAceptar_Click()
             End If
             
         Case 4 'MODIFICAR
-            If DatosOK Then
+            If DatosOk Then
 '                If ModificaDesdeFormulario(Me) Then
                 If ModificaDesdeForm Then
                     TerminaBloquear
@@ -1263,24 +1263,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     If Ascendente Then
-        Sql = Sql & " ORDER BY  horasanticipos.fecharec, horasanticipos.codtraba "
+        SQL = SQL & " ORDER BY  horasanticipos.fecharec, horasanticipos.codtraba "
     Else
         '********************* canviar el ORDER BY *********************++
-        Sql = Sql & " ORDER BY  horasanticipos.fecharec desc, horasanticipos.codtraba "
+        SQL = SQL & " ORDER BY  horasanticipos.fecharec desc, horasanticipos.codtraba "
         '**************************************************************++
     End If
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Código|1000|;S|btnBuscar(0)|B||195|;S|txtAux2(0)|T|Trabajador|3900|;"
@@ -1348,10 +1348,10 @@ Dim cadMen As String
     
 End Sub
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
 
 
@@ -1359,9 +1359,9 @@ Dim Mens As String
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        Sql = "select count(*) from horasanticipos where codtraba = " & DBSet(txtAux(0).Text, "N")
-        Sql = Sql & " and fecharec = " & DBSet(txtAux(1).Text, "F")
-        If TotalRegistros(Sql) <> 0 Then
+        SQL = "select count(*) from horasanticipos where codtraba = " & DBSet(txtAux(0).Text, "N")
+        SQL = SQL & " and fecharec = " & DBSet(txtAux(1).Text, "F")
+        If TotalRegistros(SQL) <> 0 Then
             MsgBox "El trabajador existe para esta fecha. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             B = False
@@ -1382,7 +1382,7 @@ Dim Mens As String
         End If
     End If
     
-    DatosOK = B
+    DatosOk = B
 End Function
 
 
@@ -1447,19 +1447,23 @@ Private Sub AbrirFrmManForfaits(Indice As Integer)
 End Sub
 
 Private Function ModificaDesdeForm() As Boolean
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eModificaDesdeForm
     
     ModificaDesdeForm = False
     
-    Sql = "update horasanticipos set "
-    Sql = Sql & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
-    Sql = Sql & ", fechapago = " & DBSet(ImporteSinFormato(txtAux(3).Text), "F", "S")
-    Sql = Sql & " where codtraba = " & DBSet(txtAux(0).Text, "N")
-    Sql = Sql & " and fecharec = " & DBSet(txtAux(1).Text, "F")
+    SQL = "update horasanticipos set "
+    SQL = SQL & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
+    SQL = SQL & ", fechapago = " & DBSet(ImporteSinFormato(txtAux(3).Text), "F", "S")
+    '[Monica]04/10/2018:
+    If vParamAplic.Cooperativa = 0 Then
+        SQL = SQL & ", descontado = " & DBSet(Me.chkAux(0).Value, "N")
+    End If
+    SQL = SQL & " where codtraba = " & DBSet(txtAux(0).Text, "N")
+    SQL = SQL & " and fecharec = " & DBSet(txtAux(1).Text, "F")
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ModificaDesdeForm = True
     Exit Function

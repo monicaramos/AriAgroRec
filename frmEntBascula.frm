@@ -690,9 +690,9 @@ Begin VB.Form frmEntBascula
          Height          =   360
          Index           =   7
          Left            =   1500
-         MaxLength       =   2
+         MaxLength       =   3
          TabIndex        =   10
-         Tag             =   "Código Tarifa|N|S|0|99|rentradas|codtarif|00||"
+         Tag             =   "Código Tarifa|N|S|0|999|rentradas|codtarif|000||"
          Top             =   3960
          Width           =   585
       End
@@ -2810,7 +2810,7 @@ Dim B As Boolean
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
