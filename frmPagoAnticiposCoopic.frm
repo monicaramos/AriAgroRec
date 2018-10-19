@@ -974,7 +974,7 @@ Dim List As Collection
     
     FrameHorasTrabajadasVisible True, H, W
     indFrame = 0
-    Me.cmdCancel(0).Cancel = True
+    Me.CmdCancel(0).Cancel = True
         
     Tabla = "horas"
         
@@ -987,9 +987,9 @@ Dim List As Collection
     Me.FramePago.visible = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
     Me.FramePago.Enabled = (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
     
-    If vParamAplic.Cooperativa <> 0 Then
-        Me.cmdAceptar(0).Top = Me.cmdAceptar(0).Top - 1200
-        Me.cmdCancel(0).Top = Me.cmdCancel(0).Top - 1200
+    If vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 18 Then
+        Me.CmdAceptar(0).Top = Me.CmdAceptar(0).Top - 1200
+        Me.CmdCancel(0).Top = Me.CmdCancel(0).Top - 1200
         Me.Pb2.Top = Me.Pb2.Top - 1200
     End If
     

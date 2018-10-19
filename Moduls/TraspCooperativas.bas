@@ -11,7 +11,7 @@ Option Explicit
 Public Function ComunicaCooperativa(vtabla As String, vSQL As String, vOperacion As String, Optional vObservaciones As String) As Boolean
 ' vOperacion: I insercion
 '             U modificacion
-Dim Sql As String
+Dim SQL As String
 Dim vInsert As String
 Dim vValues As String
 
@@ -19,12 +19,12 @@ Dim vValues As String
     
     ComunicaCooperativa = False
         
-    Sql = "INSERT INTO comunica_env (fechacreacion,usuariocreacion,tipo,tabla,sqlaejecutar,  "
-    Sql = Sql & "observaciones,fechadescarga,usuariodescarga) VALUES ("
-    Sql = Sql & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & "," & DBSet(vOperacion, "T") & "," & DBSet(vtabla, "T") & ","
-    Sql = Sql & DBSet(vSQL, "T") & "," & DBSet(vObservaciones, "T", "S") & "," & ValorNulo & "," & ValorNulo & ")"
+    SQL = "INSERT INTO comunica_env (fechacreacion,usuariocreacion,tipo,tabla,sqlaejecutar,  "
+    SQL = SQL & "observaciones,fechadescarga,usuariodescarga) VALUES ("
+    SQL = SQL & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & "," & DBSet(vOperacion, "T") & "," & DBSet(vtabla, "T") & ","
+    SQL = SQL & DBSet(vSQL, "T") & "," & DBSet(vObservaciones, "T", "S") & "," & ValorNulo & "," & ValorNulo & ")"
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ComunicaCooperativa = True
     Exit Function
@@ -35,7 +35,7 @@ End Function
 
 
 Public Function EsSocioCooperativa(vSoc As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
     EsSocioCooperativa = True
     If vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16 Then Exit Function
@@ -45,7 +45,7 @@ Dim Sql As String
 End Function
 
 Public Function EsCampoCooperativa(vCam As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
     EsCampoCooperativa = True
     If vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16 Then Exit Function
@@ -55,7 +55,7 @@ Dim Sql As String
 End Function
 
 Public Function EsCapatazCooperativa(vCap As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
     EsCapatazCooperativa = True
     If vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16 Then Exit Function
@@ -65,7 +65,7 @@ Dim Sql As String
 End Function
 
 Public Function EsTransportistaCooperativa(vTra As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim vCar As String
 
     EsTransportistaCooperativa = True
@@ -79,40 +79,40 @@ End Function
 
 
 Public Function EsVariedadComercializada(vCodvarie As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select count(*) from variedades  where variedades.codvarie = " & DBSet(vCodvarie, "N")
-    Sql = Sql & " and variedades.comerciocomun = 1"
+    SQL = "select count(*) from variedades  where variedades.codvarie = " & DBSet(vCodvarie, "N")
+    SQL = SQL & " and variedades.comerciocomun = 1"
     
-    EsVariedadComercializada = (TotalRegistros(Sql) <> 0)
+    EsVariedadComercializada = (TotalRegistros(SQL) <> 0)
 
 End Function
 
 
 
 Public Function EsDeVariedadComercializada(vCodcampo As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select count(*) from variedades inner join rcampos on variedades.codvarie = rcampos.codvarie where rcampos.codcampo = " & DBSet(vCodcampo, "N")
-    Sql = Sql & " and variedades.comerciocomun = 1"
+    SQL = "select count(*) from variedades inner join rcampos on variedades.codvarie = rcampos.codvarie where rcampos.codcampo = " & DBSet(vCodcampo, "N")
+    SQL = SQL & " and variedades.comerciocomun = 1"
     
-    EsDeVariedadComercializada = (TotalRegistros(Sql) <> 0)
+    EsDeVariedadComercializada = (TotalRegistros(SQL) <> 0)
 
 End Function
 
 Public Function TieneCamposVariedadComercializada(vSocio As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select count(*) from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie where codsocio = " & DBSet(vSocio, "N")
-    Sql = Sql & " and variedades.comerciocomun = 1"
+    SQL = "select count(*) from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie where codsocio = " & DBSet(vSocio, "N")
+    SQL = SQL & " and variedades.comerciocomun = 1"
     
-    TieneCamposVariedadComercializada = (TotalRegistros(Sql) <> 0)
+    TieneCamposVariedadComercializada = (TotalRegistros(SQL) <> 0)
     
 End Function
 
 
 Public Function CargarFicheroCsv(vDesFecEnt As String, vHasFecEnt As String, vDesFecAlb As String, vHasFecAlb As String, Entradas As Boolean, Albaranes As Boolean, vCd1 As CommonDialog) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Mens As String
 
@@ -141,10 +141,10 @@ Dim v_cadena As String
     
     If B Then
         
-        Sql = "select * from comunica_env where fechadescarga is null order by fechacreacion, id"
+        SQL = "select * from comunica_env where fechadescarga is null order by fechacreacion, id"
         
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         NFic = FreeFile
         Open App.Path & "\comunica.txt" For Output As NFic
@@ -156,7 +156,7 @@ Dim v_cadena As String
             
             v_cadena = DBLet(Rs!Id, "N") & ";" & DBLet(Rs!fechacreacion, "FH") & ";"
             v_cadena = v_cadena & DBLet(Rs!usuariocreacion, "N") & ";" & DBLet(Rs!Tipo, "T") & ";"
-            v_cadena = v_cadena & DBLet(Rs!tabla, "T") & ";" & DBLet(Rs!SQLAEJECUTAR, "T") & ";"
+            v_cadena = v_cadena & DBLet(Rs!Tabla, "T") & ";" & DBLet(Rs!SQLAEJECUTAR, "T") & ";"
             v_cadena = v_cadena & DBLet(Rs!Observaciones, "T") & ";" & Now() & ";" & vUsu.Login & ";"
             
             Print #NFic, v_cadena
@@ -229,7 +229,11 @@ End Function
 
 
 Private Function CargarEntradasClasificadas(vDFec As String, vHFec As String) As Boolean
-Dim Sql As String
+'[Monica]18/10/2018: antes 2 situaciones ( comunicada y no comunicada )
+' Vamos a tener ahora 3 situaciones: 0 = sin comunicar
+'                                    1 = comunicada entrada sin clasificacion
+'                                    2 = comunicada entrada con clasificacion
+Dim SQL As String
 Dim Sql2 As String
 Dim CadInsert As String
 Dim CadValues As String
@@ -247,34 +251,35 @@ Dim CadVal6 As String
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim NumNotac As Long
+Dim Transpor As String
 
     On Error GoTo eCargarEntradasClasificadas
 
     CargarEntradasClasificadas = False
 
     ' metemos en comunica las entradas entre fechas a comunicar que sean de las variedades comunes
-    Sql = "select * from (rclasifica inner join variedades on rclasifica.codvarie = variedades.codvarie) "
-    Sql = Sql & " where variedades.comerciocomun = 1 and estacomunicada = 0 "
+    SQL = "select * from (rclasifica inner join variedades on rclasifica.codvarie = variedades.codvarie) "
+    SQL = SQL & " where variedades.comerciocomun = 1 and estacomunicada in (0,1) " ' [Monica]17/10/2018: ahora pasaremos tanto entradas con clasificacion como sin clasificar
     
     ' entradas del socio de la cooperativa de Picassent
-    Sql = Sql & " and codsocio >= " & DBSet(cMaxSocio, "N")
+    SQL = SQL & " and codsocio >= " & DBSet(cMaxSocio, "N")
     
-    If vDFec <> "" Then Sql = Sql & " and fechaent >= " & DBSet(vDFec, "F")
-    If vHFec <> "" Then Sql = Sql & " and fechaent <= " & DBSet(vHFec, "F")
+    If vDFec <> "" Then SQL = SQL & " and fechaent >= " & DBSet(vDFec, "F")
+    If vHFec <> "" Then SQL = SQL & " and fechaent <= " & DBSet(vHFec, "F")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     ' rclasifica
-    CadInsert = "insert into rclasifica (numnotac,fechaent,horaentr,codvarie,codsocio,codcampo,tipoentr,recolect,codtrans,codcapat,codtarif,kilosbru,"
+    CadInsert = "replace into rclasifica (numnotac,fechaent,horaentr,codvarie,codsocio,codcampo,tipoentr,recolect,codtrans,codcapat,codtarif,kilosbru,"
     CadInsert = CadInsert & "numcajon,kilosnet,observac,imptrans,impacarr,imprecol,imppenal,tiporecol,horastra,numtraba,numalbar,fecalbar,"
     CadInsert = CadInsert & "impreso , PrEstimado, transportadopor, KilosTra, contrato) values ("
     
     ' rclasifica_clasif
-    CadIns2 = "insert into rclasifica_clasif (numnotac,codvarie,codcalid,muestra,kilosnet) values ("
+    CadIns2 = "replace into rclasifica_clasif (numnotac,codvarie,codcalid,muestra,kilosnet) values ("
     
     ' rclasifica_incidencia
-    CadIns3 = "insert into rclasifica_incidencia (numnotac,codincid) values ("
+    CadIns3 = "replace into rclasifica_incidencia (numnotac,codincid) values ("
     
     
     While Not Rs.EOF
@@ -285,11 +290,10 @@ Dim NumNotac As Long
             NumNotac = DBSet(Rs!NumNotac, "N") ' + 1000000
     
             CadValues = DBSet(NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!horaentr, "FH") & ","
-            CadValues = CadValues & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio - cMaxSocio, "N") & "," & DBSet(Rs!codcampo - cMaxCampo, "N") & ","
+            CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!Codsocio - cMaxSocio, "N") & "," & DBSet(Rs!codCampo - cMaxCampo, "N") & ","
             CadValues = CadValues & DBSet(Rs!TipoEntr, "N") & "," & DBSet(Rs!Recolect, "N") & ","
             
             ' transportista
-            Dim Transpor As String
             Transpor = DBLet(Rs!codTrans, "T")
             If Transpor <> "" Then
                 If Mid(Transpor, 1, 1) = "A" Then
@@ -301,7 +305,7 @@ Dim NumNotac As Long
             CadValues = CadValues & DBSet(Transpor, "T") & ","
             
             ' capataz
-            If DBLet(Rs!codcapat, "N") > cMaxCapa Then
+            If DBLet(Rs!codcapat, "N") >= cMaxCapa Then
                 CadValues = CadValues & DBSet(Rs!codcapat - cMaxCapa, "N") & ","
             Else
                 CadValues = CadValues & DBSet(Rs!codcapat + cMaxCapa, "N") & ","
@@ -325,7 +329,7 @@ Dim NumNotac As Long
             Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs2.EOF
-                CadVal2 = DBSet(NumNotac, "N") & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs2!codcalid, "N") & "," & DBSet(Rs2!Muestra, "N") & ","
+                CadVal2 = DBSet(NumNotac, "N") & "," & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs2!codcalid, "N") & "," & DBSet(Rs2!Muestra, "N") & ","
                 CadVal2 = CadVal2 & DBSet(Rs2!KilosNet, "N") & ")"
             
                 CadVal2 = CadIns2 & CadVal2
@@ -342,7 +346,7 @@ Dim NumNotac As Long
             Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs2.EOF
-                CadVal3 = DBSet(NumNotac, "N") & "," & DBSet(Rs!codincid, "N") & ")"
+                CadVal3 = DBSet(NumNotac, "N") & "," & DBSet(Rs2!codincid, "N") & ")"
             
                 CadVal3 = CadIns3 & CadVal3
             
@@ -352,9 +356,53 @@ Dim NumNotac As Long
             Wend
             Set Rs2 = Nothing
             
-            Sql = "update rclasifica set estacomunicada = 1 where numnotac = " & DBSet(NumNotac, "N")
-            conn.Execute Sql
+            '[Monica]17/10/2018: ahora las entradas que estan comunicadas y clasificadas le ponemos la situacion 2
+            SQL = "update rclasifica set estacomunicada = 2 where numnotac = " & DBSet(NumNotac, "N")
+            conn.Execute SQL
             
+        Else
+        
+            NumNotac = DBSet(Rs!NumNotac, "N") ' + 1000000
+    
+            CadValues = DBSet(NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!horaentr, "FH") & ","
+            CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!Codsocio - cMaxSocio, "N") & "," & DBSet(Rs!codCampo - cMaxCampo, "N") & ","
+            CadValues = CadValues & DBSet(Rs!TipoEntr, "N") & "," & DBSet(Rs!Recolect, "N") & ","
+            
+            ' transportista
+            Transpor = DBLet(Rs!codTrans, "T")
+            If Transpor <> "" Then
+                If Mid(Transpor, 1, 1) = "A" Then
+                    Transpor = Mid(Transpor, 2)
+                Else
+                    Transpor = "C" & Transpor
+                End If
+            End If
+            CadValues = CadValues & DBSet(Transpor, "T") & ","
+            
+            ' capataz
+            If DBLet(Rs!codcapat, "N") >= cMaxCapa Then
+                CadValues = CadValues & DBSet(Rs!codcapat - cMaxCapa, "N") & ","
+            Else
+                CadValues = CadValues & DBSet(Rs!codcapat + cMaxCapa, "N") & ","
+            End If
+            
+            CadValues = CadValues & DBSet(Rs!Codtarif, "N") & "," & DBSet(Rs!KilosBru, "N") & ","
+            CadValues = CadValues & DBSet(Rs!Numcajon, "N") & "," & DBSet(Rs!KilosNet, "N") & "," & DBSet(Rs!Observac, "T") & ","
+            CadValues = CadValues & DBSet(Rs!ImpTrans, "N") & "," & DBSet(Rs!impacarr, "N") & "," & DBSet(Rs!imprecol, "N") & ","
+            CadValues = CadValues & DBSet(Rs!ImpPenal, "N") & "," & DBSet(Rs!tiporecol, "N") & "," & DBSet(Rs!horastra, "N") & ","
+            CadValues = CadValues & DBSet(Rs!numtraba, "N") & "," & DBSet(Rs!numalbar, "N") & "," & DBSet(Rs!Fecalbar, "F") & ","
+            CadValues = CadValues & DBSet(Rs!impreso, "N") & "," & DBSet(Rs!PrEstimado, "N") & "," & DBSet(Rs!transportadopor, "N") & ","
+            CadValues = CadValues & DBSet(Rs!KilosTra, "N") & "," & DBSet(Rs!contrato, "N") & ")"
+        
+            CadValues = CadInsert & CadValues
+        
+            ComunicaCooperativa "rclasifica", CadValues, "I"
+            
+        
+            '[Monica]17/10/2018: entrada que esta comunicada y sin clasificar situacion 1
+            SQL = "update rclasifica set estacomunicada = 1 where numnotac = " & DBSet(NumNotac, "N")
+            conn.Execute SQL
+        
         End If
         
         Rs.MoveNext
@@ -368,7 +416,7 @@ eCargarEntradasClasificadas:
 End Function
 
 Private Function CargarAlbaranesVenta(vDFec As String, vHFec As String) As String
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim CadInsert As String
 Dim CadValues As String
@@ -393,11 +441,11 @@ Dim Albaran As Long
     
     
     ' metemos los albaranes de venta
-    Sql = "select distinct albaran.numalbar from (albaran inner join albaran_variedad on albaran.numalbar = albaran_variedad.numalbar) "
-    Sql = Sql & " inner join variedades on albaran_variedad.codvarie = variedades.codvarie "
-    Sql = Sql & " where variedades.comerciocomun = 1 and albaran.estacomunicada = 0 "
-    If vDFec <> "" Then Sql = Sql & " and fechaalb >= " & DBSet(vDFec, "F")
-    If vHFec <> "" Then Sql = Sql & " and fechaalb <= " & DBSet(vHFec, "F")
+    SQL = "select distinct albaran.numalbar from (albaran inner join albaran_variedad on albaran.numalbar = albaran_variedad.numalbar) "
+    SQL = SQL & " inner join variedades on albaran_variedad.codvarie = variedades.codvarie "
+    SQL = SQL & " where variedades.comerciocomun = 1 and albaran.estacomunicada = 0 "
+    If vDFec <> "" Then SQL = SQL & " and fechaalb >= " & DBSet(vDFec, "F")
+    If vHFec <> "" Then SQL = SQL & " and fechaalb <= " & DBSet(vHFec, "F")
     
     ' albaran
     CadInsert = "insert into albaran (numalbar,fechaalb,codclien,coddesti,codtrans,matriveh,matrirem,refclien,codtimer,totpalet,"
@@ -421,16 +469,16 @@ Dim Albaran As Long
     
     
     Set RsCab = New ADODB.Recordset
-    RsCab.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RsCab.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     
     
     While Not RsCab.EOF
         Albaran = DBLet(RsCab!numalbar, "N")
     
-        Sql = "select * from albaran where numalbar = " & DBSet(Albaran, "N")
+        SQL = "select * from albaran where numalbar = " & DBSet(Albaran, "N")
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         If Not Rs.EOF Then
         
@@ -454,7 +502,7 @@ Dim Albaran As Long
             Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs2.EOF
-                CadVal2 = DBSet(Albaran, "N") & "," & DBSet(Rs2!numlinea, "N") & "," & DBSet(Rs2!codvarie, "N") & "," & DBSet(Rs2!codvarco, "N") & ","
+                CadVal2 = DBSet(Albaran, "N") & "," & DBSet(Rs2!numlinea, "N") & "," & DBSet(Rs2!Codvarie, "N") & "," & DBSet(Rs2!codvarco, "N") & ","
                 CadVal2 = CadVal2 & DBSet(Rs2!codforfait, "T") & "," & DBSet(Rs2!codmarca, "N") & "," & DBSet(Rs2!categori, "T") & "," & DBSet(Rs2!totpalet, "N") & ","
                 CadVal2 = CadVal2 & DBSet(Rs2!NumCajas, "N") & "," & DBSet(Rs2!pesobrut, "N") & ","
                 CadVal2 = CadVal2 & DBSet(Rs2!PesoNeto, "N") & "," & DBSet(Rs2!preciopro, "N") & "," & DBSet(Rs2!preciodef, "N") & ","
@@ -479,7 +527,7 @@ Dim Albaran As Long
             Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs2.EOF
-                CadVal3 = DBSet(Albaran, "N") & "," & DBSet(Rs2!numlinea, "N") & "," & DBSet(Rs2!numline1, "N") & "," & DBSet(Rs2!codvarie, "N") & ","
+                CadVal3 = DBSet(Albaran, "N") & "," & DBSet(Rs2!numlinea, "N") & "," & DBSet(Rs2!numline1, "N") & "," & DBSet(Rs2!Codvarie, "N") & ","
                 CadVal3 = CadVal3 & DBSet(Rs2!codcalib, "N") & "," & DBSet(Rs2!NumCajas, "N") & "," & DBSet(Rs2!pesobrut, "N") & ","
                 CadVal3 = CadVal3 & DBSet(Rs2!PesoNeto, "N") & "," & DBSet(Rs2!Unidades, "N") & "," & DBSet(Rs2!preciopro, "N") & ")"
             
@@ -530,8 +578,8 @@ Dim Albaran As Long
             Set Rs2 = Nothing
             
             'lo marcamos como que está comunicado
-            Sql = "update albaran set estacomunicada = 1 where numalbar = " & DBSet(Albaran, "N")
-            conn.Execute Sql
+            SQL = "update albaran set estacomunicada = 1 where numalbar = " & DBSet(Albaran, "N")
+            conn.Execute SQL
             
         End If
         Set Rs = Nothing
@@ -549,9 +597,11 @@ End Function
 
 
 Public Function EntradaComunicada(Nota As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select estacomunicada from rclasifica where numnotac = " & DBSet(Nota, "N")
-    EntradaComunicada = (DevuelveValor(Sql) = 1)
+    SQL = "select estacomunicada from rclasifica where numnotac = " & DBSet(Nota, "N")
+    SQL = DevuelveValor(SQL)
+    '[Monica]18/10/2018: ahora la entrada puede estar comunicada sin clasificacion (1) o con la clasificacion (2)
+    EntradaComunicada = ((SQL = 1) Or (SQL = 2))
 
 End Function

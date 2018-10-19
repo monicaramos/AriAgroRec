@@ -2739,7 +2739,7 @@ Dim CadVal3 As String
         
         ' capataz
         If Text1(6).Text <> "" Then
-            If CLng(ComprobarCero(Text1(6).Text)) > cMaxCapa Then
+            If CLng(ComprobarCero(Text1(6).Text)) >= cMaxCapa Then
                 SQL = SQL & ",codcapat = " & DBSet(CLng(ComprobarCero(Text1(6).Text)) - cMaxCapa, "N")
             Else
                 SQL = SQL & ",codcapat = " & DBSet(CLng(ComprobarCero(Text1(6).Text)) + cMaxCapa, "N")
@@ -2769,21 +2769,21 @@ Dim CadVal3 As String
         ComunicaCooperativa "rclasifica", SQL, "U", "Entrada modificada " & Text1(0).Text
     
     Else
-
-        SQL = "delete from rclasifica_clasif where numnotac = " & DBSet(Text1(0).Text, "N")
-        
-        ComunicaCooperativa "rclasifica", SQL, "U", "Entrada modificada " & Text1(0).Text
-        
-        SQL = "delete from rclasifica_incidencia where numnotac = " & DBSet(Text1(0).Text, "N")
-        
-        ComunicaCooperativa "rclasifica", SQL, "U", "Entrada modificada " & Text1(0).Text
+'[Monica]17/10/2018: lo sustituyo por replaces
+'        SQL = "delete from rclasifica_clasif where numnotac = " & DBSet(Text1(0).Text, "N")
+'
+'        ComunicaCooperativa "rclasifica", SQL, "U", "Entrada modificada " & Text1(0).Text
+'
+'        SQL = "delete from rclasifica_incidencia where numnotac = " & DBSet(Text1(0).Text, "N")
+'
+'        ComunicaCooperativa "rclasifica", SQL, "U", "Entrada modificada " & Text1(0).Text
         
         
         ' rclasifica_clasif
-        CadIns2 = "insert into rclasifica_clasif (numnotac,codvarie,codcalid,muestra,kilosnet) values ("
+        CadIns2 = "replace into rclasifica_clasif (numnotac,codvarie,codcalid,muestra,kilosnet) values ("
         
         ' rclasifica_incidencia
-        CadIns3 = "insert into rclasifica_incidencia (numnotac,codincid) values ("
+        CadIns3 = "replace into rclasifica_incidencia (numnotac,codincid) values ("
         
         SQL = "select * from rclasifica_clasif where numnotac = " & DBSet(Text1(0).Text, "N")
         
@@ -2818,7 +2818,6 @@ Dim CadVal3 As String
         
     End If
 End Sub
-
 
 
 Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -5131,7 +5130,7 @@ End Sub
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1
-            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+            LanzaVisorMimeDocumento Me.hwnd, DireccionAyuda & IdPrograma & ".html"
     End Select
 End Sub
 
@@ -6637,7 +6636,9 @@ Private Sub ImprimirEtiquetas()
     
     frmImprimir.NombreRPT = nomDocu
     
-    ActivaTicket
+    
+'[Monica]10/10/2018: quitamos la impresora por defecto
+'    ActivaTicket
     
     With frmVisReport
         .FormulaSeleccion = "{trzpalets.numnotac}=" & Data1.Recordset!NumNotac
@@ -6649,12 +6650,13 @@ Private Sub ImprimirEtiquetas()
         .InfConta = False
         .ConSubInforme = False
         .SubInformeConta = ""
+        .ForzarImpresora = True
         .Opcion = 0
         .ExportarPDF = False
         .Show vbModal
     End With
     
-    DesactivaTicket
+'    DesactivaTicket
 
 End Sub
 

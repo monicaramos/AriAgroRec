@@ -198,7 +198,7 @@ Begin VB.Form frmManTarTra
       Height          =   330
       Index           =   0
       Left            =   60
-      MaxLength       =   2
+      MaxLength       =   3
       TabIndex        =   0
       Tag             =   "Código|T|N|0|999|rtarifatra|codtarif|000|S|"
       Top             =   4920
@@ -1011,7 +1011,7 @@ End Sub
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1
-            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+            LanzaVisorMimeDocumento Me.hwnd, DireccionAyuda & IdPrograma & ".html"
     End Select
 End Sub
 
