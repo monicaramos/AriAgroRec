@@ -29,7 +29,7 @@ Private mvarNivel As Long 'copia local
 Private mvarCadenaConexion As String
 Private mvarPC As String
 
-Private RS As ADODB.Recordset
+Private Rs As ADODB.Recordset
 Private SQL As String
 Private Mens As String
 
@@ -138,17 +138,17 @@ Public Property Get Codigo() As Long
     Codigo = mvarCodigo
 End Property
 
-Public Property Let Codusu(ByVal vData As Long)
+Public Property Let CodUsu(ByVal vData As Long)
 'se usa cuando se asigna un valor a una propiedad, en el lado izquierdo de la asignación.
 'Syntax: X.Codigo= 5
     mvarCodusu = vData
 End Property
 
 
-Public Property Get Codusu() As Long
+Public Property Get CodUsu() As Long
 'se usa cuando se asigna un valor a una propiedad, en el lado derecho de la asignación.
 'Syntax: Debug.Print X.Codigo
-    Codusu = mvarCodusu
+    CodUsu = mvarCodusu
 End Property
 
 
@@ -165,28 +165,28 @@ Dim i As Integer
     On Error GoTo Err1
     SQL = "SELECT * FROM usuarios WHERE login = '" & vlogin & "'"
     'SQL = SQL & " AND Nivelusuges >=0"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    If RS.EOF Then
+    If Rs.EOF Then
         Leer = 1
     Else
         i = DevuelveAumentoPC
-        mvarCodigo = Val(DBLet(RS!Codusu)) + i
-        mvarCodusu = DBLet(RS!Codusu)
-        mvarNombre = DBLet(RS!nomusu)
-        mvarNivel = Val(DBLet(RS!nivelusuges))
-        mvarPasswdPROPIO = RS!passwordpropio
+        mvarCodigo = Val(DBLet(Rs!CodUsu)) + i
+        mvarCodusu = DBLet(Rs!CodUsu)
+        mvarNombre = DBLet(Rs!nomusu)
+        mvarNivel = Val(DBLet(Rs!nivelusuges))
+        mvarPasswdPROPIO = Rs!passwordpropio
         mvarlogin = vlogin
         mvarCadenaConexion = ""  'Se le asigna en tiempo de diseño
         Leer = 0
     End If
-    RS.Close
+    Rs.Close
     Exit Function
 Err1:
     Mens = "Error: " & Err.Number & " : " & Err.Description
     MsgBox Mens, vbExclamation
-    RS.Close
+    Rs.Close
     Leer = 1
 End Function
 

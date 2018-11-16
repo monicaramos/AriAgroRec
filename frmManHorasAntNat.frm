@@ -648,7 +648,7 @@ Dim Modo As Byte
 '   4.-  Modificar
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
-Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim indCodigo As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim i As Integer
 
@@ -657,36 +657,36 @@ Private BuscaChekc As String
 
 
 Private Sub PonerModo(vModo)
-Dim B As Boolean
+Dim b As Boolean
 
     Modo = vModo
     
-    B = (Modo = 2)
-    If B Then
+    b = (Modo = 2)
+    If b Then
         PonerContRegIndicador lblIndicador, adodc1, CadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
     For i = 0 To txtAux.Count - 1
-        txtAux(i).visible = Not B
+        txtAux(i).visible = Not b
         txtAux(i).BackColor = vbWhite
     Next i
     
-    txtAux2(0).visible = Not B
+    txtAux2(0).visible = Not b
     
     For i = 0 To btnBuscar.Count - 1
-        btnBuscar(i).visible = Not B
+        btnBuscar(i).visible = Not b
     Next i
     
-    chkAux(0).visible = Not B
+    chkAux(0).visible = Not b
 
-    CmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
-    DataGrid1.Enabled = B
+    CmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
+    DataGrid1.Enabled = b
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
     
     PonerLongCampos
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
@@ -717,30 +717,30 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnBuscar.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnBuscar.Enabled = b
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnVerTodos.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnVerTodos.Enabled = b
     'Imprimir
-    Toolbar1.Buttons(8).Enabled = B
-    Me.mnImprimir.Enabled = B
+    Toolbar1.Buttons(8).Enabled = b
+    Me.mnImprimir.Enabled = b
     
     'Insertar
-    Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
-    Me.mnNuevo.Enabled = B And Not DeConsulta
+    Toolbar1.Buttons(1).Enabled = b And Not DeConsulta
+    Me.mnNuevo.Enabled = b And Not DeConsulta
     
-    B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
+    b = (b And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(2).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(2).Enabled = b
+    Me.mnModificar.Enabled = b
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(3).Enabled = b
+    Me.mnEliminar.Enabled = b
     
     
 '    Toolbar1.Buttons(12).Enabled = b And UCase(Dir(App.Path & "\controlnomi.cfg")) = UCase("controlnomi.cfg")
@@ -868,7 +868,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -883,17 +883,17 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
+    Sql = "¿Seguro que desea eliminar el Registro?"
+    Sql = Sql & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from horasanticipos where codtraba=" & adodc1.Recordset!CodTraba
-        SQL = SQL & " and fecharec = " & DBSet(adodc1.Recordset!Fecharec, "F")
+        Sql = "Delete from horasanticipos where codtraba=" & adodc1.Recordset!CodTraba
+        Sql = Sql & " and fecharec = " & DBSet(adodc1.Recordset!Fecharec, "F")
         
-        conn.Execute SQL
+        conn.Execute Sql
         CargaGrid CadB
         
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
@@ -922,12 +922,12 @@ Private Sub btnBuscar_Click(Index As Integer)
     Select Case Index
         Case 0 'trabajadores
             
-            Indice = Index
+            indice = Index
             Set frmTra = New frmManTraba
             frmTra.DatosADevolverBusqueda = "0|2|"
             frmTra.Show vbModal
             Set frmTra = Nothing
-            PonerFoco txtAux(Indice)
+            PonerFoco txtAux(indice)
     
        Case 1, 2 ' Fecha
             Dim esq As Long
@@ -937,7 +937,7 @@ Private Sub btnBuscar_Click(Index As Integer)
         
             Set frmC = New frmCal
             
-            Indice = Index
+            indice = Index
             
             esq = btnBuscar(Index).Left
             dalt = btnBuscar(Index).Top
@@ -1065,7 +1065,7 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 Dim J As Integer
 Dim Aux As String
@@ -1074,7 +1074,7 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
+    Cad = ""
     i = 0
     Do
         J = i + 1
@@ -1082,10 +1082,10 @@ Dim Aux As String
         If i > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            cad = cad & adodc1.Recordset.Fields(J) & "|"
+            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
     Loop Until i = 0
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -1182,7 +1182,7 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    If Indice = 1 Then
+    If indice = 1 Then
         txtAux(1).Text = Format(vFecha, "dd/mm/yyyy") '<===
     Else
         txtAux(3).Text = Format(vFecha, "dd/mm/yyyy") '<===
@@ -1191,8 +1191,8 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmTra_DatoSeleccionado(CadenaSeleccion As String)
-    txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo trabajador
-    txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre trabajador
+    txtAux(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo trabajador
+    txtAux2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre trabajador
 End Sub
 
 
@@ -1211,8 +1211,41 @@ Private Sub mnGenFichero_Click()
 End Sub
 
 Private Sub mnImprimir_Click()
-    AbrirListadoNominas (15)
+    'AbrirListadoNominas (15)
+    PrintNou
 End Sub
+
+Private Sub PrintNou()
+Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
+Dim nomDocu As String 'Nombre de Informe rpt de crystal
+Dim devuelve As String
+Dim nTabla As String
+Dim ConSubInforme As Boolean
+
+    With frmImprimir2
+        .cadTabla2 = "horasanticipos"
+        .Informe2 = "rAnticipos.rpt"
+        If CadB <> "" Then
+            .cadRegSelec = SQL2SF(CadB)
+        Else
+            .cadRegSelec = ""
+        End If
+        .cadRegActua = POS2SF(Me.adodc1, Me)
+        '[Monica]13/07/2012: falla si hay un solo registro seleccionado y apretamos registros buscados
+        If adodc1.Recordset.RecordCount = 1 Then .cadRegSelec = .cadRegActua
+        .cadTodosReg = ""
+        '.OtrosParametros2 = "pEmpresa='" & vEmpresa.NomEmpre & "'|pOrden={clientes.ape_raso}|"
+        .OtrosParametros2 = "pEmpresa='" & vEmpresa.nomempre & "'|"
+        .NumeroParametros2 = 1
+        .MostrarTree2 = False
+        .InfConta2 = False
+        .ConSubInforme2 = ConSubInforme 'False
+        .SubInformeConta = ""
+        .Show vbModal
+    End With
+
+End Sub
+
 
 Private Sub mnModificar_Click()
     'Comprobaciones
@@ -1263,24 +1296,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     If Ascendente Then
-        SQL = SQL & " ORDER BY  horasanticipos.fecharec, horasanticipos.codtraba "
+        Sql = Sql & " ORDER BY  horasanticipos.fecharec, horasanticipos.codtraba "
     Else
         '********************* canviar el ORDER BY *********************++
-        SQL = SQL & " ORDER BY  horasanticipos.fecharec desc, horasanticipos.codtraba "
+        Sql = Sql & " ORDER BY  horasanticipos.fecharec desc, horasanticipos.codtraba "
         '**************************************************************++
     End If
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Código|1000|;S|btnBuscar(0)|B||195|;S|txtAux2(0)|T|Trabajador|3900|;"
@@ -1301,7 +1334,7 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub txtaux_GotFocus(Index As Integer)
+Private Sub txtAux_GotFocus(Index As Integer)
     If Index = 6 And Modo = 3 Then
         txtAux(Index).Enabled = False
     End If
@@ -1350,39 +1383,39 @@ End Sub
 
 Private Function DatosOk() As Boolean
 'Dim Datos As String
-Dim B As Boolean
-Dim SQL As String
+Dim b As Boolean
+Dim Sql As String
 Dim Mens As String
 
 
-    B = CompForm(Me)
-    If Not B Then Exit Function
+    b = CompForm(Me)
+    If Not b Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        SQL = "select count(*) from horasanticipos where codtraba = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and fecharec = " & DBSet(txtAux(1).Text, "F")
-        If TotalRegistros(SQL) <> 0 Then
+        Sql = "select count(*) from horasanticipos where codtraba = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and fecharec = " & DBSet(txtAux(1).Text, "F")
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "El trabajador existe para esta fecha. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
-            B = False
+            b = False
         End If
         
     End If
     
-    If B And (Modo = 3 Or Modo = 4) Then
+    If b And (Modo = 3 Or Modo = 4) Then
         If Not EntreFechas(vParam.FecIniCam, txtAux(1).Text, vParam.FecFinCam) Then
             MsgBox "La fecha introducida no se encuentra dentro de campaña. Revise.", vbExclamation
-            B = False
+            b = False
         End If
         
         If CInt(ComprobarCero(txtAux(2).Text)) = 0 Then
             MsgBox "El importe no puede ser 0. Revise", vbExclamation
             PonerFoco txtAux(2)
-            B = False
+            b = False
         End If
     End If
     
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
@@ -1391,7 +1424,7 @@ Private Sub PonerOpcionesMenu()
     PonerOpcionesMenuGeneralNew Me
 End Sub
 
-Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             If Modo = 4 And (Index = 0 Or Index = 1) Then Exit Sub
@@ -1419,9 +1452,9 @@ Dim cerrar As Boolean
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    btnBuscar_Click (Indice)
+    btnBuscar_Click (indice)
 End Sub
 
 Private Sub BotonCalculoHorasProd()
@@ -1429,7 +1462,7 @@ Private Sub BotonCalculoHorasProd()
     CargaGrid
 End Sub
 
-Private Sub AbrirFrmVariedades(Indice As Integer)
+Private Sub AbrirFrmVariedades(indice As Integer)
     indCodigo = 8
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
@@ -1438,32 +1471,32 @@ Private Sub AbrirFrmVariedades(Indice As Integer)
     Set frmVar = Nothing
 End Sub
 
-Private Sub AbrirFrmManForfaits(Indice As Integer)
+Private Sub AbrirFrmManForfaits(indice As Integer)
     Set frmFor = New frmBasico2
-    AyudaForfaitsCom frmFor, txtAux(Indice)
+    AyudaForfaitsCom frmFor, txtAux(indice)
     Set frmFor = Nothing
     
-    PonerFoco txtAux(Indice)
+    PonerFoco txtAux(indice)
 End Sub
 
 Private Function ModificaDesdeForm() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eModificaDesdeForm
     
     ModificaDesdeForm = False
     
-    SQL = "update horasanticipos set "
-    SQL = SQL & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
-    SQL = SQL & ", fechapago = " & DBSet(ImporteSinFormato(txtAux(3).Text), "F", "S")
+    Sql = "update horasanticipos set "
+    Sql = Sql & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
+    Sql = Sql & ", fechapago = " & DBSet(ImporteSinFormato(txtAux(3).Text), "F", "S")
     '[Monica]04/10/2018:
     If vParamAplic.Cooperativa = 0 Then
-        SQL = SQL & ", descontado = " & DBSet(Me.chkAux(0).Value, "N")
+        Sql = Sql & ", descontado = " & DBSet(Me.chkAux(0).Value, "N")
     End If
-    SQL = SQL & " where codtraba = " & DBSet(txtAux(0).Text, "N")
-    SQL = SQL & " and fecharec = " & DBSet(txtAux(1).Text, "F")
+    Sql = Sql & " where codtraba = " & DBSet(txtAux(0).Text, "N")
+    Sql = Sql & " and fecharec = " & DBSet(txtAux(1).Text, "F")
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     ModificaDesdeForm = True
     Exit Function

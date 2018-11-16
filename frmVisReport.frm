@@ -227,7 +227,7 @@ Dim Inicial As Integer
         
     
       UseDefault = False
-      If mrpt.PrinterSetupEx(Me.hWnd) = 0 Then
+      If mrpt.PrinterSetupEx(Me.hwnd) = 0 Then
          
          'ok
          EstaImpreso = True
@@ -444,19 +444,19 @@ Err_Carga:
 End Sub
 
 Private Sub ForzarNombreImpresora()
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim NomImpre As String
 
 On Error GoTo eForzarNombreImpresora
 
 
-    Sql = "select impresoraticket from nompcs where nompc = " & DBSet(ComputerName, "T")
+    SQL = "select impresoraticket from nompcs where nompc = " & DBSet(ComputerName, "T")
     
     NomImpre = ""
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         NomImpre = Rs.Fields(0).Value

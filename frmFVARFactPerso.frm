@@ -733,38 +733,38 @@ Dim Modo As Byte
 '   4.-  Modificar
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
-Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim i As Integer
 
 Private Sub PonerModo(vModo)
-Dim B As Boolean
+Dim b As Boolean
 
     Modo = vModo
     BuscaChekc = ""
     
-    B = (Modo = 2)
-    If B Then
+    b = (Modo = 2)
+    If b Then
         PonerContRegIndicador lblIndicador, adodc1, CadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
     For i = 0 To txtAux.Count - 1
-        txtAux(i).visible = Not B
+        txtAux(i).visible = Not b
         txtAux(i).BackColor = vbWhite
     Next i
     
-    txtAux2(2).visible = Not B
-    txtAux2(1).visible = Not B
-    btnBuscar(0).visible = Not B
-    btnBuscar(1).visible = Not B
-    Combo1(1).visible = Not B
-    CmdAceptar.visible = Not B
-    CmdCancelar.visible = Not B
-    DataGrid1.Enabled = B
+    txtAux2(2).visible = Not b
+    txtAux2(1).visible = Not b
+    btnBuscar(0).visible = Not b
+    btnBuscar(1).visible = Not b
+    Combo1(1).visible = Not b
+    CmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
+    DataGrid1.Enabled = b
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
     
     PonerLongCampos
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
@@ -780,27 +780,27 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnBuscar.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnBuscar.Enabled = b
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnVerTodos.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnVerTodos.Enabled = b
     
     'Insertar
-    Toolbar1.Buttons(1).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(1).Enabled = b
+    Me.mnNuevo.Enabled = b
     
-    B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
+    b = (b And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(2).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(2).Enabled = b
+    Me.mnModificar.Enabled = b
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(3).Enabled = b
+    Me.mnEliminar.Enabled = b
     'Imprimir
     Toolbar1.Buttons(8).Enabled = False
     Me.mnImprimir.Enabled = False
@@ -1008,7 +1008,7 @@ Private Sub btnBuscar_Click(Index As Integer)
         Case 0 'socio o cliente
         
             If ParamTabla = "rsocios" Then
-                Indice = Index
+                indice = Index
                 Set frmAux = New frmManSocios
                 
                 frmAux.DatosADevolverBusqueda = "0|1|"
@@ -1016,25 +1016,25 @@ Private Sub btnBuscar_Click(Index As Integer)
                 Set frmAux = Nothing
             Else
             
-                Indice = Index
+                indice = Index
                 Set frmAux1 = New frmBasico2
                 
-                AyudaClienteCom frmAux1, txtAux(Indice)
+                AyudaClienteCom frmAux1, txtAux(indice)
                 
                 Set frmAux1 = Nothing
             
             End If
-            PonerFoco txtAux(Indice)
+            PonerFoco txtAux(indice)
     
         Case 1 'cconceptos
             
-            Indice = Index
+            indice = Index
             Set frmCon = New frmFVARConceptos
             frmCon.DatosADevolverBusqueda = "0|2|3|"
-            frmCon.CodigoActual = txtAux(Indice).Text
+            frmCon.CodigoActual = txtAux(indice).Text
             frmCon.Show vbModal
             Set frmCon = Nothing
-            PonerFoco txtAux(Indice)
+            PonerFoco txtAux(indice)
     
     End Select
     
@@ -1043,7 +1043,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim i As Integer
+    Dim i As Long
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -1056,7 +1056,7 @@ Private Sub cmdAceptar_Click()
             End If
             
         Case 3 'INSERTAR
-            If DatosOK Then
+            If DatosOk Then
                 If InsertarDesdeForm(Me) Then
                     CargaGrid CadB
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
@@ -1075,7 +1075,7 @@ Private Sub cmdAceptar_Click()
             End If
             
         Case 4 'MODIFICAR
-            If DatosOK Then
+            If DatosOk Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
                     i = adodc1.Recordset.Fields(0)
@@ -1122,7 +1122,7 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 Dim J As Integer
 Dim Aux As String
@@ -1131,7 +1131,7 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
+    Cad = ""
     i = 0
     Do
         J = i + 1
@@ -1139,10 +1139,10 @@ Dim Aux As String
         If i > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            cad = cad & adodc1.Recordset.Fields(J) & "|"
+            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
     Loop Until i = 0
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -1260,7 +1260,7 @@ End Sub
 
 Private Sub frmCon_DatoSeleccionado(CadenaSeleccion As String)
 'concepto
-    txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codconce
+    txtAux(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codconce
     txtAux2(1).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre concepto
 End Sub
 
@@ -1407,13 +1407,13 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub txtaux_GotFocus(Index As Integer)
+Private Sub txtAux_GotFocus(Index As Integer)
     ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
-Dim cad As String
+Dim Cad As String
     
     If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
@@ -1441,8 +1441,8 @@ Dim cad As String
                 PonerFoco txtAux(Index)
                 
             Else
-                cad = DevuelveDesdeBDNew(cAgro, "fvarconce", "codsecci", "codconce", txtAux(1).Text, "N")
-                If Int(ComprobarCero(cad)) <> Int(ParamSeccion) Then
+                Cad = DevuelveDesdeBDNew(cAgro, "fvarconce", "codsecci", "codconce", txtAux(1).Text, "N")
+                If Int(ComprobarCero(Cad)) <> Int(ParamSeccion) Then
                     MsgBox "El concepto debe de ser de la misma seccion que se ha pedido. Reintroduzca.", vbExclamation
                     PonerFoco txtAux(1)
                 End If
@@ -1475,16 +1475,16 @@ Dim cad As String
     
 End Sub
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 'Dim Datos As String
-Dim B As Boolean
+Dim b As Boolean
 Dim Sql As String
 Dim Mens As String
 
-    B = CompForm(Me)
-    If Not B Then Exit Function
+    b = CompForm(Me)
+    If Not b Then Exit Function
     
-    DatosOK = B
+    DatosOk = b
 End Function
 
 
@@ -1539,7 +1539,7 @@ End Sub
 'Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
 '    KEYpress KeyAscii
 'End Sub
-Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
@@ -1565,9 +1565,9 @@ Dim cerrar As Boolean
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    btnBuscar_Click (Indice)
+    btnBuscar_Click (indice)
 End Sub
 
 

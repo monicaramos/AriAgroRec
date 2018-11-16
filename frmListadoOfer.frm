@@ -1851,7 +1851,7 @@ Dim ImpresionNormal As Boolean
 Dim SqlDeta As String
 Dim ConDetalle As Boolean
 
-
+Dim NotasParaGastos As String
 
 Private Sub KEYpress(KeyAscii As Integer)
 Dim cerrar As Boolean
@@ -1956,7 +1956,9 @@ Dim B As Boolean
                 End If
             End If
                 
-
+            '[Monica]31/10/2018:
+            NotasParaGastos = ""
+            
             conn.BeginTrans
             If ProcesarFicheroComunicacion2(Me.cd1.FileName) Then
                 cadTabla = "tmpinformes"
@@ -2771,7 +2773,7 @@ Dim devuelve As String
             If OpcionListado = 305 Then
                 H = 5325
                 Me.cmdAceptarEtiqProv.Top = Me.cmdAceptarEtiqProv.Top - 2000
-                Me.cmdCancel(9).Top = cmdCancel(9).Top - 2000
+                Me.CmdCancel(9).Top = CmdCancel(9).Top - 2000
             End If
             PonerFrameVisible Me.FrameEtiqProv, True, H, W
             Me.Frame2.visible = (OpcionListado = 306)
@@ -2812,7 +2814,7 @@ Dim devuelve As String
             chkMail(3).visible = OpcionListado = 316 'Solo para facturae
             If OpcionListado = 316 Then
                 cmdEnvioMail.Left = 3240
-                cmdCancel(indFrame).Left = 4320
+                CmdCancel(indFrame).Left = 4320
                 Label14(16).Caption = "Facturacion E"
                 cmdEnvioMail.TabIndex = 474
                 Check4.Enabled = True
@@ -2834,7 +2836,7 @@ Dim devuelve As String
     End Select
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel(indFrame).Cancel = True
+    Me.CmdCancel(indFrame).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
     
@@ -4140,7 +4142,7 @@ Dim B As Boolean
 
     B = True
 
-    While Not EOF(NF) 'And B
+    While Not EOF(NF)
         i = i + 1
         
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
@@ -4153,28 +4155,166 @@ Dim B As Boolean
     Wend
     Close #NF
     
-'    If B Then
-        If cad <> "" Then
-            i = i + 1
-            
-            Me.Pb1.Value = Me.Pb1.Value + Len(cad)
-            lblProgres(1).Caption = "Linea " & i
-            Me.Refresh
-            DoEvents
-            B = ComprobarRegistro(cad)
-        End If
-'    End If
+    If cad <> "" Then
+        i = i + 1
+        
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & i
+        Me.Refresh
+        DoEvents
+        B = ComprobarRegistro(cad)
+    End If
+    
+    
+    '[Monica]31/10/2018: para el caso de picassent calculamos los gastos de acarreo y recoleccion
+    If vParamAplic.Cooperativa = 2 And NotasParaGastos <> "" Then
+        CalcularGastosNotas Mid(NotasParaGastos, 2)
+    End If
+    
     
     Pb1.visible = False
     lblProgres(0).Caption = ""
     lblProgres(1).Caption = ""
 
-    ProcesarFicheroComunicacion2 = True 'B
+    ProcesarFicheroComunicacion2 = True
     Exit Function
 
 eProcesarFicheroComunicacion2:
     ProcesarFicheroComunicacion2 = False
 End Function
+
+' Funcion para el calculo de gastos de las notas de las que se han insertado
+Private Sub CalcularGastosNotas(vNotas As String)
+Dim SQL As String
+Dim Rs As ADODB.Recordset
+
+    On Error GoTo eCalcularGastosNotas
+
+
+    SQL = "select * from rclasifica where numnotac in (" & vNotas & ")"
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    While Not Rs.EOF
+        CalcularGastos Rs
+        Rs.MoveNext
+    Wend
+    
+    Set Rs = Nothing
+    Exit Sub
+    
+eCalcularGastosNotas:
+    MuestraError Err.Number, "Calcular Gastos de notas", Err.Description
+End Sub
+
+Private Sub CalcularGastos(ByRef Rs As ADODB.Recordset)
+Dim RS1 As ADODB.Recordset
+Dim SQL1 As String
+Dim TotalEnvases As String
+Dim TotalCostes As String
+Dim Valor As Currency
+Dim GasRecol As Currency
+Dim GasAcarreo As Currency
+Dim KilosTria As Long
+Dim KilosNet As Long
+Dim KilosTrans As Long
+Dim EurDesta As Currency
+Dim EurRecol As Currency
+Dim PrecAcarreo As Currency
+Dim i As Integer
+Dim SQL As String
+
+    On Error Resume Next
+    
+    GasRecol = 0
+    GasAcarreo = 0
+    
+    SQL1 = "select eurdesta, eurecole from variedades where codvarie = " & DBSet(Rs!Codvarie, "N")
+    
+    Set RS1 = New ADODB.Recordset
+    RS1.Open SQL1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    If Not RS1.EOF Then
+        EurDesta = DBLet(RS1.Fields(0).Value, "N")
+        EurRecol = DBLet(RS1.Fields(1).Value, "N")
+    End If
+
+    Set RS1 = Nothing
+
+    KilosNet = DBLet(Rs!KilosNet, "N")
+
+    '[Monica]14/10/2010: para picassent los kilos son los de transporte
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then KilosNet = DBLet(Rs!KilosTra, "N")
+
+
+    'recolecta socio
+    If DBLet(Rs!Recolect, "N") = 1 Then
+        SQL = "select sum(kilosnet) from rclasifica_clasif, rcalidad  where numnotac = " & DBSet(Rs!nunotac, "N")
+        SQL = SQL & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
+        SQL = SQL & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
+        SQL = SQL & " and rcalidad.gastosrec = 1"
+        
+        KilosTria = TotalRegistros(SQL)
+        
+        GasRecol = Round2(KilosTria * EurRecol, 2)
+        
+    Else
+    'recolecta cooperativa
+        If DBLet(Rs!tiporecol, "N") = 0 Then
+            'horas
+            'gastosrecol = horas * personas * rparam.(costeshora + costesegso)
+            GasRecol = Round2(HorasDecimal(DBLet(Rs!horastra, "N")) * CCur(DBLet(Rs!numtraba, "N")) * (vParamAplic.CosteHora + vParamAplic.CosteSegSo), 2)
+        Else
+            'destajo
+            GasRecol = Round2(KilosNet * EurDesta, 2)
+        End If
+    End If
+    
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then GasRecol = Round2(KilosNet * EurDesta, 2)
+    
+
+    PrecAcarreo = 0
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "rtarifatra", "preciokg", "codtarif", DBLet(Rs!Codtarif, "N"), "N")
+    If SQL <> "" Then
+        PrecAcarreo = CCur(SQL)
+    End If
+    
+    If vParamAplic.Cooperativa = 4 Then
+        SQL = "select sum(kilosnet) from rclasifica_clasif, rcalidad  where numnotac = " & DBSet(Rs!NumNotac, "N")
+        SQL = SQL & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
+        SQL = SQL & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
+        SQL = SQL & " and rcalidad.gastosrec = 1"
+        
+        KilosTria = TotalRegistros(SQL)
+        
+        If DBLet(Rs!trasnportadopor, "N") = 1 Then ' transportado por socio
+            GasAcarreo = Round2(PrecAcarreo * KilosTria, 2)
+        Else
+            GasAcarreo = Round2(PrecAcarreo * KilosNet, 2)
+        End If
+        ' cargamos los kilos de transporte
+        ' Text1(23).text = Format(KilosTria, "###,##0")
+    Else
+        GasAcarreo = Round2(PrecAcarreo * KilosNet, 2)
+    End If
+    
+'    Text1(16).Text = Format(GasRecol, "#,##0.00")
+'    Text1(15).Text = Format(GasAcarreo, "#,##0.00")
+    
+    SQL = "update rclasifica set imprecol = " & DBSet(GasRecol, "N") & ", impacarr = " & DBSet(GasAcarreo, "N")
+    If vParamAplic.Cooperativa = 4 Then
+        SQL = SQL & ", kilostrans = " & DBSet(KilosTria, "N")
+    End If
+    SQL = SQL & " where numnotac = " & DBSet(Rs!NumNotac, "N")
+    conn.Execute SQL
+
+End Sub
+
+
+
+
 
 
 Private Function ComprobarRegistro(cad As String) As Boolean
@@ -4187,7 +4327,9 @@ Dim Tabla As String
 Dim Observaciones As String
 Dim SqlEjec As String
 Dim SqlActualizar As String
-
+Dim i As Long
+Dim vAux As String
+Dim vNota As String
 Dim Mens As String
 
     On Error GoTo eComprobarRegistro
@@ -4227,11 +4369,24 @@ Dim Mens As String
     End If
     
     
-    
     'vemos si da error el sql a ejecutar y lo registramos
+    
     conn.Execute SqlEjec
     
+    
     If Mens = "" Then
+        '[Monica]31/10/2018: en el caso de que sea una entrada de clasificacion me las guardo para calcular los costes
+        If Tabla = "rclasifica" And Tipo = "I" Then
+            'Parte correspondiente a encontrar el numero de nota de la cadena de insert
+            i = InStr(1, SqlEjec, "values (")
+            If i > 0 Then
+                i = i + 8
+                vAux = Mid(SqlEjec, i)
+                vNota = RecuperaValorNew(vAux, ",", 1)
+                NotasParaGastos = NotasParaGastos & "," & vNota
+            End If
+        End If
+    
         SQL = "insert into comunica_rec (id,fechacreacion,usuariocreacion,tipo,tabla,sqlaejecutar,observaciones) values ("
         SQL = SQL & DBSet(Id, "N") & "," & DBSet(Fecha, "FH") & "," & DBSet(Usuario, "T") & "," & DBSet(Tipo, "T") & ","
         SQL = SQL & DBSet(Tabla, "T") & "," & DBSet(SqlEjec, "T") & "," & DBSet(Observaciones, "T") & ")"
