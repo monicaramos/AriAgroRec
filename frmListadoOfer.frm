@@ -17,6 +17,710 @@ Begin VB.Form frmListadoOfer
    ScaleWidth      =   10305
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameTipoSocio 
+      Caption         =   "Tipo Socio"
+      Height          =   615
+      Left            =   7080
+      TabIndex        =   68
+      Top             =   6120
+      Width           =   3705
+      Begin VB.OptionButton Option1 
+         Caption         =   "Contado"
+         Height          =   225
+         Index           =   0
+         Left            =   270
+         TabIndex        =   71
+         Top             =   240
+         Width           =   1005
+      End
+      Begin VB.OptionButton Option1 
+         Caption         =   "Efecto"
+         Height          =   225
+         Index           =   1
+         Left            =   1515
+         TabIndex        =   70
+         Top             =   240
+         Width           =   1005
+      End
+      Begin VB.OptionButton Option1 
+         Caption         =   "Todos"
+         Height          =   225
+         Index           =   2
+         Left            =   2760
+         TabIndex        =   69
+         Top             =   240
+         Width           =   885
+      End
+   End
+   Begin VB.Frame FrameEnvioMail 
+      Height          =   1215
+      Left            =   0
+      TabIndex        =   30
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   6615
+      Begin MSComctlLib.ProgressBar ProgressBar1 
+         Height          =   375
+         Left            =   360
+         TabIndex        =   31
+         Top             =   360
+         Width           =   5895
+         _ExtentX        =   10398
+         _ExtentY        =   661
+         _Version        =   393216
+         Appearance      =   1
+      End
+      Begin VB.Label Label14 
+         AutoSize        =   -1  'True
+         Caption         =   "Preparando datos envio"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   22
+         Left            =   360
+         TabIndex        =   32
+         Top             =   840
+         Width           =   5805
+      End
+   End
+   Begin MSComDlg.CommonDialog cd1 
+      Left            =   6435
+      Top             =   5985
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
+   End
+   Begin VB.Frame FrameEtiqProv 
+      Height          =   7155
+      Left            =   0
+      TabIndex        =   14
+      Top             =   30
+      Width           =   7035
+      Begin VB.CheckBox chkMail 
+         Caption         =   "Sin Fec.Revisión"
+         Height          =   345
+         Index           =   4
+         Left            =   3030
+         TabIndex        =   79
+         Top             =   2850
+         Width           =   1515
+      End
+      Begin VB.Frame Frame5 
+         BorderStyle     =   0  'None
+         Height          =   405
+         Left            =   480
+         TabIndex        =   75
+         Top             =   750
+         Width           =   6105
+         Begin VB.ComboBox Combo1 
+            Height          =   315
+            Index           =   0
+            Left            =   1260
+            Style           =   2  'Dropdown List
+            TabIndex        =   77
+            Tag             =   "Tipo|N|N|||straba|codsecci||N|"
+            Top             =   60
+            Width           =   1005
+         End
+         Begin VB.Image imgAyuda 
+            Height          =   240
+            Index           =   2
+            Left            =   2400
+            MousePointer    =   4  'Icon
+            Tag             =   "-1"
+            ToolTipText     =   "Ayuda"
+            Top             =   90
+            Width           =   240
+         End
+         Begin VB.Label Label9 
+            AutoSize        =   -1  'True
+            Caption         =   "Fase"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   11
+            Left            =   120
+            TabIndex        =   76
+            Top             =   30
+            Width           =   345
+         End
+      End
+      Begin VB.Frame Frame1 
+         BorderStyle     =   0  'None
+         Caption         =   "Frame1"
+         Height          =   375
+         Left            =   4980
+         TabIndex        =   73
+         Top             =   2880
+         Width           =   2025
+         Begin VB.Label Label1 
+            Caption         =   "Adjuntar Archivos"
+            Height          =   195
+            Left            =   60
+            TabIndex        =   74
+            Top             =   30
+            Width           =   1275
+         End
+         Begin VB.Image imgAyuda 
+            Height          =   240
+            Index           =   1
+            Left            =   1350
+            MousePointer    =   4  'Icon
+            Tag             =   "-1"
+            ToolTipText     =   "Ayuda"
+            Top             =   0
+            Width           =   240
+         End
+      End
+      Begin VB.CheckBox chkMail 
+         Caption         =   "Sólo con marca de Correo"
+         Height          =   345
+         Index           =   2
+         Left            =   570
+         TabIndex        =   38
+         Top             =   2850
+         Width           =   2145
+      End
+      Begin InetCtlsObjects.Inet Inet1 
+         Left            =   5760
+         Top             =   5580
+         _ExtentX        =   1005
+         _ExtentY        =   1005
+         _Version        =   393216
+      End
+      Begin VB.Frame Frame4 
+         Caption         =   "SMS"
+         Height          =   1965
+         Left            =   510
+         TabIndex        =   34
+         Top             =   4560
+         Width           =   6045
+         Begin VB.CheckBox Check3 
+            Caption         =   "Sólo sin eMail"
+            Height          =   345
+            Left            =   1980
+            TabIndex        =   37
+            Top             =   270
+            Value           =   1  'Checked
+            Width           =   1935
+         End
+         Begin VB.TextBox txtCodigo 
+            Height          =   945
+            Index           =   2
+            Left            =   210
+            MaxLength       =   150
+            TabIndex        =   11
+            Text            =   "Text1"
+            Top             =   870
+            Width           =   5505
+         End
+         Begin VB.CheckBox Check2 
+            Caption         =   "Con Remitente"
+            Height          =   345
+            Left            =   3540
+            TabIndex        =   9
+            Top             =   600
+            Value           =   1  'Checked
+            Visible         =   0   'False
+            Width           =   1935
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   1
+            Left            =   4710
+            MaxLength       =   10
+            TabIndex        =   10
+            Top             =   300
+            Width           =   1005
+         End
+         Begin VB.CheckBox Check1 
+            Caption         =   "Enviar Ahora"
+            Height          =   345
+            Left            =   240
+            TabIndex        =   8
+            Top             =   270
+            Width           =   1935
+         End
+         Begin VB.Label Label9 
+            AutoSize        =   -1  'True
+            Caption         =   "Texto"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   4
+            Left            =   240
+            TabIndex        =   36
+            Top             =   600
+            Width           =   420
+         End
+         Begin VB.Label Label9 
+            AutoSize        =   -1  'True
+            Caption         =   "Hora"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   3
+            Left            =   4140
+            TabIndex        =   35
+            Top             =   345
+            Width           =   345
+         End
+      End
+      Begin VB.TextBox txtCodigo 
+         Height          =   285
+         Index           =   62
+         Left            =   2040
+         MaxLength       =   50
+         TabIndex        =   3
+         Top             =   2520
+         Width           =   4515
+      End
+      Begin VB.CommandButton CmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   9
+         Left            =   5490
+         TabIndex        =   13
+         Top             =   6570
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdAceptarEtiqProv 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   4410
+         TabIndex        =   12
+         Top             =   6570
+         Width           =   975
+      End
+      Begin VB.Frame Frame2 
+         BorderStyle     =   0  'None
+         Height          =   3225
+         Left            =   360
+         TabIndex        =   24
+         Top             =   3270
+         Width           =   6255
+         Begin VB.CheckBox chkMail 
+            Caption         =   "Imprimir los que no tienen e-mail"
+            Height          =   285
+            Index           =   5
+            Left            =   3720
+            TabIndex        =   80
+            Top             =   990
+            Width           =   2685
+         End
+         Begin VB.CheckBox chkMail 
+            Caption         =   "Enviar SMS"
+            Height          =   315
+            Index           =   1
+            Left            =   3720
+            TabIndex        =   7
+            Top             =   720
+            Width           =   1935
+         End
+         Begin VB.CheckBox chkMail 
+            Caption         =   "Enviar por e-mail"
+            Height          =   345
+            Index           =   0
+            Left            =   3720
+            TabIndex        =   6
+            Top             =   450
+            Width           =   1935
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   0
+            Left            =   1380
+            MaxLength       =   10
+            TabIndex        =   5
+            Top             =   510
+            Width           =   1005
+         End
+         Begin VB.Frame Frame3 
+            Caption         =   "e-Mail"
+            Enabled         =   0   'False
+            Height          =   780
+            Left            =   180
+            TabIndex        =   27
+            Top             =   1350
+            Visible         =   0   'False
+            Width           =   1695
+            Begin VB.OptionButton OptMailAdm 
+               Caption         =   "Administración"
+               Height          =   255
+               Index           =   0
+               Left            =   120
+               TabIndex        =   29
+               Top             =   210
+               Value           =   -1  'True
+               Width           =   1335
+            End
+            Begin VB.OptionButton OptMailCom 
+               Caption         =   "Compras"
+               Height          =   255
+               Index           =   0
+               Left            =   120
+               TabIndex        =   28
+               Top             =   460
+               Width           =   1335
+            End
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   63
+            Left            =   2490
+            Locked          =   -1  'True
+            TabIndex        =   25
+            Text            =   "Text5"
+            Top             =   150
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   63
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   4
+            Top             =   165
+            Width           =   1005
+         End
+         Begin VB.Image imgFecha 
+            Height          =   240
+            Index           =   0
+            Left            =   1080
+            Picture         =   "frmListadoOfer.frx":000C
+            ToolTipText     =   "Buscar fecha"
+            Top             =   510
+            Width           =   240
+         End
+         Begin VB.Label Label9 
+            AutoSize        =   -1  'True
+            Caption         =   "Fecha"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   0
+            Left            =   240
+            TabIndex        =   33
+            Top             =   525
+            Width           =   435
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   39
+            Left            =   1080
+            ToolTipText     =   "Buscar carta"
+            Top             =   165
+            Width           =   240
+         End
+         Begin VB.Label Label9 
+            AutoSize        =   -1  'True
+            Caption         =   "Carta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   9
+            Left            =   240
+            TabIndex        =   26
+            Top             =   180
+            Width           =   405
+         End
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   60
+         Left            =   2850
+         Locked          =   -1  'True
+         TabIndex        =   20
+         Text            =   "Text5"
+         Top             =   1725
+         Width           =   3735
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   60
+         Left            =   1740
+         MaxLength       =   6
+         TabIndex        =   1
+         Top             =   1725
+         Width           =   1005
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   61
+         Left            =   2850
+         Locked          =   -1  'True
+         TabIndex        =   19
+         Text            =   "Text5"
+         Top             =   2070
+         Width           =   3735
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   61
+         Left            =   1740
+         MaxLength       =   6
+         TabIndex        =   2
+         Top             =   2070
+         Width           =   1005
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   58
+         Left            =   1740
+         MaxLength       =   6
+         TabIndex        =   0
+         Top             =   1260
+         Width           =   1005
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   58
+         Left            =   2850
+         Locked          =   -1  'True
+         TabIndex        =   15
+         Text            =   "Text5"
+         Top             =   1260
+         Width           =   3735
+      End
+      Begin VB.Image imgAyuda 
+         Height          =   255
+         Index           =   3
+         Left            =   4560
+         MousePointer    =   4  'Icon
+         Tag             =   "-1"
+         ToolTipText     =   "Ayuda"
+         Top             =   2880
+         Width           =   255
+      End
+      Begin VB.Label Label9 
+         AutoSize        =   -1  'True
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   10
+         Left            =   570
+         TabIndex        =   67
+         Top             =   6390
+         Width           =   3705
+      End
+      Begin VB.Image imgAyuda 
+         Height          =   255
+         Index           =   0
+         Left            =   2760
+         MousePointer    =   4  'Icon
+         Tag             =   "-1"
+         ToolTipText     =   "Ayuda"
+         Top             =   2880
+         Width           =   255
+      End
+      Begin VB.Label Label9 
+         AutoSize        =   -1  'True
+         Caption         =   "A la atención de:"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   8
+         Left            =   600
+         TabIndex        =   18
+         Top             =   2520
+         Width           =   1215
+      End
+      Begin VB.Label Label9 
+         AutoSize        =   -1  'True
+         Caption         =   "Socio"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   5
+         Left            =   600
+         TabIndex        =   23
+         Top             =   1485
+         Width           =   375
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   37
+         Left            =   1440
+         ToolTipText     =   "Buscar socio"
+         Top             =   1725
+         Width           =   240
+      End
+      Begin VB.Label Label9 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   6
+         Left            =   960
+         TabIndex        =   22
+         Top             =   1725
+         Width           =   450
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   38
+         Left            =   1440
+         ToolTipText     =   "Buscar socio"
+         Top             =   2070
+         Width           =   240
+      End
+      Begin VB.Label Label9 
+         AutoSize        =   -1  'True
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   7
+         Left            =   960
+         TabIndex        =   21
+         Top             =   2070
+         Width           =   420
+      End
+      Begin VB.Label Label9 
+         AutoSize        =   -1  'True
+         Caption         =   "Sección"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   2
+         Left            =   600
+         TabIndex        =   17
+         Top             =   1155
+         Width           =   540
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   35
+         Left            =   1440
+         ToolTipText     =   "Buscar sección"
+         Top             =   1260
+         Width           =   240
+      End
+      Begin VB.Label Label9 
+         Caption         =   "Etiquetas Socios"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   1
+         Left            =   600
+         TabIndex        =   16
+         Top             =   270
+         Width           =   2460
+      End
+   End
    Begin VB.Frame FrameEnvioDatosComunica 
       Height          =   6420
       Left            =   90
@@ -98,7 +802,7 @@ Begin VB.Form frmListadoOfer
                Height          =   240
                Index           =   2
                Left            =   1155
-               Picture         =   "frmListadoOfer.frx":000C
+               Picture         =   "frmListadoOfer.frx":0097
                Top             =   900
                Width           =   240
             End
@@ -106,7 +810,7 @@ Begin VB.Form frmListadoOfer
                Height          =   240
                Index           =   1
                Left            =   1155
-               Picture         =   "frmListadoOfer.frx":0097
+               Picture         =   "frmListadoOfer.frx":0122
                Top             =   465
                Width           =   240
             End
@@ -218,7 +922,7 @@ Begin VB.Form frmListadoOfer
                Height          =   240
                Index           =   3
                Left            =   1170
-               Picture         =   "frmListadoOfer.frx":0122
+               Picture         =   "frmListadoOfer.frx":01AD
                Top             =   450
                Width           =   240
             End
@@ -226,7 +930,7 @@ Begin VB.Form frmListadoOfer
                Height          =   240
                Index           =   4
                Left            =   1170
-               Picture         =   "frmListadoOfer.frx":01AD
+               Picture         =   "frmListadoOfer.frx":0238
                Top             =   915
                Width           =   240
             End
@@ -729,7 +1433,7 @@ Begin VB.Form frmListadoOfer
          Left            =   5640
          MultiLine       =   -1  'True
          TabIndex        =   51
-         Text            =   "frmListadoOfer.frx":0238
+         Text            =   "frmListadoOfer.frx":02C3
          Top             =   3480
          Width           =   4335
       End
@@ -762,9 +1466,9 @@ Begin VB.Form frmListadoOfer
          EndProperty
          Height          =   870
          Index           =   1000
-         ItemData        =   "frmListadoOfer.frx":023E
+         ItemData        =   "frmListadoOfer.frx":02C9
          Left            =   1545
-         List            =   "frmListadoOfer.frx":0240
+         List            =   "frmListadoOfer.frx":02CB
          Style           =   1  'Checkbox
          TabIndex        =   48
          Top             =   4215
@@ -774,7 +1478,7 @@ Begin VB.Form frmListadoOfer
          Height          =   240
          Index           =   0
          Left            =   4680
-         Picture         =   "frmListadoOfer.frx":0242
+         Picture         =   "frmListadoOfer.frx":02CD
          Top             =   3960
          Width           =   240
       End
@@ -782,7 +1486,7 @@ Begin VB.Form frmListadoOfer
          Height          =   240
          Index           =   1
          Left            =   5040
-         Picture         =   "frmListadoOfer.frx":038C
+         Picture         =   "frmListadoOfer.frx":0417
          Top             =   3960
          Width           =   240
       End
@@ -906,7 +1610,7 @@ Begin VB.Form frmListadoOfer
          Height          =   240
          Index           =   33
          Left            =   1260
-         Picture         =   "frmListadoOfer.frx":04D6
+         Picture         =   "frmListadoOfer.frx":0561
          Top             =   2670
          Width           =   240
       End
@@ -914,7 +1618,7 @@ Begin VB.Form frmListadoOfer
          Height          =   240
          Index           =   34
          Left            =   3780
-         Picture         =   "frmListadoOfer.frx":0561
+         Picture         =   "frmListadoOfer.frx":05EC
          Top             =   2670
          Width           =   240
       End
@@ -1070,710 +1774,6 @@ Begin VB.Form frmListadoOfer
          Width           =   810
       End
    End
-   Begin VB.Frame FrameTipoSocio 
-      Caption         =   "Tipo Socio"
-      Height          =   615
-      Left            =   7080
-      TabIndex        =   68
-      Top             =   6120
-      Width           =   3705
-      Begin VB.OptionButton Option1 
-         Caption         =   "Contado"
-         Height          =   225
-         Index           =   0
-         Left            =   270
-         TabIndex        =   71
-         Top             =   240
-         Width           =   1005
-      End
-      Begin VB.OptionButton Option1 
-         Caption         =   "Efecto"
-         Height          =   225
-         Index           =   1
-         Left            =   1515
-         TabIndex        =   70
-         Top             =   240
-         Width           =   1005
-      End
-      Begin VB.OptionButton Option1 
-         Caption         =   "Todos"
-         Height          =   225
-         Index           =   2
-         Left            =   2760
-         TabIndex        =   69
-         Top             =   240
-         Width           =   885
-      End
-   End
-   Begin VB.Frame FrameEnvioMail 
-      Height          =   1215
-      Left            =   0
-      TabIndex        =   30
-      Top             =   0
-      Visible         =   0   'False
-      Width           =   6615
-      Begin MSComctlLib.ProgressBar ProgressBar1 
-         Height          =   375
-         Left            =   360
-         TabIndex        =   31
-         Top             =   360
-         Width           =   5895
-         _ExtentX        =   10398
-         _ExtentY        =   661
-         _Version        =   393216
-         Appearance      =   1
-      End
-      Begin VB.Label Label14 
-         AutoSize        =   -1  'True
-         Caption         =   "Preparando datos envio"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   22
-         Left            =   360
-         TabIndex        =   32
-         Top             =   840
-         Width           =   5805
-      End
-   End
-   Begin MSComDlg.CommonDialog cd1 
-      Left            =   6435
-      Top             =   5985
-      _ExtentX        =   847
-      _ExtentY        =   847
-      _Version        =   393216
-   End
-   Begin VB.Frame FrameEtiqProv 
-      Height          =   7155
-      Left            =   0
-      TabIndex        =   14
-      Top             =   30
-      Width           =   7035
-      Begin VB.CheckBox chkMail 
-         Caption         =   "Sin Fec.Revisión"
-         Height          =   345
-         Index           =   4
-         Left            =   3030
-         TabIndex        =   79
-         Top             =   2850
-         Width           =   1515
-      End
-      Begin VB.Frame Frame5 
-         BorderStyle     =   0  'None
-         Height          =   405
-         Left            =   480
-         TabIndex        =   75
-         Top             =   750
-         Width           =   6105
-         Begin VB.ComboBox Combo1 
-            Height          =   315
-            Index           =   0
-            Left            =   1260
-            Style           =   2  'Dropdown List
-            TabIndex        =   77
-            Tag             =   "Tipo|N|N|||straba|codsecci||N|"
-            Top             =   60
-            Width           =   1005
-         End
-         Begin VB.Image imgAyuda 
-            Height          =   240
-            Index           =   2
-            Left            =   2400
-            MousePointer    =   4  'Icon
-            Tag             =   "-1"
-            ToolTipText     =   "Ayuda"
-            Top             =   90
-            Width           =   240
-         End
-         Begin VB.Label Label9 
-            AutoSize        =   -1  'True
-            Caption         =   "Fase"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   11
-            Left            =   120
-            TabIndex        =   76
-            Top             =   30
-            Width           =   345
-         End
-      End
-      Begin VB.Frame Frame1 
-         BorderStyle     =   0  'None
-         Caption         =   "Frame1"
-         Height          =   375
-         Left            =   4980
-         TabIndex        =   73
-         Top             =   2880
-         Width           =   2025
-         Begin VB.Label Label1 
-            Caption         =   "Adjuntar Archivos"
-            Height          =   195
-            Left            =   60
-            TabIndex        =   74
-            Top             =   30
-            Width           =   1275
-         End
-         Begin VB.Image imgAyuda 
-            Height          =   240
-            Index           =   1
-            Left            =   1350
-            MousePointer    =   4  'Icon
-            Tag             =   "-1"
-            ToolTipText     =   "Ayuda"
-            Top             =   0
-            Width           =   240
-         End
-      End
-      Begin VB.CheckBox chkMail 
-         Caption         =   "Sólo con marca de Correo"
-         Height          =   345
-         Index           =   2
-         Left            =   570
-         TabIndex        =   38
-         Top             =   2850
-         Width           =   2145
-      End
-      Begin InetCtlsObjects.Inet Inet1 
-         Left            =   5760
-         Top             =   5580
-         _ExtentX        =   1005
-         _ExtentY        =   1005
-         _Version        =   393216
-      End
-      Begin VB.Frame Frame4 
-         Caption         =   "SMS"
-         Height          =   1965
-         Left            =   510
-         TabIndex        =   34
-         Top             =   4560
-         Width           =   6045
-         Begin VB.CheckBox Check3 
-            Caption         =   "Sólo sin eMail"
-            Height          =   345
-            Left            =   1980
-            TabIndex        =   37
-            Top             =   270
-            Value           =   1  'Checked
-            Width           =   1935
-         End
-         Begin VB.TextBox txtCodigo 
-            Height          =   945
-            Index           =   2
-            Left            =   210
-            MaxLength       =   150
-            TabIndex        =   11
-            Text            =   "Text1"
-            Top             =   870
-            Width           =   5505
-         End
-         Begin VB.CheckBox Check2 
-            Caption         =   "Con Remitente"
-            Height          =   345
-            Left            =   3540
-            TabIndex        =   9
-            Top             =   600
-            Value           =   1  'Checked
-            Visible         =   0   'False
-            Width           =   1935
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   1
-            Left            =   4710
-            MaxLength       =   10
-            TabIndex        =   10
-            Top             =   300
-            Width           =   1005
-         End
-         Begin VB.CheckBox Check1 
-            Caption         =   "Enviar Ahora"
-            Height          =   345
-            Left            =   240
-            TabIndex        =   8
-            Top             =   270
-            Width           =   1935
-         End
-         Begin VB.Label Label9 
-            AutoSize        =   -1  'True
-            Caption         =   "Texto"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   4
-            Left            =   240
-            TabIndex        =   36
-            Top             =   600
-            Width           =   420
-         End
-         Begin VB.Label Label9 
-            AutoSize        =   -1  'True
-            Caption         =   "Hora"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   3
-            Left            =   4140
-            TabIndex        =   35
-            Top             =   345
-            Width           =   345
-         End
-      End
-      Begin VB.TextBox txtCodigo 
-         Height          =   285
-         Index           =   62
-         Left            =   2040
-         MaxLength       =   50
-         TabIndex        =   3
-         Top             =   2520
-         Width           =   4515
-      End
-      Begin VB.CommandButton CmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   9
-         Left            =   5490
-         TabIndex        =   13
-         Top             =   6570
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdAceptarEtiqProv 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   4410
-         TabIndex        =   12
-         Top             =   6570
-         Width           =   975
-      End
-      Begin VB.Frame Frame2 
-         BorderStyle     =   0  'None
-         Height          =   3225
-         Left            =   360
-         TabIndex        =   24
-         Top             =   3270
-         Width           =   6255
-         Begin VB.CheckBox chkMail 
-            Caption         =   "Imprimir los que no tienen e-mail"
-            Height          =   285
-            Index           =   5
-            Left            =   3720
-            TabIndex        =   80
-            Top             =   990
-            Width           =   2685
-         End
-         Begin VB.CheckBox chkMail 
-            Caption         =   "Enviar SMS"
-            Height          =   315
-            Index           =   1
-            Left            =   3720
-            TabIndex        =   7
-            Top             =   720
-            Width           =   1935
-         End
-         Begin VB.CheckBox chkMail 
-            Caption         =   "Enviar por e-mail"
-            Height          =   345
-            Index           =   0
-            Left            =   3720
-            TabIndex        =   6
-            Top             =   450
-            Width           =   1935
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   0
-            Left            =   1380
-            MaxLength       =   10
-            TabIndex        =   5
-            Top             =   510
-            Width           =   1005
-         End
-         Begin VB.Frame Frame3 
-            Caption         =   "e-Mail"
-            Enabled         =   0   'False
-            Height          =   780
-            Left            =   180
-            TabIndex        =   27
-            Top             =   1350
-            Visible         =   0   'False
-            Width           =   1695
-            Begin VB.OptionButton OptMailAdm 
-               Caption         =   "Administración"
-               Height          =   255
-               Index           =   0
-               Left            =   120
-               TabIndex        =   29
-               Top             =   210
-               Value           =   -1  'True
-               Width           =   1335
-            End
-            Begin VB.OptionButton OptMailCom 
-               Caption         =   "Compras"
-               Height          =   255
-               Index           =   0
-               Left            =   120
-               TabIndex        =   28
-               Top             =   460
-               Width           =   1335
-            End
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   63
-            Left            =   2490
-            Locked          =   -1  'True
-            TabIndex        =   25
-            Text            =   "Text5"
-            Top             =   150
-            Width           =   3735
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   63
-            Left            =   1380
-            MaxLength       =   6
-            TabIndex        =   4
-            Top             =   165
-            Width           =   1005
-         End
-         Begin VB.Image imgFecha 
-            Height          =   240
-            Index           =   0
-            Left            =   1080
-            Picture         =   "frmListadoOfer.frx":05EC
-            ToolTipText     =   "Buscar fecha"
-            Top             =   510
-            Width           =   240
-         End
-         Begin VB.Label Label9 
-            AutoSize        =   -1  'True
-            Caption         =   "Fecha"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   0
-            Left            =   240
-            TabIndex        =   33
-            Top             =   525
-            Width           =   435
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   39
-            Left            =   1080
-            ToolTipText     =   "Buscar carta"
-            Top             =   165
-            Width           =   240
-         End
-         Begin VB.Label Label9 
-            AutoSize        =   -1  'True
-            Caption         =   "Carta"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   9
-            Left            =   240
-            TabIndex        =   26
-            Top             =   180
-            Width           =   405
-         End
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   60
-         Left            =   2850
-         Locked          =   -1  'True
-         TabIndex        =   20
-         Text            =   "Text5"
-         Top             =   1725
-         Width           =   3735
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   60
-         Left            =   1740
-         MaxLength       =   6
-         TabIndex        =   1
-         Top             =   1725
-         Width           =   1005
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   61
-         Left            =   2850
-         Locked          =   -1  'True
-         TabIndex        =   19
-         Text            =   "Text5"
-         Top             =   2070
-         Width           =   3735
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   61
-         Left            =   1740
-         MaxLength       =   6
-         TabIndex        =   2
-         Top             =   2070
-         Width           =   1005
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   58
-         Left            =   1740
-         MaxLength       =   6
-         TabIndex        =   0
-         Top             =   1260
-         Width           =   1005
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Height          =   285
-         Index           =   58
-         Left            =   2850
-         Locked          =   -1  'True
-         TabIndex        =   15
-         Text            =   "Text5"
-         Top             =   1260
-         Width           =   3735
-      End
-      Begin VB.Image imgAyuda 
-         Height          =   255
-         Index           =   3
-         Left            =   4560
-         MousePointer    =   4  'Icon
-         Tag             =   "-1"
-         ToolTipText     =   "Ayuda"
-         Top             =   2880
-         Width           =   255
-      End
-      Begin VB.Label Label9 
-         AutoSize        =   -1  'True
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   10
-         Left            =   570
-         TabIndex        =   67
-         Top             =   6390
-         Width           =   3705
-      End
-      Begin VB.Image imgAyuda 
-         Height          =   255
-         Index           =   0
-         Left            =   2760
-         MousePointer    =   4  'Icon
-         Tag             =   "-1"
-         ToolTipText     =   "Ayuda"
-         Top             =   2880
-         Width           =   255
-      End
-      Begin VB.Label Label9 
-         AutoSize        =   -1  'True
-         Caption         =   "A la atención de:"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   8
-         Left            =   600
-         TabIndex        =   18
-         Top             =   2520
-         Width           =   1215
-      End
-      Begin VB.Label Label9 
-         AutoSize        =   -1  'True
-         Caption         =   "Socio"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   5
-         Left            =   600
-         TabIndex        =   23
-         Top             =   1485
-         Width           =   375
-      End
-      Begin VB.Image imgBuscarOfer 
-         Height          =   240
-         Index           =   37
-         Left            =   1440
-         ToolTipText     =   "Buscar socio"
-         Top             =   1725
-         Width           =   240
-      End
-      Begin VB.Label Label9 
-         AutoSize        =   -1  'True
-         Caption         =   "Desde"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   6
-         Left            =   960
-         TabIndex        =   22
-         Top             =   1725
-         Width           =   450
-      End
-      Begin VB.Image imgBuscarOfer 
-         Height          =   240
-         Index           =   38
-         Left            =   1440
-         ToolTipText     =   "Buscar socio"
-         Top             =   2070
-         Width           =   240
-      End
-      Begin VB.Label Label9 
-         AutoSize        =   -1  'True
-         Caption         =   "Hasta"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   7
-         Left            =   960
-         TabIndex        =   21
-         Top             =   2070
-         Width           =   420
-      End
-      Begin VB.Label Label9 
-         AutoSize        =   -1  'True
-         Caption         =   "Sección"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   2
-         Left            =   600
-         TabIndex        =   17
-         Top             =   1155
-         Width           =   540
-      End
-      Begin VB.Image imgBuscarOfer 
-         Height          =   240
-         Index           =   35
-         Left            =   1440
-         ToolTipText     =   "Buscar sección"
-         Top             =   1260
-         Width           =   240
-      End
-      Begin VB.Label Label9 
-         Caption         =   "Etiquetas Socios"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Index           =   1
-         Left            =   600
-         TabIndex        =   16
-         Top             =   270
-         Width           =   2460
-      End
-   End
 End
 Attribute VB_Name = "frmListadoOfer"
 Attribute VB_GlobalNameSpace = False
@@ -1784,7 +1784,7 @@ Option Explicit
 
 Public Event DatoSeleccionado(CadenaSeleccion As String)
 
-Public OpcionListado As Integer
+Public Opcionlistado As Integer
     '(ver opciones en frmListado)
         
         
@@ -1829,9 +1829,9 @@ Attribute frmMen3.VB_VarHelpID = -1
 
 '----- Variables para el INforme ----
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private CadParam As String 'cadena con los parametros q se pasan a Crystal R.
+Private cadParam As String 'cadena con los parametros q se pasan a Crystal R.
 Private numParam As Byte
-Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadselect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private Titulo As String 'Titulo informe que se pasa a frmImprimir
 Private nomRPT As String 'nombre del fichero .rpt a imprimir
 Private conSubRPT As Boolean 'si tiene subinformes para enlazarlos a las tablas correctas
@@ -1885,10 +1885,10 @@ Private Sub CmdAceptarComunica_Click()
 Dim v_cadena As String
 Dim FrmEM As frmEMail
 Dim cadTabla As String
-Dim SQL As String
+Dim Sql As String
 Dim cadTitulo As String
 Dim cadNombreRPT As String
-Dim B As Boolean
+Dim b As Boolean
 
     If Option2(0) Then
         If Me.ChkEntradas.Value Then
@@ -1935,7 +1935,7 @@ Dim B As Boolean
             InicializarTabla
                 '========= PARAMETROS  =============================
             'Añadir el parametro de Empresa
-            CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+            cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
             numParam = numParam + 1
 
             'Si estamos importando y hay entradas modificadas preguntamos si quieren seguir
@@ -1943,9 +1943,9 @@ Dim B As Boolean
                 cadTabla = "tmpinformes"
                 cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
 
-                SQL = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
+                Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
 
-                If TotalRegistros(SQL) <> 0 Then
+                If TotalRegistros(Sql) <> 0 Then
                     Titulo = "Entradas comunicadas modificadas"
                     cadNombreRPT = "rErroresTrasDatosCoop.rpt"
                     
@@ -1964,9 +1964,9 @@ Dim B As Boolean
                 cadTabla = "tmpinformes"
                 cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
 
-                SQL = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
+                Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
 
-                If TotalRegistros(SQL) <> 0 Then
+                If TotalRegistros(Sql) <> 0 Then
                     conn.RollbackTrans
                 
                     MsgBox "Hay errores en el Traspaso de Datos. Debe corregirlos previamente.", vbExclamation
@@ -2004,7 +2004,7 @@ Dim T1 As Single
     'Fase 2: Preparar carpetas para los pdf
     'Fase 3: Generar para cada factura (una a una) del select su pdf
     'Fase 4: Enviar por mail, adjuntando los archivos correspondientes
-    If OpcionListado = 315 Then
+    If Opcionlistado = 315 Then
         If Text1(0).Text = "" Then
             MsgBox "Ponga el asunto", vbExclamation
             Exit Sub
@@ -2026,13 +2026,13 @@ Dim T1 As Single
     
     'AHora pongo los tipo de facturas
     cadFormula = ""
-    cadSelect = ""  'ME dira si estan todas o no
+    cadselect = ""  'ME dira si estan todas o no
     For indCodigo = 0 To Me.ListTipoMov(1000).ListCount - 1
         If Me.ListTipoMov(1000).Selected(indCodigo) Then
             'Esta checkeado
             cadFormula = cadFormula & " OR rfactsoc.codtipom = '" & Trim(Mid(ListTipoMov(1000).List(indCodigo), 1, 3)) & "'"
         Else
-            cadSelect = "NO"
+            cadselect = "NO"
         End If
     Next indCodigo
     
@@ -2051,7 +2051,7 @@ Dim T1 As Single
     '--------------------------------------------
     InicializarVbles
     cadFormula = ""
-    cadSelect = ""
+    cadselect = ""
     
 '    'Cadena para seleccion D/H Letra Serie
 '    '--------------------------------------------
@@ -2087,18 +2087,18 @@ Dim T1 As Single
     'Eliminamos temporales
     conn.Execute "DELETE from tmpinformes where codusu =" & vUsu.Codigo
     
-    If cadSelect <> "" Then cadSelect = cadSelect & " AND "
-    cadSelect = cadSelect & NomTabla
-    cadSelect = " WHERE " & cadSelect
+    If cadselect <> "" Then cadselect = cadselect & " AND "
+    cadselect = cadselect & NomTabla
+    cadselect = " WHERE " & cadselect
 
     
     Set Rs = New ADODB.Recordset
     DoEvents
         
-    If OpcionListado = 316 Then
+    If Opcionlistado = 316 Then
         If Me.Check4.Value = 0 Then
-            If cadSelect <> "" Then cadSelect = cadSelect & " AND "
-            cadSelect = cadSelect & " (rfactsoc.enfacturae = 0 )"
+            If cadselect <> "" Then cadselect = cadselect & " AND "
+            cadselect = cadselect & " (rfactsoc.enfacturae = 0 )"
         End If
     End If
         
@@ -2114,7 +2114,7 @@ Dim T1 As Single
     'Vamos a meter todas las facturas en la tabla temporal para comprobar si tienen mail
     'los clientes
     
-    NomTabla = "Select codtipom,numfactu,codsocio,fecfactu,totalfac,esliqcomplem from rfactsoc  " & cadSelect
+    NomTabla = "Select codtipom,numfactu,codsocio,fecfactu,totalfac,esliqcomplem from rfactsoc  " & cadselect
     'El orden vamos a hacerlo por: Tipo documento
     NomTabla = NomTabla & " ORDER BY codtipom, numfactu, fecfactu "
     Rs.Open NomTabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -2130,7 +2130,7 @@ Dim T1 As Single
     
     
     If NumRegElim = 0 Then
-        If OpcionListado = 316 Then
+        If Opcionlistado = 316 Then
             MsgBox "Ningúna factura para traspasar a FacturaE", vbExclamation
         Else
             MsgBox "Ningun dato a enviar por mail", vbExclamation
@@ -2143,15 +2143,15 @@ Dim T1 As Single
     NomTabla = NumRegElim
     
     
-    If OpcionListado = 315 Then
+    If Opcionlistado = 315 Then
         
         'AHora ya tengo todos los datos de las facturas que voy  a imprimir
         
-        cadSelect = "Select codsocio,maisocio "
-        cadSelect = cadSelect & " as email from tmpinformes,rsocios where codusu = " & vUsu.Codigo & " and codsocio=codigo1"
-        cadSelect = cadSelect & " and (maisocio is null or maisocio = '') "
-        cadSelect = cadSelect & " group by codsocio "
-        Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        cadselect = "Select codsocio,maisocio "
+        cadselect = cadselect & " as email from tmpinformes,rsocios where codusu = " & vUsu.Codigo & " and codsocio=codigo1"
+        cadselect = cadselect & " and (maisocio is null or maisocio = '') "
+        cadselect = cadselect & " group by codsocio "
+        Rs.Open cadselect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         NumRegElim = 0
         While Not Rs.EOF
             NumRegElim = NumRegElim + 1
@@ -2166,17 +2166,17 @@ Dim T1 As Single
             End If
                 
             'Si no salimos borramos
-            Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            cadSelect = "DELETE from tmpinformes where codusu =" & vUsu.Codigo & " and codigo1 ="
+            Rs.Open cadselect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            cadselect = "DELETE from tmpinformes where codusu =" & vUsu.Codigo & " and codigo1 ="
             While Not Rs.EOF
-                conn.Execute cadSelect & Rs!Codsocio
+                conn.Execute cadselect & Rs!Codsocio
                 Rs.MoveNext
             Wend
             Rs.Close
             
             
-            cadSelect = "Select count(*) from tmpinformes where codusu =" & vUsu.Codigo
-            Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            cadselect = "Select count(*) from tmpinformes where codusu =" & vUsu.Codigo
+            Rs.Open cadselect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             NumRegElim = 0
             If Not Rs.EOF Then
                 If Not IsNull(Rs.Fields(0)) Then NumRegElim = DBLet(Rs.Fields(0), "N")
@@ -2191,8 +2191,8 @@ Dim T1 As Single
                 MsgBox "No hay datos para enviar por mail", vbExclamation
                 Exit Sub
             Else
-                cadSelect = "Hay " & NumRegElim & " facturas para enviar por mail." & vbCrLf & "¿Continuar?"
-                If MsgBox(cadSelect, vbQuestion + vbYesNo) = vbNo Then NumRegElim = 0
+                cadselect = "Hay " & NumRegElim & " facturas para enviar por mail." & vbCrLf & "¿Continuar?"
+                If MsgBox(cadselect, vbQuestion + vbYesNo) = vbNo Then NumRegElim = 0
             End If
             If NumRegElim = 0 Then
                 Set Rs = Nothing
@@ -2219,8 +2219,8 @@ Dim T1 As Single
         End If
         
     Else
-        cadSelect = "Hay " & NumRegElim & " facturas para integrar con facturaE." & vbCrLf & "¿Continuar?"
-        If MsgBox(cadSelect, vbQuestion + vbYesNo) = vbNo Then
+        cadselect = "Hay " & NumRegElim & " facturas para integrar con facturaE." & vbCrLf & "¿Continuar?"
+        If MsgBox(cadselect, vbQuestion + vbYesNo) = vbNo Then
             Screen.MousePointer = vbDefault
             Exit Sub
         End If
@@ -2262,9 +2262,9 @@ Dim T1 As Single
     
     'Si ha ido todo bien entonces numregelim=1
     If NumRegElim = 1 Then
-        If OpcionListado = 315 Then
-            cadSelect = "Select nomsocio, maisocio"
-            cadSelect = cadSelect & " as email,tmpinformes.* from tmpinformes,rsocios where codusu = " & vUsu.Codigo & " and codsocio=codigo1"
+        If Opcionlistado = 315 Then
+            cadselect = "Select nomsocio, maisocio"
+            cadselect = cadselect & " as email,tmpinformes.* from tmpinformes,rsocios where codusu = " & vUsu.Codigo & " and codsocio=codigo1"
     '        cadSelect = cadSelect & " group by codclien having email is null"
     
             '[Monica]31/01/2014: esperamos en catadau, antes de abrir la ventana del frmEmail
@@ -2279,7 +2279,7 @@ Dim T1 As Single
             End If
     
             
-            frmEMail.DatosEnvio = Text1(0).Text & "|" & Text1(1).Text & "|" & Abs(0) & "|" & cadSelect & "|"
+            frmEMail.DatosEnvio = Text1(0).Text & "|" & Text1(1).Text & "|" & Abs(0) & "|" & cadselect & "|"
             frmEMail.Opcion = 4 'Multienvio de facturacion
             frmEMail.Show vbModal
             
@@ -2330,7 +2330,7 @@ Dim vCadena As String
                       "documento únicamente a los socios que tengan marcada la casilla " & vbCrLf & _
                       "'Correo' de su ficha. " & vbCrLf
                       
-            If OpcionListado = 306 Then
+            If Opcionlistado = 306 Then
                       vCadena = vCadena & vbCrLf & "No tendrá ningún efecto en el caso de que estemos mandando un sms. " & vbCrLf
             End If
             
@@ -2341,7 +2341,7 @@ Dim vCadena As String
                       "En la descripción de la carta debe poner el Asunto. " & vbCrLf & _
                       vbCrLf
                       
-            If OpcionListado = 306 Then
+            If Opcionlistado = 306 Then
                       vCadena = vCadena & "Si se envia a través de SMS no adjuntará ningún archivo. " & vbCrLf & vbCrLf
                       vCadena = vCadena & "Es aconsejable enviar en formato PDF."
             End If
@@ -2354,7 +2354,7 @@ Dim vCadena As String
                       "socios que estén en la fase indicada." & vbCrLf & _
                       vbCrLf
                       
-            If OpcionListado = 306 Then
+            If Opcionlistado = 306 Then
                       vCadena = vCadena & "Si se envia a través de SMS no adjuntará ningún archivo. " & vbCrLf & vbCrLf
                       vCadena = vCadena & "Es aconsejable enviar en formato PDF."
             End If
@@ -2381,7 +2381,7 @@ Private Sub cmdAceptarEtiqProv_Click()
 '305: Listado para etiquetas de proveedor
 '306: Listado para cartas a proveedor
 Dim campo As String
-Dim Tabla As String
+Dim tabla As String
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 
@@ -2395,7 +2395,7 @@ Dim Situacion As String
     
     'si es listado de CARTAS/eMAIL a socios comprobar que se ha seleccionado
     'una carta para imprimir
-    If OpcionListado = 306 Then
+    If Opcionlistado = 306 Then
         If chkMail(1).Value = 1 Then
             ' si estamos mandando un SMS no es obligado meter un codigo de carta
         Else
@@ -2406,11 +2406,11 @@ Dim Situacion As String
         End If
         
         'Parametro cod. carta
-        CadParam = "|pCodCarta= " & txtCodigo(63).Text & "|"
+        cadParam = "|pCodCarta= " & txtCodigo(63).Text & "|"
         numParam = numParam + 1
         
         'Parametro fecha
-        CadParam = CadParam & "|pFecha= """ & txtCodigo(0).Text & """|"
+        cadParam = cadParam & "|pFecha= """ & txtCodigo(0).Text & """|"
         numParam = numParam + 1
         
         'Nombre fichero .rpt a Imprimir
@@ -2418,7 +2418,7 @@ Dim Situacion As String
         Titulo = "Cartas a Socios" '"Cartas a Proveedores"
         
         indRPT = 61 'Personalizacion de la carta a socios
-        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
           
         '[Monica]19/10/2012: nueva variable para indicar que se pasa por visreport o no ImpresionNormal
         ImpresionNormal = True
@@ -2443,7 +2443,7 @@ Dim Situacion As String
         conSubRPT = True
         
     Else 'ETIQUETAS
-        CadParam = "|"
+        cadParam = "|"
     
         'Nombre fichero .rpt a Imprimir
         nomRPT = "rSocioEtiq.rpt" '"rComProveEtiq.rpt"
@@ -2452,7 +2452,7 @@ Dim Situacion As String
         '===================================================
         '============ PARAMETROS ===========================
         indRPT = 27 'Impresion de Etiquetas de socios
-        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
           
         'Nombre fichero .rpt a Imprimir
         nomRPT = nomDocu
@@ -2475,7 +2475,7 @@ Dim Situacion As String
         
         If txtCodigo(58).Text <> "" Then
             ' solo se sacan los socios que no esten dados de baja
-            If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & txtCodigo(58).Text) Then Exit Sub
+            If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & txtCodigo(58).Text) Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & txtCodigo(58).Text) Then Exit Sub
         End If
         
@@ -2491,7 +2491,7 @@ Dim Situacion As String
         '====================================================
             
         ' solo se sacan los socios que no esten dados de baja
-        If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.fecbaja} is null ") Then Exit Sub
+        If Not AnyadirAFormula(cadselect, "{rsocios_seccion.fecbaja} is null ") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "isnull({rsocios_seccion.fecbaja})") Then Exit Sub
 
     Else
@@ -2499,7 +2499,7 @@ Dim Situacion As String
         '                    si me dan la seccion funciona como el resto de cooperativas
         If ComprobarCero(txtCodigo(58).Text) <> 0 Then
             ' solo se sacan los socios que no esten dados de baja
-            If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & txtCodigo(58).Text) Then Exit Sub
+            If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & txtCodigo(58).Text) Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & txtCodigo(58).Text) Then Exit Sub
             
             'Cadena para seleccion D/H Socio
@@ -2513,14 +2513,14 @@ Dim Situacion As String
             '====================================================
                 
             ' solo se sacan los socios que no esten dados de baja
-            If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.fecbaja} is null ") Then Exit Sub
+            If Not AnyadirAFormula(cadselect, "{rsocios_seccion.fecbaja} is null ") Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "isnull({rsocios_seccion.fecbaja})") Then Exit Sub
             
         Else
             '[Monica]13/09/2016: antes un select case
             If Combo1(0).ItemData(Combo1(0).ListIndex) <> 0 Then
                 ' solo se sacan los socios de la fase que sea
-                If Not AnyadirAFormula(cadSelect, "{rsocios_pozos.numfases} = " & Combo1(0).ItemData(Combo1(0).ListIndex)) Then Exit Sub
+                If Not AnyadirAFormula(cadselect, "{rsocios_pozos.numfases} = " & Combo1(0).ItemData(Combo1(0).ListIndex)) Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rsocios_pozos.numfases} = " & Combo1(0).ItemData(Combo1(0).ListIndex)) Then Exit Sub
             End If
             
@@ -2541,16 +2541,16 @@ Dim Situacion As String
 
     '[Monica]11/11/2011: añadimos los socios que esten dados de baja en todas las secciones
     ' solo se sacan los socios que no esten dados de baja
-    If Not AnyadirAFormula(cadSelect, "{rsocios.fechabaja} is null ") Then Exit Sub
+    If Not AnyadirAFormula(cadselect, "{rsocios.fechabaja} is null ") Then Exit Sub
     If Not AnyadirAFormula(cadFormula, "isnull({rsocios.fechabaja})") Then Exit Sub
 
     '[Monica]23/11/2012: si es escalona o utxera seleccionamos que tipo de socio
     If Option1(0).Value Then    ' solo contado
-        If Not AnyadirAFormula(cadSelect, "{rsocios.cuentaba}=""8888888888""") Then Exit Sub
+        If Not AnyadirAFormula(cadselect, "{rsocios.cuentaba}=""8888888888""") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios.cuentaba}=""8888888888""") Then Exit Sub
     End If
     If Option1(1).Value Then    ' solo efecto
-        If Not AnyadirAFormula(cadSelect, "{rsocios.cuentaba<>""8888888888""") Then Exit Sub
+        If Not AnyadirAFormula(cadselect, "{rsocios.cuentaba<>""8888888888""") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios.cuentaba}<>""8888888888""") Then Exit Sub
     End If
 '   no hacemos nada
@@ -2560,7 +2560,7 @@ Dim Situacion As String
     '[Monica]29/09/2014: para el caso de escalona y de utxera si marcan solo los que NO tienen fecha de revision
     If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
         If chkMail(4).Value = 1 Then
-            If Not AnyadirAFormula(cadSelect, "({rsocios.fechanac} is null or {rsocios.fechanac}='')") Then Exit Sub
+            If Not AnyadirAFormula(cadselect, "({rsocios.fechanac} is null or {rsocios.fechanac}='')") Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "(isnull({rsocios.fechanac}) or {rsocios.fechanac}='')") Then Exit Sub
         End If
     End If
@@ -2573,24 +2573,24 @@ Dim Situacion As String
         If Situacion <> "" Then
             Situacion = Mid(Situacion, 1, Len(Situacion) - 1)
             If Not AnyadirAFormula(cadFormula, "not {rsocios.codsitua} in [" & Situacion & "]") Then Exit Sub
-            If Not AnyadirAFormula(cadSelect, "not rsocios.codsitua in (" & Situacion & ")") Then Exit Sub
+            If Not AnyadirAFormula(cadselect, "not rsocios.codsitua in (" & Situacion & ")") Then Exit Sub
         End If
     End If
     
     '[Monica]23/12/2011: si estamos mandando sms miramos los que tienen nro de movil
     If chkMail(1).Value = 1 Then
-        If Not AnyadirAFormula(cadSelect, "not {rsocios.movsocio} is null and {rsocios.movsocio}<>''") Then Exit Sub
+        If Not AnyadirAFormula(cadselect, "not {rsocios.movsocio} is null and {rsocios.movsocio}<>''") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "not isnull({rsocios.movsocio}) and {rsocios.movsocio}<>''") Then Exit Sub
         
         ' solo saldran los que no tegan email
         If Check3.Value = 1 Then
-            If Not AnyadirAFormula(cadSelect, "({rsocios.maisocio} is null or {rsocios.maisocio}='')") Then Exit Sub
+            If Not AnyadirAFormula(cadselect, "({rsocios.maisocio} is null or {rsocios.maisocio}='')") Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "(isnull({rsocios.maisocio}) or {rsocios.maisocio}='')") Then Exit Sub
         End If
     End If
     ' si es un correo electronico miramos solo los que tienen mail
     If chkMail(0).Value = 1 Then
-        If Not AnyadirAFormula(cadSelect, "not {rsocios.maisocio} is null and {rsocios.maisocio}<>''") Then Exit Sub
+        If Not AnyadirAFormula(cadselect, "not {rsocios.maisocio} is null and {rsocios.maisocio}<>''") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "not isnull({rsocios.maisocio}) and {rsocios.maisocio}<>''") Then Exit Sub
     End If
     
@@ -2598,7 +2598,7 @@ Dim Situacion As String
     '                    y son escalona o Utxera
     If chkMail(0).Value = 0 And chkMail(1).Value = 0 And chkMail(5).Value = 1 And (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) Then
         If chkMail(5).Value = 1 Then
-            If Not AnyadirAFormula(cadSelect, "({rsocios.maisocio} is null or {rsocios.maisocio}='')") Then Exit Sub
+            If Not AnyadirAFormula(cadselect, "({rsocios.maisocio} is null or {rsocios.maisocio}='')") Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "(isnull({rsocios.maisocio}) or {rsocios.maisocio}='')") Then Exit Sub
         End If
     End If
@@ -2612,7 +2612,7 @@ Dim Situacion As String
     '=========================================================================================
     If chkMail(1).Value = 0 Then
         If chkMail(2).Value = 1 Then
-            If Not AnyadirAFormula(cadSelect, "{rsocios.correo} = 1") Then Exit Sub
+            If Not AnyadirAFormula(cadselect, "{rsocios.correo} = 1") Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rsocios.correo} = 1") Then Exit Sub
         End If
     End If
@@ -2620,23 +2620,23 @@ Dim Situacion As String
         
     'Parametro a la Atencion de
     If txtCodigo(62).Text <> "" Then
-        CadParam = CadParam & "pAtencion=""Att. " & txtCodigo(62).Text & """|"
+        cadParam = cadParam & "pAtencion=""Att. " & txtCodigo(62).Text & """|"
     Else
-        CadParam = CadParam & "pAtencion=""""|"
+        cadParam = cadParam & "pAtencion=""""|"
     End If
     numParam = numParam + 1
     
-    Tabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio"
+    tabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio"
     
     '[Monica]11/11/2013: Castelduc
     If vParamAplic.Cooperativa = 5 And ComprobarCero(txtCodigo(58).Text) = 0 Then
-        Tabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio"
+        tabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio"
     End If
     
     '[Monica]11/11/2013: Castelduc
     If vParamAplic.Cooperativa <> 5 Then
         '[Monica]22/04/2015: mogente tampoco enlaza con rcampos
-        If (vParamAplic.Cooperativa = 3) And OpcionListado = 305 Then
+        If (vParamAplic.Cooperativa = 3) And Opcionlistado = 305 Then
         
         Else
             '[Monica]16/11/2012: En Utxera no tienen campos por socio
@@ -2644,56 +2644,56 @@ Dim Situacion As String
                                                     '[Monica]30/04/2015: en montifrut tampoco
                                                         '[Monica]10/07/2015: en bolbaite tampoco
             If vParamAplic.Cooperativa <> 8 And vParamAplic.Cooperativa <> 1 And vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 14 Then
-                Tabla = "(" & Tabla & ") inner join rcampos on rsocios.codsocio = rcampos.codsocio "
+                tabla = "(" & tabla & ") inner join rcampos on rsocios.codsocio = rcampos.codsocio "
             End If
         End If
     End If
     
     
     'ver si hay registros seleccionados para mostrar en el informe
-    If Not HayRegParaInforme(Tabla, cadSelect) Then Exit Sub
+    If Not HayRegParaInforme(tabla, cadselect) Then Exit Sub
     
     Set frmMen = New frmMensajes
     
     If txtCodigo(58).Text = "" Then
-        frmMen.cadWHERE = "SELECT distinct rsocios.codsocio,nomsocio,nifsocio FROM rsocios inner join rsocios_pozos on rsocios.codsocio = rsocios_pozos.codsocio where " & cadSelect & " order by rsocios.codsocio "
+        frmMen.cadWHERE = "SELECT distinct rsocios.codsocio,nomsocio,nifsocio FROM rsocios inner join rsocios_pozos on rsocios.codsocio = rsocios_pozos.codsocio where " & cadselect & " order by rsocios.codsocio "
         frmMen.OpcionMensaje = 55 'Etiquetas socios
     Else
         '[Monica]24/10/2014: antes solo tenia cadselect
-        frmMen.cadWHERE = "rsocios.codsocio in (select rsocios.codsocio from " & Tabla & " where " & cadSelect & ")"
+        frmMen.cadWHERE = "rsocios.codsocio in (select rsocios.codsocio from " & tabla & " where " & cadselect & ")"
         frmMen.OpcionMensaje = 9 'Etiquetas socios
     End If
     
     frmMen.Show vbModal
     Set frmMen = Nothing
     
-    If cadSelect = "" Then Exit Sub
+    If cadselect = "" Then Exit Sub
     
     '[Monica]16/11/2012: añadida la condicion de cooperativa <> 8
     If Documento <> "" And ImpresionNormal And vParamAplic.Cooperativa <> 8 Then
         Set frmMen2 = New frmMensajes
-        frmMen2.cadWHERE = " and codsocio in (select rsocios.codsocio from " & Tabla & " where " & cadSelect & ")"
+        frmMen2.cadWHERE = " and codsocio in (select rsocios.codsocio from " & tabla & " where " & cadselect & ")"
         frmMen2.OpcionMensaje = 15 'Etiquetas socios
         frmMen2.Show vbModal
         Set frmMen2 = Nothing
-        If cadSelect = "" Then Exit Sub
+        If cadselect = "" Then Exit Sub
     End If
     
-    If OpcionListado = 306 And Me.chkMail(0).Value = 1 Then
+    If Opcionlistado = 306 And Me.chkMail(0).Value = 1 Then
         'Enviarlo por e-mail
         IndRptReport = indRPT
-        EnviarEMailMulti cadSelect, Titulo, nomDocu, Tabla ' "rSocioCarta.rpt", Tabla  'email para socios
+        EnviarEMailMulti cadselect, Titulo, nomDocu, tabla ' "rSocioCarta.rpt", Tabla  'email para socios
         cmdCancel_Click (9)
     Else
-        If OpcionListado = 306 And Me.chkMail(1).Value = 1 Then
+        If Opcionlistado = 306 And Me.chkMail(1).Value = 1 Then
             OK = True
-            EnviarSMS cadSelect, Titulo, nomDocu, Tabla, OK    ' "rSocioCarta.rpt", Tabla  'email para socios
+            EnviarSMS cadselect, Titulo, nomDocu, tabla, OK    ' "rSocioCarta.rpt", Tabla  'email para socios
             If OK Then
                 MsgBox "Proceso realizado correctamente.", vbExclamation
                 cmdCancel_Click (9)
             End If
         Else                                                                  '[Monica]22/04/2015: añadimos a mogente
-            If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Or (vParamAplic.Cooperativa = 3 And OpcionListado = 305) Then
+            If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Or (vParamAplic.Cooperativa = 3 And Opcionlistado = 305) Then
                 cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
             End If
             LlamarImprimir
@@ -2710,7 +2710,7 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        Select Case OpcionListado
+        Select Case Opcionlistado
             Case 305, 306 '305: Listado Etiquetas proveedor
                           '306: Listado Cartas a proveedores
                 PonerFoco txtCodigo(58)
@@ -2755,29 +2755,29 @@ Dim devuelve As String
     CargarIconos
     
     Me.Option1(2).Value = True
-    FrameTipoSocio.visible = (OpcionListado = 306 And (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10))
-    FrameTipoSocio.Enabled = (OpcionListado = 306 And (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10))
+    FrameTipoSocio.visible = (Opcionlistado = 306 And (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10))
+    FrameTipoSocio.Enabled = (Opcionlistado = 306 And (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10))
     
     '[Monica]27/06/2013: marcamos bien si quieren adjuntar archivos
-    Frame1.visible = (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) And OpcionListado = 306
-    Frame1.Enabled = (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) And OpcionListado = 306
+    Frame1.visible = (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) And Opcionlistado = 306
+    Frame1.Enabled = (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) And Opcionlistado = 306
     
     FrameEnvioDatosComunica.visible = False
     
-    Select Case OpcionListado
+    Select Case Opcionlistado
         Case 305, 306 '305: Etiquetas de proveedor
                       '306: Cartas a proveedor
             indFrame = 9
             H = 7155 '5325
             W = 7035
-            If OpcionListado = 305 Then
+            If Opcionlistado = 305 Then
                 H = 5325
                 Me.cmdAceptarEtiqProv.Top = Me.cmdAceptarEtiqProv.Top - 2000
                 Me.CmdCancel(9).Top = CmdCancel(9).Top - 2000
             End If
             PonerFrameVisible Me.FrameEtiqProv, True, H, W
-            Me.Frame2.visible = (OpcionListado = 306)
-            If (OpcionListado = 306) Then Me.Label9(1).Caption = "Cartas a Socios"
+            Me.Frame2.visible = (Opcionlistado = 306)
+            If (Opcionlistado = 306) Then Me.Label9(1).Caption = "Cartas a Socios"
             Me.Frame3.visible = (chkMail(0).Value = True)
             Me.Frame3.Enabled = (chkMail(0).Value = True)
             Me.Frame4.visible = (chkMail(1).Value = True)
@@ -2804,15 +2804,15 @@ Dim devuelve As String
         Case 315, 316 'Envio masivo de Facturas
             indFrame = 18
             
-            If OpcionListado = 316 Then Me.FrameEnvioFacMail.Width = 5535
+            If Opcionlistado = 316 Then Me.FrameEnvioFacMail.Width = 5535
             
             H = FrameEnvioFacMail.Height
             W = FrameEnvioFacMail.Width
             PonerFrameVisible FrameEnvioFacMail, True, H, W
             CargarComboTipoMov 1000
             
-            chkMail(3).visible = OpcionListado = 316 'Solo para facturae
-            If OpcionListado = 316 Then
+            chkMail(3).visible = Opcionlistado = 316 'Solo para facturae
+            If Opcionlistado = 316 Then
                 cmdEnvioMail.Left = 3240
                 CmdCancel(indFrame).Left = 4320
                 Label14(16).Caption = "Facturacion E"
@@ -2857,44 +2857,44 @@ End Sub
 Private Sub frmMen_DatoSeleccionado(CadenaSeleccion As String)
 'formulario de mensajes: frmMensajes
     If CadenaSeleccion <> "" Then
-        If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Or (vParamAplic.Cooperativa = 3 And OpcionListado = 305) Then
+        If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Or (vParamAplic.Cooperativa = 3 And Opcionlistado = 305) Then
             InsertarTemporal CadenaSeleccion
-            cadSelect = "rsocios_seccion.codsocio IN (" & CadenaSeleccion & ")"
+            cadselect = "rsocios_seccion.codsocio IN (" & CadenaSeleccion & ")"
         Else
-            If OpcionListado = 305 Or OpcionListado = 306 Then 'Socios
+            If Opcionlistado = 305 Or Opcionlistado = 306 Then 'Socios
                 cadFormula = "{rsocios_seccion.codsocio} IN [" & CadenaSeleccion & "]"
-                cadSelect = "rsocios_seccion.codsocio IN (" & CadenaSeleccion & ")"
+                cadselect = "rsocios_seccion.codsocio IN (" & CadenaSeleccion & ")"
             End If
             If vParamAplic.Cooperativa = 5 And txtCodigo(58).Text = "" Then
                 cadFormula = "{rsocios.codsocio} IN [" & CadenaSeleccion & "]"
-                cadSelect = "rsocios.codsocio IN (" & CadenaSeleccion & ")"
+                cadselect = "rsocios.codsocio IN (" & CadenaSeleccion & ")"
             End If
         End If
     Else 'no seleccionamos ningun cliente
         cadFormula = ""
-        cadSelect = ""
+        cadselect = ""
     End If
 End Sub
 
 Private Sub frmMen2_DatoSeleccionado(CadenaSeleccion As String)
 'formulario de mensajes: frmMensajes
     If CadenaSeleccion <> "" Then
-        If OpcionListado = 306 Then 'Socios
+        If Opcionlistado = 306 Then 'Socios
             cadFormula = "{rcampos.codcampo} IN [" & CadenaSeleccion & "]"
-            cadSelect = "rcampos.codcampo IN (" & CadenaSeleccion & ")"
+            cadselect = "rcampos.codcampo IN (" & CadenaSeleccion & ")"
         End If
     Else 'no seleccionamos ningun cliente
         cadFormula = ""
-        cadSelect = ""
+        cadselect = ""
     End If
 End Sub
 
 Private Sub frmMen3_DatoSeleccionado(CadenaSeleccion As String)
 'formulario de mensajes: frmMensajes
     If CadenaSeleccion <> "" Then
-        cadSelect = CadenaSeleccion
+        cadselect = CadenaSeleccion
     Else 'no seleccionamos ningun archivo
-        cadSelect = ""
+        cadselect = ""
     End If
 End Sub
 
@@ -2953,13 +2953,13 @@ End Sub
 
 
 Private Sub imgCheck_Click(Index As Integer)
-Dim B As Boolean
+Dim b As Boolean
 Dim TotalArray As Integer
 
     'En el listview3
-    B = Index = 1
+    b = Index = 1
     For TotalArray = 0 To ListTipoMov(1000).ListCount - 1
-        ListTipoMov(1000).Selected(TotalArray) = B
+        ListTipoMov(1000).Selected(TotalArray) = b
         If (TotalArray Mod 50) = 0 Then DoEvents
     Next TotalArray
     
@@ -3157,19 +3157,19 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    imgBuscarOfer_Click (Indice)
+    imgBuscarOfer_Click (indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    imgFecha_Click (Indice)
+    imgFecha_Click (indice)
 End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Tabla As String
+Dim tabla As String
 Dim codCampo As String, nomCampo As String
 Dim TipCampo As String, Formato As String
 Dim Titulo As String
@@ -3198,7 +3198,7 @@ Dim EsNomCod As Boolean
         
         Case 63, 64 'CARTA de la Oferta
             EsNomCod = True
-            Tabla = "scartas"
+            tabla = "scartas"
             codCampo = "codcarta"
             nomCampo = "descarta"
             Formato = "000"
@@ -3210,7 +3210,7 @@ Dim EsNomCod As Boolean
             
          Case 58, 59 'Cod. Seccion
             EsNomCod = True
-            Tabla = "rseccion"
+            tabla = "rseccion"
             codCampo = "codsecci"
             nomCampo = "nomsecci"
             TipCampo = "N"
@@ -3225,7 +3225,7 @@ Dim EsNomCod As Boolean
     If EsNomCod Then
         If TipCampo = "N" Then
             If PonerFormatoEntero(txtCodigo(Index)) Then
-                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), Tabla, nomCampo, codCampo, TipCampo)
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), tabla, nomCampo, codCampo, TipCampo)
                 If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, Formato)
                 
                 If Index = 63 And chkMail(1).Value = 1 Then
@@ -3236,29 +3236,29 @@ Dim EsNomCod As Boolean
                 txtNombre(Index).Text = ""
             End If
         Else
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), Tabla, nomCampo, codCampo, TipCampo)
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), tabla, nomCampo, codCampo, TipCampo)
         End If
     End If
 End Sub
 
-Private Function AnyadirParametroDH(cad As String, indD As Byte, indH As Byte) As String
+Private Function AnyadirParametroDH(Cad As String, indD As Byte, indH As Byte) As String
 On Error Resume Next
     If txtCodigo(indD).Text <> "" Then
-        cad = cad & "desde " & txtCodigo(indD).Text
-        If txtNombre(indD).Text <> "" Then cad = cad & " - " & txtNombre(indD).Text
+        Cad = Cad & "desde " & txtCodigo(indD).Text
+        If txtNombre(indD).Text <> "" Then Cad = Cad & " - " & txtNombre(indD).Text
     End If
     If txtCodigo(indH).Text <> "" Then
-        cad = cad & "  hasta " & txtCodigo(indH).Text
-        If txtNombre(indH).Text <> "" Then cad = cad & " - " & txtNombre(indH).Text
+        Cad = Cad & "  hasta " & txtCodigo(indH).Text
+        If txtNombre(indH).Text <> "" Then Cad = Cad & " - " & txtNombre(indH).Text
     End If
-    AnyadirParametroDH = cad
+    AnyadirParametroDH = Cad
     If Err.Number <> 0 Then Err.Clear
 End Function
 
 Private Sub InicializarVbles()
     cadFormula = ""
-    cadSelect = ""
-    CadParam = ""
+    cadselect = ""
+    cadParam = ""
     numParam = 0
     
     Documento = ""
@@ -3266,10 +3266,10 @@ End Sub
 
 
 Private Sub InicializarTabla()
-Dim SQL As String
+Dim Sql As String
 
-    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute SQL
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
 
 End Sub
 
@@ -3277,7 +3277,7 @@ End Sub
 
 Private Function PonerDesdeHasta(campo As String, Tipo As String, indD As Byte, indH As Byte, param As String) As Boolean
 Dim devuelve As String
-Dim cad As String
+Dim Cad As String
 
     PonerDesdeHasta = False
     devuelve = CadenaDesdeHasta(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
@@ -3286,17 +3286,17 @@ Dim cad As String
     
     'para MySQL
     If Tipo <> "F" Then
-        If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
+        If Not AnyadirAFormula(cadselect, devuelve) Then Exit Function
     Else
         'Fecha para la Base de Datos
-        cad = CadenaDesdeHastaBD(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
-        If Not AnyadirAFormula(cadSelect, cad) Then Exit Function
+        Cad = CadenaDesdeHastaBD(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
+        If Not AnyadirAFormula(cadselect, Cad) Then Exit Function
     End If
     
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            CadParam = CadParam & AnyadirParametroDH(param, indD, indH) & """|"
+            cadParam = cadParam & AnyadirParametroDH(param, indD, indH) & """|"
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -3307,11 +3307,11 @@ End Function
 Private Sub LlamarImprimir()
      With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
-        .Opcion = OpcionListado
+        .Opcion = Opcionlistado
         .Titulo = Titulo
         .NombreRPT = nomRPT
         .ConSubInforme = conSubRPT
@@ -3322,15 +3322,15 @@ End Sub
 
 
 Private Sub EnviarSMS(cadWHERE As String, cadTit As String, cadRpt As String, cadTabla As String, ByRef EstaOk As Boolean)
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim Cad1 As String, Cad2 As String, lista As String
 Dim cont As Integer
 Dim Direccion As String
 
 Dim NF As Integer
-Dim cad As String
-Dim B As Boolean
+Dim Cad As String
+Dim b As Boolean
 
 On Error GoTo EEnviar
 
@@ -3346,21 +3346,21 @@ On Error GoTo EEnviar
        cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
        cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
         'seleccionamos todos los socios a los que queremos enviar un SMS
-        SQL = "SELECT distinct rsocios.codsocio,nomsocio,rsocios.movsocio "
+        Sql = "SELECT distinct rsocios.codsocio,nomsocio,rsocios.movsocio "
     End If
-    SQL = SQL & "FROM " & cadTabla
-    SQL = SQL & " WHERE " & cadWHERE
+    Sql = Sql & "FROM " & cadTabla
+    Sql = Sql & " WHERE " & cadWHERE
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     cont = 0
     lista = ""
     
-    B = True
+    b = True
     
     
-    While Not Rs.EOF And B
+    While Not Rs.EOF And b
     'para cada socio enviamos un SMS
         Cad1 = DBLet(Rs.Fields(2), "T") 'movil socio
         
@@ -3386,11 +3386,11 @@ On Error GoTo EEnviar
     
             NF = FreeFile
             Open App.Path & "\RESULT.TXT" For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
-            cad = ""
-            Line Input #NF, cad
+            Cad = ""
+            Line Input #NF, Cad
             Close NF
 
-            Select Case Mid(cad, 1, 2)
+            Select Case Mid(Cad, 1, 2)
                 Case "OK"
                     espera 2
                 
@@ -3399,21 +3399,21 @@ On Error GoTo EEnviar
                     espera 0.4
                     cont = cont + 1
                     
-                    SQL = "INSERT INTO rsmsenviados (codsocio, movsocio, fechaenvio, horaenvio, texto)"
-                    SQL = SQL & " VALUES (" & DBSet(Rs.Fields(0), "N") & "," & DBSet(Cad1, "T") & ","
-                    SQL = SQL & DBSet(txtCodigo(0).Text, "F") & "," & DBSet(txtCodigo(1).Text, "H") & "," & DBSet(txtCodigo(2).Text, "T") & ")"
-                    conn.Execute SQL
+                    Sql = "INSERT INTO rsmsenviados (codsocio, movsocio, fechaenvio, horaenvio, texto)"
+                    Sql = Sql & " VALUES (" & DBSet(Rs.Fields(0), "N") & "," & DBSet(Cad1, "T") & ","
+                    Sql = Sql & DBSet(txtCodigo(0).Text, "F") & "," & DBSet(txtCodigo(1).Text, "H") & "," & DBSet(txtCodigo(2).Text, "T") & ")"
+                    conn.Execute Sql
             
             
                 Case "-1"
                     MsgBox "Error en el Login, usuario o clave incorrectas", vbExclamation
                     EstaOk = False
                 Case Else
-                    If Mid(cad, 1, 12) = "Sin Creditos" Then
+                    If Mid(Cad, 1, 12) = "Sin Creditos" Then
                         MsgBox "No tiene créditos. Revise", vbExclamation
-                        B = False
+                        b = False
                     Else
-                        If MsgBox("Error en el envio de mensaje al socio " & DBLet(Rs.Fields(0), "N") & ". ¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then B = False
+                        If MsgBox("Error en el envio de mensaje al socio " & DBLet(Rs.Fields(0), "N") & ". ¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then b = False
                     End If
                     EstaOk = False
             End Select
@@ -3467,7 +3467,7 @@ DownloadError:
 End Sub
 
 Private Sub InsertarTemporal(cadWHERE As String)
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim Cad1 As String, Cad2 As String, lista As String
 Dim cont As Integer
@@ -3478,15 +3478,15 @@ Dim Sql2 As String
     conn.Execute Sql2
     
     'seleccionamos todos los socios a los que queremos enviar e-mail
-    SQL = "SELECT distinct " & vUsu.Codigo & ", rsocios.codsocio from rsocios where codsocio in (" & cadWHERE & ")"
+    Sql = "SELECT distinct " & vUsu.Codigo & ", rsocios.codsocio from rsocios where codsocio in (" & cadWHERE & ")"
     
-    Sql2 = "insert into tmpinformes (codusu, codigo1) " & SQL
+    Sql2 = "insert into tmpinformes (codusu, codigo1) " & Sql
     conn.Execute Sql2
 
 End Sub
 
 Private Sub EnviarEMailMulti(cadWHERE As String, cadTit As String, cadRpt As String, cadTabla As String)
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim Cad1 As String, Cad2 As String, lista As String
 Dim cont As Integer
@@ -3500,34 +3500,34 @@ On Error GoTo EEnviar
        cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
        
         'seleccionamos todos los socios a los que queremos enviar e-mail
-        SQL = "SELECT distinct rsocios.codsocio,nomsocio,maisocio, maisocio "
+        Sql = "SELECT distinct rsocios.codsocio,nomsocio,maisocio, maisocio "
         If ImpresionNormal Then
-            SQL = SQL & "FROM " & cadTabla
+            Sql = Sql & "FROM " & cadTabla
         Else
-            SQL = SQL & "FROM " & "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio"
+            Sql = Sql & "FROM " & "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio"
         End If
     ElseIf cadTabla = "sclien" Then
         'seleccionamos todos los clientes a los que queremos enviar e-mail
-        SQL = "SELECT codclien,nomclien,maiclie1,maiclie2 "
-        SQL = SQL & "FROM " & cadTabla
+        Sql = "SELECT codclien,nomclien,maiclie1,maiclie2 "
+        Sql = Sql & "FROM " & cadTabla
     End If
-    SQL = SQL & " WHERE " & cadWHERE
+    Sql = Sql & " WHERE " & cadWHERE
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     ' Primero la borro por si acaso
-    SQL = " DROP TABLE IF EXISTS tmpMail;"
-    conn.Execute SQL
+    Sql = " DROP TABLE IF EXISTS tmpMail;"
+    conn.Execute Sql
     
     'creamos una temporal donde guardamos para cada proveedor que SI tiene
     'e-mail, el mail1 o el mail2 al que vamos a enviar
-    SQL = "CREATE TEMPORARY TABLE tmpMail ( "
-    SQL = SQL & "codusu INT(7) UNSIGNED  DEFAULT '0' NOT NULL, "
-    SQL = SQL & "codprove INT(6) UNSIGNED  DEFAULT '0' NOT NULL, "
-    SQL = SQL & "nomprove varchar(40)  DEFAULT '' NOT NULL, "
-    SQL = SQL & "email varchar(40)  DEFAULT '' NOT NULL) "
-    conn.Execute SQL
+    Sql = "CREATE TEMPORARY TABLE tmpMail ( "
+    Sql = Sql & "codusu INT(7) UNSIGNED  DEFAULT '0' NOT NULL, "
+    Sql = Sql & "codprove INT(6) UNSIGNED  DEFAULT '0' NOT NULL, "
+    Sql = Sql & "nomprove varchar(40)  DEFAULT '' NOT NULL, "
+    Sql = Sql & "email varchar(40)  DEFAULT '' NOT NULL) "
+    conn.Execute Sql
     
     cont = 0
     lista = ""
@@ -3560,18 +3560,18 @@ On Error GoTo EEnviar
 
             If ImpresionNormal Then
                 With frmImprimir
-                    .OtrosParametros = CadParam
+                    .OtrosParametros = cadParam
                     .NumeroParametros = numParam
                     If cadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
                        cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
                        cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
-                        SQL = "{rsocios.codsocio}=" & Rs.Fields(0)
+                        Sql = "{rsocios.codsocio}=" & Rs.Fields(0)
                         .Opcion = 306
                     Else
-                        SQL = "{sclien.codclien}=" & Rs.Fields(0)
+                        Sql = "{sclien.codclien}=" & Rs.Fields(0)
                         .Opcion = 91
                     End If
-                    .FormulaSeleccion = SQL
+                    .FormulaSeleccion = Sql
                     .EnvioEMail = True
                     CadenaDesdeOtroForm = "GENERANDO"
                     .Titulo = cadTit
@@ -3581,9 +3581,9 @@ On Error GoTo EEnviar
     
                     If CadenaDesdeOtroForm = "" Then
                     'si se ha generado el .pdf para enviar
-                        SQL = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
-                        SQL = SQL & " VALUES (" & vUsu.Codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
-                        conn.Execute SQL
+                        Sql = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
+                        Sql = Sql & " VALUES (" & vUsu.Codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
+                        conn.Execute Sql
                 
                         Me.Refresh
                         DoEvents
@@ -3591,8 +3591,8 @@ On Error GoTo EEnviar
                         cont = cont + 1
                         'Se ha generado bien el documento
                         'Lo copiamos sobre app.path & \temp
-                        SQL = Rs.Fields(0) & ".pdf"
-                        FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & SQL
+                        Sql = Rs.Fields(0) & ".pdf"
+                        FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & Sql
                     End If
                 End With
                 Label9(10).Caption = ""
@@ -3600,9 +3600,9 @@ On Error GoTo EEnviar
             Else
                 If CadenaDesdeOtroForm = "" Then
                 'si se ha generado el .pdf para enviar
-                    SQL = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
-                    SQL = SQL & " VALUES (" & vUsu.Codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
-                    conn.Execute SQL
+                    Sql = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
+                    Sql = Sql & " VALUES (" & vUsu.Codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
+                    conn.Execute Sql
             
                     Me.Refresh
                     DoEvents
@@ -3631,16 +3631,16 @@ On Error GoTo EEnviar
         If cadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
            cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
            cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
-            SQL = "Carta: " & txtNombre(63).Text & "|"
+            Sql = "Carta: " & txtNombre(63).Text & "|"
             
             '[Monica]08/07/2011: si no hay a la atencion no se pone nada en el cuerpo del mensaje
             '                    añadida la condicion
             If txtCodigo(62).Text <> "" Then
-                SQL = SQL & "Att : " & txtCodigo(62).Text & "|"
+                Sql = Sql & "Att : " & txtCodigo(62).Text & "|"
             End If
         Else
-            SQL = "Carta: " & txtNombre(63).Text & "|"
-            SQL = SQL & "Att : " & txtCodigo(62).Text & "|"
+            Sql = "Carta: " & txtNombre(63).Text & "|"
+            Sql = Sql & "Att : " & txtCodigo(62).Text & "|"
         End If
        
         If Not ImpresionNormal Then
@@ -3649,23 +3649,23 @@ On Error GoTo EEnviar
             frmMen3.OpcionMensaje = 40 'archivos a seleccionar
             frmMen3.Show vbModal
             Set frmMen3 = Nothing
-            If cadSelect = "" Then Exit Sub
+            If cadselect = "" Then Exit Sub
         End If
        
         frmEMail.Opcion = 2
-        frmEMail.DatosEnvio = SQL
+        frmEMail.DatosEnvio = Sql
         frmEMail.CodCryst = IndRptReport
         If Not ImpresionNormal Then
             frmEMail.Opcion = 5
-            frmEMail.Ficheros = cadSelect
+            frmEMail.Ficheros = cadselect
         Else
             frmEMail.Ficheros = ""
         End If
         frmEMail.Show vbModal
 
         'Borrar la tabla temporal
-        SQL = " DROP TABLE IF EXISTS tmpMail;"
-        conn.Execute SQL
+        Sql = " DROP TABLE IF EXISTS tmpMail;"
+        conn.Execute Sql
         
         'Borrar la carpeta con temporales
         If ImpresionNormal Then Kill App.Path & "\temp\*.pdf"
@@ -3689,8 +3689,8 @@ EEnviar:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Enviando Informe por e-mail", Err.Description
         'Borrar la tabla temporal
-        SQL = " DROP TABLE IF EXISTS tmpMail;"
-        conn.Execute SQL
+        Sql = " DROP TABLE IF EXISTS tmpMail;"
+        conn.Execute Sql
     End If
 End Sub
 
@@ -3717,14 +3717,14 @@ End Sub
 Private Function DatosOk() As Boolean
 'Comprobar que los datos de la cabecera son correctos antes de Insertar o Modificar
 'la cabecera del Pedido
-Dim B As Boolean
+Dim b As Boolean
 
-    B = True
+    b = True
     
     '[Monica]11/11/2013: dejamos poner unicamente las fases de Castelduc
     If vParamAplic.Cooperativa = 5 Then
         If Combo1(0).ListIndex = -1 And ComprobarCero(txtCodigo(58).Text) = 0 Then
-            B = False
+            b = False
             MsgBox "Debe introducir sección o fase. Revise.", vbExclamation
             PonerFocoCmb Combo1(0)
         End If
@@ -3733,61 +3733,61 @@ Dim B As Boolean
     '[Monica]11/11/2013: en Castelduc dejamos poner unicamente las fases
     If txtCodigo(58).Text = "" And vParamAplic.Cooperativa <> 5 Then
         MsgBox "Debe introducir un valor en la Sección. Revise.", vbExclamation
-        B = False
+        b = False
         PonerFoco txtCodigo(58)
     End If
     
     
-    If B And OpcionListado = 306 And chkMail(1).Value = 1 Then
+    If b And Opcionlistado = 306 And chkMail(1).Value = 1 Then
         If txtCodigo(0).Text = "" Then
             MsgBox "Debe introducir un valor en la Fecha del SMS. Revise.", vbExclamation
-            B = False
+            b = False
             PonerFoco txtCodigo(0)
         End If
-        If B And txtCodigo(1).Text = "" Then
+        If b And txtCodigo(1).Text = "" Then
             MsgBox "Debe introducir un valor en la Hora del SMS. Revise.", vbExclamation
-            B = False
+            b = False
             PonerFoco txtCodigo(1)
         End If
-        If B And txtCodigo(2).Text = "" Then
+        If b And txtCodigo(2).Text = "" Then
             MsgBox "Debe introducir un valor en el Texto del SMS. Revise.", vbExclamation
-            B = False
+            b = False
             PonerFoco txtCodigo(2)
         End If
     End If
     
     '[Monica]19/10/2012: comprobamos que si vamos a enviar mas de un documento es por email.
-    If B And OpcionListado = 306 Then
+    If b And Opcionlistado = 306 Then
         Documento = DevuelveDesdeBDNew(cAgro, "scartas", "documrpt", "codcarta", txtCodigo(63).Text, "N")
         If Documento <> "" Then
             If InStr(1, Documento, ",") <> 0 And chkMail(0).Value = 0 Then
                 MsgBox "Para enviar más de un archivo adjunto debe seleccionar sólo por email.", vbExclamation
-                B = False
+                b = False
                 PonerFocoChk chkMail(0)
             Else
                 'cualquier otro tipo de documento se tiene que poder enviar por email
                 If InStr(1, Documento, ".rpt") = 0 And chkMail(0).Value = 0 Then
                     MsgBox "Para enviar más de un archivo adjunto debe seleccionar sólo por email.", vbExclamation
-                    B = False
+                    b = False
                     PonerFocoChk chkMail(0)
                 End If
             End If
             
-            If B And InStr(1, Documento, ".rpt") = 0 Then
+            If b And InStr(1, Documento, ".rpt") = 0 Then
                 'si no es un rpt a ejecutar de la carpeta de informes comprobamos que exista la carpeta de cartas
                 If Dir(App.Path & "\cartas", vbDirectory) = "" Then
                     MsgBox "No existe el directorio de cartas donde se introducen los archivos a adjuntar. Revise.", vbExclamation
-                    B = False
+                    b = False
                 End If
-                If B And Dir(App.Path & "\cartas\*.*", vbArchive) = "" Then
+                If b And Dir(App.Path & "\cartas\*.*", vbArchive) = "" Then
                     MsgBox "No existen archivos en el directorio cartas a adjuntar. Revise.", vbExclamation
-                    B = False
+                    b = False
                 End If
             End If
         End If
     End If
     
-    DatosOk = B
+    DatosOk = b
     
 End Function
 
@@ -3802,23 +3802,23 @@ Dim letraser As String
     On Error GoTo EGeneracionEnvioMail
     GeneracionEnvioMail = False
     
-    cadSelect = "Select * from tmpinformes where codusu =" & vUsu.Codigo & " ORDER BY importe1,codigo1"
-    Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cadselect = "Select * from tmpinformes where codusu =" & vUsu.Codigo & " ORDER BY importe1,codigo1"
+    Rs.Open cadselect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     CodClien = ""
     While Not Rs.EOF
     
         InicializarVbles
         '========= PARAMETROS  =============================
         'Añadir el parametro de Empresa
-        CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+        cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
         numParam = numParam + 1
         
         '[Monica]28/01/2013: impresion con arrobas o sin arrobas para Montifrut
         If vParamAplic.Cooperativa = 12 Then
             If Check5.Value = 1 Then
-                CadParam = CadParam & "pConArrobas=1|"
+                cadParam = cadParam & "pConArrobas=1|"
             Else
-                CadParam = CadParam & "pConArrobas=0|"
+                cadParam = cadParam & "pConArrobas=0|"
             End If
             numParam = numParam + 1
         End If
@@ -3878,19 +3878,19 @@ Dim letraser As String
                     If vParamAplic.Cooperativa = 4 Then
                         If Mid(Rs!Nombre1, 1, 3) = "FAA" Then
                             If ConDetalle Then
-                                CadParam = CadParam & "pDetalle=1|"
+                                cadParam = cadParam & "pDetalle=1|"
                             Else
-                                CadParam = CadParam & "pDetalle=0|"
+                                cadParam = cadParam & "pDetalle=0|"
                             End If
                         Else
-                            CadParam = CadParam & "pDetalle=1|"
+                            cadParam = cadParam & "pDetalle=1|"
                         End If
                         numParam = numParam + 1
                     End If
                 End If
        End Select
         
-       If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Function
+       If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Function
        'Nombre fichero .rpt a Imprimir
         
         
@@ -3901,7 +3901,7 @@ Dim letraser As String
    
         With frmImprimir
             .FormulaSeleccion = cadFormula
-            .OtrosParametros = CadParam
+            .OtrosParametros = cadParam
             .NumeroParametros = numParam
             .SoloImprimir = False
             .EnvioEMail = True
@@ -3926,7 +3926,7 @@ Dim letraser As String
         DoEvents
         
         
-        If OpcionListado = 315 Then
+        If Opcionlistado = 315 Then
    
             EsperaFichero
             
@@ -3970,18 +3970,18 @@ EGeneracionEnvioMail:
 End Function
 
 Private Sub EsperaFichero()
-Dim cad As String
+Dim Cad As String
 Dim T1 As Single
 
     On Error GoTo eEsperaFichero
     
     T1 = Timer
     Do
-        cad = Dir(App.Path & "\docum.pdf", vbArchive)
-        If cad = "" Then
-            If Timer - T1 > 2 Then cad = "SAL"
+        Cad = Dir(App.Path & "\docum.pdf", vbArchive)
+        If Cad = "" Then
+            If Timer - T1 > 2 Then Cad = "SAL"
         End If
-    Loop Until cad <> ""
+    Loop Until Cad <> ""
     
 eEsperaFichero:
     If Err.Number <> 0 Then Err.Clear
@@ -4005,7 +4005,7 @@ Private Sub PonerTamnyosMail(peque As Boolean)
     DoEvents
 End Sub
 
-Private Sub CargarComboTipoMov(Indice As Integer)
+Private Sub CargarComboTipoMov(indice As Integer)
 '### Combo Tipo Movimiento
 'Cargaremos el combo, o bien desde una tabla o con valores fijos
 ' El estilo del combo debe de ser 2 - Dropdown List
@@ -4013,25 +4013,25 @@ Private Sub CargarComboTipoMov(Indice As Integer)
 ' o marcamos la opcion sorted del combo
 
 'Lo cargamos con los valores de la tabla stipom que tengan tipo de documento=Albaranes (tipodocu=1)
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim i As Byte
 
     On Error GoTo ECargaCombo
     
     '[Monica]18/02/2013: excluimos los movimientos de facturas varias
-    SQL = "select codtipom, nomtipom from usuarios.stipom where (tipodocu <> 0) and tipodocu <> 12"
+    Sql = "select codtipom, nomtipom from usuarios.stipom where (tipodocu <> 0) and tipodocu <> 12"
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     i = 0
     
-    ListTipoMov(Indice).Clear
+    ListTipoMov(indice).Clear
     
     'LOS TIKCETS NO LOS ENVIO POR MAIL
     While Not Rs.EOF
-        ListTipoMov(Indice).AddItem Rs.Fields(0).Value & "-" & Rs.Fields(1).Value
+        ListTipoMov(indice).AddItem Rs.Fields(0).Value & "-" & Rs.Fields(1).Value
         'ListTipoMov(indice).List (ListTipoMov(indice).NewIndex)
-        ListTipoMov(Indice).Selected((ListTipoMov(Indice).NewIndex)) = True
+        ListTipoMov(indice).Selected((ListTipoMov(indice).NewIndex)) = True
         
         Rs.MoveNext
     Wend
@@ -4045,7 +4045,7 @@ End Sub
 
 
 Private Function SituacionesBloqueo() As String
-Dim SQL As String
+Dim Sql As String
 Dim cadena As String
 Dim Rs As ADODB.Recordset
 
@@ -4053,10 +4053,10 @@ Dim Rs As ADODB.Recordset
 
     SituacionesBloqueo = cadena
 
-    SQL = "select codsitua from rsituacion where bloqueo = 1"
+    Sql = "select codsitua from rsituacion where bloqueo = 1"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         cadena = cadena & DBLet(Rs!codsitua) & ","
@@ -4074,23 +4074,23 @@ Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
 Dim i As Integer
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
     Combo1(0).Clear
     
-    SQL = "select distinct numfases from rsocios_pozos "
+    Sql = "select distinct numfases from rsocios_pozos "
 
     Combo1(0).AddItem "Todas" 'campo del codigo
     Combo1(0).ItemData(Combo1(0).NewIndex) = 0
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        SQL = "Fase " & Rs.Fields(0).Value
+        Sql = "Fase " & Rs.Fields(0).Value
         
-        Combo1(0).AddItem SQL 'campo del codigo
+        Combo1(0).AddItem Sql 'campo del codigo
         Combo1(0).ItemData(Combo1(0).NewIndex) = Rs.Fields(0).Value
         
         Rs.MoveNext
@@ -4103,19 +4103,19 @@ End Sub
 
 Public Function ProcesarFicheroComunicacion2(nomFich As String) As Boolean
 Dim NF As Long
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim NumReg As Long
-Dim SQL As String
+Dim Sql As String
 Dim SQL1 As String
 Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo eProcesarFicheroComunicacion2
     
@@ -4127,7 +4127,7 @@ Dim B As Boolean
     NF = FreeFile
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
-    Line Input #NF, cad
+    Line Input #NF, Cad
     i = 0
     
     lblProgres(0).Caption = "Insertando en Tabla temporal: " & nomFich
@@ -4140,29 +4140,29 @@ Dim B As Boolean
     DoEvents
     ' PROCESO DEL FICHERO VENTAS.TXT
 
-    B = True
+    b = True
 
     While Not EOF(NF)
         i = i + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
         lblProgres(1).Caption = "Linea " & i
         Me.Refresh
         DoEvents
-        B = ComprobarRegistro(cad)
+        b = ComprobarRegistro(Cad)
         
-        Line Input #NF, cad
+        Line Input #NF, Cad
     Wend
     Close #NF
     
-    If cad <> "" Then
+    If Cad <> "" Then
         i = i + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
         lblProgres(1).Caption = "Linea " & i
         Me.Refresh
         DoEvents
-        B = ComprobarRegistro(cad)
+        b = ComprobarRegistro(Cad)
     End If
     
     
@@ -4185,16 +4185,16 @@ End Function
 
 ' Funcion para el calculo de gastos de las notas de las que se han insertado
 Private Sub CalcularGastosNotas(vNotas As String)
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo eCalcularGastosNotas
 
 
-    SQL = "select * from rclasifica where numnotac in (" & vNotas & ")"
+    Sql = "select * from rclasifica where numnotac in (" & vNotas & ")"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         CalcularGastos Rs
@@ -4209,7 +4209,7 @@ eCalcularGastosNotas:
 End Sub
 
 Private Sub CalcularGastos(ByRef Rs As ADODB.Recordset)
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim SQL1 As String
 Dim TotalEnvases As String
 Dim TotalCostes As String
@@ -4223,24 +4223,24 @@ Dim EurDesta As Currency
 Dim EurRecol As Currency
 Dim PrecAcarreo As Currency
 Dim i As Integer
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
     GasRecol = 0
     GasAcarreo = 0
     
-    SQL1 = "select eurdesta, eurecole from variedades where codvarie = " & DBSet(Rs!Codvarie, "N")
+    SQL1 = "select eurdesta, eurecole from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
     
-    Set RS1 = New ADODB.Recordset
-    RS1.Open SQL1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs1 = New ADODB.Recordset
+    Rs1.Open SQL1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not RS1.EOF Then
-        EurDesta = DBLet(RS1.Fields(0).Value, "N")
-        EurRecol = DBLet(RS1.Fields(1).Value, "N")
+    If Not Rs1.EOF Then
+        EurDesta = DBLet(Rs1.Fields(0).Value, "N")
+        EurRecol = DBLet(Rs1.Fields(1).Value, "N")
     End If
 
-    Set RS1 = Nothing
+    Set Rs1 = Nothing
 
     KilosNet = DBLet(Rs!KilosNet, "N")
 
@@ -4250,12 +4250,12 @@ Dim SQL As String
 
     'recolecta socio
     If DBLet(Rs!Recolect, "N") = 1 Then
-        SQL = "select sum(kilosnet) from rclasifica_clasif, rcalidad  where numnotac = " & DBSet(Rs!nunotac, "N")
-        SQL = SQL & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
-        SQL = SQL & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
-        SQL = SQL & " and rcalidad.gastosrec = 1"
+        Sql = "select sum(kilosnet) from rclasifica_clasif, rcalidad  where numnotac = " & DBSet(Rs!nunotac, "N")
+        Sql = Sql & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
+        Sql = Sql & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
+        Sql = Sql & " and rcalidad.gastosrec = 1"
         
-        KilosTria = TotalRegistros(SQL)
+        KilosTria = TotalRegistros(Sql)
         
         GasRecol = Round2(KilosTria * EurRecol, 2)
         
@@ -4275,19 +4275,19 @@ Dim SQL As String
     
 
     PrecAcarreo = 0
-    SQL = ""
-    SQL = DevuelveDesdeBDNew(cAgro, "rtarifatra", "preciokg", "codtarif", DBLet(Rs!Codtarif, "N"), "N")
-    If SQL <> "" Then
-        PrecAcarreo = CCur(SQL)
+    Sql = ""
+    Sql = DevuelveDesdeBDNew(cAgro, "rtarifatra", "preciokg", "codtarif", DBLet(Rs!Codtarif, "N"), "N")
+    If Sql <> "" Then
+        PrecAcarreo = CCur(Sql)
     End If
     
     If vParamAplic.Cooperativa = 4 Then
-        SQL = "select sum(kilosnet) from rclasifica_clasif, rcalidad  where numnotac = " & DBSet(Rs!NumNotac, "N")
-        SQL = SQL & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
-        SQL = SQL & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
-        SQL = SQL & " and rcalidad.gastosrec = 1"
+        Sql = "select sum(kilosnet) from rclasifica_clasif, rcalidad  where numnotac = " & DBSet(Rs!NumNotac, "N")
+        Sql = Sql & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
+        Sql = Sql & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
+        Sql = Sql & " and rcalidad.gastosrec = 1"
         
-        KilosTria = TotalRegistros(SQL)
+        KilosTria = TotalRegistros(Sql)
         
         If DBLet(Rs!trasnportadopor, "N") = 1 Then ' transportado por socio
             GasAcarreo = Round2(PrecAcarreo * KilosTria, 2)
@@ -4303,12 +4303,12 @@ Dim SQL As String
 '    Text1(16).Text = Format(GasRecol, "#,##0.00")
 '    Text1(15).Text = Format(GasAcarreo, "#,##0.00")
     
-    SQL = "update rclasifica set imprecol = " & DBSet(GasRecol, "N") & ", impacarr = " & DBSet(GasAcarreo, "N")
+    Sql = "update rclasifica set imprecol = " & DBSet(GasRecol, "N") & ", impacarr = " & DBSet(GasAcarreo, "N")
     If vParamAplic.Cooperativa = 4 Then
-        SQL = SQL & ", kilostrans = " & DBSet(KilosTria, "N")
+        Sql = Sql & ", kilostrans = " & DBSet(KilosTria, "N")
     End If
-    SQL = SQL & " where numnotac = " & DBSet(Rs!NumNotac, "N")
-    conn.Execute SQL
+    Sql = Sql & " where numnotac = " & DBSet(Rs!NumNotac, "N")
+    conn.Execute Sql
 
 End Sub
 
@@ -4317,13 +4317,13 @@ End Sub
 
 
 
-Private Function ComprobarRegistro(cad As String) As Boolean
-Dim SQL As String
+Private Function ComprobarRegistro(Cad As String) As Boolean
+Dim Sql As String
 Dim Id As String
 Dim Fecha As String
 Dim Usuario As String
 Dim Tipo As String
-Dim Tabla As String
+Dim tabla As String
 Dim Observaciones As String
 Dim SqlEjec As String
 Dim SqlActualizar As String
@@ -4336,36 +4336,36 @@ Dim Mens As String
 
     ComprobarRegistro = False
 
-    Id = RecuperaValorNew(cad, ";", 1)
-    Fecha = RecuperaValorNew(cad, ";", 2)
-    Usuario = RecuperaValorNew(cad, ";", 3)
-    Tipo = RecuperaValorNew(cad, ";", 4)
-    Tabla = RecuperaValorNew(cad, ";", 5)
-    SqlEjec = RecuperaValorNew(cad, ";", 6)
-    Observaciones = RecuperaValorNew(cad, ";", 7)
+    Id = RecuperaValorNew(Cad, ";", 1)
+    Fecha = RecuperaValorNew(Cad, ";", 2)
+    Usuario = RecuperaValorNew(Cad, ";", 3)
+    Tipo = RecuperaValorNew(Cad, ";", 4)
+    tabla = RecuperaValorNew(Cad, ";", 5)
+    SqlEjec = RecuperaValorNew(Cad, ";", 6)
+    Observaciones = RecuperaValorNew(Cad, ";", 7)
     
     
     Mens = ""
     
     ' id existente
-    SQL = "select count(*) from comunica_rec where id = " & DBSet(Id, "N")
-    If TotalRegistros(SQL) <> 0 Then
+    Sql = "select count(*) from comunica_rec where id = " & DBSet(Id, "N")
+    If TotalRegistros(Sql) <> 0 Then
         Mens = "Id Existente"
-        SQL = "insert into tmpinformes (codusu, fecha1, importe1, nombre1) values (" & _
+        Sql = "insert into tmpinformes (codusu, fecha1, importe1, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Fecha, "F") & "," & _
               DBSet(Id, "N") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     'Comprobamos fechas
     If Not IsDate(Fecha) Then
         Mens = "Fecha incorrecta"
-        SQL = "insert into tmpinformes (codusu, fecha1, importe1,  nombre1) values (" & _
+        Sql = "insert into tmpinformes (codusu, fecha1, importe1,  nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Fecha, "F") & "," & _
               DBSet(Id, "N") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     
@@ -4376,7 +4376,7 @@ Dim Mens As String
     
     If Mens = "" Then
         '[Monica]31/10/2018: en el caso de que sea una entrada de clasificacion me las guardo para calcular los costes
-        If Tabla = "rclasifica" And Tipo = "I" Then
+        If tabla = "rclasifica" And Tipo = "I" Then
             'Parte correspondiente a encontrar el numero de nota de la cadena de insert
             i = InStr(1, SqlEjec, "values (")
             If i > 0 Then
@@ -4387,11 +4387,11 @@ Dim Mens As String
             End If
         End If
     
-        SQL = "insert into comunica_rec (id,fechacreacion,usuariocreacion,tipo,tabla,sqlaejecutar,observaciones) values ("
-        SQL = SQL & DBSet(Id, "N") & "," & DBSet(Fecha, "FH") & "," & DBSet(Usuario, "T") & "," & DBSet(Tipo, "T") & ","
-        SQL = SQL & DBSet(Tabla, "T") & "," & DBSet(SqlEjec, "T") & "," & DBSet(Observaciones, "T") & ")"
+        Sql = "insert into comunica_rec (id,fechacreacion,usuariocreacion,tipo,tabla,sqlaejecutar,observaciones) values ("
+        Sql = Sql & DBSet(Id, "N") & "," & DBSet(Fecha, "FH") & "," & DBSet(Usuario, "T") & "," & DBSet(Tipo, "T") & ","
+        Sql = Sql & DBSet(tabla, "T") & "," & DBSet(SqlEjec, "T") & "," & DBSet(Observaciones, "T") & ")"
         
-        conn.Execute SQL
+        conn.Execute Sql
     
         SqlActualizar = "update comunica_rec set fechaactualizacion = " & DBSet(Now(), "FH")
         SqlActualizar = SqlActualizar & ", usuarioactualizacion = " & DBSet(vUsu.Nombre, "T")
@@ -4406,23 +4406,23 @@ Dim Mens As String
 eComprobarRegistro:
 '    MuestraError Err.Number, "Comprobar registro", Err.Description
     Mens = "Error sql"
-    SQL = "insert into tmpinformes (codusu, fecha1, importe1, nombre1, text1) values (" & _
+    Sql = "insert into tmpinformes (codusu, fecha1, importe1, nombre1, text1) values (" & _
               vUsu.Codigo & "," & DBSet(Fecha, "F") & "," & _
               DBSet(Id, "N") & "," & DBSet(Mens, "T") & "," & DBSet(Err.Description, "T") & ")"
-    conn.Execute SQL
+    conn.Execute Sql
 End Function
 
 
 
 Public Function ProcesarFicheroComunicacion() As Boolean
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim NumReg As Long
-Dim SQL As String
-Dim B As Boolean
+Dim Sql As String
+Dim b As Boolean
 
 Dim SqlActualizar As String
 Dim SqlEjecutar As String
@@ -4434,15 +4434,15 @@ Dim cadError As String
     
     cadError = ""
     
-    SQL = "select * from comunica_rec where fechaactualizacion is null"
-    SQL = SQL & " order by fechacreacion, tipo"
+    Sql = "select * from comunica_rec where fechaactualizacion is null"
+    Sql = Sql & " order by fechacreacion, tipo"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
     
-        cadError = "Id: " & Rs!Id & vbCrLf & "Tabla: " & Rs!Tabla & vbCrLf & "SQL: " & Rs!SQLAEJECUTAR
+        cadError = "Id: " & Rs!Id & vbCrLf & "Tabla: " & Rs!tabla & vbCrLf & "SQL: " & Rs!SQLAEJECUTAR
     
         SqlEjecutar = DBLet(Rs!SQLAEJECUTAR, "T")
         
@@ -4471,19 +4471,19 @@ End Function
 
 Public Function HayEntradasModificadas(nomFich As String) As Boolean
 Dim NF As Long
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim NumReg As Long
-Dim SQL As String
+Dim Sql As String
 Dim SQL1 As String
 Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo eProcesarFicheroComunicacion2
     
@@ -4495,7 +4495,7 @@ Dim B As Boolean
     NF = FreeFile
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
-    Line Input #NF, cad
+    Line Input #NF, Cad
     i = 0
     
     lblProgres(0).Caption = "Insertando en Tabla temporal: " & nomFich
@@ -4508,30 +4508,30 @@ Dim B As Boolean
     DoEvents
     ' PROCESO DEL FICHERO VENTAS.TXT
 
-    B = True
+    b = True
 
     While Not EOF(NF) 'And B
         i = i + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
         lblProgres(1).Caption = "Linea " & i
         Me.Refresh
         DoEvents
-        B = ComprobarEntrada(cad)
+        b = ComprobarEntrada(Cad)
         
-        Line Input #NF, cad
+        Line Input #NF, Cad
     Wend
     Close #NF
     
 '    If B Then
-        If cad <> "" Then
+        If Cad <> "" Then
             i = i + 1
             
-            Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+            Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
             lblProgres(1).Caption = "Linea " & i
             Me.Refresh
             DoEvents
-            B = ComprobarEntrada(cad)
+            b = ComprobarEntrada(Cad)
         End If
 '    End If
     
@@ -4546,13 +4546,13 @@ eProcesarFicheroComunicacion2:
     HayEntradasModificadas = False
 End Function
 
-Private Function ComprobarEntrada(cad As String) As Boolean
-Dim SQL As String
+Private Function ComprobarEntrada(Cad As String) As Boolean
+Dim Sql As String
 Dim Id As String
 Dim Fecha As String
 Dim Usuario As String
 Dim Tipo As String
-Dim Tabla As String
+Dim tabla As String
 Dim Observaciones As String
 Dim SqlEjec As String
 Dim SqlActualizar As String
@@ -4563,36 +4563,36 @@ Dim Mens As String
 
     ComprobarEntrada = False
 
-    Id = RecuperaValorNew(cad, ";", 1)
-    Fecha = RecuperaValorNew(cad, ";", 2)
-    Usuario = RecuperaValorNew(cad, ";", 3)
-    Tipo = RecuperaValorNew(cad, ";", 4)
-    Tabla = RecuperaValorNew(cad, ";", 5)
-    SqlEjec = RecuperaValorNew(cad, ";", 6)
-    Observaciones = RecuperaValorNew(cad, ";", 7)
+    Id = RecuperaValorNew(Cad, ";", 1)
+    Fecha = RecuperaValorNew(Cad, ";", 2)
+    Usuario = RecuperaValorNew(Cad, ";", 3)
+    Tipo = RecuperaValorNew(Cad, ";", 4)
+    tabla = RecuperaValorNew(Cad, ";", 5)
+    SqlEjec = RecuperaValorNew(Cad, ";", 6)
+    Observaciones = RecuperaValorNew(Cad, ";", 7)
     
     Mens = ""
     
     'damos aviso de las entradas comunicadas que han sido modificadas
-    If Tabla = "rclasifica" And Tipo = "U" Then
+    If tabla = "rclasifica" And Tipo = "U" Then
         Mens = "Entrada comunicada modif."
         
-        SQL = "insert into tmpinformes (codusu, fecha1, importe1,  nombre1, text1) values (" & _
+        Sql = "insert into tmpinformes (codusu, fecha1, importe1,  nombre1, text1) values (" & _
               vUsu.Codigo & "," & DBSet(Fecha, "F") & "," & _
               DBSet(Id, "N") & "," & DBSet(Mens, "T") & "," & DBSet(Observaciones, "T") & ")"
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     'idem de los albaranes
-    If Tabla = "albaran" And Tipo = "U" Then
+    If tabla = "albaran" And Tipo = "U" Then
         Mens = "Albarán comunicado modif."
         
-        SQL = "insert into tmpinformes (codusu, fecha1, importe1,  nombre1, text1) values (" & _
+        Sql = "insert into tmpinformes (codusu, fecha1, importe1,  nombre1, text1) values (" & _
               vUsu.Codigo & "," & DBSet(Fecha, "F") & "," & _
               DBSet(Id, "N") & "," & DBSet(Mens, "T") & "," & DBSet(Observaciones, "T") & ")"
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     ComprobarEntrada = True

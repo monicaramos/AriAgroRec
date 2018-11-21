@@ -1362,6 +1362,7 @@ Dim Linea As String
 Dim CalDestri As String
 Dim CalPeque As String
 
+Dim Fecha As String
 
     On Error GoTo eProcesarFicheroAlziraPrecalib
 
@@ -1422,6 +1423,9 @@ Dim CalPeque As String
             Kilos = Round2(CCur(Kilone), 2)
             KilosTot = KilosTot + Kilos
                     
+            '[Monica]21/11/2018: añadimos la fecha de clasificacion
+            Fecha = DBLet(Rs!Fecha, "F")
+                    
             If Situacion <> 2 Then
                 ' si hay nota asociada busco los datos
                 Sql = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(Rs1!codvarie, "N")
@@ -1453,7 +1457,7 @@ Dim CalPeque As String
                 ' si no hay nota asociada no puedo meter la clasificacion
                 Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
                 Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                Sql = Sql & "`observac`,`situacion`) values ("
+                Sql = Sql & "`observac`,`situacion`,`fechacla`) values ("
                 Sql = Sql & DBSet(Notaca, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
@@ -1463,14 +1467,16 @@ Dim CalPeque As String
                 Sql = Sql & DBSet(Podrid, "N") & ","
                 Sql = Sql & DBSet(Pequen, "N") & ","
                 Sql = Sql & DBSet(Observ, "T") & ","
-                Sql = Sql & DBSet(Situacion, "N") & ")"
+                Sql = Sql & DBSet(Situacion, "N") & ","
+                '[Monica]21/11/2018: añadimos la fecha de clasificacion
+                Sql = Sql & DBSet(Fecha, "F") & ")"
     
             Else
                 ' insertamos en las tablas intermedias: rclasifauto y rclasifauto_clasif
                 ' tabla: rclasifauto
                 Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
                 Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                Sql = Sql & "`observac`,`situacion`) values ("
+                Sql = Sql & "`observac`,`situacion`,`fechacla`) values ("
                 Sql = Sql & DBSet(Notaca, "N") & ","
                 Sql = Sql & DBSet(Rs1!Codsocio, "N") & ","
                 Sql = Sql & DBSet(Rs1!codCampo, "N") & ","
@@ -1480,7 +1486,10 @@ Dim CalPeque As String
                 Sql = Sql & DBSet(Podrid, "N") & ","
                 Sql = Sql & DBSet(Pequen, "N") & ","
                 Sql = Sql & DBSet(Observ, "T") & ","
-                Sql = Sql & DBSet(Situacion, "N") & ")"
+                Sql = Sql & DBSet(Situacion, "N") & ","
+                '[Monica]21/11/2018: añadimos la fecha de clasificacion
+                Sql = Sql & DBSet(Fecha, "F") & ")"
+                
             End If
             conn.Execute Sql
     
@@ -1554,9 +1563,6 @@ Dim CalPeque As String
                     conn.Execute SQLaux
                 End If
             End If
-            
-            
-            
             
             SQLaux = "select * from tmpcata order by codcalid"
     
@@ -2820,8 +2826,9 @@ Dim Nota As String
             Sql = "delete from tmpcalibrador"
             conn.Execute Sql
         
-            Sql = "insert into tmpcalibrador (numnota, nomcalid, kilos1) "
-            Sql = Sql & " select numnotac, concat(numcalid,'|',numcolor,'|',nomcalib,'|') nomcalid, sum(kilos) from tmpcalibradorcast where codusu = " & vUsu.Codigo
+            '[Monica]21/11/2018: me llevo la fecha maxima de fin de confeccion
+            Sql = "insert into tmpcalibrador (numnota, nomcalid, kilos1, fecha) "
+            Sql = Sql & " select numnotac, concat(numcalid,'|',numcolor,'|',nomcalib,'|') nomcalid, sum(kilos), max(fecha) from tmpcalibradorcast where codusu = " & vUsu.Codigo
             Sql = Sql & " and numnotac = " & DBSet(Rs!NumNotac, "N") & " and numcalib > -1 "
             Sql = Sql & " group by 1,2"
             

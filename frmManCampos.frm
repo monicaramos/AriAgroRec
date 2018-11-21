@@ -11411,7 +11411,12 @@ Dim Rs As ADODB.Recordset
     Combo1(0).ItemData(Combo1(0).NewIndex) = 1
     
     'tipo de recoleccion
-    Combo1(1).AddItem "Cooperativa"
+    '[Monica]19/11/2018: Ribercaqui quiere SAT
+    If vParamAplic.Cooperativa = 19 Then
+        Combo1(1).AddItem "SAT"
+    Else
+        Combo1(1).AddItem "Cooperativa"
+    End If
     Combo1(1).ItemData(Combo1(1).NewIndex) = 0
     Combo1(1).AddItem "Socio"
     Combo1(1).ItemData(Combo1(1).NewIndex) = 1

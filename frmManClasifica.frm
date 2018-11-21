@@ -5083,7 +5083,13 @@ Dim i As Integer
     
     
     'recolectado por
-    Combo1(1).AddItem "Cooperativa"
+    '[Monica]19/11/2018: para el caso de Ribercaqui quiere ver SAT en lugar de cooperativa
+    If vParamAplic.Cooperativa = 19 Then
+        Combo1(1).AddItem "SAT"
+    Else
+        Combo1(1).AddItem "Cooperativa"
+    End If
+    
     Combo1(1).ItemData(Combo1(1).NewIndex) = 0
     Combo1(1).AddItem "Socio"
     Combo1(1).ItemData(Combo1(1).NewIndex) = 1
