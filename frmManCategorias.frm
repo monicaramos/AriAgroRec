@@ -93,7 +93,7 @@ Begin VB.Form frmManCategorias
       Left            =   2475
       MaxLength       =   11
       TabIndex        =   2
-      Tag             =   "Precio|N|N|||rcategorias|precio|###,##0.00||"
+      Tag             =   "Precio|N|N|||rcategorias|precio|#,##0.0000||"
       Top             =   4950
       Width           =   1065
    End
@@ -557,7 +557,7 @@ Dim Modo As Byte
 Dim PrimeraVez As Boolean
 Dim indCodigo As Integer
 
-Dim i As Integer
+Dim I As Integer
 
 
 Private Sub PonerModo(vModo)
@@ -572,16 +572,16 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For i = 0 To 3
-        txtAux(i).visible = Not B
-        txtAux(i).BackColor = vbWhite
-    Next i
+    For I = 0 To 3
+        txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
+    Next I
     txtAux2(3).visible = Not B
     Me.btnBuscar(0).visible = Not B
     Combo1.visible = Not B
     
-    CmdAceptar.visible = Not B
-    CmdCancelar.visible = Not B
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -650,9 +650,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For i = 0 To 3
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To 3
+        txtAux(I).Text = ""
+    Next I
     txtAux2(3).Text = ""
     Combo1.ListIndex = 0
     
@@ -673,9 +673,9 @@ Private Sub BotonBuscar()
     CargaGrid "codcateg = -1"
     '*******************************************************************************
     'Buscar
-    For i = 0 To 3
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To 3
+        txtAux(I).Text = ""
+    Next I
     txtAux2(3).Text = ""
     Combo1.ListIndex = -1
 '    PosicionarCombo Combo1, "724"
@@ -686,13 +686,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -709,9 +709,9 @@ Private Sub BotonModificar()
     txtAux(3).Text = DataGrid1.Columns(5).Text
     txtAux2(3).Text = DataGrid1.Columns(6).Text
     ' ***** canviar-ho pel nom del camp del combo *********
-    i = adodc1.Recordset!Tipo
+    I = adodc1.Recordset!Tipo
     ' *****************************************************
-    PosicionarCombo Me.Combo1, i
+    PosicionarCombo Me.Combo1, I
 '    For j = 0 To Combo1.ListCount - 1
 '        If Combo1.ItemData(j) = i Then
 '            Combo1.ListIndex = j
@@ -731,9 +731,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To 3
-        txtAux(i).Top = alto
-    Next i
+    For I = 0 To 3
+        txtAux(I).Top = alto
+    Next I
     txtAux2(3).Top = alto
     Me.btnBuscar(0).Top = alto
     Combo1.Top = alto - 15
@@ -811,7 +811,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim i As Integer
+    Dim I As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -845,10 +845,10 @@ Private Sub cmdAceptar_Click()
             If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    i = adodc1.Recordset.Fields(0)
+                    I = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -883,7 +883,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -892,16 +892,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    i = 0
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -1133,7 +1133,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
         Case 1
             txtAux(Index).Text = UCase(txtAux(Index).Text)
         Case 2
-            PonerFormatoDecimal txtAux(Index), 3
+            PonerFormatoDecimal txtAux(Index), 7
         Case 3 'codigo de banco propio
             If txtAux(Index).Text = "" Then Exit Sub
             txtAux2(3).Text = PonerNombreDeCod(txtAux(Index), "banpropi", "nombanpr", "codbanpr", "N")

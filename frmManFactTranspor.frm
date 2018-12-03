@@ -169,16 +169,16 @@ Begin VB.Form frmManFactTranspor
       TabCaption(1)   =   "Rectificativa"
       TabPicture(1)   =   "frmManFactTranspor.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(14)"
-      Tab(1).Control(1)=   "imgFec(1)"
-      Tab(1).Control(2)=   "Label1(13)"
-      Tab(1).Control(3)=   "Label1(12)"
-      Tab(1).Control(4)=   "Label1(11)"
-      Tab(1).Control(5)=   "Text1(15)"
-      Tab(1).Control(6)=   "Text1(14)"
-      Tab(1).Control(7)=   "Text1(13)"
-      Tab(1).Control(8)=   "Text1(12)"
-      Tab(1).Control(9)=   "Combo1(2)"
+      Tab(1).Control(0)=   "Combo1(2)"
+      Tab(1).Control(1)=   "Text1(12)"
+      Tab(1).Control(2)=   "Text1(13)"
+      Tab(1).Control(3)=   "Text1(14)"
+      Tab(1).Control(4)=   "Text1(15)"
+      Tab(1).Control(5)=   "Label1(11)"
+      Tab(1).Control(6)=   "Label1(12)"
+      Tab(1).Control(7)=   "Label1(13)"
+      Tab(1).Control(8)=   "imgFec(1)"
+      Tab(1).Control(9)=   "Label1(14)"
       Tab(1).ControlCount=   10
       Begin VB.ComboBox Combo1 
          BeginProperty Font 
@@ -1062,7 +1062,7 @@ Begin VB.Form frmManFactTranspor
          Left            =   150
          MaxLength       =   10
          TabIndex        =   2
-         Tag             =   "Cod.Transportista|T|N|||rfacttra|codtrans||S|"
+         Tag             =   "Cod.Transportista|T1|N|||rfacttra|codtrans||S|"
          Text            =   "Text1"
          Top             =   870
          Width           =   1290
@@ -1860,7 +1860,7 @@ Option Explicit
 Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que devuelva, empipados
 Public Event DatoSeleccionado(CadenaSeleccion As String)
 
-Public numalbar As String  ' venimos de pedidos para insertar envases paletizacion
+Public NumAlbar As String  ' venimos de pedidos para insertar envases paletizacion
 
 'Si se llama de la busqueda en el frmAlmMovimArticulos se accede
 'a las tablas del Albaran o de Facturas de movimiento seleccionado (solo consulta)
@@ -1957,7 +1957,7 @@ Private Sub btnBuscar_Click(Index As Integer)
             frmMens.Show vbModal
             Set frmMens = Nothing
             
-            PonerFoco txtaux1(3)
+            PonerFoco txtAux1(3)
     End Select
     If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
 End Sub
@@ -2229,11 +2229,11 @@ Dim J As Byte
         End If
 
         For J = 3 To 4
-            txtaux1(J).Text = DataGrid5.Columns(J).Text
+            txtAux1(J).Text = DataGrid5.Columns(J).Text
         Next J
 
         For J = 5 To 9
-            txtaux1(J).Text = DataGrid5.Columns(J + 1).Text
+            txtAux1(J).Text = DataGrid5.Columns(J + 1).Text
         Next J
 
         ModificaLineas = 2 'Modificar
@@ -2246,7 +2246,7 @@ Dim J As Byte
         DataGrid5.Enabled = True
 
 '            PonerBotonCabecera False
-        PonerFoco txtaux1(9)
+        PonerFoco txtAux1(9)
         Me.DataGrid5.Enabled = False
 
 
@@ -2264,9 +2264,9 @@ Dim B As Boolean
             DeseleccionaGrid Me.DataGrid5
             B = (xModo = 1)
              For jj = 3 To 10
-                txtaux1(jj).Height = DataGrid5.RowHeight - 10
-                txtaux1(jj).Top = alto + 5
-                txtaux1(jj).visible = B
+                txtAux1(jj).Height = DataGrid5.RowHeight - 10
+                txtAux1(jj).Top = alto + 5
+                txtAux1(jj).visible = B
             Next jj
 '            btnBuscar(1).Height = DataGrid5.RowHeight - 10
 '            btnBuscar(1).Top = alto + 5
@@ -2627,19 +2627,19 @@ End Sub
 
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-    txtaux1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'numero de albaran
-    FormateaCampo txtaux1(3)
-    txtaux1(4).Text = RecuperaValor(CadenaSeleccion, 2) 'fecha de albaran
-    FormateaCampo txtaux1(4)
-    txtaux1(5).Text = RecuperaValor(CadenaSeleccion, 3) 'variedad
-    txtaux1(6).Text = RecuperaValor(CadenaSeleccion, 4) 'campo
-    FormateaCampo txtaux1(6)
-    txtaux1(7).Text = RecuperaValor(CadenaSeleccion, 5) 'numero de nota
-    FormateaCampo txtaux1(7)
-    txtaux1(8).Text = RecuperaValor(CadenaSeleccion, 6) 'kilos
-    FormateaCampo txtaux1(8)
-    txtaux1(9).Text = RecuperaValor(CadenaSeleccion, 7) 'importe
-    FormateaCampo txtaux1(9)
+    txtAux1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'numero de albaran
+    FormateaCampo txtAux1(3)
+    txtAux1(4).Text = RecuperaValor(CadenaSeleccion, 2) 'fecha de albaran
+    FormateaCampo txtAux1(4)
+    txtAux1(5).Text = RecuperaValor(CadenaSeleccion, 3) 'variedad
+    txtAux1(6).Text = RecuperaValor(CadenaSeleccion, 4) 'campo
+    FormateaCampo txtAux1(6)
+    txtAux1(7).Text = RecuperaValor(CadenaSeleccion, 5) 'numero de nota
+    FormateaCampo txtAux1(7)
+    txtAux1(8).Text = RecuperaValor(CadenaSeleccion, 6) 'kilos
+    FormateaCampo txtAux1(8)
+    txtAux1(9).Text = RecuperaValor(CadenaSeleccion, 7) 'importe
+    FormateaCampo txtAux1(9)
 End Sub
 
 Private Sub frmTIva_DatoSeleccionado(CadenaSeleccion As String)
@@ -3262,17 +3262,17 @@ Dim b1 As Boolean
          
     BloquearTxt Text1(2), (Modo <> 1) And Modo <> 3 '<= 2)
     
-    For I = 0 To txtaux1.Count - 1
-         BloquearTxt txtaux1(I), True
-         txtaux1(I).visible = False
+    For I = 0 To txtAux1.Count - 1
+         BloquearTxt txtAux1(I), True
+         txtAux1(I).visible = False
     Next
     
     
     'Si no es modo lineas Boquear los TxtAux
-    For I = 3 To txtaux1.Count - 1
+    For I = 3 To txtAux1.Count - 1
         If I <> 5 Then
-            txtaux1(I).visible = (Modo = 1)
-            BloquearTxt txtaux1(I), Not (Modo = 1)
+            txtAux1(I).visible = (Modo = 1)
+            BloquearTxt txtAux1(I), Not (Modo = 1)
         End If
     Next I
 
@@ -3298,7 +3298,7 @@ Dim b1 As Boolean
     '---------------------------------------------
     B = (Modo <> 0 And Modo <> 2)
     cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdAceptar.visible = B
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     
@@ -3424,12 +3424,12 @@ Dim I As Byte
     DatosOkLinea = False
     B = True
 
-    For I = 0 To txtaux1.Count - 1
+    For I = 0 To txtAux1.Count - 1
         If I = 4 Or I = 6 Or I = 7 Then
-            If txtaux1(I).Text = "" Then
-                MsgBox "El campo " & txtaux1(I).Tag & " no puede ser nulo", vbExclamation
+            If txtAux1(I).Text = "" Then
+                MsgBox "El campo " & txtAux1(I).Tag & " no puede ser nulo", vbExclamation
                 B = False
-                PonerFoco txtaux1(I)
+                PonerFoco txtAux1(I)
                 Exit Function
             End If
         End If
@@ -3444,7 +3444,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -3452,7 +3452,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     End If
 End Sub
 
@@ -3669,7 +3669,7 @@ Private Sub PonerBotonCabecera(B As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
     On Error Resume Next
 
-    Me.cmdAceptar.visible = Not B
+    Me.CmdAceptar.visible = Not B
     Me.cmdCancelar.visible = Not B
     Me.cmdRegresar.visible = B
     Me.cmdRegresar.Caption = "Cabecera"
@@ -3756,7 +3756,7 @@ Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtAux1_GotFocus(Index As Integer)
-    ConseguirFocoLin txtaux1(Index)
+    ConseguirFocoLin txtAux1(Index)
 End Sub
 
 Private Sub txtAux1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -3775,38 +3775,38 @@ Dim cadMen As String
 Dim Sql As String
 
     'Quitar espacios en blanco
-    If Not PerderFocoGnralLineas(txtaux1(Index), ModificaLineas) Then Exit Sub
+    If Not PerderFocoGnralLineas(txtAux1(Index), ModificaLineas) Then Exit Sub
 
     Select Case Index
         Case 4 ' calidad
-            If txtaux1(Index) <> "" Then
-                Text2(6) = DevuelveDesdeBDNew(cAgro, "rcalidad", "nomcalid", "codvarie", txtaux1(5), "N", , "codcalid", txtaux1(6).Text, "N")
+            If txtAux1(Index) <> "" Then
+                Text2(6) = DevuelveDesdeBDNew(cAgro, "rcalidad", "nomcalid", "codvarie", txtAux1(5), "N", , "codcalid", txtAux1(6).Text, "N")
                 If Text2(6).Text = "" Then
-                    cadMen = "No existe la Calidad: " & txtaux1(Index).Text & vbCrLf
+                    cadMen = "No existe la Calidad: " & txtAux1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearla?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
                         Set frmCal = New frmManCalidades
                         frmCal.DatosADevolverBusqueda = "2|3|"
-                        frmCal.ParamVariedad = txtaux1(5).Text
-                        frmCal.NuevoCodigo = txtaux1(6).Text
+                        frmCal.ParamVariedad = txtAux1(5).Text
+                        frmCal.NuevoCodigo = txtAux1(6).Text
                         TerminaBloquear
                         frmCal.Show vbModal
                         Set frmCal = Nothing
                         If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
-                        PonerFoco txtaux1(6)
+                        PonerFoco txtAux1(6)
                     Else
-                        txtaux1(Index).Text = ""
+                        txtAux1(Index).Text = ""
                     End If
-                    PonerFoco txtaux1(Index)
+                    PonerFoco txtAux1(Index)
                 End If
             Else
                 Text2(6).Text = ""
             End If
 
         Case 7 'peso neto
-            If txtaux1(Index) <> "" Then
-                PonerFormatoEntero txtaux1(Index)
-                cmdAceptar.SetFocus
+            If txtAux1(Index) <> "" Then
+                PonerFormatoEntero txtAux1(Index)
+                CmdAceptar.SetFocus
             End If
 
     End Select
@@ -4054,9 +4054,9 @@ End Sub
 
 Private Sub BotonImprimir()
 Dim cadFormula As String
-Dim CadParam As String
+Dim cadParam As String
 Dim numParam As Byte
-Dim cadSelect As String 'select para insertar en tabla temporal
+Dim cadselect As String 'select para insertar en tabla temporal
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -4069,8 +4069,8 @@ Dim Tipo As Byte
     End If
     
     cadFormula = ""
-    CadParam = ""
-    cadSelect = ""
+    cadParam = ""
+    cadselect = ""
     numParam = 0
     
         
@@ -4082,14 +4082,14 @@ Dim Tipo As Byte
     devuelve = "{" & NombreTabla & ".codtipom}='" & Mid(Combo1(0).Text, 1, 3) & "'"
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     devuelve = "codtipom = '" & Mid(Combo1(0).Text, 1, 3) & "'"
-    If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+    If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
     
     Select Case Mid(Combo1(0).Text, 1, 3)
         Case "FTR"
             indRPT = 49
     End Select
     
-    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
       
     'Nombre fichero .rpt a Imprimir
     frmImprimir.NombreRPT = nomDocu
@@ -4099,30 +4099,30 @@ Dim Tipo As Byte
     devuelve = "{" & NombreTabla & ".numfactu}=" & Val(Text1(0).Text)
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     devuelve = "numfactu = " & Val(Text1(0).Text)
-    If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+    If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
     
     'Fecha Factura
     devuelve = "{" & NombreTabla & ".fecfactu}=Date(" & Year(Text1(1).Text) & "," & Month(Text1(1).Text) & "," & Day(Text1(1).Text) & ")"
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     devuelve = "fecfactu = " & DBSet(Text1(1).Text, "F")
-    If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+    If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
     
     'Transportista
     devuelve = "{" & NombreTabla & ".codtrans}=""" & Trim(Text1(2).Text) & """"
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     devuelve = "codtrans = '" & Trim(Text1(2).Text) & "'"
-    If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+    If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
     
     
-    CadParam = CadParam & "pDuplicado=1|"
+    cadParam = cadParam & "pDuplicado=1|"
     numParam = numParam + 1
     
     
-    If Not HayRegParaInforme(NombreTabla, cadSelect) Then Exit Sub
+    If Not HayRegParaInforme(NombreTabla, cadselect) Then Exit Sub
      
     With frmImprimir
             .FormulaSeleccion = cadFormula
-            .OtrosParametros = CadParam
+            .OtrosParametros = cadParam
             .NumeroParametros = numParam
             .SoloImprimir = False
             .EnvioEMail = False
@@ -4133,7 +4133,7 @@ Dim Tipo As Byte
     End With
 
     If frmVisReport.EstaImpreso Then
-        ActualizarRegistros "rfacttra", cadSelect
+        ActualizarRegistros "rfacttra", cadselect
     End If
 End Sub
 
@@ -4485,13 +4485,13 @@ Dim I As Integer
 
             LimpiarCamposLin "FrameAlbaranes"
 
-            txtaux1(0).Text = Mid(Combo1(0).Text, 1, 3) 'tipo de movimiento
-            txtaux1(1).Text = Text1(0).Text 'nro de factura
-            txtaux1(2).Text = Text1(1).Text 'fecha de factura
+            txtAux1(0).Text = Mid(Combo1(0).Text, 1, 3) 'tipo de movimiento
+            txtAux1(1).Text = Text1(0).Text 'nro de factura
+            txtAux1(2).Text = Text1(1).Text 'fecha de factura
             
 '            BloquearTxt txtAux(14), False
 '                    BloquearTxt txtaux(12), False
-            PonerFoco txtaux1(3)
+            PonerFoco txtAux1(3)
 
 
     End Select

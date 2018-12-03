@@ -1888,7 +1888,7 @@ Dim cadTabla As String
 Dim Sql As String
 Dim cadTitulo As String
 Dim cadNombreRPT As String
-Dim b As Boolean
+Dim B As Boolean
 
     If Option2(0) Then
         If Me.ChkEntradas.Value Then
@@ -2391,7 +2391,7 @@ Dim Situacion As String
     
     InicializarVbles
     
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
     'si es listado de CARTAS/eMAIL a socios comprobar que se ha seleccionado
     'una carta para imprimir
@@ -2953,13 +2953,13 @@ End Sub
 
 
 Private Sub imgCheck_Click(Index As Integer)
-Dim b As Boolean
+Dim B As Boolean
 Dim TotalArray As Integer
 
     'En el listview3
-    b = Index = 1
+    B = Index = 1
     For TotalArray = 0 To ListTipoMov(1000).ListCount - 1
-        ListTipoMov(1000).Selected(TotalArray) = b
+        ListTipoMov(1000).Selected(TotalArray) = B
         If (TotalArray Mod 50) = 0 Then DoEvents
     Next TotalArray
     
@@ -3157,14 +3157,14 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscarOfer_Click (indice)
+    imgBuscarOfer_Click (Indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFecha_Click (indice)
+    imgFecha_Click (Indice)
 End Sub
 
 
@@ -3241,17 +3241,17 @@ Dim EsNomCod As Boolean
     End If
 End Sub
 
-Private Function AnyadirParametroDH(Cad As String, indD As Byte, indH As Byte) As String
+Private Function AnyadirParametroDH(cad As String, indD As Byte, indH As Byte) As String
 On Error Resume Next
     If txtCodigo(indD).Text <> "" Then
-        Cad = Cad & "desde " & txtCodigo(indD).Text
-        If txtNombre(indD).Text <> "" Then Cad = Cad & " - " & txtNombre(indD).Text
+        cad = cad & "desde " & txtCodigo(indD).Text
+        If txtNombre(indD).Text <> "" Then cad = cad & " - " & txtNombre(indD).Text
     End If
     If txtCodigo(indH).Text <> "" Then
-        Cad = Cad & "  hasta " & txtCodigo(indH).Text
-        If txtNombre(indH).Text <> "" Then Cad = Cad & " - " & txtNombre(indH).Text
+        cad = cad & "  hasta " & txtCodigo(indH).Text
+        If txtNombre(indH).Text <> "" Then cad = cad & " - " & txtNombre(indH).Text
     End If
-    AnyadirParametroDH = Cad
+    AnyadirParametroDH = cad
     If Err.Number <> 0 Then Err.Clear
 End Function
 
@@ -3277,7 +3277,7 @@ End Sub
 
 Private Function PonerDesdeHasta(campo As String, Tipo As String, indD As Byte, indH As Byte, param As String) As Boolean
 Dim devuelve As String
-Dim Cad As String
+Dim cad As String
 
     PonerDesdeHasta = False
     devuelve = CadenaDesdeHasta(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
@@ -3289,8 +3289,8 @@ Dim Cad As String
         If Not AnyadirAFormula(cadselect, devuelve) Then Exit Function
     Else
         'Fecha para la Base de Datos
-        Cad = CadenaDesdeHastaBD(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
-        If Not AnyadirAFormula(cadselect, Cad) Then Exit Function
+        cad = CadenaDesdeHastaBD(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
+        If Not AnyadirAFormula(cadselect, cad) Then Exit Function
     End If
     
     If devuelve <> "" Then
@@ -3329,8 +3329,8 @@ Dim cont As Integer
 Dim Direccion As String
 
 Dim NF As Integer
-Dim Cad As String
-Dim b As Boolean
+Dim cad As String
+Dim B As Boolean
 
 On Error GoTo EEnviar
 
@@ -3357,10 +3357,10 @@ On Error GoTo EEnviar
     cont = 0
     lista = ""
     
-    b = True
+    B = True
     
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
     'para cada socio enviamos un SMS
         Cad1 = DBLet(Rs.Fields(2), "T") 'movil socio
         
@@ -3386,11 +3386,11 @@ On Error GoTo EEnviar
     
             NF = FreeFile
             Open App.Path & "\RESULT.TXT" For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
-            Cad = ""
-            Line Input #NF, Cad
+            cad = ""
+            Line Input #NF, cad
             Close NF
 
-            Select Case Mid(Cad, 1, 2)
+            Select Case Mid(cad, 1, 2)
                 Case "OK"
                     espera 2
                 
@@ -3409,11 +3409,11 @@ On Error GoTo EEnviar
                     MsgBox "Error en el Login, usuario o clave incorrectas", vbExclamation
                     EstaOk = False
                 Case Else
-                    If Mid(Cad, 1, 12) = "Sin Creditos" Then
+                    If Mid(cad, 1, 12) = "Sin Creditos" Then
                         MsgBox "No tiene créditos. Revise", vbExclamation
-                        b = False
+                        B = False
                     Else
-                        If MsgBox("Error en el envio de mensaje al socio " & DBLet(Rs.Fields(0), "N") & ". ¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then b = False
+                        If MsgBox("Error en el envio de mensaje al socio " & DBLet(Rs.Fields(0), "N") & ". ¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then B = False
                     End If
                     EstaOk = False
             End Select
@@ -3696,35 +3696,35 @@ End Sub
 
 
 Private Sub CargarIconos()
-Dim i As Integer
+Dim I As Integer
 
     Me.imgBuscarOfer(35).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    For i = 37 To 39
-        Me.imgBuscarOfer(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next i
-    For i = 56 To 57
-        Me.imgBuscarOfer(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next i
+    For I = 37 To 39
+        Me.imgBuscarOfer(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    For I = 56 To 57
+        Me.imgBuscarOfer(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
 
-    For i = 0 To imgAyuda.Count - 1
-        imgAyuda(i).Picture = frmPpal.ImageListB.ListImages(10).Picture
-    Next i
+    For I = 0 To imgAyuda.Count - 1
+        imgAyuda(I).Picture = frmPpal.ImageListB.ListImages(10).Picture
+    Next I
 
 
 
 End Sub
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
 'Comprobar que los datos de la cabecera son correctos antes de Insertar o Modificar
 'la cabecera del Pedido
-Dim b As Boolean
+Dim B As Boolean
 
-    b = True
+    B = True
     
     '[Monica]11/11/2013: dejamos poner unicamente las fases de Castelduc
     If vParamAplic.Cooperativa = 5 Then
         If Combo1(0).ListIndex = -1 And ComprobarCero(txtCodigo(58).Text) = 0 Then
-            b = False
+            B = False
             MsgBox "Debe introducir sección o fase. Revise.", vbExclamation
             PonerFocoCmb Combo1(0)
         End If
@@ -3733,61 +3733,61 @@ Dim b As Boolean
     '[Monica]11/11/2013: en Castelduc dejamos poner unicamente las fases
     If txtCodigo(58).Text = "" And vParamAplic.Cooperativa <> 5 Then
         MsgBox "Debe introducir un valor en la Sección. Revise.", vbExclamation
-        b = False
+        B = False
         PonerFoco txtCodigo(58)
     End If
     
     
-    If b And Opcionlistado = 306 And chkMail(1).Value = 1 Then
+    If B And Opcionlistado = 306 And chkMail(1).Value = 1 Then
         If txtCodigo(0).Text = "" Then
             MsgBox "Debe introducir un valor en la Fecha del SMS. Revise.", vbExclamation
-            b = False
+            B = False
             PonerFoco txtCodigo(0)
         End If
-        If b And txtCodigo(1).Text = "" Then
+        If B And txtCodigo(1).Text = "" Then
             MsgBox "Debe introducir un valor en la Hora del SMS. Revise.", vbExclamation
-            b = False
+            B = False
             PonerFoco txtCodigo(1)
         End If
-        If b And txtCodigo(2).Text = "" Then
+        If B And txtCodigo(2).Text = "" Then
             MsgBox "Debe introducir un valor en el Texto del SMS. Revise.", vbExclamation
-            b = False
+            B = False
             PonerFoco txtCodigo(2)
         End If
     End If
     
     '[Monica]19/10/2012: comprobamos que si vamos a enviar mas de un documento es por email.
-    If b And Opcionlistado = 306 Then
+    If B And Opcionlistado = 306 Then
         Documento = DevuelveDesdeBDNew(cAgro, "scartas", "documrpt", "codcarta", txtCodigo(63).Text, "N")
         If Documento <> "" Then
             If InStr(1, Documento, ",") <> 0 And chkMail(0).Value = 0 Then
                 MsgBox "Para enviar más de un archivo adjunto debe seleccionar sólo por email.", vbExclamation
-                b = False
+                B = False
                 PonerFocoChk chkMail(0)
             Else
                 'cualquier otro tipo de documento se tiene que poder enviar por email
                 If InStr(1, Documento, ".rpt") = 0 And chkMail(0).Value = 0 Then
                     MsgBox "Para enviar más de un archivo adjunto debe seleccionar sólo por email.", vbExclamation
-                    b = False
+                    B = False
                     PonerFocoChk chkMail(0)
                 End If
             End If
             
-            If b And InStr(1, Documento, ".rpt") = 0 Then
+            If B And InStr(1, Documento, ".rpt") = 0 Then
                 'si no es un rpt a ejecutar de la carpeta de informes comprobamos que exista la carpeta de cartas
                 If Dir(App.Path & "\cartas", vbDirectory) = "" Then
                     MsgBox "No existe el directorio de cartas donde se introducen los archivos a adjuntar. Revise.", vbExclamation
-                    b = False
+                    B = False
                 End If
-                If b And Dir(App.Path & "\cartas\*.*", vbArchive) = "" Then
+                If B And Dir(App.Path & "\cartas\*.*", vbArchive) = "" Then
                     MsgBox "No existen archivos en el directorio cartas a adjuntar. Revise.", vbExclamation
-                    b = False
+                    B = False
                 End If
             End If
         End If
     End If
     
-    DatosOk = b
+    DatosOK = B
     
 End Function
 
@@ -3970,18 +3970,18 @@ EGeneracionEnvioMail:
 End Function
 
 Private Sub EsperaFichero()
-Dim Cad As String
+Dim cad As String
 Dim T1 As Single
 
     On Error GoTo eEsperaFichero
     
     T1 = Timer
     Do
-        Cad = Dir(App.Path & "\docum.pdf", vbArchive)
-        If Cad = "" Then
-            If Timer - T1 > 2 Then Cad = "SAL"
+        cad = Dir(App.Path & "\docum.pdf", vbArchive)
+        If cad = "" Then
+            If Timer - T1 > 2 Then cad = "SAL"
         End If
-    Loop Until Cad <> ""
+    Loop Until cad <> ""
     
 eEsperaFichero:
     If Err.Number <> 0 Then Err.Clear
@@ -4005,7 +4005,7 @@ Private Sub PonerTamnyosMail(peque As Boolean)
     DoEvents
 End Sub
 
-Private Sub CargarComboTipoMov(indice As Integer)
+Private Sub CargarComboTipoMov(Indice As Integer)
 '### Combo Tipo Movimiento
 'Cargaremos el combo, o bien desde una tabla o con valores fijos
 ' El estilo del combo debe de ser 2 - Dropdown List
@@ -4015,7 +4015,7 @@ Private Sub CargarComboTipoMov(indice As Integer)
 'Lo cargamos con los valores de la tabla stipom que tengan tipo de documento=Albaranes (tipodocu=1)
 Dim Sql As String
 Dim Rs As ADODB.Recordset
-Dim i As Byte
+Dim I As Byte
 
     On Error GoTo ECargaCombo
     
@@ -4023,15 +4023,15 @@ Dim i As Byte
     Sql = "select codtipom, nomtipom from usuarios.stipom where (tipodocu <> 0) and tipodocu <> 12"
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    i = 0
+    I = 0
     
-    ListTipoMov(indice).Clear
+    ListTipoMov(Indice).Clear
     
     'LOS TIKCETS NO LOS ENVIO POR MAIL
     While Not Rs.EOF
-        ListTipoMov(indice).AddItem Rs.Fields(0).Value & "-" & Rs.Fields(1).Value
+        ListTipoMov(Indice).AddItem Rs.Fields(0).Value & "-" & Rs.Fields(1).Value
         'ListTipoMov(indice).List (ListTipoMov(indice).NewIndex)
-        ListTipoMov(indice).Selected((ListTipoMov(indice).NewIndex)) = True
+        ListTipoMov(Indice).Selected((ListTipoMov(Indice).NewIndex)) = True
         
         Rs.MoveNext
     Wend
@@ -4073,7 +4073,7 @@ End Function
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim i As Integer
+Dim I As Integer
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 
@@ -4103,8 +4103,8 @@ End Sub
 
 Public Function ProcesarFicheroComunicacion2(nomFich As String) As Boolean
 Dim NF As Long
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim Rs1 As ADODB.Recordset
@@ -4115,7 +4115,7 @@ Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo eProcesarFicheroComunicacion2
     
@@ -4127,8 +4127,8 @@ Dim b As Boolean
     NF = FreeFile
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
-    Line Input #NF, Cad
-    i = 0
+    Line Input #NF, cad
+    I = 0
     
     lblProgres(0).Caption = "Insertando en Tabla temporal: " & nomFich
     longitud = FileLen(nomFich)
@@ -4140,29 +4140,29 @@ Dim b As Boolean
     DoEvents
     ' PROCESO DEL FICHERO VENTAS.TXT
 
-    b = True
+    B = True
 
     While Not EOF(NF)
-        i = i + 1
+        I = I + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & i
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & I
         Me.Refresh
         DoEvents
-        b = ComprobarRegistro(Cad)
+        B = ComprobarRegistro(cad)
         
-        Line Input #NF, Cad
+        Line Input #NF, cad
     Wend
     Close #NF
     
-    If Cad <> "" Then
-        i = i + 1
+    If cad <> "" Then
+        I = I + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & i
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & I
         Me.Refresh
         DoEvents
-        b = ComprobarRegistro(Cad)
+        B = ComprobarRegistro(cad)
     End If
     
     
@@ -4221,8 +4221,9 @@ Dim KilosNet As Long
 Dim KilosTrans As Long
 Dim EurDesta As Currency
 Dim EurRecol As Currency
+Dim EurSegSoc As Currency
 Dim PrecAcarreo As Currency
-Dim i As Integer
+Dim I As Integer
 Dim Sql As String
 
     On Error Resume Next
@@ -4230,7 +4231,8 @@ Dim Sql As String
     GasRecol = 0
     GasAcarreo = 0
     
-    SQL1 = "select eurdesta, eurecole from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+    '[Monica]30/11/2018: para el caso de picassent los gastos de recoleccion se calculan con eursegsoc
+    SQL1 = "select eurdesta, eurecole, eursegsoc from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
     
     Set Rs1 = New ADODB.Recordset
     Rs1.Open SQL1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -4238,6 +4240,7 @@ Dim Sql As String
     If Not Rs1.EOF Then
         EurDesta = DBLet(Rs1.Fields(0).Value, "N")
         EurRecol = DBLet(Rs1.Fields(1).Value, "N")
+        EurSegSoc = DBLet(Rs1.Fields(2).Value, "N")
     End If
 
     Set Rs1 = Nothing
@@ -4273,6 +4276,8 @@ Dim Sql As String
     
     If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then GasRecol = Round2(KilosNet * EurDesta, 2)
     
+    '[Monica]30/11/2018: los gastos de recoleccion de picassent se calculan con el eursegsoc
+    If vParamAplic.Cooperativa = 2 Then GasRecol = Round2(KilosNet * EurSegSoc, 2)
 
     PrecAcarreo = 0
     Sql = ""
@@ -4317,7 +4322,7 @@ End Sub
 
 
 
-Private Function ComprobarRegistro(Cad As String) As Boolean
+Private Function ComprobarRegistro(cad As String) As Boolean
 Dim Sql As String
 Dim Id As String
 Dim Fecha As String
@@ -4327,7 +4332,7 @@ Dim tabla As String
 Dim Observaciones As String
 Dim SqlEjec As String
 Dim SqlActualizar As String
-Dim i As Long
+Dim I As Long
 Dim vAux As String
 Dim vNota As String
 Dim Mens As String
@@ -4336,13 +4341,13 @@ Dim Mens As String
 
     ComprobarRegistro = False
 
-    Id = RecuperaValorNew(Cad, ";", 1)
-    Fecha = RecuperaValorNew(Cad, ";", 2)
-    Usuario = RecuperaValorNew(Cad, ";", 3)
-    Tipo = RecuperaValorNew(Cad, ";", 4)
-    tabla = RecuperaValorNew(Cad, ";", 5)
-    SqlEjec = RecuperaValorNew(Cad, ";", 6)
-    Observaciones = RecuperaValorNew(Cad, ";", 7)
+    Id = RecuperaValorNew(cad, ";", 1)
+    Fecha = RecuperaValorNew(cad, ";", 2)
+    Usuario = RecuperaValorNew(cad, ";", 3)
+    Tipo = RecuperaValorNew(cad, ";", 4)
+    tabla = RecuperaValorNew(cad, ";", 5)
+    SqlEjec = RecuperaValorNew(cad, ";", 6)
+    Observaciones = RecuperaValorNew(cad, ";", 7)
     
     
     Mens = ""
@@ -4378,10 +4383,10 @@ Dim Mens As String
         '[Monica]31/10/2018: en el caso de que sea una entrada de clasificacion me las guardo para calcular los costes
         If tabla = "rclasifica" And Tipo = "I" Then
             'Parte correspondiente a encontrar el numero de nota de la cadena de insert
-            i = InStr(1, SqlEjec, "values (")
-            If i > 0 Then
-                i = i + 8
-                vAux = Mid(SqlEjec, i)
+            I = InStr(1, SqlEjec, "values (")
+            If I > 0 Then
+                I = I + 8
+                vAux = Mid(SqlEjec, I)
                 vNota = RecuperaValorNew(vAux, ",", 1)
                 NotasParaGastos = NotasParaGastos & "," & vNota
             End If
@@ -4415,14 +4420,14 @@ End Function
 
 
 Public Function ProcesarFicheroComunicacion() As Boolean
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim Rs1 As ADODB.Recordset
 Dim NumReg As Long
 Dim Sql As String
-Dim b As Boolean
+Dim B As Boolean
 
 Dim SqlActualizar As String
 Dim SqlEjecutar As String
@@ -4471,8 +4476,8 @@ End Function
 
 Public Function HayEntradasModificadas(nomFich As String) As Boolean
 Dim NF As Long
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim Rs1 As ADODB.Recordset
@@ -4483,7 +4488,7 @@ Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo eProcesarFicheroComunicacion2
     
@@ -4495,8 +4500,8 @@ Dim b As Boolean
     NF = FreeFile
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
-    Line Input #NF, Cad
-    i = 0
+    Line Input #NF, cad
+    I = 0
     
     lblProgres(0).Caption = "Insertando en Tabla temporal: " & nomFich
     longitud = FileLen(nomFich)
@@ -4508,30 +4513,30 @@ Dim b As Boolean
     DoEvents
     ' PROCESO DEL FICHERO VENTAS.TXT
 
-    b = True
+    B = True
 
     While Not EOF(NF) 'And B
-        i = i + 1
+        I = I + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & i
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & I
         Me.Refresh
         DoEvents
-        b = ComprobarEntrada(Cad)
+        B = ComprobarEntrada(cad)
         
-        Line Input #NF, Cad
+        Line Input #NF, cad
     Wend
     Close #NF
     
 '    If B Then
-        If Cad <> "" Then
-            i = i + 1
+        If cad <> "" Then
+            I = I + 1
             
-            Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-            lblProgres(1).Caption = "Linea " & i
+            Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+            lblProgres(1).Caption = "Linea " & I
             Me.Refresh
             DoEvents
-            b = ComprobarEntrada(Cad)
+            B = ComprobarEntrada(cad)
         End If
 '    End If
     
@@ -4546,7 +4551,7 @@ eProcesarFicheroComunicacion2:
     HayEntradasModificadas = False
 End Function
 
-Private Function ComprobarEntrada(Cad As String) As Boolean
+Private Function ComprobarEntrada(cad As String) As Boolean
 Dim Sql As String
 Dim Id As String
 Dim Fecha As String
@@ -4563,13 +4568,13 @@ Dim Mens As String
 
     ComprobarEntrada = False
 
-    Id = RecuperaValorNew(Cad, ";", 1)
-    Fecha = RecuperaValorNew(Cad, ";", 2)
-    Usuario = RecuperaValorNew(Cad, ";", 3)
-    Tipo = RecuperaValorNew(Cad, ";", 4)
-    tabla = RecuperaValorNew(Cad, ";", 5)
-    SqlEjec = RecuperaValorNew(Cad, ";", 6)
-    Observaciones = RecuperaValorNew(Cad, ";", 7)
+    Id = RecuperaValorNew(cad, ";", 1)
+    Fecha = RecuperaValorNew(cad, ";", 2)
+    Usuario = RecuperaValorNew(cad, ";", 3)
+    Tipo = RecuperaValorNew(cad, ";", 4)
+    tabla = RecuperaValorNew(cad, ";", 5)
+    SqlEjec = RecuperaValorNew(cad, ";", 6)
+    Observaciones = RecuperaValorNew(cad, ";", 7)
     
     Mens = ""
     

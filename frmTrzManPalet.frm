@@ -169,7 +169,7 @@ Begin VB.Form frmTrzManPalet
       Left            =   240
       TabIndex        =   0
       Top             =   405
-      Width           =   1335
+      Width           =   1380
    End
 End
 Attribute VB_Name = "frmTrzManPalet"
@@ -186,7 +186,7 @@ Private Const IdPrograma = 9009
 Dim IdPalet As Long
 Dim Sql As String
 Dim Rs As ADODB.Recordset
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 
 Private Sub cmdAbocar_Click()
     Dim resultado As Boolean
@@ -227,16 +227,16 @@ Private Sub cmdConsultar_Click()
     If Not Rs.EOF Then
         IdPalet = Rs!IdPalet '????? rafa
         'SQL = "select * from Palets where codPalet = " & CStr(IdPalet)
-        Sql = "select nomvarie from variedades where codvarie = " & DBSet(Rs!Codvarie, "N")
-        Set RS1 = New ADODB.Recordset
-        RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Sql = "select nomvarie from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+        Set Rs1 = New ADODB.Recordset
+        Rs1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         Sql = "Palet:" & CStr(IdPalet) & " Fecha:" & Format(Rs!Fecha, "dd/mm/yyyy") & " Partida = " & CStr(Rs!NumNotac) & vbCrLf
-        Sql = Sql & "Socio:" & CStr(Rs!Codsocio) & " Campo:" & CStr(Rs!codcampo) & " Cajones:" & CStr(Rs!NumCajones) & " Kilos:" & CStr(Rs!NumKilos) & vbCrLf
-        Sql = Sql & "Variedad:" & RS1!nomvarie
+        Sql = Sql & "Socio:" & CStr(Rs!Codsocio) & " Campo:" & CStr(Rs!codCampo) & " Cajones:" & CStr(Rs!NumCajones) & " Kilos:" & CStr(Rs!NumKilos) & vbCrLf
+        Sql = Sql & "Variedad:" & Rs1!nomvarie
         'SQL = SQL & "Producto:" & rs!NomProdu & " Variedad:" & rs!nomvarie
         
-        Set RS1 = Nothing
+        Set Rs1 = Nothing
         txtResul.Text = Sql
     Else
         IdPalet = 0

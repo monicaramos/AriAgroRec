@@ -4884,16 +4884,19 @@ Dim PrimCalidad As Currency
 
 Dim b As Boolean
 Dim cadErr As String
-Dim Maxfecha As String
+Dim MaxFecha As Date
+Dim vFecha As Date
 
     On Error GoTo eActualizarEntradasFrutasInma
 
     conn.BeginTrans
     
-    ActualizarEntradasFrurasInma = False
+    ActualizarEntradasFrutasInma = False
     
     '[Monica]21/11/2018: me guardo cual es la fecha maxima que voy actualizar
-    Maxfecha = "01/01/1900"
+    Sql = DevuelveDesdeBD("ultfecclasifica", "rparam", "codparam", 1, "N")
+    If Sql = "" Then Sql = "01/01/1900"
+    MaxFecha = Sql
     
     Sql = "select * from rclasifauto order by numnotac"
     Set Rs = New ADODB.Recordset
@@ -4902,17 +4905,20 @@ Dim Maxfecha As String
     b = True
     
     While Not Rs.EOF And b
-    
         ' kilos de la entrada
         Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs!NumNotac, "N")
         KilosNet = DevuelveValor(Sql2)
-        
     
         Sql2 = "select sum(kiloscal) from rclasifauto_clasif where numnotac = " & DBSet(Rs!NumNotac, "N")
         Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
         
         KilMuestra = DevuelveValor(Sql2)
         If KilMuestra <> 0 Then
+            '[Monica]21/11/2018: me tengo que guardar cual es la ultima fecha de calibrado
+            vFecha = DBLet(Rs!fechacla, "F")
+            If vFecha > MaxFecha Then MaxFecha = vFecha
+        
+        
             Sql2 = "select * from rclasifauto_clasif where numnotac = " & DBSet(Rs!NumNotac, "N")
             Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
             Sql2 = Sql2 & " order by codcalid "
@@ -4940,7 +4946,7 @@ Dim Maxfecha As String
                     
                     conn.Execute Sql
                 Else
-                    Sql = "update rclasifica_clasif set muestra = muestra + " & DBSet(Rs2!KilosCal, "N") & ","
+                    Sql = "update rclasifica_clasif set muestra = coalesce(muestra,0) + " & DBSet(Rs2!KilosCal, "N") & ","
                     Sql = Sql & " kilosnet = " & DBSet(Kilos, "N")
                     Sql = Sql & " where numnotac = " & DBSet(Rs!NumNotac, "N")
                     Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
@@ -4956,52 +4962,53 @@ Dim Maxfecha As String
             
             '++
             '[Monica]20/11/2018: como puede que la entrada ya esté clasificada y hemos aumentado la muestra, recalculamos
-            Sql2 = "select sum(kiloscal) from rclasifica_clasif where numnotac = " & DBSet(Rs!NumNotac, "N")
+            Sql2 = "select sum(muestra) from rclasifica_clasif where numnotac = " & DBSet(Rs!NumNotac, "N")
             Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
             
             KilMuestra = DevuelveValor(Sql2)
+            If KilMuestra <> 0 Then
+                Sql2 = "select * from rclasifica_clasif where numnotac = " & DBSet(Rs!NumNotac, "N")
+                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = Sql2 & " order by codcalid "
             
-            Sql2 = "select * from rclasifica_clasif where numnotac = " & DBSet(Rs!NumNotac, "N")
-            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
-            Sql2 = Sql2 & " order by codcalid "
-        
-            Set Rs2 = New ADODB.Recordset
-            Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            
-            
-            KilosTot = 0
-            While Not Rs2.EOF
-                UltCalidad = Rs2!codcalid
-            
-                Kilos = Round2(KilosNet * DBLet(Rs2!KilosCal, "N") / KilMuestra, 0)
-                KilosTot = KilosTot + Kilos
-            
-                Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs!NumNotac, "N")
-                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
-                Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
+                Set Rs2 = New ADODB.Recordset
+                Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
-                If TotalRegistros(Sql) = 0 Then
-                    Sql = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
-                    Sql = Sql & " values (" & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!codvarie, "N")
-                    Sql = Sql & "," & DBSet(Rs2!codcalid, "N") & "," & DBSet(Rs2!KilosCal, "N")
-                    Sql = Sql & "," & DBSet(Kilos, "N") & ")"
-                    
-                    conn.Execute Sql
-                Else
-                    Sql = "update rclasifica_clasif set muestra = muestra + " & DBSet(Rs2!KilosCal, "N") & ","
-                    Sql = Sql & " kilosnet = " & DBSet(Kilos, "N")
-                    Sql = Sql & " where numnotac = " & DBSet(Rs!NumNotac, "N")
+                
+                KilosTot = 0
+                While Not Rs2.EOF
+                    UltCalidad = Rs2!codcalid
+                
+                    Kilos = Round2(KilosNet * DBLet(Rs2!Muestra, "N") / KilMuestra, 0)
+                    KilosTot = KilosTot + Kilos
+                
+                    Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs!NumNotac, "N")
                     Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
                     Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
+                    
+                    If TotalRegistros(Sql) = 0 Then
+                        Sql = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
+                        Sql = Sql & " values (" & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!codvarie, "N")
+                        Sql = Sql & "," & DBSet(Rs2!codcalid, "N") & "," & DBSet(Rs2!Muestra, "N")
+                        Sql = Sql & "," & DBSet(Kilos, "N") & ")"
+                        
+                        conn.Execute Sql
+                    Else
+                        Sql = "update rclasifica_clasif set "
+                        Sql = Sql & " kilosnet = " & DBSet(Kilos, "N")
+                        Sql = Sql & " where numnotac = " & DBSet(Rs!NumNotac, "N")
+                        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                        Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
+                    
+                        conn.Execute Sql
+                    End If
+                    
+                    Rs2.MoveNext
+                Wend
                 
-                    conn.Execute Sql
-                End If
-                
-                Rs2.MoveNext
-            Wend
-            
-            Set Rs2 = Nothing
-            '++ Hasta aqui el recalculo
+                Set Rs2 = Nothing
+                '++ Hasta aqui el recalculo, añadiendo el nuevo muestreo
+            End If
             
             ' si la diferencia es positiva se suma a la ultima calidad
             If KilosNet - KilosTot > 0 Then
@@ -5041,10 +5048,13 @@ Dim Maxfecha As String
         Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
         conn.Execute Sql
         
-    
         Rs.MoveNext
     Wend
 
+    '[Monica]21/11/2018: nos guardamos
+    Sql = "update rparam set ultfecclasifica = " & DBSet(MaxFecha, "F")
+    conn.Execute Sql
+    
     Set Rs = Nothing
 
     If b Then
@@ -5059,6 +5069,4 @@ eActualizarEntradasFrutasInma:
         MuestraError Err.Number, "Actualizar entradas", Err.Description & cadErr
     End If
 End Function
-
-
 

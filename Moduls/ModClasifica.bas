@@ -5,9 +5,9 @@ Option Explicit
 Public Function InsertarClasificacion(ByRef Rs As ADODB.Recordset, cadErr As String, vCalidad As String) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
-Dim Sql1 As String
-Dim RS1 As ADODB.Recordset
-Dim Cad As String
+Dim SQL1 As String
+Dim Rs1 As ADODB.Recordset
+Dim cad As String
 Dim KilosMuestra As Currency
 Dim TotalKilos As Currency
 Dim Calidad As Currency
@@ -24,11 +24,11 @@ Dim CalidadVC As String
     Sql = "insert into rclasifica_clasif (numnotac,codvarie, codcalid, muestra, kilosnet) values "
 
     If vCalidad <> "" Then
-        Sql1 = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
-        Sql1 = Sql1 & "values (" & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!codvarie, "N") & ","
-        Sql1 = Sql1 & DBSet(vCalidad, "N") & ",100," & DBSet(Rs!KilosNet, "N") & ")"
+        SQL1 = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
+        SQL1 = SQL1 & "values (" & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+        SQL1 = SQL1 & DBSet(vCalidad, "N") & ",100," & DBSet(Rs!KilosNet, "N") & ")"
         
-        conn.Execute Sql1
+        conn.Execute SQL1
         InsertarClasificacion = True
         Exit Function
     End If
@@ -40,41 +40,41 @@ Dim CalidadVC As String
 
     If CByte(vTipoClasif) = 0 Then ' clasificacion por campo
     
-        Sql1 = "select rcampos_clasif.* from rcampos_clasif where codcampo = " & DBLet(Rs!codcampo, "N")
+        SQL1 = "select rcampos_clasif.* from rcampos_clasif where codcampo = " & DBLet(Rs!codCampo, "N")
         
-        Set RS1 = New ADODB.Recordset
-        RS1.Open Sql1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs1 = New ADODB.Recordset
+        Rs1.Open SQL1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        If Not RS1.EOF Then
-            Cad = ""
+        If Not Rs1.EOF Then
+            cad = ""
             
             TotalKilos = 0
             HayReg = 0
             
-            While Not RS1.EOF
+            While Not Rs1.EOF
                 HayReg = 1
                 
-                KilosMuestra = Round2(DBLet(Rs!KilosNet, "N") * DBLet(RS1!Muestra, "N") / 100, 0)
+                KilosMuestra = Round2(DBLet(Rs!KilosNet, "N") * DBLet(Rs1!Muestra, "N") / 100, 0)
                 TotalKilos = TotalKilos + KilosMuestra
                 
-                Cad = Cad & "(" & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!codvarie, "N") & ","
-                Cad = Cad & DBSet(RS1!codcalid, "N") & "," & DBSet(RS1!Muestra, "N") & ","
-                Cad = Cad & DBSet(KilosMuestra, "N") & "),"
+                cad = cad & "(" & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+                cad = cad & DBSet(Rs1!codcalid, "N") & "," & DBSet(Rs1!Muestra, "N") & ","
+                cad = cad & DBSet(KilosMuestra, "N") & "),"
                 
-                Calidad = DBLet(RS1!codcalid, "N")
+                Calidad = DBLet(Rs1!codcalid, "N")
                 
-                RS1.MoveNext
+                Rs1.MoveNext
             Wend
         
-            Set RS1 = Nothing
+            Set Rs1 = Nothing
             
             If HayReg = 1 Then
                 ' quitamos la ultima coma de la cadena
-                If Cad <> "" Then
-                    Cad = Mid(Cad, 1, Len(Cad) - 1)
+                If cad <> "" Then
+                    cad = Mid(cad, 1, Len(cad) - 1)
                 End If
                 
-                Sql = Sql & Cad
+                Sql = Sql & cad
                 
                 conn.Execute Sql
                 
@@ -82,11 +82,11 @@ Dim CalidadVC As String
                 If TotalKilos <> DBLet(Rs!KilosNet, "N") Then
                     Diferencia = DBLet(Rs!KilosNet, "N") - TotalKilos
                     
-                    vCalidDest = CalidadDestrioenClasificacion(CStr(Rs!codvarie), CStr(Rs!Numnotac))
+                    vCalidDest = CalidadDestrioenClasificacion(CStr(Rs!codvarie), CStr(Rs!NumNotac))
                     If vCalidDest <> "" Then Calidad = vCalidDest
                     
                     Sql = "update rclasifica_clasif set kilosnet = kilosnet + (" & DBSet(Diferencia, "N") & ")"
-                    Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!NumNotac, "N")
                     Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
                     Sql = Sql & " and codcalid = " & DBSet(Calidad, "N")
                     
@@ -95,7 +95,7 @@ Dim CalidadVC As String
             End If
         Else
             ' el campo no tiene la clasificacion
-            cadErr = "El campo " & DBLet(Rs!codcampo, "N") & " no tiene clasificación. Revise."
+            cadErr = "El campo " & DBLet(Rs!codCampo, "N") & " no tiene clasificación. Revise."
             InsertarClasificacion = False
             Exit Function
             
@@ -103,10 +103,10 @@ Dim CalidadVC As String
     Else
         ' la clasificacion es en almacen luego insertamos tantos registros como calidades
         ' tenga la variedad
-        Sql1 = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
-        Sql1 = Sql1 & "select " & DBSet(Rs!Numnotac, "N") & ",rcalidad.codvarie, rcalidad.codcalid, " & ValorNulo & "," & ValorNulo & " from rcalidad where codvarie = " & DBLet(Rs!codvarie, "N")
+        SQL1 = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
+        SQL1 = SQL1 & "select " & DBSet(Rs!NumNotac, "N") & ",rcalidad.codvarie, rcalidad.codcalid, " & ValorNulo & "," & ValorNulo & " from rcalidad where codvarie = " & DBLet(Rs!codvarie, "N")
         
-        conn.Execute Sql1
+        conn.Execute SQL1
     
     End If
 EInsertar:
@@ -123,9 +123,9 @@ End Function
 Public Function InsertarClasificacionConDestrio(ByRef Rs As ADODB.Recordset, cadErr As String, vCalidad As String, CalDestrio As String, Porcen As String) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
-Dim Sql1 As String
-Dim RS1 As ADODB.Recordset
-Dim Cad As String
+Dim SQL1 As String
+Dim Rs1 As ADODB.Recordset
+Dim cad As String
 Dim KilosMuestra As Currency
 Dim TotalKilos As Currency
 Dim Calidad As Currency
@@ -151,7 +151,7 @@ Dim vPorcen As Currency
     
     ' calidad de destrio
     Sql = "insert into rclasifica_clasif (numnotac,codvarie, codcalid, muestra, kilosnet) values "
-    Sql = Sql & "(" & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+    Sql = Sql & "(" & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!codvarie, "N") & ","
     Sql = Sql & DBSet(CalDestrio, "N") & "," & DBSet(vPorcen, "N") & "," & DBSet(KilosDest, "N") & ")"
 
     conn.Execute Sql
@@ -159,7 +159,7 @@ Dim vPorcen As Currency
 
     ' calidad de retirada
     Sql = "insert into rclasifica_clasif (numnotac,codvarie, codcalid, muestra, kilosnet) values "
-    Sql = Sql & "(" & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+    Sql = Sql & "(" & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!codvarie, "N") & ","
     Sql = Sql & DBSet(vCalidad, "N") & "," & DBSet(100 - vPorcen, "N") & "," & DBSet(KilosRet, "N") & ")"
     
     conn.Execute Sql
@@ -181,7 +181,7 @@ End Function
 
 
 Public Function ActualizarTransporte(ByRef Rs As ADODB.Recordset, cadErr As String) As Boolean
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Rs2 As ADODB.Recordset
 Dim KilosDestrio As Currency
 Dim Precio As Currency
@@ -198,16 +198,16 @@ Dim Kilos As Currency
         '                     como se hacia inicialmente
         If vParamAplic.TipoPortesTRA = 0 Then
 
-            Sql1 = "select imptrans from rportespobla, rpartida, rcampos, variedades "
-            Sql1 = Sql1 & " where rpartida.codparti = rcampos.codparti and "
-            Sql1 = Sql1 & " variedades.codprodu = rportespobla.codprodu and "
-            Sql1 = Sql1 & " rpartida.codpobla = rportespobla.codpobla and "
-            Sql1 = Sql1 & " variedades.codvarie = " & DBSet(Rs!codvarie, "N") & " and "
-            Sql1 = Sql1 & " rcampos.codcampo = " & DBSet(Rs!codcampo, "N") & " and "
-            Sql1 = Sql1 & " rcampos.codvarie = variedades.codvarie "
+            SQL1 = "select imptrans from rportespobla, rpartida, rcampos, variedades "
+            SQL1 = SQL1 & " where rpartida.codparti = rcampos.codparti and "
+            SQL1 = SQL1 & " variedades.codprodu = rportespobla.codprodu and "
+            SQL1 = SQL1 & " rpartida.codpobla = rportespobla.codpobla and "
+            SQL1 = SQL1 & " variedades.codvarie = " & DBSet(Rs!codvarie, "N") & " and "
+            SQL1 = SQL1 & " rcampos.codcampo = " & DBSet(Rs!codCampo, "N") & " and "
+            SQL1 = SQL1 & " rcampos.codvarie = variedades.codvarie "
             
             Set Rs2 = New ADODB.Recordset
-            Rs2.Open Sql1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs2.Open SQL1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             Precio = 0
             If Not Rs2.EOF Then
@@ -217,19 +217,19 @@ Dim Kilos As Currency
             Set Rs2 = Nothing
             
             ' cogemos los kilos de la clasificacion que sean de destrio
-            Sql1 = "select kilosnet from rclasifica_clasif, rcalidad where numnotac = " & DBSet(Rs!Numnotac, "N")
-            Sql1 = Sql1 & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
-            Sql1 = Sql1 & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
-            Sql1 = Sql1 & " and rcalidad.tipcalid = 1 "
-            KilosDestrio = DevuelveValor(Sql1)
+            SQL1 = "select kilosnet from rclasifica_clasif, rcalidad where numnotac = " & DBSet(Rs!NumNotac, "N")
+            SQL1 = SQL1 & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
+            SQL1 = SQL1 & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
+            SQL1 = SQL1 & " and rcalidad.tipcalid = 1 "
+            KilosDestrio = DevuelveValor(SQL1)
             
             ' los gastos de transporte se calculan sobre los kilosnetos - los de destrio
             Kilos = DBLet(Rs!KilosNet, "N") - KilosDestrio
             Transporte = Round2(Kilos * Precio, 2)
             
-            Sql1 = "update rclasifica set imptrans = " & DBSet(Transporte, "N")
-            Sql1 = Sql1 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
-            conn.Execute Sql1
+            SQL1 = "update rclasifica set imptrans = " & DBSet(Transporte, "N")
+            SQL1 = SQL1 & " where numnotac = " & DBSet(Rs!NumNotac, "N")
+            conn.Execute SQL1
     
 '        Else
 '        ' [Monica] 27/04/2010 esto no haria falta aqui
@@ -248,13 +248,20 @@ Dim Kilos As Currency
                 Transporte = Round2(DBLet(Rs!KilosTra, "N") * Precio, 2)
             
                 ' metemos tambien los gastos de recoleccion
-                Precio = DevuelveValor("select eurdesta from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
+                
+                '[Monica]30/11/2018: para el caso de Picassent ahora quiere que el importe de recoleccion se calcule con
+                '                    el precio eursegsoc ( euros seguridad social )
+                If vParamAplic.Cooperativa = 2 Then
+                    Precio = DevuelveValor("select eursegsoc from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
+                Else
+                    Precio = DevuelveValor("select eurdesta from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
+                End If
                 GasRecol = Round2(Rs!KilosTra * Precio, 2)
             
-                Sql1 = "update rclasifica set impacarr = " & DBSet(Transporte, "N")
-                Sql1 = Sql1 & ", imprecol = " & DBSet(GasRecol, "N")
-                Sql1 = Sql1 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
-                conn.Execute Sql1
+                SQL1 = "update rclasifica set impacarr = " & DBSet(Transporte, "N")
+                SQL1 = SQL1 & ", imprecol = " & DBSet(GasRecol, "N")
+                SQL1 = SQL1 & " where numnotac = " & DBSet(Rs!NumNotac, "N")
+                conn.Execute SQL1
             End If
         End If
     End If
@@ -279,7 +286,7 @@ Dim KilosNet As Long
 Dim EurDesta As Currency
 Dim EurRecol As Currency
 Dim PrecAcarreo As Currency
-Dim i As Integer
+Dim I As Integer
 Dim Sql As String
 Dim Rs2 As ADODB.Recordset
 
@@ -309,7 +316,7 @@ Dim Rs2 As ADODB.Recordset
 
     'recolecta socio
     If DBLet(Rs!Recolect, "N") = 1 Then
-        Sql = "select sum(kilosnet) from rclasifica_clasif, rcalidad  where numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql = "select sum(kilosnet) from rclasifica_clasif, rcalidad  where numnotac = " & DBSet(Rs!NumNotac, "N")
         Sql = Sql & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
         Sql = Sql & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
         Sql = Sql & " and rcalidad.gastosrec = 1"
@@ -337,7 +344,7 @@ Dim Rs2 As ADODB.Recordset
     End If
     
     If vParamAplic.Cooperativa = 4 Then
-        Sql = "select sum(kilosnet) from rclasifica_clasif, rcalidad  where numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql = "select sum(kilosnet) from rclasifica_clasif, rcalidad  where numnotac = " & DBSet(Rs!NumNotac, "N")
         Sql = Sql & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
         Sql = Sql & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
         Sql = Sql & " and rcalidad.gastosrec = 1"
@@ -351,7 +358,7 @@ Dim Rs2 As ADODB.Recordset
         End If
     
         Sql = "update rclasifica set kilostra = " & DBSet(KilosTria, "N")
-        Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql = Sql & " where numnotac = " & DBSet(Rs!NumNotac, "N")
     
         conn.Execute Sql
     Else
@@ -360,7 +367,7 @@ Dim Rs2 As ADODB.Recordset
         
     Sql = "update rclasifica set impacarr = " & DBSet(GasAcarreo, "N")
     Sql = Sql & ", imprecol = " & DBSet(GasRecol, "N")
-    Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+    Sql = Sql & " where numnotac = " & DBSet(Rs!NumNotac, "N")
     
     conn.Execute Sql
     
@@ -374,7 +381,7 @@ End Function
 
 Public Function CalculoGastosCorrectos(NumNota As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim Sql As String
 Dim TotalEnvases As String
 Dim TotalCostes As String
@@ -386,7 +393,8 @@ Dim KilosNet As Long
 Dim EurDesta As Currency
 Dim EurRecol As Currency
 Dim PrecAcarreo As Currency
-Dim i As Integer
+Dim I As Integer
+Dim EurSegSoc As Currency
 
     On Error Resume Next
     
@@ -406,17 +414,19 @@ Dim i As Integer
             Exit Function
         End If
         
-        Sql = "select eurdesta, eurecole from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+        '[Monica]30/11/2018: cambiamos el calculo de gastos de recoleccion para picassent usaremos eursegsoc
+        Sql = "select eurdesta, eurecole, eursegsoc from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
         
-        Set RS1 = New ADODB.Recordset
-        RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs1 = New ADODB.Recordset
+        Rs1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         If Not Rs.EOF Then
-            EurDesta = DBLet(RS1.Fields(0).Value, "N")
-            EurRecol = DBLet(RS1.Fields(1).Value, "N")
+            EurDesta = DBLet(Rs1.Fields(0).Value, "N")
+            EurRecol = DBLet(Rs1.Fields(1).Value, "N")
+            EurSegSoc = DBLet(Rs1.Fields(2).Value, "N")
         End If
     
-        Set RS1 = Nothing
+        Set Rs1 = Nothing
     
     '    Sql = "select sum(kilosnet) from rclasifica_clasif where numnotac = " & DBSet(Text1(0).Text, "N")
     '    KilosNet = TotalRegistros(Sql)
@@ -448,6 +458,9 @@ Dim i As Integer
         End If
         
         If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then GasRecol = Round2(KilosNet * EurDesta, 2)
+        
+        '[Monica]30/11/2018: cambiamos el calculo de gastos de recoleccion para picassent
+        If vParamAplic.Cooperativa = 2 Then GasRecol = Round2(KilosNet * EurSegSoc, 2)
 
 '12/05/2009
 '        If DBLet(Rs!codtarif, "N") <> 0 Then

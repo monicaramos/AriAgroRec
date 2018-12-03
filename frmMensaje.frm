@@ -122,7 +122,7 @@ Begin VB.Form frmMensaje
          EndProperty
          ForeColor       =   &H00000040&
          Height          =   195
-         Left            =   3240
+         Left            =   3555
          TabIndex        =   14
          Top             =   3120
          Width           =   1620
@@ -130,7 +130,7 @@ Begin VB.Form frmMensaje
       Begin VB.Label Label17 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "C/ Uruguay, 11 - Despacho 101"
+         Caption         =   "Pasaje Ventura Feliu 13,entlo izq 2ª"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -145,7 +145,7 @@ Begin VB.Form frmMensaje
          Left            =   300
          TabIndex        =   13
          Top             =   3120
-         Width           =   2730
+         Width           =   3045
       End
       Begin VB.Label Label13 
          Alignment       =   1  'Right Justify
@@ -339,7 +339,7 @@ Private Sub cmdSalir_Click()
 End Sub
 
 Private Sub Form_Activate()
-    PonerFocoBtn Me.cmdAceptar
+    PonerFocoBtn Me.CmdAceptar
 End Sub
 
 
@@ -363,13 +363,13 @@ Private Sub Form_Load()
             PonerFrameCobrosPtesVisible True, 1000, 2000
             CargarListaErrComprobacion
             Me.Caption = "Errores de Comprobacion: "
-            PonerFocoBtn Me.CmdSalir
+            PonerFocoBtn Me.cmdSalir
             
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, 1000, 2000
             CargarListaErrContab
             Me.Caption = "Facturas NO contabilizadas: "
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         Case 6
             PonerFrameCobrosPtesVisible True, 1000, 2000
@@ -390,15 +390,15 @@ Private Sub CargarListaErrContab()
 'en un ListView
 Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ECargarList
 
-    SQL = " SELECT  * "
-    SQL = SQL & " FROM tmperrfac "
+    Sql = " SELECT  * "
+    Sql = Sql & " FROM tmperrfac "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
         ListView1.Height = 4500
         ListView1.Width = 7400
@@ -450,7 +450,7 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             W = 9200
 '            Me.Label1(0).Top = 4800
 '            Me.Label1(0).Left = 3400
-            Me.CmdSalir.Caption = "&Salir"
+            Me.cmdSalir.Caption = "&Salir"
             PonerFrameVisible Me.FrameErrores, visible, H, W
             Me.frameAcercaDE.visible = False
             Me.FrameCobrosPtes.visible = False
@@ -459,8 +459,8 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
         Case 10  'Errores al contabilizar facturas
             H = 6000
             W = 8400
-            Me.cmdAceptarCobros.Top = 5300
-            Me.cmdAceptarCobros.Left = 4900
+            Me.CmdAceptarCobros.Top = 5300
+            Me.CmdAceptarCobros.Left = 4900
     
         Case 6 ' Acerca de
             H = 4485
@@ -493,15 +493,15 @@ Private Sub CargarListaErrComprobacion()
 'en un ListView
 Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ECargarListErrComprobacion
 
-    SQL = " SELECT  * "
-    SQL = SQL & " FROM tmperrcomprob "
+    Sql = " SELECT  * "
+    Sql = Sql & " FROM tmperrcomprob "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
 '        ListView1.Height = 4500
 '        ListView1.Width = 7400

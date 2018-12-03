@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "18:22"
+            TextSave        =   "19:00"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1798,6 +1798,8 @@ Begin VB.MDIForm MDIppal
       End
       Begin VB.Menu mnE_Soporte2 
          Caption         =   "&Acerca de"
+         Enabled         =   0   'False
+         Visible         =   0   'False
       End
       Begin VB.Menu mnE_Soporte3 
          Caption         =   "&Calculo Aportaciones"
@@ -1819,7 +1821,7 @@ Private PrimeraVez As Boolean
 Dim TieneEditorDeMenus As Boolean
 
 Public Sub GetIconsFromLibrary(ByVal sLibraryFilePath As String, ByVal op As Integer, ByVal tam As Integer)
-    Dim i As Integer
+    Dim I As Integer
     Dim tRes As ResType, iCount As Integer
         
     opcio = op
@@ -1961,7 +1963,7 @@ Private Sub mnE_Aport_Click(Index As Integer)
 End Sub
 
 Private Sub mnE_Soporte3_Click()
-    frmListAnticipos.OpcionListado = 18
+    frmListAnticipos.Opcionlistado = 18
     frmListAnticipos.Show vbModal
 End Sub
 
@@ -1977,7 +1979,10 @@ Private Sub mnE_Soporte4_Click()
 '     frmPOZMantaTickets.Show vbModal
 '     frmPOZMantaAux.Show vbModal
 '    frmVARIOS.Show vbModal
-    MsgBox "Hola" & vbCrLf & "Qué tal?", vbQuestion + vbYesNo + vbDefaultButton2
+    
+'    MsgBox "Hola" & vbCrLf & "Qué tal?", vbQuestion + vbYesNo + vbDefaultButton2
+    frmLotApport.Show vbModal
+    
 End Sub
 
 Private Sub mnP_PreNomCateg_Click(Index As Integer)
@@ -2340,14 +2345,14 @@ End Sub
 ' añadida esta parte para la personalizacion de menus
 
 Private Sub LeerEditorMenus()
-Dim SQL As String
+Dim Sql As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     TieneEditorDeMenus = False
-    SQL = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
+    Sql = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         If Not IsNull(miRsAux.Fields(0)) Then
             If miRsAux.Fields(0) > 0 Then TieneEditorDeMenus = True
@@ -2366,33 +2371,33 @@ End Sub
 
 Private Sub PoneMenusDelEditor()
 Dim T As Control
-Dim SQL As String
-Dim c As String
+Dim Sql As String
+Dim C As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     
-    SQL = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
+    Sql = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    SQL = ""
+    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = ""
 
     While Not miRsAux.EOF
         If Not IsNull(miRsAux.Fields(3)) Then
-            SQL = SQL & miRsAux.Fields(3) & "·"
+            Sql = Sql & miRsAux.Fields(3) & "·"
         End If
         miRsAux.MoveNext
     Wend
     miRsAux.Close
         
    
-    If SQL <> "" Then
-        SQL = "·" & SQL
+    If Sql <> "" Then
+        Sql = "·" & Sql
         For Each T In Me.Controls
             If TypeOf T Is menu Then
-                c = DevuelveCadenaMenu(T)
-                c = "·" & c & "·"
-                If InStr(1, SQL, c) > 0 Then T.visible = False
+                C = DevuelveCadenaMenu(T)
+                C = "·" & C & "·"
+                If InStr(1, Sql, C) > 0 Then T.visible = False
            
             End If
         Next
@@ -2414,7 +2419,7 @@ EDevuelveCadenaMenu:
 End Function
 
 Private Sub LanzaHome(Opcion As String)
-    Dim i As Integer
+    Dim I As Integer
     Dim cad As String
     On Error GoTo ELanzaHome
     
@@ -2425,11 +2430,11 @@ Private Sub LanzaHome(Opcion As String)
         Exit Sub
     End If
         
-    i = FreeFile
+    I = FreeFile
     cad = ""
-    Open App.Path & "\lanzaexp.dat" For Input As #i
-    Line Input #i, cad
-    Close #i
+    Open App.Path & "\lanzaexp.dat" For Input As #I
+    Line Input #I, cad
+    Close #I
     
     'Lanzamos
     If cad <> "" Then Shell cad & " " & CadenaDesdeOtroForm, vbMaximizedFocus
