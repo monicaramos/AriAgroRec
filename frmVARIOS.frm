@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmVARIOS 
    BorderStyle     =   3  'Fixed Dialog
-   ClientHeight    =   8100
+   ClientHeight    =   3705
    ClientLeft      =   45
    ClientTop       =   2430
    ClientWidth     =   6660
@@ -10,10 +10,202 @@ Begin VB.Form frmVARIOS
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8100
+   ScaleHeight     =   3705
    ScaleWidth      =   6660
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameCreacionPalets 
+      Height          =   3705
+      Left            =   0
+      TabIndex        =   38
+      Top             =   0
+      Width           =   6600
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   17
+         Left            =   1620
+         MaxLength       =   10
+         TabIndex        =   40
+         Top             =   1755
+         Width           =   1350
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   16
+         Left            =   1620
+         MaxLength       =   10
+         TabIndex        =   39
+         Top             =   1290
+         Width           =   1350
+      End
+      Begin VB.CommandButton CmdAcepCreacionPalet 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   3780
+         TabIndex        =   42
+         Top             =   2850
+         Width           =   1065
+      End
+      Begin VB.CommandButton CmdCancelT 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   4980
+         TabIndex        =   44
+         Top             =   2850
+         Width           =   1065
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   8
+         Left            =   360
+         TabIndex        =   47
+         Top             =   2565
+         Width           =   5730
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   6
+         Left            =   360
+         TabIndex        =   46
+         Top             =   2340
+         Width           =   5820
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha H"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   240
+         Index           =   5
+         Left            =   360
+         TabIndex        =   45
+         Top             =   1755
+         Width           =   810
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   0
+         Left            =   1305
+         Picture         =   "frmVARIOS.frx":000C
+         Top             =   1755
+         Width           =   240
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   10
+         Left            =   1320
+         Picture         =   "frmVARIOS.frx":0097
+         Top             =   1290
+         Width           =   240
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha D"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   240
+         Index           =   43
+         Left            =   345
+         TabIndex        =   43
+         Top             =   1290
+         Width           =   810
+      End
+      Begin VB.Label Label9 
+         Caption         =   "Creación automática de Palets"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   3
+         Left            =   360
+         TabIndex        =   41
+         Top             =   450
+         Width           =   4725
+      End
+   End
    Begin MSComDlg.CommonDialog cd1 
       Left            =   6075
       Top             =   4770
@@ -22,10 +214,12 @@ Begin VB.Form frmVARIOS
       _Version        =   393216
    End
    Begin VB.Frame FrameMSGBOX 
+      Enabled         =   0   'False
       Height          =   4425
       Left            =   0
       TabIndex        =   27
       Top             =   45
+      Visible         =   0   'False
       Width           =   6585
       Begin VB.TextBox Text1 
          BackColor       =   &H8000000F&
@@ -43,7 +237,7 @@ Begin VB.Form frmVARIOS
          Left            =   1440
          MultiLine       =   -1  'True
          TabIndex        =   37
-         Text            =   "frmVARIOS.frx":000C
+         Text            =   "frmVARIOS.frx":0122
          Top             =   495
          Width           =   4740
       End
@@ -232,11 +426,107 @@ Begin VB.Form frmVARIOS
          Width           =   5895
       End
    End
+   Begin VB.Frame FrameRecalculoDC 
+      Height          =   2670
+      Left            =   0
+      TabIndex        =   13
+      Top             =   0
+      Width           =   6615
+      Begin VB.CommandButton Command3 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmVARIOS.frx":0128
+         Style           =   1  'Graphical
+         TabIndex        =   17
+         Top             =   1440
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.CommandButton Command2 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmVARIOS.frx":0432
+         Style           =   1  'Graphical
+         TabIndex        =   16
+         Top             =   2215
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.CommandButton CmdAcepRec 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Index           =   1
+         Left            =   3990
+         TabIndex        =   15
+         Top             =   1590
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdCancel2 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Left            =   5130
+         TabIndex        =   14
+         Top             =   1590
+         Width           =   975
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Socio : "
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   4
+         Left            =   660
+         TabIndex        =   21
+         Top             =   1920
+         Visible         =   0   'False
+         Width           =   1530
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Recálculo de Dígito de Control"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   630
+         TabIndex        =   20
+         Top             =   405
+         Width           =   5775
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   7
+         Left            =   600
+         TabIndex        =   19
+         Top             =   1650
+         Width           =   45
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   3
+         Left            =   630
+         TabIndex        =   18
+         Top             =   3990
+         Width           =   45
+      End
+   End
    Begin VB.Frame FrameGeneraPreciosMasiva 
+      Enabled         =   0   'False
       Height          =   5310
       Left            =   0
       TabIndex        =   4
       Top             =   0
+      Visible         =   0   'False
       Width           =   6615
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
@@ -278,7 +568,7 @@ Begin VB.Form frmVARIOS
       Begin VB.CommandButton Command10 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmVARIOS.frx":0012
+         Picture         =   "frmVARIOS.frx":073C
          Style           =   1  'Graphical
          TabIndex        =   6
          Top             =   2215
@@ -288,7 +578,7 @@ Begin VB.Form frmVARIOS
       Begin VB.CommandButton Command9 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmVARIOS.frx":031C
+         Picture         =   "frmVARIOS.frx":0A46
          Style           =   1  'Graphical
          TabIndex        =   5
          Top             =   1440
@@ -368,100 +658,6 @@ Begin VB.Form frmVARIOS
          Width           =   5775
       End
    End
-   Begin VB.Frame FrameRecalculoDC 
-      Height          =   2670
-      Left            =   0
-      TabIndex        =   13
-      Top             =   0
-      Width           =   6615
-      Begin VB.CommandButton Command3 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmVARIOS.frx":0626
-         Style           =   1  'Graphical
-         TabIndex        =   17
-         Top             =   1440
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.CommandButton Command2 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmVARIOS.frx":0930
-         Style           =   1  'Graphical
-         TabIndex        =   16
-         Top             =   2215
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.CommandButton CmdAcepRec 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Index           =   1
-         Left            =   3990
-         TabIndex        =   15
-         Top             =   1590
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdCancel2 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Left            =   5130
-         TabIndex        =   14
-         Top             =   1590
-         Width           =   975
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Socio : "
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Index           =   4
-         Left            =   660
-         TabIndex        =   21
-         Top             =   1920
-         Visible         =   0   'False
-         Width           =   1530
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Recálculo de Dígito de Control"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   630
-         TabIndex        =   20
-         Top             =   405
-         Width           =   5775
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   7
-         Left            =   600
-         TabIndex        =   19
-         Top             =   1650
-         Width           =   45
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Index           =   3
-         Left            =   630
-         TabIndex        =   18
-         Top             =   3990
-         Width           =   45
-      End
-   End
 End
 Attribute VB_Name = "frmVARIOS"
 Attribute VB_GlobalNameSpace = False
@@ -501,9 +697,9 @@ Attribute frmMens.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private CadParam As String 'Cadena con los parametros para Crystal Report
+Private cadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
-Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadselect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
 Private cadNombreRPT As String 'Nombre del informe
 
@@ -537,6 +733,379 @@ Dim cerrar As Boolean
 End Sub
 
 
+Private Sub CmdAcepCreacionPalet_Click()
+Dim Sql As String
+Dim fec As Date
+Dim b As Boolean
+    If txtCodigo(16).Text = "" Then
+        MsgBox "Ha de introducir una fecha de creación. Reintroduzca.", vbExclamation
+        PonerFoco txtCodigo(16)
+        Exit Sub
+    End If
+    
+    fec = CDate(txtCodigo(16))
+    
+    b = True
+    
+    While fec <= CDate(txtCodigo(17).Text) And b
+        Label2(6).Caption = "Procesando fecha " & fec
+        Label2(8).Caption = ""
+        DoEvents
+        
+        Sql = "select * from trzlineas_cargas where fecha = " & DBSet(fec, "F")
+        Sql = Sql & " and not idpalet in (select idpalet from palets where not idpalet is null) "
+        
+        If TotalRegistros(Sql) = 0 Then
+            MsgBox "No se ha realizado ningún volcado esa fecha.", vbExclamation
+        Else
+            If FechaVolcadoCargada(fec) Then
+                Exit Sub
+            End If
+        
+            If Not ComprobarExistenciasConAlbaranes(Sql, fec) Then
+                Exit Sub
+            End If
+            
+            If ProcesoCarga(Sql, fec) Then
+                MsgBox "Proceso dia " & fec & " realizado correctamente.", vbExclamation
+            Else
+                b = False
+            End If
+        End If
+        
+        fec = DateAdd("d", 1, fec)
+        
+    Wend
+End Sub
+
+Private Function FechaVolcadoCargada(fec As Date) As Boolean
+Dim Sql As String
+
+    FechaVolcadoCargada = False
+    
+    Sql = "select count(*) from palets where fechaini = " & DBSet(fec, "F")
+    If DevuelveValor(Sql) <> 0 Then
+        MsgBox "Hay palets confeccionados con esa fecha. Revise.", vbExclamation
+        FechaVolcadoCargada = True
+    End If
+    
+    Sql = "select count(*) from trzmovim where fecha = " & DBSet(fec, "F")
+    If DevuelveValor(Sql) <> 0 Then
+        MsgBox "Hay movimientos de palets con esa fecha. Revise.", vbExclamation
+        FechaVolcadoCargada = True
+    End If
+    
+
+End Function
+
+Private Function ComprobarExistenciasConAlbaranes(vSQL As String, fec As Date) As Boolean
+Dim Sql As String
+Dim KilosVolcados As Long
+Dim CadVariedades As String
+Dim Rs As ADODB.Recordset
+
+    On Error GoTo eComprobarExistenciasConAlbaranes
+
+
+    ComprobarExistenciasConAlbaranes = False
+
+
+    Label2(8).Caption = "Comprobar existencias con albaranes"
+    DoEvents
+
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
+    
+    
+    ' kilos salidos en albaranes
+    Sql = "insert into tmpinformes (codusu, codigo1, importe1) "
+    Sql = Sql & " select " & vUsu.Codigo & ", codvarie, sum(coalesce(pesoneto)) pesoneto "
+    Sql = Sql & " from albaran_variedad inner join albaran on albaran_variedad.numalbar = albaran.numalbar "
+    Sql = Sql & " where albaran.fechaalb = " & DBSet(fec, "F")
+    Sql = Sql & " group by 1,2 "
+    Sql = Sql & " order by 1,2 "
+    conn.Execute Sql
+    
+    Sql = "delete from tmpinformes2 where codusu = " & vUsu.Codigo
+    conn.Execute Sql
+    
+    ' kilos volcados esa fecha + kilos que quedan
+    Sql = "insert into tmpinformes2 (codusu, codigo1, importe1) "
+    Sql = Sql & " select " & vUsu.Codigo & ", aaaa.codvarie, sum(aaaa.kilos) from  "
+    Sql = Sql & " (select codvarie, sum(coalesce(numkilos,0)) kilos from trzpalets inner join trzlineas_cargas on trzpalets.idpalet = trzlineas_cargas.idpalet where trzlineas_cargas.fecha = " & DBSet(fec, "F")
+    Sql = Sql & " group by 1 "
+    Sql = Sql & " union "
+    Sql = Sql & " select codvarie, sum(coalesce(kilos,0)) kilos from trzmovim where numalbar is null and esmerma = 0"
+    Sql = Sql & " group by 1) aaaa "
+    Sql = Sql & " group by 1, 2 "
+    conn.Execute Sql
+
+
+    CadVariedades = ""
+
+    ' montamos un cursor con las variedades que tengan mas kilos salidos que volcados
+    Sql = "select tmpinformes.* from tmpinformes where codusu = " & vUsu.Codigo
+    Sql = Sql & " order by codigo1"
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+
+    While Not Rs.EOF
+        KilosVolcados = DevuelveValor("select importe1 from tmpinformes2 where codusu = " & vUsu.Codigo & " and codigo1 = " & DBSet(Rs!Codigo1, "N"))
+        
+        If KilosVolcados < DBLet(Rs!importe1) Then
+            CadVariedades = CadVariedades & DBLet(Rs!Codigo1) & ","
+        End If
+    
+        Rs.MoveNext
+    Wend
+    
+    If CadVariedades <> "" Then
+        CadVariedades = Mid(CadVariedades, 1, Len(CadVariedades) - 1)
+        MsgBox "No hay suficientes kilos de las siguientes variedades: " & CadVariedades & " fecha " & fec, vbExclamation
+        ComprobarExistenciasConAlbaranes = False
+        Exit Function
+    End If
+    
+    Set Rs = Nothing
+
+    ComprobarExistenciasConAlbaranes = True
+    Exit Function
+
+eComprobarExistenciasConAlbaranes:
+    MuestraError Err.Number, "Comprobar Existencias con Albaranes Salida", Err.Description
+End Function
+
+Private Function ProcesoCarga(vSQL As String, fec As Date) As Boolean
+Dim vMens As String
+
+    On Error GoTo eProcesoCarga
+    
+    ProcesoCarga = False
+    
+    conn.BeginTrans
+    
+    vMens = ""
+    If CargarPaletsConfeccionados(vSQL, vMens, fec) Then
+        If RepartoAlbaranes(vMens, fec) Then
+            ProcesoCarga = True
+            conn.CommitTrans
+            Exit Function
+        End If
+    End If
+    
+eProcesoCarga:
+    conn.RollbackTrans
+    If vMens <> "" Then
+        MuestraError Err.Number, vMens
+    Else
+        MsgBox "No se ha realizado el proceso de carga", vbExclamation
+    End If
+End Function
+
+Private Function RepartoAlbaranes(vMens As String, fec As Date) As Boolean
+Dim Sql As String
+Dim Sql2 As String
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+Dim Salir As Boolean
+Dim KilosVar As Long
+Dim NumLinea As Integer
+Dim resto As Long
+Dim vcodigo As Long
+
+    On Error GoTo eRepartoAlbaranes
+
+    RepartoAlbaranes = False
+
+    Label2(8).Caption = "Reparto de albaranes"
+    DoEvents
+    
+    
+    
+    ' para todos los albaranes que han salido repartimos
+    Sql = "select albaran.numalbar, albaran.codclien, codvarie, nrotraza, sum(numcajas), sum(pesoneto) pesoneto from albaran_variedad inner join albaran on albaran_variedad.numalbar = albaran.numalbar "
+    Sql = Sql & " where albaran.fechaalb = " & DBSet(fec, "F")
+    Sql = Sql & " group by 1,2,3,4  "
+    Sql = Sql & " order by 1,2,3,4 "
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    While Not Rs.EOF
+        Sql2 = "select sum(kilos) from trzmovim where numalbar is null and codvarie = " & DBSet(Rs!codvarie, "N") & " and esmerma = 0 "
+        
+        KilosVar = DBLet(Rs!PesoNeto)
+        If DevuelveValor(Sql2) < DBLet(Rs!PesoNeto) Then
+            MsgBox "No hay suficiente existencias de la variedad " & DBLet(Rs!codvarie), vbExclamation
+            Exit Function
+        Else
+            Sql2 = "select * from trzmovim where numalbar is null and codvarie = " & DBSet(Rs!codvarie, "N") & " and esmerma = 0 "
+            Sql2 = Sql2 & " order by fecha asc "
+            
+            Set Rs2 = New ADODB.Recordset
+            Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            
+            Salir = False
+            
+            NumLinea = DevuelveValor("select max(coalesce(numlinea, 0)) from albaran_palets where numalbar = " & DBSet(Rs!NumAlbar, "N"))
+            
+            While Not Rs2.EOF And Not Salir
+                NumLinea = NumLinea + 1
+                
+                Sql = "insert into albaran_palets (numalbar, numlinea, numpalet) values ("
+                Sql = Sql & DBSet(Rs!NumAlbar, "N") & "," & DBSet(NumLinea, "N") & "," & DBSet(Rs2!NumPalet, "N") & ")"
+                
+                conn.Execute Sql
+            
+                If DBLet(Rs2!Kilos) < KilosVar Then
+                    
+                    KilosVar = KilosVar - DBLet(Rs2!Kilos)
+                    
+                    Sql = "update trzmovim set numalbar = " & DBSet(Rs!NumAlbar, "N")
+                    Sql = Sql & ", nrotraza = " & DBSet(Rs!nrotraza, "T")
+                    Sql = Sql & ", codclien = " & DBSet(Rs!CodClien, "N")
+                    Sql = Sql & " where codigo = " & DBSet(Rs2!Codigo, "N")
+                    
+                    conn.Execute Sql
+                Else
+                    resto = DBLet(Rs2!Kilos) - KilosVar
+                
+                    Sql = "update trzmovim set numalbar = " & DBSet(Rs!NumAlbar, "N")
+                    Sql = Sql & ", kilos =  " & DBSet(KilosVar, "N")
+                    Sql = Sql & ", nrotraza = " & DBSet(Rs!nrotraza, "T")
+                    Sql = Sql & ", codclien = " & DBSet(Rs!CodClien, "N")
+                    Sql = Sql & " where codigo = " & DBSet(Rs2!Codigo, "N")
+                
+                    conn.Execute Sql
+                    
+                    ' insertamos una linea con la diferencia que nos queda
+                    If resto <> 0 Then
+                        vcodigo = DevuelveValor("select max(coalesce(codigo,0)) from trzmovim")
+                        vcodigo = vcodigo + 1
+                        
+                        Sql = "insert into trzmovim (codigo, numpalet, fecha, codvarie, kilos) values "
+                        Sql = Sql & "(" & DBSet(vcodigo, "N") & "," & DBSet(Rs2!NumPalet, "N") & "," & DBSet(Rs2!Fecha, "F") & "," & DBSet(Rs!codvarie, "N") & ","
+                        Sql = Sql & DBSet(resto, "N") & ")"
+                        
+                        conn.Execute Sql
+                    End If
+                    
+                    Salir = True
+                End If
+        
+                Rs2.MoveNext
+            Wend
+            
+            Set Rs2 = Nothing
+        End If
+        
+        Rs.MoveNext
+        
+    Wend
+    Set Rs = Nothing
+    
+    RepartoAlbaranes = True
+    Exit Function
+    
+eRepartoAlbaranes:
+    vMens = "Reparto de Albaranes " & Err.Description & vbCrLf
+    
+End Function
+
+Private Function CargarPaletsConfeccionados(vSQL As String, vMens As String, fec As Date) As Boolean
+Dim Sql As String
+Dim Rs As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
+Dim SQLinsert As String
+Dim SqlInsert2 As String
+Dim SqlInsert3 As String
+Dim SqlValues As String
+Dim NroPalet As Long
+Dim Marca As Integer
+Dim Forfait As String
+Dim Calibre As Integer
+Dim vcodigo As Long
+
+    On Error GoTo eCargarPaletsConfeccionados
+
+    CargarPaletsConfeccionados = False
+    
+    Label2(8).Caption = "Carga palets confeccionados"
+    DoEvents
+
+    NroPalet = DevuelveValor("select max(numpalet) from palets")
+   
+    
+    SQLinsert = "insert into palets (numpalet,fechaini,horaini,fechafin,horafin,codpalet,linconfe,tipmercan,"
+    SQLinsert = SQLinsert & "fechaconf,horaiconf,horafconf,codlinconf,intorden,linentrada,linsalida,idpalet) values "
+    
+    SqlInsert2 = "insert into palets_variedad (numpalet,numlinea,codvarie,codvarco,codmarca,codforfait,pesobrut,pesoneto,numcajas) values "
+    
+    SqlInsert3 = "insert into palets_calibre (numpalet,numlinea,numline1,codvarie,codcalib,numcajas) values "
+    
+    Marca = DevuelveValor("select min(codmarca) from marcas")
+    Forfait = DevuelveValor("select min(codforfait) from forfaits")
+    vcodigo = DevuelveValor("select max(coalesce(codigo,0)) from trzmovim")
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    While Not Rs.EOF
+        NroPalet = NroPalet + 1
+        
+        SqlValues = "(" & DBSet(NroPalet, "N") & "," & DBSet(fec, "F") & "," & DBSet(fec & " 00:00:00", "FH") & ","
+        SqlValues = SqlValues & DBSet(fec, "F") & "," & DBSet(fec & " 00:00:00", "FH") & ",1,1,0,"
+        SqlValues = SqlValues & DBSet(fec, "F") & "," & DBSet(fec & " 00:00:00", "FH") & "," & DBSet(fec & " 00:00:00", "FH")
+        SqlValues = SqlValues & ",1,1,1,1,"
+        SqlValues = SqlValues & DBSet(Rs!IdPalet, "N") & ")"
+    
+        conn.Execute SQLinsert & SqlValues
+    
+        Sql = "select * from trzpalets where idpalet = " & DBSet(Rs!IdPalet, "N")
+        
+        Set Rs1 = New ADODB.Recordset
+        Rs1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        
+        If Not Rs1.EOF Then
+            Calibre = DevuelveValor("select min(codcalib) from calibres where codvarie = " & DBSet(Rs1!codvarie, "N"))
+            
+            
+            'palets_variedad
+            SqlValues = "(" & DBSet(NroPalet, "N") & ",1," & DBSet(Rs1!codvarie, "N") & "," & DBSet(Rs1!codvarie, "N") & "," & DBSet(Marca, "N") & ","
+            SqlValues = SqlValues & DBSet(Forfait, "T") & "," & DBSet(Rs1!NumKilos, "N") & "," & DBSet(Rs1!NumKilos, "N") & "," & DBSet(Rs1!NumCajones, "N") & ")"
+            
+            conn.Execute SqlInsert2 & SqlValues
+            
+            'palets_calibre
+            SqlValues = "(" & DBSet(NroPalet, "N") & ",1,1," & DBSet(Rs1!codvarie, "N") & "," & DBSet(Calibre, "N") & "," & DBSet(Rs1!NumCajones, "N") & ")"
+            
+            conn.Execute SqlInsert3 & SqlValues
+        End If
+        
+        ' metemos en la tabla de movimientos de traza
+        vcodigo = vcodigo + 1
+        
+        Sql = "insert into trzmovim (codigo, numpalet, fecha, codvarie, kilos) values "
+        Sql = Sql & "(" & DBSet(vcodigo, "N") & "," & DBSet(NroPalet, "N") & "," & DBSet(fec, "F") & "," & DBSet(Rs1!codvarie, "N") & ","
+        Sql = Sql & DBSet(Rs1!NumKilos, "N") & ")"
+        
+        conn.Execute Sql
+        
+        Set Rs1 = Nothing
+        Rs.MoveNext
+    Wend
+    Set Rs = Nothing
+
+    CargarPaletsConfeccionados = True
+    
+    Exit Function
+
+eCargarPaletsConfeccionados:
+    vMens = "Cargar Palets Confeccionados:" & vbCrLf & Err.Description
+End Function
+
+
 Private Sub cmdAceptar1_Click()
 Dim Sql As String
 Dim Sql2 As String
@@ -566,15 +1135,15 @@ Dim RstaGlobal As Boolean
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        Label4.Caption = "Albaran " & Format(DBLet(Rs!numalbar, "N"), "0000000")
+        Label4.Caption = "Albaran " & Format(DBLet(Rs!NumAlbar, "N"), "0000000")
         
         KilosDestrio = Round(Rs!KilosNet * Rs!pordestrio / 100, 0)
         KilosPixat = Round(Rs!KilosNet * Rs!PORPIXAT / 100, 0)
         
-        KilosDes = DevuelveValor("select kilosnet from rhisfruta_clasif where numalbar = " & DBSet(Rs!numalbar, "N") & " and codvarie = " & DBSet(Rs!Codvarie, "N") & " and codcalid = 5")
+        KilosDes = DevuelveValor("select kilosnet from rhisfruta_clasif where numalbar = " & DBSet(Rs!NumAlbar, "N") & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and codcalid = 5")
         
         
-        Sql2 = "select * from rhisfruta_clasif where numalbar = " & DBSet(Rs!numalbar, "N") & " order by codvarie, codcalid "
+        Sql2 = "select * from rhisfruta_clasif where numalbar = " & DBSet(Rs!NumAlbar, "N") & " order by codvarie, codcalid "
         Set Rs2 = New ADODB.Recordset
         Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
@@ -598,8 +1167,8 @@ Dim RstaGlobal As Boolean
             End Select
             
            
-            Sql3 = " where numalbar = " & DBSet(Rs!numalbar, "N")
-            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!Codvarie, "N")
+            Sql3 = " where numalbar = " & DBSet(Rs!NumAlbar, "N")
+            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
             Sql3 = Sql3 & " and codcalid = " & DBSet(Rs2!codcalid, "N")
             Rs2.MoveNext
             
@@ -649,7 +1218,7 @@ Dim Rs As ADODB.Recordset
 Dim Ent As String ' Entidad
 Dim Suc As String ' Oficina
 Dim DC As String ' Digitos de control
-Dim I, i2, i3, i4 As Integer
+Dim i, i2, i3, i4 As Integer
 Dim NumCC As String ' Número de cuenta propiamente dicho
 Dim CC As String
 Dim cadResult As String
@@ -696,16 +1265,16 @@ Dim NFich As Integer
                     If Not Comprueba_CC(CC) Then
                         
                         '-- Calculamos el primer dígito de control
-                        I = Val(Mid(CC, 1, 1)) * 4
-                        I = I + Val(Mid(CC, 2, 1)) * 8
-                        I = I + Val(Mid(CC, 3, 1)) * 5
-                        I = I + Val(Mid(CC, 4, 1)) * 10
-                        I = I + Val(Mid(CC, 5, 1)) * 9
-                        I = I + Val(Mid(CC, 6, 1)) * 7
-                        I = I + Val(Mid(CC, 7, 1)) * 3
-                        I = I + Val(Mid(CC, 8, 1)) * 6
-                        i2 = Int(I / 11)
-                        i3 = I - (i2 * 11)
+                        i = Val(Mid(CC, 1, 1)) * 4
+                        i = i + Val(Mid(CC, 2, 1)) * 8
+                        i = i + Val(Mid(CC, 3, 1)) * 5
+                        i = i + Val(Mid(CC, 4, 1)) * 10
+                        i = i + Val(Mid(CC, 5, 1)) * 9
+                        i = i + Val(Mid(CC, 6, 1)) * 7
+                        i = i + Val(Mid(CC, 7, 1)) * 3
+                        i = i + Val(Mid(CC, 8, 1)) * 6
+                        i2 = Int(i / 11)
+                        i3 = i - (i2 * 11)
                         i4 = 11 - i3
                         Select Case i4
                             Case 11
@@ -717,18 +1286,18 @@ Dim NFich As Integer
                         DC = i4
                         
                         '-- Calculamos el segundo dígito de control
-                        I = Val(Mid(CC, 11, 1)) * 1
-                        I = I + Val(Mid(CC, 12, 1)) * 2
-                        I = I + Val(Mid(CC, 13, 1)) * 4
-                        I = I + Val(Mid(CC, 14, 1)) * 8
-                        I = I + Val(Mid(CC, 15, 1)) * 5
-                        I = I + Val(Mid(CC, 16, 1)) * 10
-                        I = I + Val(Mid(CC, 17, 1)) * 9
-                        I = I + Val(Mid(CC, 18, 1)) * 7
-                        I = I + Val(Mid(CC, 19, 1)) * 3
-                        I = I + Val(Mid(CC, 20, 1)) * 6
-                        i2 = Int(I / 11)
-                        i3 = I - (i2 * 11)
+                        i = Val(Mid(CC, 11, 1)) * 1
+                        i = i + Val(Mid(CC, 12, 1)) * 2
+                        i = i + Val(Mid(CC, 13, 1)) * 4
+                        i = i + Val(Mid(CC, 14, 1)) * 8
+                        i = i + Val(Mid(CC, 15, 1)) * 5
+                        i = i + Val(Mid(CC, 16, 1)) * 10
+                        i = i + Val(Mid(CC, 17, 1)) * 9
+                        i = i + Val(Mid(CC, 18, 1)) * 7
+                        i = i + Val(Mid(CC, 19, 1)) * 3
+                        i = i + Val(Mid(CC, 20, 1)) * 6
+                        i2 = Int(i / 11)
+                        i3 = i - (i2 * 11)
                         i4 = 11 - i3
                         Select Case i4
                             Case 11
@@ -800,6 +1369,14 @@ Private Sub CmdCancel2_Click()
 End Sub
 
 
+Private Sub cmdCancelar_Click(Index As Integer)
+    Unload Me
+End Sub
+
+Private Sub CmdCancelT_Click()
+    Unload Me
+End Sub
+
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
@@ -831,6 +1408,7 @@ Dim List As Collection
 End Sub
 
 
+
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
 Dim Sql As String
 Dim Sql2 As String
@@ -841,7 +1419,7 @@ Dim Sql2 As String
     Else
         Sql = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadselect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -879,42 +1457,35 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (Indice)
+    imgBuscar_Click (indice)
 End Sub
 
 
-'Private Sub txtCodigo_LostFocus(Index As Integer)
-'Dim Cad As String, cadTipo As String 'tipo cliente
-'
-'    'Quitar espacios en blanco por los lados
-'    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
-''    If txtCodigo(Index).Text = "" Then Exit Sub
-'
-'    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
-'    'mostrar mensajes ni hacer nada
-'    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
-'
-'    Select Case Index
-'        Case 0 'VARIEDADES
-'            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-'            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
-'
-'        Case 1, 2 'FECHAS
-'            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
-'
-'        Case 3, 4 'PRECIOS
-'            PonerFormatoDecimal txtCodigo(Index), 8
-'
-'    End Select
-'End Sub
+Private Sub txtCodigo_LostFocus(Index As Integer)
+Dim Cad As String, cadTipo As String 'tipo cliente
+
+    'Quitar espacios en blanco por los lados
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+'    If txtCodigo(Index).Text = "" Then Exit Sub
+
+    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
+    'mostrar mensajes ni hacer nada
+    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
+
+    Select Case Index
+        Case 16, 17 'FECHAS
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
+
+    End Select
+End Sub
 
 
 Private Sub InicializarVbles()
     cadFormula = ""
-    cadSelect = ""
-    CadParam = ""
+    cadselect = ""
+    cadParam = ""
     numParam = 0
 End Sub
 
@@ -933,16 +1504,16 @@ Dim devuelve2 As String
     If devuelve = "Error" Then Exit Function
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Function
     If TipCod <> "F" Then 'Fecha
-        If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
+        If Not AnyadirAFormula(cadselect, devuelve) Then Exit Function
     Else
         devuelve2 = CadenaDesdeHastaBD(codD, codH, Codigo, TipCod)
         If devuelve2 = "Error" Then Exit Function
-        If Not AnyadirAFormula(cadSelect, devuelve2) Then Exit Function
+        If Not AnyadirAFormula(cadselect, devuelve2) Then Exit Function
     End If
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -952,7 +1523,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -963,8 +1534,8 @@ Private Sub LlamarImprimir()
     End With
 End Sub
 
-Private Sub AbrirFrmArticuloADV(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmArticuloADV(indice As Integer)
+    indCodigo = indice
     Set frmArtADV = New frmADVArticulos
     frmArtADV.DatosADevolverBusqueda = "0|1|"
     frmArtADV.Show vbModal
@@ -977,7 +1548,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -1010,8 +1581,8 @@ Private Sub AbrirEMail()
 End Sub
 
 
-Private Function DatosOK() As Boolean
-Dim B As Boolean
+Private Function DatosOk() As Boolean
+Dim b As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim vClien As cSocio
@@ -1020,18 +1591,18 @@ Dim Mens As String
 Dim numfactu As String
 Dim numser As String
 Dim Fecha As Date
-Dim cad As String
+Dim Cad As String
 
-    B = True
+    b = True
     
-    If B Then
+    If b Then
         If (txtCodigo(1).Text = "" Or txtCodigo(2).Text = "") Then
             MsgBox "El rango de albaranes debe de tener un valor. Reintroduzca.", vbExclamation
-            B = False
+            b = False
         End If
     End If
     
-    DatosOK = B
+    DatosOk = b
 
 End Function
 
@@ -1071,7 +1642,7 @@ Public Function GeneraRegistros(vDesde As String, vHasta As String) As Boolean
 ' ariges.scafac --> conta.cabfact
 ' ariges.slifac --> conta.linfact
 'Actualizar la tabla ariges.scafac.inconta=1 para indicar que ya esta contabilizada
-Dim B As Boolean
+Dim b As Boolean
 Dim cadMen As String
 Dim Sql As String
 Dim NumF As Currency
@@ -1083,13 +1654,13 @@ Dim cadErr As String
 
 Dim Desde As Long
 Dim Hasta As Long
-Dim I As Long
+Dim i As Long
 
     On Error GoTo EContab
 
     conn.BeginTrans
     
-    B = True
+    b = True
     
     Desde = CLng(vDesde)
     Hasta = CLng(vHasta)
@@ -1101,11 +1672,11 @@ Dim I As Long
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF And B
-        Label2(2).Caption = Rs!numalbar
+    While Not Rs.EOF And b
+        Label2(2).Caption = Rs!NumAlbar
         DoEvents
     
-        B = CalculoGastosTransporte(Rs!numalbar, cadErr)
+        b = CalculoGastosTransporte(Rs!NumAlbar, cadErr)
         
         Rs.MoveNext
     Wend
@@ -1126,10 +1697,10 @@ Dim I As Long
 EContab:
     
     If Err.Number <> 0 Then
-        B = False
+        b = False
         MuestraError Err.Number, "Modificando Registros", Err.Description & " " & cadErr
     End If
-    If B Then
+    If b Then
         conn.CommitTrans
         GeneraRegistros = True
     Else

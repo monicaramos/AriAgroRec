@@ -4232,7 +4232,7 @@ Dim Sql As String
     GasAcarreo = 0
     
     '[Monica]30/11/2018: para el caso de picassent los gastos de recoleccion se calculan con eursegsoc
-    SQL1 = "select eurdesta, eurecole, eursegsoc from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+    SQL1 = "select eurdesta, eurecole, eurmanob from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
     
     Set Rs1 = New ADODB.Recordset
     Rs1.Open SQL1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText

@@ -22652,7 +22652,12 @@ Dim vcad As String
         cadParam = cadParam & "pAsesor=""" & txtCodigo(193).Text & """|"
         numParam = numParam + 2
         
-        cadTitulo = "Informe de Registro Aplicación de Fitosanitarios"
+        '[Monica]04/12/2018: Para ABN generamos en este punto el documento de campo
+        If vParamAplic.Cooperativa = 1 Then
+            cadTitulo = "Documento de campo - Fitosanitarios"
+        Else
+            cadTitulo = "Informe de Registro Aplicación de Fitosanitarios"
+        End If
         
         cadNombreRPT = "rInfRegFitosanitarios.rpt"
         indRPT = 106 'Informe de registro de Aplicacion de fitosanitarios
@@ -26286,6 +26291,7 @@ Private Sub Form_Activate()
                     txtCodigo(192).Text = "Juan Catalá González"
                     txtCodigo(193).Text = "AS10460001587"
                 End If
+                
         
             Case 48 ' traspaso de albaranes de retirada para abn
                 PonerFoco txtCodigo(169)

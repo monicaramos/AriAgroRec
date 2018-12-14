@@ -252,7 +252,7 @@ Dim Kilos As Currency
                 '[Monica]30/11/2018: para el caso de Picassent ahora quiere que el importe de recoleccion se calcule con
                 '                    el precio eursegsoc ( euros seguridad social )
                 If vParamAplic.Cooperativa = 2 Then
-                    Precio = DevuelveValor("select eursegsoc from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
+                    Precio = DevuelveValor("select eurmanob from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
                 Else
                     Precio = DevuelveValor("select eurdesta from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
                 End If
@@ -415,7 +415,7 @@ Dim EurSegSoc As Currency
         End If
         
         '[Monica]30/11/2018: cambiamos el calculo de gastos de recoleccion para picassent usaremos eursegsoc
-        Sql = "select eurdesta, eurecole, eursegsoc from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = "select eurdesta, eurecole, eurmanob from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
         
         Set Rs1 = New ADODB.Recordset
         Rs1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText

@@ -110,7 +110,7 @@ Begin VB.Form frmManHorasCata
       Left            =   6660
       MaxLength       =   4
       TabIndex        =   4
-      Tag             =   "Código|N|S|0|9999|horas|codcateg|0000|N|"
+      Tag             =   "Código|N|N|0|9999|horas|codcateg|0000|N|"
       Top             =   4590
       Width           =   800
    End
@@ -878,7 +878,7 @@ Begin VB.Form frmManHorasCata
       Left            =   5505
       MaxLength       =   4
       TabIndex        =   3
-      Tag             =   "Código|N|S|0|9999|horas|codcapat|0000|N|"
+      Tag             =   "Código|N|N|0|9999|horas|codcapat|0000|N|"
       Top             =   4560
       Width           =   800
    End
@@ -1326,8 +1326,8 @@ Dim b As Boolean
     chkAux(0).visible = Not b
     chkAux(1).visible = Not b
 
-    cmdAceptar.visible = Not b
-    CmdCancelar.visible = Not b
+    CmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
     'Si es regresar

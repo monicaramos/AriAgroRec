@@ -4008,7 +4008,9 @@ Private Sub BotonModificar()
 
     '[Monica]26/06/2018: si la entrada está comunicada tiene que tener permiso para modificarla
     If vParamAplic.Cooperativa = 16 Then
-        If EntradaComunicada(Text1(0).Text) Then
+        '[Monica]10/12/2018: miramos si la entrada esta comunicada con la clasificacion
+'        If EntradaComunicada(Text1(0).Text) Then
+        If EntradaComunicadaConClasificacion(Text1(0).Text) Then
             If vUsu.Nivel > 0 Then
                 MsgBox "No tiene permisos para modificar esta entrada.", vbExclamation
                 Exit Sub
@@ -4344,12 +4346,12 @@ Dim B As Boolean
         End If
         If B Then
             If vParamAplic.Cooperativa = 2 Then
-                If Combo1(3).ListIndex = 0 And (ComprobarCero(Text1(7).Text) = 0) Then
+                If Combo1(3).ListIndex = 0 And (Text1(7).Text = "") Then
                     MsgBox "Si la entrada está transportada por la cooperativa, debe introducir transportista. Revise.", vbExclamation
                     B = False
                     PonerFoco Text1(7)
                 End If
-                If Combo1(3).ListIndex = 1 And (ComprobarCero(Text1(7).Text) <> 0) Then
+                If Combo1(3).ListIndex = 1 And (Text1(7).Text = "") Then
                     MsgBox "Si la entrada está transportada por el socio, no debe introducir transportista. Revise.", vbExclamation
                     B = False
                     PonerFoco Text1(7)
@@ -4588,6 +4590,9 @@ Dim Sql As String
         
         Case 7 'Transportista
             If Text1(Index).Text <> "" Then
+                '[Monica]04/12/2018: hacemos que sean mayusculas por el tema de comunicacion de picassent
+                Text1(Index).Text = UCase(Text1(Index))
+                
                 Text2(Index) = PonerNombreDeCod(Text1(Index), "rtransporte", "nomtrans")
                 If Text2(Index).Text = "" Then
                     cadMen = "No existe el Transportista: " & Text1(Index).Text & vbCrLf
@@ -4868,7 +4873,7 @@ Dim I As Integer
     
     '[Monica]26/06/2018: si la entrada está comunicada tiene que tener permiso para modificarla
     If vParamAplic.Cooperativa = 16 Then
-        If EntradaComunicada(Text1(0).Text) Then
+        If EntradaComunicadaConClasificacion(Text1(0).Text) Then
             If vUsu.Nivel > 0 Then
                 MsgBox "No tiene permisos para modificar esta entrada.", vbExclamation
                 Exit Sub
@@ -5751,6 +5756,7 @@ Dim KilosTria As Long
 Dim KilosNet As Long
 Dim EurDesta As Currency
 Dim EurRecol As Currency
+Dim EurSegSoc As Currency
 Dim PrecAcarreo As Currency
 Dim I As Integer
 
@@ -5767,7 +5773,7 @@ Dim I As Integer
     End If
     
     '[Monica]30/11/2018: eursegsoc para picassent para el calculo de importe de recoleccion
-    Sql = "select eurdesta, eurecole, eursegsoc from variedades where codvarie = " & DBSet(Text1(3).Text, "N")
+    Sql = "select eurdesta, eurecole, eurmanob from variedades where codvarie = " & DBSet(Text1(3).Text, "N")
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText

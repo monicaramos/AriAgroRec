@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "19:00"
+            TextSave        =   "19:01"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1873,7 +1873,7 @@ Private Sub MDIForm_Activate()
 End Sub
 
 Private Sub MDIForm_Load()
-Dim cad As String
+Dim Cad As String
 
     PrimeraVez = True
     CargarImagen
@@ -1883,7 +1883,7 @@ Dim cad As String
     If vParam Is Nothing Then
         Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & " FALTA CONFIGURAR"
     Else
-        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & cad & _
+        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & Cad & _
                   " - Campaña: " & vParam.FecIniCam & " - " & vParam.FecFinCam & "   -  Usuario: " & vUsu.Nombre
     End If
 
@@ -1978,10 +1978,10 @@ Private Sub mnE_Soporte4_Click()
     
 '     frmPOZMantaTickets.Show vbModal
 '     frmPOZMantaAux.Show vbModal
-'    frmVARIOS.Show vbModal
+    frmVARIOS.Show vbModal
     
 '    MsgBox "Hola" & vbCrLf & "Qué tal?", vbQuestion + vbYesNo + vbDefaultButton2
-    frmLotApport.Show vbModal
+'    frmLotApport.Show vbModal
     
 End Sub
 
@@ -2317,11 +2317,11 @@ End Sub
 ' ### [Monica] 05/09/2006
 Private Sub HabilitarSoloPrametros_o_Empresas(Habilitar As Boolean)
 Dim T As Control
-Dim cad As String
+Dim Cad As String
 
     On Error Resume Next
     For Each T In Me
-        cad = T.Name
+        Cad = T.Name
         If Mid(T.Name, 1, 2) = "mn" Then
             'If LCase(Mid(T.Name, 1, 8)) <> "mn_b" Then
                 T.Enabled = Habilitar
@@ -2420,7 +2420,7 @@ End Function
 
 Private Sub LanzaHome(Opcion As String)
     Dim I As Integer
-    Dim cad As String
+    Dim Cad As String
     On Error GoTo ELanzaHome
     
     'Obtenemos la pagina web de los parametros
@@ -2431,16 +2431,16 @@ Private Sub LanzaHome(Opcion As String)
     End If
         
     I = FreeFile
-    cad = ""
+    Cad = ""
     Open App.Path & "\lanzaexp.dat" For Input As #I
-    Line Input #I, cad
+    Line Input #I, Cad
     Close #I
     
     'Lanzamos
-    If cad <> "" Then Shell cad & " " & CadenaDesdeOtroForm, vbMaximizedFocus
+    If Cad <> "" Then Shell Cad & " " & CadenaDesdeOtroForm, vbMaximizedFocus
     
 ELanzaHome:
-    If Err.Number <> 0 Then MuestraError Err.Number, cad & vbCrLf & Err.Description
+    If Err.Number <> 0 Then MuestraError Err.Number, Cad & vbCrLf & Err.Description
     CadenaDesdeOtroForm = ""
 End Sub
 
@@ -2544,13 +2544,13 @@ End Sub
 
 Private Sub PonerDatosVisiblesForm()
 'Escribe texto de la barra de la aplicación
-Dim cad As String
-    cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
-    cad = cad & ", " & Format(Now, "d")
-    cad = cad & " de " & Format(Now, "mmmm")
-    cad = cad & " de " & Format(Now, "yyyy")
-    cad = "    " & cad & "    "
-    Me.StatusBar1.Panels(7).Text = cad
+Dim Cad As String
+    Cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
+    Cad = Cad & ", " & Format(Now, "d")
+    Cad = Cad & " de " & Format(Now, "mmmm")
+    Cad = Cad & " de " & Format(Now, "yyyy")
+    Cad = "    " & Cad & "    "
+    Me.StatusBar1.Panels(7).Text = Cad
     
     '
     Me.StatusBar1.Panels(2).Text = vUsu.CadenaConexion
@@ -2561,11 +2561,11 @@ Dim cad As String
     End If
     
     
-    cad = ""
+    Cad = ""
     If vParam Is Nothing Then
         Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & " FALTA CONFIGURAR"
     Else
-        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & cad & _
+        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & Cad & _
                   "   -   " & vEmpresa.nomresum & "   -   Fechas: " & vParam.FecIniCam & " - " & vParam.FecFinCam & "   -   Usuario: " & vUsu.Nombre
     End If
 End Sub

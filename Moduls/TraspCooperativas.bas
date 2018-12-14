@@ -116,7 +116,7 @@ Dim Sql As String
 End Function
 
 
-Public Function CargarFicheroCsv(vDesFecEnt As String, vHasFecEnt As String, vDesFecAlb As String, vHasFecAlb As String, Entradas As Boolean, Albaranes As Boolean, vCd1 As CommonDialog) As Boolean
+Public Function CargarFicheroCsv(vDesFecEnt As String, vHasFecEnt As String, vDesFecAlb As String, vHasFecAlb As String, Entradas As Boolean, albaranes As Boolean, vCd1 As CommonDialog) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Mens As String
@@ -140,7 +140,7 @@ Dim v_cadena As String
         B = CargarEntradasClasificadas(vDesFecEnt, vHasFecEnt)
     End If
     
-    If Albaranes Then
+    If albaranes Then
         If B Then B = CargarAlbaranesVenta(vDesFecAlb, vHasFecAlb)
     End If
     
@@ -161,7 +161,7 @@ Dim v_cadena As String
             
             v_cadena = DBLet(Rs!Id, "N") & ";" & DBLet(Rs!fechacreacion, "FH") & ";"
             v_cadena = v_cadena & DBLet(Rs!usuariocreacion, "N") & ";" & DBLet(Rs!Tipo, "T") & ";"
-            v_cadena = v_cadena & DBLet(Rs!Tabla, "T") & ";" & DBLet(Rs!SQLAEJECUTAR, "T") & ";"
+            v_cadena = v_cadena & DBLet(Rs!tabla, "T") & ";" & DBLet(Rs!SQLAEJECUTAR, "T") & ";"
             v_cadena = v_cadena & DBLet(Rs!Observaciones, "T") & ";" & Now() & ";" & vUsu.Login & ";"
             
             Print #NFic, v_cadena
@@ -298,11 +298,11 @@ Dim Transpor As String
             '[Monica]06/11/2018: ponemos el socio correspondiente dependiendo de es un socio de la cooperativa o no
             If DBLet(Rs!Codsocio, "N") >= cMaxSocio Then
                 CadValues = DBSet(NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!horaentr, "FH") & ","
-                CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!Codsocio - cMaxSocio, "N") & "," & DBSet(Rs!codCampo - cMaxCampo, "N") & ","
+                CadValues = CadValues & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio - cMaxSocio, "N") & "," & DBSet(Rs!codCampo - cMaxCampo, "N") & ","
                 CadValues = CadValues & DBSet(Rs!TipoEntr, "N") & "," & DBSet(Rs!Recolect, "N") & ","
             Else
                 CadValues = DBSet(NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!horaentr, "FH") & ","
-                CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!Codsocio + cMaxSocio, "N") & "," & DBSet(Rs!codCampo + cMaxCampo, "N") & ","
+                CadValues = CadValues & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio + cMaxSocio, "N") & "," & DBSet(Rs!codCampo + cMaxCampo, "N") & ","
                 CadValues = CadValues & DBSet(Rs!TipoEntr, "N") & "," & DBSet(Rs!Recolect, "N") & ","
             End If
             
@@ -328,7 +328,7 @@ Dim Transpor As String
             CadValues = CadValues & DBSet(Rs!Numcajon, "N") & "," & DBSet(Rs!KilosNet, "N") & "," & DBSet(Rs!Observac, "T") & ","
             CadValues = CadValues & DBSet(Rs!ImpTrans, "N") & "," & DBSet(Rs!impacarr, "N") & "," & DBSet(Rs!imprecol, "N") & ","
             CadValues = CadValues & DBSet(Rs!ImpPenal, "N") & "," & DBSet(Rs!tiporecol, "N") & "," & DBSet(Rs!horastra, "N") & ","
-            CadValues = CadValues & DBSet(Rs!numtraba, "N") & "," & DBSet(Rs!numalbar, "N") & "," & DBSet(Rs!Fecalbar, "F") & ","
+            CadValues = CadValues & DBSet(Rs!numtraba, "N") & "," & DBSet(Rs!NumAlbar, "N") & "," & DBSet(Rs!Fecalbar, "F") & ","
             CadValues = CadValues & DBSet(Rs!impreso, "N") & "," & DBSet(Rs!PrEstimado, "N") & "," & DBSet(Rs!transportadopor, "N") & ","
             CadValues = CadValues & DBSet(Rs!KilosTra, "N") & "," & DBSet(Rs!contrato, "N") & ")"
         
@@ -351,7 +351,7 @@ Dim Transpor As String
             Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs2.EOF
-                CadVal2 = DBSet(NumNotac, "N") & "," & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs2!codcalid, "N") & "," & DBSet(Rs2!Muestra, "N") & ","
+                CadVal2 = DBSet(NumNotac, "N") & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs2!codcalid, "N") & "," & DBSet(Rs2!Muestra, "N") & ","
                 CadVal2 = CadVal2 & DBSet(Rs2!KilosNet, "N") & ")"
             
                 CadVal2 = CadIns2 & CadVal2
@@ -389,11 +389,11 @@ Dim Transpor As String
             '[Monica]06/11/2018: se añade la condicion de si el socio es o no de la cooperativa que comunica
             If DBLet(Rs!Codsocio, "N") >= cMaxSocio Then
                 CadValues = DBSet(NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!horaentr, "FH") & ","
-                CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!Codsocio - cMaxSocio, "N") & "," & DBSet(Rs!codCampo - cMaxCampo, "N") & ","
+                CadValues = CadValues & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio - cMaxSocio, "N") & "," & DBSet(Rs!codCampo - cMaxCampo, "N") & ","
                 CadValues = CadValues & DBSet(Rs!TipoEntr, "N") & "," & DBSet(Rs!Recolect, "N") & ","
             Else
                 CadValues = DBSet(NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!horaentr, "FH") & ","
-                CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!Codsocio + cMaxSocio, "N") & "," & DBSet(Rs!codCampo + cMaxCampo, "N") & ","
+                CadValues = CadValues & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio + cMaxSocio, "N") & "," & DBSet(Rs!codCampo + cMaxCampo, "N") & ","
                 CadValues = CadValues & DBSet(Rs!TipoEntr, "N") & "," & DBSet(Rs!Recolect, "N") & ","
             End If
             
@@ -419,7 +419,7 @@ Dim Transpor As String
             CadValues = CadValues & DBSet(Rs!Numcajon, "N") & "," & DBSet(Rs!KilosNet, "N") & "," & DBSet(Rs!Observac, "T") & ","
             CadValues = CadValues & DBSet(Rs!ImpTrans, "N") & "," & DBSet(Rs!impacarr, "N") & "," & DBSet(Rs!imprecol, "N") & ","
             CadValues = CadValues & DBSet(Rs!ImpPenal, "N") & "," & DBSet(Rs!tiporecol, "N") & "," & DBSet(Rs!horastra, "N") & ","
-            CadValues = CadValues & DBSet(Rs!numtraba, "N") & "," & DBSet(Rs!numalbar, "N") & "," & DBSet(Rs!Fecalbar, "F") & ","
+            CadValues = CadValues & DBSet(Rs!numtraba, "N") & "," & DBSet(Rs!NumAlbar, "N") & "," & DBSet(Rs!Fecalbar, "F") & ","
             CadValues = CadValues & DBSet(Rs!impreso, "N") & "," & DBSet(Rs!PrEstimado, "N") & "," & DBSet(Rs!transportadopor, "N") & ","
             CadValues = CadValues & DBSet(Rs!KilosTra, "N") & "," & DBSet(Rs!contrato, "N") & ")"
         
@@ -503,7 +503,7 @@ Dim Albaran As Long
     
     
     While Not RsCab.EOF
-        Albaran = DBLet(RsCab!numalbar, "N")
+        Albaran = DBLet(RsCab!NumAlbar, "N")
     
         Sql = "select * from albaran where numalbar = " & DBSet(Albaran, "N")
         Set Rs = New ADODB.Recordset
@@ -532,7 +532,7 @@ Dim Albaran As Long
             Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs2.EOF
-                CadVal2 = DBSet(Albaran, "N") & "," & DBSet(Rs2!numlinea, "N") & "," & DBSet(Rs2!Codvarie, "N") & "," & DBSet(Rs2!codvarco, "N") & ","
+                CadVal2 = DBSet(Albaran, "N") & "," & DBSet(Rs2!NumLinea, "N") & "," & DBSet(Rs2!codvarie, "N") & "," & DBSet(Rs2!codvarco, "N") & ","
                 CadVal2 = CadVal2 & DBSet(Rs2!codforfait, "T") & "," & DBSet(Rs2!codmarca, "N") & "," & DBSet(Rs2!categori, "T") & "," & DBSet(Rs2!totpalet, "N") & ","
                 CadVal2 = CadVal2 & DBSet(Rs2!NumCajas, "N") & "," & DBSet(Rs2!pesobrut, "N") & ","
                 CadVal2 = CadVal2 & DBSet(Rs2!PesoNeto, "N") & "," & DBSet(Rs2!preciopro, "N") & "," & DBSet(Rs2!preciodef, "N") & ","
@@ -557,7 +557,7 @@ Dim Albaran As Long
             Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs2.EOF
-                CadVal3 = DBSet(Albaran, "N") & "," & DBSet(Rs2!numlinea, "N") & "," & DBSet(Rs2!numline1, "N") & "," & DBSet(Rs2!Codvarie, "N") & ","
+                CadVal3 = DBSet(Albaran, "N") & "," & DBSet(Rs2!NumLinea, "N") & "," & DBSet(Rs2!numline1, "N") & "," & DBSet(Rs2!codvarie, "N") & ","
                 CadVal3 = CadVal3 & DBSet(Rs2!codcalib, "N") & "," & DBSet(Rs2!NumCajas, "N") & "," & DBSet(Rs2!pesobrut, "N") & ","
                 CadVal3 = CadVal3 & DBSet(Rs2!PesoNeto, "N") & "," & DBSet(Rs2!Unidades, "N") & "," & DBSet(Rs2!preciopro, "N") & ")"
             
@@ -576,7 +576,7 @@ Dim Albaran As Long
             Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs2.EOF
-                CadVal4 = DBSet(Albaran, "N") & "," & DBSet(Rs2!numlinea, "N") & "," & DBSet(Rs2!NumPalet, "N") & ")"
+                CadVal4 = DBSet(Albaran, "N") & "," & DBSet(Rs2!NumLinea, "N") & "," & DBSet(Rs2!NumPalet, "N") & ")"
             
                 CadVal4 = CadIns4 & CadVal4
             
@@ -594,7 +594,7 @@ Dim Albaran As Long
             Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs2.EOF
-                CadVal5 = DBSet(Albaran, "N") & "," & DBSet(Rs2!numlinea, "N") & "," & DBSet(Rs2!Fechamov, "F") & ","
+                CadVal5 = DBSet(Albaran, "N") & "," & DBSet(Rs2!NumLinea, "N") & "," & DBSet(Rs2!Fechamov, "F") & ","
                 CadVal5 = CadVal5 & DBSet(Rs2!codArtic, "T") & "," & DBSet(Rs2!tipomovi, "N") & "," & DBSet(Rs2!cantidad, "N") & ","
                 CadVal5 = CadVal5 & DBSet(Rs2!CodClien, "N") & "," & DBSet(Rs2!impfianza, "N") & "," & DBSet(Rs2!Factura, "T") & ","
                 CadVal5 = CadVal5 & DBSet(Rs2!fecfactu, "F") & ")"
@@ -635,3 +635,15 @@ Dim Sql As String
     EntradaComunicada = ((Sql = 1) Or (Sql = 2))
 
 End Function
+
+Public Function EntradaComunicadaConClasificacion(Nota As String) As Boolean
+Dim Sql As String
+
+    Sql = "select estacomunicada from rclasifica where numnotac = " & DBSet(Nota, "N")
+    Sql = DevuelveValor(Sql)
+    '[Monica]18/10/2018: ahora la entrada puede estar comunicada sin clasificacion (1) o con la clasificacion (2)
+    EntradaComunicadaConClasificacion = (Sql = 2)
+
+End Function
+
+

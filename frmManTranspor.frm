@@ -1396,7 +1396,7 @@ Dim B As Boolean
 '    Combo1(0).Enabled = Not b
 '
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -1666,7 +1666,7 @@ Error2:
     MuestraError Err.Number, "Eliminando registro", Err.Description
 End Sub
 
-Private Function SepuedeBorrar(ByRef Index As Integer) As Boolean
+Private Function SepuedeBorrar() As Boolean
 Dim Sql As String
 
     SepuedeBorrar = False
