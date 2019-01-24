@@ -2288,7 +2288,7 @@ Dim cadWHERE As String
 
 Dim PrimeraVez As Boolean
 Dim Bloquear As Boolean
-Dim Indice As Integer
+Dim indice As Integer
 
 'SQL de la tabla principal del formulario
 Private CadenaConsulta As String
@@ -2329,9 +2329,14 @@ End Sub
 
 Private Sub Combo1_LostFocus(Index As Integer)
     If Combo1(Index).BackColor = vbLightBlue Then Combo1(Index).BackColor = vbWhite
-    
-    Text1(26).Enabled = (Combo1(1).ListIndex = 1) Or (Combo1(0).ListIndex = 1)
-    Text1(27).Enabled = Not ((Combo1(1).ListIndex = 1) Or (Combo1(0).ListIndex = 1))
+    '[Monica]24/01/2019: dejo todo abierto
+    If vParamAplic.Cooperativa = 18 Then
+        Text1(26).Enabled = True
+        Text1(27).Enabled = True
+    Else
+        Text1(26).Enabled = (Combo1(1).ListIndex = 1) Or (Combo1(0).ListIndex = 1)
+        Text1(27).Enabled = Not ((Combo1(1).ListIndex = 1) Or (Combo1(0).ListIndex = 1))
+    End If
     
     If Text1(26).Enabled Then Text1(27).Text = ""
     If Text1(27).Enabled Then Text1(26).Text = ""
@@ -2461,9 +2466,9 @@ Private Sub frmBanPr_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
-Dim Indice As Byte
-    Indice = CByte(Me.imgFecha(0).Tag)
-    Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
+Dim indice As Byte
+    indice = CByte(Me.imgFecha(0).Tag)
+    Text1(indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 
@@ -2498,11 +2503,11 @@ Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-Dim Indice As Byte
-    Indice = 3
-    Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'Cod Socios
-    FormateaCampo Text1(Indice)
-    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom socio
+Dim indice As Byte
+    indice = 3
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'Cod Socios
+    FormateaCampo Text1(indice)
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom socio
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
@@ -2512,7 +2517,7 @@ Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
-Dim Indice As Byte
+Dim indice As Byte
 
     If Modo = 2 Or Modo = 0 Then Exit Sub
 '    Screen.MousePointer = vbHourglass
@@ -2523,10 +2528,10 @@ Dim Indice As Byte
             frmSoc.DatosADevolverBusqueda = "0|1|"
             frmSoc.Show vbModal
             Set frmSoc = Nothing
-            Indice = 3
+            indice = 3
        
        Case 2 'Bancos Propios
-            Indice = 5
+            indice = 5
             Set frmBanPr = New frmComBanco
             frmBanPr.DatosADevolverBusqueda = "0|1|"
             frmBanPr.Show vbModal
@@ -2540,14 +2545,14 @@ Dim Indice As Byte
             frmFPa.Seccion = CStr(vParamAplic.Seccionhorto)
             frmFPa.Show vbModal
             Set frmFPa = Nothing
-            Indice = 4
+            indice = 4
        
        Case 4 'variedades
             Set frmVar = New frmComVar
             frmVar.DatosADevolverBusqueda = "0|1|"
             frmVar.Show vbModal
             Set frmVar = Nothing
-            Indice = 4
+            indice = 4
     
        Case 5 ' concepto de descuento
             Set frmGas = New frmManConcepGasto
@@ -2568,7 +2573,7 @@ Dim Indice As Byte
     
     End Select
     
-    PonerFoco Text1(Indice)
+    PonerFoco Text1(indice)
 '    Screen.MousePointer = vbDefault
 End Sub
 
@@ -2611,13 +2616,13 @@ Dim i As Integer
             frmSoc.Socio = Text1(3)
             frmSoc.Show vbModal
             Set frmSoc = Nothing
-            Indice = 3
+            indice = 3
     End Select
 
 End Sub
 
 Private Sub imgFecha_Click(Index As Integer)
-Dim Indice As Byte
+Dim indice As Byte
 Dim esq As Long
 Dim dalt As Long
 Dim menu As Long
@@ -2645,16 +2650,16 @@ Dim obj As Object
    frmF.Top = dalt + imgFecha(Index).Parent.Top + imgFecha(Index).Height + menu - 40
    
    frmF.NovaData = Now
-   Indice = Index + 1
-   Me.imgFecha(0).Tag = Indice
+   indice = Index + 1
+   Me.imgFecha(0).Tag = indice
    
-   PonerFormatoFecha Text1(Indice)
-   If Text1(Indice).Text <> "" Then frmF.NovaData = CDate(Text1(Indice).Text)
+   PonerFormatoFecha Text1(indice)
+   If Text1(indice).Text <> "" Then frmF.NovaData = CDate(Text1(indice).Text)
 
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
    Set frmF = Nothing
-   PonerFoco Text1(Indice)
+   PonerFoco Text1(indice)
 End Sub
 
 
@@ -2679,11 +2684,11 @@ End Sub
 Private Sub ListView1_ItemCheck(ByVal item As MSComctlLib.ListItem)
 Dim cantidad As String
 Dim Palets As String
-Dim SQL As String
+Dim Sql As String
 Dim Valor As Currency
 Dim Valor2 As Currency
 Dim i As Long
-Dim B As Boolean
+Dim b As Boolean
 
     If Modo <> 5 Then Exit Sub
 
@@ -2704,11 +2709,17 @@ Dim B As Boolean
 
     TerminaBloquear
 
-    SQL = "update rhisfruta_clasif set precio = " & DBSet(Text1(27).Text, "N")
-    '[Monica]19/09/2013: hemos añadido el importe para que puedan modificarlo
-    SQL = SQL & " , importe = round(kilosnet * " & DBSet(Text1(27).Text, "N") & ", 2)"
-    SQL = SQL & " where numalbar = " & DBSet(item.Text, "N")
-    conn.Execute SQL
+    Sql = "update rhisfruta_clasif set precio = " & DBSet(Text1(27).Text, "N")
+    '[Monica]09/01/2019:
+    If vParamAplic.Cooperativa = 18 Then
+        '[Monica]19/09/2013: hemos añadido el importe para que puedan modificarlo
+        Sql = Sql & " , importe = round(kilostra * " & DBSet(Text1(27).Text, "N") & ", 2)"
+    Else
+        '[Monica]19/09/2013: hemos añadido el importe para que puedan modificarlo
+        Sql = Sql & " , importe = round(kilosnet * " & DBSet(Text1(27).Text, "N") & ", 2)"
+    End If
+    Sql = Sql & " where numalbar = " & DBSet(item.Text, "N")
+    conn.Execute Sql
 
     CalcularDatosFacturaNew
     
@@ -2995,14 +3006,14 @@ End Sub
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte, NumReg As Byte
-Dim B As Boolean
+Dim b As Boolean
 On Error GoTo EPonerModo
 
     Modo = Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
     '=========================================
-    B = (Modo = 2)
+    b = (Modo = 2)
         
     CmdAceptar.visible = (ModoLineas = 2)
     CmdAceptar.Enabled = (ModoLineas = 2)
@@ -3017,11 +3028,11 @@ On Error GoTo EPonerModo
 '    BloquearCombo Me, Modo
 
     'b = (Modo = 3 Or Modo = 4 Or Modo = 1 Or Modo = 5)
-    B = (Modo = 3 Or Modo = 4 Or Modo = 1) '06/09/2005, lleve el modo 5 per a que no es puga modificar la capçalera mentre treballe en les llínies
+    b = (Modo = 3 Or Modo = 4 Or Modo = 1) '06/09/2005, lleve el modo 5 per a que no es puga modificar la capçalera mentre treballe en les llínies
     
     For i = 0 To Combo1.Count - 1
-        Combo1(i).Enabled = B
-        If B Then
+        Combo1(i).Enabled = b
+        If b Then
             Combo1(i).BackColor = vbWhite
         Else
             Combo1(i).BackColor = &H80000018 'Amarillo Claro
@@ -3046,10 +3057,10 @@ On Error GoTo EPonerModo
     
     
     '---------------------------------------------
-    B = (Modo <> 0 And Modo <> 2 And Modo <> 5)
+    b = (Modo <> 0 And Modo <> 2 And Modo <> 5)
     
     For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = B
+        Me.imgBuscar(i).Enabled = b
     Next i
                     
 '    Me.chkVistaPrevia.Enabled = (Modo <= 2)
@@ -3085,7 +3096,7 @@ End Sub
 Private Function DatosOk() As Boolean
 'Comprobar que los datos del frame de introduccion son correctos antes de cargar datos
 Dim vtag As CTag
-Dim cad As String
+Dim Cad As String
 Dim i As Byte
 Dim vSeccion As CSeccion
 
@@ -3098,17 +3109,17 @@ Dim vSeccion As CSeccion
             If Text1(i).Tag <> "" Then
                 Set vtag = New CTag
                 If vtag.Cargar(Text1(i)) Then
-                    cad = vtag.Nombre
+                    Cad = vtag.Nombre
                 Else
-                    cad = "Campo"
+                    Cad = "Campo"
                 End If
                 Set vtag = Nothing
             Else
-                cad = "Campo"
-                If i = 5 Then cad = "Cta. Prev. Pago"
-                If i = 4 Then cad = "Forma de Pago"
+                Cad = "Campo"
+                If i = 5 Then Cad = "Cta. Prev. Pago"
+                If i = 4 Then Cad = "Forma de Pago"
             End If
-            MsgBox cad & " no puede estar vacio. Reintroduzca", vbExclamation
+            MsgBox Cad & " no puede estar vacio. Reintroduzca", vbExclamation
             PonerFoco Text1(i)
             Exit Function
         End If
@@ -3154,6 +3165,7 @@ Dim vSeccion As CSeccion
         End If
     End If
 
+
     If Combo1(1).ListIndex = 1 Or Combo1(0).ListIndex = 1 Then
         ' venta campo o liq sin entradas
         If ComprobarCero(Text1(26).Text) = 0 Then
@@ -3169,7 +3181,6 @@ Dim vSeccion As CSeccion
             Exit Function
         End If
     End If
-    
     
     Set vSocio = New cSocio
     If vSocio.LeerDatos(Text1(3).Text) Then
@@ -3199,7 +3210,7 @@ End Function
 Private Function DatosOkFact() As Boolean
 'Comprobar que los datos del frame de introduccion son correctos antes de cargar datos
 Dim vtag As CTag
-Dim cad As String
+Dim Cad As String
 Dim i As Byte
 Dim vSeccion As CSeccion
 
@@ -3276,15 +3287,15 @@ Dim vSeccion As CSeccion
 
 
     'Ahora buscamos el tipforpa del codforpa
-    cad = "Select tipoforp from forpago where codforpa=" & DBSet(Text1(4).Text, "N")
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Cad = "Select tipoforp from forpago where codforpa=" & DBSet(Text1(4).Text, "N")
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     i = 0
     If miRsAux.EOF Then
         MsgBox "Error en el TIPO de forma de pago", vbExclamation
     Else
         i = 1
-        cad = miRsAux.Fields(0)
-        If Val(cad) = vbFPTransferencia Then
+        Cad = miRsAux.Fields(0)
+        If Val(Cad) = vbFPTransferencia Then
             'Compruebo que la forpa es transferencia
             i = 2
         End If
@@ -3297,8 +3308,8 @@ Dim vSeccion As CSeccion
         'La forma de pago es transferencia. Debo comprobar que existe la cuenta bancaria
         'del proveedor
         If vSocio.CuentaBan = "" Or vSocio.Digcontrol = "" Or vSocio.Sucursal = "" Or vSocio.Banco = "" Then
-            cad = "Cuenta bancaria incorrecta. Forma de pago: transferencia.    ¿Continuar?"
-            If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then i = 0
+            Cad = "Cuenta bancaria incorrecta. Forma de pago: transferencia.    ¿Continuar?"
+            If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then i = 0
         End If
     End If
 
@@ -3416,7 +3427,7 @@ End Sub
 Private Sub CargarAlbaranes(cadWHERE As String)
 'Recupera de la BD y muestra en el Listview todos los albaranes de compra
 'que tiene el proveedor introducido.
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim Tabla As String
 Dim ItmX As ListItem
@@ -3428,20 +3439,29 @@ On Error GoTo ECargar
 
     Tabla = "rhisfruta"
     
-    SQL = "SELECT rhisfruta.numalbar,rhisfruta.fecalbar, variedades.nomvarie, rhisfruta.codsocio, rsocios.nomsocio, rhisfruta.kilosnet " ', " & DBSet(Text1(27).Text, "N") & " prestimado "
-    SQL = SQL & " FROM (" & Tabla & " inner join variedades on rhisfruta.codvarie = variedades.codvarie) "
-    SQL = SQL & " inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
-    SQL = SQL & " where " & cadWHERE
+    '[Monica]09/01/2019: para el caso de frutas inma, los kilos son los de transporte
+    If vParamAplic.Cooperativa = 18 Then
+        Sql = "SELECT rhisfruta.numalbar,rhisfruta.fecalbar, variedades.nomvarie, rhisfruta.codsocio, rsocios.nomsocio, rhisfruta.kilostra kilosnet " ', " & DBSet(Text1(27).Text, "N") & " prestimado "
+        Sql = Sql & " FROM (" & Tabla & " inner join variedades on rhisfruta.codvarie = variedades.codvarie) "
+        Sql = Sql & " inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
+        Sql = Sql & " where " & cadWHERE
+    
+    Else
+        Sql = "SELECT rhisfruta.numalbar,rhisfruta.fecalbar, variedades.nomvarie, rhisfruta.codsocio, rsocios.nomsocio, rhisfruta.kilosnet " ', " & DBSet(Text1(27).Text, "N") & " prestimado "
+        Sql = Sql & " FROM (" & Tabla & " inner join variedades on rhisfruta.codvarie = variedades.codvarie) "
+        Sql = Sql & " inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
+        Sql = Sql & " where " & cadWHERE
+    End If
         
     ' quitamos los albaranes q hayan sido cobrados
     If Check1(2).Value = 0 Then
-        SQL = SQL & " and not rhisfruta.numalbar in (select numalbar from rfactsoc_albaran union select numalbar from rlifter)"
+        Sql = Sql & " and not rhisfruta.numalbar in (select numalbar from rfactsoc_albaran union select numalbar from rlifter)"
     End If
     
-    SQL = SQL & " ORDER BY " & Tabla & ".numalbar,  " & Tabla & ".fecalbar "
+    Sql = Sql & " ORDER BY " & Tabla & ".numalbar,  " & Tabla & ".fecalbar "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     InicializarListView
     
@@ -3454,7 +3474,7 @@ On Error GoTo ECargar
     
     While Not Rs.EOF
         Set ItmX = ListView1.ListItems.Add()
-        ItmX.Text = Rs!numalbar
+        ItmX.Text = Rs!NumAlbar
         ItmX.SubItems(1) = Format(DBLet(Rs!Fecalbar, "F"), "dd/mm/yyyy")
         ItmX.SubItems(2) = DBLet(Rs!nomvarie, "T")
         ItmX.SubItems(3) = Format(DBLet(Rs!Codsocio, "N"), "000000")
@@ -3462,7 +3482,7 @@ On Error GoTo ECargar
         ItmX.SubItems(5) = Format(DBLet(Rs!KilosNet, "N"), "###,##0")
 '        ItmX.SubItems(6) = Format(DBLet(Rs!PrEstimado, "N"), "##0.0000")
         
-        If EstaFacturado(Rs!numalbar) Then
+        If EstaFacturado(Rs!NumAlbar) Then
             ItmX.ForeColor = vbRed
             For i = 1 To 5 '6
                 ItmX.ListSubItems(i).ForeColor = vbRed
@@ -3508,7 +3528,7 @@ End Sub
 
 Private Sub CalcularDatosFactura()
 Dim i As Integer
-Dim SQL As String
+Dim Sql As String
 Dim cadAux As String
 Dim ImpBruto As Currency
 Dim impiva As Currency
@@ -3684,8 +3704,8 @@ Dim Albaranes As String
                 Albaranes = Mid(Albaranes, 1, Len(Albaranes) - 1)
             
                 If Combo1(1).ListIndex = 1 Then ' entradas ventacampo
-                    SQL = "update rhisfruta set impentrada = 0,prestimado = 0 where numalbar in (" & Albaranes & ")"
-                    conn.Execute SQL
+                    Sql = "update rhisfruta set impentrada = 0,prestimado = 0 where numalbar in (" & Albaranes & ")"
+                    conn.Execute Sql
                 End If
             End If
             
@@ -3710,9 +3730,9 @@ Dim Albaranes As String
                                 vPrecio = vImporte / ListView1.ListItems(i).SubItems(5)
                         End Select
 
-                        SQL = "update rhisfruta set prestimado = " & DBSet(vPrecio, "N") & ", impentrada = " & DBSet(vImporte, "N")
-                        SQL = SQL & " where numalbar = " & DBSet(ListView1.ListItems(i).Text, "N")
-                        conn.Execute SQL
+                        Sql = "update rhisfruta set prestimado = " & DBSet(vPrecio, "N") & ", impentrada = " & DBSet(vImporte, "N")
+                        Sql = Sql & " where numalbar = " & DBSet(ListView1.ListItems(i).Text, "N")
+                        conn.Execute Sql
 
                         ImpBruto = ImpBruto + vImporte 'Round2(DBSet(ListView1.ListItems(I).SubItems(5), "N") * vPrecio, 2)
                     
@@ -3720,18 +3740,18 @@ Dim Albaranes As String
                         vImporte = Round2(CCur(vbase) / TotalKilos * DBSet(ListView1.ListItems(i).SubItems(5), "N"), 2)
                         vPrecio = Round2(vImporte / DBSet(ListView1.ListItems(i).SubItems(5), "N"), 4)
                         
-                        SQL = "update rhisfruta set prestimado = " & DBSet(vPrecio, "N") & ", impentrada = " & DBSet(Round2(DBSet(ListView1.ListItems(i).SubItems(5), "N") * vPrecio, 2), "N")
-                        SQL = SQL & " where numalbar = " & DBSet(ListView1.ListItems(i).Text, "N")
-                        conn.Execute SQL
+                        Sql = "update rhisfruta set prestimado = " & DBSet(vPrecio, "N") & ", impentrada = " & DBSet(Round2(DBSet(ListView1.ListItems(i).SubItems(5), "N") * vPrecio, 2), "N")
+                        Sql = Sql & " where numalbar = " & DBSet(ListView1.ListItems(i).Text, "N")
+                        conn.Execute Sql
                         
                         ImpBruto = ImpBruto + vImporte 'Round2(DBSet(ListView1.ListItems(I).SubItems(5), "N") * vPrecio, 2)
                     End If
                     
-                    SQL = "(rhisfruta.numalbar=" & DBSet(ListView1.ListItems(i).Text, "N") & ") "
+                    Sql = "(rhisfruta.numalbar=" & DBSet(ListView1.ListItems(i).Text, "N") & ") "
                     If cadAux = "" Then
-                        cadAux = SQL
+                        cadAux = Sql
                     Else
-                        cadAux = cadAux & " OR " & SQL
+                        cadAux = cadAux & " OR " & Sql
                     End If
                 End If
             Next i
@@ -3752,11 +3772,11 @@ Dim Albaranes As String
                 TerminaBloquear
                 
                 '[Monica]30/04/2013: el calculo de la factura es sobre el iva del socio
-                SQL = "SELECT sum(impentrada) as bruto"
-                SQL = SQL & " FROM rhisfruta "
-                SQL = SQL & " WHERE " & cadWHERE
+                Sql = "SELECT sum(impentrada) as bruto"
+                Sql = Sql & " FROM rhisfruta "
+                Sql = Sql & " WHERE " & cadWHERE
             
-                BrutoFact = DevuelveValor(SQL)
+                BrutoFact = DevuelveValor(Sql)
                 BaseImp = BrutoFact
                 
                 'Obtener el % de IVA
@@ -3797,16 +3817,16 @@ Dim Albaranes As String
                 
                     ' lista de albaranes
                     If Albaranes <> "" Then
-                        SQL = "select sum(impentrada) from rhisfruta where numalbar in (" & Albaranes & ")"
-                        If BaseImp <> DevuelveValor(SQL) Then
-                            Diferencia = BaseImp - DevuelveValor(SQL)
-                            SQL = "update rhisfruta set impentrada = impentrada + " & DBSet(Diferencia, "N")
-                            SQL = SQL & " where numalbar = " & DBSet(ListView1.ListItems(Ultimo).Text, "N")
-                            conn.Execute SQL
+                        Sql = "select sum(impentrada) from rhisfruta where numalbar in (" & Albaranes & ")"
+                        If BaseImp <> DevuelveValor(Sql) Then
+                            Diferencia = BaseImp - DevuelveValor(Sql)
+                            Sql = "update rhisfruta set impentrada = impentrada + " & DBSet(Diferencia, "N")
+                            Sql = Sql & " where numalbar = " & DBSet(ListView1.ListItems(Ultimo).Text, "N")
+                            conn.Execute Sql
                         
-                            SQL = "update rhisfruta set prestimado = round(impentrada / kilosnet,4)"
-                            SQL = SQL & " where numalbar = " & DBSet(ListView1.ListItems(Ultimo).Text, "N")
-                            conn.Execute SQL
+                            Sql = "update rhisfruta set prestimado = round(impentrada / kilosnet,4)"
+                            Sql = Sql & " where numalbar = " & DBSet(ListView1.ListItems(Ultimo).Text, "N")
+                            conn.Execute Sql
                         End If
                     End If
                 End If
@@ -3894,7 +3914,7 @@ End Sub
 
 Private Sub CalcularDatosFacturaNew()
 Dim i As Integer
-Dim SQL As String
+Dim Sql As String
 Dim cadAux As String
 Dim ImpBruto As Currency
 Dim impiva As Currency
@@ -4110,8 +4130,8 @@ Dim cImpIva As Currency
                 Albaranes = Mid(Albaranes, 1, Len(Albaranes) - 1)
             
                 If Combo1(1).ListIndex = 1 Then ' entradas ventacampo
-                    SQL = "update rhisfruta set impentrada = 0,prestimado = 0 where numalbar in (" & Albaranes & ")"
-                    conn.Execute SQL
+                    Sql = "update rhisfruta set impentrada = 0,prestimado = 0 where numalbar in (" & Albaranes & ")"
+                    conn.Execute Sql
                 End If
             End If
             
@@ -4148,9 +4168,9 @@ Dim cImpIva As Currency
                                 End If
                         End Select
 
-                        SQL = "update rhisfruta set prestimado = " & DBSet(vPrecio, "N") & ", impentrada = " & DBSet(vImporte, "N") & ", kilosfactu = " & DBSet(KilosAlb, "N")
-                        SQL = SQL & " where numalbar = " & DBSet(ListView1.ListItems(i).Text, "N")
-                        conn.Execute SQL
+                        Sql = "update rhisfruta set prestimado = " & DBSet(vPrecio, "N") & ", impentrada = " & DBSet(vImporte, "N") & ", kilosfactu = " & DBSet(KilosAlb, "N")
+                        Sql = Sql & " where numalbar = " & DBSet(ListView1.ListItems(i).Text, "N")
+                        conn.Execute Sql
 
                         ImpBruto = ImpBruto + vImporte 'Round2(DBSet(ListView1.ListItems(I).SubItems(5), "N") * vPrecio, 2)
                     
@@ -4158,19 +4178,19 @@ Dim cImpIva As Currency
                         vImporte = Round2(CCur(vbase) / TotalKilos * DBSet(ListView1.ListItems(i).SubItems(5), "N"), 2)
                         vPrecio = Round2(vImporte / DBSet(ListView1.ListItems(i).SubItems(5), "N"), 4)
                         
-                        SQL = "update rhisfruta set prestimado = " & DBSet(vPrecio, "N") & ", impentrada = " & DBSet(Round2(DBSet(ListView1.ListItems(i).SubItems(5), "N") * vPrecio, 2), "N")
-                        SQL = SQL & " kilosfactu = " & DBSet(ListView1.ListItems(i).SubItems(5), "N")
-                        SQL = SQL & " where numalbar = " & DBSet(ListView1.ListItems(i).Text, "N")
-                        conn.Execute SQL
+                        Sql = "update rhisfruta set prestimado = " & DBSet(vPrecio, "N") & ", impentrada = " & DBSet(Round2(DBSet(ListView1.ListItems(i).SubItems(5), "N") * vPrecio, 2), "N")
+                        Sql = Sql & " kilosfactu = " & DBSet(ListView1.ListItems(i).SubItems(5), "N")
+                        Sql = Sql & " where numalbar = " & DBSet(ListView1.ListItems(i).Text, "N")
+                        conn.Execute Sql
                         
                         ImpBruto = ImpBruto + vImporte 'Round2(DBSet(ListView1.ListItems(I).SubItems(5), "N") * vPrecio, 2)
                     End If
                     
-                    SQL = "(rhisfruta.numalbar=" & DBSet(ListView1.ListItems(i).Text, "N") & ") "
+                    Sql = "(rhisfruta.numalbar=" & DBSet(ListView1.ListItems(i).Text, "N") & ") "
                     If cadAux = "" Then
-                        cadAux = SQL
+                        cadAux = Sql
                     Else
-                        cadAux = cadAux & " OR " & SQL
+                        cadAux = cadAux & " OR " & Sql
                     End If
                 End If
             Next i
@@ -4191,11 +4211,11 @@ Dim cImpIva As Currency
                 TerminaBloquear
                 
                 '[Monica]30/04/2013: el calculo de la factura es sobre el iva del socio
-                SQL = "SELECT sum(impentrada) as bruto"
-                SQL = SQL & " FROM rhisfruta "
-                SQL = SQL & " WHERE " & cadWHERE
+                Sql = "SELECT sum(impentrada) as bruto"
+                Sql = Sql & " FROM rhisfruta "
+                Sql = Sql & " WHERE " & cadWHERE
             
-                BrutoFact = DevuelveValor(SQL)
+                BrutoFact = DevuelveValor(Sql)
                 BaseImp = BrutoFact
                 
                 'Obtener el % de IVA
@@ -4236,16 +4256,16 @@ Dim cImpIva As Currency
                 
                     ' lista de albaranes
                     If Albaranes <> "" Then
-                        SQL = "select sum(impentrada) from rhisfruta where numalbar in (" & Albaranes & ")"
-                        If BaseImp <> DevuelveValor(SQL) Then
-                            Diferencia = BaseImp - DevuelveValor(SQL)
-                            SQL = "update rhisfruta set impentrada = impentrada + " & DBSet(Diferencia, "N")
-                            SQL = SQL & " where numalbar = " & DBSet(ListView1.ListItems(Ultimo).Text, "N")
-                            conn.Execute SQL
+                        Sql = "select sum(impentrada) from rhisfruta where numalbar in (" & Albaranes & ")"
+                        If BaseImp <> DevuelveValor(Sql) Then
+                            Diferencia = BaseImp - DevuelveValor(Sql)
+                            Sql = "update rhisfruta set impentrada = impentrada + " & DBSet(Diferencia, "N")
+                            Sql = Sql & " where numalbar = " & DBSet(ListView1.ListItems(Ultimo).Text, "N")
+                            conn.Execute Sql
                         
-                            SQL = "update rhisfruta set prestimado = round(impentrada / kilosnet,4)"
-                            SQL = SQL & " where numalbar = " & DBSet(ListView1.ListItems(Ultimo).Text, "N")
-                            conn.Execute SQL
+                            Sql = "update rhisfruta set prestimado = round(impentrada / kilosnet,4)"
+                            Sql = Sql & " where numalbar = " & DBSet(ListView1.ListItems(Ultimo).Text, "N")
+                            conn.Execute Sql
                         End If
                     End If
                 End If
@@ -4369,24 +4389,34 @@ End Sub
 
 
 Private Function CalculoImporteTot(Albaran As String, TotalKilos As Currency, TotalImporte As Currency) As Currency
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
     
     On Error Resume Next
 
     If Albaran = "" Then Exit Function
 
-    '[Monica]19/09/2013: calculamos el precio normal
-    If Combo1(2).ListIndex = 0 Then
-        SQL = "select kilosnet, /*round(precio * kilosnet,2)*/ importe from rhisfruta_clasif where numalbar in (" & Albaran & ")"
+    '[Monica]09/01/2019: para el caso de frutas inma, sobre kilos transportados
+    If vParamAplic.Cooperativa = 18 Then
+        '[Monica]19/09/2013: calculamos el precio normal
+        If Combo1(2).ListIndex = 0 Then
+            Sql = "select kilostra kilosnet, /*round(precio * kilosnet,2)*/ importe from rhisfruta_clasif where numalbar in (" & Albaran & ")"
+        Else
+            Sql = "select kilostra kilosnet, round(precio * kilostra,2) importe from rhisfruta_clasif where numalbar in (" & Albaran & ")"
+        End If
     Else
-        SQL = "select kilosnet, round(precio * kilosnet,2) importe from rhisfruta_clasif where numalbar in (" & Albaran & ")"
+
+        '[Monica]19/09/2013: calculamos el precio normal
+        If Combo1(2).ListIndex = 0 Then
+            Sql = "select kilosnet, /*round(precio * kilosnet,2)*/ importe from rhisfruta_clasif where numalbar in (" & Albaran & ")"
+        Else
+            Sql = "select kilosnet, round(precio * kilosnet,2) importe from rhisfruta_clasif where numalbar in (" & Albaran & ")"
+        End If
+    '[Monica]22/04/2015: cogemos todas las lineas marcadas hayan o no puesto precio
+    '    SQL = SQL & " and precio <> 0 and not precio is null "
     End If
-'[Monica]22/04/2015: cogemos todas las lineas marcadas hayan o no puesto precio
-'    SQL = SQL & " and precio <> 0 and not precio is null "
-    
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     TotalKilos = 0
     TotalImporte = 0
@@ -4403,7 +4433,7 @@ End Function
 
 Private Sub CalcularDatosFacturaSinEntradas()
 Dim i As Integer
-Dim SQL As String
+Dim Sql As String
 Dim cadAux As String
 Dim ImpBruto As Currency
 Dim impiva As Currency
@@ -4652,16 +4682,16 @@ Private Function SeleccionaRegistros() As Boolean
 'Comprueba que se seleccionan albaranes en la base de datos
 'es decir que hay albaranes marcados
 'cuando se van marcando albaranes se van añadiendo el la cadena cadWhere
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ESel
     SeleccionaRegistros = False
     
     If cadWHERE = "" Then Exit Function
     
-    SQL = "Select count(*) FROM rhisfruta"
-    SQL = SQL & " WHERE " & cadWHERE
-    If RegistrosAListar(SQL) <> 0 Then SeleccionaRegistros = True
+    Sql = "Select count(*) FROM rhisfruta"
+    Sql = Sql & " WHERE " & cadWHERE
+    If RegistrosAListar(Sql) <> 0 Then SeleccionaRegistros = True
     Exit Function
     
 ESel:
@@ -4672,20 +4702,20 @@ End Function
 
 Private Sub BotonFacturar()
 Dim vFactu As CFacturaTer
-Dim cad As String
+Dim Cad As String
 Dim CadFact As String
 
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
     
-    cad = ""
+    Cad = ""
     If Text1(3).Text = "" Then
-        cad = "Falta socio"
+        Cad = "Falta socio"
     Else
-        If Not IsNumeric(Text1(3).Text) Then cad = "Campo socio debe ser numérico"
+        If Not IsNumeric(Text1(3).Text) Then Cad = "Campo socio debe ser numérico"
     End If
-    If cad <> "" Then
-        MsgBox cad, vbExclamation
+    If Cad <> "" Then
+        MsgBox Cad, vbExclamation
         Exit Sub
     End If
         
@@ -4822,21 +4852,21 @@ End Sub
 
 Private Function ActualizarRegistrosFac(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistrosFac = False
-    SQL = "update " & cTabla & ", usuarios.stipom set impreso = 1 "
-    SQL = SQL & " where usuarios.stipom.codtipom = rfactsoc.codtipom "
+    Sql = "update " & cTabla & ", usuarios.stipom set impreso = 1 "
+    Sql = Sql & " where usuarios.stipom.codtipom = rfactsoc.codtipom "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " and " & cWhere
+        Sql = Sql & " and " & cWhere
     End If
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     ActualizarRegistrosFac = True
     Exit Function
@@ -4863,10 +4893,10 @@ End Sub
 
 
 Private Function InsertarFacturaSocioAntLiq(vSocio As cSocio) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim vSeccion As CSeccion
 Dim CuentaPrev As String
-Dim B As Boolean
+Dim b As Boolean
 Dim tipoMov As String
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
@@ -4907,7 +4937,7 @@ Dim i As Long
 '    End If
     
     '[Monica]01/10/2018: para el resto de cooperativas, frutas inma y castelduc
-    If vParamAplic.Cooperativa = 12 Then
+    If vParamAplic.Cooperativa = 12 Or vParamAplic.Cooperativa = 18 Then
         tipoMov = vSocio.CodTipomLiq
     Else
         If Combo1(0).ListIndex = 1 Then
@@ -4948,7 +4978,7 @@ Dim i As Long
 
     'Insertar la Factura
     MenError = "Insertar Cabecera de Factura"
-    B = InsertarCabecera(vSocio, tipoMov, CStr(numfactu), Text1(1).Text, MenError)
+    b = InsertarCabecera(vSocio, tipoMov, CStr(numfactu), Text1(1).Text, MenError)
 
     'si se trata de una liquidacion con albaranes
     If Combo1(0).ListIndex = 0 And Combo1(1).ListIndex = 0 Then
@@ -4967,22 +4997,22 @@ Dim i As Long
         
     
         MenError = "Insertar Variedades"
-        If B Then B = InsertarLineasFactura(tipoMov, CStr(numfactu), Text1(1).Text, Albaranes, MenError)
+        If b Then b = InsertarLineasFactura(tipoMov, CStr(numfactu), Text1(1).Text, Albaranes, MenError)
     
         MenError = "Insertar Albaranes"
-        If B Then B = InsertarLineasAlbaranes(tipoMov, CStr(numfactu), Text1(1).Text, Albaranes, MenError)
+        If b Then b = InsertarLineasAlbaranes(tipoMov, CStr(numfactu), Text1(1).Text, Albaranes, MenError)
     
         MenError = "Insertar Anticipos"
-        If B Then
+        If b Then
             If TotalFactAnticipo <> 0 Then
-                B = InsertarAnticipos(tipoMov, CStr(numfactu), Text1(1).Text, vSocio, MenError)
+                b = InsertarAnticipos(tipoMov, CStr(numfactu), Text1(1).Text, vSocio, MenError)
             End If
         End If
         
         MenError = "Insertar Descuentos"
-        If B Then
+        If b Then
             If ComprobarCero(Text1(32).Text) <> 0 Then
-                B = InsertarGastos(tipoMov, CStr(numfactu), Text1(1).Text, vSocio, MenError)
+                b = InsertarGastos(tipoMov, CStr(numfactu), Text1(1).Text, vSocio, MenError)
             End If
         End If
 
@@ -4990,13 +5020,13 @@ Dim i As Long
     Else
     ' caso de liquidacion sin albaranes
         MenError = "Insertar Variedades"
-        If B Then B = InsertarLineasFacturaSinEntradas(tipoMov, CStr(numfactu), Text1(1).Text, Text1(29).Text, MenError)
+        If b Then b = InsertarLineasFacturaSinEntradas(tipoMov, CStr(numfactu), Text1(1).Text, Text1(29).Text, MenError)
     
         ' si es liquidacion puede que tenga anticipos
-        If B Then
+        If b Then
             If Combo1(0).ListIndex = 0 Then
                 If TotalFactAnticipo <> 0 Then
-                    B = InsertarAnticipos(tipoMov, CStr(numfactu), Text1(1).Text, vSocio, MenError)
+                    b = InsertarAnticipos(tipoMov, CStr(numfactu), Text1(1).Text, vSocio, MenError)
                 End If
             End If
         End If
@@ -5004,20 +5034,20 @@ Dim i As Long
         
         '[Monica]22/10/2013
         MenError = "Insertar Descuentos"
-        If B Then
+        If b Then
             If ComprobarCero(Text1(32).Text) <> 0 Then
-                B = InsertarGastos(tipoMov, CStr(numfactu), Text1(1).Text, vSocio, MenError)
+                b = InsertarGastos(tipoMov, CStr(numfactu), Text1(1).Text, vSocio, MenError)
             End If
         End If
     
     End If
 
     ' actualizar contador
-    If B Then B = vTipoMov.IncrementarContador(tipoMov)
+    If b Then b = vTipoMov.IncrementarContador(tipoMov)
 
 
 
-    If B Then
+    If b Then
         cadFormula = "{rfactsoc.numfactu} = " & DBSet(numfactu, "N") & " and {rfactsoc.codtipom} = """ & tipoMov & """"
         cadFormula = cadFormula & " and {rfactsoc.fecfactu}= Date(" & Year(CDate(Text1(1).Text)) & "," & Month(CDate(Text1(1).Text)) & "," & Day(CDate(Text1(1).Text)) & ")"
         
@@ -5028,8 +5058,8 @@ Dim i As Long
     
 
 eInsertarFacturaSocioAntLiq:
-    If Err.Number <> 0 Then B = False
-    If B Then
+    If Err.Number <> 0 Then b = False
+    If b Then
         conn.CommitTrans
         ConnConta.CommitTrans
         InsertarFacturaSocioAntLiq = True
@@ -5052,7 +5082,7 @@ Private Function InsertarAnticipos(tipoMov As String, numfactu As String, FecFac
 'codcampo tiene valor cuando venimos de almazara que hemos tenido que buscarlo porque en el cursor Rs no lo tenemos
 Dim Tipo As String
 
-    Dim SQL As String
+    Dim Sql As String
     Dim ImpLinea As Currency
     
     On Error GoTo eInsertLinea
@@ -5063,34 +5093,34 @@ Dim Tipo As String
     
     'insertamos el albaran
     If vSocio.TipoProd = 0 Then ' socio
-        SQL = "insert into rfactsoc_anticipos (codtipom, numfactu, fecfactu, codtipomanti,numfactuanti,fecfactuanti,codvarieanti,codcampoanti,baseimpo) "
-        SQL = SQL & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ", codtipom, numfactu, fecfactu, basereten,0, baseimpo "
-        SQL = SQL & " from tmprfactsoc "
-        SQL = SQL & " where codusu = " & vUsu.Codigo
+        Sql = "insert into rfactsoc_anticipos (codtipom, numfactu, fecfactu, codtipomanti,numfactuanti,fecfactuanti,codvarieanti,codcampoanti,baseimpo) "
+        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ", codtipom, numfactu, fecfactu, basereten,0, baseimpo "
+        Sql = Sql & " from tmprfactsoc "
+        Sql = Sql & " where codusu = " & vUsu.Codigo
     
-        conn.Execute SQL
+        conn.Execute Sql
     
         ' he de marcar los anticipos que acabo de descontar
-        SQL = "update rfactsoc_variedad set descontado = 1 "
-        SQL = SQL & " where (codtipom, numfactu, fecfactu, codvarie) in (select codtipom, numfactu, fecfactu, basereten from tmprfactsoc where codusu = " & vUsu.Codigo & ")"
+        Sql = "update rfactsoc_variedad set descontado = 1 "
+        Sql = Sql & " where (codtipom, numfactu, fecfactu, codvarie) in (select codtipom, numfactu, fecfactu, basereten from tmprfactsoc where codusu = " & vUsu.Codigo & ")"
         
-        conn.Execute SQL
+        conn.Execute Sql
             
     
     Else 'tercero
-        SQL = "insert into rliantifter (codsocio, numfactu, fecfactu, codsocioanti, numfactuanti, fecfactuanti) "
-        SQL = SQL & " select " & DBSet(vSocio.Codigo, "N") & "," & DBSet(numfactu, "T") & "," & DBSet(FecFac, "F") & "," & DBSet(vSocio.Codigo, "N")
-        SQL = SQL & " codsocio, fecfactu "
-        SQL = SQL & " from tmprfactsoc "
-        SQL = SQL & " where codusu = " & vUsu.Codigo
+        Sql = "insert into rliantifter (codsocio, numfactu, fecfactu, codsocioanti, numfactuanti, fecfactuanti) "
+        Sql = Sql & " select " & DBSet(vSocio.Codigo, "N") & "," & DBSet(numfactu, "T") & "," & DBSet(FecFac, "F") & "," & DBSet(vSocio.Codigo, "N")
+        Sql = Sql & " codsocio, fecfactu "
+        Sql = Sql & " from tmprfactsoc "
+        Sql = Sql & " where codusu = " & vUsu.Codigo
     
-        conn.Execute SQL
+        conn.Execute Sql
     
         '[Monica]25/09/2013: descontamos los anticipos que hemos marcado
-        SQL = "update rlifter set descontado = 1 "
-        SQL = SQL & " where (codsocio, numfactu, fecfactu, codvarie) in (select codtipom, numfactu, fecfactu, basereten from tmprfactsoc where codusu = " & vUsu.Codigo & ")"
+        Sql = "update rlifter set descontado = 1 "
+        Sql = Sql & " where (codsocio, numfactu, fecfactu, codvarie) in (select codtipom, numfactu, fecfactu, basereten from tmprfactsoc where codusu = " & vUsu.Codigo & ")"
     
-        conn.Execute SQL
+        conn.Execute Sql
     
     End If
     
@@ -5121,7 +5151,7 @@ Private Function InsertarLineasAlbaranes(tipoMov As String, numfactu As String, 
 Dim GastosAlb As Currency
 Dim Tipo As String
 
-    Dim SQL As String
+    Dim Sql As String
     Dim ImpLinea As Currency
     
     On Error GoTo eInsertLinea
@@ -5132,25 +5162,32 @@ Dim Tipo As String
     
     
     'insertamos el albaran
-    SQL = "insert into rfactsoc_albaran (codtipom, numfactu, fecfactu, numalbar, fecalbar, "
-    SQL = SQL & "codvarie, codcampo, kilosbru, kilosnet, grado, precio, importe, imporgasto)  "
+    Sql = "insert into rfactsoc_albaran (codtipom, numfactu, fecfactu, numalbar, fecalbar, "
+    Sql = Sql & "codvarie, codcampo, kilosbru, kilosnet, grado, precio, importe, imporgasto)  "
 '    sql = sql & "select '" & Trim(tipoMov) & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ", numalbar, fecalbar, rhisfruta.codvarie, 0, rhisfruta.kilosbru, rhisfruta.kilosfactu, "
 '    sql = sql & " prestimado,impentrada,0"
 '    sql = sql & " from  rhisfruta "
 '    sql = sql & " where rhisfruta.numalbar in (" & Albaranes & ")"
     
     
-    SQL = SQL & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ", rhisfruta_clasif.numalbar, rhisfruta.fecalbar, rhisfruta.codvarie, 0,sum(rhisfruta_clasif.kilosnet), sum(rhisfruta_clasif.kilosnet), round(sum(precio) / count(*),4), round(sum(precio) / count(*),4), round(sum(rhisfruta_clasif.kilosnet) * round(sum(precio) / count(*),4),2), 0  "
-    SQL = SQL & " from rhisfruta_clasif inner join rhisfruta on rhisfruta_clasif.numalbar = rhisfruta.numalbar "
-    SQL = SQL & " and rhisfruta.codvarie = rhisfruta_clasif.codvarie "
-    SQL = SQL & " where rhisfruta.numalbar in (" & Albaranes & ")"
-    SQL = SQL & " group by 1,2,3,4,5,6,7 "
-    SQL = SQL & " order by 1,2,3,4,5,6,7 "
+    Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ", rhisfruta_clasif.numalbar, rhisfruta.fecalbar, rhisfruta.codvarie, "
+    '[Monica]07/01/2019: antes el codcampo era siempre 0, pq montifrut no usa campos
+    '[Monica]24/01/2019: si es frutas inma los kilos son los transportados
+    If vParamAplic.Cooperativa = 18 Then
+        Sql = Sql & " rhisfruta.codcampo, sum(rhisfruta_clasif.kilostra), sum(rhisfruta_clasif.kilostra), round(sum(precio) / count(*),4), round(sum(precio) / count(*),4), round(sum(rhisfruta_clasif.kilostra) * round(sum(precio) / count(*),4),2), 0  "
+    Else
+        Sql = Sql & " rhisfruta.codcampo, sum(rhisfruta_clasif.kilosnet), sum(rhisfruta_clasif.kilosnet), round(sum(precio) / count(*),4), round(sum(precio) / count(*),4), round(sum(rhisfruta_clasif.kilosnet) * round(sum(precio) / count(*),4),2), 0  "
+    End If
+    Sql = Sql & " from rhisfruta_clasif inner join rhisfruta on rhisfruta_clasif.numalbar = rhisfruta.numalbar "
+    Sql = Sql & " and rhisfruta.codvarie = rhisfruta_clasif.codvarie "
+    Sql = Sql & " where rhisfruta.numalbar in (" & Albaranes & ")"
+    Sql = Sql & " group by 1,2,3,4,5,6,7 "
+    Sql = Sql & " order by 1,2,3,4,5,6,7 "
     
     
     
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     InsertarLineasAlbaranes = True
     
@@ -5173,7 +5210,7 @@ Private Function InsertarLineasFactura(tipoMov As String, numfactu As String, Fe
 Dim Precio As Currency
 Dim Rs As ADODB.Recordset
 Dim CadValues As String
-Dim SQL As String
+Dim Sql As String
 
     
     On Error GoTo eInsertLinea
@@ -5184,11 +5221,11 @@ Dim SQL As String
     Precio = 0
     
     '[Monica]01/10/2018: metemos el codigo de campo
-    SQL = "select codvarie, codcampo, sum(kilosfactu) kilos, sum(impentrada) importe from rhisfruta where numalbar in (" & Albaranes & ")"
-    SQL = SQL & " group by 1,2 order by 1,2"
+    Sql = "select codvarie, codcampo, sum(kilosfactu) kilos, sum(impentrada) importe from rhisfruta where numalbar in (" & Albaranes & ")"
+    Sql = Sql & " group by 1,2 order by 1,2"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     CadValues = ""
     
@@ -5198,7 +5235,7 @@ Dim SQL As String
         End If
     
         CadValues = CadValues & "('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
-        CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!codCampo, "N") & "," '[Monica]01/10/2018: antes 0
+        CadValues = CadValues & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!codCampo, "N") & "," '[Monica]01/10/2018: antes 0
         CadValues = CadValues & DBSet(ImporteSinFormato(Rs!Kilos), "N") & "," & DBSet(Precio, "N") & ","
         CadValues = CadValues & DBSet(ImporteSinFormato(Rs!Importe), "N")
         CadValues = CadValues & ",0,0," & DBSet(Text1(27).Text, "N") & " ),"
@@ -5210,13 +5247,13 @@ Dim SQL As String
     If CadValues <> "" Then
         CadValues = Mid(CadValues, 1, Len(CadValues) - 1)
         
-        SQL = "insert into rfactsoc_variedad (codtipom, numfactu, fecfactu, codvarie, codcampo, "
-        SQL = SQL & "kilosnet, preciomed, imporvar, imporgasto, kilogrado, preciorea) values "
+        Sql = "insert into rfactsoc_variedad (codtipom, numfactu, fecfactu, codvarie, codcampo, "
+        Sql = Sql & "kilosnet, preciomed, imporvar, imporgasto, kilogrado, preciorea) values "
         
-        conn.Execute SQL & CadValues
+        conn.Execute Sql & CadValues
     End If
     
-    SQL = "insert into rfactsoc_calidad(codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,imporcal) "
+    Sql = "insert into rfactsoc_calidad(codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,imporcal) "
     '[Monica]11/07/2013: cambiamos el calculo
 '    sql = sql & " select codtipom,numfactu,fecfactu,rfactsoc_variedad.codvarie,codcampo,max(codcalid),kilosnet,preciomed,imporvar "
 '    sql = sql & " from rfactsoc_variedad inner join rcalidad on rfactsoc_variedad.codvarie = rcalidad.codvarie "
@@ -5227,20 +5264,26 @@ Dim SQL As String
 '    sql = sql & " order by 1,2,3,4,5,7,8,9 "
 
     '[Monica]01/10/2018: antes era 0 codcampo
-    SQL = SQL & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ", rhisfruta_clasif.codvarie, rhisfruta.codcampo, codcalid, sum(rhisfruta_clasif.kilosnet), round(sum(rhisfruta_clasif.precio) / count(*),4), round(sum(rhisfruta_clasif.kilosnet) * round(sum(rhisfruta_clasif.precio) / count(*),4),2)  "
-    SQL = SQL & " from rhisfruta_clasif inner join rhisfruta on rhisfruta_clasif.numalbar = rhisfruta.numalbar "
-    SQL = SQL & " where rhisfruta_clasif.numalbar in (" & Albaranes & ")"
-    SQL = SQL & " group by 1,2,3,4,5,6 "
-    SQL = SQL & " order by 1,2,3,4,5,6 "
+    '[Monica]24/01/2019: para el caso de frutas inma
+    If vParamAplic.Cooperativa = 18 Then
+        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ", rhisfruta_clasif.codvarie, rhisfruta.codcampo, codcalid, sum(rhisfruta_clasif.kilostra), round(sum(rhisfruta_clasif.precio) / count(*),4), round(sum(rhisfruta_clasif.kilostra) * round(sum(rhisfruta_clasif.precio) / count(*),4),2)  "
+    Else
+        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ", rhisfruta_clasif.codvarie, rhisfruta.codcampo, codcalid, sum(rhisfruta_clasif.kilosnet), round(sum(rhisfruta_clasif.precio) / count(*),4), round(sum(rhisfruta_clasif.kilosnet) * round(sum(rhisfruta_clasif.precio) / count(*),4),2)  "
+    End If
+    
+    Sql = Sql & " from rhisfruta_clasif inner join rhisfruta on rhisfruta_clasif.numalbar = rhisfruta.numalbar "
+    Sql = Sql & " where rhisfruta_clasif.numalbar in (" & Albaranes & ")"
+    Sql = Sql & " group by 1,2,3,4,5,6 "
+    Sql = Sql & " order by 1,2,3,4,5,6 "
 
-    conn.Execute SQL
+    conn.Execute Sql
     
     '[Monica]01/10/2018: añadimos esto
     If vParamAplic.Cooperativa = 5 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
-        SQL = "update rfactsoc_calidad set preciocalidad = precio, imporcalidad = imporcal where codtipom = " & DBSet(tipoMov, "T")
-        SQL = SQL & " and numfactu = " & DBSet(numfactu, "N") & " and fecfactu = " & DBSet(FecFac, "F")
+        Sql = "update rfactsoc_calidad set preciocalidad = precio, imporcalidad = imporcal where codtipom = " & DBSet(tipoMov, "T")
+        Sql = Sql & " and numfactu = " & DBSet(numfactu, "N") & " and fecfactu = " & DBSet(FecFac, "F")
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     InsertarLineasFactura = True
@@ -5258,7 +5301,7 @@ Private Function InsertarLineasFacturaSinEntradas(tipoMov As String, numfactu As
 Dim Precio As Currency
 Dim Rs As ADODB.Recordset
 Dim CadValues As String
-Dim SQL As String
+Dim Sql As String
 
     
     On Error GoTo eInsertLinea
@@ -5277,20 +5320,20 @@ Dim SQL As String
     CadValues = CadValues & ",0,0,0)"
     
         
-    SQL = "insert into rfactsoc_variedad (codtipom, numfactu, fecfactu, codvarie, codcampo, "
-    SQL = SQL & "kilosnet, preciomed, imporvar, imporgasto, kilogrado, preciorea) values "
+    Sql = "insert into rfactsoc_variedad (codtipom, numfactu, fecfactu, codvarie, codcampo, "
+    Sql = Sql & "kilosnet, preciomed, imporvar, imporgasto, kilogrado, preciorea) values "
     
-    conn.Execute SQL & CadValues
+    conn.Execute Sql & CadValues
     
-    SQL = "insert into rfactsoc_calidad(codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,imporcal) "
-    SQL = SQL & " select codtipom,numfactu,fecfactu,rfactsoc_variedad.codvarie,codcampo,max(codcalid),kilosnet,preciomed,imporvar "
-    SQL = SQL & " from rfactsoc_variedad inner join rcalidad on rfactsoc_variedad.codvarie = rcalidad.codvarie "
-    SQL = SQL & " where codtipom = " & DBSet(tipoMov, "T")
-    SQL = SQL & " and numfactu = " & DBSet(numfactu, "N")
-    SQL = SQL & " and fecfactu = " & DBSet(FecFac, "F")
-    SQL = SQL & " group by 1,2,3,4,5,7,8,9 "
-    SQL = SQL & " order by 1,2,3,4,5,7,8,9 "
-    conn.Execute SQL
+    Sql = "insert into rfactsoc_calidad(codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,imporcal) "
+    Sql = Sql & " select codtipom,numfactu,fecfactu,rfactsoc_variedad.codvarie,codcampo,max(codcalid),kilosnet,preciomed,imporvar "
+    Sql = Sql & " from rfactsoc_variedad inner join rcalidad on rfactsoc_variedad.codvarie = rcalidad.codvarie "
+    Sql = Sql & " where codtipom = " & DBSet(tipoMov, "T")
+    Sql = Sql & " and numfactu = " & DBSet(numfactu, "N")
+    Sql = Sql & " and fecfactu = " & DBSet(FecFac, "F")
+    Sql = Sql & " group by 1,2,3,4,5,7,8,9 "
+    Sql = Sql & " order by 1,2,3,4,5,7,8,9 "
+    conn.Execute Sql
     
     
     InsertarLineasFacturaSinEntradas = True
@@ -5308,7 +5351,7 @@ End Function
 
 
 Private Function InsertarCabecera(vSocio As cSocio, TipoM As String, NumFact As String, FecFact As String, MenError As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim PorcIva As Currency
 Dim EsAnticipo As Byte
 Dim EsVtaCampo As Byte
@@ -5321,32 +5364,32 @@ Dim EsVtaCampo As Byte
     EsAnticipo = Combo1(0).ListIndex
     EsVtaCampo = Combo1(1).ListIndex
 
-    SQL = "insert into rfactsoc (codtipom, numfactu, fecfactu, codsocio, baseimpo, tipoiva, porc_iva,"
-    SQL = SQL & "imporiva, tipoirpf, basereten, porc_ret, impreten, baseaport, porc_apo, impapor, totalfac, impreso, contabilizado, pasaridoc,"
-    SQL = SQL & "esanticipogasto, esretirada, esliqcomplem, codforpa, porccorredor, tipoprecio) "
-    SQL = SQL & " values ('" & TipoM & "'," & DBSet(NumFact, "N") & "," & DBSet(FecFact, "F") & "," & DBSet(vSocio.Codigo, "N") & ","
+    Sql = "insert into rfactsoc (codtipom, numfactu, fecfactu, codsocio, baseimpo, tipoiva, porc_iva,"
+    Sql = Sql & "imporiva, tipoirpf, basereten, porc_ret, impreten, baseaport, porc_apo, impapor, totalfac, impreso, contabilizado, pasaridoc,"
+    Sql = Sql & "esanticipogasto, esretirada, esliqcomplem, codforpa, porccorredor, tipoprecio) "
+    Sql = Sql & " values ('" & TipoM & "'," & DBSet(NumFact, "N") & "," & DBSet(FecFact, "F") & "," & DBSet(vSocio.Codigo, "N") & ","
     
     PorcIva = 0
     PorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", CStr(vSocio.CodIva), "N")
 
-    SQL = SQL & DBSet(Text1(9).Text, "N") & "," & vSocio.CodIva & "," & DBSet(PorcIva, "N") & ","
+    Sql = Sql & DBSet(Text1(9).Text, "N") & "," & vSocio.CodIva & "," & DBSet(PorcIva, "N") & ","
     
-    SQL = SQL & DBSet(Text1(19).Text, "N") & "," & DBSet(vSocio.TipoIRPF, "N") & "," & DBSet(Text1(23).Text, "N") & ","
-    SQL = SQL & DBSet(Text1(24).Text, "N") & "," & DBSet(Text1(25).Text, "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Text1(22).Text, "N") & ","
-    SQL = SQL & "0,0,0,"
+    Sql = Sql & DBSet(Text1(19).Text, "N") & "," & DBSet(vSocio.TipoIRPF, "N") & "," & DBSet(Text1(23).Text, "N") & ","
+    Sql = Sql & DBSet(Text1(24).Text, "N") & "," & DBSet(Text1(25).Text, "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Text1(22).Text, "N") & ","
+    Sql = Sql & "0,0,0,"
     
     '0,0,0,"
     '[Monica]01/10/2018:caso de frutas inma y castelduc
-    If vParamAplic.Cooperativa = 12 Then
-        SQL = SQL & DBSet(EsAnticipo, "N") & "," & DBSet(EsVtaCampo, "N") & ",0,"
+    If vParamAplic.Cooperativa = 12 Or vParamAplic.Cooperativa = 18 Then
+        Sql = Sql & DBSet(EsAnticipo, "N") & "," & DBSet(EsVtaCampo, "N") & ",0,"
     Else
-        SQL = SQL & "0,0,0,"
+        Sql = Sql & "0,0,0,"
     End If
     
     
-    SQL = SQL & DBSet(Text1(4).Text, "N") & "," & DBSet(Text1(28).Text, "N") & "," & Combo1(2).ListIndex & ")"
+    Sql = Sql & DBSet(Text1(4).Text, "N") & "," & DBSet(Text1(28).Text, "N") & "," & Combo1(2).ListIndex & ")"
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     InsertarCabecera = True
     
@@ -5361,16 +5404,16 @@ End Function
 
 Private Function ExisteFacturaEnHco() As Boolean
 'Comprobamos si la factura ya existe en la tabla de Facturas a Proveedor: scafpc
-Dim cad As String
+Dim Cad As String
 
     ExisteFacturaEnHco = False
     'Tiene que tener valor los 3 campos de clave primaria antes de comprobar
     If Not (Text1(0).Text <> "" And Text1(1).Text <> "" And Text1(3).Text <> "") Then Exit Function
     
     ' No debe existir el número de factura para el proveedor en hco
-    cad = "SELECT count(*) FROM rcafter "
-    cad = cad & " WHERE codsocio=" & Text1(3).Text & " AND numfactu=" & DBSet(Text1(0).Text, "T") & " AND year(fecfactu)=" & Year(Text1(2).Text)
-    If RegistrosAListar(cad) > 0 Then
+    Cad = "SELECT count(*) FROM rcafter "
+    Cad = Cad & " WHERE codsocio=" & Text1(3).Text & " AND numfactu=" & DBSet(Text1(0).Text, "T") & " AND year(fecfactu)=" & Year(Text1(2).Text)
+    If RegistrosAListar(Cad) > 0 Then
         MsgBox "Factura de Tercero ya existente. Reintroduzca.", vbExclamation
         ExisteFacturaEnHco = True
         Exit Function
@@ -5468,7 +5511,7 @@ Private Sub BotonModificarLinea(Index As Integer)
 End Sub
 
 Private Sub CargaGrid(Index As Integer, enlaza As Boolean)
-Dim B As Boolean
+Dim b As Boolean
 Dim i As Byte
 Dim tots As String
 
@@ -5491,8 +5534,8 @@ Dim tots As String
             DataGridAux(0).Columns(1).Alignment = dbgLeft
             DataGridAux(0).Columns(5).Alignment = dbgRight
         
-            B = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
-            BloquearTxt txtAux(3), Not B
+            b = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
+            BloquearTxt txtAux(3), Not b
 
     End Select
     DataGridAux(Index).ScrollBars = dbgAutomatic
@@ -5517,38 +5560,38 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim Tabla As String
    
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 0 'historico de entradas
             Tabla = "rhisfruta"
-            SQL = "SELECT rhisfruta.numalbar,rhisfruta.fecalbar, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.kilosnet, rhisfruta.prestimado, rhisfruta.impentrada, rhisfruta.codsocio "
-            SQL = SQL & " FROM " & Tabla & " inner join variedades on rhisfruta.codvarie = variedades.codvarie "
+            Sql = "SELECT rhisfruta.numalbar,rhisfruta.fecalbar, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.kilosnet, rhisfruta.prestimado, rhisfruta.impentrada, rhisfruta.codsocio "
+            Sql = Sql & " FROM " & Tabla & " inner join variedades on rhisfruta.codvarie = variedades.codvarie "
             If enlaza Then
 '                SQL = SQL & ObtenerWhereCab(True)
-                SQL = SQL & " where codsocio =  " & DBSet(Text1(3).Text, "N")
+                Sql = Sql & " where codsocio =  " & DBSet(Text1(3).Text, "N")
                 
                 
                 '[Monica] 04/02/2010 Todos los albaranes o solo los que no han sido cobrados
                 If Check1(2).Value = 0 Then
-                    SQL = SQL & " and cobradosn = 0 "   ' que no esten cobradas
+                    Sql = Sql & " and cobradosn = 0 "   ' que no esten cobradas
                 End If
                     
                 If Text1(26).Text <> "" Then
-                    SQL = SQL & " and rhisfruta.codvarie = " & DBSet(Text1(26).Text, "N")
+                    Sql = Sql & " and rhisfruta.codvarie = " & DBSet(Text1(26).Text, "N")
                 End If
             Else
-                SQL = SQL & " WHERE numalbar  = -1"
+                Sql = Sql & " WHERE numalbar  = -1"
             End If
             
-            SQL = SQL & " ORDER BY " & Tabla & ".numalbar,  " & Tabla & ".fecalbar "
+            Sql = Sql & " ORDER BY " & Tabla & ".numalbar,  " & Tabla & ".fecalbar "
             
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -5623,38 +5666,38 @@ Error1:
 End Sub
 
 Private Sub ListaAnticipos()
-Dim SQL As String
+Dim Sql As String
 
     If vSocio.TipoProd = 1 Then
-        SQL = "select distinct rcafter.numfactu, rcafter.fecfactu, variedades.nomvarie, rcafter.baseiva1 from (rcafter inner join rlifter on rcafter.codsocio = rlifter.codsocio and rcafter.numfactu = rlifter.numfactu and "
-        SQL = SQL & " rcafter.fecfactu = rlifter.fecfactu) inner join variedades on rlifter.codvarie = variedades.codvarie  "
-        SQL = SQL & " where rcafter.codsocio = " & vSocio.Codigo
-        SQL = SQL & " and rcafter.esanticipo = 1 " ' sea un anticipo
-        SQL = SQL & " and rlifter.descontado = 0 "
+        Sql = "select distinct rcafter.numfactu, rcafter.fecfactu, variedades.nomvarie, rcafter.baseiva1 from (rcafter inner join rlifter on rcafter.codsocio = rlifter.codsocio and rcafter.numfactu = rlifter.numfactu and "
+        Sql = Sql & " rcafter.fecfactu = rlifter.fecfactu) inner join variedades on rlifter.codvarie = variedades.codvarie  "
+        Sql = Sql & " where rcafter.codsocio = " & vSocio.Codigo
+        Sql = Sql & " and rcafter.esanticipo = 1 " ' sea un anticipo
+        Sql = Sql & " and rlifter.descontado = 0 "
     
 
     Else
-        SQL = "select rfactsoc.numfactu, rfactsoc.fecfactu,  variedades.nomvarie, rfactsoc.baseimpo from (rfactsoc inner join rfactsoc_variedad on rfactsoc.codtipom = rfactsoc_variedad.codtipom and "
-        SQL = SQL & " rfactsoc.numfactu = rfactsoc_variedad.numfactu and rfactsoc.fecfactu = rfactsoc_variedad.fecfactu) inner join variedades on rfactsoc_variedad.codvarie = variedades.codvarie "
-        SQL = SQL & " where rfactsoc.codsocio = " & DBSet(Text1(3).Text, "N")
+        Sql = "select rfactsoc.numfactu, rfactsoc.fecfactu,  variedades.nomvarie, rfactsoc.baseimpo from (rfactsoc inner join rfactsoc_variedad on rfactsoc.codtipom = rfactsoc_variedad.codtipom and "
+        Sql = Sql & " rfactsoc.numfactu = rfactsoc_variedad.numfactu and rfactsoc.fecfactu = rfactsoc_variedad.fecfactu) inner join variedades on rfactsoc_variedad.codvarie = variedades.codvarie "
+        Sql = Sql & " where rfactsoc.codsocio = " & DBSet(Text1(3).Text, "N")
         If Combo1(1).ListIndex = 1 Then
             'Sql = Sql & " and rfactsoc.codtipom = 'FAC' "
-            SQL = SQL & " and rfactsoc.esanticipogasto = 1 and rfactsoc.esretirada = 1"
+            Sql = Sql & " and rfactsoc.esanticipogasto = 1 and rfactsoc.esretirada = 1"
         Else
             'Sql = Sql & " and rfactsoc.codtipom = 'FAA' "
-            SQL = SQL & " and rfactsoc.esanticipogasto = 1 and rfactsoc.esretirada = 0"
+            Sql = Sql & " and rfactsoc.esanticipogasto = 1 and rfactsoc.esretirada = 0"
         End If
-        SQL = SQL & " and rfactsoc_variedad.descontado = 0"
+        Sql = Sql & " and rfactsoc_variedad.descontado = 0"
 
     End If
 
-    If TotalRegistrosConsulta(SQL) = 0 Then Exit Sub
+    If TotalRegistrosConsulta(Sql) = 0 Then Exit Sub
 
 
     Set frmMens = New frmMensajes
     
     frmMens.OpcionMensaje = 48
-    frmMens.cadWHERE = SQL
+    frmMens.cadWHERE = Sql
     frmMens.Show vbModal
     
     Set frmMens = Nothing
@@ -5663,7 +5706,7 @@ Dim SQL As String
 End Sub
 
 Private Sub VisualizarAnticipos(vSocio As cSocio)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Variedades As String
 Dim vVar As String
@@ -5697,24 +5740,24 @@ Dim i As Integer
     
     ' si es tercero
     If vSocio.TipoProd = 1 Then
-        SQL = "select sum(rlifter.importel) impanticipo from rcafter inner join rlifter on rcafter.codsocio = rlifter.codsocio and rcafter.numfactu = rlifter.numfactu and "
-        SQL = SQL & " rcafter.fecfactu = rlifter.fecfactu "
-        SQL = SQL & " where rcafter.codsocio = " & vSocio.Codigo
-        If Variedades <> "" Then SQL = SQL & " and rlifter.codvarie in (" & Variedades & ")"
-        SQL = SQL & " and rcafter.esanticipo = 1 " ' sea un anticipo
-        SQL = SQL & " and rlifter.descontado = 0 "
+        Sql = "select sum(rlifter.importel) impanticipo from rcafter inner join rlifter on rcafter.codsocio = rlifter.codsocio and rcafter.numfactu = rlifter.numfactu and "
+        Sql = Sql & " rcafter.fecfactu = rlifter.fecfactu "
+        Sql = Sql & " where rcafter.codsocio = " & vSocio.Codigo
+        If Variedades <> "" Then Sql = Sql & " and rlifter.codvarie in (" & Variedades & ")"
+        Sql = Sql & " and rcafter.esanticipo = 1 " ' sea un anticipo
+        Sql = Sql & " and rlifter.descontado = 0 "
 
         If Anticipos <> "" Then
-            SQL = SQL & " and (rcafter.numfactu, rcafter.fecfactu) in " & Anticipos
+            Sql = Sql & " and (rcafter.numfactu, rcafter.fecfactu) in " & Anticipos
         Else
-            SQL = SQL & " and (rcafter.numfactu, rcafter.fecfactu) = (null,null) "
+            Sql = Sql & " and (rcafter.numfactu, rcafter.fecfactu) = (null,null) "
         End If
     
         ' total anticipado
         Sql2 = "select sum(rcafter.totalfac) importe from rcafter inner join rlifter on rcafter.codsocio = rlifter.codsocio and rcafter.numfactu = rlifter.numfactu and "
         Sql2 = Sql2 & " rcafter.fecfactu = rlifter.fecfactu "
         Sql2 = Sql2 & " where rcafter.codsocio = " & vSocio.Codigo
-        If Variedades <> "" Then SQL = SQL & " and rlifter.codvarie in (" & Variedades & ")"
+        If Variedades <> "" Then Sql = Sql & " and rlifter.codvarie in (" & Variedades & ")"
         Sql2 = Sql2 & " and rcafter.esanticipo = 1 " ' sea un anticipo
         Sql2 = Sql2 & " and rlifter.descontado = 0 "
         
@@ -5733,7 +5776,7 @@ Dim i As Integer
         Sql2 = Sql2 & "select distinct " & vUsu.Codigo & ", rcafter.numfactu, rcafter.fecfactu, rcafter.baseiva1 from rcafter inner join rlifter on rcafter.codsocio = rlifter.codsocio and rcafter.numfactu = rlifter.numfactu and "
         Sql2 = Sql2 & " rcafter.fecfactu = rlifter.fecfactu "
         Sql2 = Sql2 & " where rcafter.codsocio = " & vSocio.Codigo
-        If Variedades <> "" Then SQL = SQL & " and rlifter.codvarie in (" & Variedades & ")"
+        If Variedades <> "" Then Sql = Sql & " and rlifter.codvarie in (" & Variedades & ")"
         Sql2 = Sql2 & " and rcafter.esanticipo = 1 " ' sea un anticipo
         Sql2 = Sql2 & " and rlifter.descontado = 0 "
         
@@ -5747,23 +5790,23 @@ Dim i As Integer
 
 
     Else
-        SQL = "select sum(rfactsoc_variedad.imporvar) impanticipo from rfactsoc inner join rfactsoc_variedad on rfactsoc.codtipom = rfactsoc_variedad.codtipom and "
-        SQL = SQL & " rfactsoc.numfactu = rfactsoc_variedad.numfactu and rfactsoc.fecfactu = rfactsoc_variedad.fecfactu "
-        SQL = SQL & " where rfactsoc.codsocio = " & DBSet(Text1(3).Text, "N")
+        Sql = "select sum(rfactsoc_variedad.imporvar) impanticipo from rfactsoc inner join rfactsoc_variedad on rfactsoc.codtipom = rfactsoc_variedad.codtipom and "
+        Sql = Sql & " rfactsoc.numfactu = rfactsoc_variedad.numfactu and rfactsoc.fecfactu = rfactsoc_variedad.fecfactu "
+        Sql = Sql & " where rfactsoc.codsocio = " & DBSet(Text1(3).Text, "N")
         If Combo1(1).ListIndex = 1 Then
             'Sql = Sql & " and rfactsoc.codtipom = 'FAC' "
-            SQL = SQL & " and rfactsoc.esanticipogasto = 1 and rfactsoc.esretirada = 1"
+            Sql = Sql & " and rfactsoc.esanticipogasto = 1 and rfactsoc.esretirada = 1"
         Else
             'Sql = Sql & " and rfactsoc.codtipom = 'FAA' "
-            SQL = SQL & " and rfactsoc.esanticipogasto = 1 and rfactsoc.esretirada = 0"
+            Sql = Sql & " and rfactsoc.esanticipogasto = 1 and rfactsoc.esretirada = 0"
         End If
-        SQL = SQL & " and rfactsoc_variedad.descontado = 0"
-        If Variedades <> "" Then SQL = SQL & " and rfactsoc_variedad.codvarie in (" & Variedades & ")"
+        Sql = Sql & " and rfactsoc_variedad.descontado = 0"
+        If Variedades <> "" Then Sql = Sql & " and rfactsoc_variedad.codvarie in (" & Variedades & ")"
         
         If Anticipos <> "" Then
-            SQL = SQL & " and (rfactsoc.numfactu, rfactsoc.fecfactu) in " & Anticipos
+            Sql = Sql & " and (rfactsoc.numfactu, rfactsoc.fecfactu) in " & Anticipos
         Else
-            SQL = SQL & " and (rfactsoc.numfactu, rfactsoc.fecfactu) = (null,null) "
+            Sql = Sql & " and (rfactsoc.numfactu, rfactsoc.fecfactu) = (null,null) "
         End If
         
         
@@ -5822,7 +5865,7 @@ Dim i As Integer
         
     End If
 
-    Anticipo = DevuelveValor(SQL)
+    Anticipo = DevuelveValor(Sql)
     Text1(8).Text = Format(Anticipo, "###,###,##0.00")
     
     Exit Sub
@@ -5859,14 +5902,14 @@ End Function
 
 
 Private Sub PosicionarData()
-Dim cad As String, Indicador As String
+Dim Cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    cad = "numalbar = " & Adoaux(0).Recordset!numalbar
+    Cad = "numalbar = " & Adoaux(0).Recordset!NumAlbar
     ' ***************************************
     
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
-    If SituarData(Adoaux(0), cad, Indicador) Then
+    If SituarData(Adoaux(0), Cad, Indicador) Then
         lblIndicador.Caption = Indicador
     End If
     ' ***********************************************************************************
@@ -5875,13 +5918,13 @@ End Sub
 
 Private Sub LLamaLineas(Index As Integer, xModo As Byte, Optional alto As Single)
 Dim jj As Integer
-Dim B As Boolean
+Dim b As Boolean
 
     ' *** si n'hi han tabs sense datagrid posar el If ***
     If Index <> 3 Then DeseleccionaGrid DataGridAux(Index)
     ' ***************************************************
        
-    B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
+    b = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
     Select Case Index
         Case 0 'albaranes
             txtAux(0).visible = False
@@ -5889,7 +5932,7 @@ Dim B As Boolean
             txtAux(2).visible = False
             txtAux(3).visible = False
             For jj = 4 To 4
-                txtAux(jj).visible = B
+                txtAux(jj).visible = b
                 txtAux(jj).Top = alto
             Next jj
             
@@ -5904,7 +5947,7 @@ Private Sub ModificarLinea()
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
 Dim V As Long
-Dim cad As String
+Dim Cad As String
     On Error Resume Next
 
     ' *** posa els noms del frames, tant si son de grid com si no ***
@@ -5962,8 +6005,8 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
-Dim B As Boolean
+Dim Sql As String
+Dim b As Boolean
 Dim Cant As Integer
 Dim Mens As String
 Dim vFact As Byte, vDocum As Byte
@@ -5973,10 +6016,10 @@ Dim vFact As Byte, vDocum As Byte
     Mens = ""
     DatosOkLlin = False
 
-    B = CompForm2(Me, 2, nomframe) 'Comprovar formato datos ok
-    If Not B Then Exit Function
+    b = CompForm2(Me, 2, nomframe) 'Comprovar formato datos ok
+    If Not b Then Exit Function
     
-    DatosOkLlin = B
+    DatosOkLlin = b
 
 EDatosOKLlin:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -5985,14 +6028,14 @@ End Function
 
 Private Sub PonerModoOpcionesMenu(Modo)
 'Actives unes Opcions de Menú i Toolbar según el modo en que estem
-Dim B As Boolean, bAux As Boolean
+Dim b As Boolean, bAux As Boolean
 Dim i As Byte
     
     ' *** si n'hi han llínies que tenen grids (en o sense tab) ***
-    B = (Modo = 3 Or Modo = 4 Or Modo = 2)
+    b = (Modo = 3 Or Modo = 4 Or Modo = 2)
     For i = 0 To ToolAux.Count - 1
-        ToolAux(i).Buttons(1).Enabled = B
-        If B Then bAux = (B And Me.Adoaux(i).Recordset.RecordCount > 0)
+        ToolAux(i).Buttons(1).Enabled = b
+        If b Then bAux = (b And Me.Adoaux(i).Recordset.RecordCount > 0)
         ToolAux(i).Buttons(2).Enabled = bAux
         ToolAux(i).Buttons(3).Enabled = bAux
     Next i
@@ -6011,7 +6054,7 @@ Dim i As Byte
     ' *******************************************
 End Sub
 
-Private Sub txtaux_GotFocus(Index As Integer)
+Private Sub txtAux_GotFocus(Index As Integer)
     ConseguirFoco txtAux(Index), Modo
 End Sub
 
@@ -6019,7 +6062,7 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
     If Index <> 0 And KeyCode <> 38 Then KEYdown KeyCode
 End Sub
 
-Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
     
     If KeyAscii = 13 Then
@@ -6136,7 +6179,7 @@ Private Function InsertarGastos(tipoMov As String, numfactu As String, FecFac As
 'codcampo tiene valor cuando venimos de almazara que hemos tenido que buscarlo porque en el cursor Rs no lo tenemos
 Dim Tipo As String
 
-    Dim SQL As String
+    Dim Sql As String
     Dim ImpLinea As Currency
     
     On Error GoTo eInsertLinea
@@ -6147,16 +6190,16 @@ Dim Tipo As String
     
     'insertamos el albaran
     If vSocio.TipoProd = 0 Then ' socio
-        SQL = "insert into rfactsoc_gastos (codtipom, numfactu, fecfactu, numlinea,codgasto,importe) "
-        SQL = SQL & " values (" & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ",1," & DBSet(Text1(30).Text, "N") & "," & DBSet(Text1(32).Text, "N") & ")"
+        Sql = "insert into rfactsoc_gastos (codtipom, numfactu, fecfactu, numlinea,codgasto,importe) "
+        Sql = Sql & " values (" & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ",1," & DBSet(Text1(30).Text, "N") & "," & DBSet(Text1(32).Text, "N") & ")"
     
-        conn.Execute SQL
+        conn.Execute Sql
     
     Else 'tercero
-        SQL = "update rcafter set impppago = " & DBSet(Text1(32).Text, "N") & ", brutofac = brutofac + " & DBSet(Text1(32).Text, "N")
-        SQL = SQL & " where codsocio = " & DBSet(vSocio.Codigo, "N") & " and numfactu = " & DBSet(numfactu, "T") & " and fecfactu = " & DBSet(FecFac, "F")
+        Sql = "update rcafter set impppago = " & DBSet(Text1(32).Text, "N") & ", brutofac = brutofac + " & DBSet(Text1(32).Text, "N")
+        Sql = Sql & " where codsocio = " & DBSet(vSocio.Codigo, "N") & " and numfactu = " & DBSet(numfactu, "T") & " and fecfactu = " & DBSet(FecFac, "F")
     
-        conn.Execute SQL
+        conn.Execute Sql
     
     End If
     
@@ -6173,25 +6216,30 @@ End Function
 
 
 Private Sub imgCheck_Click(Index As Integer)
-Dim B As Boolean
+Dim b As Boolean
 Dim TotalArray As Integer
 Dim item As ListItem
-Dim SQL As String
+Dim Sql As String
 
     
     'En el listview1
-    B = Index = 1
+    b = Index = 1
     For TotalArray = 1 To ListView1.ListItems.Count
-        ListView1.ListItems(TotalArray).Checked = B
+        ListView1.ListItems(TotalArray).Checked = b
         
         Set item = ListView1.ListItems(TotalArray)
         
 '        ListView1_ItemCheck (It.Text)
-        SQL = "update rhisfruta_clasif set precio = " & DBSet(Text1(27).Text, "N")
-        '[Monica]19/09/2013: hemos añadido el importe para que puedan modificarlo   [Monica]06/03/2014:faltaba el 2 del round
-        SQL = SQL & " , importe = round(kilosnet * " & DBSet(Text1(27).Text, "N") & ",2)"
-        SQL = SQL & " where numalbar = " & DBSet(item.Text, "N")
-        conn.Execute SQL
+        Sql = "update rhisfruta_clasif set precio = " & DBSet(Text1(27).Text, "N")
+        If vParamAplic.Cooperativa = 18 Then
+            '[Monica]19/09/2013: hemos añadido el importe para que puedan modificarlo   [Monica]06/03/2014:faltaba el 2 del round
+            Sql = Sql & " , importe = round(kilostra * " & DBSet(Text1(27).Text, "N") & ",2)"
+        Else
+            '[Monica]19/09/2013: hemos añadido el importe para que puedan modificarlo   [Monica]06/03/2014:faltaba el 2 del round
+            Sql = Sql & " , importe = round(kilosnet * " & DBSet(Text1(27).Text, "N") & ",2)"
+        End If
+        Sql = Sql & " where numalbar = " & DBSet(item.Text, "N")
+        conn.Execute Sql
 
         CalcularDatosFacturaNew
 

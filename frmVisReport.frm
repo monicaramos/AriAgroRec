@@ -227,7 +227,7 @@ Dim Inicial As Integer
         
     
       UseDefault = False
-      If mrpt.PrinterSetupEx(Me.hwnd) = 0 Then
+      If mrpt.PrinterSetupEx(Me.hWnd) = 0 Then
          
          'ok
          EstaImpreso = True
@@ -261,16 +261,16 @@ ePrintButtonClicked:
     
 End Sub
 Private Function PuedoCerrar(SegundoIncial As Single) As Boolean
-Dim c As Integer
+Dim C As Integer
     PuedoCerrar = False
     If Not mrpt Is Nothing Then
-        c = mrpt.PrintingStatus.Progress
-        Debug.Print Now & " e:" & c
+        C = mrpt.PrintingStatus.Progress
+        Debug.Print Now & " e:" & C
     Else
-        c = 1
+        C = 1
     End If
     
-    If c = 2 Then
+    If C = 2 Then
         DoEvents
         If Timer - SegundoIncial < 20 Then
             Screen.MousePointer = vbHourglass
@@ -444,19 +444,19 @@ Err_Carga:
 End Sub
 
 Private Sub ForzarNombreImpresora()
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim NomImpre As String
 
 On Error GoTo eForzarNombreImpresora
 
 
-    SQL = "select impresoraticket from nompcs where nompc = " & DBSet(ComputerName, "T")
+    Sql = "select impresoraticket from nompcs where nompc = " & DBSet(ComputerName, "T")
     
     NomImpre = ""
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         NomImpre = Rs.Fields(0).Value
@@ -599,18 +599,18 @@ Private Sub Exportar()
 End Sub
 
 Private Sub PonerMargen()
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
     On Error GoTo EPon
-    cad = Dir(App.Path & "\*.mrg")
-    If cad <> "" Then
-        i = InStr(1, cad, ".")
+    Cad = Dir(App.Path & "\*.mrg")
+    If Cad <> "" Then
+        i = InStr(1, Cad, ".")
         If i > 0 Then
-            cad = Mid(cad, 1, i - 1)
-            If IsNumeric(cad) Then
-                If Val(cad) > 4000 Then cad = "4000"
-                If Val(cad) > 0 Then
-                    mrpt.BottomMargin = mrpt.BottomMargin + Val(cad)
+            Cad = Mid(Cad, 1, i - 1)
+            If IsNumeric(Cad) Then
+                If Val(Cad) > 4000 Then Cad = "4000"
+                If Val(Cad) > 0 Then
+                    mrpt.BottomMargin = mrpt.BottomMargin + Val(Cad)
                 End If
             End If
         End If
@@ -706,7 +706,7 @@ End Function
 ' el resto de archivos seleccionados
 Private Sub HacerPDFSubDocumentos()
 Dim RN As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim J As Integer
 
 
@@ -731,11 +731,11 @@ Dim J As Integer
             'Concatenamos
             Screen.MousePointer = vbHourglass
             
-            cad = """" & App.Path & "\temp\tmp" & J - 1 & ".pdf" & """" & " """ & RN!Fichero & """"
+            Cad = """" & App.Path & "\temp\tmp" & J - 1 & ".pdf" & """" & " """ & RN!Fichero & """"
             
-            cad = """" & App.Path & "\pdftk.exe"" " & cad & " cat output """ & App.Path & "\temp\tmp" & J & ".pdf" & """ verbose"
+            Cad = """" & App.Path & "\pdftk.exe"" " & Cad & " cat output """ & App.Path & "\temp\tmp" & J & ".pdf" & """ verbose"
     
-            Shell cad, vbNormalFocus
+            Shell Cad, vbNormalFocus
             
             
             
@@ -750,17 +750,17 @@ Dim J As Integer
         
         
         'Puede tardar bastante en crearse
-        cad = App.Path & "\temp\tmp" & J & ".pdf"
+        Cad = App.Path & "\temp\tmp" & J & ".pdf"
         J = 1
         Do
-            If Dir(cad, vbArchive) = "" Then
+            If Dir(Cad, vbArchive) = "" Then
                 Screen.MousePointer = vbHourglass
                 DoEvents
                 espera 0.8
                 J = J + 1
             Else
                 espera 0.1
-                If CopiarFichero(cad) Then
+                If CopiarFichero(Cad) Then
                     J = 35
                 Else
                     J = 34

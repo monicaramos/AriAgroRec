@@ -6306,7 +6306,7 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Public Opcionlistado As Byte
+Public OpcionListado As Byte
     '==== Listados / Procesos ANTICIPOS ====
     '=============================
     ' 1 .- Informe de Anticipos
@@ -6410,9 +6410,9 @@ Attribute frmMens5.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
-Private cadselect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
 Private cadNombreRPT As String 'Nombre del informe
 Private ConSubInforme As Boolean
@@ -6425,7 +6425,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim tabla As String
+Dim Tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -6441,7 +6441,7 @@ Dim Bodega As Boolean
 Dim Industria As Boolean
 
 Dim Variedades As String
-Dim albaranes As String
+Dim Albaranes As String
 
 Dim vReturn As Integer
 
@@ -6532,7 +6532,7 @@ Dim Anticipos As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -6586,28 +6586,28 @@ Dim Anticipos As String
     End If
         
         
-    tabla = "(rfactsoc INNER JOIN rfactsoc_variedad On rfactsoc.codtipom = rfactsoc_variedad.codtipom and rfactsoc.numfactu = rfactsoc_variedad.numfactu and rfactsoc.fecfactu = rfactsoc_variedad.fecfactu )"
-    tabla = tabla & " INNER JOIN variedades On rfactsoc_variedad.codvarie = variedades.codvarie "
+    Tabla = "(rfactsoc INNER JOIN rfactsoc_variedad On rfactsoc.codtipom = rfactsoc_variedad.codtipom and rfactsoc.numfactu = rfactsoc_variedad.numfactu and rfactsoc.fecfactu = rfactsoc_variedad.fecfactu )"
+    Tabla = Tabla & " INNER JOIN variedades On rfactsoc_variedad.codvarie = variedades.codvarie "
     
     If Not AnyadirAFormula(cadFormula, "{rfactsoc_variedad.descontado} = 0") Then Exit Sub
-    If Not AnyadirAFormula(cadselect, "{rfactsoc_variedad.descontado} = 0") Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, "{rfactsoc_variedad.descontado} = 0") Then Exit Sub
     
     Anticipos = CodTipomAnticipos
     
     'En el caso de Montifrut, los anticipos estan marcados como
     If vParamAplic.Cooperativa = 12 Then
         If Not AnyadirAFormula(cadFormula, "{rfactsoc.esanticipogasto} = 1") Then Exit Sub
-        If Not AnyadirAFormula(cadselect, "{rfactsoc.esanticipogasto} = 1") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rfactsoc.esanticipogasto} = 1") Then Exit Sub
     Else
         If Not AnyadirAFormula(cadFormula, "{rfactsoc.codtipom} in [" & Anticipos & "]") Then Exit Sub
-        If Not AnyadirAFormula(cadselect, "{rfactsoc.codtipom} in (" & Anticipos & ")") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rfactsoc.codtipom} in (" & Anticipos & ")") Then Exit Sub
     End If
     
-    If HayRegistros(tabla, cadselect) Then
+    If HayRegistros(Tabla, cadSelect) Then
     
         indRPT = 103 ' "rAntPdtesDescontar.rpt"
     
-        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
     
         cadNombreRPT = nomDocu
         cadTitulo = "Informe de Anticipos Pdtes Descontar"
@@ -6644,7 +6644,7 @@ Dim vSQL As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '[Monica]02/11/2017: antes estaba if datosok then, ahora asi
@@ -6652,36 +6652,36 @@ Dim vSQL As String
         
     '======== FORMULA  ====================================
     'SECCION
-    If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
     
     
     nTabla = "rsocios INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio "
     
     
-    Select Case Opcionlistado
+    Select Case OpcionListado
         Case 16 ' anticipo venta campo sin entrada
             
             '[Monica]29/05/2017: si picassent se mira si es no tercero
             If vParamAplic.Cooperativa = 2 Then
                 If Check1(17).Value = 0 Then
-                    If Not AnyadirAFormula(cadselect, "{rsocios.tipoirpf} <> 2") Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, "{rsocios.tipoirpf} <> 2") Then Exit Sub
                     If Not AnyadirAFormula(cadFormula, "{rsocios.tipoirpf} <> 2") Then Exit Sub
                 Else
                     ' socio tercero
-                    If Not AnyadirAFormula(cadselect, "{rsocios.tipoirpf} = 2") Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, "{rsocios.tipoirpf} = 2") Then Exit Sub
                     If Not AnyadirAFormula(cadFormula, "{rsocios.tipoirpf} = 2") Then Exit Sub
                 End If
             
             End If
     
-            If Not AnyadirAFormula(cadselect, "{rsocios.codsocio} = " & txtCodigo(49).Text) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, "{rsocios.codsocio} = " & txtCodigo(49).Text) Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rsocios.codsocio} = " & txtCodigo(49).Text) Then Exit Sub
     
     
-            If HayRegParaInforme(nTabla, cadselect) Then
+            If HayRegParaInforme(nTabla, cadSelect) Then
 
-                If Not ComprobarTiposMovimiento(2, nTabla, cadselect, , True) Then Exit Sub
+                If Not ComprobarTiposMovimiento(2, nTabla, cadSelect, , True) Then Exit Sub
                         
                 If FacturaAnticipoVentaCampo(txtCodigo(49).Text, txtCodigo(50).Text, txtCodigo(45).Text, txtCodigo(51).Text, Check1(17).Value = 1) Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -6690,7 +6690,7 @@ Dim vSQL As String
                     'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE VENTA CAMPO
                     If Me.Check1(8).Value Then
                         cadFormula = ""
-                        cadselect = ""
+                        cadSelect = ""
                         
                         '[Monica]29/05/2017: si es de terceros
                         If vParamAplic.Cooperativa = 2 Then
@@ -6705,22 +6705,22 @@ Dim vSQL As String
                         cadTitulo = "Reimpresión Facturas Anticipos V.Campo"
                         
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                         'Nº Factura
                         cadAux = "({rfactsoc.numfactu} IN [" & vParamAplic.UltFactAntVC & "])"
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                         cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
-                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                         'Fecha de Factura
                         FecFac = CDate(txtCodigo(51).Text)
                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                         cadAux = "{rfactsoc.fecfactu}= '" & Format(FecFac, FormatoFecha) & "'"
                         
-                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                        
                         indRPT = 23 'Impresion de facturas de socios
-                        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                         'Nombre fichero .rpt a Imprimir
                         cadNombreRPT = nomDocu
                         ConSubInforme = True
@@ -6728,7 +6728,7 @@ Dim vSQL As String
                         LlamarImprimir
                         
                         If frmVisReport.EstaImpreso Then
-                            ActualizarRegistrosFac "rfactsoc", cadselect
+                            ActualizarRegistrosFac "rfactsoc", cadSelect
                         End If
                     End If
                 End If
@@ -6736,7 +6736,7 @@ Dim vSQL As String
             
         Case 161 ' anticipo normal sin entrada
     
-            If Not ComprobarTiposMovimiento(0, nTabla, cadselect) Then Exit Sub
+            If Not ComprobarTiposMovimiento(0, nTabla, cadSelect) Then Exit Sub
                     
             If FacturaAnticipoSinEntrada(txtCodigo(49).Text, txtCodigo(50).Text, txtCodigo(45).Text, txtCodigo(51).Text, Check1(17).Value = 1, txtCodigo(70).Text) Then
                 MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -6745,7 +6745,7 @@ Dim vSQL As String
                 'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE VENTA CAMPO
                 If Me.Check1(8).Value Then
                     cadFormula = ""
-                    cadselect = ""
+                    cadSelect = ""
                     
                     '[Monica]07/11/2013: si esta marcado que es un socio tercero cogemos otro contador (Picassent)
                     If Check1(17).Value = 1 Then
@@ -6757,22 +6757,22 @@ Dim vSQL As String
                     cadTitulo = "Reimpresión Facturas Anticipos"
                     
                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                    If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                     'Nº Factura
                     cadAux = "({rfactsoc.numfactu} IN [" & vParamAplic.UltFactAnt & "])"
                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                     cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
-                    If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                     'Fecha de Factura
                     FecFac = CDate(txtCodigo(51).Text)
                     cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                     cadAux = "{rfactsoc.fecfactu}= '" & Format(FecFac, FormatoFecha) & "'"
                     
-                    If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                    
                     indRPT = 23 'Impresion de facturas de socios
-                    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                     'Nombre fichero .rpt a Imprimir
                     cadNombreRPT = nomDocu
                     ConSubInforme = True
@@ -6780,7 +6780,7 @@ Dim vSQL As String
                     LlamarImprimir
                     
                     If frmVisReport.EstaImpreso Then
-                        ActualizarRegistrosFac "rfactsoc", cadselect
+                        ActualizarRegistrosFac "rfactsoc", cadSelect
                     End If
                 End If
                                
@@ -6818,7 +6818,7 @@ Dim MaxContador As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -6830,7 +6830,7 @@ Dim MaxContador As String
         nHasta = txtNombre(56).Text
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".codsocio}"
+            Codigo = "{" & Tabla & ".codsocio}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
         End If
@@ -6859,17 +6859,17 @@ Dim MaxContador As String
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".fecalbar}"
+            Codigo = "{" & Tabla & ".fecalbar}"
             TipCod = "F"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
             
         'SECCION
-        If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         
         'Socio que no sea tercero
-        If Not AnyadirAFormula(cadselect, "{rsocios.tipoprod} <> 1") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
         
 '        'sólo entradas distintas de VENTA CAMPO y distintas de INDUSTRIA
@@ -6879,10 +6879,10 @@ Dim MaxContador As String
         '++monica: 28/07/2009 dependiendo del tipo de recoleccion (0=coop 1=socio 2=todos)
         Select Case Combo1(2).ListIndex
             Case 0      ' recolectado cooperativa
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.recolect} = 0") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.recolect} = 0") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.recolect} = 0") Then Exit Sub
             Case 1      ' recolectado socio
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.recolect} = 1") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.recolect} = 1") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.recolect} = 1") Then Exit Sub
             Case 2      ' ambos
             
@@ -6905,19 +6905,19 @@ Dim MaxContador As String
         Set frmMens = Nothing
         
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
-        If HayRegParaInforme(nTabla, cadselect) Then
-            If CargarAportaciones(nTabla, cadselect) Then
+        If HayRegParaInforme(nTabla, cadSelect) Then
+            If CargarAportaciones(nTabla, cadSelect) Then
                 MsgBox "Proceso realizado correctamente.", vbExclamation
                 
                 cadTitulo = "Informe de Aportación Fondo Operativo"
 
                 indRPT = 75 ' rInformeAFO.rpt
 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
 
                 cadNombreRPT = Replace(nomDocu, "AFO", "AFOResul")
                 
-                cadParam = cadParam & "pResumen=" & Check2.Value & "|"
+                CadParam = CadParam & "pResumen=" & Check2.Value & "|"
                 numParam = numParam + 1
                 
                 cadFormula = ""
@@ -7043,7 +7043,7 @@ Private Sub CmdAcepDesF_Click()
 Dim Tipo As Byte
     If DatosOk Then
         Pb2.visible = True
-        Select Case Opcionlistado
+        Select Case OpcionListado
             Case 5 ' anticipo
                 Tipo = 0
             Case 7
@@ -7091,7 +7091,7 @@ Dim vSQL As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -7103,7 +7103,7 @@ Dim vSQL As String
         nHasta = txtNombre(17).Text
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".codsocio}"
+            Codigo = "{" & Tabla & ".codsocio}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
         End If
@@ -7132,21 +7132,21 @@ Dim vSQL As String
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".fecalbar}"
+            Codigo = "{" & Tabla & ".fecalbar}"
             TipCod = "F"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
         
         'SECCION
-        If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         
         'sólo entradas de VENTA CAMPO
-        If Not AnyadirAFormula(cadselect, "{rhisfruta.tipoentr} = 1") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} = 1") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} = 1") Then Exit Sub
         
         'sólo entradas que tengan importe (rhisfruta.impentrada)
-        If Not AnyadirAFormula(cadselect, "{rhisfruta.impentrada} <> 0") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rhisfruta.impentrada} <> 0") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rhisfruta.impentrada} <> 0") Then Exit Sub
         
         
@@ -7154,11 +7154,11 @@ Dim vSQL As String
         '                 ahora para Juan los socios terceros son los que tengan IRPF = 2 (Entidad)
         If vParamAplic.Cooperativa = 2 Then
             If Check1(29).Value = 0 Then
-                If Not AnyadirAFormula(cadselect, "{rsocios.tipoirpf} <> 2") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoirpf} <> 2") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rsocios.tipoirpf} <> 2") Then Exit Sub
             Else
                 ' socio tercero
-                If Not AnyadirAFormula(cadselect, "{rsocios.tipoirpf} = 2") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoirpf} = 2") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rsocios.tipoirpf} = 2") Then Exit Sub
             End If
         End If
@@ -7177,16 +7177,16 @@ Dim vSQL As String
         
         Set frmMens = Nothing
         
-        If HayRegParaInforme(nTabla, cadselect) Then
-            Nregs = TotalFacturas(nTabla, cadselect)
+        If HayRegParaInforme(nTabla, cadSelect) Then
+            Nregs = TotalFacturas(nTabla, cadSelect)
             If Nregs <> 0 Then
                 'combo1(0).listindex = 0 ---> anticipo venta campo
                 '                    = 1 ---> liquidación venta campo
                 Select Case Combo1(0).ListIndex
                     Case 0 ' anticipo
-                        If Not ComprobarTiposMovimiento(2, nTabla, cadselect, , Check1(29).Value = 1) Then Exit Sub
+                        If Not ComprobarTiposMovimiento(2, nTabla, cadSelect, , Check1(29).Value = 1) Then Exit Sub
                     Case 1 ' liquidacion venta campo
-                        If Not ComprobarTiposMovimiento(3, nTabla, cadselect, , Check1(29).Value = 1) Then Exit Sub
+                        If Not ComprobarTiposMovimiento(3, nTabla, cadSelect, , Check1(29).Value = 1) Then Exit Sub
                 End Select
                 
                 Me.Pb3.visible = True
@@ -7195,13 +7195,13 @@ Dim vSQL As String
                 Me.Refresh
                 DoEvents
                         
-                If FacturacionVentaCampo(Combo1(0).ListIndex, nTabla, cadselect, txtCodigo(14).Text, Me.Pb3, Check1(10).Value, Check1(15).Value = 1, Check1(29).Value = 1) Then
+                If FacturacionVentaCampo(Combo1(0).ListIndex, nTabla, cadSelect, txtCodigo(14).Text, Me.Pb3, Check1(10).Value, Check1(15).Value = 1, Check1(29).Value = 1) Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation
                                    
                     ' si imprimimos resumen
                     If Me.Check1(0).Value Then
                         cadFormula = ""
-                        cadParam = cadParam & "pFecFac= """ & txtCodigo(14).Text & """|"
+                        CadParam = CadParam & "pFecFac= """ & txtCodigo(14).Text & """|"
                         numParam = numParam + 1
                         
                         FecFac = CDate(txtCodigo(14).Text)
@@ -7214,11 +7214,11 @@ Dim vSQL As String
                         Select Case Combo1(0).ListIndex
                             Case 0 ' anticipos
                                 cadTitulo = "Resumen Facturas Anticipos Venta Campo"
-                                cadParam = cadParam & "pTitulo= ""Resumen Fact.Anticipos V.Campo""|"
+                                CadParam = CadParam & "pTitulo= ""Resumen Fact.Anticipos V.Campo""|"
                                 numParam = numParam + 1
                             Case 1 ' liquidaciones
                                 cadTitulo = "Resumen Facturas Liquidación Venta Campo"
-                                cadParam = cadParam & "pTitulo= ""Resumen Fact.Liquidación V.Campo""|"
+                                CadParam = CadParam & "pTitulo= ""Resumen Fact.Liquidación V.Campo""|"
                                 numParam = numParam + 1
                         End Select
                         ConSubInforme = True
@@ -7229,7 +7229,7 @@ Dim vSQL As String
                     'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE VENTA CAMPO
                     If Me.Check1(1).Value Then
                         cadFormula = ""
-                        cadselect = ""
+                        cadSelect = ""
                         'Tipo de Factura: Anticipo
                         Select Case Combo1(0).ListIndex
                             Case 0 ' anticipos
@@ -7251,22 +7251,22 @@ Dim vSQL As String
                         End Select
                         
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                         'Nº Factura
                         cadAux = "({rfactsoc.numfactu} IN [" & FacturasGeneradas(Combo1(0).ListIndex) & "])"
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                         cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
-                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                         'Fecha de Factura
                         FecFac = CDate(txtCodigo(14).Text)
                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                         cadAux = "{rfactsoc.fecfactu}= '" & Format(FecFac, FormatoFecha) & "'"
                         
-                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                        
                         indRPT = 23 'Impresion de facturas de socios
-                        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                         'Nombre fichero .rpt a Imprimir
                         cadNombreRPT = nomDocu
                         ConSubInforme = True
@@ -7275,14 +7275,14 @@ Dim vSQL As String
                             Dim PrecioApor As Double
                             PrecioApor = DevuelveValor("select min(precio) from raporreparto")
                             
-                            cadParam = cadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
+                            CadParam = CadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
                             numParam = numParam + 1
                         End If
                         
                         LlamarImprimir
                         
                         If frmVisReport.EstaImpreso Then
-                            ActualizarRegistrosFac "rfactsoc", cadselect
+                            ActualizarRegistrosFac "rfactsoc", cadSelect
                         End If
                     End If
                                    
@@ -7326,9 +7326,9 @@ Dim nTabla As String
         'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
         If Me.Check1(18).Value Then
             cadFormula = ""
-            cadParam = cadParam & "pFecFac= """ & txtCodigo(61).Text & """|"
+            CadParam = CadParam & "pFecFac= """ & txtCodigo(61).Text & """|"
             numParam = numParam + 1
-            cadParam = cadParam & "pTitulo= ""Resumen Facturación de Liquidaciones""|"
+            CadParam = CadParam & "pTitulo= ""Resumen Facturación de Liquidaciones""|"
             numParam = numParam + 1
             
             FecFac = CDate(txtCodigo(61).Text)
@@ -7342,25 +7342,25 @@ Dim nTabla As String
         'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE ANTICIPOS/LIQUIDACION
         If Me.Check1(3).Value Then
             cadFormula = ""
-            cadselect = ""
+            cadSelect = ""
             cadAux = "({stipom.tipodocu} = 2)"
             If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-            If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
             'Nº Factura
             cadAux = "({rfactsoc.numfactu} IN [" & FacturasGeneradas(3) & "])"
             If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
             cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
-            If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
 
             'Fecha de Factura
             FecFac = CDate(txtCodigo(61).Text)
             cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
             If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
             cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
-            If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
 
             indRPT = 23 'Impresion de facturas de socios
-            If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
             'Nombre fichero .rpt a Imprimir
             cadNombreRPT = nomDocu
             'Nombre fichero .rpt a Imprimir
@@ -7371,14 +7371,14 @@ Dim nTabla As String
                 Dim PrecioApor As Double
                 PrecioApor = DevuelveValor("select min(precio) from raporreparto")
                 
-                cadParam = cadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
+                CadParam = CadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
                 numParam = numParam + 1
             End If
 
             LlamarImprimir
 
             If frmVisReport.EstaImpreso Then
-                ActualizarRegistrosFac "rfactsoc", cadselect
+                ActualizarRegistrosFac "rfactsoc", cadSelect
             End If
         End If
         'SALIR DE LA FACTURACION DE ANTICIPOS / LIQUIDACIONES
@@ -7435,7 +7435,7 @@ Dim vCampAnt As CCampAnt
     nHasta = txtNombre(35).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".codsocio}"
+        Codigo = "{" & Tabla & ".codsocio}"
         Codigo1 = "{rcafter.codsocio}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHCliente= """) Then Exit Sub
@@ -7474,7 +7474,7 @@ Dim vCampAnt As CCampAnt
     cHasta = FecFin
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".fecfactu}"
+        Codigo = "{" & Tabla & ".fecfactu}"
         Codigo1 = "{rfacttra.fecfactu}"
         codigo2 = "{rcafter.fecfactu}"
         TipCod = "F"
@@ -7497,7 +7497,7 @@ Dim vCampAnt As CCampAnt
     txtCodigo(30).Text = Format(Year(FecIni), "0000") ' inicio del año natural
     
     
-    Select Case Opcionlistado
+    Select Case OpcionListado
         Case 10 'modelo 190
             If Not AnyadirAFormula(cadFormula, "{rfactsoc.impreten} <> 0") Then Exit Sub
             If Not AnyadirAFormula(cadSelect1, "{rfactsoc.impreten} <> 0") Then Exit Sub
@@ -7542,7 +7542,7 @@ Dim vCampAnt As CCampAnt
 '            b = GeneraFicheroModelo(OpcionListado - 10, nTabla, cadSelect)
             Label4(48).Caption = "Generando fichero..."
             DoEvents
-            b = GeneraFicheroModelo(Opcionlistado - 10, "tmprfactsoc", "tmprfactsoc.codusu=" & vUsu.Codigo)
+            b = GeneraFicheroModelo(OpcionListado - 10, "tmprfactsoc", "tmprfactsoc.codusu=" & vUsu.Codigo)
             If b Then
                 If CopiarFichero Then
                     MsgBox "Proceso realizado correctamente", vbExclamation
@@ -7578,30 +7578,30 @@ Dim Sql As String
     If Not DatosOk Then Exit Sub
 
     ' Socio el socio es obligatorio introducirlo
-    If Not AnyadirAFormula(cadselect, "rhisfruta.codsocio = " & Trim(txtCodigo(52).Text)) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, "rhisfruta.codsocio = " & Trim(txtCodigo(52).Text)) Then Exit Sub
     
     ' Variedad
     If Trim(txtCodigo(48).Text) <> "" Then
-        If Not AnyadirAFormula(cadselect, "rhisfruta.codvarie = " & Trim(txtCodigo(48).Text)) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "rhisfruta.codvarie = " & Trim(txtCodigo(48).Text)) Then Exit Sub
     End If
     
-    If Not AnyadirAFormula(cadselect, "rhisfruta.tipoentr = 1") Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, "rhisfruta.tipoentr = 1") Then Exit Sub
     
-    Sql = "select count(*) from rhisfruta where " & cadselect
+    Sql = "select count(*) from rhisfruta where " & cadSelect
     If TotalRegistros(Sql) = 0 Then
         MsgBox "No hay entradas de venta campo de este socio. Revise.", vbExclamation
     Else
         ' cargamos el listview para que se seleccionen que campos hemos de modificar
         Set frmMens2 = New frmMensajes
-        frmMens2.cadWHERE = cadselect
+        frmMens2.cadWHERE = cadSelect
         frmMens2.OpcionMensaje = 26 '6
         frmMens2.Show vbModal
         Set frmMens2 = Nothing
         
-        If albaranes = "" Then
+        If Albaranes = "" Then
             MsgBox "No se han seleccionado albaranes para hacer el reparto. Revise.", vbExclamation
         Else
-            If RecalculoImportes(albaranes) Then
+            If RecalculoImportes(Albaranes) Then
                 MsgBox "Proceso realizado correctamente", vbExclamation
                 cmdCancel_Click
             End If
@@ -7630,7 +7630,7 @@ Dim Codigo1 As String
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vParam.NombreEmpresa & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vParam.NombreEmpresa & """|"
     numParam = numParam + 1
     
      '======== FORMULA  ====================================
@@ -7665,7 +7665,7 @@ Dim Codigo1 As String
     nHasta = txtNombre(25).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".codsocio}"
+        Codigo = "{" & Tabla & ".codsocio}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHCliente= """) Then Exit Sub
         If cDesde <> "" Then If Not AnyadirAFormula(cadSelect1, Codigo & ">= " & cDesde) Then Exit Sub
@@ -7719,7 +7719,7 @@ Dim Codigo1 As String
     cHasta = Trim(txtCodigo(27).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".fecfactu}"
+        Codigo = "{" & Tabla & ".fecfactu}"
         Codigo1 = "{rfacttra.fecfactu}"
         TipCod = "F"
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHFecha= """) Then Exit Sub
@@ -7757,10 +7757,10 @@ Dim Codigo1 As String
     If CargarFacturas(nTabla, cadSelect1, nTabla2, cadSelect2) Then
 
         If HayRegistros("tmprfactsoc", "tmprfactsoc.codusu=" & vUsu.Codigo) Then
-            cadParam = cadParam & "pResumen=" & Me.Check1(4).Value & "|"
+            CadParam = CadParam & "pResumen=" & Me.Check1(4).Value & "|"
             numParam = numParam + 1
             'Nombre fichero .rpt a Imprimir
-            Select Case Opcionlistado
+            Select Case OpcionListado
                 Case 8
                     'Nombre fichero .rpt a Imprimir
                     cadNombreRPT = "rInfResultados.rpt"
@@ -7777,7 +7777,7 @@ Dim Codigo1 As String
                     
                     indRPT = 76 ' Informe de Retenciones
 
-                    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
 
                     cadNombreRPT = nomDocu
                     
@@ -7787,17 +7787,17 @@ Dim Codigo1 As String
 
                         indRPT = 39 ' Certificado de Retenciones
 
-                        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
 
                         cadNombreRPT = nomDocu
 
-                        cadParam = cadParam & "pDesdeFecha=""" & txtCodigo(26).Text & """|"
+                        CadParam = CadParam & "pDesdeFecha=""" & txtCodigo(26).Text & """|"
                         numParam = numParam + 1
-                        cadParam = cadParam & "pHastaFecha=""" & txtCodigo(27).Text & """|"
+                        CadParam = CadParam & "pHastaFecha=""" & txtCodigo(27).Text & """|"
                         numParam = numParam + 1
-                        cadParam = cadParam & "pFecha=""" & txtCodigo(32).Text & """|"
+                        CadParam = CadParam & "pFecha=""" & txtCodigo(32).Text & """|"
                         numParam = numParam + 1
-                        cadParam = cadParam & "pJustificante=" & txtCodigo(33).Text & "|"
+                        CadParam = CadParam & "pJustificante=" & txtCodigo(33).Text & "|"
                         numParam = numParam + 1
                     Else
                         If Check1(9).Value = 1 Then ' informe de aportaciones
@@ -7805,15 +7805,15 @@ Dim Codigo1 As String
     
                             indRPT = 75 ' rInformeAFO.rpt
     
-                            If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
     
                             cadNombreRPT = nomDocu
     
-                            cadParam = cadParam & "pDesdeFecha=""" & txtCodigo(26).Text & """|"
+                            CadParam = CadParam & "pDesdeFecha=""" & txtCodigo(26).Text & """|"
                             numParam = numParam + 1
-                            cadParam = cadParam & "pHastaFecha=""" & txtCodigo(27).Text & """|"
+                            CadParam = CadParam & "pHastaFecha=""" & txtCodigo(27).Text & """|"
                             numParam = numParam + 1
-                            cadParam = cadParam & "pFecha=""" & txtCodigo(32).Text & """|"
+                            CadParam = CadParam & "pFecha=""" & txtCodigo(32).Text & """|"
                             numParam = numParam + 1
                             
                             '[Monica]12/01/2012 : el precio lo paso a capon
@@ -7827,7 +7827,7 @@ Dim Codigo1 As String
                             Sql5 = "select sum(if(kilosnet is null,0,kilosnet)) from tmprfactsoc_variedad where codusu = " & vUsu.Codigo
                             Kilos = DevuelveValor(Sql5)
                             Precio = Round2(Importe / Kilos, 6)
-                            cadParam = cadParam & "pPrecio=" & TransformaComasPuntos(ImporteSinFormato(CStr(Precio))) & "|"
+                            CadParam = CadParam & "pPrecio=" & TransformaComasPuntos(ImporteSinFormato(CStr(Precio))) & "|"
                             numParam = numParam + 1
                             
                         Else
@@ -7837,11 +7837,11 @@ Dim Codigo1 As String
                                 cadNombreRPT = Replace(cadNombreRPT, "Retenciones", "RetencionesEpi")
                                 cadTitulo = "Informe de Retenciones por Socio/Epígrafe"
             
-                                cadParam = cadParam & "pDesdeFecha=""" & txtCodigo(26).Text & """|"
+                                CadParam = CadParam & "pDesdeFecha=""" & txtCodigo(26).Text & """|"
                                 numParam = numParam + 1
-                                cadParam = cadParam & "pHastaFecha=""" & txtCodigo(27).Text & """|"
+                                CadParam = CadParam & "pHastaFecha=""" & txtCodigo(27).Text & """|"
                                 numParam = numParam + 1
-                                cadParam = cadParam & "pFecha=""" & txtCodigo(32).Text & """|"
+                                CadParam = CadParam & "pFecha=""" & txtCodigo(32).Text & """|"
                                 numParam = numParam + 1
                                 
                                 ConSubInforme = True
@@ -7851,7 +7851,7 @@ Dim Codigo1 As String
                                     cadNombreRPT = Replace(cadNombreRPT, "Retenciones", "RetencionesGPie")
                                     cadTitulo = "Informe de Retenciones con Gastos Pie"
                                 Else
-                                    cadParam = cadParam & "pSaltaPag=" & Check1(6).Value & "|"
+                                    CadParam = CadParam & "pSaltaPag=" & Check1(6).Value & "|"
                                     numParam = numParam + 1
                                 End If
                             End If
@@ -7862,7 +7862,7 @@ Dim Codigo1 As String
             cadFormula = "{tmprfactsoc.codusu}=" & vUsu.Codigo
             ConSubInforme = True
             
-            If Opcionlistado = 9 And (Mid(cadNombreRPT, 1, 3) = "Cat" Or Mid(cadNombreRPT, 1, 3) = "Moi") Then
+            If OpcionListado = 9 And (Mid(cadNombreRPT, 1, 3) = "Cat" Or Mid(cadNombreRPT, 1, 3) = "Moi") Then
                 ConSubInforme = True
             End If
             
@@ -7887,7 +7887,7 @@ Private Sub cmdAceptarAnt_Click()
                
         Case 3 'COOPERATIVA MOIXENT
                'ProcesoMoixent
-               If Opcionlistado = 12 Or Opcionlistado = 13 Or Opcionlistado = 14 Or Opcionlistado = 15 Then
+               If OpcionListado = 12 Or OpcionListado = 13 Or OpcionListado = 14 Or OpcionListado = 15 Then
                     ProcesoValsur
                End If
         Case 4 'COOPERATIVA DE ALZIRA
@@ -7901,7 +7901,7 @@ Private Sub cmdAceptarAnt_Click()
                 
                 
         Case 5 ' COOPERATIVA DE CASTELDUC
-            Select Case Opcionlistado
+            Select Case OpcionListado
                 Case 1, 2, 3
                     '[Monica]12/09/2012:antes los anticipos los hacia como en Valsur, un solo anticipo por campaña
                     ProcesoCatadau
@@ -7962,7 +7962,7 @@ Dim Tabla1 As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -7974,7 +7974,7 @@ Dim Tabla1 As String
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".codsocio}"
+            Codigo = "{" & Tabla & ".codsocio}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
         End If
@@ -8003,13 +8003,13 @@ Dim Tabla1 As String
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".fecalbar}"
+            Codigo = "{" & Tabla & ".fecalbar}"
             TipCod = "F"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
             
         'SECCION
-        If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         
         
@@ -8023,22 +8023,22 @@ Dim Tabla1 As String
         '
             'Socio que no sea tercero
             If Check1(11).Value = 0 Then
-                If Not AnyadirAFormula(cadselect, "{rsocios.tipoprod} <> 1") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
             Else
                 ' socio tercero de modulos
-                If Not AnyadirAFormula(cadselect, "{rsocios.tipoprod} = 1 and {rsocios.tipoirpf} = 0") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} = 1 and {rsocios.tipoirpf} = 0") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} = 1 and {rsocios.tipoirpf} = 0") Then Exit Sub
             End If
         Else
             'Socio que no sea tercero
-            If Not AnyadirAFormula(cadselect, "{rsocios.tipoprod} <> 1") Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1") Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
         End If
                 
         
         '[Monica]03/06/2013: distinguimos entre entradas normales y entradas de p.integrado (solo para catadau)
-        If (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19) And (Opcionlistado = 12 Or Opcionlistado = 13 Or Opcionlistado = 14) Then
+        If (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19) And (OpcionListado = 12 Or OpcionListado = 13 Or OpcionListado = 14) Then
         '[Monica]27/01/2016: cambiamos lo de la seleccion de las entradas
 '                If Check1(16).Value = 1 Then ' solo entradas normales
 '                    If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} = 0") Then Exit Sub
@@ -8048,19 +8048,19 @@ Dim Tabla1 As String
 '                    If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} = 2") Then Exit Sub
 '                End If
             If Check1(23).Value = 0 Then ' normales
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.tipoentr} <> 0") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 0") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 0") Then Exit Sub
             End If
             If Check1(24).Value = 0 Then ' producto integrado
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.tipoentr} <> 2") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 2") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 2") Then Exit Sub
             End If
             If Check1(25).Value = 0 Then ' venta campo
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.tipoentr} <> 1") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 1") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 1") Then Exit Sub
             End If
         
-            If Not AnyadirAFormula(cadselect, "{rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4 and {rhisfruta.tipoentr} <> 6") Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4 and {rhisfruta.tipoentr} <> 6") Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4 and {rhisfruta.tipoentr} <> 6") Then Exit Sub
         
         
@@ -8068,7 +8068,7 @@ Dim Tabla1 As String
             '[Monica]27/03/2013: nuevo tipo de entradas que tampoco hemos de liquidar (complementarias=siniestro) solo catadau
             '[Monica]30/11/2011: antes no estaba ni industria ni retirada
             'sólo entradas distintas de VENTA CAMPO y distintas de INDUSTRIA y distintas de RETIRADA
-            If Not AnyadirAFormula(cadselect, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4 and {rhisfruta.tipoentr} <> 6") Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4 and {rhisfruta.tipoentr} <> 6") Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4 and {rhisfruta.tipoentr} <> 6") Then Exit Sub
         End If
         
@@ -8076,10 +8076,10 @@ Dim Tabla1 As String
         '++monica: 28/07/2009 dependiendo del tipo de recoleccion (0=coop 1=socio 2=todos)
         Select Case Combo1(2).ListIndex
             Case 0      ' recolectado cooperativa
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.recolect} = 0") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.recolect} = 0") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.recolect} = 0") Then Exit Sub
             Case 1      ' recolectado socio
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.recolect} = 1") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.recolect} = 1") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.recolect} = 1") Then Exit Sub
             Case 2      ' ambos
             
@@ -8093,16 +8093,16 @@ Dim Tabla1 As String
         nTabla = nTabla & " INNER JOIN grupopro ON productos.codgrupo = grupopro.codgrupo "
         nTabla = nTabla & " and grupopro.codgrupo <> 5 and grupopro.codgrupo <> 6 " ' grupo no puede ser 5=almazara ni 6=bodegaÇ
         
-        cadSelect1 = cadselect
+        cadSelect1 = cadSelect
         Tabla1 = nTabla
         
         
-        Select Case Opcionlistado
+        Select Case OpcionListado
             Case 1 ' Listado de anticipos
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 24 ' informe de anticipos
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu '"CatAnticipos.rpt"
                 cadTitulo = "Informe de Anticipos"
@@ -8123,7 +8123,7 @@ Dim Tabla1 As String
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 26 ' informe de liquidacion
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu '"CatLiquidacion.rpt"
                 cadTitulo = "Informe de Liquidación"
@@ -8139,7 +8139,7 @@ Dim Tabla1 As String
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 33 ' informe de prevision de pago de liquidacion
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu 'rPrevPagosLiq.rpt
                 If Combo1(3).ListIndex = 0 Then ' agrupado por socio
@@ -8154,7 +8154,7 @@ Dim Tabla1 As String
                 '[Monica]27/01/2016: si es Catadau y es complementaria sale un subreport con los diferentes kilos agrupados
                 '                    por variedad
                 If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
-                    cadParam = cadParam & "pComple=" & Check1(5).Value & "|"
+                    CadParam = CadParam & "pComple=" & Check1(5).Value & "|"
                     numParam = numParam + 1
                 End If
                 
@@ -8181,8 +8181,8 @@ Dim Tabla1 As String
         '                    esten pendiente de descontar
         vFechas = ""
         If vParamAplic.Cooperativa = 9 Then
-            If Opcionlistado = 12 Or Opcionlistado = 13 Or Opcionlistado = 14 Then
-                vFechas = CargarFechasAnticiposPendientes(nTabla, cadselect)
+            If OpcionListado = 12 Or OpcionListado = 13 Or OpcionListado = 14 Then
+                vFechas = CargarFechasAnticiposPendientes(nTabla, cadSelect)
                 
                 If vFechas <> "" Then
                     Set frmMens5 = New frmMensajes
@@ -8200,9 +8200,9 @@ Dim Tabla1 As String
         
         
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
-        If HayRegParaInforme(nTabla, cadselect) Then
+        If HayRegParaInforme(nTabla, cadSelect) Then
         
-            Select Case Opcionlistado
+            Select Case OpcionListado
                 Case 1, 2, 3
                     TipoPrec = 0 ' ANTICIPOS
                 Case 12, 13, 14
@@ -8211,7 +8211,7 @@ Dim Tabla1 As String
             
             '[Monica]05/03/2014: añado todo lo de alzira aqui
             'comprobamos que los tipos de iva existen en la contabilidad de horto
-            If Not ComprobarTiposIVA(nTabla, cadselect) Then Exit Sub
+            If Not ComprobarTiposIVA(nTabla, cadSelect) Then Exit Sub
             
             
             '[Monica]27/04/2011: de momento solo alzira comprobamos si los albaranes seccionado ya estan liquidados
@@ -8219,7 +8219,7 @@ Dim Tabla1 As String
                 Dim CadenaAlbaranes As String
                 
                 CadenaAlbaranes = ""
-                If Not AlbaranesFacturados(nTabla, cadselect, CadenaAlbaranes) Then Exit Sub
+                If Not AlbaranesFacturados(nTabla, cadSelect, CadenaAlbaranes) Then Exit Sub
                 
                 If Not AnyadirAFormula(cadSelect1, CadenaAlbaranes) Then Exit Sub
                 
@@ -8227,7 +8227,7 @@ Dim Tabla1 As String
                 If Not HayRegParaInforme(Tabla1, cadSelect1) Then Exit Sub
             End If
             
-            If HayPreciosVariedadesCatadau(TipoPrec, nTabla, cadselect, Combo1(2).ListIndex) Then
+            If HayPreciosVariedadesCatadau(TipoPrec, nTabla, cadSelect, Combo1(2).ListIndex) Then
                 'D/H fecha
                 cDesde = Trim(txtCodigo(6).Text)
                 cHasta = Trim(txtCodigo(7).Text)
@@ -8236,31 +8236,31 @@ Dim Tabla1 As String
                 cadAux = "{rprecios.fechaini}= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                 cadAux = "{rprecios.fechaini}=" & DBSet(txtCodigo(6).Text, "F")
-                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 cadAux = "{rprecios.fechafin}= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                 cadAux = "{rprecios.fechafin}=" & DBSet(txtCodigo(7).Text, "F")
-                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 
                 If Check1(5).Value = 0 Then
                     ' si se trata de anticipos--> seleccionamos los precios de anticipos
                     ' sino los de liquidaciones
                     If Not AnyadirAFormula(cadFormula, "{rprecios.tipofact} = " & TipoPrec) Then Exit Sub
-                    If Not AnyadirAFormula(cadselect, "{rprecios.tipofact} = " & TipoPrec) Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, "{rprecios.tipofact} = " & TipoPrec) Then Exit Sub
                 Else
                     If Not AnyadirAFormula(cadFormula, "{rprecios.tipofact} = 3") Then Exit Sub
-                    If Not AnyadirAFormula(cadselect, "{rprecios.tipofact} = 3") Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, "{rprecios.tipofact} = 3") Then Exit Sub
                 End If
                 
-                Select Case Opcionlistado
+                Select Case OpcionListado
                     Case 1, 12
                         If CargarTemporalCatadau(Tabla1, cadSelect1, TipoPrec) Then
                             cadFormula = ""
                             If Not AnyadirAFormula(cadFormula, "{tmpliquidacion.codusu} = " & vUsu.Codigo) Then Exit Sub
                             
-                            cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
+                            CadParam = CadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                             numParam = numParam + 1
                             
                             ConSubInforme = True
@@ -8335,12 +8335,12 @@ Dim Tabla1 As String
                                     'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                     If Me.Check1(2).Value Then
                                         cadFormula = ""
-                                        cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
+                                        CadParam = CadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                         numParam = numParam + 1
                                         If TipoPrec = 0 Then
-                                            cadParam = cadParam & "pTitulo= ""Resumen Facturación de Anticipos""|"
+                                            CadParam = CadParam & "pTitulo= ""Resumen Facturación de Anticipos""|"
                                         Else
-                                            cadParam = cadParam & "pTitulo= ""Resumen Facturación de Liquidaciones""|"
+                                            CadParam = CadParam & "pTitulo= ""Resumen Facturación de Liquidaciones""|"
                                         End If
                                         numParam = numParam + 1
                                         
@@ -8355,14 +8355,14 @@ Dim Tabla1 As String
                                     'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE ANTICIPOS/LIQUIDACION
                                     If Me.Check1(3).Value Then
                                         cadFormula = ""
-                                        cadselect = ""
+                                        cadSelect = ""
                                         If TipoPrec = 0 Then 'Tipo de Factura: Anticipo
                                             cadAux = "({stipom.tipodocu} = 1)"
                                         Else  'Tipo de Factura: Liquidación
                                             cadAux = "({stipom.tipodocu} = 2)"
                                         End If
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                         'Nº Factura
                                         If TipoPrec = 0 Then
                                             cadAux = "({rfactsoc.numfactu} IN [" & FacturasGeneradas(2) & "])"
@@ -8371,17 +8371,17 @@ Dim Tabla1 As String
                                         End If
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
-                                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                          
                                         'Fecha de Factura
                                         FecFac = CDate(txtCodigo(15).Text)
                                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
-                                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                                        
                                         indRPT = 23 'Impresion de facturas de socios
-                                        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                                        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                                         'Nombre fichero .rpt a Imprimir
                                         cadNombreRPT = nomDocu
                                         'Nombre fichero .rpt a Imprimir
@@ -8395,7 +8395,7 @@ Dim Tabla1 As String
                                         LlamarImprimir
                                         
                                         If frmVisReport.EstaImpreso Then
-                                            ActualizarRegistrosFac "rfactsoc", cadselect
+                                            ActualizarRegistrosFac "rfactsoc", cadSelect
                                         End If
                                     End If
                                     'SALIR DE LA FACTURACION DE ANTICIPOS / LIQUIDACIONES
@@ -8489,7 +8489,7 @@ Dim MaxContador As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -8501,7 +8501,7 @@ Dim MaxContador As String
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".codsocio}"
+            Codigo = "{" & Tabla & ".codsocio}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
         End If
@@ -8530,13 +8530,13 @@ Dim MaxContador As String
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".fecalbar}"
+            Codigo = "{" & Tabla & ".fecalbar}"
             TipCod = "F"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
             
         'SECCION
-        If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         
         
@@ -8548,30 +8548,30 @@ Dim MaxContador As String
         '
             'Socio que no sea tercero
             If Check1(11).Value = 0 Then
-                If Not AnyadirAFormula(cadselect, "{rsocios.tipoprod} <> 1") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
             Else
                 ' socio tercero de modulos
-                If Not AnyadirAFormula(cadselect, "{rsocios.tipoprod} = 1 and {rsocios.tipoirpf} = 0") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} = 1 and {rsocios.tipoirpf} = 0") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} = 1 and {rsocios.tipoirpf} = 0") Then Exit Sub
             End If
         Else
             'Socio que no sea tercero
-            If Not AnyadirAFormula(cadselect, "{rsocios.tipoprod} <> 1") Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1") Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
         End If
         
         'sólo entradas distintas de VENTA CAMPO y distintas de INDUSTRIA y distintas de RETIRADA
-        If Not AnyadirAFormula(cadselect, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4") Then Exit Sub
         
         '++monica: 28/07/2009 dependiendo del tipo de recoleccion (0=coop 1=socio 2=todos)
         Select Case Combo1(2).ListIndex
             Case 0      ' recolectado cooperativa
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.recolect} = 0") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.recolect} = 0") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.recolect} = 0") Then Exit Sub
             Case 1      ' recolectado socio
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.recolect} = 1") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.recolect} = 1") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.recolect} = 1") Then Exit Sub
             Case 2      ' ambos
             
@@ -8585,12 +8585,12 @@ Dim MaxContador As String
         nTabla = nTabla & " INNER JOIN grupopro ON productos.codgrupo = grupopro.codgrupo "
         nTabla = nTabla & " and grupopro.codgrupo <> 5 and grupopro.codgrupo <> 6 " ' grupo no puede ser 5=almazara ni 6=bodega
         
-        Select Case Opcionlistado
+        Select Case OpcionListado
             Case 1 ' Listado de anticipos
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 24 ' informe de anticipos
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu '"CatAnticipos.rpt"
                 cadTitulo = "Informe de Anticipos"
@@ -8616,7 +8616,7 @@ Dim MaxContador As String
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 26 ' informe de liquidacion
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu '"CatLiquidacion.rpt"
                 cadTitulo = "Informe de Liquidación"
@@ -8625,7 +8625,7 @@ Dim MaxContador As String
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 33 ' informe de prevision de pago de liquidacion
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu '"ValPrevPagosLiq.rpt"
                 If Combo1(3).ListIndex = 0 Then ' agrupado por socio
@@ -8657,8 +8657,8 @@ Dim MaxContador As String
         Set frmMens = Nothing
         
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
-        If HayRegParaInforme(nTabla, cadselect) Then
-            Select Case Opcionlistado
+        If HayRegParaInforme(nTabla, cadSelect) Then
+            Select Case OpcionListado
                 Case 1, 2, 3
                     TipoPrec = 0 ' ANTICIPOS
                 Case 12, 13, 14
@@ -8666,17 +8666,17 @@ Dim MaxContador As String
             End Select
             
             'comprobamos que los tipos de iva existen en la contabilidad de horto
-            If Not ComprobarTiposIVA(nTabla, cadselect) Then Exit Sub
+            If Not ComprobarTiposIVA(nTabla, cadSelect) Then Exit Sub
             
             
             '[Monica]27/04/2011: de momento solo alzira comprobamos si los albaranes seccionado ya estan liquidados
             If vParamAplic.Cooperativa = 4 Then
-                If Not AlbaranesFacturados(nTabla, cadselect) Then Exit Sub
+                If Not AlbaranesFacturados(nTabla, cadSelect) Then Exit Sub
                 ' volvemos a comprobar si hay albaranes pendientes de liquidar
-                If Not HayRegParaInforme(nTabla, cadselect) Then Exit Sub
+                If Not HayRegParaInforme(nTabla, cadSelect) Then Exit Sub
             End If
             
-            If HayPreciosVariedadesValsur(TipoPrec, nTabla, cadselect, Combo1(2).ListIndex) Then
+            If HayPreciosVariedadesValsur(TipoPrec, nTabla, cadSelect, Combo1(2).ListIndex) Then
                 'D/H fecha
                 cDesde = Trim(txtCodigo(6).Text)
                 cHasta = Trim(txtCodigo(7).Text)
@@ -8685,33 +8685,33 @@ Dim MaxContador As String
                 cadAux = "{rprecios.fechaini}= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                 cadAux = "{rprecios.fechaini}=" & DBSet(txtCodigo(6).Text, "F")
-                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 cadAux = "{rprecios.fechafin}= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                 cadAux = "{rprecios.fechafin}=" & DBSet(txtCodigo(7).Text, "F")
-                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 If Check1(5).Value = 0 Then
                     ' si se trata de anticipos--> seleccionamos los precios de anticipos
                     ' sino los de liquidaciones
                     If Not AnyadirAFormula(cadFormula, "{rprecios.tipofact} = " & TipoPrec) Then Exit Sub
-                    If Not AnyadirAFormula(cadselect, "{rprecios.tipofact} = " & TipoPrec) Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, "{rprecios.tipofact} = " & TipoPrec) Then Exit Sub
                 Else
                     If Not AnyadirAFormula(cadFormula, "{rprecios.tipofact} = 3") Then Exit Sub
-                    If Not AnyadirAFormula(cadselect, "{rprecios.tipofact} = 3") Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, "{rprecios.tipofact} = 3") Then Exit Sub
                 End If
                 
                 '02/09/2010
                 cadAux = "{rprecios.contador} = (select max(p.contador) from rprecios p where p.codvarie = rhisfruta.codvarie and "
                 cadAux = cadAux & " p.tipofact = " & TipoPrec & " and p.fechaini = " & DBSet(txtCodigo(6).Text, "F")
                 cadAux = cadAux & " and p.fechafin = " & DBSet(txtCodigo(7).Text, "F") & ")"
-                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
-                Select Case Opcionlistado
+                Select Case OpcionListado
                     Case 1  '1 - informe de anticipos
                         'pasamos como parametro la fecha de anticipo
-                        cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
+                        CadParam = CadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                         numParam = numParam + 1
                         ConSubInforme = False
                         
@@ -8729,43 +8729,43 @@ Dim MaxContador As String
                         
                         Select Case vParamAplic.Cooperativa
                             Case 1, 3, 5  ' valsur / mogente
-                                If CargarTemporalLiquidacionValsur(nTabla, cadselect) Then
+                                If CargarTemporalLiquidacionValsur(nTabla, cadSelect) Then
 '                                    cadFormula = ""
                                     
                                     If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                                                                         
                                     ConSubInforme = True
                                     'pasamos como parametro la fecha de anticipo
-                                    cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
+                                    CadParam = CadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                                     numParam = numParam + 1
-                                    cadParam = cadParam & "pUsu=" & vUsu.Codigo & "|"
+                                    CadParam = CadParam & "pUsu=" & vUsu.Codigo & "|"
                                     numParam = numParam + 1
                                     LlamarImprimir
                                 End If
                             
                             Case 2 ' Picassent
-                                If CargarTemporalLiquidacionPicassent(nTabla, cadselect) Then
+                                If CargarTemporalLiquidacionPicassent(nTabla, cadSelect) Then
 '                                    cadFormula = ""
                                     If Not AnyadirAFormula(cadFormula, "{tmpliquidacion.codusu} = " & vUsu.Codigo) Then Exit Sub
                                                                         
                                     ConSubInforme = True
                                     'pasamos como parametro la fecha de anticipo
-                                    cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
+                                    CadParam = CadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                                     numParam = numParam + 1
-                                    cadParam = cadParam & "pUsu=" & vUsu.Codigo & "|"
+                                    CadParam = CadParam & "pUsu=" & vUsu.Codigo & "|"
                                     numParam = numParam + 1
                                     LlamarImprimir
                                 End If
                             
                             Case 4 ' Alzira
-                                If CargarTemporalLiquidacionAlzira(nTabla, cadselect, TipoPrec) Then
+                                If CargarTemporalLiquidacionAlzira(nTabla, cadSelect, TipoPrec) Then
         '                            cadFormula = ""
         '                            If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                                     ConSubInforme = True
                                     'pasamos como parametro la fecha de anticipo
-                                    cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
+                                    CadParam = CadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                                     numParam = numParam + 1
-                                    cadParam = cadParam & "pUsu=" & vUsu.Codigo & "|"
+                                    CadParam = CadParam & "pUsu=" & vUsu.Codigo & "|"
                                     numParam = numParam + 1
                                     LlamarImprimir
                                 End If
@@ -8781,7 +8781,7 @@ Dim MaxContador As String
                         Select Case vParamAplic.Cooperativa
                             Case 2 ' Picassent
                                 If Combo1(3).ListIndex = 2 Then
-                                    If CargarTemporalAnticiposCalidadPicassent(nTabla, cadselect) Then
+                                    If CargarTemporalAnticiposCalidadPicassent(nTabla, cadSelect) Then
                                         cadFormula = ""
                                         If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                                         ConSubInforme = False
@@ -8789,19 +8789,19 @@ Dim MaxContador As String
                                         LlamarImprimir
                                     End If
                                 Else
-                                    If CargarTemporalAnticiposPicassent(nTabla, cadselect) Then
+                                    If CargarTemporalAnticiposPicassent(nTabla, cadSelect) Then
                                         cadFormula = ""
                                         If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                                         ConSubInforme = True
                                         
-                                        cadParam = cadParam & "pConBonifica=1|"
+                                        CadParam = CadParam & "pConBonifica=1|"
                                         numParam = numParam + 1
                                         LlamarImprimir
                                     End If
                                 End If
                                                         
                             Case 4 ' Alzira
-                                If CargarTemporalAnticiposAlzira(nTabla, cadselect) Then
+                                If CargarTemporalAnticiposAlzira(nTabla, cadSelect) Then
                                     cadFormula = ""
                                     If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                                     ConSubInforme = False
@@ -8810,7 +8810,7 @@ Dim MaxContador As String
                                 End If
                             
                             Case Else
-                                If CargarTemporalAnticiposValsur(nTabla, cadselect) Then
+                                If CargarTemporalAnticiposValsur(nTabla, cadSelect) Then
                                     cadFormula = ""
                                     If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                                     ConSubInforme = False
@@ -8828,7 +8828,7 @@ Dim MaxContador As String
                         
                         Select Case vParamAplic.Cooperativa
                             Case 1, 3, 5   ' valsur / mogente
-                                If CargarTemporalLiquidacionValsur(nTabla, cadselect) Then
+                                If CargarTemporalLiquidacionValsur(nTabla, cadSelect) Then
                                     cadFormula = ""
                                     If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                                     ConSubInforme = False
@@ -8838,15 +8838,15 @@ Dim MaxContador As String
                             Case 2 ' Picassent
                                 '[Monica]22/03/2012: indicamos en el informe si hacemos o no el descuento de comision segun el check1(13)
                                 If Check1(13).Value = 1 Then
-                                    cadParam = cadParam & "pTipo=""Cálculo con comisión""|"
+                                    CadParam = CadParam & "pTipo=""Cálculo con comisión""|"
                                 Else
-                                    cadParam = cadParam & "pTipo=""Cálculo sin comisión""|"
+                                    CadParam = CadParam & "pTipo=""Cálculo sin comisión""|"
                                 End If
                                 numParam = numParam + 1
                                 
                                 If Combo1(3).ListIndex = 2 Then
                                     ' es igual que la cargatempporal de anticipos pero aqui coge los precios de liquidacion
-                                    If CargarTemporalLiquidacionesCalidadPicassent(nTabla, cadselect) Then
+                                    If CargarTemporalLiquidacionesCalidadPicassent(nTabla, cadSelect) Then
                                         cadFormula = ""
                                         If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                                         ConSubInforme = False
@@ -8854,7 +8854,7 @@ Dim MaxContador As String
                                         LlamarImprimir
                                     End If
                                 Else
-                                    If CargarTemporalLiquidacionPicassent(nTabla, cadselect) Then
+                                    If CargarTemporalLiquidacionPicassent(nTabla, cadSelect) Then
                                         cadFormula = ""
                                         If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                                         ConSubInforme = False
@@ -8864,7 +8864,7 @@ Dim MaxContador As String
                                 End If
                                 
                             Case 4 ' Alzira
-                                If CargarTemporalLiquidacionAlzira(nTabla, cadselect, TipoPrec) Then
+                                If CargarTemporalLiquidacionAlzira(nTabla, cadSelect, TipoPrec) Then
                                     cadFormula = ""
                                     If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                                     ConSubInforme = False
@@ -8880,9 +8880,9 @@ Dim MaxContador As String
 '                        NTabla = "(" & NTabla & ") INNER JOIN rsocios ON rhisfruta.codsocio = rsocios.codsocio "
                         nTabla = "(" & nTabla & ") INNER JOIN rcalidad ON rhisfruta_clasif.codvarie = rcalidad.codvarie and rhisfruta_clasif.codcalid = rcalidad.codcalid "
                         
-                        Nregs = TotalFacturas(nTabla, cadselect)
+                        Nregs = TotalFacturas(nTabla, cadSelect)
                         If Nregs <> 0 Then
-                            If Not ComprobarTiposMovimiento(TipoPrec, nTabla, cadselect) Then
+                            If Not ComprobarTiposMovimiento(TipoPrec, nTabla, cadSelect) Then
                                 Exit Sub
                             End If
                             
@@ -8895,23 +8895,23 @@ Dim MaxContador As String
                             Select Case vParamAplic.Cooperativa
                                 Case 1, 3, 5  ' valsur / mogente
                                     If TipoPrec = 0 Then
-                                        b = FacturacionAnticiposValsur(nTabla, cadselect, txtCodigo(15).Text, Me.Pb1)
+                                        b = FacturacionAnticiposValsur(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1)
                                     Else
-                                        b = FacturacionLiquidacionesValsur(nTabla, cadselect, txtCodigo(15).Text, Me.Pb1, Check1(5).Value)
+                                        b = FacturacionLiquidacionesValsur(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, Check1(5).Value)
                                     End If
                                 Case 4 ' alzira
                                     If TipoPrec = 0 Then
                                         '[Monica]20/01/2012: alzira no ha hecho hasta el momento anticipos
                                         'b = FacturacionAnticiposValsur(nTabla, cadSelect, txtcodigo(15).Text, Me.pb1)
-                                        b = FacturacionAnticiposAlzira(nTabla, cadselect, txtCodigo(15).Text, Me.Pb1)
+                                        b = FacturacionAnticiposAlzira(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1)
                                     Else
-                                        b = FacturacionLiquidacionesAlzira(nTabla, cadselect, txtCodigo(15).Text, Me.Pb1, TipoPrec)
+                                        b = FacturacionLiquidacionesAlzira(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, TipoPrec)
                                     End If
                                 Case 2 ' Picassent
                                     If TipoPrec = 0 Then
-                                        b = FacturacionAnticiposPicassent(nTabla, cadselect, txtCodigo(15).Text, Me.Pb1, Check1(14).Value = 1)
+                                        b = FacturacionAnticiposPicassent(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, Check1(14).Value = 1)
                                     Else
-                                        b = FacturacionLiquidacionesPicassent(nTabla, cadselect, txtCodigo(15).Text, Me.Pb1, TipoPrec, Check1(14).Value = 1)
+                                        b = FacturacionLiquidacionesPicassent(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, TipoPrec, Check1(14).Value = 1)
                                     End If
                                 
                                 
@@ -8922,12 +8922,12 @@ Dim MaxContador As String
                                 'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                 If Me.Check1(2).Value Then
                                     cadFormula = ""
-                                    cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
+                                    CadParam = CadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                     numParam = numParam + 1
                                     If TipoPrec = 0 Then
-                                        cadParam = cadParam & "pTitulo= ""Resumen Facturación de Anticipos""|"
+                                        CadParam = CadParam & "pTitulo= ""Resumen Facturación de Anticipos""|"
                                     Else
-                                        cadParam = cadParam & "pTitulo= ""Resumen Facturación de Liquidaciones""|"
+                                        CadParam = CadParam & "pTitulo= ""Resumen Facturación de Liquidaciones""|"
                                     End If
                                     numParam = numParam + 1
                                     
@@ -8942,14 +8942,14 @@ Dim MaxContador As String
                                 'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE ANTICIPOS/LIQUIDACION
                                 If Me.Check1(3).Value Then
                                     cadFormula = ""
-                                    cadselect = ""
+                                    cadSelect = ""
                                     If TipoPrec = 0 Then 'Tipo de Factura: Anticipo
                                         cadAux = "({stipom.tipodocu} = 1)"
                                     Else  'Tipo de Factura: Liquidación
                                         cadAux = "({stipom.tipodocu} = 2)"
                                     End If
                                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                                    If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                    If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                     'Nº Factura
                                     If TipoPrec = 0 Then
                                         cadAux = "({rfactsoc.numfactu} IN [" & FacturasGeneradas(2) & "])"
@@ -8958,17 +8958,17 @@ Dim MaxContador As String
                                     End If
                                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                     cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
-                                    If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                    If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
 
                                     'Fecha de Factura
                                     FecFac = CDate(txtCodigo(15).Text)
                                     cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                     cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
-                                    If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                    If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
 
                                     indRPT = 23 'Impresion de facturas de socios
-                                    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                                    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                                     'Nombre fichero .rpt a Imprimir
                                     cadNombreRPT = nomDocu
                                     'Nombre fichero .rpt a Imprimir
@@ -8983,14 +8983,14 @@ Dim MaxContador As String
                                         Dim PrecioApor As Double
                                         PrecioApor = DevuelveValor("select min(precio) from raporreparto")
                                         
-                                        cadParam = cadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
+                                        CadParam = CadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
                                         numParam = numParam + 1
                                     End If
 
                                     LlamarImprimir
 
                                     If frmVisReport.EstaImpreso Then
-                                        ActualizarRegistrosFac "rfactsoc", cadselect
+                                        ActualizarRegistrosFac "rfactsoc", cadSelect
                                     End If
                                 End If
                                 'SALIR DE LA FACTURACION DE ANTICIPOS / LIQUIDACIONES
@@ -9042,7 +9042,7 @@ Dim vSeccion As CSeccion
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -9054,7 +9054,7 @@ Dim vSeccion As CSeccion
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".codsocio}"
+            Codigo = "{" & Tabla & ".codsocio}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
         End If
@@ -9083,7 +9083,7 @@ Dim vSeccion As CSeccion
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".fecalbar}"
+            Codigo = "{" & Tabla & ".fecalbar}"
             TipCod = "F"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
@@ -9094,13 +9094,13 @@ Dim vSeccion As CSeccion
 '        If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         
         'Socio que no sea tercero
-        If Not AnyadirAFormula(cadselect, "{rsocios.tipoprod} <> 1") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
         
         '[Monica]30/11/2011: en quatretonda en el informe de liquidacion se cogen todos los kilos incluidos los de retirada
 '        If OpcionListado = 12 Then
             'sólo entradas distintas de VENTA CAMPO y distintas de INDUSTRIA
-            If Not AnyadirAFormula(cadselect, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 ") Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 ") Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 ") Then Exit Sub
 '        Else
 '            'sólo entradas distintas de VENTA CAMPO y distintas de INDUSTRIA y distintas de RETIRADA
@@ -9111,10 +9111,10 @@ Dim vSeccion As CSeccion
         '++monica: 28/07/2009 dependiendo del tipo de recoleccion (0=coop 1=socio 2=todos)
         Select Case Combo1(2).ListIndex
             Case 0      ' recolectado cooperativa
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.recolect} = 0") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.recolect} = 0") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.recolect} = 0") Then Exit Sub
             Case 1      ' recolectado socio
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.recolect} = 1") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.recolect} = 1") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.recolect} = 1") Then Exit Sub
             Case 2      ' ambos
             
@@ -9130,16 +9130,16 @@ Dim vSeccion As CSeccion
         '[Monica]30/11/2011: en quatretonda se pueden liquidar lo de aceituna
         nTabla = nTabla & " and grupopro.codgrupo <> 6 " ' grupo no puede ser 5=almazara ni 6=bodegaÇ
         
-        cadSelect1 = cadselect
+        cadSelect1 = cadSelect
         Tabla1 = nTabla
         
         
-        Select Case Opcionlistado
+        Select Case OpcionListado
             Case 1 ' Listado de anticipos
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 24 ' informe de anticipos
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu '"CatAnticipos.rpt"
                 cadTitulo = "Informe de Anticipos"
@@ -9160,7 +9160,7 @@ Dim vSeccion As CSeccion
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 26 ' informe de liquidacion
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu '"CatLiquidacion.rpt"
                 cadTitulo = "Informe de Liquidación"
@@ -9176,7 +9176,7 @@ Dim vSeccion As CSeccion
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 33 ' informe de prevision de pago de liquidacion
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu 'rPrevPagosLiq.rpt
                 If Combo1(3).ListIndex = 0 Then ' agrupado por socio
@@ -9206,7 +9206,7 @@ Dim vSeccion As CSeccion
         '[Monica]30/11/2011: hemos de controlar que no se incluyan a la vez facturas de recoleccion con facturas de almazara
         ' para que en la integracion contable integremos a la contabilidad de fruta o a la de bodega
         ' aqui entraran todas las facturas como FAL aunque algunas tengan variedades de almazara
-        If HayVariedadesAlmazaraconHorto(nTabla, cadselect) Then
+        If HayVariedadesAlmazaraconHorto(nTabla, cadSelect) Then
             MsgBox "Las variedades seleccionadas deben ser todas de Horto o todas de Almazara. Revise.", vbExclamation
             Exit Sub
         End If
@@ -9214,14 +9214,14 @@ Dim vSeccion As CSeccion
 '[Monica]25/06/2012: metemos la seccion que corresponda segun sea de horto o de almazara
         Dim Seccion As String
         'SECCION
-        If HayVariedadesAlmazara(nTabla, cadselect) Then
-            If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & vParamAplic.SeccionAlmaz) Then Exit Sub
+        If HayVariedadesAlmazara(nTabla, cadSelect) Then
+            If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.SeccionAlmaz) Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.SeccionAlmaz) Then Exit Sub
             If Not AnyadirAFormula(cadSelect1, "{rsocios_seccion.codsecci} = " & vParamAplic.SeccionAlmaz) Then Exit Sub
             
             Seccion = vParamAplic.SeccionAlmaz
         Else
-            If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
             If Not AnyadirAFormula(cadSelect1, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
             
@@ -9230,16 +9230,16 @@ Dim vSeccion As CSeccion
         
         
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
-        If HayRegParaInforme(nTabla, cadselect) Then
+        If HayRegParaInforme(nTabla, cadSelect) Then
         
-            Select Case Opcionlistado
+            Select Case OpcionListado
                 Case 1, 2, 3
                     TipoPrec = 0 ' ANTICIPOS
                 Case 12, 13, 14
                     TipoPrec = 1 ' LIQUIDACIONES
             End Select
             
-            If HayPreciosVariedadesCatadau(TipoPrec, nTabla, cadselect, Combo1(2).ListIndex) Then
+            If HayPreciosVariedadesCatadau(TipoPrec, nTabla, cadSelect, Combo1(2).ListIndex) Then
             
                 'D/H fecha
                 cDesde = Trim(txtCodigo(6).Text)
@@ -9249,31 +9249,31 @@ Dim vSeccion As CSeccion
                 cadAux = "{rprecios.fechaini}= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                 cadAux = "{rprecios.fechaini}=" & DBSet(txtCodigo(6).Text, "F")
-                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 cadAux = "{rprecios.fechafin}= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                 cadAux = "{rprecios.fechafin}=" & DBSet(txtCodigo(7).Text, "F")
-                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 
                 If Check1(5).Value = 0 Then
                     ' si se trata de anticipos--> seleccionamos los precios de anticipos
                     ' sino los de liquidaciones
                     If Not AnyadirAFormula(cadFormula, "{rprecios.tipofact} = " & TipoPrec) Then Exit Sub
-                    If Not AnyadirAFormula(cadselect, "{rprecios.tipofact} = " & TipoPrec) Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, "{rprecios.tipofact} = " & TipoPrec) Then Exit Sub
                 Else
                     If Not AnyadirAFormula(cadFormula, "{rprecios.tipofact} = 3") Then Exit Sub
-                    If Not AnyadirAFormula(cadselect, "{rprecios.tipofact} = 3") Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, "{rprecios.tipofact} = 3") Then Exit Sub
                 End If
                 
-                Select Case Opcionlistado
+                Select Case OpcionListado
                     Case 1, 12
                         If CargarTemporalQuatretonda(Tabla1, cadSelect1, TipoPrec) Then
                             cadFormula = ""
                             If Not AnyadirAFormula(cadFormula, "{tmpliquidacion.codusu} = " & vUsu.Codigo) Then Exit Sub
                             
-                            cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
+                            CadParam = CadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                             numParam = numParam + 1
                             
                             '[Monica]14/02/2012: pasamos el iva de la seccion de horto para el calculo del importe con iva
@@ -9298,7 +9298,7 @@ Dim vSeccion As CSeccion
                             
 '                            PorcIva = 0
 '                            If vPorcIva <> "" Then PorcIva = CCur(vPorcIva)
-                            cadParam = cadParam & "pPorciva=" & TransformaComasPuntos(ImporteSinFormato(vPorcIva)) & "|"
+                            CadParam = CadParam & "pPorciva=" & TransformaComasPuntos(ImporteSinFormato(vPorcIva)) & "|"
                             ' fin de iva
                             
                             
@@ -9347,7 +9347,7 @@ Dim vSeccion As CSeccion
                                 DoEvents
                                 b = False
                                 If TipoPrec = 0 Then
-                                    b = FacturacionAnticiposCatadau(nTabla, cadselect, txtCodigo(15).Text, Me.Pb1)
+                                    b = FacturacionAnticiposCatadau(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1)
                                 Else
                                    '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
                                     b = FacturacionLiquidacionesQuatretonda(Tabla1, cadSelect1, txtCodigo(15).Text, Me.Pb1, (TipoPrec = 3), Seccion)
@@ -9358,12 +9358,12 @@ Dim vSeccion As CSeccion
                                     'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                     If Me.Check1(2).Value Then
                                         cadFormula = ""
-                                        cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
+                                        CadParam = CadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                         numParam = numParam + 1
                                         If TipoPrec = 0 Then
-                                            cadParam = cadParam & "pTitulo= ""Resumen Facturación de Anticipos""|"
+                                            CadParam = CadParam & "pTitulo= ""Resumen Facturación de Anticipos""|"
                                         Else
-                                            cadParam = cadParam & "pTitulo= ""Resumen Facturación de Liquidaciones""|"
+                                            CadParam = CadParam & "pTitulo= ""Resumen Facturación de Liquidaciones""|"
                                         End If
                                         numParam = numParam + 1
                                         
@@ -9378,14 +9378,14 @@ Dim vSeccion As CSeccion
                                     'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE ANTICIPOS/LIQUIDACION
                                     If Me.Check1(3).Value Then
                                         cadFormula = ""
-                                        cadselect = ""
+                                        cadSelect = ""
                                         If TipoPrec = 0 Then 'Tipo de Factura: Anticipo
                                             cadAux = "({stipom.tipodocu} = 1)"
                                         Else  'Tipo de Factura: Liquidación
                                             cadAux = "({stipom.tipodocu} = 2)"
                                         End If
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                         'Nº Factura
                                         If TipoPrec = 0 Then
                                             cadAux = "({rfactsoc.numfactu} IN [" & FacturasGeneradas(2) & "])"
@@ -9394,17 +9394,17 @@ Dim vSeccion As CSeccion
                                         End If
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
-                                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                          
                                         'Fecha de Factura
                                         FecFac = CDate(txtCodigo(15).Text)
                                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
-                                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                                        
                                         indRPT = 23 'Impresion de facturas de socios
-                                        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                                        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                                         'Nombre fichero .rpt a Imprimir
                                         cadNombreRPT = nomDocu
                                         'Nombre fichero .rpt a Imprimir
@@ -9418,7 +9418,7 @@ Dim vSeccion As CSeccion
                                         LlamarImprimir
                                         
                                         If frmVisReport.EstaImpreso Then
-                                            ActualizarRegistrosFac "rfactsoc", cadselect
+                                            ActualizarRegistrosFac "rfactsoc", cadSelect
                                         End If
                                     End If
                                     'SALIR DE LA FACTURACION DE ANTICIPOS / LIQUIDACIONES
@@ -9471,7 +9471,7 @@ Dim cadSelect1 As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -9483,7 +9483,7 @@ Dim cadSelect1 As String
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".codsocio}"
+            Codigo = "{" & Tabla & ".codsocio}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
         End If
@@ -9512,27 +9512,27 @@ Dim cadSelect1 As String
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".fecalbar}"
+            Codigo = "{" & Tabla & ".fecalbar}"
             TipCod = "F"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
             
         'SECCION
-        If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         
         'Socio que no sea tercero
-        If Not AnyadirAFormula(cadselect, "{rsocios.tipoprod} <> 1") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
         
         
         'sólo entradas distintas de VENTA CAMPO
-        If Not AnyadirAFormula(cadselect, "{rhisfruta.tipoentr} <> 1") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 1") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 1") Then Exit Sub
         
         
         'sólo entradas recolectadas por socio
-        If Not AnyadirAFormula(cadselect, "{rhisfruta.recolect} = 1") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rhisfruta.recolect} = 1") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rhisfruta.recolect} = 1") Then Exit Sub
         
         nTabla = "((((((rhisfruta INNER JOIN rsocios ON rhisfruta.codsocio = rsocios.codsocio) "
@@ -9544,7 +9544,7 @@ Dim cadSelect1 As String
         nTabla = nTabla & " INNER JOIN grupopro ON productos.codgrupo = grupopro.codgrupo "
         nTabla = nTabla & " and grupopro.codgrupo <> 5 and grupopro.codgrupo <> 6 " ' grupo no puede ser 5=almazara ni 6=bodega
         
-        Select Case Opcionlistado
+        Select Case OpcionListado
             Case 2 ' Prevision de pago de anticipos gastos recoleccion
                 cadNombreRPT = "rPrevPagosAntGastos.rpt"
                 cadTitulo = "Previsión Pago de Anticipos Gastos"
@@ -9565,15 +9565,15 @@ Dim cadSelect1 As String
         Set frmMens = Nothing
         
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
-        If HayRegParaInforme(nTabla, cadselect) Then
+        If HayRegParaInforme(nTabla, cadSelect) Then
         
-            Select Case Opcionlistado
+            Select Case OpcionListado
                 Case 2  '2 - listado de prevision de pagos de anticipos
                     cadSelect1 = " rhisfruta.tipoentr <> 1 and rhisfruta.recolect = 1 "
                     If txtCodigo(6).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar >=" & DBSet(txtCodigo(6).Text, "F")
                     If txtCodigo(7).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar <=" & DBSet(txtCodigo(7).Text, "F")
                     
-                    If CargarTemporalAnticiposGastos(nTabla, cadselect, cadSelect1) Then
+                    If CargarTemporalAnticiposGastos(nTabla, cadSelect, cadSelect1) Then
                         cadFormula = ""
                         If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                         ConSubInforme = False
@@ -9584,9 +9584,9 @@ Dim cadSelect1 As String
                 Case 3  '3 .- factura de anticipos de gastos
                     TipoPrec = 0 ' son anticipos
                     
-                    Nregs = TotalFacturas(nTabla, cadselect)
+                    Nregs = TotalFacturas(nTabla, cadSelect)
                     If Nregs <> 0 Then
-                        If Not ComprobarTiposMovimiento(TipoPrec, nTabla, cadselect) Then
+                        If Not ComprobarTiposMovimiento(TipoPrec, nTabla, cadSelect) Then
                             Exit Sub
                         End If
                         
@@ -9601,7 +9601,7 @@ Dim cadSelect1 As String
                         If txtCodigo(7).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar <=" & DBSet(txtCodigo(7).Text, "F")
                         
                         
-                        b = FacturacionAnticiposGastos(nTabla, cadselect, txtCodigo(15).Text, Me.Pb1, cadSelect1)
+                        b = FacturacionAnticiposGastos(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, cadSelect1)
                         
                         If b Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -9609,10 +9609,10 @@ Dim cadSelect1 As String
                             'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS GASTOS
                             If Me.Check1(2).Value Then
                                 cadFormula = ""
-                                cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
+                                CadParam = CadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                 numParam = numParam + 1
                                 If TipoPrec = 0 Then
-                                    cadParam = cadParam & "pTitulo= ""Resumen Facturación de Anticipos Gastos""|"
+                                    CadParam = CadParam & "pTitulo= ""Resumen Facturación de Anticipos Gastos""|"
                                 End If
                                 numParam = numParam + 1
                                 
@@ -9627,12 +9627,12 @@ Dim cadSelect1 As String
                             'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE ANTICIPOS GASTOS
                             If Me.Check1(3).Value Then
                                 cadFormula = ""
-                                cadselect = ""
+                                cadSelect = ""
                                 If TipoPrec = 0 Then 'Tipo de Factura: Anticipo
                                     cadAux = "({stipom.tipodocu} = 1)"
                                 End If
                                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                 'Nº Factura
                                 If TipoPrec = 0 Then
                                     cadAux = "({rfactsoc.numfactu} IN [" & FacturasGeneradas(2) & "])"
@@ -9641,17 +9641,17 @@ Dim cadSelect1 As String
                                 End If
                                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                 cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
-                                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                  
                                 'Fecha de Factura
                                 FecFac = CDate(txtCodigo(15).Text)
                                 cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                 cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
-                                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                                
                                 indRPT = 23 'Impresion de facturas de socios
-                                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                                 'Nombre fichero .rpt a Imprimir
                                 cadNombreRPT = nomDocu
                                 'Nombre fichero .rpt a Imprimir
@@ -9663,7 +9663,7 @@ Dim cadSelect1 As String
                                 LlamarImprimir
                                 
                                 If frmVisReport.EstaImpreso Then
-                                    ActualizarRegistrosFac "rfactsoc", cadselect
+                                    ActualizarRegistrosFac "rfactsoc", cadSelect
                                 End If
                             End If
                             'SALIR DE LA FACTURACION DE ANTICIPOS / LIQUIDACIONES
@@ -9710,7 +9710,7 @@ Dim cadSelect1 As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -9768,16 +9768,16 @@ Dim cadSelect1 As String
         End If
             
         'SECCION
-        If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         
         'Socio que no sea tercero
-        If Not AnyadirAFormula(cadselect, "{rsocios.tipoprod} <> 1") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
         
         
         'sólo entradas distintas de VENTA CAMPO
-        If Not AnyadirAFormula(cadselect, "{rclasifica.tipoentr} <> 1") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rclasifica.tipoentr} <> 1") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rclasifica.tipoentr} <> 1") Then Exit Sub
         
        
@@ -9788,7 +9788,7 @@ Dim cadSelect1 As String
         nTabla = nTabla & " INNER JOIN grupopro ON productos.codgrupo = grupopro.codgrupo "
         nTabla = nTabla & " and grupopro.codgrupo <> 5 and grupopro.codgrupo <> 6 " ' grupo no puede ser 5=almazara ni 6=bodega
         
-        Select Case Opcionlistado
+        Select Case OpcionListado
             Case 2 ' Prevision de pago de anticipos generico
                 cadNombreRPT = "rPrevPagosAntGene.rpt"
                 If Check1(12).Value = 0 Then
@@ -9798,7 +9798,7 @@ Dim cadSelect1 As String
                     '[Monica]23/12/2014:VR
                     If Check1(22).Value = 1 Then cadTitulo = cadTitulo & " VR"
                 End If
-                cadParam = cadParam & "pTitulo=""" & cadTitulo & """|"
+                CadParam = CadParam & "pTitulo=""" & cadTitulo & """|"
                 numParam = numParam + 1
             
             Case 3 ' Facturación de Anticipos de Genericos de recoleccion
@@ -9812,7 +9812,7 @@ Dim cadSelect1 As String
                     If Check1(22).Value = 1 Then cadTitulo = cadTitulo & " VR"
                     
                 End If
-                cadParam = cadParam & "pTitulo=""" & cadTitulo & """|"
+                CadParam = CadParam & "pTitulo=""" & cadTitulo & """|"
                 numParam = numParam + 1
             
         End Select
@@ -9837,16 +9837,16 @@ Dim cadSelect1 As String
         End If
         
         ' insertamos en la tabla intermedia de liquidacion lo que vamos a facturar
-        b = InsertarTablaIntermedia(nTabla, cadselect, False)
+        b = InsertarTablaIntermedia(nTabla, cadSelect, False)
         
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
         If b And HayRegParaInforme("tmpliquidacion", "codusu = " & vUsu.Codigo) Then
         
-            Select Case Opcionlistado
+            Select Case OpcionListado
                 Case 2  '2 - listado de prevision de pagos de anticipos
                     '[Monica]18/10/2011: si check1(12).value = 1 indicamos que el anticipo es de retirada
                     '                    si check1(12).value = 0 indicamos que el anticipo es generico
-                    If CargarTemporalAnticiposGenericos(nTabla, cadselect, False, Check1(12).Value = 1) Then
+                    If CargarTemporalAnticiposGenericos(nTabla, cadSelect, False, Check1(12).Value = 1) Then
                         
                         cadFormula = ""
                         If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -9878,10 +9878,10 @@ Dim cadSelect1 As String
                             'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS GASTOS
                             If Me.Check1(2).Value Then
                                 cadFormula = ""
-                                cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
+                                CadParam = CadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                 numParam = numParam + 1
                                 If TipoPrec = 0 Then
-                                    cadParam = cadParam & "pTitulo= ""Resumen Facturación de Anticipos Genérico""|"
+                                    CadParam = CadParam & "pTitulo= ""Resumen Facturación de Anticipos Genérico""|"
                                 End If
                                 numParam = numParam + 1
                                 
@@ -9896,12 +9896,12 @@ Dim cadSelect1 As String
                             'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE ANTICIPOS GENERICO
                             If Me.Check1(3).Value Then
                                 cadFormula = ""
-                                cadselect = ""
+                                cadSelect = ""
                                 If TipoPrec = 0 Then 'Tipo de Factura: Anticipo
                                     cadAux = "({stipom.tipodocu} = 1)"
                                 End If
                                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                 'Nº Factura
                                 If TipoPrec = 0 Then
                                     cadAux = "({rfactsoc.numfactu} IN [" & FacturasGeneradas(2) & "])"
@@ -9910,17 +9910,17 @@ Dim cadSelect1 As String
                                 End If
                                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                 cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
-                                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                  
                                 'Fecha de Factura
                                 FecFac = CDate(txtCodigo(15).Text)
                                 cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                 cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
-                                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                                
                                 indRPT = 23 'Impresion de facturas de socios
-                                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                                 'Nombre fichero .rpt a Imprimir
                                 cadNombreRPT = nomDocu
                                 'Nombre fichero .rpt a Imprimir
@@ -9932,7 +9932,7 @@ Dim cadSelect1 As String
                                 LlamarImprimir
                                 
                                 If frmVisReport.EstaImpreso Then
-                                    ActualizarRegistrosFac "rfactsoc", cadselect
+                                    ActualizarRegistrosFac "rfactsoc", cadSelect
                                 End If
                             End If
                             'SALIR DE LA FACTURACION DE ANTICIPOS / LIQUIDACIONES
@@ -9981,7 +9981,7 @@ Dim CadenaAlbaranes As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -9993,7 +9993,7 @@ Dim CadenaAlbaranes As String
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".codsocio}"
+            Codigo = "{" & Tabla & ".codsocio}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
         End If
@@ -10022,13 +10022,13 @@ Dim CadenaAlbaranes As String
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".fecalbar}"
+            Codigo = "{" & Tabla & ".fecalbar}"
             TipCod = "F"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
             
         'SECCION
-        If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         
 '[Monica] 28/12/2009 : quito la condicion de que el socio no sea tercero (solo para liquidacion de industria)
@@ -10037,7 +10037,7 @@ Dim CadenaAlbaranes As String
 '        If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
         
         'sólo entradas de Industria directa
-        If Not AnyadirAFormula(cadselect, "{rhisfruta.tipoentr} = 3") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} = 3") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} = 3") Then Exit Sub
         
         
@@ -10049,17 +10049,17 @@ Dim CadenaAlbaranes As String
         nTabla = nTabla & " INNER JOIN grupopro ON productos.codgrupo = grupopro.codgrupo "
         nTabla = nTabla & " and grupopro.codgrupo <> 5 and grupopro.codgrupo <> 6 " ' grupo no puede ser 5=almazara ni 6=bodega
         
-        cadSelect1 = cadselect
+        cadSelect1 = cadSelect
         Tabla1 = nTabla
         
         
-        Select Case Opcionlistado
+        Select Case OpcionListado
             '[Monica]23/05/2013: añadimos el informe de Liquidacion en ppio solo para Catadau
             Case 12 ' Informe de liquidacion
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 26 ' informe de liquidacion
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu '"CatLiquidacion.rpt"
                 cadTitulo = "Informe de Liquidación"
@@ -10069,7 +10069,7 @@ Dim CadenaAlbaranes As String
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 37 ' informe de prevision de pago de liquidacion
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu 'AlzPrevPagosLiqInd.rpt
                 
@@ -10091,20 +10091,20 @@ Dim CadenaAlbaranes As String
         Set frmMens = Nothing
         
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
-        If HayRegParaInforme(nTabla, cadselect) Then
+        If HayRegParaInforme(nTabla, cadSelect) Then
         
             TipoPrec = 1 ' LIQUIDACIONES
             
             '[Monica]27/12/2012: de momento solo alzira comprobamos si los albaranes seccionado ya estan liquidados
             CadenaAlbaranes = ""
             If vParamAplic.Cooperativa = 4 Then
-                If Not AlbaranesFacturados(nTabla, cadselect, CadenaAlbaranes) Then Exit Sub
+                If Not AlbaranesFacturados(nTabla, cadSelect, CadenaAlbaranes) Then Exit Sub
                 ' volvemos a comprobar si hay albaranes pendientes de liquidar
-                If Not HayRegParaInforme(nTabla, cadselect) Then Exit Sub
-                cadSelect1 = cadselect
+                If Not HayRegParaInforme(nTabla, cadSelect) Then Exit Sub
+                cadSelect1 = cadSelect
             End If
             
-            If HayPreciosVariedadesIndustria(nTabla, cadselect) Then
+            If HayPreciosVariedadesIndustria(nTabla, cadSelect) Then
                 'D/H fecha
                 cDesde = Trim(txtCodigo(6).Text)
                 cHasta = Trim(txtCodigo(7).Text)
@@ -10113,24 +10113,24 @@ Dim CadenaAlbaranes As String
                 cadAux = "{rprecios.fechaini}= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                 cadAux = "{rprecios.fechaini}=" & DBSet(txtCodigo(6).Text, "F")
-                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 cadAux = "{rprecios.fechafin}= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                 cadAux = "{rprecios.fechafin}=" & DBSet(txtCodigo(7).Text, "F")
-                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 
                 If Not AnyadirAFormula(cadFormula, "{rprecios.tipofact} = 2") Then Exit Sub
-                If Not AnyadirAFormula(cadselect, "{rprecios.tipofact} = 2") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rprecios.tipofact} = 2") Then Exit Sub
                 
-                Select Case Opcionlistado
+                Select Case OpcionListado
                     Case 12 '[Monica]23/05/2013: Informe de liquidacion de industria
                         If CargarTemporalIndustria(Tabla1, cadSelect1) Then
                             cadFormula = ""
                             If Not AnyadirAFormula(cadFormula, "{tmpliquidacion.codusu} = " & vUsu.Codigo) Then Exit Sub
                             
-                            cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
+                            CadParam = CadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                             numParam = numParam + 1
                             
                             ConSubInforme = True
@@ -10167,16 +10167,16 @@ Dim CadenaAlbaranes As String
                                 Me.Refresh
                                 DoEvents
                                 
-                                b = FacturacionLiquidacionIndustria(nTabla, cadselect, txtCodigo(15).Text, Me.Pb1, CadenaAlbaranes)
+                                b = FacturacionLiquidacionIndustria(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, CadenaAlbaranes)
                                 If b Then
                                     MsgBox "Proceso realizado correctamente.", vbExclamation
                                                    
                                     'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                     If Me.Check1(2).Value Then
                                         cadFormula = ""
-                                        cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
+                                        CadParam = CadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                         numParam = numParam + 1
-                                        cadParam = cadParam & "pTitulo= ""Resumen Facturación Liquidación Industria""|"
+                                        CadParam = CadParam & "pTitulo= ""Resumen Facturación Liquidación Industria""|"
                                         numParam = numParam + 1
                                         
                                         FecFac = CDate(txtCodigo(15).Text)
@@ -10190,25 +10190,25 @@ Dim CadenaAlbaranes As String
                                     'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE LIQUIDACION INDUSTRIA
                                     If Me.Check1(3).Value Then
                                         cadFormula = ""
-                                        cadselect = ""
+                                        cadSelect = ""
                                         cadAux = "({stipom.tipodocu} = 2)"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                         'Nº Factura
                                         cadAux = "({rfactsoc.numfactu} IN [" & FacturasGeneradas(3) & "])"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
-                                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                          
                                         'Fecha de Factura
                                         FecFac = CDate(txtCodigo(15).Text)
                                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
-                                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                                        
                                         indRPT = 38 'Impresion de facturas de socios
-                                        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                                        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                                         'Nombre fichero .rpt a Imprimir
                                         cadNombreRPT = nomDocu
                                         'Nombre fichero .rpt a Imprimir
@@ -10218,7 +10218,7 @@ Dim CadenaAlbaranes As String
                                         LlamarImprimir
                                         
                                         If frmVisReport.EstaImpreso Then
-                                            ActualizarRegistrosFac "rfactsoc", cadselect
+                                            ActualizarRegistrosFac "rfactsoc", cadSelect
                                         End If
                                     End If
                                     'SALIR DE LA FACTURACION DE ANTICIPOS / LIQUIDACIONES
@@ -10255,7 +10255,7 @@ Dim Tipos As String
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -10274,7 +10274,7 @@ Dim Tipos As String
         If TipoFacturaOk Then
             ' quitamos la ultima coma
             Tipos = "{rfactsoc.codtipom} in (" & Mid(Tipos, 1, Len(Tipos) - 1) & ")"
-            If Not AnyadirAFormula(cadselect, Tipos) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, Tipos) Then Exit Sub
             Tipos = Replace(Replace(Tipos, "(", "["), ")", "]")
             If Not AnyadirAFormula(cadFormula, Tipos) Then Exit Sub
         Else
@@ -10289,7 +10289,7 @@ Dim Tipos As String
     nHasta = txtNombre(1).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".codsocio}"
+        Codigo = "{" & Tabla & ".codsocio}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHCliente= """) Then Exit Sub
     End If
@@ -10309,12 +10309,12 @@ Dim Tipos As String
     cHasta = Trim(txtCodigo(3).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".fecfactu}"
+        Codigo = "{" & Tabla & ".fecfactu}"
         TipCod = "F"
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHFecha= """) Then Exit Sub
     End If
     
-    If HayRegistros(tabla, cadselect) Then
+    If HayRegistros(Tabla, cadSelect) Then
         If Industria Then
             indRPT = 38 'Impresion de Factura Socio de Industria
             ConSubInforme = False
@@ -10329,7 +10329,7 @@ Dim Tipos As String
             cadTitulo = "Reimpresión de Facturas Socios"
         End If
         
-        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
           
         'Nombre fichero .rpt a Imprimir
         cadNombreRPT = nomDocu
@@ -10338,16 +10338,16 @@ Dim Tipos As String
             Dim PrecioApor As Double
             PrecioApor = DevuelveValor("select min(precio) from raporreparto")
             
-            cadParam = cadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
+            CadParam = CadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
             numParam = numParam + 1
         End If
         
         '[Monica]28/01/2014: impresion con arrobas para Montifrut
         If vParamAplic.Cooperativa = 12 Then
             If Check3.Value = 1 Then
-                cadParam = cadParam & "pConArrobas=1|"
+                CadParam = CadParam & "pConArrobas=1|"
             Else
-                cadParam = cadParam & "pConArrobas=0|"
+                CadParam = CadParam & "pConArrobas=0|"
             End If
             numParam = numParam + 1
         End If
@@ -10356,9 +10356,9 @@ Dim Tipos As String
         If vParamAplic.Cooperativa = 4 Then
             If indRPT = 23 And InStr(Tipos, "FAA") <> 0 Then
                 If MsgBox("¿ Desea impresión detallada por campos ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                    cadParam = cadParam & "pDetalle=1|"
+                    CadParam = CadParam & "pDetalle=1|"
                 Else
-                    cadParam = cadParam & "pDetalle=0|"
+                    CadParam = CadParam & "pDetalle=0|"
                 End If
                 numParam = numParam + 1
             End If
@@ -10366,14 +10366,14 @@ Dim Tipos As String
         
         '[Monica]06/06/2016: en el caso de reimpresion de facturas de socio ver si se imprime la palabra duplicado
         If indRPT = 23 Then
-            cadParam = cadParam & "pDuplicado=" & Check4.Value & "|"
+            CadParam = CadParam & "pDuplicado=" & Check4.Value & "|"
             numParam = numParam + 1
         End If
         
         LlamarImprimir
         
         If frmVisReport.EstaImpreso Then
-            ActualizarRegistros "rfactsoc", cadselect
+            ActualizarRegistros "rfactsoc", cadSelect
         End If
     End If
 
@@ -10461,7 +10461,7 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        Select Case Opcionlistado
+        Select Case OpcionListado
             Case 1, 2, 3 ' 1-Inf.Anticipos
                          ' 2-Listado de Previsión de pago
                          ' 3-Facturas de Anticipos
@@ -10637,20 +10637,20 @@ Dim List As Collection
     '###Descomentar
 '    CommitConexion
     
-    Select Case Opcionlistado
+    Select Case OpcionListado
     
     'LISTADOS DE MANTENIMIENTOS BASICOS
     '---------------------
     Case 1, 12   '1- Informe de Anticipos
                  '12- Informe de Liquidacion
         FrameAnticiposVisible True, H, W
-        tabla = "rhisfruta"
+        Tabla = "rhisfruta"
         Me.FrameFechaAnt.visible = True
         Me.FrameFechaAnt.Enabled = True
         Me.FrameAgrupado.visible = False
         Me.FrameAgrupado.Enabled = False
         
-        If Opcionlistado = 1 Then
+        If OpcionListado = 1 Then
             Me.Label3.Caption = "Informe de Anticipos"
             Me.Label2(25).Caption = "Fecha Anticipo"
             '++Monica:03/12/2009
@@ -10717,7 +10717,7 @@ Dim List As Collection
     Case 2, 13   '2 - Listado de prevision de pagos de anticipos
                  '13- Listado de prevision de pagos de liquidacion
         FrameAnticiposVisible True, H, W
-        tabla = "rhisfruta"
+        Tabla = "rhisfruta"
         Me.FrameFechaAnt.visible = False
         Me.FrameFechaAnt.Enabled = False
         Me.FrameAgrupado.visible = True And Not AnticipoGastos And Not AnticipoGenerico
@@ -10727,7 +10727,7 @@ Dim List As Collection
         Check1(14).visible = (vParamAplic.HayFacVarias And Not AnticipoGastos And Not AnticipoGenerico)
         Check1(14).Enabled = (vParamAplic.HayFacVarias And Not AnticipoGastos And Not AnticipoGenerico)
         
-        If Opcionlistado = 2 Then
+        If OpcionListado = 2 Then
             Me.Label3.Caption = "Previsión de Pagos Anticipos"
             If AnticipoGastos Then
                 Me.Label3.Caption = "Previsión Pagos Anticipos Gastos"
@@ -10813,8 +10813,8 @@ Dim List As Collection
         Combo1(3).ListIndex = 0
         
         '[Monica]22/03/2012: Añadimos si calculamos sobre el precio comision o no (sólo para Picassent)
-        Check1(13).Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And (Opcionlistado = 13)
-        Check1(13).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And (Opcionlistado = 13)
+        Check1(13).Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And (OpcionListado = 13)
+        Check1(13).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And (OpcionListado = 13)
         If Check1(13).Enabled Then Check1(13).Left = 3090 '3390
         
         If LiquidacionIndustria Then 'ocultamos agrupado y recolectado
@@ -10827,7 +10827,7 @@ Dim List As Collection
     Case 3, 14   '3 - Factura de Anticipos
                  '14- Factura de Liquidacion
         FrameAnticiposVisible True, H, W
-        tabla = "rhisfruta"
+        Tabla = "rhisfruta"
         Me.FrameFechaAnt.visible = True
         Me.FrameFechaAnt.Enabled = True
         Me.FrameAgrupado.visible = False
@@ -10836,7 +10836,7 @@ Dim List As Collection
         
         '[Monica]11/03/2015: observaciones de la factura visibles
         '                    añadido a la factura de anticipo
-        If Opcionlistado = 14 Or Opcionlistado = 3 Then
+        If OpcionListado = 14 Or OpcionListado = 3 Then
             Me.Label2(49).visible = (vParamAplic.Cooperativa = 4)
             Me.txtCodigo(68).visible = (vParamAplic.Cooperativa = 4)
             Me.txtCodigo(68).Enabled = (vParamAplic.Cooperativa = 4)
@@ -10846,7 +10846,7 @@ Dim List As Collection
         Check1(14).visible = (vParamAplic.HayFacVarias And Not AnticipoGastos And Not AnticipoGenerico)
         Check1(14).Enabled = (vParamAplic.HayFacVarias And Not AnticipoGastos And Not AnticipoGenerico)
         
-        If Opcionlistado = 3 Then
+        If OpcionListado = 3 Then
             Me.Label3.Caption = "Factura de Anticipos"
             Me.Label2(25).Caption = "Fecha Anticipo"
             If AnticipoGastos Then
@@ -10944,7 +10944,7 @@ Dim List As Collection
         
     Case 4   ' Reimpresion de facturas de SOCIOS
         FrameReimpresionVisible True, H, W
-        tabla = "rfactsoc"
+        Tabla = "rfactsoc"
         Me.FrameFechaAnt.visible = True
         Me.FrameFechaAnt.Enabled = True
         Me.Label3.Caption = "Factura de Socios"
@@ -10959,7 +10959,7 @@ Dim List As Collection
         ActivarCLAVE
         FrameTipoFactura.visible = False
         FrameDesFacturacionVisible True, H, W
-        tabla = "rfactsoc"
+        Tabla = "rfactsoc"
         Me.Caption = "Deshacer Proceso Facturación de Anticipos"
         
     Case 6   ' Generacion de factura de venta campo (anticipo o liquidacion)
@@ -10970,7 +10970,7 @@ Dim List As Collection
     
         FrameGeneraFacturaVisible True, H, W
         CargaCombo
-        tabla = "rhisfruta"
+        Tabla = "rhisfruta"
         Me.Caption = "Facturación"
     
         If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
@@ -10998,12 +10998,12 @@ Dim List As Collection
         FrameTipoFactura.visible = True
         CargaCombo
         FrameDesFacturacionVisible True, H, W
-        tabla = "rfactsoc"
+        Tabla = "rfactsoc"
         Me.Caption = "Deshacer Proceso Facturación Venta Campo"
                 
     Case 8, 9   '8= Informe de Resultados de facturas de SOCIOS
                 '9= Informe de Retenciones de facturas de SOCIOS
-        If Opcionlistado = 8 Then
+        If OpcionListado = 8 Then
             Label8.Caption = "Listado de Resultados"
             txtCodigo(26).Text = Format(vParam.FecIniCam, "dd/mm/yyyy")
             txtCodigo(27).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
@@ -11013,8 +11013,8 @@ Dim List As Collection
             txtCodigo(27).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
         End If
         
-        FrameOpc.Enabled = (Opcionlistado = 9)
-        FrameOpc.visible = (Opcionlistado = 9)
+        FrameOpc.Enabled = (OpcionListado = 9)
+        FrameOpc.visible = (OpcionListado = 9)
         
         txtCodigo(32).Text = Format(Now, "dd/mm/yyyy")
         
@@ -11022,17 +11022,17 @@ Dim List As Collection
         FrameFechaCertif.Enabled = False
         
         FrameResultadosVisible True, H, W
-        tabla = "rfactsoc"
+        Tabla = "rfactsoc"
         CargarListView (1)
         
         '[Monica]21/03/2016: sacar los gastos a pie únicamente si es listado de retenciones y es catadau
-        Check1(27).Enabled = Opcionlistado = 9 And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
-        Check1(27).visible = Opcionlistado = 9 And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+        Check1(27).Enabled = OpcionListado = 9 And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
+        Check1(27).visible = OpcionListado = 9 And (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
         
         
     Case 10, 11 '10 = grabacion modelo 190
                 '11 = grabacion modelo 346
-        If Opcionlistado = 10 Then
+        If OpcionListado = 10 Then
             Label9.Caption = "Grabación Modelo 190"
         Else
             Label9.Caption = "Grabación Modelo 346"
@@ -11046,28 +11046,28 @@ Dim List As Collection
         
         
         FrameGrabacionModelosVisible True, H, W
-        tabla = "rfactsoc"
+        Tabla = "rfactsoc"
     
     Case 15   ' Deshacer Proceso de facturación de Liquidacion
         ActivarCLAVE
         FrameTipoFactura.visible = False
         FrameDesFacturacionVisible True, H, W
-        tabla = "rfactsoc"
+        Tabla = "rfactsoc"
         Me.Caption = "Deshacer Proceso Facturación de Liquidación"
         
     Case 18   ' Calculo de Aportaciones (SOLO PICASSENT)
         CargaCombo
         FrameAportacionVisible True, H, W
-        tabla = "rhisfruta"
+        Tabla = "rhisfruta"
         
     Case 19   ' Liquidacion Directa para Alzira
         FrameLiqDirectaVisible True, H, W
-        tabla = "rhisfruta"
+        Tabla = "rhisfruta"
     
     
     Case 20   ' Anticipos pendientes de descontar
         FrameAnticiposPdteDescontarVisible True, H, W
-        tabla = "rhisfruta"
+        Tabla = "rhisfruta"
     
     
     End Select
@@ -11080,7 +11080,7 @@ Dim List As Collection
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Select Case Opcionlistado
+    Select Case OpcionListado
         Case 3
             DesBloqueoManual ("FACANT")
         Case 14
@@ -11121,7 +11121,7 @@ Dim Sql2 As String
     Else
         Sql = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadselect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadSelect1, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadSelect2, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
@@ -11165,7 +11165,7 @@ End Sub
 
 
 Private Sub frmMens2_DatoSeleccionado(CadenaSeleccion As String)
-    albaranes = CadenaSeleccion
+    Albaranes = CadenaSeleccion
 End Sub
 
 Private Sub frmMens3_datoseleccionado(CadenaSeleccion As String)
@@ -11178,7 +11178,7 @@ Dim Sql2 As String
     Else
         Sql = " {rclasifica.codsocio} = -1 "
     End If
-    If Not AnyadirAFormula(cadselect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
 
 
 End Sub
@@ -11402,7 +11402,7 @@ End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
     ConseguirFoco txtCodigo(Index), 3
-    If Opcionlistado = 10 Then
+    If OpcionListado = 10 Then
         If Index = 40 Then
             BarraEst.SimpleText = " CL = Calle    AV = Avenida."
         Else
@@ -11517,14 +11517,14 @@ Dim b As Boolean
             If txtCodigo(Index).Text <> "" Then b = PonerFormatoFecha(txtCodigo(Index))
             
             '[Monica]11/03/2015: si es factura vamos a las observaciones
-            If b And Index = 15 And (Opcionlistado = 3 Or Opcionlistado = 14) Then ' And vParamAplic.Cooperativa = 4 Then
+            If b And Index = 15 And (OpcionListado = 3 Or OpcionListado = 14) Then ' And vParamAplic.Cooperativa = 4 Then
                 PonerFoco txtCodigo(68)
                 Exit Sub
             End If
             
             
-            If b And Index = 7 And (Me.Opcionlistado = 1 Or Me.Opcionlistado = 3 Or Me.Opcionlistado = 12 Or Me.Opcionlistado = 14) Then PonerFoco txtCodigo(15)
-            If b And Index = 15 And (Me.Opcionlistado = 1 Or Me.Opcionlistado = 3 Or Me.Opcionlistado = 12 Or Me.Opcionlistado = 14) Then
+            If b And Index = 7 And (Me.OpcionListado = 1 Or Me.OpcionListado = 3 Or Me.OpcionListado = 12 Or Me.OpcionListado = 14) Then PonerFoco txtCodigo(15)
+            If b And Index = 15 And (Me.OpcionListado = 1 Or Me.OpcionListado = 3 Or Me.OpcionListado = 12 Or Me.OpcionListado = 14) Then
                 If AnticipoGastos Then
                     cmdAceptarAntGastos.SetFocus
                 Else
@@ -11542,7 +11542,7 @@ Dim b As Boolean
             
             
         Case 68 ' observaciones de la factura
-            If (Opcionlistado = 3 Or Opcionlistado = 14) Then
+            If (OpcionListado = 3 Or OpcionListado = 14) Then
                 If AnticipoGastos Then
                     cmdAceptarAntGastos.SetFocus
                 Else
@@ -11570,7 +11570,7 @@ Dim b As Boolean
                 PonerFoco txtCodigo(Index)
             Else
                 DesactivarCLAVE
-                Select Case Opcionlistado
+                Select Case OpcionListado
                     Case 5, 15 '5 = anticipos
                                '15= liquidaciones
                         PonerFoco txtCodigo(9)
@@ -11637,8 +11637,8 @@ Dim b As Boolean
         W = Me.FrameAnticipos.Width
         H = Me.FrameAnticipos.Height
         
-        b = (Opcionlistado = 1 Or Opcionlistado = 2 Or Opcionlistado = 3 Or _
-             Opcionlistado = 12 Or Opcionlistado = 13 Or Opcionlistado = 14) And _
+        b = (OpcionListado = 1 Or OpcionListado = 2 Or OpcionListado = 3 Or _
+             OpcionListado = 12 Or OpcionListado = 13 Or OpcionListado = 14) And _
              Not AnticipoGastos And Not LiquidacionIndustria And Not AnticipoGenerico
              
         
@@ -11655,7 +11655,7 @@ Dim b As Boolean
         
         
         '[Monica]11/10/2013: colocamos el check de terceros mas a la izquierda
-        If (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And (Opcionlistado = 1 Or Opcionlistado = 2 Or Opcionlistado = 3) Then
+        If (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And (OpcionListado = 1 Or OpcionListado = 2 Or OpcionListado = 3) Then
             Check1(11).Left = 3090 '3390
         End If
    
@@ -11748,7 +11748,7 @@ Private Sub FrameGrabacionModelosVisible(visible As Boolean, ByRef H As Integer,
     If visible = True Then
         Me.FrameGrabacionModelos.Top = -90
         Me.FrameGrabacionModelos.Left = 0
-        Select Case Opcionlistado
+        Select Case OpcionListado
             Case 10, 11
                 Me.FrameGrabacionModelos.Height = 5490
                 Me.CmdAcepModelo.Top = 4740
@@ -11876,11 +11876,11 @@ End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
-    cadselect = ""
+    cadSelect = ""
     cadSelect1 = ""
     cadSelect2 = ""
     cadSelect3 = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -11899,16 +11899,16 @@ Dim devuelve2 As String
     If devuelve = "Error" Then Exit Function
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Function
     If TipCod <> "F" Then 'Fecha
-        If Not AnyadirAFormula(cadselect, devuelve) Then Exit Function
+        If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
     Else
         devuelve2 = CadenaDesdeHastaBD(codD, codH, Codigo, TipCod)
         If devuelve2 = "Error" Then Exit Function
-        If Not AnyadirAFormula(cadselect, devuelve2) Then Exit Function
+        If Not AnyadirAFormula(cadSelect, devuelve2) Then Exit Function
     End If
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -11918,13 +11918,13 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
         .Titulo = cadTitulo
         .NombreRPT = cadNombreRPT
-        .Opcion = Opcionlistado
+        .Opcion = OpcionListado
         .ConSubInforme = ConSubInforme
         .Show vbModal
     End With
@@ -12009,7 +12009,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -12025,7 +12025,7 @@ Private Sub AbrirVisReport()
         '##descomen
 '        .ConSubInforme = ConSubInforme
         '##
-        .Opcion = Opcionlistado
+        .Opcion = OpcionListado
 '        .ExportarPDF = (chkEMAIL.Value = 1)
         .Show vbModal
     End With
@@ -12056,7 +12056,7 @@ Dim vCont As CTiposMov
 Dim tipoMov As String
 
     b = True
-    Select Case Opcionlistado
+    Select Case OpcionListado
         Case 1, 3
             '1 - Informe de Anticipos
             '3 - Factura de Anticipos
@@ -14132,7 +14132,7 @@ On Error GoTo ecopiarfichero
     CommonDialog1.FilterIndex = 1
     
     ' copiamos el primer fichero
-    Select Case Opcionlistado
+    Select Case OpcionListado
         Case 10
             CommonDialog1.FileName = "modelo190.txt"
         Case 11
@@ -16677,7 +16677,7 @@ Private Function CargarTemporalCatadau(cTabla As String, cWhere As String, Tipo 
 'tipo  0=anticipos
 '      1=liquidacion
 Dim Rs As ADODB.Recordset
-Dim Rs1 As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
 
 Dim Sql As String
 Dim SQL1 As String
@@ -16743,7 +16743,14 @@ Dim HayPrecio As Boolean
     
     '[Monica]24/04/2013: Meto los albaranes y calidades que puede que liquide
     Sql2 = "insert into tmpinformes2 (codusu, importe1, fecha1, importe2, importe3, importe4) select " & vUsu.Codigo & ",rhisfruta.numalbar, rhisfruta.fecalbar,rhisfruta.codvarie, rhisfruta_clasif.codcalid, "
-    Sql2 = Sql2 & " sum(rhisfruta_clasif.kilosnet) as kilos  "
+    
+    '[Monica]28/12/2018: en el caso de frutas inma se pagan los kilos transportados
+    If vParamAplic.Cooperativa = 18 Then
+        Sql2 = Sql2 & " sum(rhisfruta_clasif.kilostra) as kilos  "
+    Else
+        Sql2 = Sql2 & " sum(rhisfruta_clasif.kilosnet) as kilos  "
+    End If
+    
     Sql2 = Sql2 & " FROM  (" & cTabla & ") inner join tmpvarie on rhisfruta.codvarie = tmpvarie.codvarie "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
@@ -16752,7 +16759,13 @@ Dim HayPrecio As Boolean
         Sql2 = Sql2 & " WHERE " & cWhere
     End If
     Sql2 = Sql2 & " group by 1, 2, 3, 4, 5"
-    Sql2 = Sql2 & " having sum(rhisfruta_clasif.kilosnet) <> 0 "
+    
+    '[Monica]28/12/2018: en el caso de frutas inma se pagan los kilos transportados
+    If vParamAplic.Cooperativa = 18 Then
+        Sql2 = Sql2 & " having sum(rhisfruta_clasif.kilostra) <> 0 "
+    Else
+        Sql2 = Sql2 & " having sum(rhisfruta_clasif.kilosnet) <> 0 "
+    End If
     Sql2 = Sql2 & " order by 1, 2, 3, 4, 5 "
     
     conn.Execute Sql2
@@ -16760,7 +16773,13 @@ Dim HayPrecio As Boolean
     
     Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, "
     Sql = Sql & " rhisfruta.recolect, rhisfruta.tipoentr, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, "
-    Sql = Sql & " sum(rhisfruta_clasif.kilosnet) as kilos "
+    
+    '[Monica]28/12/2018: en el caso de frutas inma se pagan los kilos transportados
+    If vParamAplic.Cooperativa = 18 Then
+        Sql = Sql & " sum(rhisfruta_clasif.kilostra) as kilos "
+    Else
+        Sql = Sql & " sum(rhisfruta_clasif.kilosnet) as kilos "
+    End If
     Sql = Sql & " FROM  (" & cTabla & ") inner join tmpvarie on rhisfruta.codvarie = tmpvarie.codvarie "
     
     If cWhere <> "" Then
@@ -16770,7 +16789,14 @@ Dim HayPrecio As Boolean
         Sql = Sql & " WHERE " & cWhere
     End If
     Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8 "
-    Sql = Sql & " having sum(rhisfruta_clasif.kilosnet) <> 0 "
+    
+    '[Monica]28/12/2018: en el caso de frutas inma se pagan los kilos transportados
+    If vParamAplic.Cooperativa = 18 Then
+        Sql = Sql & " having sum(rhisfruta_clasif.kilostra) <> 0 "
+    Else
+        Sql = Sql & " having sum(rhisfruta_clasif.kilosnet) <> 0 "
+    End If
+    
     Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8 "
 
     Nregs = TotalRegistrosConsulta(Sql)
@@ -16801,14 +16827,14 @@ Dim HayPrecio As Boolean
         Sql3 = Sql3 & " and fechafin >= " & DBSet(Rs!Fecalbar, "F")
         Sql3 = Sql3 & " group by 1,2,3"
                 
-        Set Rs1 = New ADODB.Recordset
-        Rs1.Open Sql3, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs1.EOF Then
-            Contador = DBLet(Rs1!Contador, "N")
-            FechaIni = DBLet(Rs1!FechaIni, "F")
-            FechaFin = DBLet(Rs1!FechaFin, "F")
+        Set RS1 = New ADODB.Recordset
+        RS1.Open Sql3, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS1.EOF Then
+            Contador = DBLet(RS1!Contador, "N")
+            FechaIni = DBLet(RS1!FechaIni, "F")
+            FechaFin = DBLet(RS1!FechaFin, "F")
         End If
-        Set Rs1 = Nothing
+        Set RS1 = Nothing
         
         If DBLet(Rs!Recolect, "N") = 0 Then 'cooperativa
             Sql3 = "select precoop "
@@ -16858,7 +16884,7 @@ Dim HayPrecio As Boolean
         Sql4 = Sql4 & " and rhisfruta.tipoentr <> 1 and rhisfruta.tipoentr <> 3 and rhisfruta.tipoentr <> 4 and rhisfruta.tipoentr <> 6 "
         
         '[Monica]03/06/2013: distinguimos entre entradas normales y entradas de p.integrado (solo para catadau)
-        If (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19) And (Opcionlistado = 12 Or Opcionlistado = 13 Or Opcionlistado = 14) Then
+        If (vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19) And (OpcionListado = 12 Or OpcionListado = 13 Or OpcionListado = 14) Then
             '[Monica]01/02/2016: antes Check1(16)
             If Check1(23).Value = 1 Then ' solo entradas normales
                 Sql4 = Sql4 & " and rhisfruta.tipoentr = 0"
@@ -17298,7 +17324,7 @@ Private Function CargarTemporalQuatretonda(cTabla As String, cWhere As String, T
 'tipo  0=anticipos
 '      1=liquidacion
 Dim Rs As ADODB.Recordset
-Dim Rs1 As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
 
 Dim Sql As String
 Dim SQL1 As String
@@ -17403,14 +17429,14 @@ Dim ImporRet As Currency
         Sql3 = Sql3 & " and fechafin >= " & DBSet(Rs!Fecalbar, "F")
         Sql3 = Sql3 & " group by 1,2"
                 
-        Set Rs1 = New ADODB.Recordset
-        Rs1.Open Sql3, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs1.EOF Then
-            Contador = DBLet(Rs1!Contador, "N")
-            FechaIni = DBLet(Rs1!FechaIni, "F")
-            FechaFin = DBLet(Rs1!FechaFin, "F")
+        Set RS1 = New ADODB.Recordset
+        RS1.Open Sql3, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS1.EOF Then
+            Contador = DBLet(RS1!Contador, "N")
+            FechaIni = DBLet(RS1!FechaIni, "F")
+            FechaFin = DBLet(RS1!FechaFin, "F")
         End If
-        Set Rs1 = Nothing
+        Set RS1 = Nothing
         If DBLet(Rs!Recolect, "N") = 0 Then 'cooperativa
             Sql3 = "select precoop "
         Else
@@ -17560,7 +17586,7 @@ End Function
 
 
 
-Private Function ComprobarTiposIVA(tabla As String, cSelect As String) As Boolean
+Private Function ComprobarTiposIVA(Tabla As String, cSelect As String) As Boolean
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim vSeccion As CSeccion
@@ -17576,7 +17602,7 @@ Dim b As Boolean
         If vSeccion.AbrirConta Then
             
             Sql = "select distinct codiva from rsocios_seccion where codsecci = " & vParamAplic.Seccionhorto
-            Sql = Sql & " and codsocio in (select rhisfruta.codsocio from " & Trim(tabla) & " where " & Trim(cSelect) & ")"
+            Sql = Sql & " and codsocio in (select rhisfruta.codsocio from " & Trim(Tabla) & " where " & Trim(cSelect) & ")"
             Sql = Sql & " group by 1 "
             Sql = Sql & " order by 1 "
             
@@ -17619,12 +17645,12 @@ End Function
 
 Private Function HayFacturasConLineasDeDistintoGrupo(nTabla As String, cadSelect1 As String) As Boolean
 Dim Sql As String
-Dim tabla As String
+Dim Tabla As String
 
-    tabla = "(" & nTabla & ") INNER JOIN productos on variedades.codprodu = productos.codprodu "
+    Tabla = "(" & nTabla & ") INNER JOIN productos on variedades.codprodu = productos.codprodu "
     
-    tabla = QuitarCaracterACadena(tabla, "{")
-    tabla = QuitarCaracterACadena(tabla, "}")
+    Tabla = QuitarCaracterACadena(Tabla, "{")
+    Tabla = QuitarCaracterACadena(Tabla, "}")
     
     If cadSelect1 <> "" Then
         cadSelect1 = QuitarCaracterACadena(cadSelect1, "{")
@@ -17633,7 +17659,7 @@ Dim tabla As String
     End If
 
     Sql = "select rfactsoc_variedad.codtipom, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu, count(distinct productos.gruporeten) "
-    Sql = Sql & " from " & tabla
+    Sql = Sql & " from " & Tabla
     Sql = Sql & " where " & cadSelect1
     Sql = Sql & " group by 1,2,3 "
     Sql = Sql & " having count(distinct productos.gruporeten) > 1"
@@ -17782,7 +17808,7 @@ Dim Termino As String
         conn.Execute Sql
     End If
     
-    If InStr(1, cSelect, "FTR") Or (cSelect2 <> "" And (Opcionlistado = 10 Or Opcionlistado = 11)) Then
+    If InStr(1, cSelect, "FTR") Or (cSelect2 <> "" And (OpcionListado = 10 Or OpcionListado = 11)) Then
         ' insertamos las facturas correspondientes a la campaña actual - idem transporte
         Sql = "insert into tmprfactsoc(`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
         Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
@@ -17814,7 +17840,7 @@ Dim Termino As String
     
     
     '[Monica]20/01/2015: en el caso de ser modelo 190, añadimos las de terceros
-    If Opcionlistado = 10 Then
+    If OpcionListado = 10 Then
         Sql = "insert into tmprfactsoc(`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
         Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
         Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo) "
@@ -17830,7 +17856,7 @@ Dim Termino As String
     
     
     
-    If Opcionlistado = 11 Then ' caso del 346
+    If OpcionListado = 11 Then ' caso del 346
         Sql = "delete from tmp346 where codusu= " & vUsu.Codigo
         conn.Execute Sql
         
@@ -17853,7 +17879,7 @@ Dim Termino As String
         conn.Execute Sql
     End If
     
-    If Opcionlistado = 8 Or Opcionlistado = 9 Then
+    If OpcionListado = 8 Or OpcionListado = 9 Then
         Sql = "delete from tmprfactsoc_variedad where codusu= " & vUsu.Codigo
         conn.Execute Sql
         
@@ -17992,7 +18018,8 @@ Dim Termino As String
 '[Monica]17/10/2013: Si y solo si no es Montifrut que tiene en otro ariagro otra cosa
     '[Monica]21/01/2015: añado el caso de Natural
     '[Monica]25/01/2016: añado el caso de bolbaite
-If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
+    '[Monica]23/01/2019: añado frutas inma
+If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 And vParamAplic.Cooperativa <> 18 Then
     SqlBd = "SHOW DATABASES like 'ariagro%' "
     Set RsBd = New ADODB.Recordset
     RsBd.Open SqlBd, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -18076,7 +18103,7 @@ If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamApli
             conn.Execute Sql
             
             
-            If InStr(1, cSelect, "FTR") Or (cSelect2 <> "" And (Opcionlistado = 10 Or Opcionlistado = 11)) Then
+            If InStr(1, cSelect, "FTR") Or (cSelect2 <> "" And (OpcionListado = 10 Or OpcionListado = 11)) Then
                 Sql = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc (`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
                 Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
                 Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo) "
@@ -18108,7 +18135,7 @@ If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamApli
             End If
         
             '[Monica]20/01/2015: en el caso de ser modelo 190, añadimos las de terceros
-            If Opcionlistado = 10 Then
+            If OpcionListado = 10 Then
                 Sql = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc(`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
                 Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
                 Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo) "
@@ -18121,7 +18148,7 @@ If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamApli
                 conn.Execute Sql
             End If
         
-            If Opcionlistado = 11 Then ' caso del 346
+            If OpcionListado = 11 Then ' caso del 346
                 Sql = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmp346 where codusu= " & vUsu.Codigo
                 conn.Execute Sql
                 
@@ -18144,7 +18171,7 @@ If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamApli
                 conn.Execute Sql
             End If
             
-            If Opcionlistado = 8 Or Opcionlistado = 9 Then
+            If OpcionListado = 8 Or OpcionListado = 9 Then
                 Sql = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad where codusu= " & vUsu.Codigo
                 conn.Execute Sql
                 
@@ -18209,14 +18236,14 @@ If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamApli
             conn.Execute Sql
             
             
-            If Opcionlistado = 11 Then
+            If OpcionListado = 11 Then
                 Sql = "insert into tmp346 select * from " & Trim(RsBd.Fields(0).Value) & ".tmp346 "
                 Sql = Sql & " where codusu = " & vUsu.Codigo
                 
                 conn.Execute Sql
             End If
             
-            If Opcionlistado = 8 Or Opcionlistado = 9 Then
+            If OpcionListado = 8 Or OpcionListado = 9 Then
                 Sql = "insert into tmprfactsoc_variedad select * from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad "
                 Sql = Sql & " where codusu = " & vUsu.Codigo
                 
@@ -18802,7 +18829,7 @@ End Function
 
 Private Function CargarTemporalIndustria(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Rs1 As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
 
 Dim Sql As String
 Dim SQL1 As String
@@ -18903,14 +18930,14 @@ Dim Sql5 As String
         Sql3 = Sql3 & " and fechafin >= " & DBSet(Rs!Fecalbar, "F")
         Sql3 = Sql3 & " group by 1,2"
                 
-        Set Rs1 = New ADODB.Recordset
-        Rs1.Open Sql3, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs1.EOF Then
-            Contador = DBLet(Rs1!Contador, "N")
-            FechaIni = DBLet(Rs1!FechaIni, "F")
-            FechaFin = DBLet(Rs1!FechaFin, "F")
+        Set RS1 = New ADODB.Recordset
+        RS1.Open Sql3, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS1.EOF Then
+            Contador = DBLet(RS1!Contador, "N")
+            FechaIni = DBLet(RS1!FechaIni, "F")
+            FechaFin = DBLet(RS1!FechaFin, "F")
         End If
-        Set Rs1 = Nothing
+        Set RS1 = Nothing
         
         Sql3 = "select precioindustria from rprecios where codvarie = " & DBSet(Rs!codvarie, "N")
         Sql3 = Sql3 & " and tipofact = 2 "
@@ -20028,7 +20055,7 @@ Dim Tabla1 As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -20040,7 +20067,7 @@ Dim Tabla1 As String
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".codsocio}"
+            Codigo = "{" & Tabla & ".codsocio}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
         End If
@@ -20069,13 +20096,13 @@ Dim Tabla1 As String
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & tabla & ".fecalbar}"
+            Codigo = "{" & Tabla & ".fecalbar}"
             TipCod = "F"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
             
         'SECCION
-        If Not AnyadirAFormula(cadselect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         
         
@@ -20096,36 +20123,36 @@ Dim Tabla1 As String
         
             '[Monica]04/05/2017: ahora para Juan los socios terceros son los que tengan IRPF = 2 (Entidad)
             If Check1(11).Value = 0 Then
-                If Not AnyadirAFormula(cadselect, "{rsocios.tipoirpf} <> 2") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoirpf} <> 2") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rsocios.tipoirpf} <> 2") Then Exit Sub
             Else
                 ' socio tercero
-                If Not AnyadirAFormula(cadselect, "{rsocios.tipoirpf} = 2") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoirpf} = 2") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rsocios.tipoirpf} = 2") Then Exit Sub
             End If
 
         Else
             If Check1(11).Value = 0 Then
-                If Not AnyadirAFormula(cadselect, "{rsocios.tipoprod} <> 1") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
             Else
                 ' socio tercero de modulos
-                If Not AnyadirAFormula(cadselect, "{rsocios.tipoprod} = 1") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} = 1") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} = 1") Then Exit Sub
             End If
         End If
         
         'sólo entradas distintas de VENTA CAMPO y distintas de INDUSTRIA y distintas de RETIRADA
-        If Not AnyadirAFormula(cadselect, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4") Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4") Then Exit Sub
         
         '++monica: 28/07/2009 dependiendo del tipo de recoleccion (0=coop 1=socio 2=todos)
         Select Case Combo1(2).ListIndex
             Case 0      ' recolectado cooperativa
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.recolect} = 0") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.recolect} = 0") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.recolect} = 0") Then Exit Sub
             Case 1      ' recolectado socio
-                If Not AnyadirAFormula(cadselect, "{rhisfruta.recolect} = 1") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.recolect} = 1") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rhisfruta.recolect} = 1") Then Exit Sub
             Case 2      ' ambos
             
@@ -20139,15 +20166,15 @@ Dim Tabla1 As String
         nTabla = nTabla & " INNER JOIN grupopro ON productos.codgrupo = grupopro.codgrupo "
         nTabla = nTabla & " and grupopro.codgrupo <> 5 and grupopro.codgrupo <> 6 " ' grupo no puede ser 5=almazara ni 6=bodega
         
-        cadSelect1 = cadselect
+        cadSelect1 = cadSelect
         Tabla1 = nTabla
         
-        Select Case Opcionlistado
+        Select Case OpcionListado
             Case 1 ' Listado de anticipos
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 24 ' informe de anticipos
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu '"CatAnticipos.rpt"
                 cadTitulo = "Informe de Anticipos"
@@ -20173,7 +20200,7 @@ Dim Tabla1 As String
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 26 ' informe de liquidacion
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu '"CatLiquidacion.rpt"
                 cadTitulo = "Informe de Liquidación"
@@ -20182,7 +20209,7 @@ Dim Tabla1 As String
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 33 ' informe de prevision de pago de liquidacion
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu '"ValPrevPagosLiq.rpt"
                 If Combo1(3).ListIndex = 0 Then ' agrupado por socio
@@ -20214,8 +20241,8 @@ Dim Tabla1 As String
         Set frmMens = Nothing
         
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
-        If HayRegParaInforme(nTabla, cadselect) Then
-            Select Case Opcionlistado
+        If HayRegParaInforme(nTabla, cadSelect) Then
+            Select Case OpcionListado
                 Case 1, 2, 3
                     TipoPrec = 0 ' ANTICIPOS
                 Case 12, 13, 14
@@ -20223,7 +20250,7 @@ Dim Tabla1 As String
             End Select
             
             'comprobamos que los tipos de iva existen en la contabilidad de horto
-            If Not ComprobarTiposIVA(nTabla, cadselect) Then Exit Sub
+            If Not ComprobarTiposIVA(nTabla, cadSelect) Then Exit Sub
             
             
 '            '[Monica]27/04/2011: de momento solo alzira comprobamos si los albaranes seccionado ya estan liquidados
@@ -20233,7 +20260,7 @@ Dim Tabla1 As String
 '                If Not HayRegParaInforme(nTabla, cadSelect) Then Exit Sub
 '            End If
             
-            If HayPreciosVariedadesCatadau(TipoPrec, nTabla, cadselect, Combo1(2).ListIndex) Then
+            If HayPreciosVariedadesCatadau(TipoPrec, nTabla, cadSelect, Combo1(2).ListIndex) Then
                 'D/H fecha
                 cDesde = Trim(txtCodigo(6).Text)
                 cHasta = Trim(txtCodigo(7).Text)
@@ -20242,21 +20269,21 @@ Dim Tabla1 As String
                 cadAux = "{rprecios.fechaini}= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                 cadAux = "{rprecios.fechaini}=" & DBSet(txtCodigo(6).Text, "F")
-                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 cadAux = "{rprecios.fechafin}= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                 cadAux = "{rprecios.fechafin}=" & DBSet(txtCodigo(7).Text, "F")
-                If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 If Check1(5).Value = 0 Then
                     ' si se trata de anticipos--> seleccionamos los precios de anticipos
                     ' sino los de liquidaciones
                     If Not AnyadirAFormula(cadFormula, "{rprecios.tipofact} = " & TipoPrec) Then Exit Sub
-                    If Not AnyadirAFormula(cadselect, "{rprecios.tipofact} = " & TipoPrec) Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, "{rprecios.tipofact} = " & TipoPrec) Then Exit Sub
                 Else
                     If Not AnyadirAFormula(cadFormula, "{rprecios.tipofact} = 3") Then Exit Sub
-                    If Not AnyadirAFormula(cadselect, "{rprecios.tipofact} = 3") Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, "{rprecios.tipofact} = 3") Then Exit Sub
                 End If
                 
 '                '02/09/2010
@@ -20265,7 +20292,7 @@ Dim Tabla1 As String
 '                cadAux = cadAux & " and p.fechafin = " & DBSet(txtcodigo(7).Text, "F") & ")"
 '                If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
-                Select Case Opcionlistado
+                Select Case OpcionListado
                     Case 1  '1 - informe de anticipos
                     
 '[Monica]10/04/2018: quito lo que tenia comentado de Coopic
@@ -20282,13 +20309,13 @@ Dim Tabla1 As String
 
                                 ConSubInforme = True
                                 'pasamos como parametro la fecha de anticipo
-                                cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
+                                CadParam = CadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                                 numParam = numParam + 1
-                                cadParam = cadParam & "pUsu=" & vUsu.Codigo & "|"
+                                CadParam = CadParam & "pUsu=" & vUsu.Codigo & "|"
                                 numParam = numParam + 1
 
                                 '[Monica]16/06/2016: en el caso de Picassent quiere salto por campo cuando se trata de terceros
-                                cadParam = cadParam & "pSaltaxCampo=" & Check1(28).Value & "|"
+                                CadParam = CadParam & "pSaltaxCampo=" & Check1(28).Value & "|"
                                 numParam = numParam + 1
 
                                 LlamarImprimir
@@ -20299,7 +20326,7 @@ Dim Tabla1 As String
                         Else
                             If CargarTemporalCatadau(Tabla1, cadSelect1, TipoPrec) Then
                                 'pasamos como parametro la fecha de anticipo
-                                cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
+                                CadParam = CadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                                 numParam = numParam + 1
                                 ConSubInforme = True
     
@@ -20351,13 +20378,13 @@ Dim Tabla1 As String
                                                                 
                             ConSubInforme = True
                             'pasamos como parametro la fecha de anticipo
-                            cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
+                            CadParam = CadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                             numParam = numParam + 1
-                            cadParam = cadParam & "pUsu=" & vUsu.Codigo & "|"
+                            CadParam = CadParam & "pUsu=" & vUsu.Codigo & "|"
                             numParam = numParam + 1
                             
                             '[Monica]16/06/2016: en el caso de Picassent quiere salto por campo cuando se trata de terceros
-                            cadParam = cadParam & "pSaltaxCampo=" & Check1(28).Value & "|"
+                            CadParam = CadParam & "pSaltaxCampo=" & Check1(28).Value & "|"
                             numParam = numParam + 1
                             
                             LlamarImprimir
@@ -20385,7 +20412,7 @@ Dim Tabla1 As String
                                 If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                                 ConSubInforme = True
                                 
-                                cadParam = cadParam & "pConBonifica=1|"
+                                CadParam = CadParam & "pConBonifica=1|"
                                 numParam = numParam + 1
                                 LlamarImprimir
                             End If
@@ -20402,9 +20429,9 @@ Dim Tabla1 As String
                         ' Picassent
                         '[Monica]22/03/2012: indicamos en el informe si hacemos o no el descuento de comision segun el check1(13)
                         If Check1(13).Value = 1 Then
-                            cadParam = cadParam & "pTipo=""Cálculo con comisión""|"
+                            CadParam = CadParam & "pTipo=""Cálculo con comisión""|"
                         Else
-                            cadParam = cadParam & "pTipo=""Cálculo sin comisión""|"
+                            CadParam = CadParam & "pTipo=""Cálculo sin comisión""|"
                         End If
                         numParam = numParam + 1
                         
@@ -20456,12 +20483,12 @@ Dim Tabla1 As String
                                     'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                     If Me.Check1(2).Value Then
                                         cadFormula = ""
-                                        cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
+                                        CadParam = CadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                         numParam = numParam + 1
                                         If TipoPrec = 0 Then
-                                            cadParam = cadParam & "pTitulo= ""Resumen Facturación de Anticipos""|"
+                                            CadParam = CadParam & "pTitulo= ""Resumen Facturación de Anticipos""|"
                                         Else
-                                            cadParam = cadParam & "pTitulo= ""Resumen Facturación de Liquidaciones""|"
+                                            CadParam = CadParam & "pTitulo= ""Resumen Facturación de Liquidaciones""|"
                                         End If
                                         numParam = numParam + 1
                                         
@@ -20476,14 +20503,14 @@ Dim Tabla1 As String
                                     'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE ANTICIPOS/LIQUIDACION
                                     If Me.Check1(3).Value Then
                                         cadFormula = ""
-                                        cadselect = ""
+                                        cadSelect = ""
                                         If TipoPrec = 0 Then 'Tipo de Factura: Anticipo
                                             cadAux = "({stipom.tipodocu} = 1)"
                                         Else  'Tipo de Factura: Liquidación
                                             cadAux = "({stipom.tipodocu} = 2)"
                                         End If
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                         'Nº Factura
                                         If TipoPrec = 0 Then
                                             cadAux = "({rfactsoc.numfactu} IN [" & FacturasGeneradas(2) & "])"
@@ -20492,17 +20519,17 @@ Dim Tabla1 As String
                                         End If
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
-                                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
     
                                         'Fecha de Factura
                                         FecFac = CDate(txtCodigo(15).Text)
                                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
-                                        If Not AnyadirAFormula(cadselect, cadAux) Then Exit Sub
+                                        If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
     
                                         indRPT = 23 'Impresion de facturas de socios
-                                        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                                        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                                         'Nombre fichero .rpt a Imprimir
                                         cadNombreRPT = nomDocu
                                         'Nombre fichero .rpt a Imprimir
@@ -20517,14 +20544,14 @@ Dim Tabla1 As String
                                             Dim PrecioApor As Double
                                             PrecioApor = DevuelveValor("select min(precio) from raporreparto")
                                             
-                                            cadParam = cadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
+                                            CadParam = CadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
                                             numParam = numParam + 1
                                         End If
     
                                         LlamarImprimir
     
                                         If frmVisReport.EstaImpreso Then
-                                            ActualizarRegistrosFac "rfactsoc", cadselect
+                                            ActualizarRegistrosFac "rfactsoc", cadSelect
                                         End If
                                     End If
                                     'SALIR DE LA FACTURACION DE ANTICIPOS / LIQUIDACIONES
@@ -20548,7 +20575,7 @@ Private Function CargarTemporalPicassent(cTabla As String, cWhere As String, Tip
 'tipo  0=anticipos
 '      1=liquidacion
 Dim Rs As ADODB.Recordset
-Dim Rs1 As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
 
 Dim Sql As String
 Dim SQL1 As String
@@ -20674,14 +20701,14 @@ Dim HayPrecio As Boolean
         Sql3 = Sql3 & " and fechafin >= " & DBSet(Rs!Fecalbar, "F")
         Sql3 = Sql3 & " group by 1,2"
                 
-        Set Rs1 = New ADODB.Recordset
-        Rs1.Open Sql3, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs1.EOF Then
-            Contador = DBLet(Rs1!Contador, "N")
-            FechaIni = DBLet(Rs1!FechaIni, "F")
-            FechaFin = DBLet(Rs1!FechaFin, "F")
+        Set RS1 = New ADODB.Recordset
+        RS1.Open Sql3, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS1.EOF Then
+            Contador = DBLet(RS1!Contador, "N")
+            FechaIni = DBLet(RS1!FechaIni, "F")
+            FechaFin = DBLet(RS1!FechaFin, "F")
         End If
-        Set Rs1 = Nothing
+        Set RS1 = Nothing
         If DBLet(Rs!Recolect, "N") = 0 Then 'cooperativa
             Sql3 = "select precoop "
         Else

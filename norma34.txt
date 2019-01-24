@@ -2,98 +2,60 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANPAG000000F20181016T182816</MsgId>
-      <CreDtTm>2018-10-16T18:28:16</CreDtTm>
-      <NbOfTxs>37</NbOfTxs>
-      <CtrlSum>22973.75</CtrlSum>
+      <MsgId>TRANPAG000000F20190115T184129</MsgId>
+      <CreDtTm>2019-01-15T18:41:29</CreDtTm>
+      <NbOfTxs>18</NbOfTxs>
+      <CtrlSum>2662.32</CtrlSum>
       <InitgPty>
-         <Nm>Frutas Inma</Nm>
+         <Nm>Catadau</Nm>
          <Id>
            <OrgId>
                <Othr>
-                  <Id>V98987266</Id>
+                  <Id>F46038881AN0</Id>
                </Othr>
            </OrgId>
          </Id>
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>20181016182816V98987266</PmtInfId>
+      <PmtInfId>20190115184129F46038881</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
-      <ReqdExctnDt>2018-10-16</ReqdExctnDt>
+      <ReqdExctnDt>2019-01-15</ReqdExctnDt>
       <Dbtr>
-         <Nm>Frutas Inma</Nm>
+         <Nm>Catadau</Nm>
          <PstlAdr>
             <Ctry>ES</Ctry>
-            <AdrLine>C/DE L OLIVERA,S/N BENIMODO VALENCIA</AdrLine>
+            <AdrLine>C/Rodriguez de la Fuente s/n CATADAU VALENCIA</AdrLine>
          </PstlAdr>
          <Id>
             <OrgId>
                <Othr>
-                  <Id>V98987266</Id>
+                  <Id>F46038881AN0</Id>
                </Othr>
             </OrgId>
          </Id>
     </Dbtr>
     <DbtrAcct>
        <Id>
-          <IBAN>ES2100490500912110978728</IBAN>
+          <IBAN>ES5230582268501021006736</IBAN>
        </Id>
        <Ccy>EUR</Ccy>
     </DbtrAcct>
     <DbtrAgt>
        <FinInstnId>
-          <BIC>BSCHESMMXXX</BIC>
+          <BIC>CCRIES2AXXX</BIC>
        </FinInstnId>
     </DbtrAgt>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>Y0846805M</EndToEndId>
+         <EndToEndId>20778221K</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">669.5</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAIXESBBXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>BLOSENKO, EDUARDS</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>Y0846805M</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES3321000209420100620319</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 669,50</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>X6063779J</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">737.25</InstdAmt>
+          <InstdAmt Ccy="EUR">9.28</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -101,265 +63,37 @@
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>SERVA, TOMAS</Nm>
+          <Nm>ESTEVE SABATER,JOSE SALVADOR</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>X6063779J</Id>
+                     <Id>20778221K</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES5130582171712810604800</IBAN>
+              <IBAN>ES9230587100072810000878</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 737,25</Ustrd>
+         <Ustrd>Pago N mina 15/01/2019 Importe 9,28</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>20237084M</EndToEndId>
+         <EndToEndId>20776962G</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">289.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>BSCHESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>MARTI TORREGROSA, AUSIAS</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>20237084M</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES8800490500912190921721</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 289,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>X4114658G</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">718.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAIXESBBXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>LYTVYN, MIROSLAV</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X4114658G</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES2721004416260100156236</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 718,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>X8776347F</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">718.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>BSABESBBXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>PEREGINETS, ANDRII</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X8776347F</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES7300811292990006722382</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 718,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>Y1313817W</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">672.75</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAHMESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>KHOMYSHYN, OLEH</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>Y1313817W</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES3520385767703002044371</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 672,75</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>20847525A</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">718.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAIXESBBXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>PEREZ SANCHEZ, CESAR</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>20847525A</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES0421002805110100584904</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 718,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>73580430A</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">773.5</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>INGDESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>GALDON MENDOZA, ANGEL</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>73580430A</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES1214650100951727051735</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 773,50</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>20782737Y</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">698</InstdAmt>
+          <InstdAmt Ccy="EUR">176.57</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -367,37 +101,37 @@
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>BELDA CARDONA, FRANCISCO JOSE</Nm>
+          <Nm>ESTARLICH BRIZ,MIGUEL</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>20782737Y</Id>
+                     <Id>20776962G</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES7130582276392726718068</IBAN>
+              <IBAN>ES6030821315863191923212</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 698,00</Ustrd>
+         <Ustrd>Pago N mina 15/01/2019 Importe 176,57</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>X5908820M</EndToEndId>
+         <EndToEndId>20818013T</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">663</InstdAmt>
+          <InstdAmt Ccy="EUR">62.63</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -405,113 +139,37 @@
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>ATANASOV, ROSEN</Nm>
+          <Nm>YUSTE OREA,JORGE</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>X5908820M</Id>
+                     <Id>20818013T</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES6230582290082810029342</IBAN>
+              <IBAN>ES7730582268512720003141</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 663,00</Ustrd>
+         <Ustrd>Pago N mina 15/01/2019 Importe 62,63</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>X4931331Q</EndToEndId>
+         <EndToEndId>73772451C</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">711.75</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CDRRSSMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>KIRILOV YORDANOV, STILIYAN</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X4931331Q</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES6401332987964100001931</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 711,75</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>X6357711M</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">672.75</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAIXESBBXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>ARIF ARIF, ALI</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X6357711M</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES6621002987220100145506</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 672,75</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>19840497F</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">562.25</InstdAmt>
+          <InstdAmt Ccy="EUR">62.63</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -519,75 +177,37 @@
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>BARTHEMELY ARJONA, ENRIQUE</Nm>
+          <Nm>BARBERA GARCIA,JUAN CARLOS</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>19840497F</Id>
+                     <Id>73772451C</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES8630587119912810016969</IBAN>
+              <IBAN>ES8130821315863191952419</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 562,25</Ustrd>
+         <Ustrd>Pago N mina 15/01/2019 Importe 62,63</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>X6700513S</EndToEndId>
+         <EndToEndId>73939701Z</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">672.75</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAIXESBBXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>DIMITROV OGNYANOV OGNYAN</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X6700513S</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES2721005105130100176064</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 672,75</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>20457646C</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">659.75</InstdAmt>
+          <InstdAmt Ccy="EUR">232.56</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -595,227 +215,37 @@
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>GIMENEZ MARTINEZ, GIANMARCO</Nm>
+          <Nm>MARTINEZ DELGADO,ALFONSO</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>20457646C</Id>
+                     <Id>73939701Z</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES2730582261332820002476</IBAN>
+              <IBAN>ES2530582268582810017212</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 659,75</Ustrd>
+         <Ustrd>Pago N mina 15/01/2019 Importe 232,56</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>Y2189238C</EndToEndId>
+         <EndToEndId>20792578A</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">718.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>BBVAESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>JANAVICIUS, VACLOVAS</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>Y2189238C</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES5901822741110201549461</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 718,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>X3471186A</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">344.5</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAIXESBBXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>STAVYTSKY, SERHIY</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X3471186A</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES6221002447550100437129</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 344,50</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>Y4981732S</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">624</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAIXESBBXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>VICIULIS, ARUNAS</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>Y4981732S</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES0321002829420200177826</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 624,00</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>Y4981678F</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">624</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAHMESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>SLIEPOVAITE, ONUTE</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>Y4981678F</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES3820386203986000097824</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 624,00</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>20804847J</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">733.75</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAIXESBBXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>NAVASQUILLO GARCIA, FRANCISCO</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>20804847J</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES4121005691790100049091</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 733,75</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>24325276Q</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">614.25</InstdAmt>
+          <InstdAmt Ccy="EUR">195.01</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -823,75 +253,75 @@
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>BURGUET GARCIA, ANTONIO</Nm>
+          <Nm>BISBAL MARTI,VICENTE RAMON</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>24325276Q</Id>
+                     <Id>20792578A</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES3630582261312810014807</IBAN>
+              <IBAN>ES3230582268552810007727</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 614,25</Ustrd>
+         <Ustrd>Pago N mina 15/01/2019 Importe 195,01</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>Y5497110D</EndToEndId>
+         <EndToEndId>20792080B</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">718.25</InstdAmt>
+          <InstdAmt Ccy="EUR">194.07</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
-             <BIC>CAHMESMMXXX</BIC>
+             <BIC>CCRIES2AXXX</BIC>
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>IVANOV ANGELOV, DANKO</Nm>
+          <Nm>ESTARLICH BRIZ,FERNANDO</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>Y5497110D</Id>
+                     <Id>20792080B</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES6420389615516000483317</IBAN>
+              <IBAN>ES4530582268582810013845</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 718,25</Ustrd>
+         <Ustrd>Pago N mina 15/01/2019 Importe 194,07</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>X9221975X</EndToEndId>
+         <EndToEndId>54802677W</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">552.5</InstdAmt>
+          <InstdAmt Ccy="EUR">83.28</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -899,113 +329,37 @@
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>KIRILOV GEORGIEV, SVETOSLAV</Nm>
+          <Nm>VARGAS VARGAS,SANTOS ELICIO</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>X9221975X</Id>
+                     <Id>54802677W</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES7521002197040100875202</IBAN>
+              <IBAN>ES2321003981720100261261</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 552,50</Ustrd>
+         <Ustrd>Pago N mina 15/01/2019 Importe 83,28</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>X7994934L</EndToEndId>
+         <EndToEndId>73756536K</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">718.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAHMESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>GEORGIEV TIHOMIROV, KIRIL</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X7994934L</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES4220386162496000174565</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 718,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>X8480100T</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">718.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>BSCHESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>DIMOV SIMOV, VERCHO</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X8480100T</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES4600495465012195015216</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 718,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>20429488Z</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">718.25</InstdAmt>
+          <InstdAmt Ccy="EUR">62.63</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -1013,37 +367,341 @@
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>CARRILLO RODRIGUEZ, ANDRES</Nm>
+          <Nm>TARAZONA SOBREVELA, ERNESTO</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>20429488Z</Id>
+                     <Id>73756536K</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES3730582339162810006677</IBAN>
+              <IBAN>ES9730582268512810002388</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 718,25</Ustrd>
+         <Ustrd>Pago N mina 15/01/2019 Importe 62,63</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>48653279E</EndToEndId>
+         <EndToEndId>24379774G</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">718.25</InstdAmt>
+          <InstdAmt Ccy="EUR">146.34</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CCRIES2AXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>BAREA BONO, JOAQUIN</Nm>
+           <Id>
+               <OrgId>
+                  <Othr>
+                     <Id>24379774G</Id>
+                  </Othr>
+               </OrgId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES2330582268542810005998</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>Pago N mina 15/01/2019 Importe 146,34</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>23824474Q</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">144.66</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CCRIES2AXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>PEREZ ROCA, JOSE MIGUEL</Nm>
+           <Id>
+               <OrgId>
+                  <Othr>
+                     <Id>23824474Q</Id>
+                  </Othr>
+               </OrgId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES7830582268572720002926</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>Pago N mina 15/01/2019 Importe 144,66</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>20815685H</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">413.2</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CCRIES2AXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>DIAZ GUERRA MENDOZA,JESUS</Nm>
+           <Id>
+               <OrgId>
+                  <Othr>
+                     <Id>20815685H</Id>
+                  </Othr>
+               </OrgId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES3830582268582810002913</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>Pago N mina 15/01/2019 Importe 413,20</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>73593415Q</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">305.81</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CCRIES2AXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>DIAZ GUERRA A O, JONATAN</Nm>
+           <Id>
+               <OrgId>
+                  <Othr>
+                     <Id>73593415Q</Id>
+                  </Othr>
+               </OrgId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES5030582268512810012255</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>Pago N mina 15/01/2019 Importe 305,81</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>20804398R</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">50.14</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CCRIES2AXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>ROMERO SANCHEZ, ANTONIO</Nm>
+           <Id>
+               <OrgId>
+                  <Othr>
+                     <Id>20804398R</Id>
+                  </Othr>
+               </OrgId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES3530582268542810015094</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>Pago N mina 15/01/2019 Importe 50,14</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>20856883T</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">214.71</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CCRIES2AXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>CERVERA CELDA, NESTOR</Nm>
+           <Id>
+               <OrgId>
+                  <Othr>
+                     <Id>20856883T</Id>
+                  </Othr>
+               </OrgId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES3330582277882820002268</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>Pago N mina 15/01/2019 Importe 214,71</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>74176302Z</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">62.63</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CCRIES2AXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>MORENO MORENO, ISIDRO</Nm>
+           <Id>
+               <OrgId>
+                  <Othr>
+                     <Id>74176302Z</Id>
+                  </Othr>
+               </OrgId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES4830587100052820001498</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>Pago N mina 15/01/2019 Importe 62,63</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>73942756X</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">31.46</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CCRIES2AXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>MARTINEZ BISBAL, VICENTE JOSE</Nm>
+           <Id>
+               <OrgId>
+                  <Othr>
+                     <Id>73942756X</Id>
+                  </Othr>
+               </OrgId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES3530582268552810002241</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>Pago N mina 15/01/2019 Importe 31,46</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>53098038P</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">214.71</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -1051,405 +709,25 @@
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>ALARCON CAMACHO, VICTOR</Nm>
+          <Nm>EXPOSITO RODRIGUEZ, RAFAEL</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>48653279E</Id>
+                     <Id>53098038P</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES0621002829430100407112</IBAN>
+              <IBAN>ES7921002805120200104438</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 718,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>X7590918K</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">669.5</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAHMESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>SABALIAUSKAS, EDVINAS</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X7590918K</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES2020389638366000428307</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 669,50</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>49033547P</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">718.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>INGDESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>MEJIAS MORENO, ANTONIO</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>49033547P</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES5014650100921728746758</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 718,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>20815270N</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">543.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAHMESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>CLIMENT GARCIA, MIGUEL ANGEL</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>20815270N</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES2020386314413000029242</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 543,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>733587165E</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">535.5</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CCRIES2AXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>LORENTE GARCIA, SALVADOR</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>733587165E</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES3630580990262753094303</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 535,50</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>X8750977Y</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">571.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CCRIES2AXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>BARBU, COSTEL</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X8750977Y</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES6230580990202753094129</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 571,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>Y0494513G</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">571.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAHMESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>CONSTANTIN SLUJITORU, BOGDAN</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>Y0494513G</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES9620386314483000629416</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 571,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>X08200651R</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">549.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAHMESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>APANAVICIUTE, AIRA</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X08200651R</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES5720386227143000197015</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 549,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>X08200735Q</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">503.75</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAHMESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>APANAVICIENE, ALVIDA</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X08200735Q</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES5720386227113000375157</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 503,75</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>0X7220365K</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">315.25</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>BBVAESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>EL HAKMI, AHMED</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>0X7220365K</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES1701829465670206922342</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 315,25</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>0X6726269B</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">256.75</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>BSABESBBXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>KOROL, OSTAP</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>0X6726269B</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES4400815409140006236039</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 16/10/2018 Importe 256,75</Ustrd>
+         <Ustrd>Pago N mina 15/01/2019 Importe 214,71</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    </PmtInf>

@@ -508,7 +508,7 @@ Begin VB.Form frmManSocios
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   1
+      Tab             =   3
       TabsPerRow      =   8
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -542,9 +542,8 @@ Begin VB.Form frmManSocios
       Tab(0).ControlCount=   15
       TabCaption(1)   =   "Secciones"
       TabPicture(1)   =   "frmManSocios.frx":0028
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "FrameAux1"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Teléfonos"
       TabPicture(2)   =   "frmManSocios.frx":0044
@@ -553,17 +552,27 @@ Begin VB.Form frmManSocios
       Tab(2).ControlCount=   1
       TabCaption(3)   =   "Documentos"
       TabPicture(3)   =   "frmManSocios.frx":0060
-      Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Frame8"
-      Tab(3).Control(1)=   "Text3(0)"
-      Tab(3).Control(2)=   "Toolbar2"
-      Tab(3).Control(3)=   "lw1"
-      Tab(3).Control(4)=   "Toolbar3"
-      Tab(3).Control(5)=   "Frame5"
-      Tab(3).Control(6)=   "Toolbar4"
-      Tab(3).Control(7)=   "imgFec(3)"
-      Tab(3).Control(8)=   "Label17"
-      Tab(3).Control(9)=   "Label16"
+      Tab(3).ControlEnabled=   -1  'True
+      Tab(3).Control(0)=   "Label16"
+      Tab(3).Control(0).Enabled=   0   'False
+      Tab(3).Control(1)=   "Label17"
+      Tab(3).Control(1).Enabled=   0   'False
+      Tab(3).Control(2)=   "imgFec(3)"
+      Tab(3).Control(2).Enabled=   0   'False
+      Tab(3).Control(3)=   "Toolbar4"
+      Tab(3).Control(3).Enabled=   0   'False
+      Tab(3).Control(4)=   "Frame5"
+      Tab(3).Control(4).Enabled=   0   'False
+      Tab(3).Control(5)=   "Toolbar3"
+      Tab(3).Control(5).Enabled=   0   'False
+      Tab(3).Control(6)=   "lw1"
+      Tab(3).Control(6).Enabled=   0   'False
+      Tab(3).Control(7)=   "Toolbar2"
+      Tab(3).Control(7).Enabled=   0   'False
+      Tab(3).Control(8)=   "Text3(0)"
+      Tab(3).Control(8).Enabled=   0   'False
+      Tab(3).Control(9)=   "Frame8"
+      Tab(3).Control(9).Enabled=   0   'False
       Tab(3).ControlCount=   10
       TabCaption(4)   =   "Pozos"
       TabPicture(4)   =   "frmManSocios.frx":007C
@@ -1291,7 +1300,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   4395
-         Left            =   -65100
+         Left            =   9900
          TabIndex        =   147
          Top             =   405
          Visible         =   0   'False
@@ -1966,7 +1975,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   -63660
+         Left            =   11340
          TabIndex        =   123
          Text            =   "Text4"
          Top             =   1050
@@ -2003,7 +2012,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   7245
-         Left            =   45
+         Left            =   -74955
          TabIndex        =   99
          Top             =   405
          Width           =   15165
@@ -4395,7 +4404,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   4350
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   120
          Top             =   450
          Width           =   615
@@ -4463,7 +4472,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.ListView lw1 
          Height          =   3855
-         Left            =   -74040
+         Left            =   960
          TabIndex        =   121
          Top             =   420
          Width           =   8745
@@ -4493,7 +4502,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.Toolbar Toolbar3 
          Height          =   2370
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   127
          Top             =   480
          Visible         =   0   'False
@@ -4551,7 +4560,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   1005
-         Left            =   -64980
+         Left            =   10020
          TabIndex        =   130
          Top             =   1440
          Width           =   2760
@@ -4592,7 +4601,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.Toolbar Toolbar4 
          Height          =   390
-         Left            =   -64860
+         Left            =   10140
          TabIndex        =   129
          Top             =   1590
          Visible         =   0   'False
@@ -4617,7 +4626,7 @@ Begin VB.Form frmManSocios
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   3
-         Left            =   -64140
+         Left            =   10860
          Picture         =   "frmManSocios.frx":1C77
          ToolTipText     =   "Buscar fecha"
          Top             =   1050
@@ -4635,7 +4644,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -64860
+         Left            =   10140
          TabIndex        =   126
          Top             =   1050
          Width           =   735
@@ -4653,7 +4662,7 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   300
-         Left            =   -64920
+         Left            =   10080
          TabIndex        =   122
          Top             =   510
          Width           =   2865
@@ -5019,9 +5028,9 @@ Private Const CarpetaIMG = "ImgFicFT"
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
-Private cadselect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
 Private cadNombreRPT As String 'Nombre del informe
 Private ConSubInforme As Boolean
@@ -5281,6 +5290,8 @@ Dim Sql As String
                 '[Monica]10/10/2018: solo en el caso de que no sea picassent se introduce el iban
                 If vParamAplic.Cooperativa <> 2 Then
                     Sql = Sql & "," & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
+                Else
+                    Sql = Sql & "," & ValorNulo
                 End If
                 Sql = Sql & ")"
             Else
@@ -5306,23 +5317,74 @@ Dim Sql As String
         
         Case "M" ' modificar
 
-            Sql = "update aripush.usuariospush set "
-            Sql = Sql & " nif = " & DBSet(Text1(2), "T")
-            Sql = Sql & ",nombre = " & DBSet(Text1(1).Text, "T")
-            Sql = Sql & ",email = " & DBSet(Text1(12).Text, "T")
-            Sql = Sql & ",direccion = " & DBSet(Text1(3), "T") 'dirsocio (direccion fiscal)
-            Sql = Sql & ",codpostal = " & DBSet(Text1(4), "T") 'codigo postal
-            Sql = Sql & ",poblacion = " & DBSet(Text1(5), "T") 'poblacion
-            Sql = Sql & ",provincia = " & DBSet(Text1(6), "T") 'provincia
-            Sql = Sql & ",telefono1 = " & DBSet(Text1(8), "T") 'telefono1
-            Sql = Sql & ",telefono2 = " & DBSet(Text1(9), "T") 'telefono2
-            '[Monica]10/10/2018: solo en el caso de no ser picassent se actualiza el iban
-            If vParamAplic.Cooperativa <> 2 Then
-                Sql = Sql & ",iban = " & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
+            '[Monica]18/01/2019: si no existe que lo de de alta
+            Sql = DevuelveDesdeBDNew(cAgro, "aripush.usuariospush", "ariagroid", "ariagroid", Text1(0).Text, "N")
+            If Sql = "" Then
+                Sql = "insert into aripush.usuariospush (nif,nombre,comunId,ariagroId,tiendaId,gasolineraId,telefoniaId,tratamientosId,login,"
+                Sql = Sql & "password,email,playerId,direccion,codPostal,poblacion,provincia,telefono1,telefono2,iban)"
+                Sql = Sql & " values ("
+                Sql = Sql & DBSet(Text1(2), "T") & "," ' nif
+                Sql = Sql & DBSet(Text1(1), "T") & "," 'nombre
+                Sql = Sql & DBSet(Text1(0), "N") & "," 'codsocio
+                Sql = Sql & DBSet(Text1(0), "N") & "," 'ariagroid
+                Sql = Sql & DBSet(Text1(0), "N") & "," 'tiendaid
+                Sql = Sql & DBSet(Text1(0), "N") & "," 'gasolineraid
+                Sql = Sql & DBSet(Text1(0), "N") & "," 'telefoniaid
+                Sql = Sql & DBSet(Text1(0), "N") & "," 'tratamientosid
+                Sql = Sql & DBSet(Text1(0), "N") & "," 'login
+                Sql = Sql & DBSet(Text1(2), "T") & "," 'password el nif
+                Sql = Sql & DBSet(Text1(12), "T") & "," 'email
+                Sql = Sql & ValorNulo & "," 'playerid
+                Sql = Sql & DBSet(Text1(3), "T") & "," 'dirsocio (direccion fiscal)
+                Sql = Sql & DBSet(Text1(4), "T") & "," 'codigo postal
+                Sql = Sql & DBSet(Text1(5), "T") & "," 'poblacion
+                Sql = Sql & DBSet(Text1(6), "T") & "," 'provincia
+                Sql = Sql & DBSet(Text1(8), "T") & "," 'telefono1
+                Sql = Sql & DBSet(Text1(9), "T")  'telefono2
+                '[Monica]10/10/2018: solo en el caso de que no sea picassent se introduce el iban
+                If vParamAplic.Cooperativa <> 2 Then
+                    Sql = Sql & "," & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
+                Else
+                    Sql = Sql & "," & ValorNulo
+                End If
+                Sql = Sql & ")"
+            Else
+                Sql = "update aripush.usuariospush set "
+                Sql = Sql & " nif = " & DBSet(Text1(2), "T")
+                Sql = Sql & ",nombre = " & DBSet(Text1(1).Text, "T")
+                Sql = Sql & ",email = " & DBSet(Text1(12).Text, "T")
+                Sql = Sql & ",direccion = " & DBSet(Text1(3), "T")  'dirsocio (direccion fiscal)
+                Sql = Sql & ",codpostal = " & DBSet(Text1(4), "T")  'codigo postal
+                Sql = Sql & ",poblacion = " & DBSet(Text1(5), "T")  'poblacion
+                Sql = Sql & ",provincia = " & DBSet(Text1(6), "T")  'provincia
+                Sql = Sql & ",telefono1 = " & DBSet(Text1(8), "T")  'telefono1
+                Sql = Sql & ",telefono2 = " & DBSet(Text1(9), "T")  'telefono2
+                '[Monica]10/10/2018: solo en el caso de no ser picassent se actualiza el iban
+                If vParamAplic.Cooperativa <> 2 Then
+                    Sql = Sql & ",iban = " & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
+                End If
+                Sql = Sql & " where ariagroId = " & DBSet(Text1(0).Text, "N")
             End If
-            Sql = Sql & " where ariagroId = " & DBSet(Text1(0).Text, "N")
-            
+
             conn.Execute Sql
+            
+'            Sql = "update aripush.usuariospush set "
+'            Sql = Sql & " nif = " & DBSet(Text1(2), "T")
+'            Sql = Sql & ",nombre = " & DBSet(Text1(1).Text, "T")
+'            Sql = Sql & ",email = " & DBSet(Text1(12).Text, "T")
+'            Sql = Sql & ",direccion = " & DBSet(Text1(3), "T") 'dirsocio (direccion fiscal)
+'            Sql = Sql & ",codpostal = " & DBSet(Text1(4), "T") 'codigo postal
+'            Sql = Sql & ",poblacion = " & DBSet(Text1(5), "T") 'poblacion
+'            Sql = Sql & ",provincia = " & DBSet(Text1(6), "T") 'provincia
+'            Sql = Sql & ",telefono1 = " & DBSet(Text1(8), "T") 'telefono1
+'            Sql = Sql & ",telefono2 = " & DBSet(Text1(9), "T") 'telefono2
+'            '[Monica]10/10/2018: solo en el caso de no ser picassent se actualiza el iban
+'            If vParamAplic.Cooperativa <> 2 Then
+'                Sql = Sql & ",iban = " & DBSet(Text1(27).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text & Text1(19).Text, "T")
+'            End If
+'            Sql = Sql & " where ariagroId = " & DBSet(Text1(0).Text, "N")
+'
+'            conn.Execute Sql
         
         Case "E" ' eliminar
     End Select
@@ -5496,7 +5558,7 @@ Dim nomDocu As String
             InicializarVbles
             
             'Añadir el parametro de Empresa
-            cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+            CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
             numParam = numParam + 1
             
             
@@ -5508,10 +5570,10 @@ Dim nomDocu As String
                 cadTitulo = "Documento Baja de Campos"
             End If
              
-            cadParam = cadParam & "pFecha=""" & lw1.SelectedItem.SubItems(1) & """|"
+            CadParam = CadParam & "pFecha=""" & lw1.SelectedItem.SubItems(1) & """|"
             numParam = numParam + 1
         
-            cadParam = cadParam & "pCausas=""" & lw1.SelectedItem.SubItems(3) & """|"
+            CadParam = CadParam & "pCausas=""" & lw1.SelectedItem.SubItems(3) & """|"
             numParam = numParam + 1
             
             If esAlta Then
@@ -5520,7 +5582,7 @@ Dim nomDocu As String
                 indRPT = 19 ' baja campos
             End If
             
-            If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
             
             cadNombreRPT = nomDocu
             
@@ -5829,7 +5891,7 @@ Dim b As Boolean
     '---------------------------------------------
     b = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = b
-    CmdAceptar.visible = b
+    cmdAceptar.visible = b
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -6077,71 +6139,71 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
 Dim Sql As String
-Dim tabla As String
+Dim Tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 0 'telefonos
-            tabla = "rsocios_telefonos"
+            Tabla = "rsocios_telefonos"
             Sql = "SELECT rsocios_telefonos.codsocio, rsocios_telefonos.idtelefono, rsocios_telefonos.nif, "
             Sql = Sql & " rsocios_telefonos.imei, rsocios_telefonos.codpostal, rsocios_telefonos.nombre, "
             Sql = Sql & " rsocios_telefonos.direccion, rsocios_telefonos.poblacion, rsocios_telefonos.provincia, "
             Sql = Sql & " rsocios_telefonos.telefono1, rsocios_telefonos.sim, rsocios_telefonos.mail, rsocios_telefonos.codbanco, "
             Sql = Sql & " rsocios_telefonos.codsucur, rsocios_telefonos.digcontr, rsocios_telefonos.cuentaba, "
             Sql = Sql & " rsocios_telefonos.observaciones,  rsocios_telefonos.inactivo "
-            Sql = Sql & " FROM " & tabla
+            Sql = Sql & " FROM " & Tabla
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab(True)
             Else
                 Sql = Sql & " WHERE codsocio = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".idtelefono "
+            Sql = Sql & " ORDER BY " & Tabla & ".idtelefono "
             
             
        Case 1 ' secciones
-            tabla = "rsocios_seccion"
+            Tabla = "rsocios_seccion"
              Sql = "SELECT rsocios_seccion.codsocio, rsocios_seccion.codsecci, rseccion.nomsecci, rsocios_seccion.fecalta, "
              Sql = Sql & " rsocios_seccion.fecbaja, rsocios_seccion.codmaccli, rsocios_seccion.codmacpro, rsocios_seccion.codiva "
-            Sql = Sql & " FROM " & tabla & " INNER JOIN rseccion ON rsocios_seccion.codsecci = rseccion.codsecci "
+            Sql = Sql & " FROM " & Tabla & " INNER JOIN rseccion ON rsocios_seccion.codsecci = rseccion.codsecci "
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab(True)
             Else
                 Sql = Sql & " WHERE codsocio = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".codsecci "
+            Sql = Sql & " ORDER BY " & Tabla & ".codsecci "
             
        Case 2 ' pozos
-            tabla = "rsocios_pozos"
+            Tabla = "rsocios_pozos"
             Sql = "SELECT rsocios_pozos.codsocio, rsocios_pozos.numfases, rsocios_pozos.acciones, rsocios_pozos.observac "
-            Sql = Sql & " FROM " & tabla
+            Sql = Sql & " FROM " & Tabla
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab(True)
             Else
                 Sql = Sql & " WHERE codsocio = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numfases "
+            Sql = Sql & " ORDER BY " & Tabla & ".numfases "
             
        Case 3 ' miembros de entidades
-            tabla = "rsocios_miembros"
+            Tabla = "rsocios_miembros"
             Sql = "SELECT rsocios_miembros.codsocio, rsocios_miembros.numlinea, rsocios_miembros.nifmiembro, rsocios_miembros.nommiembro, rsocios_miembros.votos, rsocios_miembros.capital "
-            Sql = Sql & " FROM " & tabla
+            Sql = Sql & " FROM " & Tabla
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab(True)
             Else
                 Sql = Sql & " WHERE codsocio = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
             
        Case 4 ' movimientos
-            tabla = "rsocios_movim"
+            Tabla = "rsocios_movim"
             Sql = "SELECT rsocios_movim.codsocio, rsocios_movim.numlinea, rsocios_movim.codcampo, rsocios_movim.supcoope, rsocios_movim.fecmovim, rsocios_movim.importe, rsocios_movim.causa, rsocios_movim.numerodoc "
-            Sql = Sql & " FROM " & tabla
+            Sql = Sql & " FROM " & Tabla
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab(True)
             Else
                 Sql = Sql & " WHERE codsocio = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
             
             
     End Select
@@ -6884,7 +6946,7 @@ Private Sub BotonBajaSocio()
     Text1(0).Text = Data1.Recordset!Codsocio
     
     frmListado.NumCod = Text1(0).Text
-    frmListado.Opcionlistado = 23
+    frmListado.OpcionListado = 23
     frmListado.Show vbModal
     
     TerminaBloquear
@@ -7710,7 +7772,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rsocios_miembros"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!NumLinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
                 
                 CadenaCambio = "DELETE FROM rsocios_miembros " & vWhere
                 '------------------------------------------------------------------------------
@@ -7728,7 +7790,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rsocios_movim"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!NumLinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
                 
                 CadenaCambio = "DELETE FROM rsocios_miembros " & vWhere
                 '------------------------------------------------------------------------------
@@ -8203,7 +8265,7 @@ Dim Nuevo As Boolean
             PonerFormatoEntero txtAux(Index)
             
         Case 16
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
     End Select
     
     ' ******************************************************************************
@@ -8851,7 +8913,7 @@ Dim nTabla As String
 Dim ConSubInforme As Boolean
 
     indRPT = 52 'Impresion de facturas de socios
-    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
     'Nombre fichero .rpt a Imprimir
     
     ConSubInforme = False
@@ -9016,7 +9078,7 @@ Dim cadena As String
             If Not vSeccion Is Nothing Then
                   txtAux2(0).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", txtAux1(Index).Text, "N")
             End If
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
 
     End Select
     
@@ -9075,7 +9137,7 @@ Dim cadena As String
             PonerFormatoDecimal txtAux3(Index), 10
         
         Case 3 'observaciones
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
 
     End Select
     
@@ -9688,19 +9750,19 @@ InicializarVbles
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
 '    cadparam = cadparam & "pSocio=" & Data1.Recordset!codsocio & "|"
 '    numParam = numParam + 1
 '
-    cadParam = cadParam & "Fecha=Date(""" & Text3(0).Text & """)|"
+    CadParam = CadParam & "Fecha=Date(""" & Text3(0).Text & """)|"
     numParam = numParam + 1
     
-    cadParam = cadParam & "pDetalleAlb=" & Check1.Value & "|"
+    CadParam = CadParam & "pDetalleAlb=" & Check1.Value & "|"
     numParam = numParam + 1
     
-    cadParam = cadParam & "pImpFactura=" & Check2.Value & "|"
+    CadParam = CadParam & "pImpFactura=" & Check2.Value & "|"
     numParam = numParam + 1
     
     If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
@@ -9735,7 +9797,7 @@ InicializarVbles
     End If
     indRPT = 40 'Impresion de Factura Socio
     ConSubInforme = True
-    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
       
     'Nombre fichero .rpt a Imprimir
     cadNombreRPT = nomDocu
@@ -9747,7 +9809,7 @@ End Sub
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -9762,8 +9824,8 @@ End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
-    cadselect = ""
-    cadParam = ""
+    cadSelect = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -10089,7 +10151,7 @@ Dim cadena As String
         
         Case 5 ' capital
             If PonerFormatoDecimal(txtAux4(Index), 1) Then
-                CmdAceptar.SetFocus
+                cmdAceptar.SetFocus
             End If
 
     End Select
