@@ -3027,9 +3027,9 @@ Dim HoraEnt As String
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
-Private cadselect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
 Private cadNombreRPT As String 'Nombre del informe
 
@@ -3193,7 +3193,7 @@ Private Sub BotonLiquidacion()
     Screen.MousePointer = vbHourglass
     
     frmListAnticipos.NumCod = Text1(0).Text
-    frmListAnticipos.Opcionlistado = 19
+    frmListAnticipos.OpcionListado = 19
     frmListAnticipos.Show vbModal
     
     Screen.MousePointer = vbDefault
@@ -4711,7 +4711,7 @@ Dim b As Boolean
     '---------------------------------------------
     b = (Modo <> 0 And Modo <> 2)
     cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    CmdAceptar.visible = b
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     BloquearImgFec Me, 0, Modo
@@ -4924,7 +4924,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -4932,7 +4932,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     End If
 End Sub
 
@@ -5255,7 +5255,7 @@ Private Sub PonerBotonCabecera(b As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
     On Error Resume Next
 
-    Me.cmdAceptar.visible = Not b
+    Me.CmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
     Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
@@ -5456,14 +5456,14 @@ Dim Sql As String
         Case 7 'peso neto
             If txtAux(Index) <> "" Then
                 If PonerFormatoEntero(txtAux(Index)) Then
-                    If vParamAplic.Cooperativa <> 18 Then cmdAceptar.SetFocus
+                    If vParamAplic.Cooperativa <> 18 Then CmdAceptar.SetFocus
                 End If
             End If
         
         Case 12 ' kilos transportados
             If txtAux(Index) <> "" Then
                 If PonerFormatoEntero(txtAux(Index)) Then
-                    If vParamAplic.Cooperativa = 18 Then cmdAceptar.SetFocus
+                    If vParamAplic.Cooperativa = 18 Then CmdAceptar.SetFocus
                 End If
             End If
     
@@ -5498,7 +5498,7 @@ Dim Sql As String
     
         Case 8 ' importe
             If txtAux(Index) <> "" Then
-                If PonerFormatoDecimal(txtAux(Index), 3) Then cmdAceptar.SetFocus
+                If PonerFormatoDecimal(txtAux(Index), 3) Then CmdAceptar.SetFocus
             End If
         
     
@@ -5765,9 +5765,9 @@ End Sub
 
 Private Sub BotonImprimir()
 Dim cadFormula As String
-Dim cadParam As String
+Dim CadParam As String
 Dim numParam As Byte
-Dim cadselect As String 'select para insertar en tabla temporal
+Dim cadSelect As String 'select para insertar en tabla temporal
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -5779,14 +5779,14 @@ Dim NroCopias As Integer
     End If
     
     cadFormula = ""
-    cadParam = ""
-    cadselect = ""
+    CadParam = ""
+    cadSelect = ""
     numParam = 0
     
     '===================================================
     '============ PARAMETROS ===========================
     indRPT = 22 'Impresion de Albaran de clasificacion
-    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
       
     'Nombre fichero .rpt a Imprimir
     frmImprimir.NombreRPT = nomDocu
@@ -5800,18 +5800,18 @@ Dim NroCopias As Integer
         devuelve = "{" & NombreTabla & ".numalbar}=" & Val(Text1(0).Text)
         If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
         devuelve = "numalbar = " & Val(Text1(0).Text)
-        If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
     End If
     
-    cadParam = cadParam & "pDuplicado=1|"
+    CadParam = CadParam & "pDuplicado=1|"
     numParam = numParam + 1
     
     
-    If Not HayRegParaInforme(NombreTabla, cadselect) Then Exit Sub
+    If Not HayRegParaInforme(NombreTabla, cadSelect) Then Exit Sub
      
     With frmImprimir
             .FormulaSeleccion = cadFormula
-            .OtrosParametros = cadParam
+            .OtrosParametros = CadParam
             .NumeroParametros = numParam
             .SoloImprimir = False
             .EnvioEMail = False
@@ -6268,60 +6268,6 @@ Dim vFact As Byte, vDocum As Byte
 
     b = CompForm2(Me, 2, nomframe) 'Comprovar formato datos ok
     If Not b Then Exit Function
-'
-'    ' *** si cal fer atres comprovacions a les llínies (en o sense tab) ***
-'    Select Case NumTabMto
-'        Case 0  'CUENTAS BANCARIAS
-'            SQL = "SELECT COUNT(ctaprpal) FROM cltebanc "
-'            SQL = SQL & ObtenerWhereCab(True) & " AND ctaprpal=1"
-'            If ModoLineas = 2 Then SQL = SQL & " AND numlinea<> " & AdoAux(NumTabMto).Recordset!numlinea
-'            Set RS = New ADODB.Recordset
-'            RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'            Cant = IIf(Not RS.EOF, RS.Fields(0).Value, 0)
-'
-'            RS.Close
-'            Set RS = Nothing
-''yo
-''            'no n'hi ha cap conter principal i ha seleccionat que no
-''            If (Cant = 0) And (cmbAux(10).ItemData(cmbAux(10).ListIndex) = 0) Then
-''                Mens = "Debe una haber una cuenta principal"
-''            ElseIf (cmbAux(10).ItemData(cmbAux(10).ListIndex) = 1) And (cmbAux(9).ItemData(cmbAux(9).ListIndex) = 0) Then
-''                Mens = "Debe seleccionar que esta cuenta está activa si desea que sea la principal"
-''            End If
-'
-''            'No puede haber más de una cuenta principal
-''            If cant > 0 And (cmbAux(10).ItemData(cmbAux(10).ListIndex) = 1) Then
-''                Mens = "No puede haber más de una cuenta principal."
-''            End If
-''yo
-''            'No pueden haber registros con el mismo: codbanco-codsucur-digcontr-ctabanc
-''            If Mens = "" Then
-''                SQL = "SELECT count(codclien) FROM cltebanc "
-''                SQL = SQL & " WHERE codclien=" & text1(0).Text & " AND codempre= " & vSesion.Empresa
-''                If ModoLineas = 2 Then SQL = SQL & " AND numlinea<> " & AdoAux(NumTabMto).Recordset!numlinea
-''                SQL = SQL & " AND codnacio=" & cmbAux(0).ItemData(cmbAux(0).ListIndex)
-''                SQL = SQL & " AND codbanco=" & txtaux(3).Text & " AND codsucur=" & txtaux(4).Text
-''                SQL = SQL & " AND digcontr='" & txtaux(5).Text & "' AND ctabanco='" & txtaux(6).Text & "'"
-''                Set RS = New ADODB.Recordset
-''                RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-''                Cant = IIf(Not RS.EOF, RS.Fields(0).Value, 0)
-''                If Cant > 0 Then
-''                    Mens = "Ya Existe la cuenta bancaria: " & cmbAux(0).List(cmbAux(0).ListIndex) & " - " & txtaux(3).Text & "-" & txtaux(4).Text & "-" & txtaux(5).Text & "-" & txtaux(6).Text
-''                End If
-''                RS.Close
-''                Set RS = Nothing
-''            End If
-''
-''            If Mens <> "" Then
-''                Screen.MousePointer = vbNormal
-''                MsgBox Mens, vbExclamation
-''                DatosOkLlin = False
-''                'PonerFoco txtAux(3)
-''                Exit Function
-''            End If
-''
-'    End Select
-'    ' ******************************************************************************
     DatosOkLlin = b
 
 EDatosOKLlin:
@@ -6730,7 +6676,7 @@ On Error GoTo eError
         InicializarVbles
             '========= PARAMETROS  =============================
         'Añadir el parametro de Empresa
-        cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+        CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
         numParam = numParam + 1
 
         If CargaInicialTabla(Me.CommonDialog1.FileName) Then
@@ -6786,7 +6732,7 @@ End Sub
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .Titulo = cadTitulo
@@ -6799,8 +6745,8 @@ End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
-    cadselect = ""
-    cadParam = ""
+    cadSelect = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -6811,7 +6757,7 @@ Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
-Dim Rs1 As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
 Dim Sql As String
 Dim SQL1 As String
@@ -6948,7 +6894,7 @@ Dim Sql As String
 Dim SQL1 As String
 
 Dim Mens As String
-Dim NumLinea As Long
+Dim numlinea As Long
 
 Dim vError As Boolean
 Dim vNota As Long
@@ -7003,7 +6949,7 @@ Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
-Dim Rs1 As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
 Dim Sql As String
 Dim SQL1 As String
@@ -7090,7 +7036,7 @@ Dim Sql As String
 Dim SQL1 As String
 
 Dim Mens As String
-Dim NumLinea As Long
+Dim numlinea As Long
 
 Dim vError As Boolean
 Dim vNota As Long
