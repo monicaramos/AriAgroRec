@@ -508,7 +508,6 @@ Begin VB.Form frmManSocios
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   3
       TabsPerRow      =   8
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -523,22 +522,37 @@ Begin VB.Form frmManSocios
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManSocios.frx":000C
-      Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame7"
-      Tab(0).Control(1)=   "Frame6"
-      Tab(0).Control(2)=   "Text1(7)"
-      Tab(0).Control(3)=   "Frame4"
-      Tab(0).Control(4)=   "Text1(12)"
-      Tab(0).Control(5)=   "FrameDatosDtoAdministracion"
-      Tab(0).Control(6)=   "Text1(20)"
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "Label5"
+      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).Control(1)=   "Label29"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "imgZoom(0)"
+      Tab(0).Control(2).Enabled=   0   'False
+      Tab(0).Control(3)=   "imgMail(0)"
+      Tab(0).Control(3).Enabled=   0   'False
+      Tab(0).Control(4)=   "Label19"
+      Tab(0).Control(4).Enabled=   0   'False
+      Tab(0).Control(5)=   "imgFec(2)"
+      Tab(0).Control(5).Enabled=   0   'False
+      Tab(0).Control(6)=   "Label10"
+      Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "Text1(2)"
-      Tab(0).Control(8)=   "Label10"
-      Tab(0).Control(9)=   "imgFec(2)"
-      Tab(0).Control(10)=   "Label19"
-      Tab(0).Control(11)=   "imgMail(0)"
-      Tab(0).Control(12)=   "imgZoom(0)"
-      Tab(0).Control(13)=   "Label29"
-      Tab(0).Control(14)=   "Label5"
+      Tab(0).Control(7).Enabled=   0   'False
+      Tab(0).Control(8)=   "Text1(20)"
+      Tab(0).Control(8).Enabled=   0   'False
+      Tab(0).Control(9)=   "FrameDatosDtoAdministracion"
+      Tab(0).Control(9).Enabled=   0   'False
+      Tab(0).Control(10)=   "Text1(12)"
+      Tab(0).Control(10).Enabled=   0   'False
+      Tab(0).Control(11)=   "Frame4"
+      Tab(0).Control(11).Enabled=   0   'False
+      Tab(0).Control(12)=   "Text1(7)"
+      Tab(0).Control(12).Enabled=   0   'False
+      Tab(0).Control(13)=   "Frame6"
+      Tab(0).Control(13).Enabled=   0   'False
+      Tab(0).Control(14)=   "Frame7"
+      Tab(0).Control(14).Enabled=   0   'False
       Tab(0).ControlCount=   15
       TabCaption(1)   =   "Secciones"
       TabPicture(1)   =   "frmManSocios.frx":0028
@@ -552,27 +566,17 @@ Begin VB.Form frmManSocios
       Tab(2).ControlCount=   1
       TabCaption(3)   =   "Documentos"
       TabPicture(3)   =   "frmManSocios.frx":0060
-      Tab(3).ControlEnabled=   -1  'True
-      Tab(3).Control(0)=   "Label16"
-      Tab(3).Control(0).Enabled=   0   'False
-      Tab(3).Control(1)=   "Label17"
-      Tab(3).Control(1).Enabled=   0   'False
-      Tab(3).Control(2)=   "imgFec(3)"
-      Tab(3).Control(2).Enabled=   0   'False
-      Tab(3).Control(3)=   "Toolbar4"
-      Tab(3).Control(3).Enabled=   0   'False
-      Tab(3).Control(4)=   "Frame5"
-      Tab(3).Control(4).Enabled=   0   'False
-      Tab(3).Control(5)=   "Toolbar3"
-      Tab(3).Control(5).Enabled=   0   'False
-      Tab(3).Control(6)=   "lw1"
-      Tab(3).Control(6).Enabled=   0   'False
-      Tab(3).Control(7)=   "Toolbar2"
-      Tab(3).Control(7).Enabled=   0   'False
-      Tab(3).Control(8)=   "Text3(0)"
-      Tab(3).Control(8).Enabled=   0   'False
-      Tab(3).Control(9)=   "Frame8"
-      Tab(3).Control(9).Enabled=   0   'False
+      Tab(3).ControlEnabled=   0   'False
+      Tab(3).Control(0)=   "Frame8"
+      Tab(3).Control(1)=   "Text3(0)"
+      Tab(3).Control(2)=   "Toolbar2"
+      Tab(3).Control(3)=   "lw1"
+      Tab(3).Control(4)=   "Toolbar3"
+      Tab(3).Control(5)=   "Frame5"
+      Tab(3).Control(6)=   "Toolbar4"
+      Tab(3).Control(7)=   "imgFec(3)"
+      Tab(3).Control(8)=   "Label17"
+      Tab(3).Control(9)=   "Label16"
       Tab(3).ControlCount=   10
       TabCaption(4)   =   "Pozos"
       TabPicture(4)   =   "frmManSocios.frx":007C
@@ -1300,7 +1304,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   4395
-         Left            =   9900
+         Left            =   -65100
          TabIndex        =   147
          Top             =   405
          Visible         =   0   'False
@@ -1386,7 +1390,7 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1980
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   141
          Top             =   1095
          Width           =   7245
@@ -1542,7 +1546,7 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1980
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   137
          Top             =   3270
          Width           =   7245
@@ -1975,7 +1979,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   11340
+         Left            =   -63660
          TabIndex        =   123
          Text            =   "Text4"
          Top             =   1050
@@ -1993,7 +1997,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   7
-         Left            =   -69195
+         Left            =   5805
          MaxLength       =   10
          TabIndex        =   4
          Tag             =   "Fecha Nacimiento|F|S|||rsocios|fechanac|dd/mm/yyyy||"
@@ -2639,7 +2643,7 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1485
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   94
          Top             =   5385
          Width           =   7245
@@ -2803,7 +2807,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   12
-         Left            =   -73605
+         Left            =   1395
          MaxLength       =   50
          TabIndex        =   17
          Tag             =   "E-mail|T|S|||rsocios|maisocio|||"
@@ -3546,7 +3550,7 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   6405
-         Left            =   -67440
+         Left            =   7560
          TabIndex        =   74
          Top             =   450
          Width           =   8100
@@ -4374,7 +4378,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   540
          Index           =   20
-         Left            =   -67275
+         Left            =   7725
          MaxLength       =   250
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -4395,7 +4399,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   -73275
+         Left            =   1725
          MaxLength       =   15
          TabIndex        =   3
          Tag             =   "NIF / CIF|T|N|||rsocios|nifsocio|||"
@@ -4404,7 +4408,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   4350
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   120
          Top             =   450
          Width           =   615
@@ -4472,7 +4476,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.ListView lw1 
          Height          =   3855
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   121
          Top             =   420
          Width           =   8745
@@ -4502,7 +4506,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.Toolbar Toolbar3 
          Height          =   2370
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   127
          Top             =   480
          Visible         =   0   'False
@@ -4560,7 +4564,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   1005
-         Left            =   10020
+         Left            =   -64980
          TabIndex        =   130
          Top             =   1440
          Width           =   2760
@@ -4601,7 +4605,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.Toolbar Toolbar4 
          Height          =   390
-         Left            =   10140
+         Left            =   -64860
          TabIndex        =   129
          Top             =   1590
          Visible         =   0   'False
@@ -4626,7 +4630,7 @@ Begin VB.Form frmManSocios
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   3
-         Left            =   10860
+         Left            =   -64140
          Picture         =   "frmManSocios.frx":1C77
          ToolTipText     =   "Buscar fecha"
          Top             =   1050
@@ -4644,7 +4648,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   10140
+         Left            =   -64860
          TabIndex        =   126
          Top             =   1050
          Width           =   735
@@ -4662,7 +4666,7 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   300
-         Left            =   10080
+         Left            =   -64920
          TabIndex        =   122
          Top             =   510
          Width           =   2865
@@ -4679,7 +4683,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -70785
+         Left            =   4215
          TabIndex        =   104
          Top             =   660
          Width           =   1275
@@ -4687,7 +4691,7 @@ Begin VB.Form frmManSocios
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   2
-         Left            =   -69495
+         Left            =   5505
          Picture         =   "frmManSocios.frx":1D02
          ToolTipText     =   "Buscar fecha"
          Top             =   660
@@ -4705,7 +4709,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -74625
+         Left            =   375
          TabIndex        =   93
          Top             =   7170
          Width           =   705
@@ -4713,14 +4717,14 @@ Begin VB.Form frmManSocios
       Begin VB.Image imgMail 
          Height          =   240
          Index           =   0
-         Left            =   -73890
+         Left            =   1110
          Top             =   7170
          Width           =   240
       End
       Begin VB.Image imgZoom 
          Height          =   240
          Index           =   0
-         Left            =   -65655
+         Left            =   9345
          Tag             =   "-1"
          ToolTipText     =   "Zoom descripción"
          Top             =   6900
@@ -4738,7 +4742,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -67275
+         Left            =   7725
          TabIndex        =   73
          Top             =   6870
          Width           =   1515
@@ -4755,7 +4759,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -74610
+         Left            =   390
          TabIndex        =   71
          Top             =   660
          Width           =   735
@@ -5891,7 +5895,7 @@ Dim b As Boolean
     '---------------------------------------------
     b = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    CmdAceptar.visible = b
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -8265,7 +8269,7 @@ Dim Nuevo As Boolean
             PonerFormatoEntero txtAux(Index)
             
         Case 16
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
     End Select
     
     ' ******************************************************************************
@@ -9078,7 +9082,7 @@ Dim cadena As String
             If Not vSeccion Is Nothing Then
                   txtAux2(0).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", txtAux1(Index).Text, "N")
             End If
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
 
     End Select
     
@@ -9137,7 +9141,7 @@ Dim cadena As String
             PonerFormatoDecimal txtAux3(Index), 10
         
         Case 3 'observaciones
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
 
     End Select
     
@@ -10151,7 +10155,7 @@ Dim cadena As String
         
         Case 5 ' capital
             If PonerFormatoDecimal(txtAux4(Index), 1) Then
-                cmdAceptar.SetFocus
+                CmdAceptar.SetFocus
             End If
 
     End Select

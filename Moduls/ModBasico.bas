@@ -18,7 +18,7 @@ Public Sub AyudaAlmacenCom(frmCom As frmBasico2, Optional CodActual As String, O
     
     frmCom.pConn = cAgro
     
-    frmCom.tabla = "salmpr"
+    frmCom.Tabla = "salmpr"
     frmCom.CampoCP = "codalmac"
     frmCom.TipoCP = "N"
     frmCom.Caption = "Almacenes Propios de Comercial"
@@ -50,7 +50,7 @@ Public Sub AyudaBancosCom(frmCom As frmBasico2, Optional CodActual As String, Op
 
     frmCom.pConn = cAgro
 
-    frmCom.tabla = "banpropi"
+    frmCom.Tabla = "banpropi"
     frmCom.CampoCP = "codbanpr"
     frmCom.TipoCP = "N"
     frmCom.Caption = "Bancos Propios de Comercial"
@@ -90,7 +90,7 @@ Public Sub AyudaClasesCom(frmCom As frmBasico2, Optional CodActual As String, Op
     
     frmCom.pConn = cAgro
 
-    frmCom.tabla = "clases"
+    frmCom.Tabla = "clases"
     frmCom.CampoCP = "codclase"
     frmCom.TipoCP = "N"
     frmCom.Caption = "Clases de Comercial"
@@ -122,7 +122,7 @@ Public Sub AyudaGrupoCom(frmCom As frmBasico2, Optional CodActual As String, Opt
     
     frmCom.pConn = cAgro
     
-    frmCom.tabla = "grupopro"
+    frmCom.Tabla = "grupopro"
     frmCom.CampoCP = "codgrupo"
     frmCom.TipoCP = "N"
     frmCom.Caption = "Grupos de Producto de Comercial"
@@ -154,7 +154,7 @@ Public Sub AyudaHorarioCom(frmCom As frmBasico2, Optional CodActual As String, O
     
     frmCom.pConn = cAgro
     
-    frmCom.tabla = "cchorario"
+    frmCom.Tabla = "cchorario"
     frmCom.CampoCP = "codhorario"
     frmCom.TipoCP = "N"
     frmCom.Caption = "Horarios Costes de Comercial"
@@ -186,7 +186,7 @@ Public Sub AyudaClienteAriges(frmBas As frmBasico2, Optional CodActual As String
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = vParamAplic.BDAriges & ".sclien"
+    frmBas.Tabla = vParamAplic.BDAriges & ".sclien"
     frmBas.CampoCP = "codclien"
     frmBas.TipoCP = "N"
     'frmBas.Report = "rManGlobalGap.rpt"
@@ -222,7 +222,7 @@ Public Sub AyudaClienteCom(frmBas As frmBasico2, Optional CodActual As String, O
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "clientes"
+    frmBas.Tabla = "clientes"
     frmBas.CampoCP = "codclien"
     frmBas.TipoCP = "N"
     'frmBas.Report = "rManGlobalGap.rpt"
@@ -264,7 +264,7 @@ Public Sub AyudaVariedad(frmBas As frmBasico2, Optional CodActual As String, Opt
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "variedades"
+    frmBas.Tabla = "variedades"
     frmBas.CampoCP = "codvarie"
     frmBas.TipoCP = "N"
     frmBas.Caption = "Variedades"
@@ -308,7 +308,7 @@ Public Sub AyudaVariedadPrevio(frmBas As frmBasico2, Optional CodActual As Strin
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "variedades"
+    frmBas.Tabla = "variedades"
     frmBas.CampoCP = "codvarie"
     frmBas.TipoCP = "N"
     frmBas.Caption = "Variedades"
@@ -347,7 +347,7 @@ Public Sub AyudaCuadrillas(frmBas As frmBasico2, Optional CodActual As String, O
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "rcuadrilla"
+    frmBas.Tabla = "rcuadrilla"
     frmBas.CampoCP = "codcuadrilla"
     frmBas.TipoCP = "N"
     frmBas.Caption = "Cuadrillas"
@@ -376,7 +376,7 @@ Public Sub AyudaConceptos(frmBas As frmBasico2, Optional CodActual As String)
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "rriego"
+    frmBas.Tabla = "rriego"
     frmBas.CampoCP = "codriego"
     frmBas.TipoCP = "N"
     frmBas.Caption = "Conceptos"
@@ -409,7 +409,7 @@ Public Sub AyudaFamiliasADV(frmCom As frmBasico2, Optional CodActual As String, 
     
     frmCom.pConn = cAgro
     
-    frmCom.tabla = "advfamia"
+    frmCom.Tabla = "advfamia"
     frmCom.CampoCP = "codfamia"
     frmCom.TipoCP = "N"
     frmCom.Caption = "Familias de Artículos ADV"
@@ -441,7 +441,7 @@ Public Sub AyudaTiposDocumentos(frmBas As frmBasico2, Optional CodActual As Stri
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "scryst"
+    frmBas.Tabla = "scryst"
     frmBas.CampoCP = "codcryst"
     frmBas.TipoCP = "N"
     frmBas.Caption = "Tipos de Documentos"
@@ -474,7 +474,7 @@ Public Sub AyudaTUnidadesCom(frmCom As frmBasico2, Optional CodActual As String,
     
     frmCom.pConn = cAgro
     
-    frmCom.tabla = "sunida"
+    frmCom.Tabla = "sunida"
     frmCom.CampoCP = "codunida"
     frmCom.TipoCP = "N"
     frmCom.Caption = "Tipos de Unidad de Comercial"
@@ -504,7 +504,7 @@ Public Sub AyudaProveedoresCom(frmCom As frmBasico2, Optional CodActual As Strin
 
     frmCom.pConn = cAgro
 
-    frmCom.tabla = "proveedor"
+    frmCom.Tabla = "proveedor"
     frmCom.CampoCP = "codprove"
     frmCom.TipoCP = "N"
     frmCom.Caption = "Proveedores de Comercial"
@@ -537,7 +537,7 @@ Public Sub AyudaProductosCom(frmCom As frmBasico2, Optional CodActual As String,
     frmCom.pConn = cAgro
     
     
-    frmCom.tabla = "productos"
+    frmCom.Tabla = "productos"
     frmCom.CampoCP = "codprodu"
     frmCom.TipoCP = "N"
     frmCom.Caption = "Productos de Comercial"
@@ -569,7 +569,7 @@ Public Sub AyudaForfaitsCom(frmCom As frmBasico2, Optional CodActual As String, 
     
     frmCom.pConn = cAgro
 
-    frmCom.tabla = "forfaits"
+    frmCom.Tabla = "forfaits"
     frmCom.CampoCP = "codforfait"
     frmCom.TipoCP = "T"
     frmCom.Caption = "Forfaits de Comercial"
@@ -602,7 +602,7 @@ Public Sub AyudaFPagoCom(frmCom As frmBasico2, Optional CodActual As String, Opt
     
     frmCom.pConn = cAgro
     
-    frmCom.tabla = "forpago"
+    frmCom.Tabla = "forpago"
     frmCom.CampoCP = "codforpa"
     frmCom.TipoCP = "N"
     frmCom.Caption = "Formas Pago de Comercial"
@@ -634,7 +634,7 @@ Public Sub AyudaFamiliasCom(frmCom As frmBasico2, Optional CodActual As String, 
     
     frmCom.pConn = cAgro
     
-    frmCom.tabla = "sfamia"
+    frmCom.Tabla = "sfamia"
     frmCom.CampoCP = "codfamia"
     frmCom.TipoCP = "N"
     frmCom.Caption = "Familias de Comercial"
@@ -677,7 +677,7 @@ Public Sub AyudaFrasTerceros(frmBas As frmBasico2, Optional CodActual As String,
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "rcafter"
+    frmBas.Tabla = "rcafter"
     frmBas.TipoCP = "T"
     frmBas.CampoCP = "numfactu"
     'frmBas.Report = "rManGlobalGap.rpt"
@@ -727,7 +727,7 @@ Public Sub AyudaPartesCampo(frmBas As frmBasico2, Optional CodActual As String, 
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "(rpartes INNER JOIN rcuadrilla ON rpartes.codcuadrilla=rcuadrilla.codcuadrilla) " & _
+    frmBas.Tabla = "(rpartes INNER JOIN rcuadrilla ON rpartes.codcuadrilla=rcuadrilla.codcuadrilla) " & _
                             " INNER JOIN rcapataz ON rcuadrilla.codcapat=rcapataz.codcapat"
     frmBas.CampoCP = "nroparte"
     frmBas.TipoCP = "N"
@@ -776,7 +776,7 @@ Public Sub AyudaFVarClientes(frmBas As frmBasico2, Optional CodActual As String,
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "fvarcabfact inner join rseccion"
+    frmBas.Tabla = "fvarcabfact inner join rseccion"
     frmBas.CampoCP = "codclien"
     frmBas.TipoCP = "N"
     'frmBas.Report = "rManGlobalGap.rpt"
@@ -825,7 +825,7 @@ Public Sub AyudaFVarProveedores(frmBas As frmBasico2, Optional CodActual As Stri
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "(fvarcabfactpro inner join rseccion)"
+    frmBas.Tabla = "(fvarcabfactpro inner join rseccion)"
     frmBas.CampoCP = "codsecci"
     frmBas.TipoCP = "N"
     'frmBas.Report = "rManGlobalGap.rpt"
@@ -857,7 +857,7 @@ Public Sub AyudaGlobalGap(frmBas As frmBasico2, Optional CodActual As String, Op
     frmBas.Maxlen2 = 40
     frmBas.Maxlen3 = 0
     
-    frmBas.tabla = "rglobalgap"
+    frmBas.Tabla = "rglobalgap"
     frmBas.CampoCP = "codigo"
     frmBas.TipoCP = "T"
     frmBas.Report = "rManGlobalGap.rpt"
@@ -890,7 +890,7 @@ Public Sub AyudaIncidenciasOrdenesRecogida(frmBas As frmBasico2, Optional CodAct
     frmBas.pConn = cAgro
     
     
-    frmBas.tabla = "rplagasaux"
+    frmBas.Tabla = "rplagasaux"
     frmBas.CampoCP = "idplaga"
     frmBas.TipoCP = "N"
     frmBas.Caption = "Incidencias Ordenes Recogida"
@@ -935,7 +935,7 @@ Public Sub AyudaControlDestrio(frmBas As frmBasico2, Optional CodActual As Strin
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "(rcontrol inner join rsocios on rcontrol.codsocio = rsocios.codsocio) inner join variedades on rcontrol.codvarie = variedades.codvarie"
+    frmBas.Tabla = "(rcontrol inner join rsocios on rcontrol.codsocio = rsocios.codsocio) inner join variedades on rcontrol.codvarie = variedades.codvarie"
     frmBas.CampoCP = "rcontrol.codsocio"
     frmBas.TipoCP = "N"
     'frmBas.Report = "rManGlobalGap.rpt"
@@ -984,7 +984,7 @@ Public Sub AyudaVtaFruta(frmBas As frmBasico2, Optional CodActual As String, Opt
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "(vtafrutacab LEFT JOIN clientes ON vtafrutacab.codclien=clientes.codclien) left join rsocios On vtafrutacab.codsocio = rsocios.codsocio "
+    frmBas.Tabla = "(vtafrutacab LEFT JOIN clientes ON vtafrutacab.codclien=clientes.codclien) left join rsocios On vtafrutacab.codsocio = rsocios.codsocio "
     frmBas.CampoCP = "numalbar"
     frmBas.TipoCP = "N"
     'frmBas.Report = "rManGlobalGap.rpt"
@@ -1019,7 +1019,7 @@ Public Sub AyudaBonificaciones(frmCom As frmBasico2, Optional CodActual As Strin
     
     frmCom.pConn = cAgro
     
-    frmCom.tabla = "rbonifica"
+    frmCom.Tabla = "rbonifica"
     frmCom.CampoCP = "codvarie"
     frmCom.TipoCP = "N"
     frmCom.Caption = "Bonificaciones"
@@ -1064,7 +1064,7 @@ Public Sub AyudaFrasTransporte(frmBas As frmBasico2, Optional CodActual As Strin
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "rfacttra inner join rtransporte"
+    frmBas.Tabla = "rfacttra inner join rtransporte"
     frmBas.CampoCP = "numfactu"
     frmBas.TipoCP = "N"
     'frmBas.Report = "rManGlobalGap.rpt"
@@ -1097,7 +1097,7 @@ Public Sub AyudaPueblos(frmBas As frmBasico2, Optional CodActual As String)
     
     frmBas.pConn = cAgro
     
-    frmBas.tabla = "rpueblos"
+    frmBas.Tabla = "rpueblos"
     frmBas.CampoCP = "codpobla"
     frmBas.TipoCP = "T"
     frmBas.Caption = "Pueblos"
@@ -1120,6 +1120,51 @@ Public Sub AyudaPueblos(frmBas As frmBasico2, Optional CodActual As String)
 
 End Sub
 
+Public Sub AyudaFrasSocios(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|905|;S|txtAux(1)|T|Seccion|2795|;S|txtAux(2)|T|Tipo|800|;S|txtAux(3)|T|Factura|1000|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & "S|txtAux(4)|T|Fecha|1500|;S|txtAux(5)|T|Socio|1000|;S|txtAux(6)|T|Cliente|1000|;"
+    
+    frmBas.CadenaConsulta = "SELECT stipom.nomtipom, rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu, rfactsoc.codsocio, rsocios.nomsocio "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM (rfactsoc inner join rsocios on rfactsoc.codsocio = rsocios.codsocio) left join ususarios.stipom on rfactsoc.codtipom = stipom.codtipom "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Seccion|N|N|0|999|fvarcabfact|codsecci|000||"
+    frmBas.Tag2 = "Nombre|T|N|||clientes|nomclien|||"
+    frmBas.Tag3 = "Tipo Movimiento|T|N|||fvarcabfact|codtipom||S|"
+    frmBas.Tag4 = "Nº de Factura|N|S|0|9999999|fvarcabfact|numfactu|0000000|S|"
+    frmBas.Tag5 = "Fecha Factura|F|N|||fvarcabfact|fecfactu|dd/mm/yyyy|S|"
+    frmBas.Tag6 = "Cod.Socio|N|S|||fvarcabfact|codsocio|000000||"
+    frmBas.Tag7 = "Cod.Cliente|N|S|||fvarcabfact|codclien|000000||"
+    frmBas.Maxlen1 = 3
+    frmBas.Maxlen2 = 40
+    frmBas.Maxlen3 = 3
+    frmBas.Maxlen4 = 7
+    frmBas.Maxlen5 = 10
+    frmBas.Maxlen6 = 6
+    frmBas.Maxlen7 = 6
+    
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.Tabla = "fvarcabfact inner join rseccion"
+    frmBas.CampoCP = "codclien"
+    frmBas.TipoCP = "N"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Facturas Varias"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|2|3|4|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 2000
+    
+    frmBas.Show vbModal
+    
+    
+End Sub
 
 
 
@@ -1127,7 +1172,7 @@ Private Sub Redimensiona(frmBas As frmBasico2, Cant As Integer)
     frmBas.Width = frmBas.Width + Cant
     frmBas.DataGrid1.Width = frmBas.DataGrid1.Width + Cant
     frmBas.CmdAceptar.Left = frmBas.CmdAceptar.Left + Cant
-    frmBas.CmdCancelar.Left = frmBas.CmdCancelar.Left + Cant
+    frmBas.cmdCancelar.Left = frmBas.cmdCancelar.Left + Cant
     frmBas.cmdRegresar.Left = frmBas.cmdRegresar.Left + Cant
 
 End Sub

@@ -5636,6 +5636,15 @@ Dim Desc As String, devuelve As String
         End If
     End If
     Screen.MousePointer = vbDefault
+    
+    
+'    Set frmFac = New frmBasico2
+'
+'    AyudaFacturasSocio frmFac
+'
+'    Set frmFac = Nothing
+    
+    
 End Sub
 
 
