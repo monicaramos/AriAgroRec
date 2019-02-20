@@ -30,8 +30,48 @@ Begin VB.Form frmBasico2
          Strikethrough   =   0   'False
       EndProperty
       Height          =   330
+      Index           =   8
+      Left            =   7110
+      MaxLength       =   30
+      TabIndex        =   16
+      Top             =   4905
+      Width           =   675
+   End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
+      Index           =   7
+      Left            =   6390
+      MaxLength       =   30
+      TabIndex        =   15
+      Top             =   4905
+      Width           =   675
+   End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   6
-      Left            =   6345
+      Left            =   5625
       MaxLength       =   30
       TabIndex        =   14
       Top             =   4905
@@ -51,7 +91,7 @@ Begin VB.Form frmBasico2
       EndProperty
       Height          =   330
       Index           =   5
-      Left            =   5580
+      Left            =   4860
       MaxLength       =   30
       TabIndex        =   13
       Top             =   4905
@@ -71,7 +111,7 @@ Begin VB.Form frmBasico2
       EndProperty
       Height          =   330
       Index           =   4
-      Left            =   4770
+      Left            =   4095
       MaxLength       =   30
       TabIndex        =   12
       Top             =   4905
@@ -91,7 +131,7 @@ Begin VB.Form frmBasico2
       EndProperty
       Height          =   330
       Index           =   3
-      Left            =   3870
+      Left            =   3195
       MaxLength       =   30
       TabIndex        =   11
       Top             =   4905
@@ -116,7 +156,7 @@ Begin VB.Form frmBasico2
       TabIndex        =   2
       Tag             =   "Descripción|T|N|||inciden|nomincid|||"
       Top             =   4920
-      Width           =   1395
+      Width           =   765
    End
    Begin VB.Frame FrameBotonGnral 
       Enabled         =   0   'False
@@ -500,6 +540,8 @@ Public Tag4 As String
 Public Tag5 As String
 Public Tag6 As String
 Public Tag7 As String
+Public Tag8 As String
+Public Tag9 As String
 
 Public Maxlen1 As Integer
 Public Maxlen2 As Integer
@@ -508,6 +550,8 @@ Public Maxlen4 As Integer
 Public Maxlen5 As Integer
 Public Maxlen6 As Integer
 Public Maxlen7 As Integer
+Public Maxlen8 As Integer
+Public Maxlen9 As Integer
 
 Public CadenaTots As String
 Public tabla As String
@@ -515,7 +559,7 @@ Public CampoCP As String
 Public TipoCP As String
 Public Report As String
 
-Private CadB As String
+Private cadB As String
 
 Dim CampoOrden As String
 Dim TipoOrden As String
@@ -593,7 +637,7 @@ Private Sub BotonAnyadir()
     Dim anc As Single
     
     CargaGrid 'primer de tot carregue tot el grid
-    CadB = ""
+    cadB = ""
     '******************** canviar taula i camp **************************
     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
         NumF = NuevoCodigo
@@ -618,7 +662,7 @@ Private Sub BotonAnyadir()
 End Sub
 
 Private Sub BotonVerTodos()
-    CadB = ""
+    cadB = ""
     CargaGrid ""
     PonerModo 2
 End Sub
@@ -631,7 +675,7 @@ Private Sub BotonBuscar()
     For i = 0 To txtAux.Count - 1
         txtAux(i).Text = ""
     Next i
-    LLamaLineas DataGrid1.Top + 230, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
@@ -694,7 +738,7 @@ Dim temp As Boolean
         NumRegElim = adodc1.Recordset.AbsolutePosition
         Sql = "Delete from " & tabla & " where " & CampoCP & "=" & adodc1.Recordset.Fields(0).Value
         conn.Execute Sql
-        CargaGrid CadB
+        CargaGrid cadB
         PonerModoOpcionesMenu
         adodc1.Recordset.Cancel
     End If
@@ -719,9 +763,9 @@ Private Sub cmdAceptar_Click()
 
     Select Case Modo
         Case 1 'BUSQUEDA
-            CadB = ObtenerBusqueda(Me)
-            If CadB <> "" Then
-                CargaGrid CadB
+            cadB = ObtenerBusqueda(Me)
+            If cadB <> "" Then
+                CargaGrid cadB
                 PonerModo 2
                 PonerFocoGrid Me.DataGrid1
             End If
@@ -739,7 +783,7 @@ Private Sub cmdAceptar_Click()
                     Else
                         BotonAnyadir
                     End If
-                    CadB = ""
+                    cadB = ""
                 End If
             End If
             
@@ -749,7 +793,7 @@ Private Sub cmdAceptar_Click()
                     TerminaBloquear
                     i = adodc1.Recordset.Fields(0)
                     PonerModo 2
-                    CargaGrid CadB
+                    CargaGrid cadB
 
                     adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & DBSet(i, RecuperaValor(Tag1, 2)))
                     PonerFocoGrid Me.DataGrid1
@@ -763,7 +807,7 @@ Private Sub cmdCancelar_Click()
     
     Select Case Modo
         Case 1 'búsqueda
-            CargaGrid CadB
+            CargaGrid cadB
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
             'CargaGrid
@@ -817,7 +861,7 @@ Dim Cad As String
 
     If adodc1.Recordset Is Nothing Then Exit Sub
     If adodc1.Recordset.EOF Then Exit Sub
-    If ColIndex <= 6 Then
+    If ColIndex <= 8 Then
         Me.Refresh
         DoEvents
         Screen.MousePointer = vbHourglass
@@ -835,6 +879,10 @@ Dim Cad As String
             Case 5
                 CampoOrden = RecuperaValor(txtAux(5).Tag, 7)
             Case 6
+                CampoOrden = RecuperaValor(txtAux(6).Tag, 7)
+            Case 7
+                CampoOrden = RecuperaValor(txtAux(6).Tag, 7)
+            Case 8
                 CampoOrden = RecuperaValor(txtAux(6).Tag, 7)
         End Select
         
@@ -898,6 +946,8 @@ Private Sub Form_Load()
     txtAux(4).Tag = Tag5
     txtAux(5).Tag = Tag6
     txtAux(6).Tag = Tag7
+    txtAux(7).Tag = Tag8
+    txtAux(8).Tag = Tag9
     
     txtAux(0).MaxLength = Maxlen1
     txtAux(1).MaxLength = Maxlen2
@@ -906,11 +956,13 @@ Private Sub Form_Load()
     txtAux(4).MaxLength = Maxlen5
     txtAux(5).MaxLength = Maxlen6
     txtAux(6).MaxLength = Maxlen7
+    txtAux(7).MaxLength = Maxlen8
+    txtAux(8).MaxLength = Maxlen9
     
     CampoOrden = CampoCP
     TipoOrden = "ASC"
     
-    CadB = ""
+    cadB = ""
     CargaGrid
     
     Set vTag1 = New CTag
@@ -1106,7 +1158,7 @@ Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
         cadReg = PonerContRegistros(Me.adodc1)
-        If CadB = "" Then
+        If cadB = "" Then
             lblIndicador.Caption = cadReg
         Else
             lblIndicador.Caption = "BUSQUEDA: " & cadReg

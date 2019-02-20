@@ -2741,7 +2741,7 @@ Begin VB.Form frmManFactSocios
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   120
+         Left            =   135
          Style           =   2  'Dropdown List
          TabIndex        =   0
          Top             =   360
@@ -4195,6 +4195,10 @@ Attribute frmList.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes 'para asignacion de albaranes
 Attribute frmMens.VB_VarHelpID = -1
 
+Private WithEvents frmFac As frmBasico2
+Attribute frmFac.VB_VarHelpID = -1
+
+
 Private Modo As Byte
 '-----------------------------
 'Se distinguen varios modos
@@ -4999,6 +5003,25 @@ Dim i As Integer
 End Sub
 
 
+Private Sub frmFac_DatoSeleccionado(CadenaSeleccion As String)
+Dim CadB As String
+
+    If CadenaSeleccion <> "" Then
+        Text1(12).Text = RecuperaValor(CadenaSeleccion, 1) 'codtipom
+        Text1(0).Text = RecuperaValor(CadenaSeleccion, 2) 'numfactu
+        Text1(1).Text = RecuperaValor(CadenaSeleccion, 3) 'fecfactu
+        
+        CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+    
+        If CadB <> "" Then
+            'Se muestran en el mismo form
+            CadenaConsulta = "select * from rfactsoc WHERE " & CadB & " " & Ordenacion
+            PonerCadenaBusqueda
+        End If
+    End If
+
+End Sub
+
 Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1 ' Recepcion de nro de factura
@@ -5590,59 +5613,59 @@ Dim Cad As String
 Dim Tabla As String
 Dim Titulo As String
 Dim Desc As String, devuelve As String
-    'Llamamos a al form
-    '##A mano
-    Cad = ""
-'    Cad = Cad & "Tipo|if(rfactsoc.codtipom='FAA','Anticipo','Liquidación') as a|T||10·"
-    Cad = Cad & "Tipo Factura|stipom.nomtipom|T||22·"
-    Cad = Cad & "Tipo|rfactsoc.codtipom|T||7·"
-    Cad = Cad & "Nº.Factura|rfactsoc.numfactu|N||10·"
-    Cad = Cad & "Fecha|rfactsoc.fecfactu|F||15·"
-    Cad = Cad & "Socio|rfactsoc.codsocio|N||10·"
-    Cad = Cad & "Nombre Socio|rsocios.nomsocio|T||35·"
-    Tabla = NombreTabla & " INNER JOIN rsocios ON rfactsoc.codsocio=rsocios.codsocio "
-    Tabla = "(" & Tabla & ") INNER JOIN usuarios.stipom stipom ON rfactsoc.codtipom = stipom.codtipom "
-    Titulo = "Facturas Socios"
-    devuelve = "1|2|3|"
-           
-    If Cad <> "" Then
-        Screen.MousePointer = vbHourglass
-        Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
-        frmB.vtabla = Tabla
-        frmB.vSQL = CadB
-        HaDevueltoDatos = False
-        '###A mano
-        frmB.vDevuelve = devuelve
-        frmB.vTitulo = Titulo
-        frmB.vSelElem = 0
-'        frmB.vConexionGrid = cAgro  'Conexión a BD: Ariagro
-        If Not EsCabecera Then frmB.Label1.FontSize = 11
-'        frmB.vBuscaPrevia = chkVistaPrevia
-        '#
-        frmB.Show vbModal
-        Set frmB = Nothing
-'        If EsCabecera Then
-'            PonerCadenaBusqueda
-'            Text1(0).Text = Format(Text1(0).Text, "0000000")
+'    'Llamamos a al form
+'    '##A mano
+'    Cad = ""
+''    Cad = Cad & "Tipo|if(rfactsoc.codtipom='FAA','Anticipo','Liquidación') as a|T||10·"
+'    Cad = Cad & "Tipo Factura|stipom.nomtipom|T||22·"
+'    Cad = Cad & "Tipo|rfactsoc.codtipom|T||7·"
+'    Cad = Cad & "Nº.Factura|rfactsoc.numfactu|N||10·"
+'    Cad = Cad & "Fecha|rfactsoc.fecfactu|F||15·"
+'    Cad = Cad & "Socio|rfactsoc.codsocio|N||10·"
+'    Cad = Cad & "Nombre Socio|rsocios.nomsocio|T||35·"
+'    Tabla = NombreTabla & " INNER JOIN rsocios ON rfactsoc.codsocio=rsocios.codsocio "
+'    Tabla = "(" & Tabla & ") INNER JOIN usuarios.stipom stipom ON rfactsoc.codtipom = stipom.codtipom "
+'    Titulo = "Facturas Socios"
+'    devuelve = "1|2|3|"
+'
+'    If Cad <> "" Then
+'        Screen.MousePointer = vbHourglass
+'        Set frmB = New frmBuscaGrid
+'        frmB.vCampos = Cad
+'        frmB.vtabla = Tabla
+'        frmB.vSQL = CadB
+'        HaDevueltoDatos = False
+'        '###A mano
+'        frmB.vDevuelve = devuelve
+'        frmB.vTitulo = Titulo
+'        frmB.vSelElem = 0
+''        frmB.vConexionGrid = cAgro  'Conexión a BD: Ariagro
+'        If Not EsCabecera Then frmB.Label1.FontSize = 11
+''        frmB.vBuscaPrevia = chkVistaPrevia
+'        '#
+'        frmB.Show vbModal
+'        Set frmB = Nothing
+''        If EsCabecera Then
+''            PonerCadenaBusqueda
+''            Text1(0).Text = Format(Text1(0).Text, "0000000")
+''        End If
+'        'Si ha puesto valores y tenemos que es formulario de busqueda entonces
+'        'tendremos que cerrar el form lanzando el evento
+'        If HaDevueltoDatos Then
+'            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
+'                cmdRegresar_Click
+'        Else   'de ha devuelto datos, es decir NO ha devuelto datos
+'            PonerFoco Text1(kCampo)
 '        End If
-        'Si ha puesto valores y tenemos que es formulario de busqueda entonces
-        'tendremos que cerrar el form lanzando el evento
-        If HaDevueltoDatos Then
-            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-                cmdRegresar_Click
-        Else   'de ha devuelto datos, es decir NO ha devuelto datos
-            PonerFoco Text1(kCampo)
-        End If
-    End If
-    Screen.MousePointer = vbDefault
-    
-    
-'    Set frmFac = New frmBasico2
+'    End If
+'    Screen.MousePointer = vbDefault
 '
-'    AyudaFacturasSocio frmFac
-'
-'    Set frmFac = Nothing
+    
+    Set frmFac = New frmBasico2
+
+    AyudaFrasSocios frmFac
+
+    Set frmFac = Nothing
     
     
 End Sub

@@ -2511,7 +2511,7 @@ Public Event DatoSeleccionado(CadenaSeleccion As String)
 Public Albaran As String  ' venimos de albaranes para ver las facturas donde aparece el albaran
 
 '========== VBLES PRIVADAS ====================
-Private WithEvents frmEntPrev As frmEntPesadaPrev
+Private WithEvents frmEntPrev As frmBasico2
 Attribute frmEntPrev.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
@@ -3376,18 +3376,18 @@ End Sub
 
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim CadB As String
+Dim cadB As String
 Dim Aux As String
       
     If CadenaDevuelta <> "" Then
         HaDevueltoDatos = True
         Screen.MousePointer = vbHourglass
-        CadB = ""
+        cadB = ""
         Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        CadB = Aux
+        cadB = Aux
         
         
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -3424,13 +3424,13 @@ Private Sub frmCap_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmEntPrev_DatoSeleccionado(CadenaSeleccion As String)
-Dim CadB As String
+Dim cadB As String
     
     If CadenaSeleccion <> "" Then
-        CadB = "nropesada = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
+        cadB = "nropesada = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
         
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -3756,7 +3756,7 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 Dim cadAux As String
     
 '    '--- Laura 12/01/2007
@@ -3772,29 +3772,28 @@ Dim cadAux As String
 '    CadB = ObtenerBusqueda(Me)
 '++monica
     If Albaran = "" Then
-        CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+        cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     Else
-        CadB = "numalbar = " & Albaran & " "
+        cadB = "numalbar = " & Albaran & " "
     End If
 
     If chkVistaPrevia = 1 Then
         EsCabecera = True
-        MandaBusquedaPrevia CadB
-    ElseIf CadB <> "" Then
+        MandaBusquedaPrevia cadB
+    ElseIf cadB <> "" Then
         'Se muestran en el mismo form
         CadenaConsulta = "select rpesadas.* from " & NombreTabla
-        CadenaConsulta = CadenaConsulta & " WHERE " & CadB & Ordenacion
+        CadenaConsulta = CadenaConsulta & " WHERE " & cadB & Ordenacion
         PonerCadenaBusqueda
     End If
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 
-    Set frmEntPrev = New frmEntPesadaPrev
-    frmEntPrev.cWhere = CadB
-    frmEntPrev.DatosADevolverBusqueda = "0|1|2|"
-    frmEntPrev.Show vbModal
+    Set frmEntPrev = New frmBasico2
+
+    AyudaEntradaPesada frmEntPrev
     
     Set frmEntPrev = Nothing
 
@@ -5368,7 +5367,7 @@ Dim Rs As ADODB.Recordset
         End If
     Else
         Set frmMens = New frmMensajes
-        frmMens.cadWHERE = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
+        frmMens.cadWhere = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
         frmMens.campo = txtAux(7).Text
         frmMens.OpcionMensaje = 6
         frmMens.Show vbModal

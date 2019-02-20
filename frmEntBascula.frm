@@ -2265,7 +2265,7 @@ Public DatosADevolverBusqueda As String    'Tindrà el nº de text que vol que tor
 Public Event DatoSeleccionado(CadenaSeleccion As String)
 
 ' *** declarar els formularis als que vaig a cridar ***
-Private WithEvents frmEntPrev As frmEntBasculaPrev
+Private WithEvents frmEntPrev As frmBasico2
 Attribute frmEntPrev.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal 'calendario fecha
 Attribute frmC.VB_VarHelpID = -1
@@ -2329,7 +2329,7 @@ Private HaDevueltoDatos As Boolean
 Dim btnPrimero As Byte 'Variable que indica el nº del Botó PrimerRegistro en la Toolbar1
 'Dim CadAncho() As Boolean  'array, per a quan cridem al form de llínies
 Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim CadB As String
+Dim cadB As String
 
 Dim vSeccion As CSeccion
 Dim b As Boolean
@@ -2810,7 +2810,7 @@ Dim b As Boolean
     '---------------------------------------------
     b = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = b
-    CmdAceptar.visible = b
+    cmdAceptar.visible = b
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -3030,13 +3030,13 @@ Private Sub frmCap_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmEntPrev_DatoSeleccionado(CadenaSeleccion As String)
-Dim CadB As String
+Dim cadB As String
     
     If CadenaSeleccion <> "" Then
-        CadB = "numnotac = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
+        cadB = "numnotac = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
         
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -3367,14 +3367,14 @@ Private Sub HacerBusqueda()
         Text1(4).Tag = Replace(Text1(8).Tag, "FH", "FHH")
     End If
 
-    CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+    cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     
     Text1(4).Tag = Replace(Text1(4).Tag, "FHH", "FH")
     
     If chkVistaPrevia(0) = 1 Then
-        MandaBusquedaPrevia CadB
-    ElseIf CadB <> "" Then
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        MandaBusquedaPrevia cadB
+    ElseIf cadB <> "" Then
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
     Else
         ' *** foco al 1r camp visible de la capçalera que siga clau primaria ***
@@ -3384,17 +3384,14 @@ Private Sub HacerBusqueda()
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 
-
-    Set frmEntPrev = New frmEntBasculaPrev
-    frmEntPrev.cWhere = CadB
-    frmEntPrev.DatosADevolverBusqueda = "0|1|2|"
-    frmEntPrev.Show vbModal
+    Set frmEntPrev = New frmBasico2
+    
+    AyudaEntradaBascula frmEntPrev
     
     Set frmEntPrev = Nothing
-
-
+    
 End Sub
 
 
@@ -3456,7 +3453,7 @@ End Sub
 Private Sub BotonVerTodos()
 'Vore tots
     LimpiarCampos 'Neteja els Text1
-    CadB = ""
+    cadB = ""
     
     PonerModo 0
     
@@ -5523,7 +5520,7 @@ Dim Rs As ADODB.Recordset
 '        End If
 '    Else
         Set frmMens = New frmMensajes
-        frmMens.cadWHERE = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
+        frmMens.cadWhere = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
         frmMens.campo = Text1(5).Text
         '[Monica]13/08/2018: añadimos la condicion de que el campo no sea un tratamiento
         frmMens.vCampos = " and rcampos.codsocio = " & DBSet(Text1(1).Text, "N") & " and rcampos.fecbajas is null and rcampos.tipocampo <> 3"

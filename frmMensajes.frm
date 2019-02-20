@@ -15,6 +15,119 @@ Begin VB.Form frmMensajes
    ScaleWidth      =   14160
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameFrasPteContabilizar 
+      Height          =   5790
+      Left            =   0
+      TabIndex        =   170
+      Top             =   0
+      Width           =   13660
+      Begin VB.CommandButton cmdCerrarFras 
+         Caption         =   "Continuar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   5
+         Left            =   12060
+         TabIndex        =   172
+         Top             =   5280
+         Width           =   1215
+      End
+      Begin VB.ComboBox Combo1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         ItemData        =   "frmMensajes.frx":000C
+         Left            =   240
+         List            =   "frmMensajes.frx":0016
+         Style           =   2  'Dropdown List
+         TabIndex        =   171
+         Tag             =   "Tipo de cliente|N|N|0|2|ssocio|tipsocio|||"
+         Top             =   240
+         Width           =   2055
+      End
+      Begin MSComctlLib.ListView ListView22 
+         Height          =   4545
+         Left            =   240
+         TabIndex        =   173
+         Top             =   630
+         Width           =   13085
+         _ExtentX        =   23072
+         _ExtentY        =   8017
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   4
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Código"
+            Object.Width           =   1764
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Variedad"
+            Object.Width           =   3881
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Clase "
+            Object.Width           =   1411
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "Descripcion"
+            Object.Width           =   3706
+         EndProperty
+      End
+      Begin VB.Label Label24 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Facturas Pendientes de Contabilizar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   11.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   375
+         Left            =   4920
+         TabIndex        =   174
+         Top             =   300
+         Width           =   8355
+      End
+   End
    Begin VB.Frame FrameCreacionCampo 
       Height          =   4725
       Left            =   0
@@ -625,7 +738,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   3
          Left            =   240
-         Picture         =   "frmMensajes.frx":000C
+         Picture         =   "frmMensajes.frx":002C
          Top             =   5160
          Width           =   240
       End
@@ -633,7 +746,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   2
          Left            =   600
-         Picture         =   "frmMensajes.frx":0156
+         Picture         =   "frmMensajes.frx":0176
          Top             =   5160
          Width           =   240
       End
@@ -1025,7 +1138,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":02A0
+         Picture         =   "frmMensajes.frx":02C0
          Top             =   5160
          Width           =   240
       End
@@ -1033,7 +1146,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":03EA
+         Picture         =   "frmMensajes.frx":040A
          Top             =   5160
          Width           =   240
       End
@@ -1206,118 +1319,6 @@ Begin VB.Form frmMensajes
          TabIndex        =   116
          Top             =   2640
          Width           =   1215
-      End
-   End
-   Begin VB.Frame FrameFrasPteContabilizar 
-      Height          =   5790
-      Left            =   0
-      TabIndex        =   170
-      Top             =   0
-      Width           =   13660
-      Begin VB.CommandButton cmdCerrarFras 
-         Caption         =   "Continuar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   5
-         Left            =   12060
-         TabIndex        =   172
-         Top             =   5280
-         Width           =   1215
-      End
-      Begin VB.ComboBox Combo1 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   0
-         ItemData        =   "frmMensajes.frx":0534
-         Left            =   240
-         List            =   "frmMensajes.frx":053E
-         Style           =   2  'Dropdown List
-         TabIndex        =   171
-         Tag             =   "Tipo de cliente|N|N|0|2|ssocio|tipsocio|||"
-         Top             =   240
-         Width           =   2055
-      End
-      Begin MSComctlLib.ListView ListView22 
-         Height          =   4545
-         Left            =   240
-         TabIndex        =   173
-         Top             =   630
-         Width           =   13085
-         _ExtentX        =   23072
-         _ExtentY        =   8017
-         View            =   3
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         NumItems        =   4
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "Código"
-            Object.Width           =   1764
-         EndProperty
-         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   1
-            Text            =   "Variedad"
-            Object.Width           =   3881
-         EndProperty
-         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   2
-            Text            =   "Clase "
-            Object.Width           =   1411
-         EndProperty
-         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   3
-            Text            =   "Descripcion"
-            Object.Width           =   3706
-         EndProperty
-      End
-      Begin VB.Label Label24 
-         Alignment       =   1  'Right Justify
-         Caption         =   "Facturas Pendientes de Contabilizar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   11.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   375
-         Left            =   4920
-         TabIndex        =   174
-         Top             =   300
-         Width           =   8355
       End
    End
    Begin VB.Frame FrameConsumoSocio 
@@ -3557,7 +3558,7 @@ Private WithEvents frmSoc As frmManSocios 'socios
 Attribute frmSoc.VB_VarHelpID = -1
 
 
-Public cadWHERE As String 'Cadena para pasarle la WHERE de la SELECT de los cobros pendientes o de Pedido(para comp. stock)
+Public cadWhere As String 'Cadena para pasarle la WHERE de la SELECT de los cobros pendientes o de Pedido(para comp. stock)
                           'o CodArtic para seleccionar los Nº Series
                           'para cargar el ListView
                           
@@ -3996,7 +3997,7 @@ Dim c1 As String * 10, c2 As String * 10, c3 As String * 10
         Next i
         If Cad <> "" Then
             Sql = Sql & "))"
-            Cad = "(" & cadWHERE & ") AND (" & Sql & ")"
+            Cad = "(" & cadWhere & ") AND (" & Sql & ")"
         End If
 '        If cad <> "" Then cad = "(" & cadWHERE & ") AND (" & cad & ")"
     ElseIf OpcionMensaje = 14 Then
@@ -4474,7 +4475,7 @@ Dim OK As Boolean
     
         Case 53 'asignamos los valores
             txtAux(3).Text = cadena
-            txtAux(4).Text = cadWHERE
+            txtAux(4).Text = cadWhere
             txtAux(0).Text = campo
             
             
@@ -5186,12 +5187,12 @@ Dim Sql As String
     If vParamAplic.ContabilidadNueva Then
         Sql = "SELECT numserie, numfactu, fecfactu, fecvenci, impvenci, impcobro "
         Sql = Sql & " FROM cobros INNER JOIN formapago ON cobros.codforpa=formapago.codforpa "
-        Sql = Sql & cadWHERE
+        Sql = Sql & cadWhere
         Sql = Sql & " and (ImpVenci + if(Gastos is null,0,gastos) - if(impcobro is null, 0, impcobro)) <> 0 "
     Else
         Sql = "SELECT numserie, codfaccl, fecfaccl, fecvenci, impvenci, impcobro "
         Sql = Sql & " FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
-        Sql = Sql & cadWHERE
+        Sql = Sql & cadWhere
         Sql = Sql & " and (ImpVenci + if(Gastos is null,0,gastos) - if(impcobro is null, 0, impcobro)) <> 0 "
     End If
     Set Rs = New ADODB.Recordset
@@ -5241,7 +5242,7 @@ Dim Sql As String
     Sql = "SELECT " & NomTabla & ".codalmac," & NomTabla & ".codartic, " & NomTabla & ".nomartic, salmac.canstock as canstock, SUM(cantidad) as cantidad, canstock-SUM(cantidad) as disp "
     Sql = Sql & "FROM ((" & NomTabla & " INNER JOIN sartic ON " & NomTabla & ".codartic=sartic.codartic) INNER JOIN sfamia ON sartic.codfamia=sfamia.codfamia) "
     Sql = Sql & "INNER JOIN salmac ON " & NomTabla & ".codalmac=salmac.codalmac and " & NomTabla & ".codartic=salmac.codartic "
-    Sql = Sql & cadWHERE 'Where numpedcl = 2 And sfamia.instalac = 0
+    Sql = Sql & cadWhere 'Where numpedcl = 2 And sfamia.instalac = 0
     Sql = Sql & "GROUP by " & NomTabla & ".codalmac, " & NomTabla & ".codartic "
     
 
@@ -5466,14 +5467,14 @@ Dim Sql As String, Men As String
         'CLIENTES
         Sql = "SELECT codclien,nomclien,cifclien "
         Sql = Sql & "FROM clientes "
-        If cadWHERE <> "" Then Sql = Sql & " WHERE " & cadWHERE
+        If cadWhere <> "" Then Sql = Sql & " WHERE " & cadWhere
         Sql = Sql & " ORDER BY codclien "
         Men = "Cliente"
     Case 9
         'SOCIOS
         Sql = "SELECT distinct rsocios.codsocio,nomsocio,nifsocio "
         Sql = Sql & "FROM rsocios inner join rsocios_seccion on rsocios.codsocio = rsocios_seccion.codsocio "
-        If cadWHERE <> "" Then Sql = Sql & " WHERE " & cadWHERE
+        If cadWhere <> "" Then Sql = Sql & " WHERE " & cadWhere
         If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Or vParamAplic.Cooperativa = 12 Then
             Sql = Sql & " ORDER BY rsocios.nomsocio "
         Else
@@ -5482,21 +5483,21 @@ Dim Sql As String, Men As String
         Men = "Socio"
     Case 17
         'CLIENTES MANTENIMIENTO
-        Sql = cadWHERE
+        Sql = cadWhere
     
     Case 42
         Sql = "SELECT distinct rsocios.codsocio,nomsocio,sum(rrecibpozos.totalfact) totalfact "
         Sql = Sql & "FROM rsocios inner join rrecibpozos on rsocios.codsocio = rrecibpozos.codsocio "
-        If cadWHERE <> "" Then Sql = Sql & " WHERE " & cadWHERE
+        If cadWhere <> "" Then Sql = Sql & " WHERE " & cadWhere
         Sql = Sql & " GROUP BY 1,2 "
         Sql = Sql & " ORDER BY rsocios.codsocio "
         Men = "Socio"
     
     Case 55
-        Sql = cadWHERE
+        Sql = cadWhere
         
     Case 67
-        Sql = cadWHERE
+        Sql = cadWhere
         If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
             Sql = Sql & " ORDER BY rsocios.nomsocio "
             Men = "Socio"
@@ -5612,7 +5613,7 @@ Dim Sql As String
 
     Sql = "SELECT codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,codalmac,codartic,nomartic,ampliaci,cantidad,precioar,dtoline1,dtoline2,importel,origpre"
     Sql = Sql & " FROM slifac "
-    If cadWHERE <> "" Then Sql = Sql & " WHERE " & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & " WHERE " & cadWhere
     Sql = Sql & " ORDER BY codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea "
     
     Set Rs = New ADODB.Recordset
@@ -5650,7 +5651,7 @@ Dim Sql As String
              ItmX.Text = Rs!codtipoa 'cod tipo alb
              ItmX.Checked = False
              ItmX.SubItems(1) = Format(Rs!NumAlbar, "0000000") 'Nº Albaran
-             ItmX.SubItems(2) = Rs!numlinea 'linea Albaran
+             ItmX.SubItems(2) = Rs!NumLinea 'linea Albaran
              ItmX.SubItems(3) = Format(Rs!codAlmac, "000") 'cod almacen
              ItmX.SubItems(4) = Rs!codArtic 'Cod Articulo
              ItmX.SubItems(5) = Rs!NomArtic 'Nombre del Articulo
@@ -5693,7 +5694,7 @@ Dim Sql As String
 
     On Error GoTo ECargarList
 
-    Sql = cadWHERE 'cadwhere ya le pasamos toda la SQL
+    Sql = cadWhere 'cadwhere ya le pasamos toda la SQL
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -6194,10 +6195,10 @@ Dim It As ListItem
         Sql = Sql & " rcampos.codvarie = variedades.codvarie and rcampos.codsocio = rsocios.codsocio and rcampos.codparti = rpartida.codparti "
     
     Case 4
-        Sql = "select rcampos.codcampo, rcampos.nrocampo, rpartida.nomparti, variedades.nomvarie,  "
-        Sql = Sql & " rsocios.nomsocio  from rcampos, variedades, rsocios, rpartida where "
+        Sql = "select distinct codcampo, nrocampo, nomparti, codvarie, nomvarie, codsocio, nomsocio from ("
+        Sql = Sql & "select rcampos.codcampo, rcampos.nrocampo, rpartida.nomparti, rcampos.codvarie, variedades.nomvarie,  "
+        Sql = Sql & " rsocios.codsocio, rsocios.nomsocio  from rcampos, variedades, rsocios, rpartida where "
         Sql = Sql & " rcampos.codvarie = variedades.codvarie and rcampos.codsocio = rsocios.codsocio and rcampos.codparti = rpartida.codparti "
-    
     
     Case 5
         Sql = "select rcampos.nrocampo, rpartida.nomparti, variedades.nomvarie,  "
@@ -6221,12 +6222,21 @@ Dim It As ListItem
     If ChkVariedades.Value = 1 And vCampos <> "" Then
         Sql = Sql & vCampos
     Else
-        If cadWHERE <> "" Then Sql = Sql & cadWHERE
+        If cadWhere <> "" Then Sql = Sql & cadWhere
     End If
     
     
     If Opcion = 4 Then
-        Sql = Sql & " order by rcampos.codvarie, rcampos.codsocio "
+        '[Monica]20/02/2019: faltan los copropietarios
+        Sql = Sql & " union  "
+        Sql = Sql & " select rcampos.codcampo, rcampos.nrocampo, rpartida.nomparti, rcampos.codvarie, variedades.nomvarie,  "
+        Sql = Sql & " rsocios.codsocio, rsocios.nomsocio  from rcampos, rcampos_cooprop, variedades, rsocios, rpartida where "
+        Sql = Sql & " rcampos.codvarie = variedades.codvarie and rcampos_cooprop.codsocio = rsocios.codsocio and rcampos.codparti = rpartida.codparti and rcampos.codcampo = rcampos_cooprop.codcampo "
+        If cadWhere <> "" Then Sql = Sql & Replace(cadWhere, "rcampos", "rcampos_cooprop")
+        Sql = Sql & ") aaaaa "
+    
+'        Sql = Sql & " order by rcampos.codvarie, rcampos.codsocio "
+        Sql = Sql & " order by codvarie, codsocio "
     End If
     If Opcion = 5 Then
         Sql = Sql & " group by 1,2,3,4 "
@@ -6451,7 +6461,7 @@ Dim It As ListItem
         Sql = "select variedades.codvarie, variedades.nomvarie, variedades.codclase, clases.nomclase from variedades, clases "
         Sql = Sql & " where variedades.codclase = clases.codclase "
     End If
-    If cadWHERE <> "" Then Sql = Sql & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & cadWhere
     
 '    If Ordenar Then SQL = SQL & " order by 1"
     
@@ -6519,7 +6529,7 @@ Dim Consumido As Currency
     Sql = Sql & " from variedades, rbodalbaran_variedad, rbodalbaran "
     Sql = Sql & " where variedades.codvarie = rbodalbaran_variedad.codvarie "
     Sql = Sql & " and rbodalbaran_variedad.numalbar = rbodalbaran.numalbar "
-    If cadWHERE <> "" Then Sql = Sql & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & cadWhere
     
     Sql = Sql & " group by 1,2 order by 1,2 "
     
@@ -6555,7 +6565,7 @@ Dim Consumido As Currency
     Sql = Sql & " where variedades.codvarie = rbodalbaran_variedad.codvarie "
     Sql = Sql & " and rbodalbaran_variedad.numalbar = rbodalbaran.numalbar "
     Sql = Sql & " and variedades.codprodu = productos.codprodu "
-    If cadWHERE <> "" Then Sql = Sql & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & cadWhere
     
     Sql = Sql & " group by 1,2 order by 1,2 "
     
@@ -6591,7 +6601,7 @@ Dim Consumido As Currency
     Sql = Sql & " where rhisfruta.codvarie = variedades.codvarie "
     Sql = Sql & " and variedades.codprodu = productos.codprodu "
     Sql = Sql & " and productos.codgrupo = 5 "
-    If cadWHERE <> "" Then Sql = Sql & Replace(cadWHERE, "rbodalbaran", "rhisfruta")
+    If cadWhere <> "" Then Sql = Sql & Replace(cadWhere, "rbodalbaran", "rhisfruta")
     
     Text2.Text = Format(CCur(DevuelveValor(Sql)), "###,###,##0.00")
 
@@ -6604,7 +6614,7 @@ Dim Consumido As Currency
     Sql = Sql & " and rbodalbaran_variedad.numalbar = rbodalbaran.numalbar "
     Sql = Sql & " and variedades.codprodu = productos.codprodu "
     Sql = Sql & " and productos.codgrupo = 5 "
-    If cadWHERE <> "" Then Sql = Sql & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & cadWhere
     
     Consumido = CCur(DevuelveValor(Sql))
     
@@ -6616,7 +6626,7 @@ Dim Consumido As Currency
     Sql = Sql & " where rhisfruta.codvarie = variedades.codvarie "
     Sql = Sql & " and variedades.codprodu = productos.codprodu "
     Sql = Sql & " and productos.codgrupo = 5 "
-    If cadWHERE <> "" Then Sql = Sql & Replace(cadWHERE, "rbodalbaran", "rhisfruta")
+    If cadWhere <> "" Then Sql = Sql & Replace(cadWhere, "rbodalbaran", "rhisfruta")
     
     Text5.Text = Format(CCur(DevuelveValor(Sql)), "###,###,##0.00")
     
@@ -6626,7 +6636,7 @@ Dim Consumido As Currency
     Sql = Sql & " where rhisfruta.codvarie = variedades.codvarie "
     Sql = Sql & " and variedades.codprodu = productos.codprodu "
     Sql = Sql & " and productos.codgrupo = 6 "
-    If cadWHERE <> "" Then Sql = Sql & Replace(cadWHERE, "rbodalbaran", "rhisfruta")
+    If cadWhere <> "" Then Sql = Sql & Replace(cadWhere, "rbodalbaran", "rhisfruta")
     
     Text6.Text = Format(CCur(DevuelveValor(Sql)), "###,###,##0.00")
     
@@ -6641,7 +6651,7 @@ Dim It As ListItem
     Sql = Sql & " rpozos.codparti = rpartida.codparti "
     
     
-    If cadWHERE <> "" Then Sql = Sql & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & cadWhere
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -6689,7 +6699,7 @@ Dim It As ListItem
     Sql = Sql & " (rpozos.fechabaja is null or rpozos.fechabaja = '')"
     
     
-    If cadWHERE <> "" Then Sql = Sql & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & cadWhere
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -6740,7 +6750,7 @@ Dim It As ListItem
     End If
     
     
-    If cadWHERE <> "" Then Sql = Sql & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & cadWhere
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -6884,14 +6894,14 @@ Private Sub txtMante_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
-Public Function ObtenerSQLcomponentes(cadWHERE As String) As String
+Public Function ObtenerSQLcomponentes(cadWhere As String) As String
 'Obtiene la consulta SQL que selecciona los articulos con nº de serie
 'agrupados por tipo de articulo
 Dim Sql As String
 
     Sql = "Select distinct sserie.codtipar, nomtipar, count(numserie) as cantidad "
     Sql = Sql & "FROM sserie INNER JOIN stipar ON sserie.codtipar=stipar.codtipar "
-    Sql = Sql & cadWHERE
+    Sql = Sql & cadWhere
     Sql = Sql & " GROUP by codtipar "
     
     ObtenerSQLcomponentes = Sql
@@ -7082,7 +7092,7 @@ Dim It As ListItem
     Sql = Sql & " rhisfruta.numalbar = rhisfruta_entradas.numalbar and "
     Sql = Sql & " rhisfruta.codvarie = variedades.codvarie "
     
-    If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & " and " & cadWhere
     
     Sql = Sql & " ORDER BY 1 "
     
@@ -7142,7 +7152,7 @@ Dim It As ListItem
     Sql = Sql & " and rhisfruta.codcampo = rcampos.codcampo "
     Sql = Sql & " and rcampos.codparti = rpartida.codparti "
     
-    If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & " and " & cadWhere
     
     Sql = Sql & " ORDER BY 1 "
     
@@ -7201,7 +7211,7 @@ Dim It As ListItem
     Sql = Sql & "  from rhisfruta, variedades where "
     Sql = Sql & " rhisfruta.codvarie = variedades.codvarie "
     
-    If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & " and " & cadWhere
     
     Sql = Sql & " ORDER BY 1 "
     
@@ -7254,7 +7264,7 @@ Dim It As ListItem
     Sql = "select rincidencia.codincid,nomincid,case tipincid when 0 then ""LEVE"" when 1 then ""GRAVE"" when 2 then ""MUY GRAVE"" end as tipoincid"
     Sql = Sql & "  from rincidencia "
     
-    If cadWHERE <> "" Then Sql = Sql & " where (1=1)" & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & " where (1=1)" & cadWhere
     
     Sql = Sql & " ORDER BY 1 "
     
@@ -7304,7 +7314,7 @@ Dim It As ListItem
     Sql = "select rtipoapor.codaport,nomaport "
     Sql = Sql & "  from rtipoapor "
     
-    If cadWHERE <> "" Then Sql = Sql & " where (1=1)" & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & " where (1=1)" & cadWhere
     
     Sql = Sql & " ORDER BY 1 "
     
@@ -7358,7 +7368,7 @@ Dim It As ListItem
     Sql = Sql & "  from rentradas, variedades, rsocios "
     
     ' siempre hay cadwhere pq sino no entro en mostrar entradas
-    Sql = Sql & " where rentradas.codsocio = rsocios.codsocio and rentradas.codvarie = variedades.codvarie and " & cadWHERE
+    Sql = Sql & " where rentradas.codsocio = rsocios.codsocio and rentradas.codvarie = variedades.codvarie and " & cadWhere
     
     Sql = Sql & " ORDER BY 1 "
     
@@ -7430,7 +7440,7 @@ Private Sub Text4_LostFocus()
 
     If Text4.Text <> "" Then
         Text4.Text = Format(Text4.Text, "000000")
-        cadWHERE = " and rcampos.codsocio = " & DBSet(Text4.Text, "N")
+        cadWhere = " and rcampos.codsocio = " & DBSet(Text4.Text, "N")
         ListView4.ListItems.Clear
         CargarCamposSocio 1
     End If
@@ -7461,7 +7471,7 @@ Dim It As ListItem
     Sql = Sql & "  from rhisfruta, rhisfruta_entradas, variedades, rsocios "
     
     ' siempre hay cadwhere pq sino no entro en mostrar entradas
-    Sql = Sql & " where rhisfruta.codsocio = rsocios.codsocio and rhisfruta.codvarie = variedades.codvarie and rhisfruta.numalbar = rhisfruta_entradas.numalbar and " & cadWHERE
+    Sql = Sql & " where rhisfruta.codsocio = rsocios.codsocio and rhisfruta.codvarie = variedades.codvarie and rhisfruta.numalbar = rhisfruta_entradas.numalbar and " & cadWhere
     
     Sql = Sql & " ORDER BY 1 "
     
@@ -7518,7 +7528,7 @@ Dim It As ListItem
     Sql = Sql & "  from rfactsoc "
     
     ' siempre hay cadwhere pq sino no entro en mostrar entradas
-    Sql = Sql & " where  " & cadWHERE
+    Sql = Sql & " where  " & cadWhere
     
     Sql = Sql & " ORDER BY 1, 2, 3 "
     
@@ -7568,7 +7578,7 @@ Dim Rs As ADODB.Recordset
 Dim It As ListItem
 
     Sql = "select rsituacion.codsitua, rsituacion.nomsitua from rsituacion where (1=1) "
-    If cadWHERE <> "" Then Sql = Sql & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & cadWhere
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -7601,7 +7611,7 @@ End Sub
 Private Sub CargaEmpresas()
 Dim Sql As String
 Dim Rs As ADODB.Recordset
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 
 Dim It As ListItem
 Dim Cad As String
@@ -7652,10 +7662,10 @@ Dim SQL1 As String
     While Not Rs.EOF And Not Encontrado
         If AbrirConexionCampAnterior(DBLet(Rs!Ariagro, "T")) Then
             SQL1 = "select * from empresas "
-            Set RS1 = New ADODB.Recordset
-            RS1.Open SQL1, ConnCAnt, adOpenForwardOnly, adLockOptimistic, adCmdText
+            Set Rs1 = New ADODB.Recordset
+            Rs1.Open SQL1, ConnCAnt, adOpenForwardOnly, adLockOptimistic, adCmdText
             
-            If DBLet(RS1!FechaFin, "F") = (CDate(vParam.FecIniCam) - 1) Then
+            If DBLet(Rs1!FechaFin, "F") = (CDate(vParam.FecIniCam) - 1) Then
                     Encontrado = True
                     Cad = "|" & Rs!codempre & "|"
                     Cad = Rs!nomempre
@@ -7762,7 +7772,7 @@ Dim i As Integer
 
 
     Sql = "select rhisfruta.numalbar, rhisfruta.fecalbar, variedades.nomvarie, rhisfruta.kilosnet, rhisfruta.kilostra from rhisfruta, variedades  where rhisfruta.codvarie = variedades.codvarie "
-    If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & " and " & cadWhere
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -7819,7 +7829,7 @@ Dim It As ListItem
 Dim i As Integer
 
 
-    Sql = cadWHERE
+    Sql = cadWhere
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -7860,7 +7870,7 @@ Dim It As ListItem
 Dim i As Integer
 
 
-    Sql = "select distinct fecfactu from rfactsoc_variedad where fecfactu in (" & cadWHERE & ") order by fecfactu "
+    Sql = "select distinct fecfactu from rfactsoc_variedad where fecfactu in (" & cadWhere & ") order by fecfactu "
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -7958,7 +7968,7 @@ Dim Consumido As Currency
     Sql = "select rpozos.hidrante, rsocios.nomsocio, rpozos.consumo as consumo "
     Sql = Sql & " from rpozos inner join rsocios on rpozos.codsocio = rsocios.codsocio "
     Sql = Sql & " where consumo < " & DBSet(vParamAplic.ConsumoMinPOZ, "N")
-    If cadWHERE <> "" Then Sql = Sql & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & cadWhere
     
     Sql = Sql & " order by 1,2 "
     
@@ -7990,7 +8000,7 @@ Dim Consumido As Currency
     Sql = "select rpozos.hidrante, rsocios.nomsocio, rpozos.consumo as consumo "
     Sql = Sql & " from rpozos inner join rsocios on rpozos.codsocio = rsocios.codsocio "
     Sql = Sql & " where consumo > " & DBSet(vParamAplic.ConsumoMaxPOZ, "N")
-    If cadWHERE <> "" Then Sql = Sql & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & cadWhere
     
     Sql = Sql & " order by 1,2 "
     
@@ -8025,7 +8035,7 @@ Dim It As ListItem
 
     Sql = "select rtransporte.codtrans, rtransporte.nomtrans, rtransporte.matricula from rtransporte "
     Sql = Sql & " where (1=1) "
-    If cadWHERE <> "" Then Sql = Sql & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & cadWhere
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -8092,7 +8102,7 @@ Dim It As ListItem
 
     Sql = "select rtransporte.matricula, rtransporte.contador from rtransporte where "
     
-    If cadWHERE <> "" Then Sql = Sql & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & cadWhere
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -8930,7 +8940,7 @@ Dim Rs As ADODB.Recordset
 Dim It As ListItem
 
     Sql = "select codsocio, nomsocio from rsocios "
-    If cadWHERE <> "" Then Sql = Sql & " where (1=1) " & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & " where (1=1) " & cadWhere
     Sql = Sql & " order by 1"
     
     Set Rs = New ADODB.Recordset
@@ -8972,7 +8982,7 @@ Dim Rs As ADODB.Recordset
 Dim It As ListItem
 
     Sql = "select codprodu, nomprodu from productos "
-    If cadWHERE <> "" Then Sql = Sql & " where (1=1) " & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & " where (1=1) " & cadWhere
     Sql = Sql & " order by 1 "
     
     Set Rs = New ADODB.Recordset
@@ -9014,7 +9024,7 @@ Dim Rs As ADODB.Recordset
 Dim It As ListItem
 
     Sql = "select codzonas, nomzonas from rzonas "
-    If cadWHERE <> "" Then Sql = Sql & " where (1=1) " & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & " where (1=1) " & cadWhere
     Sql = Sql & " order by 1 "
     
     
@@ -9057,7 +9067,7 @@ Dim Rs As ADODB.Recordset
 Dim It As ListItem
 
     Sql = "select codparti, nomparti from rpartida "
-    If cadWHERE <> "" Then Sql = Sql & " where (1=1) " & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & " where (1=1) " & cadWhere
     Sql = Sql & " order by 1 "
     
     Set Rs = New ADODB.Recordset
@@ -9099,7 +9109,7 @@ Dim Rs As ADODB.Recordset
 Dim It As ListItem
 
     Sql = "select codsitua, nomsitua from rsituacioncampo "
-    If cadWHERE <> "" Then Sql = Sql & " where (1=1) " & cadWHERE
+    If cadWhere <> "" Then Sql = Sql & " where (1=1) " & cadWhere
     Sql = Sql & " order by 1 "
     
     Set Rs = New ADODB.Recordset

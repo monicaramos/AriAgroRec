@@ -2918,7 +2918,7 @@ Public hcoCodTipoM As String 'Codigo detalle de Movimiento(ALC)
 Public hcoFechaMov As String 'fecha del movimiento
 
 '========== VBLES PRIVADAS ====================
-Private WithEvents frmHcoFrutaPrev As frmManHcoFrutaPrev 'Form para busquedas
+Private WithEvents frmHcoFrutaPrev As frmBasico2  'Form para busquedas
 Attribute frmHcoFrutaPrev.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
@@ -3027,9 +3027,9 @@ Dim HoraEnt As String
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private CadParam As String 'Cadena con los parametros para Crystal Report
+Private cadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
-Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadselect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
 Private cadNombreRPT As String 'Nombre del informe
 
@@ -3193,7 +3193,7 @@ Private Sub BotonLiquidacion()
     Screen.MousePointer = vbHourglass
     
     frmListAnticipos.NumCod = Text1(0).Text
-    frmListAnticipos.OpcionListado = 19
+    frmListAnticipos.Opcionlistado = 19
     frmListAnticipos.Show vbModal
     
     Screen.MousePointer = vbDefault
@@ -3827,16 +3827,16 @@ End Sub
 
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim CadB As String
+Dim cadB As String
 Dim Aux As String
       
     If CadenaDevuelta <> "" Then
         HaDevueltoDatos = True
         Screen.MousePointer = vbHourglass
-        CadB = ""
+        cadB = ""
         Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        CadB = Aux
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        cadB = Aux
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -3897,13 +3897,13 @@ Private Sub frmGas_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmHcoFrutaPrev_DatoSeleccionado(CadenaSeleccion As String)
-Dim CadB As String
+Dim cadB As String
     
     If CadenaSeleccion <> "" Then
-        CadB = "numalbar = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
+        cadB = "numalbar = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
         
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -4475,7 +4475,7 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 Dim cadAux As String
     
 '    '--- Laura 12/01/2007
@@ -4487,15 +4487,15 @@ Dim cadAux As String
 '    Text1(5).Text = cadAux
 '    '---
 '    CadB = ObtenerBusqueda(Me)
-    CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+    cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     
     If chkVistaPrevia = 1 Then
         EsCabecera = True
-        MandaBusquedaPrevia CadB & " and " & CadB1
-    ElseIf CadB <> "" Then
+        MandaBusquedaPrevia cadB & " and " & CadB1
+    ElseIf cadB <> "" Then
         'Se muestran en el mismo form
         CadenaConsulta = "select rhisfruta.* from " & NombreTabla & " LEFT JOIN rhisfruta_entradas ON rhisfruta.numalbar=rhisfruta_entradas.numalbar "
-        CadenaConsulta = CadenaConsulta & " WHERE " & CadB & " and " & CadB1 & " GROUP BY rhisfruta.numalbar " & Ordenacion
+        CadenaConsulta = CadenaConsulta & " WHERE " & cadB & " and " & CadB1 & " GROUP BY rhisfruta.numalbar " & Ordenacion
 '        CadenaConsulta = "select palets.* from " & NombreTabla
 '        CadenaConsulta = CadenaConsulta & " WHERE " & CadB & " GROUP BY palets.numpalet " & Ordenacion
         PonerCadenaBusqueda
@@ -4503,15 +4503,15 @@ Dim cadAux As String
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 
-    Set frmHcoFrutaPrev = New frmManHcoFrutaPrev
     
-    frmHcoFrutaPrev.cWhere = CadB
-    frmHcoFrutaPrev.DatosADevolverBusqueda = "0|1|2|"
-    frmHcoFrutaPrev.Show vbModal
+    Set frmHcoFrutaPrev = New frmBasico2
+    
+    AyudaHcoFrutas frmHcoFrutaPrev
     
     Set frmHcoFrutaPrev = Nothing
+
 
 End Sub
 
@@ -5765,9 +5765,9 @@ End Sub
 
 Private Sub BotonImprimir()
 Dim cadFormula As String
-Dim CadParam As String
+Dim cadParam As String
 Dim numParam As Byte
-Dim cadSelect As String 'select para insertar en tabla temporal
+Dim cadselect As String 'select para insertar en tabla temporal
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -5779,14 +5779,14 @@ Dim NroCopias As Integer
     End If
     
     cadFormula = ""
-    CadParam = ""
-    cadSelect = ""
+    cadParam = ""
+    cadselect = ""
     numParam = 0
     
     '===================================================
     '============ PARAMETROS ===========================
     indRPT = 22 'Impresion de Albaran de clasificacion
-    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
       
     'Nombre fichero .rpt a Imprimir
     frmImprimir.NombreRPT = nomDocu
@@ -5800,18 +5800,18 @@ Dim NroCopias As Integer
         devuelve = "{" & NombreTabla & ".numalbar}=" & Val(Text1(0).Text)
         If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
         devuelve = "numalbar = " & Val(Text1(0).Text)
-        If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+        If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
     End If
     
-    CadParam = CadParam & "pDuplicado=1|"
+    cadParam = cadParam & "pDuplicado=1|"
     numParam = numParam + 1
     
     
-    If Not HayRegParaInforme(NombreTabla, cadSelect) Then Exit Sub
+    If Not HayRegParaInforme(NombreTabla, cadselect) Then Exit Sub
      
     With frmImprimir
             .FormulaSeleccion = cadFormula
-            .OtrosParametros = CadParam
+            .OtrosParametros = cadParam
             .NumeroParametros = numParam
             .SoloImprimir = False
             .EnvioEMail = False
@@ -6602,7 +6602,7 @@ Dim Rs As ADODB.Recordset
         End If
     Else
         Set frmMens = New frmMensajes
-        frmMens.cadWHERE = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
+        frmMens.cadWhere = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
         frmMens.campo = Text1(4).Text
         frmMens.OpcionMensaje = 6
         frmMens.Show vbModal
@@ -6646,7 +6646,7 @@ End Function
 Private Sub ImportacionEntradas()
 Dim Sql As String
 Dim i As Byte
-Dim cadWHERE As String
+Dim cadWhere As String
 Dim b As Boolean
 Dim NomFic As String
 Dim cadena As String
@@ -6676,7 +6676,7 @@ On Error GoTo eError
         InicializarVbles
             '========= PARAMETROS  =============================
         'Añadir el parametro de Empresa
-        CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+        cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
         numParam = numParam + 1
 
         If CargaInicialTabla(Me.CommonDialog1.FileName) Then
@@ -6732,7 +6732,7 @@ End Sub
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .Titulo = cadTitulo
@@ -6745,8 +6745,8 @@ End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
-    cadSelect = ""
-    CadParam = ""
+    cadselect = ""
+    cadParam = ""
     numParam = 0
 End Sub
 
@@ -6757,7 +6757,7 @@ Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim NumReg As Long
 Dim Sql As String
 Dim SQL1 As String
@@ -6894,7 +6894,7 @@ Dim Sql As String
 Dim SQL1 As String
 
 Dim Mens As String
-Dim numlinea As Long
+Dim NumLinea As Long
 
 Dim vError As Boolean
 Dim vNota As Long
@@ -6949,7 +6949,7 @@ Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim NumReg As Long
 Dim Sql As String
 Dim SQL1 As String
@@ -7036,7 +7036,7 @@ Dim Sql As String
 Dim SQL1 As String
 
 Dim Mens As String
-Dim numlinea As Long
+Dim NumLinea As Long
 
 Dim vError As Boolean
 Dim vNota As Long

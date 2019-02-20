@@ -33,22 +33,24 @@ Option Explicit
 '       14.- Modificacion registros BD
 '       15.- Insertamos los albaranes en las facturas de terceros
 '       16.- Eliminar volcado de traza
+'       17.- Insertar facturas
+'       18.- Modificar facturas
 
 Public Function Insertar(Accion As Byte, ByRef ElUsuario As Usuario, Descripcion As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EI
     Insertar = False
     
-    SQL = "insert into `slog` (`fecha`,`accion`,`usuario`,`pc`,`descripcion`,`procedencia`) values ( "
-    SQL = SQL & " now()," & Accion & " ,'" & DevNombreSQL(ElUsuario.Login) & "','"
-    SQL = SQL & DevNombreSQL(ElUsuario.PC) & "',"
+    Sql = "insert into `slog` (`fecha`,`accion`,`usuario`,`pc`,`descripcion`,`procedencia`) values ( "
+    Sql = Sql & " now()," & Accion & " ,'" & DevNombreSQL(ElUsuario.Login) & "','"
+    Sql = Sql & DevNombreSQL(ElUsuario.PC) & "',"
     If Descripcion = "" Then
-        SQL = SQL & "NULL,1)"
+        Sql = Sql & "NULL,1)"
     Else
-        SQL = SQL & "'" & DevNombreSQL(Descripcion) & "',1)"
+        Sql = Sql & "'" & DevNombreSQL(Descripcion) & "',1)"
     End If
-    conn.Execute SQL
+    conn.Execute Sql
     
     
     Insertar = True
@@ -77,6 +79,8 @@ Public Function DevuelveAcciones(ByRef ListaAcciones As Collection) As Boolean
     ListaAcciones.Add "14|Modificar Registros BD|"
     ListaAcciones.Add "15|Insertar Albaranes|"
     ListaAcciones.Add "16|Eliminar Volcado|"
+    ListaAcciones.Add "17|Insertar Facturas|"
+    ListaAcciones.Add "18|Modificar Facturas|"
     DevuelveAcciones = True
     Exit Function
 EDevuelveAcciones:
@@ -84,11 +88,11 @@ EDevuelveAcciones:
 End Function
 
 Public Sub InsertarCambiosRegistros(Accion As Byte, ByRef ElUsuario As Usuario, Descripcion As String, tabla As String, CP As String)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 
     '[Monica]15/11/2013: meto el replace
-    SQL = Replace(CadenaCambio, "\'", " ")
+    Sql = Replace(CadenaCambio, "\'", " ")
 
     Sql2 = "insert into slog (fecha, accion, usuario, pc, descripcion, procedencia, tabla, cp, cadena, valorant) values ("
     Sql2 = Sql2 & DBSet(Now, "FH") & "," & Accion & " ,'" & DevNombreSQL(ElUsuario.Login) & "','"
@@ -101,7 +105,7 @@ Dim Sql2 As String
     
     Sql2 = Sql2 & DBSet(tabla, "T") & ","
     Sql2 = Sql2 & DBSet(CP, "T") & ","
-    Sql2 = Sql2 & DBSet(SQL, "T") & ","
+    Sql2 = Sql2 & DBSet(Sql, "T") & ","
     If ValorAnterior = ValorNulo Then
         Sql2 = Sql2 & ValorNulo & ")"
     Else

@@ -167,16 +167,16 @@ Begin VB.Form frmManFactTranspor
       TabCaption(1)   =   "Rectificativa"
       TabPicture(1)   =   "frmManFactTranspor.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(14)"
-      Tab(1).Control(1)=   "imgFec(1)"
-      Tab(1).Control(2)=   "Label1(13)"
-      Tab(1).Control(3)=   "Label1(12)"
-      Tab(1).Control(4)=   "Label1(11)"
-      Tab(1).Control(5)=   "Text1(15)"
-      Tab(1).Control(6)=   "Text1(14)"
-      Tab(1).Control(7)=   "Text1(13)"
-      Tab(1).Control(8)=   "Text1(12)"
-      Tab(1).Control(9)=   "Combo1(2)"
+      Tab(1).Control(0)=   "Combo1(2)"
+      Tab(1).Control(1)=   "Text1(12)"
+      Tab(1).Control(2)=   "Text1(13)"
+      Tab(1).Control(3)=   "Text1(14)"
+      Tab(1).Control(4)=   "Text1(15)"
+      Tab(1).Control(5)=   "Label1(11)"
+      Tab(1).Control(6)=   "Label1(12)"
+      Tab(1).Control(7)=   "Label1(13)"
+      Tab(1).Control(8)=   "imgFec(1)"
+      Tab(1).Control(9)=   "Label1(14)"
       Tab(1).ControlCount=   10
       Begin VB.ComboBox Combo1 
          BeginProperty Font 
@@ -1106,7 +1106,7 @@ Begin VB.Form frmManFactTranspor
          TabIndex        =   2
          Tag             =   "Cod.Transportista|T1|N|||rfacttra|codtrans||S|"
          Text            =   "Text1"
-         Top             =   870
+         Top             =   855
          Width           =   1290
       End
       Begin VB.TextBox Text1 
@@ -1123,7 +1123,7 @@ Begin VB.Form frmManFactTranspor
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   2160
+         Left            =   2205
          MaxLength       =   7
          TabIndex        =   0
          Tag             =   "Nº Factura|N|S|||rfacttra|numfactu|0000000|S|"
@@ -1452,7 +1452,7 @@ Begin VB.Form frmManFactTranspor
          EndProperty
          Height          =   255
          Index           =   28
-         Left            =   2160
+         Left            =   2205
          TabIndex        =   23
          Top             =   0
          Width           =   1125
@@ -1845,7 +1845,11 @@ Dim Facturas As String
 
 Dim Cliente As String
 Private BuscaChekc As String
-Dim vTrans As CTransportista
+
+Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
+Dim vTrans As CTransportista ' clase de transportista
+
+
 
 Private Sub btnBuscar_Click(Index As Integer)
     TerminaBloquear
@@ -1864,7 +1868,7 @@ Private Sub btnBuscar_Click(Index As Integer)
             Set frmMens = New frmMensajes
             
             frmMens.OpcionMensaje = 24
-            frmMens.cadWHERE = "codtrans = " & DBSet(Data1.Recordset!codTrans, "T")
+            frmMens.cadWhere = "codtrans = " & DBSet(Data1.Recordset!codTrans, "T")
             frmMens.Show vbModal
             Set frmMens = Nothing
             
@@ -1983,6 +1987,7 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub BotonAnyadir()
+Dim vTipoMov As CTiposMov
 
     LimpiarCampos 'Huida els TextBox
     PonerModo 3
@@ -2000,11 +2005,15 @@ Private Sub BotonAnyadir()
     Text1(5).Text = 0
     Text1(6).Text = 0
     Text1(7).Text = 0
-    Text1(8).Text = vParamAplic.PorcreteFacSoc
+    Text1(8).Text = vParamAplic.PorcreteFacTra
     
     LimpiarDataGrids
     Combo1(0).ListIndex = 0
-    Combo1(0).SetFocus
+    Text1(10).Text = Mid(Trim(Combo1(0).List(0)), 1, 3)
+'    Combo1(0).SetFocus
+    
+    PonerFoco Text1(1)
+    
 '    PonerFoco Text1(1) '*** 1r camp visible que siga PK ***
     ' *** si n'hi han camps de descripció a la capçalera ***
     'PosarDescripcions
@@ -2505,22 +2514,22 @@ End Sub
 
 
 Private Sub frmB_DatoSeleccionado(CadenaSeleccion As String)
-Dim CadB As String
+Dim cadB As String
 Dim Aux As String
       
     If CadenaSeleccion <> "" Then
         HaDevueltoDatos = True
         Screen.MousePointer = vbHourglass
-        CadB = ""
+        cadB = ""
         Aux = ValorDevueltoFormGrid(Text1(10), CadenaSeleccion, 1)
-        CadB = CadB & Aux
+        cadB = cadB & Aux
         Aux = ValorDevueltoFormGrid(Text1(0), CadenaSeleccion, 2)
-        CadB = CadB & " and " & Aux
+        cadB = cadB & " and " & Aux
         Aux = ValorDevueltoFormGrid(Text1(1), CadenaSeleccion, 3)
-        CadB = CadB & " and " & Aux
+        cadB = cadB & " and " & Aux
         Aux = ValorDevueltoFormGrid(Text1(2), CadenaSeleccion, 4)
-        CadB = CadB & " and " & Aux
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        cadB = cadB & " and " & Aux
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -2584,8 +2593,8 @@ End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Variedades
-    txtAux1(indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") 'Cod Variedad
-    txtAux2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Variedad
+    txtAux1(5).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") 'Cod Variedad
+    txtAux2(5).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Variedad
 End Sub
 
 Private Sub frmTra_DatoSeleccionado(CadenaSeleccion As String)
@@ -2882,6 +2891,23 @@ Dim vSocio As cSocio
                         End If
                     End If
                     Set vTrans = Nothing
+                    
+'                    '[Monica]14/02/2019: dejamos modificar el nro de factura
+'                    If Modo = 3 Then
+'                        '[Monica]14/02/2019: pueden tocar el contador
+'                        If vParamAplic.TipoContadorTRA = 0 Then ' contador automatico de FTR facturas de transporte
+'                            Set vTipoMov = New CTiposMov
+'                            If vTipoMov.Leer(CodTipoMov) Then
+'                                Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
+'                            End If
+'                        Else
+'                            Set vTrans = New CTransportista
+'                            If vTrans.LeerDatos(Text1(2).Text) Then
+'                                Text1(0).Text = vTrans.ConseguirContador()
+'                            End If
+'                        End If
+'                        PonerFoco Text1(0)
+'                    End If
                 End If
             End If
             
@@ -2905,7 +2931,7 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 Dim cadAux As String
     
 '    '--- Laura 12/01/2007
@@ -2920,17 +2946,17 @@ Dim cadAux As String
 
     '[Monica]09/01/2015: nuevo tipo de dato para busqueda sin asteriscos
     Text1(2).Tag = "Cod.Transportista|TT|N|||rfacttra|codtrans||S|"
-    CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+    cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     Text1(2).Tag = "Cod.Transportista|T|N|||rfacttra|codtrans||S|"
 
     If chkVistaPrevia = 1 Then
         EsCabecera = True
-        MandaBusquedaPrevia CadB
-    ElseIf CadB <> "" Then
+        MandaBusquedaPrevia cadB
+    ElseIf cadB <> "" Then
         'Se muestran en el mismo form
         CadenaConsulta = "select rfacttra.* from " & NombreTabla & " LEFT JOIN rfacttra_albaran ON rfacttra.codtipom=rfacttra_albaran.codtipom "
         CadenaConsulta = CadenaConsulta & " and rfacttra_albaran.numfactu = rfacttra.numfactu and rfacttra_albaran.fecfactu = rfacttra.fecfactu "
-        CadenaConsulta = CadenaConsulta & " WHERE " & CadB & " GROUP BY rfacttra.codtipom, rfacttra.numfactu, rfacttra.fecfactu, rfacttra.codtrans " & Ordenacion
+        CadenaConsulta = CadenaConsulta & " WHERE " & cadB & " GROUP BY rfacttra.codtipom, rfacttra.numfactu, rfacttra.fecfactu, rfacttra.codtrans " & Ordenacion
 '        CadenaConsulta = "select palets.* from " & NombreTabla
 '        CadenaConsulta = CadenaConsulta & " WHERE " & CadB & " GROUP BY palets.numpalet " & Ordenacion
         PonerCadenaBusqueda
@@ -2938,10 +2964,10 @@ Dim cadAux As String
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim Cad As String
-Dim Tabla As String
+Dim tabla As String
 Dim Titulo As String
 Dim Desc As String, devuelve As String
     'Llamamos a al form
@@ -2994,7 +3020,7 @@ Dim Desc As String, devuelve As String
 
     Set frmB = New frmBasico2
     
-    AyudaFrasTransporte frmB, , CadB
+    AyudaFrasTransporte frmB, , cadB
     
     Set frmB = Nothing
 
@@ -3189,7 +3215,11 @@ Dim b1 As Boolean
     
     b = (Modo <> 1)
     'Campos Nº Pedido bloqueado y en azul
-    BloquearTxt Text1(0), b, True
+'    If Modo = 3 Then
+'        Text1(0).Enabled = True
+'    Else
+        BloquearTxt Text1(0), b, True
+'    End If
          
     BloquearTxt Text1(2), (Modo <> 1) And Modo <> 3 '<= 2)
     
@@ -3258,6 +3288,9 @@ Dim b1 As Boolean
     imgFec(1).Enabled = b
     imgFec(1).visible = b
        
+       
+'    Check1(1).Enabled = ((Modo = 3 Or Modo = 4) And vUsu.Nivel = 0)
+       
     ' ***************************
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -3299,8 +3332,11 @@ Dim b As Boolean
             '[Monica]20/06/2017: control de fechas que antes no estaba, solo para Montifrut que cuando integra no coge la fecha de recepcion
             ResultadoFechaContaOK = EsFechaOKConta(CDate(Text1(1).Text))
             If ResultadoFechaContaOK > 0 Then
-                If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
-                Exit Function
+                If ResultadoFechaContaOK <> 4 Then
+                    MsgBox MensajeFechaOkConta, vbExclamation
+'                    If MsgBox("¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then Exit Function
+                    Exit Function
+                End If
             End If
         End If
     End If
@@ -3699,7 +3735,12 @@ Dim Mens As String
     If Data1.Recordset.EOF Then Exit Function
         
     conn.BeginTrans
-        
+    
+    Dim vLog As cLOG
+    Set vLog = New cLOG
+    vLog.Insertar 1, vUsu, "Factura de transporte, Nro:" & Text1(0).Text & " Fec:" & Text1(1) & " Transpor: " & Text1(2)
+    Set vLog = Nothing
+    
     'Eliminar en tablas de cabecera de factura
     '------------------------------------------
     Sql = " " & ObtenerWhereCP(True)
@@ -3915,9 +3956,9 @@ End Sub
 
 Private Sub BotonImprimir()
 Dim cadFormula As String
-Dim CadParam As String
+Dim cadParam As String
 Dim numParam As Byte
-Dim cadSelect As String 'select para insertar en tabla temporal
+Dim cadselect As String 'select para insertar en tabla temporal
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -3930,8 +3971,8 @@ Dim Tipo As Byte
     End If
     
     cadFormula = ""
-    CadParam = ""
-    cadSelect = ""
+    cadParam = ""
+    cadselect = ""
     numParam = 0
     
         
@@ -3943,14 +3984,14 @@ Dim Tipo As Byte
     devuelve = "{" & NombreTabla & ".codtipom}='" & Mid(Combo1(0).Text, 1, 3) & "'"
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     devuelve = "codtipom = '" & Mid(Combo1(0).Text, 1, 3) & "'"
-    If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+    If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
     
     Select Case Mid(Combo1(0).Text, 1, 3)
         Case "FTR"
             indRPT = 49
     End Select
     
-    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
       
     'Nombre fichero .rpt a Imprimir
     frmImprimir.NombreRPT = nomDocu
@@ -3960,30 +4001,30 @@ Dim Tipo As Byte
     devuelve = "{" & NombreTabla & ".numfactu}=" & Val(Text1(0).Text)
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     devuelve = "numfactu = " & Val(Text1(0).Text)
-    If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+    If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
     
     'Fecha Factura
     devuelve = "{" & NombreTabla & ".fecfactu}=Date(" & Year(Text1(1).Text) & "," & Month(Text1(1).Text) & "," & Day(Text1(1).Text) & ")"
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     devuelve = "fecfactu = " & DBSet(Text1(1).Text, "F")
-    If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+    If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
     
     'Transportista
     devuelve = "{" & NombreTabla & ".codtrans}=""" & Trim(Text1(2).Text) & """"
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     devuelve = "codtrans = '" & Trim(Text1(2).Text) & "'"
-    If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+    If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
     
     
-    CadParam = CadParam & "pDuplicado=1|"
+    cadParam = cadParam & "pDuplicado=1|"
     numParam = numParam + 1
     
     
-    If Not HayRegParaInforme(NombreTabla, cadSelect) Then Exit Sub
+    If Not HayRegParaInforme(NombreTabla, cadselect) Then Exit Sub
      
     With frmImprimir
             .FormulaSeleccion = cadFormula
-            .OtrosParametros = CadParam
+            .OtrosParametros = cadParam
             .NumeroParametros = numParam
             .SoloImprimir = False
             .EnvioEMail = False
@@ -3994,7 +4035,7 @@ Dim Tipo As Byte
     End With
 
     If frmVisReport.EstaImpreso Then
-        ActualizarRegistros "rfacttra", cadSelect
+        ActualizarRegistros "rfacttra", cadselect
     End If
 End Sub
 
@@ -4058,6 +4099,13 @@ Dim MenError As String
     b = ModificaDesdeFormulario2(Me, 2, "Frame2")
 '    If b Then b = ModificaDesdeFormulario2(Me, 2, "Frame6")
 
+    Dim vLog As cLOG
+    Set vLog = New cLOG
+    vLog.Insertar 18, vUsu, "Factura de transporte, Nro:" & Text1(0).Text & " Fec:" & Text1(1) & " Transpor: " & Text1(2)
+    Set vLog = Nothing
+
+
+
 EModificarCab:
     If Err.Number <> 0 Or Not b Then
         MenError = "Modificando Factura." & vbCrLf & "----------------------------" & vbCrLf & MenError
@@ -4075,8 +4123,6 @@ End Function
 
 
 Private Sub InsertarCabecera()
-Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim vTrans As CTransportista ' clase de transportista
 Dim Sql As String
 
     On Error GoTo EInsertarCab
@@ -4089,7 +4135,7 @@ Dim Sql As String
             Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
             Sql = CadenaInsertarDesdeForm(Me)
             If Sql <> "" Then
-                If InsertarOferta(Sql, vTipoMov) Then
+                If InsertarOferta(Sql) Then
                     CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
                     PonerCadenaBusqueda
                     PonerModo 2
@@ -4120,7 +4166,7 @@ Dim Sql As String
             Text1(0).Text = vTrans.ConseguirContador()
             Sql = CadenaInsertarDesdeForm(Me)
             If Sql <> "" Then
-                If InsertarOferta2(Sql, vTrans) Then
+                If InsertarOferta2(Sql) Then
                     CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
                     PonerCadenaBusqueda
  '                   PonerModo 2
@@ -4145,8 +4191,8 @@ Dim Sql As String
             End If
             Text1(0).Text = Format(Text1(0).Text, "0000000")
         End If
-        
-        
+'
+'
         Set vTrans = Nothing
     
     End If
@@ -4160,7 +4206,7 @@ EInsertarCab:
 End Sub
 
 
-Private Function InsertarOferta(vSQL As String, vTipoMov As CTiposMov) As Boolean
+Private Function InsertarOferta(vSQL As String) As Boolean
 Dim MenError As String
 Dim bol As Boolean, Existe As Boolean
 Dim cambiaSQL As Boolean
@@ -4193,7 +4239,16 @@ Dim devuelve As String
     MenError = "Error al insertar en la tabla Cabecera de Factura (" & NombreTabla & ")."
     conn.Execute vSQL, , adCmdText
     
+    Dim vLog As cLOG
+    Set vLog = New cLOG
+    vLog.Insertar 17, vUsu, "Factura de transporte, Nro:" & Text1(0).Text & " Fec:" & Text1(1) & " Transpor: " & Text1(2)
+    Set vLog = Nothing
+    
+    
+    
+    
     MenError = "Error al actualizar el contador de la Factura."
+'    If Text1(0).Text = vTipoMov.Contador Then vTipoMov.IncrementarContador (CodTipoMov)
     vTipoMov.IncrementarContador (CodTipoMov)
     
 EInsertarOferta:
@@ -4212,7 +4267,7 @@ EInsertarOferta:
 End Function
 
 
-Private Function InsertarOferta2(vSQL As String, vTrans As CTransportista) As Boolean
+Private Function InsertarOferta2(vSQL As String) As Boolean
 Dim MenError As String
 Dim bol As Boolean, Existe As Boolean
 Dim cambiaSQL As Boolean
@@ -4245,7 +4300,13 @@ Dim devuelve As String
     MenError = "Error al insertar en la tabla Cabecera de Factura (" & NombreTabla & ")."
     conn.Execute vSQL, , adCmdText
     
+    Dim vLog As cLOG
+    Set vLog = New cLOG
+    vLog.Insertar 17, vUsu, "Factura de transporte, Nro:" & Text1(0).Text & " Fec:" & Text1(1) & " Transpor: " & Text1(2)
+    Set vLog = Nothing
+    
     MenError = "Error al actualizar el contador de la Factura."
+'    If CLng(ComprobarCero(Text1(0).Text)) = vTrans.Contador + 1 Then vTrans.IncrementarContador
     vTrans.IncrementarContador
     
 EInsertarOferta:
