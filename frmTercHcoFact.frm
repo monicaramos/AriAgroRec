@@ -168,9 +168,9 @@ Begin VB.Form frmTercHcoFact
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmTercHcoFact.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame2(1)"
+      Tab(0).Control(0)=   "Label1(11)"
       Tab(0).Control(1)=   "Text1(15)"
-      Tab(0).Control(2)=   "Label1(11)"
+      Tab(0).Control(2)=   "Frame2(1)"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmTercHcoFact.frx":0028
@@ -3073,7 +3073,7 @@ On Error GoTo eModificarLinea
     
     vWhere = ObtenerWhereCP(False)
     vWhere = vWhere & " AND numalbar=" & Data3.Recordset.Fields!NumAlbar & ""
-    vWhere = vWhere & " and numlinea=" & Data2.Recordset!numlinea
+    vWhere = vWhere & " and numlinea=" & Data2.Recordset!NumLinea
     If Not BloqueaRegistro(NomTablaLineas, vWhere) Then
         TerminaBloquear
         Exit Sub
@@ -3267,7 +3267,7 @@ End Sub
 
 Private Sub CmdTraerAlbaranes_Click()
 Dim Sql As String
-Dim cadWHERE As String
+Dim cadWhere As String
 
     If AsignarAlbaranes Then
 '        MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -3277,7 +3277,7 @@ End Sub
 
 Private Function AsignarAlbaranes() As Boolean
 Dim Sql As String
-Dim cadWHERE As String
+Dim cadWhere As String
 
 Dim Coope As Long
 Dim cSocios As String
@@ -3317,7 +3317,7 @@ Dim cSocios As String
     
 '[Monica]19/09/2013: cambio esta linea por la de abajo
 '    cadwhere = "codsocio = " & DBSet(Text1(2).Text, "N")
-    cadWHERE = cSocios
+    cadWhere = cSocios
     
 '[Monica]19/09/2013:--- quiere que quite la condicion de que sean albaranes de la variedad que me dieron inicial
 '    cadwhere = cadwhere & " and rhisfruta.codvarie in (select distinct codvarie from rlifter where codsocio = " & Data1.Recordset!CodSocio
@@ -3327,7 +3327,7 @@ Dim cSocios As String
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 47
-        frmMens.cadWHERE = cadWHERE
+        frmMens.cadWhere = cadWhere
         
         frmMens.Show vbModal
         
@@ -3525,18 +3525,18 @@ Dim i As Integer
 End Sub
 
 Private Sub frmTERFra_DatoSeleccionado(CadenaSeleccion As String)
-Dim CadB As String
+Dim cadB As String
 
     If CadenaSeleccion <> "" Then
         Text1(0).Text = RecuperaValor(CadenaSeleccion, 1) 'numfactu
         Text1(1).Text = RecuperaValor(CadenaSeleccion, 2) 'fecfactu
         Text1(2).Text = RecuperaValor(CadenaSeleccion, 3) 'codsocio
         
-        CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+        cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     
-        If CadB <> "" Then
+        If cadB <> "" Then
             'Se muestran en el mismo form
-            CadenaConsulta = "select * from rcafter WHERE " & CadB & " " & Ordenacion
+            CadenaConsulta = "select * from rcafter WHERE " & cadB & " " & Ordenacion
             PonerCadenaBusqueda
         End If
     End If
@@ -3568,20 +3568,20 @@ End Sub
 
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim CadB As String
+Dim cadB As String
 Dim Aux As String
       
     If CadenaDevuelta <> "" Then
         HaDevueltoDatos = True
         Screen.MousePointer = vbHourglass
-        CadB = ""
+        cadB = ""
         Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        CadB = Aux
+        cadB = Aux
         Aux = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
-        CadB = CadB & " and " & Aux
+        cadB = cadB & " and " & Aux
         Aux = ValorDevueltoFormGrid(Text1(2), CadenaDevuelta, 3)
-        CadB = CadB & " and " & Aux
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB
+        cadB = cadB & " and " & Aux
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB
         CadenaConsulta = CadenaConsulta & " GROUP BY rcafter.codsocio, rcafter.numfactu,rcafter.fecfactu "
         CadenaConsulta = CadenaConsulta & " " & Ordenacion
         PonerCadenaBusqueda
@@ -3958,16 +3958,16 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 
-    CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+    cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia CadB
-    ElseIf CadB <> "" Then
+        MandaBusquedaPrevia cadB
+    ElseIf cadB <> "" Then
         'Se muestran en el mismo form
         CadenaConsulta = "select " & NombreTabla & ".* from (" & NombreTabla & " LEFT OUTER JOIN rlifter ON " & NombreTabla & ".codsocio=rlifter.codsocio AND " & NombreTabla & ".numfactu=rlifter.numfactu AND " & NombreTabla & ".fecfactu=rlifter.fecfactu) "
-        CadenaConsulta = CadenaConsulta & " WHERE " & CadB
+        CadenaConsulta = CadenaConsulta & " WHERE " & cadB
         CadenaConsulta = CadenaConsulta & " GROUP BY rcafter.codsocio, rcafter.numfactu, rcafter.fecfactu "
         CadenaConsulta = CadenaConsulta & " " & Ordenacion
         
@@ -3976,10 +3976,10 @@ Dim CadB As String
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim Cad As String
-Dim Tabla As String
+Dim tabla As String
 Dim Titulo As String
 Dim devuelve As String
     
@@ -4028,7 +4028,7 @@ Dim devuelve As String
     
     Set frmTERFra = New frmBasico2
     
-    AyudaFrasTerceros frmTERFra
+    AyudaFrasTerceros frmTERFra, , cadB
     
     Set frmTERFra = Nothing
 
@@ -4240,7 +4240,7 @@ Dim b As Boolean
     '---------------------------------------------
     b = (Modo <> 0 And Modo <> 2 And Modo <> 5)
     cmdCancelar.visible = b
-    CmdAceptar.visible = b
+    cmdAceptar.visible = b
     
     
     For i = 0 To Me.imgBuscar.Count - 1
@@ -4322,7 +4322,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -4330,7 +4330,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 17 And KeyAscii = 13 Then 'campo nº de lote y ENTER
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYpress KeyAscii
     End If
@@ -4351,7 +4351,7 @@ Private Sub Text3_LostFocus(Index As Integer)
 '        Case 0, 1 'trabajador
 '            Text2(Index).Text = PonerNombreDeCod(Text3(Index), conAri, "straba", "nomtraba", "codtraba", "Cod. Trabajador", "N")
         Case 8 'observa 5
-            PonerFocoBtn Me.CmdAceptar
+            PonerFocoBtn Me.cmdAceptar
     End Select
 End Sub
 
@@ -4470,7 +4470,7 @@ Private Sub PonerBotonCabecera(b As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
 On Error Resume Next
 
-    Me.CmdAceptar.visible = Not b
+    Me.cmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
     Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
@@ -5319,7 +5319,7 @@ End Sub
 
 
 
-Private Function InsertarAlbaranes(Albaranes As String)
+Private Function InsertarAlbaranes(albaranes As String)
 Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
@@ -5348,13 +5348,13 @@ Dim Precio As Currency
     '------------------------------------------------------------------------------
     '  LOG de acciones
     Set LOG = New cLOG
-    LOG.Insertar 15, vUsu, "Albaranes de Terceros: " & vbCrLf & Albaranes & vbCrLf & " de " & ObtenerWhereCP(False)
+    LOG.Insertar 15, vUsu, "Albaranes de Terceros: " & vbCrLf & albaranes & vbCrLf & " de " & ObtenerWhereCP(False)
     Set LOG = Nothing
     '-----------------------------------------------------------------------------
     
     
     
-    vSQL = "select codvarie, sum(kilosnet) kilosnet from rhisfruta where numalbar in ( " & Albaranes & ") group by 1 order by 1"
+    vSQL = "select codvarie, sum(kilosnet) kilosnet from rhisfruta where numalbar in ( " & albaranes & ") group by 1 order by 1"
     
     Set Rs = New ADODB.Recordset
     Rs.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -5369,7 +5369,7 @@ Dim Precio As Currency
     
         ImporteTot = ImporteTot + ImporteVar
     
-        Sql2 = "select * from rhisfruta where numalbar in (" & Albaranes & ") and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql2 = "select * from rhisfruta where numalbar in (" & albaranes & ") and codvarie = " & DBSet(Rs!codvarie, "N")
         Set Rs2 = New ADODB.Recordset
         
         Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText

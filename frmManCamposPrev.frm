@@ -53,7 +53,7 @@ Begin VB.Form frmManCamposPrev
       EndProperty
       Height          =   350
       Index           =   7
-      Left            =   9720
+      Left            =   9675
       MaxLength       =   2
       TabIndex        =   15
       Tag             =   "Subparcela|T|N|||rcampos|subparce|||"

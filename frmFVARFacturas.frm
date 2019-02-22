@@ -2286,9 +2286,9 @@ Dim BdConta1 As Integer
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private CadParam As String 'Cadena con los parametros para Crystal Report
+Private cadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
-Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadselect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
 Private cadNombreRPT As String 'Nombre del informe
 
@@ -2391,8 +2391,8 @@ Dim Sql As String
                     If vSeccion.AbrirConta Then
                         PorRet = 0
                         If Text1(26).Text <> "" Then PorRet = CCur(ImporteSinFormato(Text1(26).Text))
-                        Adoaux(0).Recordset.MoveFirst
-                        RecalculoBasesIvaFactura Adoaux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet, Combo1(2).ListIndex
+                        AdoAux(0).Recordset.MoveFirst
+                        RecalculoBasesIvaFactura AdoAux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet, Combo1(2).ListIndex
 
                         Text1(28).Text = ""
                         If ImpRet <> 0 Then Text1(28).Text = Format(ImpRet, "#,###,###,##0.00")
@@ -2757,7 +2757,7 @@ Dim Sql2 As String
 End Sub
 
 Private Sub frmFVarCL_DatoSeleccionado(CadenaSeleccion As String)
-Dim CadB As String
+Dim cadB As String
 
     If CadenaSeleccion <> "" Then
         Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'seccion
@@ -2765,11 +2765,11 @@ Dim CadB As String
         Text1(1).Text = RecuperaValor(CadenaSeleccion, 3) 'numfactu
         Text1(2).Text = RecuperaValor(CadenaSeleccion, 4) 'fecfactu
         
-        CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+        cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     
-        If CadB <> "" Then
+        If cadB <> "" Then
             'Se muestran en el mismo form
-            CadenaConsulta = "select * from " & NomTabla & " WHERE " & CadB & " " & Ordenacion
+            CadenaConsulta = "select * from " & NomTabla & " WHERE " & cadB & " " & Ordenacion
             PonerCadenaBusqueda
         End If
     End If
@@ -2847,7 +2847,7 @@ On Error GoTo EPonerModo
 
     b = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = b
-    CmdAceptar.visible = b
+    cmdAceptar.visible = b
     
     '---------------------------------------------
     
@@ -3079,7 +3079,7 @@ Dim i As Byte
     b = (Modo = 3 Or (Modo = 4 And Not ModificarTotales) Or Modo = 2) 'And (Check1(1).Value = 0)
     For i = 0 To ToolAux.Count - 1
         ToolAux(i).Buttons(1).Enabled = b
-        If b Then bAux = (b And Me.Adoaux(i).Recordset.RecordCount > 0)
+        If b Then bAux = (b And Me.AdoAux(i).Recordset.RecordCount > 0)
         ToolAux(i).Buttons(2).Enabled = bAux
         ToolAux(i).Buttons(3).Enabled = bAux
     Next i
@@ -3106,11 +3106,11 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
 Dim Sql As String
-Dim Tabla As String
+Dim tabla As String
     
     Select Case Index
         Case 0 'Lineas de factura
-                Tabla = "fvarlinfact"
+                tabla = "fvarlinfact"
                 Sql = "SELECT codtipom,numfactu,fecfactu,numlinea,fvarlinfact.codconce,fvarconce.nomconce, fvarlinfact.tipoiva, ampliaci,"
                 Sql = Sql & "cantidad, precio, importe"
                 Sql = Sql & " FROM fvarlinfact, fvarconce "
@@ -3121,13 +3121,13 @@ Dim Tabla As String
                 Else
                     Sql = Sql & " AND fvarlinfact.codtipom is null"
                 End If
-                Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+                Sql = Sql & " ORDER BY " & tabla & ".numlinea "
     End Select
     MontaSQLCarga = Sql
 End Function
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-    Dim CadB As String
+    Dim cadB As String
     Dim Aux As String
     
     If CadenaDevuelta <> "" Then
@@ -3135,18 +3135,18 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
         Screen.MousePointer = vbHourglass
         'Sabemos que campos son los que nos devuelve
         'Creamos una cadena consulta y ponemos los datos
-        CadB = ""
+        cadB = ""
         Aux = ValorDevueltoFormGrid(Text1(3), CadenaDevuelta, 1) 'codsecci
-        CadB = Aux
+        cadB = Aux
         Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 2) 'letraser
-        CadB = CadB & " AND " & Aux
+        cadB = cadB & " AND " & Aux
         Aux = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 3) 'numfactu
-        CadB = CadB & " AND " & Aux
+        cadB = cadB & " AND " & Aux
         Aux = ValorDevueltoFormGrid(Text1(2), CadenaDevuelta, 4) 'fecfactu
-        CadB = CadB & " AND " & Aux
+        cadB = cadB & " AND " & Aux
         '   Como la clave principal es unica, con poner el sql apuntando
         '   al valor devuelto sobre la clave ppal es suficiente
-        CadenaConsulta = "select * from " & NomTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NomTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -3423,9 +3423,9 @@ Private Sub mnImprimir_Click()
     indRPT = 89 'Facturas Varias
 
 
-    CadParam = "|pEmpresa=" & vEmpresa.nomempre & "|" '& "|pCodigoISO="11112"|pCodigoRev="01"|
+    cadParam = "|pEmpresa=" & vEmpresa.nomempre & "|" '& "|pCodigoISO="11112"|pCodigoRev="01"|
 
-    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
     'Nombre fichero .rpt a Imprimir
     frmImprimir.NombreRPT = nomDocu
     ' he añadido estas dos lineas para que llame al rpt correspondiente
@@ -3600,22 +3600,22 @@ Private Sub BotonBuscar()
 End Sub
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 
-    CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+    cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     
     If chkVistaPrevia(0) = 1 Then
-        MandaBusquedaPrevia CadB
-    ElseIf CadB <> "" Then
+        MandaBusquedaPrevia cadB
+    ElseIf cadB <> "" Then
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NomTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NomTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
     Else
         PonerFoco Text1(0)
     End If
 End Sub
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 Dim Cad As String
 '        'Llamamos a al form
 '        '##A mano
@@ -3655,7 +3655,7 @@ Dim Cad As String
 
     Set frmFVarCL = New frmBasico2
     
-    AyudaFVarClientes frmFVarCL
+    AyudaFVarClientes frmFVarCL, , cadB
     
     Set frmFVarCL = Nothing
     
@@ -3977,16 +3977,16 @@ Dim V
                     DataGridAux(NumTabMto).Enabled = True
                     DataGridAux(NumTabMto).SetFocus
 
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
-                        Adoaux(NumTabMto).Recordset.MoveFirst
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                        AdoAux(NumTabMto).Recordset.MoveFirst
                     End If
 
                 Case 2 'modificar llinies
                     ModoLineas = 0
                     PonerModo 4
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
-                        V = Adoaux(NumTabMto).Recordset.Fields(3) 'el 1 es el nº de llinia
-                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                        V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 1 es el nº de llinia
+                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
                     End If
                     LLamaLineas NumTabMto, ModoLineas 'ocultar txtAux
             End Select
@@ -4453,7 +4453,7 @@ Dim Eliminar As Boolean
 '    If AdoAux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     
-    If Adoaux(Index).Recordset.RecordCount = 1 Then
+    If AdoAux(Index).Recordset.RecordCount = 1 Then
         MsgBox "No se puede borrar un única línea de factura, elimine la factura completa", vbExclamation
         PonerModo 2
         Exit Sub
@@ -4465,13 +4465,13 @@ Dim Eliminar As Boolean
     Select Case Index
         Case 0 'lineas de factura
             Sql = "¿Seguro que desea eliminar la línea?"
-            Sql = Sql & vbCrLf & "Nº línea: " & Format(DBLet(Adoaux(Index).Recordset!numlinea), FormatoCampo(txtAux(4)))
-            Sql = Sql & vbCrLf & "Concepto: " & DBLet(Adoaux(Index).Recordset!codConce) '& "  " & txtAux(4).Text
+            Sql = Sql & vbCrLf & "Nº línea: " & Format(DBLet(AdoAux(Index).Recordset!NumLinea), FormatoCampo(txtAux(4)))
+            Sql = Sql & vbCrLf & "Concepto: " & DBLet(AdoAux(Index).Recordset!codConce) '& "  " & txtAux(4).Text
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
-                NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
+                NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
                 Eliminar = True
                 Sql = "DELETE FROM fvarlinfact"
-                Sql = Sql & Replace(ObtenerWhereCab(True), "fvarcabfact", "fvarlinfact") & " AND numlinea= " & Adoaux(Index).Recordset!numlinea
+                Sql = Sql & Replace(ObtenerWhereCab(True), "fvarcabfact", "fvarlinfact") & " AND numlinea= " & AdoAux(Index).Recordset!NumLinea
             End If
     End Select
 
@@ -4490,7 +4490,7 @@ Dim Eliminar As Boolean
         
         'antes estaba debajo de situardata
         CargaGrid Index, True
-        SituarDataTrasEliminar Adoaux(Index), NumRegElim, True
+        SituarDataTrasEliminar AdoAux(Index), NumRegElim, True
         
         
         
@@ -4538,7 +4538,7 @@ Dim vSec As CSeccion
     NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
 
     'Situamos el grid al final
-    AnyadirLinea DataGridAux(Index), Adoaux(Index)
+    AnyadirLinea DataGridAux(Index), AdoAux(Index)
 
     anc = DataGridAux(Index).Top
     If DataGridAux(Index).Row < 0 Then
@@ -4574,8 +4574,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim J As Integer
     Dim vSec As CSeccion
     
-    If Adoaux(Index).Recordset.EOF Then Exit Sub
-    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
     
     ModoLineas = 2 'Modificar llínia
     
@@ -4764,7 +4764,7 @@ Dim Sql As String
 '            End If
             'Es numerico
             If PonerFormatoDecimal(txtAux(Index), 3) Then
-                PonerFocoBtn Me.CmdAceptar
+                PonerFocoBtn Me.cmdAceptar
             Else
                 txtAux(Index).Text = ""
             End If
@@ -4833,7 +4833,7 @@ End Function
 Private Function SepuedeBorrar(ByRef Index As Integer) As Boolean
 
     SepuedeBorrar = False
-    If Adoaux(Index).Recordset.EOF Then Exit Function
+    If AdoAux(Index).Recordset.EOF Then Exit Function
 
     SepuedeBorrar = True
 End Function
@@ -4849,7 +4849,7 @@ Dim tots As String
     
     tots = MontaSQLCarga(Index, enlaza)
     
-    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
     
     Select Case Index
         Case 0 'lineas de factura
@@ -4902,12 +4902,12 @@ Dim V As Integer
         If InsertarDesdeForm2(Me, 2, nomframe) Then
             b = BLOQUEADesdeFormulario2(Me, Data1, 1)
             CargaGrid NumTabMto, True
-            V = Adoaux(NumTabMto).Recordset.Fields(4) 'el 2 es el nº de llinia
+            V = AdoAux(NumTabMto).Recordset.Fields(4) 'el 2 es el nº de llinia
             ModoLineas = 0
             CargaGrid NumTabMto, True
 '            SituarTab (NumTabMto)
             DataGridAux(NumTabMto).SetFocus
-            Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(4).Name & " =" & V)
+            AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(4).Name & " =" & V)
             
 '            ' ### [Monica] 29/09/2006
 '            ' añadido el tema de de recalculo de bases
@@ -4920,7 +4920,7 @@ Dim V As Integer
                     PorRet = 0
                     If Text1(26).Text <> "" Then PorRet = CCur(ImporteSinFormato(Text1(26).Text))
                     
-                    RecalculoBasesIvaFactura Adoaux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet, Combo1(2).ListIndex
+                    RecalculoBasesIvaFactura AdoAux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet, Combo1(2).ListIndex
                 End If
             End If
             If Not vSeccion Is Nothing Then
@@ -5030,7 +5030,7 @@ Dim V As Currency
 
                 
             End If
-            V = Adoaux(NumTabMto).Recordset.Fields(4) 'el 2 es el nº de llinia
+            V = AdoAux(NumTabMto).Recordset.Fields(4) 'el 2 es el nº de llinia
             ModoLineas = 0
             CargaGrid NumTabMto, True
 '            SituarTab (NumTabMto)
@@ -5049,7 +5049,7 @@ Dim V As Currency
                     PorRet = 0
                     If Text1(26).Text <> "" Then PorRet = CCur(ImporteSinFormato(Text1(26).Text))
         
-                    RecalculoBasesIvaFactura Adoaux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet, Combo1(2).ListIndex
+                    RecalculoBasesIvaFactura AdoAux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet, Combo1(2).ListIndex
                     
                 End If
             End If
@@ -5190,7 +5190,7 @@ Private Sub LlamarImprimir()
         .outTipoDocumento = 1
     
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = 2
         .SoloImprimir = False
         .Titulo = cadTitulo
@@ -5275,7 +5275,7 @@ Dim Sql As String
             PorRet = 0
             If Text1(26).Text <> "" Then PorRet = CCur(ImporteSinFormato(Text1(26).Text))
 
-            RecalculoBasesIvaFactura Adoaux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet, Combo1(2).ListIndex
+            RecalculoBasesIvaFactura AdoAux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet, Combo1(2).ListIndex
 
 
             '13/02/2007 iniacializo los txt

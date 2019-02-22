@@ -2524,7 +2524,7 @@ Public CodigoActual As String
 Public DeConsulta As Boolean
 
 ' *** declarar els formularis als que vaig a cridar ***
-Private WithEvents frmClasPrev As frmManClasificaPrev ' Socios vista previa
+Private WithEvents frmClasPrev As frmBasico2 ' Socios vista previa
 Attribute frmClasPrev.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal 'calendario fecha
 Attribute frmC.VB_VarHelpID = -1
@@ -2596,7 +2596,7 @@ Dim NotaExistente As Boolean
 Dim btnPrimero As Byte 'Variable que indica el nº del Botó PrimerRegistro en la Toolbar1
 'Dim CadAncho() As Boolean  'array, per a quan cridem al form de llínies
 Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim CadB As String
+Dim cadB As String
 
 Dim VarieAnt As String
 Dim MuestraAnt As String
@@ -3280,12 +3280,12 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
         Screen.MousePointer = vbHourglass
         'Sabem quins camps son els que mos torna
         'Creem una cadena consulta i posem els datos
-        CadB = ""
+        cadB = ""
         Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        CadB = Aux
+        cadB = Aux
         '   Com la clau principal es única, en posar el sql apuntant
         '   al valor retornat sobre la clau ppal es suficient
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         ' **********************************
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
@@ -3316,13 +3316,13 @@ Private Sub frmCap_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmClasPrev_DatoSeleccionado(CadenaSeleccion As String)
-Dim CadB As String
+Dim cadB As String
     
     If CadenaSeleccion <> "" Then
-        CadB = "numnotac = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
+        cadB = "numnotac = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
         
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -3875,14 +3875,14 @@ Private Sub HacerBusqueda()
         Text1(21).Tag = Replace(Text1(21).Tag, "FH", "FHH")
     End If
 
-    CadB = ObtenerBusqueda2(Me, 1)
+    cadB = ObtenerBusqueda2(Me, 1)
     
     Text1(21).Tag = Replace(Text1(21).Tag, "FHH", "FH")
     
     If chkVistaPrevia(0) = 1 Then
-        MandaBusquedaPrevia CadB
-    ElseIf CadB <> "" Then
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        MandaBusquedaPrevia cadB
+    ElseIf cadB <> "" Then
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
     Else
         ' *** foco al 1r camp visible de la capçalera que siga clau primaria ***
@@ -3891,17 +3891,14 @@ Private Sub HacerBusqueda()
     End If
 End Sub
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 
-
-    Set frmClasPrev = New frmManClasificaPrev
-    frmClasPrev.cWhere = CadB
-    frmClasPrev.DatosADevolverBusqueda = "0|1|2|"
-    frmClasPrev.Show vbModal
+    Set frmClasPrev = New frmBasico2
+    
+    AyudaEntradasClasificadasPrev frmClasPrev, , cadB
     
     Set frmClasPrev = Nothing
-
-
+    
 End Sub
 
 Private Sub cmdRegresar_Click()
@@ -3960,7 +3957,7 @@ End Sub
 Private Sub BotonVerTodos()
 'Vore tots
     LimpiarCampos 'Neteja els Text1
-    CadB = ""
+    cadB = ""
     
     If chkVistaPrevia(0).Value = 1 Then
         MandaBusquedaPrevia ""
@@ -5907,7 +5904,7 @@ Dim Sql As String
 Dim TotalKilos As Currency
 Dim TotalMuestra As Currency
 Dim Calidad As Integer
-Dim vSql As String
+Dim vSQL As String
 
 Dim TotalEnvases As String
 Dim TotalCostes As String
@@ -6033,13 +6030,13 @@ Dim KilosNetos As Long
         TotalKilos = TotalKilos + KilosNet
         Calidad = DBLet(Rs!codcalid, "N")
         
-        vSql = "update rclasifica_clasif set kilosnet = " & DBSet(KilosNet, "N", "S")
-        vSql = vSql & ", muestra = " & DBSet(Rs!Muestra, "N", "S")
-        vSql = vSql & " where numnotac = " & DBSet(Rs!NumNotac, "N")
-        vSql = vSql & " and codvarie = " & DBSet(Rs!codvarie, "N")
-        vSql = vSql & " and codcalid = " & DBSet(Rs!codcalid, "N")
+        vSQL = "update rclasifica_clasif set kilosnet = " & DBSet(KilosNet, "N", "S")
+        vSQL = vSQL & ", muestra = " & DBSet(Rs!Muestra, "N", "S")
+        vSQL = vSQL & " where numnotac = " & DBSet(Rs!NumNotac, "N")
+        vSQL = vSQL & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        vSQL = vSQL & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
-        conn.Execute vSql
+        conn.Execute vSQL
         
         Rs.MoveNext
     Wend
@@ -6051,21 +6048,21 @@ Dim KilosNetos As Long
     If TotalKilos <> Me.Data1.Recordset!KilosNet Then
         '[Monica]28/06/2011: si es Quatretonda la calidad de redondeo es la de maxima muestra no la de destrio
         If vParamAplic.Cooperativa = 7 Then
-            vSql = CalidadMaximaMuestraenClasificacion(Me.Data1.Recordset!codvarie, Me.Data1.Recordset!NumNotac, True)
+            vSQL = CalidadMaximaMuestraenClasificacion(Me.Data1.Recordset!codvarie, Me.Data1.Recordset!NumNotac, True)
         Else
             If vParamAplic.Cooperativa = 16 And EsVariedadComercializada(Me.Data1.Recordset!codvarie) Then
-                vSql = CalidadMaximaNormal(CStr(Me.Data1.Recordset!codvarie), CStr(Me.Data1.Recordset!NumNotac), True)
+                vSQL = CalidadMaximaNormal(CStr(Me.Data1.Recordset!codvarie), CStr(Me.Data1.Recordset!NumNotac), True)
             Else
                 '[Monica]21/12/2018: para el caso de frutas inma el redondeo va como en coopic, en la calidad maxima
                 If vParamAplic.Cooperativa = 18 Then
-                    vSql = CalidadMaximaNormal(CStr(Me.Data1.Recordset!codvarie), CStr(Me.Data1.Recordset!NumNotac), True)
+                    vSQL = CalidadMaximaNormal(CStr(Me.Data1.Recordset!codvarie), CStr(Me.Data1.Recordset!NumNotac), True)
                 Else
-                    vSql = CalidadDestrioenClasificacion(Me.Data1.Recordset!codvarie, Me.Data1.Recordset!NumNotac, True)
+                    vSQL = CalidadDestrioenClasificacion(Me.Data1.Recordset!codvarie, Me.Data1.Recordset!NumNotac, True)
                 End If
             End If
         End If
         
-        If vSql <> "" Then Calidad = CInt(vSql)
+        If vSQL <> "" Then Calidad = CInt(vSQL)
     
         Sql = "update rclasifica_clasif set kilosnet = kilosnet + (" & (Me.Data1.Recordset!KilosNet - TotalKilos) & ") "
         Sql = Sql & " where numnotac = " & Data1.Recordset!NumNotac
@@ -6156,7 +6153,7 @@ Dim Rs As ADODB.Recordset
         End If
     Else
         Set frmMens = New frmMensajes
-        frmMens.cadWHERE = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
+        frmMens.cadWhere = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
         frmMens.campo = Text1(5).Text
         frmMens.OpcionMensaje = 6
         frmMens.Show vbModal
@@ -6236,7 +6233,7 @@ Dim actualiza As Boolean
 End Sub
 
 
-Private Function InsertarOferta(vSql As String, vTipoMov As CTiposMov, ActualizarContador As Boolean) As Boolean
+Private Function InsertarOferta(vSQL As String, vTipoMov As CTiposMov, ActualizarContador As Boolean) As Boolean
 Dim MenError As String
 Dim bol As Boolean, Existe As Boolean
 Dim cambiaSQL As Boolean
@@ -6280,13 +6277,13 @@ Dim cadMen As String
             Existe = False
         End If
     Loop Until Not Existe
-    If cambiaSQL Then vSql = CadenaInsertarDesdeForm(Me)
+    If cambiaSQL Then vSQL = CadenaInsertarDesdeForm(Me)
     
     
     'Aqui empieza transaccion
     conn.BeginTrans
     MenError = "Error al insertar en la tabla Cabecera de Factura (" & NombreTabla & ")."
-    conn.Execute vSql, , adCmdText
+    conn.Execute vSQL, , adCmdText
     
     cadMen = ""
     Sql3 = "select * from rclasifica where numnotac = " & DBSet(Text1(0).Text, "N")
@@ -6904,7 +6901,7 @@ Dim b As Boolean
 Dim cadErr As String
 
 Dim EntClasif As String
-Dim vSql As String
+Dim vSQL As String
 
 
     On Error GoTo eActualizarEntradasfrutasInma
@@ -7024,8 +7021,8 @@ Dim vSql As String
 ' si hay diferencia no hacemos nada pq meten en el calibrador un cajon no la entrada completa como en melocotones
                 ' si la diferencia es positiva se suma a la ultima calidad
                 If KilosNet <> KilosTot Then
-                    vSql = CalidadMaximaNormal(CStr(Me.Data1.Recordset!codvarie), CStr(Me.Data1.Recordset!NumNotac), True)
-                    If vSql <> "" Then Calidad = CInt(vSql)
+                    vSQL = CalidadMaximaNormal(CStr(Me.Data1.Recordset!codvarie), CStr(Me.Data1.Recordset!NumNotac), True)
+                    If vSQL <> "" Then Calidad = CInt(vSQL)
                 
                     Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosNet - KilosTot, "N")
                     Sql = Sql & " where numnotac = " & DBSet(Rs!NumNotac, "N")

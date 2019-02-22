@@ -3388,7 +3388,7 @@ Private Sub MandaBusquedaPrevia(cadB As String)
 
     Set frmEntPrev = New frmBasico2
     
-    AyudaEntradaBascula frmEntPrev
+    AyudaEntradaBascula frmEntPrev, , cadB
     
     Set frmEntPrev = Nothing
     

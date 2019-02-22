@@ -1574,11 +1574,319 @@ Public Sub AyudaAportaciones(frmBas As frmBasico2, Optional CodActual As String,
     
 End Sub
 
+Public Sub AyudaCamposPrev(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|1100|;S|txtAux(1)|T|Socio|900|;S|txtAux(2)|T|Nombre|3800|;S|txtAux(3)|T|Variedad|2300|;S|txtAux(4)|T|Partida|2300|;S|txtAux(5)|T|Pol|650|;S|txtAux(6)|T|Parcela|850|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & "S|txtAux(7)|T|SPar|750|;S|txtAux(8)|T|Nro.Orden|1250|;"
+    
+    frmBas.CadenaConsulta = "select rcampos.codcampo, rcampos.codsocio, rsocios.nomsocio, variedades.nomvarie, rpartida.nomparti, rcampos.poligono, rcampos.parcela, rcampos.subparce, rcampos.nrocampo "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " from ((rcampos INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio) INNER JOIN rpartida ON rcampos.codparti = rpartida.codparti "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " where (1=1)  "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Código|N|N|||rcampos|codcampo|00000000|S|"
+    frmBas.Tag2 = "Codsocio|N|N|||rcampos|codsocio|000000||"
+    frmBas.Tag3 = "Nombre Socio|T|N|||rsocios|nomsocio|||"
+    frmBas.Tag4 = "Variedad|T|N|||variedades|nomvarie|||"
+    frmBas.Tag5 = "Partida|T|N|||rpartida|nomparti|||"
+    frmBas.Tag6 = "Poligono|N|N|||rcampos|poligono|000||"
+    frmBas.Tag7 = "Parcela|N|N|||rcampos|parcela|000000||"
+    frmBas.Tag8 = "Subparcela|T|N|||rcampos|subparce|||"
+    frmBas.Tag9 = "Nro Orden|N|N|||rcampos|nrocampo|000000||"
+    frmBas.Maxlen1 = 8
+    frmBas.Maxlen2 = 6
+    frmBas.Maxlen3 = 35
+    frmBas.Maxlen4 = 25
+    frmBas.Maxlen5 = 25
+    frmBas.Maxlen6 = 3
+    frmBas.Maxlen7 = 6
+    frmBas.Maxlen8 = 6
+    frmBas.Maxlen9 = 6
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "(((rcampos INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio) INNER JOIN rpartida ON rcampos.codparti = rpartida.codparti "
+    frmBas.CampoCP = "codcampo"
+    frmBas.TipoCP = "N"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Campos - Huertos"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 6900
+    
+    frmBas.Show vbModal
+    
+End Sub
+
+Public Sub AyudaEntradasClasificadasPrev(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Nota|1000|;S|txtAux(1)|T|Fecha|1300|;S|txtAux(2)|T|Codigo|950|;S|txtAux(3)|T|Socio|4100|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & "S|txtAux(4)|T|Variedad|2500|;S|txtAux(5)|T|Campo|1250|;"
+    
+    frmBas.CadenaConsulta = "select rclasifica.numnotac, rclasifica.fechaent, rclasifica.codsocio, rsocios.nomsocio, variedades.nomvarie, rclasifica.codcampo "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " from (rclasifica left join rsocios on rclasifica.codsocio = rsocios.codsocio) "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " left join variedades on rclasifica.codvarie = variedades.codvarie "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " where (1=1)  "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Nro.Nota|N|N|||rclasifica|numnotac|0000000|S|"
+    frmBas.Tag2 = "Fecha|F|N|||rsocios|fechaent|dd/mm/yyyy||"
+    frmBas.Tag3 = "Codigo Socio|N|N|||rclasifica|codsocio|000000||"
+    frmBas.Tag4 = "Nombre Socio|T|N|||rsocios|nomsocio|||"
+    frmBas.Tag5 = "Variedad|T|N|||variedades|nomvarie|||"
+    frmBas.Tag6 = "Campo|N|N|||rclasifica|codcampo|00000000||"
+    frmBas.Maxlen1 = 7
+    frmBas.Maxlen2 = 10
+    frmBas.Maxlen3 = 6
+    frmBas.Maxlen4 = 35
+    frmBas.Maxlen5 = 25
+    frmBas.Maxlen6 = 8
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "(rclasifica left join rsocios on rclasifica.codsocio = rsocios.codsocio) left join variedades on rclasifica.codvarie = variedades.codvarie "
+    frmBas.CampoCP = "numnotac"
+    frmBas.TipoCP = "N"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Clasificación de Campos"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 4100
+    
+    frmBas.Show vbModal
+    
+End Sub
+
+Public Sub AyudaSociosPrev(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|900|;S|txtAux(1)|T|Nombre|4210|;S|txtAux(2)|T|Nif|1550|;S|txtAux(3)|T|Teléfono|1500|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & "S|txtAux(4)|T|Móvil|1500|;S|txtAux(5)|T|Fecha Alta|1350|;"
+    
+    frmBas.CadenaConsulta = "select codsocio, nomsocio, nifsocio, telsoci1, movsocio, fechaalta  "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " from rsocios "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " where (1=1)  "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Código|N|N|||rsocios|codsocio|000000|S|"
+    frmBas.Tag2 = "Nombre|T|N|||rsocios|nomsocio|||"
+    frmBas.Tag3 = "Nif Socio|T|N|||rsocios|nifsocio|||"
+    frmBas.Tag4 = "Teléfono|T|N|||rsocios|telsoci1|||"
+    frmBas.Tag5 = "Móvil|T|N|||rsocios|movsocio|||"
+    frmBas.Tag6 = "Fecha Alta|F|N|||rsocios|fechaalta|dd/mm/yyyy||"
+    frmBas.Maxlen1 = 6
+    frmBas.Maxlen2 = 35
+    frmBas.Maxlen3 = 15
+    frmBas.Maxlen4 = 15
+    frmBas.Maxlen5 = 15
+    frmBas.Maxlen6 = 10
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "rsocios"
+    frmBas.CampoCP = "codsocio"
+    frmBas.TipoCP = "N"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Socios"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 4000
+    
+    frmBas.Show vbModal
+    
+End Sub
+
+
+Public Sub AyudaOrdenesRecogidaPrev(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Nro.Orden|1400|;S|txtAux(1)|T|Fecha|1400|;S|txtAux(2)|T|Nro.Campo|1400|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & "S|txtAux(3)|T|Variedad|1100|;S|txtAux(4)|T|Descripción|2700|;"
+    
+    frmBas.CadenaConsulta = "select nroorden, fecimpre, nrocampo, rordrecogida.codvarie, variedades.nomvarie "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " from rordrecogida inner join variedades on rordrecogida.codvarie = variedades.codvarie "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " where (1=1)  "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Nro.Nota|N|S|||rordrecogida|nroorden|000000000|S|"
+    frmBas.Tag2 = "Fecha Impresión|F|N|||rordrecogida|fecimpre|dd/mm/yyyy||"
+    frmBas.Tag3 = "Nro.Campo|N|N|||rordrecogida|nrocampo|00000000||"
+    frmBas.Tag4 = "Variedad|N|N|1|999999|rordrecogida|codvarie|000000||"
+    frmBas.Tag5 = "Variedad|T|N|||variedades|nomvarie|||"
+    frmBas.Tag6 = ""
+    frmBas.Maxlen1 = 8
+    frmBas.Maxlen2 = 10
+    frmBas.Maxlen3 = 8
+    frmBas.Maxlen4 = 6
+    frmBas.Maxlen5 = 25
+    frmBas.Maxlen6 = 0
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "rordrecogida inner join variedades on rordrecogida.codvarie = variedades.codvarie "
+    frmBas.CampoCP = "nroorden"
+    frmBas.TipoCP = "N"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Ordenes de Recogida"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 1000
+    
+    frmBas.Show vbModal
+    
+End Sub
+
+Public Sub AyudaPOZHidrantesPrev(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Hidrante|1600|;S|txtAux(1)|T|Socio|1100|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & "S|txtAux(2)|T|Nombre|4200|;S|txtAux(3)|T|Orden|1400|;"
+    
+    frmBas.CadenaConsulta = "select rpozos.hidrante, rpozos.codsocio, rsocios.nomsocio,  rpozos.nroorden "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " from rpozos inner join rsocios on rpozos.codsocio = rsocios.codsocio  "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " where (1=1)  "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Numero Hidrante|T|N|||rpozos|hidrante||S|"
+    frmBas.Tag2 = "Socio|N|N|1|999999|rpozos|codsocio|000000||"
+    frmBas.Tag3 = "Nombre Socio|T|N|||rsocios|nomsocio|||"
+    frmBas.Tag4 = "Nro.Orden|N|S|0|9999999|rpozos|nroorden|0000000||"
+    frmBas.Maxlen1 = 10
+    frmBas.Maxlen2 = 6
+    frmBas.Maxlen3 = 35
+    frmBas.Maxlen4 = 7
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "rpozos inner join rsocios on rpozos.codsocio = rsocios.codsocio"
+    frmBas.CampoCP = "hidrante"
+    frmBas.TipoCP = "N"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Hidrantes"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 1300
+    
+    frmBas.Show vbModal
+    
+End Sub
+
+
+Public Sub AyudaPOZRecibosPrev(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Tipo Fichero|3000|;S|txtAux(1)|T|Tipo|750|;S|txtAux(2)|T|Factura|1200|;S|txtAux(3)|T|Fecha|1350|;S|txtAux(4)|T|Lin|800|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & "S|txtAux(5)|T|Codigo|1100|;S|txtAux(6)|T|Nombre|4800|;"
+    
+    frmBas.CadenaConsulta = "select case rrecibpozos.codtipom when ""RCP"" then ""RCP-Consumo"" when ""RMP"" then ""RMP-Mantenim"" when ""RVP"" then ""RVP-Contadores"" when ""RMT"" then ""RMT-Manta"" when ""TAL"" then ""TAL-Talla"" when ""RRC"" then ""RRC-Rect Consumo""  when ""RRM"" then ""RRM-Rect Mto"" when ""RRT"" then ""RRT-Rect Manta""  when ""RRV"" then ""RRV-Rect Cont"" when ""RTA"" then ""RTA-Rect Talla""  when ""FIN"" then ""FIN-Internas"" end as tipo, rrecibpozos.codtipom, "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " rrecibpozos.numfactu, rrecibpozos.fecfactu, rrecibpozos.numlinea, rrecibpozos.codsocio, rsocios.nomsocio from rrecibpozos inner join rsocios on rrecibpozos.codsocio = rsocios.codsocio "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " where (1=1)  "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Código|T|N|||rrecibpozos|codtipom||S|"
+    frmBas.Tag2 = ""
+    frmBas.Tag3 = "Nro.Factura|N|N|||rrecibpozos|numfactu|0000000||"
+    frmBas.Tag4 = "Fecha|F|N|||rrecibpozos|fecfactu|dd/mm/yyyy||"
+    frmBas.Tag5 = "Linea|N|N|||rrecibpozos|numlinea|00||"
+    frmBas.Tag6 = "Codigo|N|N|||rrecibpozos|codsocio|000000||"
+    frmBas.Tag7 = "Nombre|T|N|||rsocios|nomsocio|||"
+    frmBas.Maxlen1 = 3
+    frmBas.Maxlen2 = 0
+    frmBas.Maxlen3 = 7
+    frmBas.Maxlen4 = 10
+    frmBas.Maxlen5 = 2
+    frmBas.Maxlen6 = 6
+    frmBas.Maxlen7 = 35
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "rrecibpozos inner join rsocios on rrecibpozos.codsocio = rsocios.codsocio"
+    frmBas.CampoCP = "codtipom"
+    frmBas.TipoCP = "N"
+    If vParamAplic.Cooperativa = 10 Then
+        frmBas.Caption = "Duplicado de Recibos"
+    Else
+        frmBas.Caption = "Histórico de Recibos "
+    End If
+    
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "1|2|3|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 6000
+    
+    frmBas.Show vbModal
+    
+End Sub
+
+
+Public Sub AyudaAlbaranesRetiradaBodPrev(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Albaran|1200|;S|txtAux(1)|T|Codigo|1050|;S|txtAux(2)|T|Nombre Socio|4500|;S|txtAux(3)|T|Fecha|1350|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & ""
+    
+    frmBas.CadenaConsulta = "select numalbar, rbodalbaran.codsocio, rsocios.nomsocio, rbodalbaran.fechaalb  "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " from rbodalbaran inner join rsocios on rbodalbaran.codsocio = rsocios.codsocio "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " where (1=1)  "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "NºAlbarán|N|S|||rbodalbaran|numalbar|0000000|S|"
+    frmBas.Tag2 = "Socio|N|N|0|999999|rbodalbaran|codsocio|000000||"
+    frmBas.Tag3 = "Nombre Socio|T|N|||rsocios|nomsocio|||"
+    frmBas.Tag4 = "Fecha Albaran|F|N|||rbodalbaran|fechaalb|dd/mm/yyyy|N|"
+    frmBas.Tag5 = ""
+    frmBas.Tag6 = ""
+    frmBas.Tag7 = ""
+    frmBas.Maxlen1 = 7
+    frmBas.Maxlen2 = 6
+    frmBas.Maxlen3 = 35
+    frmBas.Maxlen4 = 10
+    frmBas.Maxlen5 = 0
+    frmBas.Maxlen6 = 0
+    frmBas.Maxlen7 = 0
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "rbodalbaran inner join rsocios on rbodalbaran.codsocio = rsocios.codsocio "
+    frmBas.CampoCP = "numalbar"
+    frmBas.TipoCP = "N"
+    frmBas.Caption = "Albaranes de Retirada de Vino y de Aceite"
+    
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 1100
+    
+    frmBas.Show vbModal
+    
+End Sub
+
 
 Private Sub Redimensiona(frmBas As frmBasico2, Cant As Integer)
     frmBas.Width = frmBas.Width + Cant
     frmBas.DataGrid1.Width = frmBas.DataGrid1.Width + Cant
-    frmBas.CmdAceptar.Left = frmBas.CmdAceptar.Left + Cant
+    frmBas.cmdAceptar.Left = frmBas.cmdAceptar.Left + Cant
     frmBas.cmdCancelar.Left = frmBas.cmdCancelar.Left + Cant
     frmBas.cmdRegresar.Left = frmBas.cmdRegresar.Left + Cant
 

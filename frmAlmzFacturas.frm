@@ -2684,7 +2684,7 @@ Private Sub MandaBusquedaPrevia(cadB As String)
 
     Set frmAlmzPrev = New frmBasico2
     
-    AyudaFacturasAlmazara frmAlmzPrev
+    AyudaFacturasAlmazara frmAlmzPrev, , cadB
     
     Set frmAlmzPrev = Nothing
 

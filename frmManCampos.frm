@@ -601,13 +601,13 @@ Begin VB.Form frmManCampos
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmManCampos.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame10"
-      Tab(1).Control(1)=   "Frame9"
-      Tab(1).Control(2)=   "Frame8"
+      Tab(1).Control(0)=   "Frame3"
+      Tab(1).Control(1)=   "Frame5"
+      Tab(1).Control(2)=   "Frame6"
       Tab(1).Control(3)=   "Frame7"
-      Tab(1).Control(4)=   "Frame6"
-      Tab(1).Control(5)=   "Frame5"
-      Tab(1).Control(6)=   "Frame3"
+      Tab(1).Control(4)=   "Frame8"
+      Tab(1).Control(5)=   "Frame9"
+      Tab(1).Control(6)=   "Frame10"
       Tab(1).ControlCount=   7
       TabCaption(2)   =   "Coopropietarios"
       TabPicture(2)   =   "frmManCampos.frx":0044
@@ -642,8 +642,8 @@ Begin VB.Form frmManCampos
       TabCaption(8)   =   "Ordenes Rec."
       TabPicture(8)   =   "frmManCampos.frx":00EC
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "ListView4"
-      Tab(8).Control(1)=   "FrameAux6"
+      Tab(8).Control(0)=   "FrameAux6"
+      Tab(8).Control(1)=   "ListView4"
       Tab(8).ControlCount=   2
       TabCaption(9)   =   "Registro Visitas"
       TabPicture(9)   =   "frmManCampos.frx":0108
@@ -6532,7 +6532,7 @@ Private WithEvents frmZ As frmZoom  'Zoom para campos Text
 Attribute frmZ.VB_VarHelpID = -1
 Private WithEvents frmZ2 As frmZoom  'Zoom para campos Text (observaciones de la revision)
 Attribute frmZ2.VB_VarHelpID = -1
-Private WithEvents frmCamPrev As frmManCamposPrev ' campos vista previa
+Private WithEvents frmCamPrev As frmBasico2 ' campos vista previa
 Attribute frmCamPrev.VB_VarHelpID = -1
 
 Private WithEvents frmPar As frmManPartidas 'partidas
@@ -6617,7 +6617,7 @@ Private HaDevueltoDatos As Boolean
 Dim btnPrimero As Byte 'Variable que indica el nº del Botó PrimerRegistro en la Toolbar1
 'Dim CadAncho() As Boolean  'array, per a quan cridem al form de llínies
 Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim CadB As String
+Dim cadB As String
 
 Dim vSeccion As CSeccion
 Dim b As Boolean
@@ -6626,9 +6626,9 @@ Private BuscaChekc As String
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private CadParam As String 'Cadena con los parametros para Crystal Report
+Private cadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
-Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadselect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
 Private cadNombreRPT As String 'Nombre del informe
 
@@ -7308,8 +7308,8 @@ Dim b As Boolean
     
     '---------------------------------------------
     b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    CmdAceptar.visible = b
+    CmdCancelar.visible = b
+    cmdAceptar.visible = b
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -7589,7 +7589,7 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
 Dim Sql As String
-Dim Tabla As String
+Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
@@ -7608,9 +7608,9 @@ Dim Tabla As String
             Sql = Sql & " ORDER BY rcampos_cooprop.codsocio "
        
        Case 1 ' clasificacion
-            Tabla = "rcampos_clasif"
+            tabla = "rcampos_clasif"
             Sql = "SELECT rcampos_clasif.codcampo, rcampos_clasif.codvarie, rcampos_clasif.codcalid, rcalidad.nomcalid, rcampos_clasif.muestra "
-            Sql = Sql & " FROM " & Tabla & " INNER JOIN rcalidad ON rcampos_clasif.codvarie = rcalidad.codvarie "
+            Sql = Sql & " FROM " & tabla & " INNER JOIN rcalidad ON rcampos_clasif.codvarie = rcalidad.codvarie "
             Sql = Sql & " and rcampos_clasif.codcalid = rcalidad.codcalid "
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab(True)
@@ -7618,83 +7618,83 @@ Dim Tabla As String
                 Sql = Sql & " WHERE rcampos_clasif.codcampo = -1"
             End If
             Sql = Sql
-            Sql = Sql & " ORDER BY " & Tabla & ".codcalid "
+            Sql = Sql & " ORDER BY " & tabla & ".codcalid "
             
        Case 2 ' parcelas
-            Tabla = "rcampos_parcelas"
+            tabla = "rcampos_parcelas"
             Sql = "SELECT rcampos_parcelas.codcampo, rcampos_parcelas.numlinea, rcampos_parcelas.poligono,rcampos_parcelas.parcela,rcampos_parcelas.subparce, "
             Sql = Sql & "rcampos_parcelas.recintos,rcampos_parcelas.codsigpa,rcampos_parcelas.supsigpa,"
             Sql = Sql & "rcampos_parcelas.supcultsigpa,rcampos_parcelas.supcatas,rcampos_parcelas.supcultcatas"
-            Sql = Sql & " FROM " & Tabla
+            Sql = Sql & " FROM " & tabla
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab2(True)
             Else
                 Sql = Sql & " WHERE rcampos_parcelas.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
             
        Case 3 ' agroseguro
-            Tabla = "rcampos_seguros"
+            tabla = "rcampos_seguros"
             Sql = "SELECT rcampos_seguros.codcampo, rcampos_seguros.numlinea, rcampos_seguros.fecha, rcampos_seguros.codincid, rincidencia.nomincid, "
             Sql = Sql & "rcampos_seguros.kilos,rcampos_seguros.kilosaportacion, rcampos_seguros.importe,rcampos_seguros.fechapago,"
             Sql = Sql & "rcampos_seguros.essiniestro , IF(essiniestro=1,'*','') as dsiniestro "
-            Sql = Sql & " FROM " & Tabla & " INNER JOIN rincidencia ON rcampos_seguros.codincid = rincidencia.codincid "
+            Sql = Sql & " FROM " & tabla & " INNER JOIN rincidencia ON rcampos_seguros.codincid = rincidencia.codincid "
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab3(True)
             Else
                 Sql = Sql & " WHERE rcampos_seguros.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
             
         Case 4 ' hco del campo
-            Tabla = "rcampos_hco"
+            tabla = "rcampos_hco"
             Sql = "SELECT rcampos_hco.codcampo, rcampos_hco.numlinea, rcampos_hco.codsocio, rsocios.nomsocio, rcampos_hco.fechaalta, "
             Sql = Sql & "rcampos_hco.fechabaja, rcampos_hco.codincid, rincidencia.nomincid"
-            Sql = Sql & " FROM (" & Tabla & " INNER JOIN rincidencia ON rcampos_hco.codincid = rincidencia.codincid) "
+            Sql = Sql & " FROM (" & tabla & " INNER JOIN rincidencia ON rcampos_hco.codincid = rincidencia.codincid) "
             Sql = Sql & " INNER JOIN rsocios ON rcampos_hco.codsocio = rsocios.codsocio "
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab4(True)
             Else
                 Sql = Sql & " WHERE rcampos_hco.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
         
         Case 5 ' gastos del campo
-            Tabla = "rcampos_gastos"
+            tabla = "rcampos_gastos"
             Sql = "SELECT rcampos_gastos.codcampo, rcampos_gastos.numlinea, rcampos_gastos.codgasto, rconcepgasto.nomgasto, rcampos_gastos.fecha, "
             Sql = Sql & "rcampos_gastos.importe, rcampos_gastos.contabilizado, IF(contabilizado=1,'*','') as dcontabilizado "
-            Sql = Sql & " FROM " & Tabla & " INNER JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
+            Sql = Sql & " FROM " & tabla & " INNER JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
             
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab5(True)
             Else
                 Sql = Sql & " WHERE rcampos_gastos.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
     
         Case 6 ' impresion de ordenes de recoleccion del campo
-            Tabla = "rcampos_ordrec"
+            tabla = "rcampos_ordrec"
             Sql = "SELECT rcampos_ordrec.codcampo, rcampos_ordrec.nroorden, rcampos_ordrec.fecimpre "
-            Sql = Sql & " FROM " & Tabla
+            Sql = Sql & " FROM " & tabla
             
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab6(True)
             Else
                 Sql = Sql & " WHERE rcampos_ordrec.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".nroorden "
+            Sql = Sql & " ORDER BY " & tabla & ".nroorden "
     
         Case 7 ' revisiones
-            Tabla = "rcampos_revision"
+            tabla = "rcampos_revision"
             Sql = "SELECT rcampos_revision.codcampo, rcampos_revision.numlinea, rcampos_revision.fecha, rcampos_revision.tecnico, rcampos_revision.observac "
-            Sql = Sql & " FROM " & Tabla
+            Sql = Sql & " FROM " & tabla
             
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab7(True)
             Else
                 Sql = Sql & " WHERE rcampos_revision.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
     
     
     
@@ -7713,13 +7713,13 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
         Screen.MousePointer = vbHourglass
         'Sabem quins camps son els que mos torna
         'Creem una cadena consulta i posem els datos
-        CadB = ""
+        cadB = ""
         Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        CadB = Aux
+        cadB = Aux
         '   Com la clau principal es única, en posar el sql apuntant
         '   al valor retornat sobre la clau ppal es suficient
         ' *** canviar o llevar el WHERE; repasar codEmpre ***
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         'CadenaConsulta = "select * from " & NombreTabla & " WHERE codempre = " & codEmpre & " AND " & CadB & " " & Ordenacion
         ' **********************************
         PonerCadenaBusqueda
@@ -7770,13 +7770,13 @@ Private Sub frmCalid_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmCamPrev_DatoSeleccionado(CadenaSeleccion As String)
-Dim CadB As String
+Dim cadB As String
     
     If CadenaSeleccion <> "" Then
-        CadB = "codcampo = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
+        cadB = "codcampo = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
         
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -7952,7 +7952,7 @@ Dim Mens As String
 Dim vAux As String
 Dim vCampos As String
 Dim Rs As ADODB.Recordset
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 
 Dim Sql As String
 Dim indRPT As Byte
@@ -7961,11 +7961,11 @@ Dim NroDoc As String
 
     If Index = 0 Then
         Sql = "select numerodoc, fecmovim, causa from rsocios_movim where codcampo = " & DBSet(Text1(0).Text, "N")
-        Set RS1 = New ADODB.Recordset
-        RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs1 = New ADODB.Recordset
+        Rs1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-        If Not RS1.EOF Then
-            NroDoc = DBLet(RS1.Fields(0).Value, "N")
+        If Not Rs1.EOF Then
+            NroDoc = DBLet(Rs1.Fields(0).Value, "N")
             
             vCampos = ""
             Sql = "select codcampo from rsocios_movim where numerodoc = " & DBSet(NroDoc, "N")
@@ -7984,7 +7984,7 @@ Dim NroDoc As String
                 InicializarVbles
                 
                 'Añadir el parametro de Empresa
-                CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+                cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
                 numParam = numParam + 1
                 
                 
@@ -7992,15 +7992,15 @@ Dim NroDoc As String
                 
                 cadTitulo = "Documento Baja de Campos"
                  
-                CadParam = CadParam & "pFecha=""" & DBLet(RS1.Fields(1)) & """|"
+                cadParam = cadParam & "pFecha=""" & DBLet(Rs1.Fields(1)) & """|"
                 numParam = numParam + 1
             
-                CadParam = CadParam & "pCausas=""" & DBLet(RS1.Fields(2)) & """|"
+                cadParam = cadParam & "pCausas=""" & DBLet(Rs1.Fields(2)) & """|"
                 numParam = numParam + 1
                 
                 indRPT = 19 ' baja campos
                 
-                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu
                 
@@ -8228,7 +8228,7 @@ Dim Rs As ADODB.Recordset
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     Sql = "select rpueblos.codpobla, rcampos.poligono, rcampos.parcela, rcampos.recintos, count(*) "
@@ -8367,12 +8367,12 @@ End Sub
 
 Private Sub HacerBusqueda()
 
-    CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+    cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     
     If chkVistaPrevia(0) = 1 Then
-        MandaBusquedaPrevia CadB
-    ElseIf CadB <> "" Then
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        MandaBusquedaPrevia cadB
+    ElseIf cadB <> "" Then
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
     Else
         ' *** foco al 1r camp visible de la capçalera que siga clau primaria ***
@@ -8382,7 +8382,7 @@ Private Sub HacerBusqueda()
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 '    Dim Cad As String
 '    Dim NombreTabla1 As String
 '
@@ -8427,13 +8427,16 @@ Private Sub MandaBusquedaPrevia(CadB As String)
 '        End If
 '    End If
 
-    Set frmCamPrev = New frmManCamposPrev
-    frmCamPrev.cWhere = CadB
-    frmCamPrev.DatosADevolverBusqueda = "0|1|2|"
-    frmCamPrev.Show vbModal
+
+'    frmCamPrev.cWhere = cadB
+'    frmCamPrev.DatosADevolverBusqueda = "0|1|2|"
+'    frmCamPrev.Show vbModal
+    
+    Set frmCamPrev = New frmBasico2
+    
+    AyudaCamposPrev frmCamPrev, , cadB
     
     Set frmCamPrev = Nothing
-
 
 
 End Sub
@@ -8497,7 +8500,7 @@ End Sub
 Private Sub BotonVerTodos()
 'Vore tots
     LimpiarCampos 'Neteja els Text1
-    CadB = ""
+    cadB = ""
     
     PonerModo 0
     
@@ -9668,7 +9671,7 @@ Private Sub BotonImpresionRevisiones()
 
     Screen.MousePointer = vbHourglass
     
-    frmListado.OpcionListado = 45
+    frmListado.Opcionlistado = 45
     frmListado.NumCod = "rcampos_revision.codcampo = " & Me.Data1.Recordset!codCampo
     frmListado.Show vbModal
     
@@ -9683,8 +9686,8 @@ Private Sub BotonContabilizarGasto()
 
     Screen.MousePointer = vbHourglass
     
-    frmListado.OpcionListado = 37
-    frmListado.NumCod = "rcampos_gastos.codcampo = " & Adoaux(5).Recordset!codCampo & " and rcampos_gastos.numlinea = " & Adoaux(5).Recordset!numlinea
+    frmListado.Opcionlistado = 37
+    frmListado.NumCod = "rcampos_gastos.codcampo = " & Adoaux(5).Recordset!codCampo & " and rcampos_gastos.numlinea = " & Adoaux(5).Recordset!NumLinea
     frmListado.Show vbModal
     CargaGrid NumTabMto, True
     
@@ -9747,7 +9750,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rcampos_parcelas"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!NumLinea, "N")
             End If
     
         Case 3 'agroseguro
@@ -9758,7 +9761,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rcampos_seguros"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!NumLinea, "N")
             End If
     
         Case 4 'hco de campos
@@ -9772,7 +9775,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rcampos_hco"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!NumLinea, "N")
             End If
     
         Case 5 'gastos de campos
@@ -9792,7 +9795,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rcampos_gastos"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!NumLinea, "N")
             End If
         
         Case 6 'ordenes de recoleccion
@@ -9818,7 +9821,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rcampos_revision"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!NumLinea, "N")
             End If
     
     
@@ -10350,7 +10353,7 @@ Dim Nuevo As Boolean
             
         Case 3 'porcentaje de
             PonerFormatoDecimal txtAux3(Index), 4
-            If txtAux3(2).Text <> "" Then CmdAceptar.SetFocus
+            If txtAux3(2).Text <> "" Then cmdAceptar.SetFocus
     
     End Select
 
@@ -10487,7 +10490,7 @@ EDatosOKLlin:
 End Function
 
 
-Private Function ActualisaCtaprpal(ByRef numlinea As Integer)
+Private Function ActualisaCtaprpal(ByRef NumLinea As Integer)
 Dim Sql As String
 'yo
 '    On Error Resume Next
@@ -11102,7 +11105,7 @@ Dim b As Boolean
                 Case 5 ' Caso de gastos de campo, tenemos que insertar un asiento en el diario
                     Screen.MousePointer = vbHourglass
                     
-                    frmListado.OpcionListado = 37
+                    frmListado.Opcionlistado = 37
                     frmListado.NumCod = "rcampos_gastos.codcampo = " & DBSet(txtaux7(0).Text, "N") & " and rcampos_gastos.numlinea = " & DBSet(txtaux7(1).Text, "N")
                     frmListado.Show vbModal
                     CargaGrid NumTabMto, True
@@ -11358,15 +11361,15 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     '[Monica]05/02/2014: Personalizamos el informe de campos
     indRPT = 102 ' personalizacion del informe de campos
     
-    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
     
     cadNombreRPT = nomDocu
 
     With frmImprimir2
         .cadTabla2 = "rcampos"
         .Informe2 = cadNombreRPT '"rManCampos.rpt"
-        If CadB <> "" Then
-            .cadRegSelec = SQL2SF(CadB)
+        If cadB <> "" Then
+            .cadRegSelec = SQL2SF(cadB)
         Else
             .cadRegSelec = ""
         End If
@@ -11509,7 +11512,7 @@ Dim Nuevo As Boolean
 
         Case 3 ' muestra debe sumar el 100%
             If PonerFormatoDecimal(txtAux1(Index), 4) Then
-                CmdAceptar.SetFocus
+                cmdAceptar.SetFocus
             End If
 
 '        Case 2, 3 'fecha de alta y de baja
@@ -11602,7 +11605,7 @@ End Sub
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -11615,8 +11618,8 @@ End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
-    cadSelect = ""
-    CadParam = ""
+    cadselect = ""
+    cadParam = ""
     numParam = 0
 End Sub
 
@@ -11807,9 +11810,9 @@ Dim Nuevo As Boolean
         Case 7, 8, 9, 10 'superficies en hectareas
             If Modo = 1 Then Exit Sub
             If PonerFormatoDecimal(txtAux4(Index), 7) Then
-                If Index = 10 Then CmdAceptar.SetFocus
+                If Index = 10 Then cmdAceptar.SetFocus
             Else
-                If Index = 10 And txtAux4(Index) = "" Then CmdAceptar.SetFocus
+                If Index = 10 And txtAux4(Index) = "" Then cmdAceptar.SetFocus
             End If
             
 
@@ -12066,7 +12069,7 @@ Dim Nuevo As Boolean
             End If
         
         Case 4 ' Importe
-            If PonerFormatoDecimal(txtaux7(Index), 3) Then CmdAceptar.SetFocus
+            If PonerFormatoDecimal(txtaux7(Index), 3) Then cmdAceptar.SetFocus
         
     End Select
 
@@ -12096,7 +12099,7 @@ Dim NroContadores As Long
             
             frmMens2.cadWHERE2 = "1"
             frmMens2.OpcionMensaje = 39
-            frmMens2.cadWHERE = " and codcampo = " & DBSet(Text1(0).Text, "N")
+            frmMens2.cadWhere = " and codcampo = " & DBSet(Text1(0).Text, "N")
             frmMens2.Show vbModal
             
             Set frmMens2 = Nothing
@@ -12116,7 +12119,7 @@ Dim NroContadores As Long
 '    End If
     
     frmListado.NumCod = Text1(0).Text ' le pasamos el campo del que vamos a cambiar el socio
-    frmListado.OpcionListado = 34
+    frmListado.Opcionlistado = 34
     frmListado.Show vbModal
 
     TerminaBloquear
@@ -12153,7 +12156,7 @@ Dim Sql As String
     Set frmMens = New frmMensajes
     
     frmMens.OpcionMensaje = 25
-    frmMens.cadWHERE = Sql
+    frmMens.cadWhere = Sql
     frmMens.Show vbModal
     
     Set frmMens = Nothing
@@ -12313,7 +12316,7 @@ Dim Nuevo As Boolean
     ' ******* configurar el LostFocus dels camps de llínies (dins i fora grid) ********
     Select Case Index
         Case 2 'fecha de impresion
-            If PonerFormatoFecha(txtaux8(Index), True) Then CmdAceptar.SetFocus
+            If PonerFormatoFecha(txtaux8(Index), True) Then cmdAceptar.SetFocus
         
     End Select
 
@@ -12450,7 +12453,7 @@ Dim Nuevo As Boolean
         Case 2 'fecha de revision
             PonerFormatoFecha txtAux9(Index), True
         Case 4 ' observaciones
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
     End Select
 
     ' ******************************************************************************

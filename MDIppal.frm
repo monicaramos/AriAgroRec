@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "19:01"
+            TextSave        =   "10:08"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1821,7 +1821,7 @@ Private PrimeraVez As Boolean
 Dim TieneEditorDeMenus As Boolean
 
 Public Sub GetIconsFromLibrary(ByVal sLibraryFilePath As String, ByVal op As Integer, ByVal tam As Integer)
-    Dim I As Integer
+    Dim i As Integer
     Dim tRes As ResType, iCount As Integer
         
     opcio = op
@@ -1939,15 +1939,17 @@ Dim Cad As String
     PonerDatosFormulario
     
 '    Stop
-    
-    '[Monica]08/10/2015: solo en el caso de escalona mandamos los datos a indefa
-    If vParamAplic.Cooperativa = 10 Then
-        If Dir("c:\indefa", vbDirectory) <> "" Then
-            LanzaVisorMimeDocumento Me.hWnd, "c:\indefa\ftpINDEFA.bat"
-        Else
-            If MsgBox("No existe el directorio del traspaso. ¿ Continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then End
-        End If
-    End If
+
+'[Monica]22/02/2019: quitamos lo de indefa
+'
+'    '[Monica]08/10/2015: solo en el caso de escalona mandamos los datos a indefa
+'    If vParamAplic.Cooperativa = 10 Then
+'        If Dir("c:\indefa", vbDirectory) <> "" Then
+'            LanzaVisorMimeDocumento Me.hWnd, "c:\indefa\ftpINDEFA.bat"
+'        Else
+'            If MsgBox("No existe el directorio del traspaso. ¿ Continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then End
+'        End If
+'    End If
     
     
     
@@ -2419,7 +2421,7 @@ EDevuelveCadenaMenu:
 End Function
 
 Private Sub LanzaHome(Opcion As String)
-    Dim I As Integer
+    Dim i As Integer
     Dim Cad As String
     On Error GoTo ELanzaHome
     
@@ -2430,11 +2432,11 @@ Private Sub LanzaHome(Opcion As String)
         Exit Sub
     End If
         
-    I = FreeFile
+    i = FreeFile
     Cad = ""
-    Open App.Path & "\lanzaexp.dat" For Input As #I
-    Line Input #I, Cad
-    Close #I
+    Open App.Path & "\lanzaexp.dat" For Input As #i
+    Line Input #i, Cad
+    Close #i
     
     'Lanzamos
     If Cad <> "" Then Shell Cad & " " & CadenaDesdeOtroForm, vbMaximizedFocus
@@ -2457,7 +2459,7 @@ eCargarImagen:
 End Sub
 
 Private Sub PonerMenusNivelUsuario()
-Dim B As Boolean
+Dim b As Boolean
 
 '    b = (vSesion.Nivel = 0)    'Administradores y root
 

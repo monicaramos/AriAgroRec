@@ -1665,8 +1665,8 @@ Dim b As Boolean
     
     '---------------------------------------------
     b = Modo <> 0 And Modo <> 2
-    CmdCancelar.visible = b
-    CmdAceptar.visible = b
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -2042,7 +2042,7 @@ Private Sub MandaBusquedaPrevia(cadB As String)
 
     Set frmApoPrev = New frmBasico2
     
-    AyudaAportaciones frmApoPrev
+    AyudaAportaciones frmApoPrev, , cadB
     
     Set frmApoPrev = Nothing
 

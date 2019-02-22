@@ -5004,18 +5004,18 @@ End Sub
 
 
 Private Sub frmFac_DatoSeleccionado(CadenaSeleccion As String)
-Dim CadB As String
+Dim cadB As String
 
     If CadenaSeleccion <> "" Then
         Text1(12).Text = RecuperaValor(CadenaSeleccion, 1) 'codtipom
         Text1(0).Text = RecuperaValor(CadenaSeleccion, 2) 'numfactu
         Text1(1).Text = RecuperaValor(CadenaSeleccion, 3) 'fecfactu
         
-        CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+        cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     
-        If CadB <> "" Then
+        If cadB <> "" Then
             'Se muestran en el mismo form
-            CadenaConsulta = "select * from rfactsoc WHERE " & CadB & " " & Ordenacion
+            CadenaConsulta = "select * from rfactsoc WHERE " & cadB & " " & Ordenacion
             PonerCadenaBusqueda
         End If
     End If
@@ -5069,20 +5069,20 @@ End Sub
 
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim CadB As String
+Dim cadB As String
 Dim Aux As String
       
     If CadenaDevuelta <> "" Then
         HaDevueltoDatos = True
         Screen.MousePointer = vbHourglass
-        CadB = ""
+        cadB = ""
         Aux = ValorDevueltoFormGrid(Text1(12), CadenaDevuelta, 1)
-        CadB = CadB & Aux
+        cadB = cadB & Aux
         Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 2)
-        CadB = CadB & " and " & Aux
+        cadB = cadB & " and " & Aux
         Aux = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 3)
-        CadB = CadB & " and " & Aux
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        cadB = cadB & " and " & Aux
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -5349,7 +5349,7 @@ Private Sub mnRecepcion_Click()
 
     Set frmList = New frmListado
     
-    frmList.OpcionListado = 38
+    frmList.Opcionlistado = 38
     frmList.NumCod = "codtipom = '" & Mid(Combo1(0).Text, 1, 3) & "' and numfactu = " & Text1(0).Text & " and fecfactu = " & DBSet(Text1(1).Text, "F")
     frmList.Show vbModal
     
@@ -5578,7 +5578,7 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 Dim cadAux As String
     
 '    '--- Laura 12/01/2007
@@ -5590,16 +5590,16 @@ Dim cadAux As String
 '    Text1(5).Text = cadAux
 '    '---
 '    CadB = ObtenerBusqueda(Me)
-    CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+    cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
 
     If chkVistaPrevia = 1 Then
         EsCabecera = True
-        MandaBusquedaPrevia CadB
-    ElseIf CadB <> "" Then
+        MandaBusquedaPrevia cadB
+    ElseIf cadB <> "" Then
         'Se muestran en el mismo form
         CadenaConsulta = "select rfactsoc.* from " & NombreTabla & " LEFT JOIN rfactsoc_variedad ON rfactsoc.codtipom=rfactsoc_variedad.codtipom "
         CadenaConsulta = CadenaConsulta & " and rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
-        CadenaConsulta = CadenaConsulta & " WHERE " & CadB & " GROUP BY rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu " & Ordenacion
+        CadenaConsulta = CadenaConsulta & " WHERE " & cadB & " GROUP BY rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu " & Ordenacion
 '        CadenaConsulta = "select palets.* from " & NombreTabla
 '        CadenaConsulta = CadenaConsulta & " WHERE " & CadB & " GROUP BY palets.numpalet " & Ordenacion
         PonerCadenaBusqueda
@@ -5607,67 +5607,13 @@ Dim cadAux As String
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
-Dim Tabla As String
-Dim Titulo As String
-Dim Desc As String, devuelve As String
-'    'Llamamos a al form
-'    '##A mano
-'    Cad = ""
-''    Cad = Cad & "Tipo|if(rfactsoc.codtipom='FAA','Anticipo','Liquidación') as a|T||10·"
-'    Cad = Cad & "Tipo Factura|stipom.nomtipom|T||22·"
-'    Cad = Cad & "Tipo|rfactsoc.codtipom|T||7·"
-'    Cad = Cad & "Nº.Factura|rfactsoc.numfactu|N||10·"
-'    Cad = Cad & "Fecha|rfactsoc.fecfactu|F||15·"
-'    Cad = Cad & "Socio|rfactsoc.codsocio|N||10·"
-'    Cad = Cad & "Nombre Socio|rsocios.nomsocio|T||35·"
-'    Tabla = NombreTabla & " INNER JOIN rsocios ON rfactsoc.codsocio=rsocios.codsocio "
-'    Tabla = "(" & Tabla & ") INNER JOIN usuarios.stipom stipom ON rfactsoc.codtipom = stipom.codtipom "
-'    Titulo = "Facturas Socios"
-'    devuelve = "1|2|3|"
-'
-'    If Cad <> "" Then
-'        Screen.MousePointer = vbHourglass
-'        Set frmB = New frmBuscaGrid
-'        frmB.vCampos = Cad
-'        frmB.vtabla = Tabla
-'        frmB.vSQL = CadB
-'        HaDevueltoDatos = False
-'        '###A mano
-'        frmB.vDevuelve = devuelve
-'        frmB.vTitulo = Titulo
-'        frmB.vSelElem = 0
-''        frmB.vConexionGrid = cAgro  'Conexión a BD: Ariagro
-'        If Not EsCabecera Then frmB.Label1.FontSize = 11
-''        frmB.vBuscaPrevia = chkVistaPrevia
-'        '#
-'        frmB.Show vbModal
-'        Set frmB = Nothing
-''        If EsCabecera Then
-''            PonerCadenaBusqueda
-''            Text1(0).Text = Format(Text1(0).Text, "0000000")
-''        End If
-'        'Si ha puesto valores y tenemos que es formulario de busqueda entonces
-'        'tendremos que cerrar el form lanzando el evento
-'        If HaDevueltoDatos Then
-'            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-'                cmdRegresar_Click
-'        Else   'de ha devuelto datos, es decir NO ha devuelto datos
-'            PonerFoco Text1(kCampo)
-'        End If
-'    End If
-'    Screen.MousePointer = vbDefault
-'
     
     Set frmFac = New frmBasico2
-
-    AyudaFrasSocios frmFac
-
+    AyudaFrasSocios frmFac, , cadB
     Set frmFac = Nothing
-    
-    
+
 End Sub
 
 
@@ -7013,9 +6959,9 @@ End Sub
 
 Private Sub BotonImprimir()
 Dim cadFormula As String
-Dim CadParam As String
+Dim cadParam As String
 Dim numParam As Byte
-Dim cadSelect As String 'select para insertar en tabla temporal
+Dim cadselect As String 'select para insertar en tabla temporal
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -7030,8 +6976,8 @@ Dim EsComplemen As Byte
     End If
     
     cadFormula = ""
-    CadParam = ""
-    cadSelect = ""
+    cadParam = ""
+    cadselect = ""
     numParam = 0
     
         
@@ -7043,7 +6989,7 @@ Dim EsComplemen As Byte
     devuelve = "{" & NombreTabla & ".codtipom}='" & Mid(Combo1(0).Text, 1, 3) & "'"
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     devuelve = "codtipom = '" & Mid(Combo1(0).Text, 1, 3) & "'"
-    If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+    If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
     
     Select Case Mid(Combo1(0).Text, 1, 3)
         Case "FRS" ' Impresion de facturas rectificativas
@@ -7089,7 +7035,7 @@ Dim EsComplemen As Byte
     End Select
     
     
-    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
       
     'Nombre fichero .rpt a Imprimir
     frmImprimir.NombreRPT = nomDocu
@@ -7099,31 +7045,31 @@ Dim EsComplemen As Byte
     devuelve = "{" & NombreTabla & ".numfactu}=" & Val(Text1(0).Text)
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     devuelve = "numfactu = " & Val(Text1(0).Text)
-    If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+    If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
     
     'Fecha Factura
     devuelve = "{" & NombreTabla & ".fecfactu}=Date(" & Year(Text1(1).Text) & "," & Month(Text1(1).Text) & "," & Day(Text1(1).Text) & ")"
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     devuelve = "fecfactu = " & DBSet(Text1(1).Text, "F")
-    If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+    If Not AnyadirAFormula(cadselect, devuelve) Then Exit Sub
     
-    CadParam = CadParam & "pDuplicado=1|"
+    cadParam = cadParam & "pDuplicado=1|"
     numParam = numParam + 1
     
     If indRPT = 23 And (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) Then
         Dim PrecioApor As Double
         PrecioApor = DevuelveValor("select min(precio) from raporreparto")
         
-        CadParam = CadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
+        cadParam = cadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
         numParam = numParam + 1
     End If
     
     '[Monica]28/01/2014: preguntamos si quiere imprimir arrobas
     If vParamAplic.Cooperativa = 12 Or vParamAplic.Cooperativa = 18 Then
         If MsgBox("¿ Desea impresión con Arrobas ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-            CadParam = CadParam & "pConArrobas=1|"
+            cadParam = cadParam & "pConArrobas=1|"
         Else
-            CadParam = CadParam & "pConArrobas=0|"
+            cadParam = cadParam & "pConArrobas=0|"
         End If
         numParam = numParam + 1
     End If
@@ -7132,16 +7078,16 @@ Dim EsComplemen As Byte
     If vParamAplic.Cooperativa = 4 Then
         If Text1(12).Text = "FAA" Then
             If MsgBox("¿ Desea impresión detallada por campos ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                CadParam = CadParam & "pDetalle=1|"
+                cadParam = cadParam & "pDetalle=1|"
             Else
-                CadParam = CadParam & "pDetalle=0|"
+                cadParam = cadParam & "pDetalle=0|"
             End If
             numParam = numParam + 1
         End If
     End If
     
     
-    If Not HayRegParaInforme(NombreTabla, cadSelect) Then Exit Sub
+    If Not HayRegParaInforme(NombreTabla, cadselect) Then Exit Sub
      
     With frmImprimir
           '[Monica]06/02/2012: añadido la siguientes 3 lineas para el envio por el outlook
@@ -7150,7 +7096,7 @@ Dim EsComplemen As Byte
             .outTipoDocumento = 100
     
             .FormulaSeleccion = cadFormula
-            .OtrosParametros = CadParam
+            .OtrosParametros = cadParam
             .NumeroParametros = numParam
             .SoloImprimir = False
             .EnvioEMail = False
@@ -7161,7 +7107,7 @@ Dim EsComplemen As Byte
     End With
 
     If frmVisReport.EstaImpreso Then
-        ActualizarRegistros "rfactsoc", cadSelect
+        ActualizarRegistros "rfactsoc", cadselect
     End If
 End Sub
 
@@ -7897,7 +7843,7 @@ End Sub
 
 Private Function AsignarAlbaranes() As Boolean
 Dim Sql As String
-Dim cadWHERE As String
+Dim cadWhere As String
 
 
     On Error GoTo eAsignaAlbaranes
@@ -7908,15 +7854,15 @@ Dim cadWHERE As String
     Sql = Sql & " and rhisfruta.codvarie in (select distinct codvarie from rfactsoc_variedad where codtipom = " & DBSet(Data1.Recordset!CodTipom, "T")
     Sql = Sql & " and numfactu = " & Data1.Recordset!numfactu & " and fecfactu = " & DBSet(Data1.Recordset!fecfactu, "F") & ")"
     
-    cadWHERE = "codsocio = " & DBSet(Text1(2).Text, "N")
-    cadWHERE = cadWHERE & " and rhisfruta.codvarie in (select distinct codvarie from rfactsoc_variedad where codtipom = " & DBSet(Data1.Recordset!CodTipom, "T")
-    cadWHERE = cadWHERE & " and numfactu = " & Data1.Recordset!numfactu & " and fecfactu = " & DBSet(Data1.Recordset!fecfactu, "F") & ")"
+    cadWhere = "codsocio = " & DBSet(Text1(2).Text, "N")
+    cadWhere = cadWhere & " and rhisfruta.codvarie in (select distinct codvarie from rfactsoc_variedad where codtipom = " & DBSet(Data1.Recordset!CodTipom, "T")
+    cadWhere = cadWhere & " and numfactu = " & Data1.Recordset!numfactu & " and fecfactu = " & DBSet(Data1.Recordset!fecfactu, "F") & ")"
     
     If TotalRegistrosConsulta(Sql) <> 0 Then
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 47
-        frmMens.cadWHERE = cadWHERE
+        frmMens.cadWhere = cadWhere
         
         frmMens.Show vbModal
         
@@ -7933,7 +7879,7 @@ eAsignaAlbaranes:
 End Function
 
 
-Private Function InsertarAlbaranes(Albaranes As String)
+Private Function InsertarAlbaranes(albaranes As String)
 Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
@@ -7952,7 +7898,7 @@ Dim Rs2 As ADODB.Recordset
     
     conn.BeginTrans
     
-    vSQL = "select codvarie, sum(kilosnet) kilosnet from rhisfruta where numalbar in ( " & Albaranes & ") group by 1 order by 1"
+    vSQL = "select codvarie, sum(kilosnet) kilosnet from rhisfruta where numalbar in ( " & albaranes & ") group by 1 order by 1"
     
     Set Rs = New ADODB.Recordset
     Rs.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -7962,7 +7908,7 @@ Dim Rs2 As ADODB.Recordset
         TotalKilos = DBLet(Rs!KilosNet, "N")
         ImporteVar = DevuelveValor("select imporvar from rfactsoc_variedad where " & ObtenerWhereCP(False) & " and codvarie = " & DBSet(Rs!codvarie, "N"))
     
-        Sql2 = "select * from rhisfruta where numalbar in (" & Albaranes & ") and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql2 = "select * from rhisfruta where numalbar in (" & albaranes & ") and codvarie = " & DBSet(Rs!codvarie, "N")
         Set Rs2 = New ADODB.Recordset
         
         Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -8023,7 +7969,7 @@ End Function
 
 
 
-Private Function InsertarAlbaranesFrutasInma(Albaranes As String) As Boolean
+Private Function InsertarAlbaranesFrutasInma(albaranes As String) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
@@ -8042,7 +7988,7 @@ Dim Rs2 As ADODB.Recordset
     
     conn.BeginTrans
     
-    vSQL = "select codvarie, codcampo, sum(kilostra) kilostra from rhisfruta where numalbar in ( " & Albaranes & ") group by 1, 2 order by 1, 2"
+    vSQL = "select codvarie, codcampo, sum(kilostra) kilostra from rhisfruta where numalbar in ( " & albaranes & ") group by 1, 2 order by 1, 2"
     
     Set Rs = New ADODB.Recordset
     Rs.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -8052,7 +7998,7 @@ Dim Rs2 As ADODB.Recordset
         TotalKilos = DBLet(Rs!KilosTra, "N")
         ImporteVar = DevuelveValor("select imporvar from rfactsoc_variedad where " & ObtenerWhereCP(False) & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and codcampo = " & DBSet(Rs!codCampo, "N"))
     
-        Sql2 = "select * from rhisfruta where numalbar in (" & Albaranes & ") and codvarie = " & DBSet(Rs!codvarie, "N") & " and codcampo = " & DBSet(Rs!codCampo, "N")
+        Sql2 = "select * from rhisfruta where numalbar in (" & albaranes & ") and codvarie = " & DBSet(Rs!codvarie, "N") & " and codcampo = " & DBSet(Rs!codCampo, "N")
         Set Rs2 = New ADODB.Recordset
         
         Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -8084,7 +8030,7 @@ Dim Rs2 As ADODB.Recordset
         Sql = Sql & " select " & DBSet(Text1(12), "T") & "," & DBSet(Text1(0), "N") & "," & DBSet(Text1(1), "F") & ", cc.codvarie, cc.codcampo, ll.codcalid, sum(ll.kilostra), " & DBSet(PrecioAlb, "N") & ", round(sum(ll.kilostra) * " & DBSet(PrecioAlb, "N") & ",2),"
         Sql = Sql & DBSet(PrecioAlb, "N") & ", round(sum(ll.kilostra) * " & DBSet(PrecioAlb, "N") & ",2)"
         Sql = Sql & " from rhisfruta_clasif ll inner join rhisfruta cc on ll.numalbar = cc.numalbar "
-        Sql = Sql & " where cc.numalbar in (" & Albaranes & ") "
+        Sql = Sql & " where cc.numalbar in (" & albaranes & ") "
         Sql = Sql & " group by 1,2,3,4,5,6,8,10"
         Sql = Sql & " order by 1,2,3,4,5,6,8,10"
         conn.Execute Sql

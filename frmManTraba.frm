@@ -2651,7 +2651,7 @@ Private Sub MandaBusquedaPrevia(cadB As String)
 
     Set frmTraPrev = New frmBasico2
     
-    AyudaTrabajadores frmTraPrev
+    AyudaTrabajadores frmTraPrev, , cadB
     
     Set frmTraPrev = Nothing
     
