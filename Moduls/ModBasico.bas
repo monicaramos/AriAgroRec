@@ -1883,11 +1883,234 @@ Public Sub AyudaAlbaranesRetiradaBodPrev(frmBas As frmBasico2, Optional CodActua
 End Sub
 
 
+
+
+Public Sub AyudaFacturasBodPrev(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Tipo|1000|;S|txtAux(1)|T|NºFactura|1250|;S|txtAux(2)|T|Fecha|1400|;S|txtAux(3)|T|Código|1000|;S|txtAux(4)|T|Nombre Socio|4500|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & ""
+    
+    frmBas.CadenaConsulta = "select codtipom, numfactu, fecfactu, codsocio, nomsocio "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " from rbodfacturas "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " where (1=1)  "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Tipo|T|N|||rbodfacturas|codtipom||S|"
+    frmBas.Tag2 = "Nº Factura|N|N|||rbodfacturas|numfactu|0000000|S|"
+    frmBas.Tag3 = "Fecha Fra|F|N|||rbodfacturas|fecfactu|dd/mm/yyyy|S|"
+    frmBas.Tag4 = "Socio|N|N|0|999999|rbodfacturas|codsocio|000000|S|"
+    frmBas.Tag5 = "Nombre Socio|T|N|||rbodfacturas|nomsocio||N|"
+    frmBas.Tag6 = ""
+    frmBas.Tag7 = ""
+    frmBas.Maxlen1 = 3
+    frmBas.Maxlen2 = 7
+    frmBas.Maxlen3 = 10
+    frmBas.Maxlen4 = 6
+    frmBas.Maxlen5 = 35
+    frmBas.Maxlen6 = 0
+    frmBas.Maxlen7 = 0
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "rbodfacturas"
+    frmBas.CampoCP = "numfactu"
+    frmBas.TipoCP = "N"
+    frmBas.Caption = "Histórico de Facturas Retirada Bodega/Almazara"
+    
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 2150
+    
+    frmBas.Show vbModal
+    
+End Sub
+
+Public Sub AyudaFamiliasADVPrev(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Tipo|1000|;S|txtAux(1)|T|Nombre|3500|;S|txtAux(2)|T|Cta.Ventas|1400|;S|txtAux(3)|T|Cta.Compras|1400|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & ""
+    
+    frmBas.CadenaConsulta = "select codfamia, nomfamia, ctaventa, ctacompr "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " from advfamia "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " where (1=1)  "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Código|N|N|0|9999|advfamia|codfamia|0000|S|"
+    frmBas.Tag2 = "Denominación|T|N|||advfamia|nomfamia||N|"
+    frmBas.Tag3 = "Cta.Ventas|T|N|||advfamia|ctaventa||N|"
+    frmBas.Tag4 = "Cta.Compras|T|N|||advfamia|ctacompr||N|"
+    frmBas.Tag5 = ""
+    frmBas.Tag6 = ""
+    frmBas.Tag7 = ""
+    frmBas.Maxlen1 = 4
+    frmBas.Maxlen2 = 35
+    frmBas.Maxlen3 = 10
+    frmBas.Maxlen4 = 10
+    frmBas.Maxlen5 = 0
+    frmBas.Maxlen6 = 0
+    frmBas.Maxlen7 = 0
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "advfamia"
+    frmBas.CampoCP = "codfamia"
+    frmBas.TipoCP = "N"
+    frmBas.Caption = "Familias de Artículos de ADV"
+    
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 300
+    
+    frmBas.Show vbModal
+    
+End Sub
+
+Public Sub AyudaFacturasADVPrev(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Tipo|1000|;S|txtAux(1)|T|Factura|1300|;S|txtAux(2)|T|Fecha|1400|;S|txtAux(3)|T|Código|1000|;S|txtAux(4)|T|Nombre|4500|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & ""
+    
+    frmBas.CadenaConsulta = "select codtipom, numfactu, fecfactu, codsocio, nomsocio "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " from advfacturas "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " where (1=1)  "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Tipo|T|N|||advfacturas|codtipom||S|"
+    frmBas.Tag2 = "Nº Factura|N|N|||advfacturas|numfactu|0000000|S|"
+    frmBas.Tag3 = "Fecha Factura|F|N|||advfacturas|fecfactu|dd/mm/yyyy|S|"
+    frmBas.Tag4 = "Socio|N|N|0|999999|advfacturas|codsocio|000000|S|"
+    frmBas.Tag5 = "Nombre Socio|T|N|||advfacturas|nomsocio||N|"
+    frmBas.Tag6 = ""
+    frmBas.Tag7 = ""
+    frmBas.Maxlen1 = 3
+    frmBas.Maxlen2 = 7
+    frmBas.Maxlen3 = 10
+    frmBas.Maxlen4 = 6
+    frmBas.Maxlen5 = 35
+    frmBas.Maxlen6 = 0
+    frmBas.Maxlen7 = 0
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "advfacturas"
+    frmBas.CampoCP = "numfactu"
+    frmBas.TipoCP = "N"
+    frmBas.Caption = "Histórico de Facturas ADV"
+    
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|1|2|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 2200
+    
+    frmBas.Show vbModal
+    
+End Sub
+
+Public Sub AyudaArticulosADVPrev(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Codigo|2000|;S|txtAux(1)|T|Nombre|3500|;S|txtAux(2)|T|EAN|1800|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & ""
+    
+    frmBas.CadenaConsulta = "select codartic, nomartic, codigoea "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " from advartic "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " where (1=1)  "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Código de articulo|T|N|||advartic|codartic||S|"
+    frmBas.Tag2 = "Nombre|T|N|||advartic|nomartic|||"
+    frmBas.Tag3 = "Código de Barras|T|S|||advartic|codigoea||N|"
+    frmBas.Tag4 = ""
+    frmBas.Tag5 = ""
+    frmBas.Tag6 = ""
+    frmBas.Tag7 = ""
+    frmBas.Maxlen1 = 16
+    frmBas.Maxlen2 = 3500
+    frmBas.Maxlen3 = 13
+    frmBas.Maxlen4 = 0
+    frmBas.Maxlen5 = 0
+    frmBas.Maxlen6 = 0
+    frmBas.Maxlen7 = 0
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "advartic"
+    frmBas.CampoCP = "codartic"
+    frmBas.TipoCP = "T"
+    frmBas.Caption = "Artículos de ADV"
+    
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 300
+    
+    frmBas.Show vbModal
+    
+End Sub
+
+
+Public Sub AyudaPartesADVPrev(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Parte|1000|;S|txtAux(1)|T|Fecha|1400|;S|txtAux(2)|T|Socio|1200|;S|txtAux(3)|T|Nombre|3800|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & ""
+    
+    frmBas.CadenaConsulta = "select numparte, fechapar, advpartes.codsocio, rsocios.nomsocio "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " from advpartes inner join rsocios on advpartes.codsocio = rsocios.codsocio "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " where (1=1)  "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "NºParte|N|S|||advpartes|numparte|0000000|S|"
+    frmBas.Tag2 = "Fecha Parte|F|N|||advpartes|fechapar|dd/mm/yyyy|N|"
+    frmBas.Tag3 = "Socio|N|N|0|999999|advpartes|codsocio|000000||"
+    frmBas.Tag4 = "Nombre Socio|T|N|||rsocios|nomsocio|||"
+    frmBas.Tag5 = ""
+    frmBas.Tag6 = ""
+    frmBas.Tag7 = ""
+    frmBas.Maxlen1 = 7
+    frmBas.Maxlen2 = 10
+    frmBas.Maxlen3 = 6
+    frmBas.Maxlen4 = 35
+    frmBas.Maxlen5 = 0
+    frmBas.Maxlen6 = 0
+    frmBas.Maxlen7 = 0
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "advpartes inner join rsocios on advpartes.codsocio = rsocios.codsocio"
+    frmBas.CampoCP = "numparte"
+    frmBas.TipoCP = "N"
+    frmBas.Caption = "Entrada de Partes"
+    
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 400
+    
+    frmBas.Show vbModal
+    
+End Sub
+
 Private Sub Redimensiona(frmBas As frmBasico2, Cant As Integer)
     frmBas.Width = frmBas.Width + Cant
     frmBas.DataGrid1.Width = frmBas.DataGrid1.Width + Cant
     frmBas.cmdAceptar.Left = frmBas.cmdAceptar.Left + Cant
-    frmBas.cmdCancelar.Left = frmBas.cmdCancelar.Left + Cant
+    frmBas.CmdCancelar.Left = frmBas.CmdCancelar.Left + Cant
     frmBas.cmdRegresar.Left = frmBas.cmdRegresar.Left + Cant
 
 End Sub

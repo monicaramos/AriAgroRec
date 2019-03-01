@@ -41,7 +41,7 @@ Begin VB.Form frmManSocios
       EndProperty
       Height          =   300
       Left            =   13110
-      TabIndex        =   174
+      TabIndex        =   173
       Top             =   255
       Width           =   1605
    End
@@ -57,13 +57,13 @@ Begin VB.Form frmManSocios
       EndProperty
       Height          =   705
       Left            =   6345
-      TabIndex        =   172
+      TabIndex        =   171
       Top             =   30
       Width           =   2415
       Begin MSComctlLib.Toolbar ToolbarDes 
          Height          =   330
          Left            =   240
-         TabIndex        =   173
+         TabIndex        =   172
          Top             =   180
          Width           =   1965
          _ExtentX        =   3466
@@ -106,13 +106,13 @@ Begin VB.Form frmManSocios
       EndProperty
       Height          =   705
       Left            =   3900
-      TabIndex        =   170
+      TabIndex        =   169
       Top             =   30
       Width           =   2370
       Begin MSComctlLib.Toolbar Toolbar5 
          Height          =   330
          Left            =   210
-         TabIndex        =   171
+         TabIndex        =   170
          Top             =   180
          Width           =   1950
          _ExtentX        =   3440
@@ -151,13 +151,13 @@ Begin VB.Form frmManSocios
       EndProperty
       Height          =   705
       Left            =   240
-      TabIndex        =   167
+      TabIndex        =   166
       Top             =   30
       Width           =   3585
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   210
-         TabIndex        =   168
+         TabIndex        =   167
          Top             =   180
          Width           =   3135
          _ExtentX        =   5530
@@ -303,7 +303,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   255
          Left            =   11325
-         TabIndex        =   165
+         TabIndex        =   164
          Top             =   300
          Width           =   1335
       End
@@ -524,21 +524,21 @@ Begin VB.Form frmManSocios
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManSocios.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame7"
-      Tab(0).Control(1)=   "Frame6"
-      Tab(0).Control(2)=   "Text1(7)"
-      Tab(0).Control(3)=   "Frame4"
-      Tab(0).Control(4)=   "Text1(12)"
-      Tab(0).Control(5)=   "FrameDatosDtoAdministracion"
-      Tab(0).Control(6)=   "Text1(20)"
+      Tab(0).Control(0)=   "Label5"
+      Tab(0).Control(1)=   "Label29"
+      Tab(0).Control(2)=   "imgZoom(0)"
+      Tab(0).Control(3)=   "imgMail(0)"
+      Tab(0).Control(4)=   "Label19"
+      Tab(0).Control(5)=   "imgFec(2)"
+      Tab(0).Control(6)=   "Label10"
       Tab(0).Control(7)=   "Text1(2)"
-      Tab(0).Control(8)=   "Label10"
-      Tab(0).Control(9)=   "imgFec(2)"
-      Tab(0).Control(10)=   "Label19"
-      Tab(0).Control(11)=   "imgMail(0)"
-      Tab(0).Control(12)=   "imgZoom(0)"
-      Tab(0).Control(13)=   "Label29"
-      Tab(0).Control(14)=   "Label5"
+      Tab(0).Control(8)=   "Text1(20)"
+      Tab(0).Control(9)=   "FrameDatosDtoAdministracion"
+      Tab(0).Control(10)=   "Text1(12)"
+      Tab(0).Control(11)=   "Frame4"
+      Tab(0).Control(12)=   "Text1(7)"
+      Tab(0).Control(13)=   "Frame6"
+      Tab(0).Control(14)=   "Frame7"
       Tab(0).ControlCount=   15
       TabCaption(1)   =   "Secciones"
       TabPicture(1)   =   "frmManSocios.frx":0028
@@ -559,21 +559,25 @@ Begin VB.Form frmManSocios
       Tab(3).Control(1).Enabled=   0   'False
       Tab(3).Control(2)=   "imgFec(3)"
       Tab(3).Control(2).Enabled=   0   'False
-      Tab(3).Control(3)=   "Toolbar4"
+      Tab(3).Control(3)=   "Label44"
       Tab(3).Control(3).Enabled=   0   'False
-      Tab(3).Control(4)=   "Frame5"
+      Tab(3).Control(4)=   "Image2"
       Tab(3).Control(4).Enabled=   0   'False
-      Tab(3).Control(5)=   "Toolbar3"
+      Tab(3).Control(5)=   "Toolbar2"
       Tab(3).Control(5).Enabled=   0   'False
-      Tab(3).Control(6)=   "lw1"
+      Tab(3).Control(6)=   "Frame5"
       Tab(3).Control(6).Enabled=   0   'False
-      Tab(3).Control(7)=   "Toolbar2"
+      Tab(3).Control(7)=   "Toolbar3"
       Tab(3).Control(7).Enabled=   0   'False
-      Tab(3).Control(8)=   "Text3(0)"
+      Tab(3).Control(8)=   "lw1"
       Tab(3).Control(8).Enabled=   0   'False
-      Tab(3).Control(9)=   "Frame8"
+      Tab(3).Control(9)=   "Text3(0)"
       Tab(3).Control(9).Enabled=   0   'False
-      Tab(3).ControlCount=   10
+      Tab(3).Control(10)=   "Frame8"
+      Tab(3).Control(10).Enabled=   0   'False
+      Tab(3).Control(11)=   "Frame9"
+      Tab(3).Control(11).Enabled=   0   'False
+      Tab(3).ControlCount=   12
       TabCaption(4)   =   "Pozos"
       TabPicture(4)   =   "frmManSocios.frx":007C
       Tab(4).ControlEnabled=   0   'False
@@ -589,6 +593,139 @@ Begin VB.Form frmManSocios
       Tab(6).ControlEnabled=   0   'False
       Tab(6).Control(0)=   "FrameAux4"
       Tab(6).ControlCount=   1
+      Begin VB.Frame Frame9 
+         Height          =   690
+         Left            =   135
+         TabIndex        =   197
+         Top             =   810
+         Width           =   13335
+         Begin VB.OptionButton Option1 
+            Caption         =   "Alta/Baja Campo"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   6
+            Left            =   11070
+            TabIndex        =   204
+            Top             =   270
+            Width           =   2085
+         End
+         Begin VB.OptionButton Option1 
+            Caption         =   "Imágenes"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   5
+            Left            =   9540
+            TabIndex        =   203
+            Top             =   270
+            Width           =   1275
+         End
+         Begin VB.OptionButton Option1 
+            Caption         =   "Impresión"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   4
+            Left            =   8085
+            TabIndex        =   202
+            Top             =   270
+            Width           =   1410
+         End
+         Begin VB.OptionButton Option1 
+            Caption         =   "Facturas Cliente"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   3
+            Left            =   5895
+            TabIndex        =   201
+            Top             =   270
+            Width           =   1950
+         End
+         Begin VB.OptionButton Option1 
+            Caption         =   "Detalle Entradas"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   2
+            Left            =   3825
+            TabIndex        =   200
+            Top             =   270
+            Width           =   1905
+         End
+         Begin VB.OptionButton Option1 
+            Caption         =   "Entradas por Huerto"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   1
+            Left            =   1470
+            TabIndex        =   199
+            Top             =   270
+            Width           =   2310
+         End
+         Begin VB.OptionButton Option1 
+            Caption         =   "Facturas"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   0
+            Left            =   225
+            TabIndex        =   198
+            Top             =   270
+            Width           =   1410
+         End
+      End
       Begin VB.Frame FrameAux4 
          BorderStyle     =   0  'None
          BeginProperty Font 
@@ -602,7 +739,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   7275
          Left            =   -74760
-         TabIndex        =   183
+         TabIndex        =   182
          Top             =   510
          Width           =   14360
          Begin VB.TextBox txtAux5 
@@ -622,7 +759,7 @@ Begin VB.Form frmManSocios
             Index           =   7
             Left            =   10950
             MaxLength       =   30
-            TabIndex        =   194
+            TabIndex        =   193
             Tag             =   "Nro Docum|N|S|||rsocios_movim|numerodoc|||"
             Text            =   "Doc"
             Top             =   3480
@@ -646,7 +783,7 @@ Begin VB.Form frmManSocios
             Index           =   6
             Left            =   8760
             MaxLength       =   30
-            TabIndex        =   193
+            TabIndex        =   192
             Tag             =   "Causa|T|S|||rsocios_movim|causa|||"
             Text            =   "Causa"
             Top             =   3450
@@ -669,7 +806,7 @@ Begin VB.Form frmManSocios
             Index           =   3
             Left            =   1980
             MaxLength       =   40
-            TabIndex        =   191
+            TabIndex        =   190
             Tag             =   "Superficie|N|N|||rsocios_movim|supcoope|###,##0.00||"
             Text            =   "Superficie"
             Top             =   3450
@@ -693,7 +830,7 @@ Begin VB.Form frmManSocios
             Index           =   4
             Left            =   5250
             MaxLength       =   30
-            TabIndex        =   190
+            TabIndex        =   189
             Tag             =   "Fecha|F|N|||rsocios_movim|fecmovim|dd/mm/yyyy||"
             Text            =   "fecha"
             Top             =   3450
@@ -717,7 +854,7 @@ Begin VB.Form frmManSocios
             Index           =   0
             Left            =   150
             MaxLength       =   6
-            TabIndex        =   189
+            TabIndex        =   188
             Tag             =   "Código Socio|N|N|1|999999|rsocios_miembros|codsocio|000000|S|"
             Text            =   "Socio"
             Top             =   3450
@@ -741,7 +878,7 @@ Begin VB.Form frmManSocios
             Index           =   2
             Left            =   1440
             MaxLength       =   9
-            TabIndex        =   188
+            TabIndex        =   187
             Tag             =   "Campo|N|N|||rsocios_movim|codcampo|0000000||"
             Text            =   "campo"
             Top             =   3450
@@ -765,7 +902,7 @@ Begin VB.Form frmManSocios
             Index           =   5
             Left            =   7020
             MaxLength       =   30
-            TabIndex        =   187
+            TabIndex        =   186
             Tag             =   "Importe|N|S|||rsocios_movim|importe|###,###,##0.00||"
             Text            =   "Importe"
             Top             =   3450
@@ -788,7 +925,7 @@ Begin VB.Form frmManSocios
             Index           =   1
             Left            =   720
             MaxLength       =   6
-            TabIndex        =   186
+            TabIndex        =   185
             Tag             =   "Lineal|N|N|||rsocios_miembros|numlinea|#####0|S|"
             Text            =   "Linea"
             Top             =   3450
@@ -808,7 +945,7 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   645
             Left            =   60
-            TabIndex        =   184
+            TabIndex        =   183
             Top             =   0
             Visible         =   0   'False
             Width           =   1500
@@ -816,7 +953,7 @@ Begin VB.Form frmManSocios
                Height          =   330
                Index           =   4
                Left            =   150
-               TabIndex        =   185
+               TabIndex        =   184
                Top             =   180
                Width           =   1290
                _ExtentX        =   2275
@@ -896,7 +1033,7 @@ Begin VB.Form frmManSocios
             Height          =   5985
             Index           =   4
             Left            =   60
-            TabIndex        =   192
+            TabIndex        =   191
             Top             =   720
             Width           =   13175
             _ExtentX        =   23230
@@ -976,7 +1113,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   7365
          Left            =   -74955
-         TabIndex        =   154
+         TabIndex        =   153
          Top             =   405
          Width           =   14360
          Begin VB.Frame FrameToolAux3 
@@ -991,14 +1128,14 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   645
             Left            =   60
-            TabIndex        =   181
+            TabIndex        =   180
             Top             =   0
             Width           =   1500
             Begin MSComctlLib.Toolbar ToolAux 
                Height          =   330
                Index           =   3
                Left            =   150
-               TabIndex        =   182
+               TabIndex        =   181
                Top             =   180
                Width           =   1290
                _ExtentX        =   2275
@@ -1041,7 +1178,7 @@ Begin VB.Form frmManSocios
             Index           =   1
             Left            =   720
             MaxLength       =   6
-            TabIndex        =   161
+            TabIndex        =   160
             Tag             =   "Lineal|N|N|||rsocios_miembros|numlinea|#####0|S|"
             Text            =   "Linea"
             Top             =   3450
@@ -1065,7 +1202,7 @@ Begin VB.Form frmManSocios
             Index           =   5
             Left            =   7020
             MaxLength       =   30
-            TabIndex        =   160
+            TabIndex        =   159
             Tag             =   "Capital|N|S|||rsocios_miembros|capital|###,###,##0.00||"
             Text            =   "Capital"
             Top             =   3450
@@ -1089,7 +1226,7 @@ Begin VB.Form frmManSocios
             Index           =   2
             Left            =   1440
             MaxLength       =   9
-            TabIndex        =   156
+            TabIndex        =   155
             Tag             =   "NIF miembro|T|N|||rsocios_miembros|nifmiembro|||"
             Text            =   "Nif"
             Top             =   3450
@@ -1113,7 +1250,7 @@ Begin VB.Form frmManSocios
             Index           =   0
             Left            =   150
             MaxLength       =   6
-            TabIndex        =   155
+            TabIndex        =   154
             Tag             =   "Código Socio|N|N|1|999999|rsocios_miembros|codsocio|000000|S|"
             Text            =   "Socio"
             Top             =   3480
@@ -1137,7 +1274,7 @@ Begin VB.Form frmManSocios
             Index           =   4
             Left            =   5250
             MaxLength       =   30
-            TabIndex        =   159
+            TabIndex        =   158
             Tag             =   "Votos|N|S|||rsocios_miembros|votos|###,###,##0.00||"
             Text            =   "Votos"
             Top             =   3450
@@ -1160,7 +1297,7 @@ Begin VB.Form frmManSocios
             Index           =   3
             Left            =   1980
             MaxLength       =   40
-            TabIndex        =   157
+            TabIndex        =   156
             Tag             =   "Nombre|T|N|||rsocios_miembros|nommiembro|||"
             Text            =   "Nombre"
             Top             =   3450
@@ -1220,7 +1357,7 @@ Begin VB.Form frmManSocios
             Height          =   5985
             Index           =   3
             Left            =   60
-            TabIndex        =   158
+            TabIndex        =   157
             Top             =   720
             Width           =   13175
             _ExtentX        =   23230
@@ -1300,9 +1437,9 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   4395
-         Left            =   9900
-         TabIndex        =   149
-         Top             =   405
+         Left            =   9945
+         TabIndex        =   148
+         Top             =   1710
          Visible         =   0   'False
          Width           =   3465
          Begin VB.CommandButton cmdAccCRM 
@@ -1320,7 +1457,7 @@ Begin VB.Form frmManSocios
             Left            =   0
             Picture         =   "frmManSocios.frx":0100
             Style           =   1  'Graphical
-            TabIndex        =   152
+            TabIndex        =   151
             ToolTipText     =   "Insertar Imágen"
             Top             =   0
             Width           =   375
@@ -1340,7 +1477,7 @@ Begin VB.Form frmManSocios
             Left            =   1080
             Picture         =   "frmManSocios.frx":0B02
             Style           =   1  'Graphical
-            TabIndex        =   151
+            TabIndex        =   150
             ToolTipText     =   "Ver Documento"
             Top             =   0
             Width           =   375
@@ -1360,7 +1497,7 @@ Begin VB.Form frmManSocios
             Left            =   480
             Picture         =   "frmManSocios.frx":108C
             Style           =   1  'Graphical
-            TabIndex        =   150
+            TabIndex        =   149
             ToolTipText     =   "Eliminar"
             Top             =   0
             Width           =   375
@@ -1369,7 +1506,7 @@ Begin VB.Form frmManSocios
             Height          =   3780
             Left            =   0
             Stretch         =   -1  'True
-            Top             =   420
+            Top             =   405
             Width           =   3405
          End
       End
@@ -1387,7 +1524,7 @@ Begin VB.Form frmManSocios
          ForeColor       =   &H00972E0B&
          Height          =   2205
          Left            =   -74850
-         TabIndex        =   143
+         TabIndex        =   142
          Top             =   1095
          Width           =   7245
          Begin VB.TextBox Text1 
@@ -1489,7 +1626,7 @@ Begin VB.Form frmManSocios
             Height          =   255
             Index           =   0
             Left            =   240
-            TabIndex        =   146
+            TabIndex        =   145
             Top             =   495
             Width           =   1005
          End
@@ -1506,7 +1643,7 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   255
             Left            =   240
-            TabIndex        =   145
+            TabIndex        =   144
             Top             =   1530
             Width           =   945
          End
@@ -1524,7 +1661,7 @@ Begin VB.Form frmManSocios
             Height          =   255
             Index           =   26
             Left            =   240
-            TabIndex        =   144
+            TabIndex        =   143
             Top             =   1005
             Width           =   945
          End
@@ -1543,7 +1680,7 @@ Begin VB.Form frmManSocios
          ForeColor       =   &H00972E0B&
          Height          =   2205
          Left            =   -74850
-         TabIndex        =   139
+         TabIndex        =   138
          Top             =   3360
          Width           =   7245
          Begin VB.TextBox Text1 
@@ -1645,7 +1782,7 @@ Begin VB.Form frmManSocios
             Height          =   255
             Index           =   1
             Left            =   240
-            TabIndex        =   142
+            TabIndex        =   141
             Top             =   495
             Width           =   975
          End
@@ -1662,7 +1799,7 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   255
             Left            =   240
-            TabIndex        =   141
+            TabIndex        =   140
             Top             =   1500
             Width           =   945
          End
@@ -1680,7 +1817,7 @@ Begin VB.Form frmManSocios
             Height          =   255
             Index           =   1
             Left            =   240
-            TabIndex        =   140
+            TabIndex        =   139
             Top             =   1005
             Width           =   975
          End
@@ -1698,7 +1835,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   7380
          Left            =   -74955
-         TabIndex        =   133
+         TabIndex        =   132
          Top             =   405
          Width           =   14360
          Begin VB.Frame FrameToolAux2 
@@ -1713,14 +1850,14 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   645
             Left            =   60
-            TabIndex        =   177
+            TabIndex        =   176
             Top             =   0
             Width           =   1500
             Begin MSComctlLib.Toolbar ToolAux 
                Height          =   330
                Index           =   2
                Left            =   150
-               TabIndex        =   178
+               TabIndex        =   177
                Top             =   180
                Width           =   1230
                _ExtentX        =   2170
@@ -1764,7 +1901,7 @@ Begin VB.Form frmManSocios
             Index           =   2
             Left            =   1290
             MaxLength       =   9
-            TabIndex        =   135
+            TabIndex        =   134
             Tag             =   "Acciones|N|N|||rsocios_pozos|acciones|##0.00||"
             Text            =   "Acciones"
             Top             =   3420
@@ -1787,7 +1924,7 @@ Begin VB.Form frmManSocios
             Index           =   3
             Left            =   1950
             MaxLength       =   30
-            TabIndex        =   136
+            TabIndex        =   135
             Tag             =   "Observaciones|T|S|||rsocios_pozos|observac|||"
             Text            =   "observaciones"
             Top             =   3420
@@ -1811,7 +1948,7 @@ Begin VB.Form frmManSocios
             Index           =   0
             Left            =   300
             MaxLength       =   6
-            TabIndex        =   137
+            TabIndex        =   136
             Tag             =   "Código Socio|N|N|1|999999|rsocios_pozos|codsocio|000000|S|"
             Text            =   "Socio"
             Top             =   3420
@@ -1835,7 +1972,7 @@ Begin VB.Form frmManSocios
             Index           =   1
             Left            =   750
             MaxLength       =   9
-            TabIndex        =   134
+            TabIndex        =   133
             Tag             =   "Numero Fases|N|N|||rsocios_pozos|numfases|000|S|"
             Text            =   "Fases"
             Top             =   3405
@@ -1895,7 +2032,7 @@ Begin VB.Form frmManSocios
             Height          =   5985
             Index           =   2
             Left            =   60
-            TabIndex        =   138
+            TabIndex        =   137
             Top             =   720
             Width           =   9995
             _ExtentX        =   17621
@@ -1975,10 +2112,10 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   11340
+         Left            =   11295
          TabIndex        =   125
          Text            =   "Text4"
-         Top             =   1050
+         Top             =   2040
          Width           =   1455
       End
       Begin VB.TextBox Text1 
@@ -2028,14 +2165,14 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   645
             Left            =   30
-            TabIndex        =   175
+            TabIndex        =   174
             Top             =   0
             Width           =   1500
             Begin MSComctlLib.Toolbar ToolAux 
                Height          =   330
                Index           =   1
                Left            =   150
-               TabIndex        =   176
+               TabIndex        =   175
                Top             =   180
                Width           =   1230
                _ExtentX        =   2170
@@ -2838,14 +2975,14 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   645
             Left            =   60
-            TabIndex        =   179
+            TabIndex        =   178
             Top             =   0
             Width           =   1500
             Begin MSComctlLib.Toolbar ToolAux 
                Height          =   330
                Index           =   0
                Left            =   150
-               TabIndex        =   180
+               TabIndex        =   179
                Top             =   180
                Width           =   1290
                _ExtentX        =   2275
@@ -3640,7 +3777,7 @@ Begin VB.Form frmManSocios
             Height          =   315
             Index           =   4
             Left            =   3750
-            TabIndex        =   166
+            TabIndex        =   165
             Tag             =   "No Devolver Aportaciones|N|N|||rsocios|nodevolverapor||N|"
             Top             =   1005
             Width           =   3135
@@ -3739,7 +3876,7 @@ Begin VB.Form frmManSocios
             Height          =   360
             Index           =   26
             Left            =   2415
-            TabIndex        =   148
+            TabIndex        =   147
             Top             =   5070
             Width           =   5280
          End
@@ -4067,7 +4204,7 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   255
             Left            =   180
-            TabIndex        =   197
+            TabIndex        =   196
             Top             =   6240
             Width           =   1305
          End
@@ -4094,7 +4231,7 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   255
             Left            =   3420
-            TabIndex        =   196
+            TabIndex        =   195
             Top             =   5670
             Width           =   1830
          End
@@ -4111,7 +4248,7 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   255
             Left            =   180
-            TabIndex        =   195
+            TabIndex        =   194
             Top             =   5655
             Width           =   1305
          End
@@ -4153,7 +4290,7 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   255
             Left            =   3720
-            TabIndex        =   164
+            TabIndex        =   163
             Top             =   510
             Width           =   3480
          End
@@ -4170,7 +4307,7 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   255
             Left            =   4560
-            TabIndex        =   163
+            TabIndex        =   162
             Top             =   3990
             Width           =   705
          End
@@ -4187,7 +4324,7 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   255
             Left            =   180
-            TabIndex        =   162
+            TabIndex        =   161
             Top             =   4020
             Width           =   705
          End
@@ -4222,7 +4359,7 @@ Begin VB.Form frmManSocios
             EndProperty
             Height          =   255
             Left            =   180
-            TabIndex        =   147
+            TabIndex        =   146
             Top             =   5100
             Width           =   1005
          End
@@ -4438,11 +4575,140 @@ Begin VB.Form frmManSocios
          Top             =   660
          Width           =   1920
       End
+      Begin MSComctlLib.ListView lw1 
+         Height          =   6690
+         Left            =   135
+         TabIndex        =   123
+         Top             =   1665
+         Width           =   9330
+         _ExtentX        =   16457
+         _ExtentY        =   11800
+         View            =   3
+         LabelEdit       =   1
+         MultiSelect     =   -1  'True
+         LabelWrap       =   -1  'True
+         HideSelection   =   0   'False
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   0
+      End
+      Begin MSComctlLib.Toolbar Toolbar3 
+         Height          =   2370
+         Left            =   225
+         TabIndex        =   129
+         Top             =   1755
+         Visible         =   0   'False
+         Width           =   480
+         _ExtentX        =   847
+         _ExtentY        =   4180
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Appearance      =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   7
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Facturas"
+               Object.Tag             =   "0"
+               Style           =   2
+               Value           =   1
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Entradas por Huerto"
+               Object.Tag             =   "1"
+               Style           =   2
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Detalle Entradas"
+               Object.Tag             =   "2"
+               Style           =   2
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Facturas Clientes"
+               Object.Tag             =   "3"
+               Style           =   2
+            EndProperty
+         EndProperty
+      End
+      Begin VB.Frame Frame5 
+         BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   1005
+         Left            =   10395
+         TabIndex        =   131
+         Top             =   2565
+         Width           =   2760
+         Begin VB.CheckBox Check2 
+            Caption         =   "Imprimir Facturas"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Left            =   135
+            TabIndex        =   127
+            Top             =   720
+            Width           =   2220
+         End
+         Begin VB.CheckBox Check1 
+            Caption         =   "Detalle Albaranes"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Left            =   135
+            TabIndex        =   126
+            Top             =   270
+            Width           =   2220
+         End
+      End
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   4350
-         Left            =   150
+         Left            =   180
          TabIndex        =   122
-         Top             =   450
+         Top             =   1710
          Width           =   615
          _ExtentX        =   1085
          _ExtentY        =   7673
@@ -4506,26 +4772,15 @@ Begin VB.Form frmManSocios
             EndProperty
          EndProperty
       End
-      Begin MSComctlLib.ListView lw1 
-         Height          =   7140
-         Left            =   960
-         TabIndex        =   123
-         Top             =   420
-         Width           =   8745
-         _ExtentX        =   15425
-         _ExtentY        =   12594
-         View            =   3
-         LabelEdit       =   1
-         MultiSelect     =   -1  'True
-         LabelWrap       =   -1  'True
-         HideSelection   =   0   'False
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+      Begin VB.Image Image2 
+         Height          =   375
+         Left            =   180
+         Top             =   405
+         Width           =   420
+      End
+      Begin VB.Label Label44 
+         Caption         =   "Fecha"
+         BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
@@ -4534,138 +4789,20 @@ Begin VB.Form frmManSocios
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   0
-      End
-      Begin MSComctlLib.Toolbar Toolbar3 
-         Height          =   2370
-         Left            =   150
-         TabIndex        =   129
-         Top             =   480
-         Visible         =   0   'False
-         Width           =   795
-         _ExtentX        =   1402
-         _ExtentY        =   4180
-         ButtonWidth     =   609
-         ButtonHeight    =   582
-         AllowCustomize  =   0   'False
-         Appearance      =   1
-         _Version        =   393216
-         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   7
-            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Facturas"
-               Object.Tag             =   "0"
-               Style           =   2
-               Value           =   1
-            EndProperty
-            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Style           =   3
-            EndProperty
-            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Entradas por Huerto"
-               Object.Tag             =   "1"
-               Style           =   2
-            EndProperty
-            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Style           =   3
-            EndProperty
-            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Detalle Entradas"
-               Object.Tag             =   "2"
-               Style           =   2
-            EndProperty
-            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Style           =   3
-            EndProperty
-            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Facturas Clientes"
-               Object.Tag             =   "3"
-               Style           =   2
-            EndProperty
-         EndProperty
-      End
-      Begin VB.Frame Frame5 
-         BorderStyle     =   0  'None
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   1005
-         Left            =   10020
-         TabIndex        =   132
-         Top             =   1440
-         Width           =   2760
-         Begin VB.CheckBox Check2 
-            Caption         =   "Imprimir Facturas"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   240
-            Left            =   135
-            TabIndex        =   127
-            Top             =   720
-            Width           =   2220
-         End
-         Begin VB.CheckBox Check1 
-            Caption         =   "Detalle Albaranes"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   240
-            Left            =   135
-            TabIndex        =   126
-            Top             =   270
-            Width           =   2220
-         End
-      End
-      Begin MSComctlLib.Toolbar Toolbar4 
-         Height          =   390
-         Left            =   10140
-         TabIndex        =   131
-         Top             =   1590
-         Visible         =   0   'False
-         Width           =   615
-         _ExtentX        =   1085
-         _ExtentY        =   688
-         ButtonWidth     =   609
-         ButtonHeight    =   582
-         AllowCustomize  =   0   'False
-         Appearance      =   1
-         _Version        =   393216
-         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   1
-            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Imprimir documentos"
-               Object.Tag             =   "0"
-               Style           =   2
-               Value           =   1
-            EndProperty
-         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   300
+         Left            =   10035
+         TabIndex        =   205
+         Top             =   1665
+         Width           =   2865
       End
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   3
-         Left            =   10860
+         Left            =   10815
          Picture         =   "frmManSocios.frx":1C77
          ToolTipText     =   "Buscar fecha"
-         Top             =   1050
+         Top             =   2085
          Width           =   240
       End
       Begin VB.Label Label17 
@@ -4680,9 +4817,9 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   10140
+         Left            =   10095
          TabIndex        =   128
-         Top             =   1050
+         Top             =   2085
          Width           =   735
       End
       Begin VB.Label Label16 
@@ -4698,10 +4835,10 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   300
-         Left            =   10080
+         Left            =   720
          TabIndex        =   124
-         Top             =   510
-         Width           =   2865
+         Top             =   450
+         Width           =   7590
       End
       Begin VB.Label Label10 
          Caption         =   "F.Nacimiento"
@@ -4847,7 +4984,7 @@ Begin VB.Form frmManSocios
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
       Left            =   15150
-      TabIndex        =   169
+      TabIndex        =   168
       Top             =   195
       Width           =   405
       _ExtentX        =   714
@@ -4878,7 +5015,7 @@ Begin VB.Form frmManSocios
       ForeColor       =   &H00FFFFFF&
       Height          =   465
       Left            =   3300
-      TabIndex        =   153
+      TabIndex        =   152
       Top             =   10260
       Visible         =   0   'False
       Width           =   2715
@@ -5849,7 +5986,8 @@ Dim i As Integer
     Me.SSTab1.TabVisible(2) = False
     Me.SSTab1.TabEnabled(2) = False
     
-
+    '[Monica]25/02/2019: por defecto
+    Me.Option1(0).Value = True
 
 End Sub
 
@@ -5927,7 +6065,7 @@ Dim b As Boolean
     '---------------------------------------------
     b = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    CmdAceptar.visible = b
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -6723,6 +6861,38 @@ Private Sub mnVerTodos_Click()
 End Sub
 
 
+
+Private Sub Option1_Click(Index As Integer)
+   
+'    If Button.Tag = "" Then Exit Sub
+'
+'    If Button.Index = 9 Then
+'        ImprimirDocumentos
+'        Exit Sub
+'    End If
+'
+'
+'    Label16.Caption = ""
+'    'Levantamos todos los botones y dejamos pulsado el de ahora
+'    For NumRegElim = 1 To Toolbar2.Buttons.Count
+'        If Toolbar2.Buttons(NumRegElim).Tag <> "" Then
+'            If Toolbar2.Buttons(NumRegElim).Index <> Button.Index Then Toolbar2.Buttons(NumRegElim).Value = tbrUnpressed
+'        End If
+'    Next NumRegElim
+'    CargaColumnas CByte(Button.Tag)
+    
+    If Index = 4 Then
+        ImprimirDocumentos
+        Exit Sub
+    End If
+    
+    
+    CargaColumnas CByte(Index)
+        
+    
+    'Hacemos las acciones
+    If Modo = 2 Then CargaDatosLW
+End Sub
 
 Private Sub Text3_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
@@ -8246,9 +8416,7 @@ End Sub
 
 
 
-Private Sub Toolbar4_ButtonClick(ByVal Button As MSComctlLib.Button)
-    ImprimirDocumentos
-End Sub
+
 
 Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
@@ -8299,7 +8467,7 @@ Dim Nuevo As Boolean
             PonerFormatoEntero txtAux(Index)
             
         Case 16
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
     End Select
     
     ' ******************************************************************************
@@ -9112,7 +9280,7 @@ Dim cadena As String
             If Not vSeccion Is Nothing Then
                   txtAux2(0).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", txtAux1(Index).Text, "N")
             End If
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
 
     End Select
     
@@ -9171,7 +9339,7 @@ Dim cadena As String
             PonerFormatoDecimal txtAux3(Index), 10
         
         Case 3 'observaciones
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
 
     End Select
     
@@ -9222,12 +9390,6 @@ Private Sub ImagenesNavegacion()
         .Buttons(5).Image = 6
         .Buttons(7).Image = 8
     End With
-    With Me.Toolbar4
-        .ImageList = frmPpal.imgListComun16
-        
-'        .ImageList = frmPpal.imgListPpal
-        .Buttons(1).Image = 10
-    End With
     
 '    Set lw1.SmallIcons = frmPpal.imgListPpal
     Set lw1.SmallIcons = frmPpal.imgListImages16
@@ -9259,9 +9421,6 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 
-
-
-
 Private Sub CargaColumnas(OpcionList As Byte)
 Dim Columnas As String
 Dim Ancho As String
@@ -9277,7 +9436,7 @@ Dim C As ColumnHeader
         'Facturas
         Label16.Caption = "Facturas"
         Columnas = "Tipo|Numero|Fecha|Importe|"
-        Ancho = "1000|2000|1200|3600|"
+        Ancho = "1000|2000|1400|3600|"
         'vwColumnRight =1  left=0   center=2
         Alinea = "0|0|0|1|"
         'Formatos
@@ -9288,7 +9447,7 @@ Dim C As ColumnHeader
         'Entradas por Huerto
         Label16.Caption = "Entradas por Huerto"
         Columnas = "Huerto|Nro.Orden|Partida|Variedad|Kilos Netos|"
-        Ancho = "1200|1200|2400|1900|1700|"
+        Ancho = "1200|1200|2400|2200|1700|"
         'vwColumnRight =1  left=0   center=2
         Alinea = "0|0|0|0|1|"
         'Formatos
@@ -9300,7 +9459,7 @@ Dim C As ColumnHeader
         Label16.Caption = "Detalles de Entradas"
         If vParamAplic.Cooperativa = 12 Then
             Columnas = "Albarán|Fecha|Variedad|Cajas|Kilos Netos|"
-            Ancho = "1400|1400|2000|1500|2000|"
+            Ancho = "1400|1400|2000|1500|2100|"
             'vwColumnRight =1  left=0   center=2
             Alinea = "0|0|0|1|1|"
             'Formatos
@@ -9308,7 +9467,7 @@ Dim C As ColumnHeader
             Ncol = 5
         Else
             Columnas = "Albarán|Fecha|Campo|N.Orden|Partida|Variedad|Kilos Netos|"
-            Ancho = "1100|1400|1100|1000|1300|1300|1200|"
+            Ancho = "1100|1400|1100|1000|1500|1500|1400|"
             'vwColumnRight =1  left=0   center=2
             Alinea = "0|0|0|0|0|0|1|"
             'Formatos
@@ -9316,7 +9475,7 @@ Dim C As ColumnHeader
             Ncol = 7
         End If
         
-    Case 4
+    Case 3
         'Facturas adv , retirada almazara y bodega , recibos de pozos
         Label16.Caption = "Facturas Cliente"
         Columnas = "Tipo|Factura|Fecha|Importe|Cobrado|"
@@ -9342,7 +9501,7 @@ Dim C As ColumnHeader
         
     Case 6
         'Documentos de baja de campos
-        Label16.Caption = "Documentos de baja de campos"
+        Label16.Caption = "Documentos de alta/baja de campos"
         Columnas = "Documento|Fecha|Importe|Concepto|"
         Ancho = "1800|1400|1600|3600|"
         'vwColumnRight =1  left=0   center=2
@@ -9350,8 +9509,6 @@ Dim C As ColumnHeader
         'Formatos
         Formato = "00000000|dd/mm/yyyy|" & FormatoImporte & "||"
         Ncol = 4
-        
-        
         
     End Select
     
@@ -9393,23 +9550,43 @@ Dim ElIcono As Integer
 Dim GroupBy As String
 Dim Orden As String
 Dim C As String
-
+Dim i As Integer
 
     On Error GoTo ECargaDatosLW
     
     If Modo <> 2 Then Exit Sub
     
-    For NumRegElim = 1 To Toolbar2.Buttons.Count
-        If Toolbar2.Buttons(NumRegElim).Value = tbrPressed Then
-            ElIcono = Toolbar3.Buttons(NumRegElim).Image
+'    For NumRegElim = 1 To Toolbar2.Buttons.Count
+'        If Toolbar2.Buttons(NumRegElim).Value = tbrPressed Then
+'            ElIcono = Toolbar3.Buttons(NumRegElim).Image
+'            Exit For
+'        End If
+'    Next
+    
+    For NumRegElim = 0 To 6
+        If Option1(NumRegElim).Value Then
+            ElIcono = Toolbar3.Buttons(NumRegElim + 1).Image
+            i = NumRegElim
+            Select Case i
+                Case 0
+                    Me.Image2.Picture = frmPpal.imgListPpal.ListImages(23).Picture
+                Case 2
+                    Me.Image2.Picture = frmPpal.imgListPpal.ListImages(30).Picture
+                Case 3
+                    Me.Image2.Picture = frmPpal.imgListPpal.ListImages(22).Picture
+                Case Else
+                    Me.Image2.Picture = LoadPicture("")
+            End Select
+        
             Exit For
         End If
     Next
-    
     'Fecha incio busquedas
     Text3(0).Text = Format(imgFec(3).Tag, "dd/mm/yyyy")
     
-    Select Case CByte(RecuperaValor(lw1.Tag, 1))
+    
+    
+    Select Case CByte(i) 'CByte(RecuperaValor(lw1.Tag, 1))
     Case 0
         'FACTURAS
         Cad = "select h.codtipom,h.numfactu,h.fecfactu,h.totalfac from rfactsoc h WHERE 1=1"
@@ -9437,6 +9614,7 @@ Dim C As String
         GroupBy = "1,2,3,4"
         BuscaChekc = "h.fecalbar"
         Orden = "c.codcampo"
+        
     Case 2
         'DETALLE DE ENTRADAS
         If vParamAplic.Cooperativa = 12 Then
@@ -9466,7 +9644,7 @@ Dim C As String
         End If
         
     
-    Case 4
+    Case 3
         'FACTURAS de cliente (advfacturas, rbodfacturas, rrecibpozos)
         'advfacturas
         Dim ContaADV As Integer
@@ -9637,7 +9815,7 @@ Dim C As String
                     End If
                     
                 Next
-                It.SmallIcon = ElIcono
+'                It.SmallIcon = ElIcono
                 Rs.MoveNext
             Wend
             Rs.Close
@@ -10185,7 +10363,7 @@ Dim cadena As String
         
         Case 5 ' capital
             If PonerFormatoDecimal(txtAux4(Index), 1) Then
-                cmdAceptar.SetFocus
+                CmdAceptar.SetFocus
             End If
 
     End Select
