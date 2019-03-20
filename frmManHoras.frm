@@ -831,7 +831,7 @@ Public CodigoActual As String
 Public DeConsulta As Boolean
 
 Private CadenaConsulta As String
-Private CadB As String
+Private cadB As String
 
 Private WithEvents frmTra As frmManTraba 'mantenimiento de trabajadores
 Attribute frmTra.VB_VarHelpID = -1
@@ -869,7 +869,7 @@ Dim b As Boolean
     
     b = (Modo = 2)
     If b Then
-        PonerContRegIndicador lblIndicador, adodc1, CadB
+        PonerContRegIndicador lblIndicador, adodc1, cadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
@@ -888,8 +888,8 @@ Dim b As Boolean
     chkAux(0).visible = Not b
     chkAux(1).visible = Not b
 
-    cmdAceptar.visible = Not b
-    CmdCancelar.visible = Not b
+    CmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
     'Si es regresar
@@ -962,7 +962,7 @@ Private Sub BotonAnyadir()
     Dim NumF As String
     Dim anc As Single
     
-    CargaGrid CadB, True 'primer de tot carregue tot el grid
+    CargaGrid cadB, True 'primer de tot carregue tot el grid
 '    CadB = ""
    
 '    '******************** canviar taula i camp **************************
@@ -1001,8 +1001,8 @@ Private Sub BotonAnyadir()
 End Sub
 
 Private Sub BotonVerTodos()
-    CadB = ""
-    CargaGrid CadB
+    cadB = ""
+    CargaGrid cadB
     PonerModo 2
 End Sub
 
@@ -1116,7 +1116,7 @@ Dim temp As Boolean
         Sql = Sql & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
         Sql = Sql & " and codalmac = " & DBLet(adodc1.Recordset!codAlmac)
         conn.Execute Sql
-        CargaGrid CadB
+        CargaGrid cadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
 '            lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
@@ -1219,7 +1219,7 @@ Private Sub cboFiltro_Change()
 End Sub
 
 Private Sub cboFiltro_KeyPress(KeyAscii As Integer)
-    If Modo = 2 Then CargaGrid CadB
+    If Modo = 2 Then CargaGrid cadB
 End Sub
 
 
@@ -1240,9 +1240,9 @@ Private Sub cmdAceptar_Click()
 
     Select Case Modo
         Case 1 'BUSQUEDA
-            CadB = ObtenerBusqueda3(Me, False, BuscaChekc)
-            If CadB <> "" Then
-                CargaGrid CadB
+            cadB = ObtenerBusqueda3(Me, False, BuscaChekc)
+            If cadB <> "" Then
+                CargaGrid cadB
                 PonerModo 2
 '                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
@@ -1251,7 +1251,7 @@ Private Sub cmdAceptar_Click()
         Case 3 'INSERTAR
             If DatosOk Then
                 If InsertarDesdeForm(Me) Then
-                    CargaGrid CadB
+                    CargaGrid cadB
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
 '                        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveLast
@@ -1262,7 +1262,7 @@ Private Sub cmdAceptar_Click()
                     Else
                         BotonAnyadir
                     End If
-                    CadB = ""
+                    cadB = ""
                 End If
             End If
             
@@ -1272,7 +1272,7 @@ Private Sub cmdAceptar_Click()
                     TerminaBloquear
                     i = adodc1.Recordset.Fields(0)
                     PonerModo 2
-                    CargaGrid CadB
+                    CargaGrid cadB
 '                    If CadB <> "" Then
 '                        CargaGrid CadB
 '                        lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
@@ -1292,7 +1292,7 @@ Private Sub cmdCancelar_Click()
     
     Select Case Modo
         Case 1 'búsqueda
-            CargaGrid CadB
+            CargaGrid cadB
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
             CargaGrid
@@ -1347,7 +1347,7 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Modo = 2 Then PonerContRegIndicador lblIndicador, adodc1, CadB
+    If Modo = 2 Then PonerContRegIndicador lblIndicador, adodc1, cadB
 End Sub
 
 Private Sub Form_Activate()
@@ -1443,8 +1443,9 @@ Private Sub Form_Load()
     cboFiltro.ListIndex = 0
     
     
+    
   
-    CadB = ""
+    cadB = ""
     CargaGrid "horas.codtraba = -1"
     
 '    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then

@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManHorasCata 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Entrada de Horas Catadau"
-   ClientHeight    =   10320
+   ClientHeight    =   10695
    ClientLeft      =   195
    ClientTop       =   180
    ClientWidth     =   19005
@@ -13,9 +13,53 @@ Begin VB.Form frmManHorasCata
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   10320
+   ScaleHeight     =   10695
    ScaleWidth      =   19005
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtAux2 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000018&
+      BorderStyle     =   0  'None
+      Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
+      Index           =   8
+      Left            =   4005
+      TabIndex        =   52
+      Top             =   10280
+      Visible         =   0   'False
+      Width           =   4785
+   End
+   Begin VB.CommandButton btnBuscar 
+      Appearance      =   0  'Flat
+      Caption         =   "+"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   350
+      Index           =   6
+      Left            =   15750
+      MaskColor       =   &H00000000&
+      TabIndex        =   51
+      ToolTipText     =   "Buscar campo"
+      Top             =   4635
+      Visible         =   0   'False
+      Width           =   195
+   End
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
@@ -67,7 +111,7 @@ Begin VB.Form frmManHorasCata
       Index           =   4
       Left            =   1935
       TabIndex        =   46
-      Top             =   9045
+      Top             =   9135
       Width           =   510
    End
    Begin VB.TextBox txtAux 
@@ -154,7 +198,7 @@ Begin VB.Form frmManHorasCata
       Index           =   11
       Left            =   4005
       TabIndex        =   43
-      Top             =   9810
+      Top             =   9900
       Width           =   4785
    End
    Begin VB.TextBox txtAux 
@@ -341,10 +385,10 @@ Begin VB.Form frmManHorasCata
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00000000&
-      Height          =   1005
+      Height          =   1275
       Left            =   9045
       TabIndex        =   28
-      Top             =   9135
+      Top             =   9000
       Width           =   6765
       Begin VB.TextBox txtAux2 
          Alignment       =   1  'Right Justify
@@ -365,7 +409,7 @@ Begin VB.Form frmManHorasCata
          Index           =   5
          Left            =   3375
          TabIndex        =   49
-         Top             =   495
+         Top             =   720
          Width           =   1560
       End
       Begin VB.TextBox txtAux2 
@@ -387,7 +431,7 @@ Begin VB.Form frmManHorasCata
          Index           =   3
          Left            =   4995
          TabIndex        =   33
-         Top             =   495
+         Top             =   720
          Width           =   1560
       End
       Begin VB.TextBox txtAux2 
@@ -409,7 +453,7 @@ Begin VB.Form frmManHorasCata
          Index           =   2
          Left            =   1755
          TabIndex        =   30
-         Top             =   495
+         Top             =   720
          Width           =   1560
       End
       Begin VB.TextBox txtAux2 
@@ -431,7 +475,7 @@ Begin VB.Form frmManHorasCata
          Index           =   1
          Left            =   135
          TabIndex        =   29
-         Top             =   495
+         Top             =   720
          Width           =   1560
       End
       Begin VB.Label Label8 
@@ -449,7 +493,7 @@ Begin VB.Form frmManHorasCata
          Height          =   225
          Left            =   3375
          TabIndex        =   50
-         Top             =   225
+         Top             =   360
          Width           =   1335
       End
       Begin VB.Label Label3 
@@ -467,7 +511,7 @@ Begin VB.Form frmManHorasCata
          Height          =   225
          Left            =   4995
          TabIndex        =   34
-         Top             =   225
+         Top             =   360
          Width           =   1335
       End
       Begin VB.Label Label2 
@@ -485,7 +529,7 @@ Begin VB.Form frmManHorasCata
          Height          =   225
          Left            =   1755
          TabIndex        =   32
-         Top             =   225
+         Top             =   360
          Width           =   1395
       End
       Begin VB.Label Label1 
@@ -503,7 +547,7 @@ Begin VB.Form frmManHorasCata
          Height          =   225
          Left            =   180
          TabIndex        =   31
-         Top             =   240
+         Top             =   375
          Width           =   945
       End
    End
@@ -569,7 +613,7 @@ Begin VB.Form frmManHorasCata
       Index           =   6
       Left            =   4005
       TabIndex        =   24
-      Top             =   9045
+      Top             =   9135
       Width           =   4785
    End
    Begin VB.CommandButton btnBuscar 
@@ -755,7 +799,7 @@ Begin VB.Form frmManHorasCata
       Index           =   0
       Left            =   4005
       TabIndex        =   20
-      Top             =   9420
+      Top             =   9510
       Width           =   4785
    End
    Begin VB.CommandButton btnBuscar 
@@ -816,7 +860,7 @@ Begin VB.Form frmManHorasCata
       Height          =   375
       Left            =   16650
       TabIndex        =   13
-      Top             =   9540
+      Top             =   9855
       Visible         =   0   'False
       Width           =   1035
    End
@@ -835,7 +879,7 @@ Begin VB.Form frmManHorasCata
       Height          =   375
       Left            =   17820
       TabIndex        =   15
-      Top             =   9540
+      Top             =   9855
       Visible         =   0   'False
       Width           =   1095
    End
@@ -966,7 +1010,7 @@ Begin VB.Form frmManHorasCata
       Height          =   375
       Left            =   17820
       TabIndex        =   18
-      Top             =   9540
+      Top             =   9855
       Visible         =   0   'False
       Width           =   1095
    End
@@ -975,7 +1019,7 @@ Begin VB.Form frmManHorasCata
       Index           =   1
       Left            =   60
       TabIndex        =   14
-      Top             =   9585
+      Top             =   9630
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -1075,6 +1119,25 @@ Begin VB.Form frmManHorasCata
          EndProperty
       EndProperty
    End
+   Begin VB.Label Label9 
+      Caption         =   "Partida"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00000000&
+      Height          =   270
+      Left            =   2880
+      TabIndex        =   53
+      Top             =   10280
+      Visible         =   0   'False
+      Width           =   945
+   End
    Begin VB.Label Label7 
       Caption         =   "Grupo Trabajador"
       BeginProperty Font 
@@ -1090,7 +1153,7 @@ Begin VB.Form frmManHorasCata
       Height          =   270
       Left            =   135
       TabIndex        =   47
-      Top             =   9090
+      Top             =   9180
       Width           =   2025
    End
    Begin VB.Label Label6 
@@ -1108,7 +1171,7 @@ Begin VB.Form frmManHorasCata
       Height          =   270
       Left            =   2880
       TabIndex        =   44
-      Top             =   9810
+      Top             =   9900
       Width           =   945
    End
    Begin VB.Label Label5 
@@ -1126,7 +1189,7 @@ Begin VB.Form frmManHorasCata
       Height          =   225
       Left            =   2880
       TabIndex        =   42
-      Top             =   9450
+      Top             =   9540
       Width           =   945
    End
    Begin VB.Label Label4 
@@ -1144,7 +1207,7 @@ Begin VB.Form frmManHorasCata
       Height          =   225
       Left            =   2880
       TabIndex        =   41
-      Top             =   9090
+      Top             =   9180
       Width           =   945
    End
    Begin VB.Menu mnOpciones 
@@ -1267,7 +1330,7 @@ Public CodigoActual As String
 Public DeConsulta As Boolean
 
 Private CadenaConsulta As String
-Private CadB As String
+Private cadB As String
 
 Private WithEvents frmCap As frmManCapataz 'mantenimiento de capataces
 Attribute frmCap.VB_VarHelpID = -1
@@ -1275,6 +1338,8 @@ Private WithEvents frmTra As frmManTraba 'mantenimiento de trabajadores
 Attribute frmTra.VB_VarHelpID = -1
 Private WithEvents frmCat As frmManCategorias 'mantenimiento de categorias
 Attribute frmCat.VB_VarHelpID = -1
+Private WithEvents frmCam As frmManCampos ' mantenimiento de campos
+Attribute frmCam.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmVar As frmBasico2 'ComVar 'variedades
@@ -1305,7 +1370,7 @@ Dim b As Boolean
     
     b = (Modo = 2)
     If b Then
-        PonerContRegIndicador lblIndicador, adodc1, CadB
+        PonerContRegIndicador lblIndicador, adodc1, cadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
@@ -1322,6 +1387,7 @@ Dim b As Boolean
     For i = 0 To btnBuscar.Count - 1
         btnBuscar(i).visible = Not b
     Next i
+    If vParamAplic.Cooperativa <> 18 Then btnBuscar(6).visible = False
     
     chkAux(0).visible = Not b
     chkAux(1).visible = Not b
@@ -1346,6 +1412,9 @@ Dim b As Boolean
     BloquearBtn Me.btnBuscar(0), (Modo = 4)
     BloquearBtn Me.btnBuscar(4), (Modo = 4)
     BloquearBtn Me.btnBuscar(3), (Modo = 4)
+    
+    If vParamAplic.Cooperativa = 18 Then BloquearBtn Me.btnBuscar(6), (Modo = 4)
+    
 ' la fecha la dejamos poner y modificar pq ellos no imprimen recibos
 '    BloquearBtn Me.btnBuscar(2), (Modo = 4) Or (Modo = 3)
     
@@ -1359,10 +1428,13 @@ Dim b As Boolean
     BloquearTxt txtAux(5), (Modo <> 1)
     BloquearBtn btnBuscar(2), (Modo <> 1)
     
-    'El nro de parte unicamente lo podemos buscar
-    txtAux(10).Enabled = (Modo = 1)
-    txtAux(10).visible = (Modo = 1)
-    
+    If vParamAplic.Cooperativa = 18 Then
+        ' para el caso de frutas inma  es el txtaux(10) es el campo
+    Else
+        'El nro de parte unicamente lo podemos buscar
+        txtAux(10).Enabled = (Modo = 1)
+        txtAux(10).visible = (Modo = 1)
+    End If
 End Sub
 
 
@@ -1412,7 +1484,7 @@ Private Sub BotonAnyadir()
     Dim NumF As String
     Dim anc As Single
     
-    CargaGrid CadB, True 'primer de tot carregue tot el grid
+    CargaGrid cadB, True 'primer de tot carregue tot el grid
 '    CadB = ""
    
 '    '******************** canviar taula i camp **************************
@@ -1438,6 +1510,7 @@ Private Sub BotonAnyadir()
     txtAux2(0).Text = ""
     txtAux2(6).Text = ""
     txtAux2(7).Text = ""
+    txtAux2(8).Text = ""
     txtAux2(11).Text = ""
     
     txtAux(8).Text = vParamAplic.AlmacenNOMI ' pq es clave primaria
@@ -1459,7 +1532,7 @@ Private Sub BotonAnyadir()
 End Sub
 
 Private Sub BotonVerTodos()
-    CadB = ""
+    cadB = ""
     CargaGrid ""
     PonerModo 2
 End Sub
@@ -1594,7 +1667,7 @@ Dim temp As Boolean
         
         
         conn.Execute Sql
-        CargaGrid CadB
+        CargaGrid cadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
 '            lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
@@ -1691,6 +1764,10 @@ Private Sub btnBuscar_Click(Index As Integer)
         
         Case 5
             AbrirFrmCategoria 11
+            
+        Case 6 ' codigo de campo
+            AbrirFrmCampos 10
+            
     End Select
     
     If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Me.adodc1, 1
@@ -1713,9 +1790,9 @@ Private Sub cmdAceptar_Click()
 
     Select Case Modo
         Case 1 'BUSQUEDA
-            CadB = ObtenerBusqueda3(Me, False, BuscaChekc)
-            If CadB <> "" Then
-                CargaGrid CadB
+            cadB = ObtenerBusqueda3(Me, False, BuscaChekc)
+            If cadB <> "" Then
+                CargaGrid cadB
                 PonerModo 2
 '                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
@@ -1724,7 +1801,7 @@ Private Sub cmdAceptar_Click()
         Case 3 'INSERTAR
             If DatosOk Then
                 If InsertarDesdeForm(Me) Then
-                    CargaGrid CadB
+                    CargaGrid cadB
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
 '                        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveLast
@@ -1735,7 +1812,7 @@ Private Sub cmdAceptar_Click()
                     Else
                         BotonAnyadir
                     End If
-                    CadB = ""
+                    cadB = ""
                 End If
             End If
             
@@ -1755,7 +1832,7 @@ Dim Cad As String, Indicador As String
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
     Cad = "codtraba = " & adodc1.Recordset.Fields(3) & " and  codvarie = " & adodc1.Recordset.Fields(1) & " and fechahora = " & DBSet(adodc1.Recordset.Fields(0), "F")
     ' ***************************************
-    CargaGrid CadB
+    CargaGrid cadB
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
     'If SituarDataMULTI(Data1, cad, Indicador) Then
     If SituarDataMULTI(adodc1, Cad, Indicador, True) Then
@@ -1774,7 +1851,7 @@ Private Sub cmdCancelar_Click()
     
     Select Case Modo
         Case 1 'búsqueda
-            CargaGrid CadB
+            CargaGrid cadB
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
             CargaGrid
@@ -1830,7 +1907,7 @@ End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     If Modo = 2 Then
-        PonerContRegIndicador lblIndicador, adodc1, CadB
+        PonerContRegIndicador lblIndicador, adodc1, cadB
         CargaForaGrid
     End If
 End Sub
@@ -1900,20 +1977,45 @@ Private Sub Form_Load()
     
     '****************** canviar la consulta *********************************+
     CadenaConsulta = "SELECT horas.fechahora, horas.codvarie, variedades.nomvarie, horas.codtraba, straba.nomtraba, "
-    CadenaConsulta = CadenaConsulta & " horas.codcapat, rcapataz.nomcapat, horas.codcateg, rcategorias.nomcateg, "
-    CadenaConsulta = CadenaConsulta & " horas.horasdia, horas.kilos, horas.importe, horas.compleme, horas.importekms, horas.penaliza, "
-    CadenaConsulta = CadenaConsulta & " horas.fecharec, "
-    CadenaConsulta = CadenaConsulta & " horas.escapataz,  IF(escapataz=1,'*','') as escapa, "
-    CadenaConsulta = CadenaConsulta & " horas.intconta,  IF(intconta=1,'*','') as intcon, "
-    CadenaConsulta = CadenaConsulta & " horas.codalmac, horas.nroparte "
+    CadenaConsulta = CadenaConsulta & " horas.codcapat, rcapataz.nomcapat, "
+    
+    If vParamAplic.Cooperativa = 18 Then
+        CadenaConsulta = CadenaConsulta & " horas.codcampo, "
+        CadenaConsulta = CadenaConsulta & " horas.codcateg , rcategorias.nomcateg, "
+        CadenaConsulta = CadenaConsulta & " horas.horasdia, horas.kilos, horas.importe, horas.compleme, horas.importekms, horas.penaliza, "
+        CadenaConsulta = CadenaConsulta & " horas.fecharec, "
+        CadenaConsulta = CadenaConsulta & " horas.escapataz,  IF(escapataz=1,'*','') as escapa, "
+        CadenaConsulta = CadenaConsulta & " horas.intconta,  IF(intconta=1,'*','') as intcon, "
+        CadenaConsulta = CadenaConsulta & " horas.codalmac "
+    
+    Else
+    
+        CadenaConsulta = CadenaConsulta & " horas.codcateg , rcategorias.nomcateg, "
+        CadenaConsulta = CadenaConsulta & " horas.horasdia, horas.kilos, horas.importe, horas.compleme, horas.importekms, horas.penaliza, "
+        CadenaConsulta = CadenaConsulta & " horas.fecharec, "
+        CadenaConsulta = CadenaConsulta & " horas.escapataz,  IF(escapataz=1,'*','') as escapa, "
+        CadenaConsulta = CadenaConsulta & " horas.intconta,  IF(intconta=1,'*','') as intcon, "
+        CadenaConsulta = CadenaConsulta & " horas.codalmac, horas.nroparte "
+    
+    End If
+    
     CadenaConsulta = CadenaConsulta & " FROM  variedades, straba, rcapataz, horas left join rcategorias on horas.codcateg = rcategorias.codcateg "
     CadenaConsulta = CadenaConsulta & " WHERE horas.codcapat = rcapataz.codcapat and  "
     CadenaConsulta = CadenaConsulta & " horas.codtraba = straba.codtraba and "
     CadenaConsulta = CadenaConsulta & " horas.codvarie = variedades.codvarie "
     
     '************************************************************************
+    If vParamAplic.Cooperativa = 18 Then
+        txtAux(10).Tag = "Campo|N|S|||horas|codcampo|00000000|S|"
+        txtAux(10).TabIndex = 4
+        
+        Label9.visible = True
+        txtAux2(8).visible = True
+    Else
+        Me.Height = 10840
+    End If
     
-    CadB = ""
+    cadB = ""
     CargaGrid "horas.codcapat = -1"
     
 '    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
@@ -1959,6 +2061,10 @@ End Sub
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
     txtAux(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo variedad
     txtAux2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre variedad
+End Sub
+
+Private Sub frmCam_DatoSeleccionado(CadenaSeleccion As String)
+    txtAux(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo campo
 End Sub
 
 Private Sub mnAltaRapida_Click()
@@ -2067,15 +2173,25 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     tots = tots & "S|txtAux(6)|T|Variedad|1100|;S|btnBuscar(3)|B||195|;N|txtAux2(6)|T|Variedad|1600|;"
     tots = tots & "S|txtAux(7)|T|Codigo|1000|;S|btnBuscar(4)|B||195|;S|txtAux2(7)|T|Trabajador|2700|;"
     tots = tots & "S|txtAux(0)|T|Capataz|850|;S|btnBuscar(1)|B||195|;N|txtAux2(0)|T|Capataz|1400|;"
-    tots = tots & "S|txtAux(11)|T|Categoria|1100|;S|btnBuscar(5)|B||195|;N|txtAux2(11)|T|Categoria|1400|;"
-    tots = tots & "S|txtAux(4)|T|Horas|800|;S|txtAux(12)|T|Kilos|1200|;"
-    tots = tots & "S|txtAux(2)|T|Importe|1200|;"
-    tots = tots & "S|txtAux(3)|T|Complem.|1100|;"
-    tots = tots & "S|txtAux(13)|T|Kms(€)|1100|;"
-    tots = tots & "S|txtAux(9)|T|Penalización|1400|;"
-    tots = tots & "S|txtAux(5)|T|F.Recibo|1400|;S|btnBuscar(2)|B||195|;N||||0|;S|chkAux(1)|CB|Cap|460|;N||||0|;S|chkAux(0)|CB|IC|360|;N|txtAux(8)|T|Almacen|800|;"
-    tots = tots & "S|txtAux(10)|T|Nro.Parte|1100|;"
-    
+    If vParamAplic.Cooperativa = 18 Then
+        tots = tots & "S|txtAux(10)|T|Campo|1200|;S|btnBuscar(6)|B||195|;"
+        tots = tots & "S|txtAux(11)|T|Categoria|1100|;S|btnBuscar(5)|B||195|;N|txtAux2(11)|T|Categoria|1400|;"
+        tots = tots & "S|txtAux(4)|T|Horas|800|;S|txtAux(12)|T|Kilos|1200|;"
+        tots = tots & "S|txtAux(2)|T|Importe|1200|;"
+        tots = tots & "S|txtAux(3)|T|Complem.|1100|;"
+        tots = tots & "S|txtAux(13)|T|Kms(€)|1100|;"
+        tots = tots & "S|txtAux(9)|T|Penalización|1400|;"
+        tots = tots & "S|txtAux(5)|T|F.Recibo|1400|;S|btnBuscar(2)|B||195|;N||||0|;S|chkAux(1)|CB|Cap|460|;N||||0|;S|chkAux(0)|CB|IC|360|;N|txtAux(8)|T|Almacen|800|;"
+    Else
+        tots = tots & "S|txtAux(11)|T|Categoria|1100|;S|btnBuscar(5)|B||195|;N|txtAux2(11)|T|Categoria|1400|;"
+        tots = tots & "S|txtAux(4)|T|Horas|800|;S|txtAux(12)|T|Kilos|1200|;"
+        tots = tots & "S|txtAux(2)|T|Importe|1200|;"
+        tots = tots & "S|txtAux(3)|T|Complem.|1100|;"
+        tots = tots & "S|txtAux(13)|T|Kms(€)|1100|;"
+        tots = tots & "S|txtAux(9)|T|Penalización|1400|;"
+        tots = tots & "S|txtAux(5)|T|F.Recibo|1400|;S|btnBuscar(2)|B||195|;N||||0|;S|chkAux(1)|CB|Cap|460|;N||||0|;S|chkAux(0)|CB|IC|360|;N|txtAux(8)|T|Almacen|800|;"
+        tots = tots & "S|txtAux(10)|T|Nro.Parte|1100|;"
+    End If
     arregla tots, DataGrid1, Me, 350
     
     CargaForaGrid
@@ -2102,10 +2218,43 @@ Private Sub CargaForaGrid()
     ' **********************************************************************
     If adodc1.Recordset.EOF Then Exit Sub
     txtAux2(6).Text = DataGrid1.Columns(2).Text
-    txtAux2(0).Text = DataGrid1.Columns(6).Text
-    txtAux2(11).Text = DataGrid1.Columns(8).Text
-    txtAux2(4).Text = GrupoTrabajo(DataGrid1.Columns(3).Text)
+    If vParamAplic.Cooperativa = 18 Then
+        txtAux2(0).Text = DataGrid1.Columns(6).Text
+        txtAux2(11).Text = DataGrid1.Columns(9).Text
+        txtAux2(4).Text = GrupoTrabajo(DataGrid1.Columns(3).Text)
+        
+        txtAux2(8).Text = PartidaCampo(DataGrid1.Columns(7).Text)
+    Else
+        txtAux2(0).Text = DataGrid1.Columns(6).Text
+        txtAux2(11).Text = DataGrid1.Columns(8).Text
+        txtAux2(4).Text = GrupoTrabajo(DataGrid1.Columns(3).Text)
+    End If
 End Sub
+
+' solo la ejecuto si es Frutas Inma
+Private Function PartidaCampo(vCampo As String) As String
+Dim Sql As String
+Dim Rs As ADODB.Recordset
+
+    On Error GoTo ePartidaCampo
+
+    PartidaCampo = ""
+
+    Sql = "select rcampos.codparti, rpartida.nomparti from rcampos inner join rpartida on rcampos.codparti = rpartida.codparti "
+    Sql = Sql & " where rcampos.codcampo = " & DBSet(vCampo, "N")
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        PartidaCampo = DBLet(Rs.Fields(1).Value)
+    End If
+    
+    Exit Function
+    
+ePartidaCampo:
+    MuestraError Err.Number, "Poner partida campo", Err.Description
+End Function
+
 
 Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
@@ -2130,6 +2279,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim PrecioHora As Currency
 Dim Tipo As String
+Dim Sql As String
 
     If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
@@ -2259,6 +2409,21 @@ Dim Tipo As String
                 txtAux2(Index).Text = ""
             End If
             
+        Case 10 ' codigo de campo
+            If PonerFormatoEntero(txtAux(Index)) Then
+                If vParamAplic.Cooperativa = 18 Then
+                    If txtAux(6).Text <> "" Then
+                        Sql = "select codcampo from rcampos where codcampo= " & DBSet(txtAux(10).Text, "N") & " and codvarie = " & DBSet(txtAux(6).Text, "N")
+                        If TotalRegistrosConsulta(Sql) = 0 Then
+                            If MsgBox("El campo introducido no es de la variedad introducida. " & vbCrLf & vbCrLf & "¿ Desea continuar ? ", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
+                                PonerFoco txtAux(6)
+                            End If
+                        End If
+                    End If
+                    txtAux2(8).Text = PartidaCampo(txtAux(Index))
+                End If
+            End If
+            
     End Select
     
     
@@ -2304,14 +2469,38 @@ Dim Mens As String
     If Not b Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        Sql = "select count(*) from horas where codcapat = " & DBSet(txtAux(0).Text, "N")
-        Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
-        Sql = Sql & " and codtraba = " & DBSet(txtAux(7).Text, "N")
-        Sql = Sql & " and codvarie = " & DBSet(txtAux(6).Text, "N")
-        If TotalRegistros(Sql) <> 0 Then
-            MsgBox "El capataz existe para esta fecha, codtraba, variedad. Reintroduzca.", vbExclamation
-            PonerFoco txtAux(0)
-            b = False
+        If vParamAplic.Cooperativa = 18 Then
+            Sql = "select count(*) from horas where codcampo = " & DBSet(txtAux(10).Text, "N")
+            Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
+            Sql = Sql & " and codtraba = " & DBSet(txtAux(7).Text, "N")
+            Sql = Sql & " and codvarie = " & DBSet(txtAux(6).Text, "N")
+            If TotalRegistros(Sql) <> 0 Then
+                MsgBox "El campo existe para esta fecha, codtraba, variedad. Reintroduzca.", vbExclamation
+                PonerFoco txtAux(0)
+                b = False
+            End If
+        Else
+            Sql = "select count(*) from horas where codcapat = " & DBSet(txtAux(0).Text, "N")
+            Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
+            Sql = Sql & " and codtraba = " & DBSet(txtAux(7).Text, "N")
+            Sql = Sql & " and codvarie = " & DBSet(txtAux(6).Text, "N")
+            If TotalRegistros(Sql) <> 0 Then
+                MsgBox "El capataz existe para esta fecha, codtraba, variedad. Reintroduzca.", vbExclamation
+                PonerFoco txtAux(0)
+                b = False
+            End If
+        End If
+    End If
+    '[Monica]11/03/2019: para el caso de frutas inma se mete el campo
+    If b And vParamAplic.Cooperativa = 18 And (Modo = 3 Or Modo = 4) Then
+        If ComprobarCero(txtAux(10).Text) <> 0 And ComprobarCero(txtAux(6).Text) <> 0 Then
+            Sql = "select codcampo from rcampos where codcampo= " & DBSet(txtAux(10).Text, "N") & " and codvarie = " & DBSet(txtAux(6).Text, "N")
+            If TotalRegistrosConsulta(Sql) = 0 Then
+                If MsgBox("El campo introducido no es de la variedad introducida. " & vbCrLf & vbCrLf & "¿ Desea continuar ? ", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
+                    PonerFoco txtAux(6)
+                    b = False
+                End If
+            End If
         End If
     End If
     
@@ -2385,8 +2574,8 @@ End Sub
 Private Sub BotonTrabajadores()
     vCadBusqueda = ""
     AbrirListadoNominas (41)
-    CadB = vCadBusqueda
-    CargaGrid CadB
+    cadB = vCadBusqueda
+    CargaGrid cadB
     PonerModoOpcionesMenu
 End Sub
 
@@ -2453,6 +2642,21 @@ Private Sub AbrirFrmCategoria(indice As Integer)
     PonerFoco txtAux(indCodigo)
 
 End Sub
+
+
+Private Sub AbrirFrmCampos(indice As Integer)
+    indCodigo = 10
+    
+    Set frmCam = New frmManCampos
+    frmCam.DatosADevolverBusqueda = "0|1|"
+    frmCam.Show vbModal
+    Set frmCam = Nothing
+    
+    PonerFoco txtAux(indCodigo)
+
+End Sub
+
+
 
 
 

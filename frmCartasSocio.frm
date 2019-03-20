@@ -727,8 +727,8 @@ Public CodigoActual As String
  
  
  
-Private WithEvents frmB As frmBuscaGrid 'Form para busquedas (frmBuscaGrid)
-Attribute frmB.VB_VarHelpID = -1
+Private WithEvents frmCartasPrev As frmBasico2 'Form busqueda previa
+Attribute frmCartasPrev.VB_VarHelpID = -1
 Private WithEvents frmZ As frmZoom  'Zoom para campos Text
 Attribute frmZ.VB_VarHelpID = -1
 
@@ -738,7 +738,7 @@ Dim Ordenacion As String
 Private Modo As Byte
 Private ModoAnterior As Byte
 Dim kCampo As Integer
-Dim Indice As Integer
+Dim indice As Integer
 Dim PrimeraVez As Boolean
 
 Dim btnPrimero As Byte
@@ -761,11 +761,11 @@ On Error GoTo Error1
     Case 1 'BUSQUEDA
         HacerBusqueda
     Case 3 'INSERTAR
-        If DatosOK Then
+        If DatosOk Then
             If InsertarDesdeForm(Me) Then PosicionarData
         End If
     Case 4 'MODIFICAR
-        If DatosOK Then
+        If DatosOk Then
              If ModificaDesdeFormulario(Me) Then
                  TerminaBloquear
                  PosicionarData
@@ -806,16 +806,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = Data1.Recordset.Fields(0) & "|"
-    cad = cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Data1.Recordset.Fields(0) & "|"
+    Cad = Cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -833,7 +833,7 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim I As Integer
+Dim i As Integer
 
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -879,12 +879,12 @@ Dim I As Integer
     
     
     'IMAGES para zoom
-    For I = 0 To Me.imgZoom.Count - 1
-        Me.imgZoom(I).Picture = frmPpal.imgListImages16.ListImages(3).Picture
-    Next I
-    For I = 0 To imgAyuda.Count - 1
-        imgAyuda(I).Picture = frmPpal.ImageListB.ListImages(10).Picture
-    Next I
+    For i = 0 To Me.imgZoom.Count - 1
+        Me.imgZoom(i).Picture = frmPpal.imgListImages16.ListImages(3).Picture
+    Next i
+    For i = 0 To imgAyuda.Count - 1
+        imgAyuda(i).Picture = frmPpal.ImageListB.ListImages(10).Picture
+    Next i
         
     'Vemos como esta guardado el valor del check
     chkVistaPrevia.Value = CheckValueLeer(Name)
@@ -910,30 +910,21 @@ Dim I As Integer
 End Sub
 
 
-Private Sub frmB_Selecionado(CadenaDevuelta As String)
-'Formulario para Busqueda
-Dim CadB As String
-Dim Aux As String
-      
-    If CadenaDevuelta <> "" Then
-        HaDevueltoDatos = True
-        Screen.MousePointer = vbHourglass
+Private Sub frmCartasPrev_DatoSeleccionado(CadenaSeleccion As String)
+Dim cadB As String
+    
+    If CadenaSeleccion <> "" Then
+        cadB = "codcarta = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
         
-        'Estamos en Cabecera
-        'Recupera todo el registro de Tarifas de Precios
-        'Sabemos que campos son los que nos devuelve
-        'Creamos una cadena consulta y ponemos los datos
-        CadB = ""
-        Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        CadB = Aux
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
+        Screen.MousePointer = vbDefault
     End If
-    Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
-     Text1(Indice).Text = vCampo
+     Text1(indice).Text = vCampo
      cmdAceptar_Click
 End Sub
 
@@ -960,13 +951,13 @@ Private Sub imgZoom_Click(Index As Integer)
 
     Select Case Index
         Case 0
-            Indice = 3
+            indice = 3
             frmZ.pTitulo = "Párrafo"
-            frmZ.pValor = Text1(Indice).Text
+            frmZ.pValor = Text1(indice).Text
             frmZ.pModo = Modo
             frmZ.Show vbModal
             Set frmZ = Nothing
-            PonerFoco Text1(Indice)
+            PonerFoco Text1(indice)
     End Select
 End Sub
 
@@ -1054,7 +1045,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
@@ -1062,11 +1053,11 @@ Dim NumReg As Byte
     
     '===========================================
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
         If Modo = 1 Then Me.lblIndicador.Caption = "BUSQUEDA"
     Else
         cmdRegresar.visible = False
@@ -1079,7 +1070,7 @@ Dim NumReg As Byte
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
+    DesplazamientoVisible b And Data1.Recordset.RecordCount > 1
     
     
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -1088,9 +1079,9 @@ Dim NumReg As Byte
     
          
     '==============================
-    B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
     
     chkVistaPrevia.Enabled = (Modo <= 2)
 
@@ -1107,30 +1098,30 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(2).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(2).Enabled = b
+    Me.mnModificar.Enabled = b
     'eliminar                       '[Monica]19/06/2014: dejamos buscar
-    Toolbar1.Buttons(3).Enabled = B ' And CodigoActual = ""
-    Me.mnEliminar.Enabled = B ' And CodigoActual = ""
+    Toolbar1.Buttons(3).Enabled = b ' And CodigoActual = ""
+    Me.mnEliminar.Enabled = b ' And CodigoActual = ""
     If Modo = 2 And Text1(0).Text <> "" Then
         Toolbar1.Buttons(3).Enabled = Toolbar1.Buttons(3).Enabled And CInt(Text1(0).Text) <> vParamAplic.CartaPOZ
         Me.mnEliminar.Enabled = Me.mnEliminar.Enabled And CInt(Text1(0).Text) <> vParamAplic.CartaPOZ
     End If
 
-    B = (Modo >= 3)
+    b = (Modo >= 3)
     'Insertar                           '[Monica]19/06/2014: dejamos buscar
-    Toolbar1.Buttons(1).Enabled = Not B 'And CodigoActual = ""
-    Me.mnNuevo.Enabled = Not B 'And CodigoActual = ""
+    Toolbar1.Buttons(1).Enabled = Not b 'And CodigoActual = ""
+    Me.mnNuevo.Enabled = Not b 'And CodigoActual = ""
     'Buscar
-    Toolbar1.Buttons(5).Enabled = Not B 'And CodigoActual = ""
-    Me.mnBuscar.Enabled = Not B 'And CodigoActual = ""
+    Toolbar1.Buttons(5).Enabled = Not b 'And CodigoActual = ""
+    Me.mnBuscar.Enabled = Not b 'And CodigoActual = ""
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = Not B 'And CodigoActual = ""
-    Me.mnVerTodos.Enabled = Not B 'And CodigoActual = ""
+    Toolbar1.Buttons(6).Enabled = Not b 'And CodigoActual = ""
+    Me.mnVerTodos.Enabled = Not b 'And CodigoActual = ""
 End Sub
 
 
@@ -1168,16 +1159,16 @@ End Sub
 
 
 Private Sub BotonVerTodos()
-Dim cad As String
+Dim Cad As String
 
 'Ver todos
     LimpiarCampos
     
     If chkVistaPrevia.Value = 1 Then
-        cad = ""
+        Cad = ""
 '[Monica]19/06/2014: dejamos buscar
 '        If CodigoActual <> "" Then cad = " codcarta = " & DBSet(CodigoActual, "N")
-        MandaBusquedaPrevia cad
+        MandaBusquedaPrevia Cad
     Else
 '[Monica]19/06/2014: dejamos buscar
 '        If CodigoActual <> "" Then
@@ -1239,7 +1230,6 @@ Error2:
     End If
 End Sub
 
-
 Private Function Eliminar() As Boolean
 On Error GoTo FinEliminar
     
@@ -1259,71 +1249,31 @@ FinEliminar:
     End If
 End Function
 
-
-Private Function DatosOK() As Boolean
-Dim B As Boolean
+Private Function DatosOk() As Boolean
+Dim b As Boolean
 On Error Resume Next
 
-    DatosOK = False
-    B = CompForm(Me)
-    If Not B Then Exit Function
-    DatosOK = True
+    DatosOk = False
+    b = CompForm(Me)
+    If Not b Then Exit Function
+    DatosOk = True
 End Function
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
-'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
-Dim tabla As String
-Dim Titulo As String
+Private Sub MandaBusquedaPrevia(cadB As String)
 
-    'Llamamos a al form
-    cad = ""
-    'Estamos en Modo de Cabeceras
-    'Registro de la tabla de cabeceras: scapla
-    cad = cad & ParaGrid(Text1(0), 20, "Cod. Carta")
-    cad = cad & ParaGrid(Text1(1), 80, "Descripción")
+    Set frmCartasPrev = New frmBasico2
     
-    tabla = NombreTabla
-    Titulo = "Cartas de Oferta"
-           
-    If cad <> "" Then
-        Screen.MousePointer = vbHourglass
-        Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vtabla = tabla
-        frmB.vSQL = CadB
-        HaDevueltoDatos = False
-        '###A mano
-        frmB.vDevuelve = "0|"
-        frmB.vTitulo = Titulo
-        frmB.vSelElem = 1
-'        frmB.vConexionGrid = conAri 'Conexion a BD Ariges
-'        frmB.vBuscaPrevia = chkVistaPrevia
-        '#
-        frmB.Show vbModal
-        Set frmB = Nothing
-        'Si ha puesto valores y tenemos que es formulario de busqueda entonces
-        'tendremos que cerrar el form lanzando el evento
-        If HaDevueltoDatos Then
-''            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-''                cmdRegresar_Click
-'        Else   'de ha devuelto datos, es decir NO ha devuelto datos
-'            If Modo = 5 Then
-'                PonerFoco txtAux(0)
-'            Else
-                PonerFoco Text1(kCampo)
-'            End If
-        End If
-    End If
-    Screen.MousePointer = vbDefault
+    AyudaCartasPrev frmCartasPrev, , cadB
+    
+    Set frmCartasPrev = Nothing
 End Sub
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 
-    CadB = ObtenerBusqueda(Me, False)
+    cadB = ObtenerBusqueda(Me, False)
     
 '[Monica]19/06/2014: permito buscar todos
 '    If CodigoActual <> "" Then
@@ -1332,10 +1282,10 @@ Dim CadB As String
 '    End If
     
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia CadB
-    ElseIf CadB <> "" Then
+        MandaBusquedaPrevia cadB
+    ElseIf cadB <> "" Then
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
     End If
 End Sub

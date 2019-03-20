@@ -2106,11 +2106,46 @@ Public Sub AyudaPartesADVPrev(frmBas As frmBasico2, Optional CodActual As String
     
 End Sub
 
+Public Sub AyudaCartasPrev(frmCom As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+    frmCom.CadenaTots = "S|txtAux(0)|T|Código|905|;S|txtAux(1)|T|Nombre|6595|;"
+    frmCom.CadenaConsulta = "SELECT scartas.codcarta, scartas.descarta "
+    frmCom.CadenaConsulta = frmCom.CadenaConsulta & " FROM scartas "
+    frmCom.CadenaConsulta = frmCom.CadenaConsulta & " WHERE (1=1) "
+    If cWhere <> "" Then frmCom.CadenaConsulta = frmCom.CadenaConsulta & " and " & cWhere
+    
+    frmCom.Tag1 = "Cod. Carta|N|N|0|999|scartas|codcarta|000|S|"
+    frmCom.Tag2 = "Descripción|T|S|||scartas|descarta||N|"
+    frmCom.Tag3 = ""
+    frmCom.Maxlen1 = 3
+    frmCom.Maxlen2 = 15
+    frmCom.Maxlen3 = 0
+    
+    frmCom.pConn = cAgro
+    
+    frmCom.tabla = "scartas"
+    frmCom.CampoCP = "codcarta"
+    frmCom.TipoCP = "N"
+    frmCom.Caption = "Cartas / SMS"
+    frmCom.DeConsulta = True
+
+    frmCom.DatosADevolverBusqueda = "0|1|"
+    frmCom.CodigoActual = 0
+    If CodActual <> "" Then frmCom.CodigoActual = CodActual
+    
+    Redimensiona frmCom, 500
+    
+    frmCom.Show vbModal
+End Sub
+
+
+
+
+
 Private Sub Redimensiona(frmBas As frmBasico2, Cant As Integer)
     frmBas.Width = frmBas.Width + Cant
     frmBas.DataGrid1.Width = frmBas.DataGrid1.Width + Cant
     frmBas.cmdAceptar.Left = frmBas.cmdAceptar.Left + Cant
-    frmBas.CmdCancelar.Left = frmBas.CmdCancelar.Left + Cant
+    frmBas.cmdCancelar.Left = frmBas.cmdCancelar.Left + Cant
     frmBas.cmdRegresar.Left = frmBas.cmdRegresar.Left + Cant
 
 End Sub
