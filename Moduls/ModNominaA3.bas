@@ -5,11 +5,11 @@ Option Explicit
 Public Function GeneraFicheroA3(Contador As Long, FechaPago As Date) As Boolean
 Dim Regs As Integer
 Dim Im As Currency
-Dim cad As String
+Dim Cad As String
 Dim Aux As String
 Dim NFic As Integer
 Dim EsPersonaJuridica2 As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
 Dim RegImpBruto As String
@@ -29,20 +29,20 @@ Dim FecPag As String
     NFic = FreeFile
     Open App.Path & "\anticipoA3.txt" For Output As NFic
 
-    cad = "03" & "00017" & "00000" ' tipo de registro + codigo de empresa + centro o codigo de trabajador
+    Cad = "03" & "00017" & "00000" ' tipo de registro + codigo de empresa + centro o codigo de trabajador
     '[Monica]29/01/2018: en el caso de catadau el codigo de empresa no es 17, lo parametrizo
     If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
-        cad = "03" & Format(vParamAplic.CodEmpreA3, "00000") & "00000"
+        Cad = "03" & Format(vParamAplic.CodEmpreA3, "00000") & "00000"
     End If
     
     FecPag = Format(Year(FechaPago), "0000") & Format(Month(FechaPago), "00") & Format(Day(FechaPago), "00")
 
-    SQL = "select * from rrecibosnomina where fechahora = " & DBSet(FechaPago, "F") & " and idcontador = " & DBSet(Contador, "N")
+    Sql = "select * from rrecibosnomina where fechahora = " & DBSet(FechaPago, "F") & " and idcontador = " & DBSet(Contador, "N")
     ' añado la condicion de q solo se pasa a A3 si no hay embargo
-    SQL = SQL & " and hayembargo = 0 "
+    Sql = Sql & " and hayembargo = 0 "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Regs = 0
     While Not Rs.EOF
@@ -59,7 +59,7 @@ Dim FecPag As String
         
         Importe = Importe & "000000000+"
         
-        RegImpBruto = cad & Format(Rs!CodTraba, "000000") & FecPag & "001" & "250" & Importe 'cad+codtraba+fecha+incidencia+250+importe bruto
+        RegImpBruto = Cad & Format(Rs!CodTraba, "000000") & FecPag & "001" & "250" & Importe 'cad+codtraba+fecha+incidencia+250+importe bruto
         Print #NFic, RegImpBruto
         
         ' dto seguridad social
@@ -72,7 +72,7 @@ Dim FecPag As String
         
         Importe = Importe & "000000000+"
         
-        RegImpSS = cad & Format(Rs!CodTraba, "000000") & FecPag & "001" & "255" & Importe 'cad+codtraba+fecha+incidencia+255+dtoss
+        RegImpSS = Cad & Format(Rs!CodTraba, "000000") & FecPag & "001" & "255" & Importe 'cad+codtraba+fecha+incidencia+255+dtoss
         Print #NFic, RegImpSS
         
         
@@ -86,7 +86,7 @@ Dim FecPag As String
         
         Importe = Importe & "000000000+"
         
-        RegImpIRPF = cad & Format(Rs!CodTraba, "000000") & FecPag & "001" & "256" & Importe 'cad+codtraba+fecha+incidencia+256+irpf
+        RegImpIRPF = Cad & Format(Rs!CodTraba, "000000") & FecPag & "001" & "256" & Importe 'cad+codtraba+fecha+incidencia+256+irpf
         Print #NFic, RegImpIRPF
     
     
@@ -114,11 +114,11 @@ End Function
 Public Function GeneraNominaA3(FechaPago As Date) As Boolean
 Dim Regs As Integer
 Dim Im As Currency
-Dim cad As String
+Dim Cad As String
 Dim Aux As String
 Dim NFic As Integer
 Dim EsPersonaJuridica2 As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
 Dim RegImpBruto As String
@@ -138,18 +138,18 @@ Dim FecPag As String
     NFic = FreeFile
     Open App.Path & "\nominaA3.txt" For Output As NFic
 
-    cad = "03" & "00017" & "00000" ' tipo de registro + codigo de empresa + centro o codigo de trabajador
+    Cad = "03" & "00017" & "00000" ' tipo de registro + codigo de empresa + centro o codigo de trabajador
     '[Monica]29/01/2018: en el caso de catadau el codigo de empresa no es 17, lo parametrizo
     If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
-        cad = "03" & Format(vParamAplic.CodEmpreA3, "00000") & "00000"
+        Cad = "03" & Format(vParamAplic.CodEmpreA3, "00000") & "00000"
     End If
     
     FecPag = Format(Year(FechaPago), "0000") & Format(Month(FechaPago), "00") & Format(Day(FechaPago), "00")
 
-    SQL = "select * from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
+    Sql = "select * from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Regs = 0
     While Not Rs.EOF
@@ -171,9 +171,9 @@ Dim FecPag As String
         If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
             Dim CodAse As String
             CodAse = DevuelveValor("select codasesoria from straba where codtraba = " & DBLet(Rs!Codigo1, "N"))
-            RegImpBruto = cad & Format(CodAse, "000000") & FecPag & "001" & "001" & Importe 'cad+codtraba+fecha+incidencia+001+importe bruto
+            RegImpBruto = Cad & Format(CodAse, "000000") & FecPag & "001" & "001" & Importe 'cad+codtraba+fecha+incidencia+001+importe bruto
         Else
-            RegImpBruto = cad & Format(Rs!Codigo1, "000000") & FecPag & "001" & "001" & Importe 'cad+codtraba+fecha+incidencia+001+importe bruto
+            RegImpBruto = Cad & Format(Rs!Codigo1, "000000") & FecPag & "001" & "001" & Importe 'cad+codtraba+fecha+incidencia+001+importe bruto
         End If
         Print #NFic, RegImpBruto
         
@@ -181,9 +181,9 @@ Dim FecPag As String
         Dias = Format(Int(DBLet(Rs!importe2, "N")), "00")
         
         If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
-            RegDias = cad & Format(CodAse, "000000") & FecPag & "016" & Format(Dias, "00") & "00" & Left(DBLet(Rs!Nombre1, "T") & "NNN", 31) & "00000000000000" 'cad+codtraba+fecha+016+dias+00+SSNNS..+"
+            RegDias = Cad & Format(CodAse, "000000") & FecPag & "016" & Format(Dias, "00") & "00" & Left(DBLet(Rs!Nombre1, "T") & "NNN", 31) & "00000000000000" 'cad+codtraba+fecha+016+dias+00+SSNNS..+"
         Else
-            RegDias = cad & Format(Rs!Codigo1, "000000") & FecPag & "016" & Format(Dias, "00") & "00" & Left(DBLet(Rs!Nombre1, "T") & "NNN", 31) & "00000000000000" 'cad+codtraba+fecha+016+dias+00+SSNNS..+"
+            RegDias = Cad & Format(Rs!Codigo1, "000000") & FecPag & "016" & Format(Dias, "00") & "00" & Left(DBLet(Rs!Nombre1, "T") & "NNN", 31) & "00000000000000" 'cad+codtraba+fecha+016+dias+00+SSNNS..+"
         End If
         Print #NFic, RegDias
         
@@ -232,15 +232,15 @@ On Error GoTo ecopiarfichero
         FicherAux = Replace(vFicher, ".txt", "") & Format(vFecha, "yyyymmdd")
         
         Dim i As Integer
-        Dim B As Boolean
+        Dim b As Boolean
         Dim FicherAux1 As String
         
         i = 0
-        B = True
-        While Dir("C:\Ariadna\EnlaceA3\" & FicherAux & ".txt", vbArchive) <> "" And B
+        b = True
+        While Dir("C:\Ariadna\EnlaceA3\" & FicherAux & ".txt", vbArchive) <> "" And b
             i = i + 1
             FicherAux1 = Replace(vFicher, ".txt", "") & Format(vFecha, "yyyymmdd") & "_" & i
-            If Dir("C:\Ariadna\EnlaceA3\" & FicherAux1 & ".txt", vbArchive) = "" Then B = False
+            If Dir("C:\Ariadna\EnlaceA3\" & FicherAux1 & ".txt", vbArchive) = "" Then b = False
             FicherAux = FicherAux1
         Wend
         FileCopy App.Path & "\" & vFicher, "C:\Ariadna\EnlaceA3\" & FicherAux & ".txt"

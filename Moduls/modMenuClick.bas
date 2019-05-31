@@ -346,7 +346,7 @@ End Sub
 
 Public Sub SubmnC_RecoleccionG_LiquidFO_Click(Index As Integer)
     Select Case Index
-        Case 1: frmListAnticipos.OpcionListado = 18 ' REPARTO DE LA APORTACION DE FONDO OPERATIVO
+        Case 1: frmListAnticipos.Opcionlistado = 18 ' REPARTO DE LA APORTACION DE FONDO OPERATIVO
                 frmListAnticipos.Show vbModal
         
         Case 2: frmManIngresos.Show vbModal ' MANENTIMIENTO DE INGRESOS DE LIQUIDACION (PICASSENT)
@@ -523,13 +523,13 @@ End Sub
 
 Public Sub SubmnC_RecoleccionG_Transporte_Click(Index As Integer)
     Select Case Index
-        Case 1: frmTRAFactAlb.OpcionListado = 1
+        Case 1: frmTRAFactAlb.Opcionlistado = 1
                 frmTRAFactAlb.Show vbModal 'frmTransListAnticipos.Show vbModal     ' facturacion de transporte
-        Case 2: frmTRAFactAlb.OpcionListado = 2
+        Case 2: frmTRAFactAlb.Opcionlistado = 2
                 frmTRAFactAlb.Show vbModal  'frmTransListAnticipos.Show vbModal    ' reimpresion de facturas
         Case 3: frmManFactTranspor.Show vbModal 'Construc ("Hco de facturas de transporte") 'frmTransFacturas.Show vbModal ' facturas de transporte
         
-        Case 4: frmTRAFactAlb.OpcionListado = 3 ' Factura a socio
+        Case 4: frmTRAFactAlb.Opcionlistado = 3 ' Factura a socio
                 frmTRAFactAlb.Show vbModal
 
         Case 6: frmTRAContaFac.Show vbModal 'Construc ("Integracion contable")
@@ -598,10 +598,14 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                         If vParamAplic.Cooperativa = 16 Then
                             frmManHorasCoopic.Show vbModal ' entradas horas coopic
                         Else
-                            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
+                            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 19 Then
                                 frmManHorasCata.Show vbModal ' entradas horas catadau
                             Else
-                                frmManHoras.Show vbModal  'Entrada de Horas de trabajadores
+                                If vParamAplic.Cooperativa = 18 Then
+                                    frmManHorasFrI.Show vbModal ' entradas horas frutas inma
+                                Else
+                                    frmManHoras.Show vbModal  'Entrada de Horas de trabajadores
+                                End If
                             End If
                         End If
                     End If
@@ -617,16 +621,16 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
         Case 16:
                 '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
                  If vParamAplic.Cooperativa = 9 Then   ' caso de natural de montaña
-                    frmPagoRecibos.OpcionListado = 2
+                    frmPagoRecibos.Opcionlistado = 2
                     frmPagoRecibos.Show vbModal 'Pago de Recibos
                  Else
                     '[Monica]29/01/2018: para el caso de Catadau igual que coopic
                     If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
                         AbrirListadoNominas (37)
                     Else
-                       'caso de valsur y de alzira
-                        frmPagoRecibos.OpcionListado = 1
-                        frmPagoRecibos.Show vbModal 'Pago de Recibos
+                        'caso de valsur y de alzira
+                         frmPagoRecibos.Opcionlistado = 1
+                         frmPagoRecibos.Show vbModal 'Pago de Recibos
                     End If
                  End If
                  
@@ -647,8 +651,6 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                  
         '[Monica]24/10/2017: nuevo listado de trabajadores activos
         Case 24: AbrirListadoNominas (42) ' Trabajadores Activos
-                 
-                 
                  
     End Select
 End Sub
@@ -674,6 +676,8 @@ Public Sub SubmnC_RecoleccionG_Trazabilidad_Click(Index As Integer)
         Case 11: frmTrzManPalet.Show vbModal ' Manejo de Palets
         Case 12: AbrirListadoTrazabilidad (6) ' Modificacion de cargas de confeccion
         Case 13: frmTrzManMovim.Show vbModal  ' modificacion de asignacion albaranes
+        
+        Case 15: AbrirListadoTrazabilidad (9)  ' balance de masas
     End Select
 End Sub
 
@@ -704,9 +708,9 @@ Public Sub SubmnC_RecoleccionG_Almz_Click(Index As Integer)
         Case 6: ' mantenimiento de precios de anticipos liquidacion
                 frmManPrecios.Tipo = 1 ' almazara
                 frmManPrecios.Show vbModal
-        Case 7: frmAlmzListEntradas.OpcionListado = 0
+        Case 7: frmAlmzListEntradas.Opcionlistado = 0
                 frmAlmzListEntradas.Show vbModal ' informe de entradas de almazara por socios/variedad
-        Case 8: frmAlmzListEntradas.OpcionListado = 1
+        Case 8: frmAlmzListEntradas.Opcionlistado = 1
                 frmAlmzListEntradas.Show vbModal  ' extracto de entradas de almazara socio/variedad
         Case 10: frmAlmzTrasRendimiento.Show vbModal ' traspaso de rendimiento entradas
 '                ' VALSUR no tiene bodega y quiere poder llamar al mantenimiento de retirada desde almazara
@@ -767,12 +771,12 @@ Public Sub SubmnC_RecoleccionG_Almz1_Click(Index As Integer)
 
         Case 3: ' previsio de facturacion de albaranes de retirada
                 frmBodFactAlbaranes.Tipo = 0     ' Prevision Facturacion de albaranes de almazara
-                frmBodFactAlbaranes.OpcionListado = 50
+                frmBodFactAlbaranes.Opcionlistado = 50
                 frmBodFactAlbaranes.Show vbModal
                         
         Case 4:
                 frmBodFactAlbaranes.Tipo = 0     ' Facturacion de albaranes de almazara
-                frmBodFactAlbaranes.OpcionListado = 52
+                frmBodFactAlbaranes.Opcionlistado = 52
                 frmBodFactAlbaranes.Label10(0).Caption = "Facturación de Albaranes Retirada Almazara"
                 frmBodFactAlbaranes.Show vbModal
                 
@@ -808,13 +812,13 @@ Public Sub SubmnC_RecoleccionG_Bod1_Click(Index As Integer)
 
 
         Case 3: frmBodFactAlbaranes.Tipo = 1    ' Prevision Facturacion de albaranes de retirada bodega
-                frmBodFactAlbaranes.OpcionListado = 50
+                frmBodFactAlbaranes.Opcionlistado = 50
                 frmBodFactAlbaranes.Label10(0).Caption = "Previsión Facturación Retirada Bodega"
                 frmBodFactAlbaranes.Show vbModal
 
 
         Case 4: frmBodFactAlbaranes.Tipo = 1    ' Facturacion de albaranes de bodega
-                frmBodFactAlbaranes.OpcionListado = 52
+                frmBodFactAlbaranes.Opcionlistado = 52
                 frmBodFactAlbaranes.Label10(0).Caption = "Facturación de Albaranes Retirada Bodega"
                 frmBodFactAlbaranes.Show vbModal
         
@@ -855,15 +859,15 @@ Public Sub SubmnC_RecoleccionG_ADV_Click(Index As Integer)
                     frmADVTratamientos.Show vbModal ' tratamientos de adv
                 End If
         Case 5: frmADVPartes.Show vbModal       ' Entradas de partes
-        Case 6: frmADVReimpre.OpcionListado = 0 ' Reimpresion de partes
+        Case 6: frmADVReimpre.Opcionlistado = 0 ' Reimpresion de partes
                 frmADVReimpre.Show vbModal
                 
-        Case 8: frmADVFactPartes.OpcionListado = 0 ' Prevision de Facturacion de partes
+        Case 8: frmADVFactPartes.Opcionlistado = 0 ' Prevision de Facturacion de partes
                 frmADVFactPartes.Show vbModal
-        Case 9: frmADVFactPartes.OpcionListado = 1 ' Facturacion de partes
+        Case 9: frmADVFactPartes.Opcionlistado = 1 ' Facturacion de partes
                 frmADVFactPartes.Show vbModal
                 
-        Case 10: frmADVReimpre.OpcionListado = 1 ' Reimpresion de facturas de adv
+        Case 10: frmADVReimpre.Opcionlistado = 1 ' Reimpresion de facturas de adv
                 frmADVReimpre.Show vbModal
         Case 11: frmADVHcoFacturas.Show vbModal  ' Hco de Partes Facturas
         Case 13: frmADVContaFac.Show vbModal    ' Integracion contable de facturas
@@ -990,7 +994,7 @@ Public Sub SubmnC_RecoleccionG_Pozos_Click(Index As Integer)
         
         Case 21: ' Impresion de carta de reclamacion para escalona
                 Screen.MousePointer = vbHourglass
-                frmPOZListadoOfer.OpcionListado = 1
+                frmPOZListadoOfer.Opcionlistado = 1
                 frmPOZListadoOfer.Show vbModal
                 Screen.MousePointer = vbDefault
         
@@ -1074,11 +1078,11 @@ Public Sub SubmnC_RecoleccionG_Aport_Click(Index As Integer)
                 If vParamAplic.Cooperativa = 14 Then
                     AbrirListadoAPOR (4)
                 Else
-                    frmAPOListados.OpcionListado = 1
+                    frmAPOListados.Opcionlistado = 1
                     frmAPOListados.Show vbModal
                 End If
                 
-        Case 5: frmAPOListados.OpcionListado = 2     ' Regularizaciones de aportacion
+        Case 5: frmAPOListados.Opcionlistado = 2     ' Regularizaciones de aportacion
                 frmAPOListados.Show vbModal
                 'Construc ("Regularizaciones de aportacion")
         Case 6: ' Certificado de aportaciones
@@ -1088,7 +1092,7 @@ Public Sub SubmnC_RecoleccionG_Aport_Click(Index As Integer)
                 ElseIf vParamAplic.Cooperativa = 16 Then ' Coopic
                     AbrirListadoAPOR (18)
                 Else
-                    frmAPOListados.OpcionListado = 3
+                    frmAPOListados.Opcionlistado = 3
                     frmAPOListados.Show vbModal
                 End If
     
@@ -1139,7 +1143,7 @@ End Sub
 
 Public Sub BloqueoMenusSegunCooperativa()
 Dim b As Boolean
-Dim i As Integer
+Dim I As Integer
 
     ' traspaso de facturas a cooperativas solo para Valsur
     MDIppal.mnE_Util(3).Enabled = (vParamAplic.Cooperativa = 1)
@@ -1151,10 +1155,10 @@ Dim i As Integer
     
 ' luego lo descomento
     ' telefonia solo para Valsur
-    For i = 8 To 10
-        MDIppal.mnE_Util(i).Enabled = (vParamAplic.Cooperativa = 1)
-        MDIppal.mnE_Util(i).visible = (vParamAplic.Cooperativa = 1)
-    Next i
+    For I = 8 To 10
+        MDIppal.mnE_Util(I).Enabled = (vParamAplic.Cooperativa = 1)
+        MDIppal.mnE_Util(I).visible = (vParamAplic.Cooperativa = 1)
+    Next I
     
 '    ' traspaso de datos a Almazara solo para Moixent
 '    MDIppal.mnE_Util(6).Enabled = (vParamAplic.Cooperativa = 3)
@@ -1416,7 +1420,7 @@ Private Sub AbrirFormularioGlobalGAP()
     frmBas.Tag2 = "Descripción|T|N|||rglobalgap|descripcion|||"
     frmBas.Maxlen1 = 4
     frmBas.Maxlen2 = 40
-    frmBas.Tabla = "rglobalgap"
+    frmBas.tabla = "rglobalgap"
     frmBas.CampoCP = "codigo"
     frmBas.Report = "rManGlobalGap.rpt"
     frmBas.Caption = "GlobalGap"

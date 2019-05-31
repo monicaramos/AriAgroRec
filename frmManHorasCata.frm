@@ -290,14 +290,14 @@ Begin VB.Form frmManHorasCata
       Left            =   3720
       TabIndex        =   35
       Top             =   0
-      Width           =   1545
+      Width           =   1590
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   330
          Left            =   210
          TabIndex        =   36
          Top             =   180
-         Width           =   1095
-         _ExtentX        =   1931
+         Width           =   1185
+         _ExtentX        =   2090
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -1357,10 +1357,19 @@ Dim Modo As Byte
 Dim PrimeraVez As Boolean
 Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim indCodigo As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim i As Integer
+Dim I As Integer
 
 ' utilizado para buscar por checks
 Private BuscaChekc As String
+
+
+Dim FechaAnt As String
+Dim VarieAnt As String
+Dim CapaAnt As String
+Dim CampoAnt As String
+Dim CateAnt As String
+Dim HorasAnt As String
+
 
 
 Private Sub PonerModo(vModo)
@@ -1375,24 +1384,24 @@ Dim b As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).visible = Not b
-        txtAux(i).BackColor = vbWhite
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).visible = Not b
+        txtAux(I).BackColor = vbWhite
+    Next I
     
 '    txtAux2(0).visible = Not B
 '    txtAux2(6).visible = Not B
     txtAux2(7).visible = Not b
     
-    For i = 0 To btnBuscar.Count - 1
-        btnBuscar(i).visible = Not b
-    Next i
+    For I = 0 To btnBuscar.Count - 1
+        btnBuscar(I).visible = Not b
+    Next I
     If vParamAplic.Cooperativa <> 18 Then btnBuscar(6).visible = False
     
     chkAux(0).visible = Not b
     chkAux(1).visible = Not b
 
-    CmdAceptar.visible = Not b
+    cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
@@ -1503,9 +1512,9 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     txtAux(1).Text = Format(Now, "dd/mm/yyyy")
     txtAux2(0).Text = ""
     txtAux2(6).Text = ""
@@ -1525,6 +1534,16 @@ Private Sub BotonAnyadir()
     '[Monica]07/06/2018: importe kms
     txtAux(13).Text = 0
     
+    '[Monica]09/05/2019: para el caso de frutas inma (agilizar el proceso)
+    If vParamAplic.Cooperativa = 18 Then
+        If FechaAnt <> "" Then txtAux(1) = FechaAnt
+        txtAux(6) = VarieAnt
+        txtAux(0) = CapaAnt
+        txtAux(10) = CampoAnt
+        txtAux(11) = CateAnt
+        txtAux(4) = HorasAnt
+    End If
+    
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
     'Ponemos el foco
@@ -1542,9 +1561,9 @@ Private Sub BotonBuscar()
     CargaGrid "horas.codcapat = -1"
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     chkAux(0).Value = 0
     chkAux(1).Value = 0
     Me.txtAux2(0).Text = ""
@@ -1561,13 +1580,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -1580,6 +1599,8 @@ Private Sub BotonModificar()
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(5).Text ' codcapat
     txtAux2(0).Text = DataGrid1.Columns(6).Text ' nomcapat
+    
+    
     txtAux(6).Text = DataGrid1.Columns(1).Text 'codvarie
     txtAux2(6).Text = DataGrid1.Columns(2).Text 'nomvarie
     txtAux(1).Text = DataGrid1.Columns(0).Text 'fechahora
@@ -1591,18 +1612,35 @@ Private Sub BotonModificar()
     ' ***** canviar-ho pel nom del camp del combo *********
 '    SelComboBool DataGrid1.Columns(2).Text, Combo1(0)
     ' *****************************************************
-    txtAux(11).Text = DataGrid1.Columns(7).Text 'categoria
-    txtAux(12).Text = DataGrid1.Columns(10).Text 'importe
+    If vParamAplic.Cooperativa = 18 Then
+        txtAux(10).Text = DataGrid1.Columns(7).Text 'campo
     
-    txtAux(2).Text = DataGrid1.Columns(11).Text 'importe
-    txtAux(3).Text = DataGrid1.Columns(12).Text 'complemento
-    txtAux(13).Text = DataGrid1.Columns(13).Text 'importe kms
-    txtAux(4).Text = DataGrid1.Columns(9).Text 'horas
-    txtAux(9).Text = DataGrid1.Columns(14).Text 'penalizacion
-    txtAux(5).Text = DataGrid1.Columns(15).Text 'fecharecep
+        txtAux(11).Text = DataGrid1.Columns(8).Text 'categoria
+        txtAux(12).Text = DataGrid1.Columns(11).Text 'importe
+        
+        txtAux(2).Text = DataGrid1.Columns(12).Text 'importe
+        txtAux(3).Text = DataGrid1.Columns(13).Text 'complemento
+        txtAux(13).Text = DataGrid1.Columns(14).Text 'importe kms
+        txtAux(4).Text = DataGrid1.Columns(10).Text 'horas
+        txtAux(9).Text = DataGrid1.Columns(15).Text 'penalizacion
+        txtAux(5).Text = DataGrid1.Columns(16).Text 'fecharecep
+    
+    Else
+        
+        txtAux(11).Text = DataGrid1.Columns(7).Text 'categoria
+        txtAux(12).Text = DataGrid1.Columns(10).Text 'importe
+        
+        txtAux(2).Text = DataGrid1.Columns(11).Text 'importe
+        txtAux(3).Text = DataGrid1.Columns(12).Text 'complemento
+        txtAux(13).Text = DataGrid1.Columns(13).Text 'importe kms
+        txtAux(4).Text = DataGrid1.Columns(9).Text 'horas
+        txtAux(9).Text = DataGrid1.Columns(14).Text 'penalizacion
+        txtAux(5).Text = DataGrid1.Columns(15).Text 'fecharecep
+    
+    End If
     
     Me.chkAux(0).Value = Me.adodc1.Recordset!intconta
-    Me.chkAux(1).Value = Me.adodc1.Recordset!escapataz
+    Me.chkAux(1).Value = Me.adodc1.Recordset!Escapataz
     
 
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
@@ -1617,17 +1655,17 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Top = alto
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
+    Next I
     
     ' ### [Monica] 12/09/2006
 '    txtAux2(0).Top = alto
 '    txtAux2(6).Top = alto
     txtAux2(7).Top = alto
-    For i = 0 To btnBuscar.Count - 1
-        btnBuscar(i).Top = alto - 15
-    Next i
+    For I = 0 To btnBuscar.Count - 1
+        btnBuscar(I).Top = alto - 15
+    Next I
     
     Me.chkAux(0).Top = alto
     Me.chkAux(1).Top = alto
@@ -1786,7 +1824,7 @@ Private Sub chkAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim i As Integer
+    Dim I As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -1801,6 +1839,19 @@ Private Sub cmdAceptar_Click()
         Case 3 'INSERTAR
             If DatosOk Then
                 If InsertarDesdeForm(Me) Then
+                
+                    '[Monica]09/05/2019: para el caso de frutas inma por tema de velocidad en al siguiente insercion daremos por defecto:
+                    '           fecha variedad capataz campo categoria y horas
+                    If vParamAplic.Cooperativa = 18 Then
+                        FechaAnt = txtAux(1)
+                        VarieAnt = txtAux(6)
+                        CapaAnt = txtAux(0)
+                        CampoAnt = txtAux(10)
+                        CateAnt = txtAux(11)
+                        HorasAnt = txtAux(4)
+                    End If
+                
+                
                     CargaGrid cadB
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
@@ -1854,6 +1905,16 @@ Private Sub cmdCancelar_Click()
             CargaGrid cadB
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
+            
+            If vParamAplic.Cooperativa = 18 Then
+                FechaAnt = ""
+                VarieAnt = ""
+                CapaAnt = ""
+                CampoAnt = ""
+                CateAnt = ""
+                HorasAnt = ""
+            End If
+            
             CargaGrid
             If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
         Case 4 'modificar
@@ -1874,7 +1935,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim Cad As String
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1883,16 +1944,16 @@ Dim Aux As String
         Exit Sub
     End If
     Cad = ""
-    i = 0
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
             Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
@@ -1970,6 +2031,10 @@ Private Sub Form_Load()
     If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
         Me.Caption = "Entrada de horas"
     End If
+
+    '[Monica]17/05/2019
+    Toolbar2.Buttons(1).Enabled = (vParamAplic.Cooperativa = 18)
+
 
 
     '## A mano
@@ -2170,18 +2235,18 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(1)|T|Fecha|1400|;S|btnBuscar(0)|B||195|;"
-    tots = tots & "S|txtAux(6)|T|Variedad|1100|;S|btnBuscar(3)|B||195|;N|txtAux2(6)|T|Variedad|1600|;"
+    tots = tots & "S|txtAux(6)|T|Variedad|1050|;S|btnBuscar(3)|B||195|;N|txtAux2(6)|T|Variedad|1600|;"
     tots = tots & "S|txtAux(7)|T|Codigo|1000|;S|btnBuscar(4)|B||195|;S|txtAux2(7)|T|Trabajador|2700|;"
     tots = tots & "S|txtAux(0)|T|Capataz|850|;S|btnBuscar(1)|B||195|;N|txtAux2(0)|T|Capataz|1400|;"
     If vParamAplic.Cooperativa = 18 Then
         tots = tots & "S|txtAux(10)|T|Campo|1200|;S|btnBuscar(6)|B||195|;"
         tots = tots & "S|txtAux(11)|T|Categoria|1100|;S|btnBuscar(5)|B||195|;N|txtAux2(11)|T|Categoria|1400|;"
-        tots = tots & "S|txtAux(4)|T|Horas|800|;S|txtAux(12)|T|Kilos|1200|;"
+        tots = tots & "S|txtAux(4)|T|Horas|750|;S|txtAux(12)|T|Kilos|1200|;"
         tots = tots & "S|txtAux(2)|T|Importe|1200|;"
         tots = tots & "S|txtAux(3)|T|Complem.|1100|;"
         tots = tots & "S|txtAux(13)|T|Kms(€)|1100|;"
         tots = tots & "S|txtAux(9)|T|Penalización|1400|;"
-        tots = tots & "S|txtAux(5)|T|F.Recibo|1400|;S|btnBuscar(2)|B||195|;N||||0|;S|chkAux(1)|CB|Cap|460|;N||||0|;S|chkAux(0)|CB|IC|360|;N|txtAux(8)|T|Almacen|800|;"
+        tots = tots & "S|txtAux(5)|T|F.Recibo|1400|;S|btnBuscar(2)|B||195|;N||||0|;S|chkAux(1)|CB|Cap|460|;N||||0|;S|chkAux(0)|CB|IC|340|;N|txtAux(8)|T|Almacen|800|;"
     Else
         tots = tots & "S|txtAux(11)|T|Categoria|1100|;S|btnBuscar(5)|B||195|;N|txtAux2(11)|T|Categoria|1400|;"
         tots = tots & "S|txtAux(4)|T|Horas|800|;S|txtAux(12)|T|Kilos|1200|;"
@@ -2562,8 +2627,14 @@ End Sub
 
 
 Private Sub BotonAltaRapida()
-    AbrirListadoNominas (24)
-    CargaGrid
+Dim frmCrea As frmManHorasCreacion
+    
+    Set frmCrea = New frmManHorasCreacion
+    
+    frmCrea.Show vbModal
+    
+    Set frmCrea = Nothing
+
 End Sub
 
 Private Sub BotonEventuales()
@@ -2679,6 +2750,13 @@ Dim Sql As String
     Sql = Sql & ", fecharec = " & DBSet(txtAux(5).Text, "F", "S")
     Sql = Sql & ", codcapat = " & DBSet(txtAux(0).Text, "N")
     Sql = Sql & ", escapataz = " & DBSet(Me.chkAux(1).Value, "N")
+    
+    '[Monica]16/04/2019: faltaba la categoria y el campo en el caso de frutas inma
+    Sql = Sql & ", codcateg = " & DBSet(txtAux(11), "N")
+    If vParamAplic.Cooperativa = 18 Then
+        Sql = Sql & ", codcampo = " & DBSet(txtAux(10).Text, "N")
+    End If
+    
     Sql = Sql & " where (1=1) "
     Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
     Sql = Sql & " and codtraba = " & DBSet(txtAux(7).Text, "N")

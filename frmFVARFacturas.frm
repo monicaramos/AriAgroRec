@@ -37,7 +37,7 @@ Begin VB.Form frmFVARFacturas
    End
    Begin VB.Frame FrameDesplazamiento 
       Height          =   705
-      Left            =   4845
+      Left            =   5580
       TabIndex        =   93
       Top             =   90
       Width           =   2415
@@ -80,14 +80,14 @@ Begin VB.Form frmFVARFacturas
       Left            =   3885
       TabIndex        =   91
       Top             =   90
-      Width           =   885
+      Width           =   1605
       Begin MSComctlLib.Toolbar Toolbar5 
          Height          =   330
          Left            =   210
          TabIndex        =   92
          Top             =   180
-         Width           =   555
-         _ExtentX        =   979
+         Width           =   1230
+         _ExtentX        =   2170
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -95,7 +95,7 @@ Begin VB.Form frmFVARFacturas
          Style           =   1
          _Version        =   393216
          BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   2
+            NumButtons      =   3
             BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Enabled         =   0   'False
                Object.Visible         =   0   'False
@@ -103,6 +103,10 @@ Begin VB.Form frmFVARFacturas
             EndProperty
             BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Carga Masiva"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Factura de Maquila"
+               Object.Tag             =   "2"
             EndProperty
          EndProperty
       End
@@ -2670,6 +2674,7 @@ Dim Sql2 As String
         .ImageList = frmPpal.imgListComun
         .Buttons(1).Image = 13 ' Modificar totales
         .Buttons(2).Image = 16 ' Carga masiva de facturas
+        .Buttons(3).Image = 26 ' Creacion de factura de Maquila
     End With
     
     ' desplazamiento
@@ -2781,6 +2786,8 @@ Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
             mn_ModTotales_Click
         Case 2 'Carga Masiva de Facturas
             mnCargaMasiva_Click
+        Case 3 'generacion de facturas de maquila de la sat a la sl
+            mnGeneracionMaquila_click
     End Select
 End Sub
 
@@ -3054,6 +3061,11 @@ Dim i As Byte
     'insertar masivamente
     Toolbar5.Buttons(2).Enabled = b
     Me.mnCargaMasiva.Enabled = b
+    
+    'insertar masivamente
+    Toolbar5.Buttons(3).Enabled = b And (vParamAplic.Cooperativa = 18)
+    
+    
     
     '[Monica]2017/03/10: solo si no está descontada se permite modificar observaciones y donde descontar (anticipos o liquidaciones)
     b = (Modo = 2 And Data1.Recordset.RecordCount > 0) And Check1(2).Value = 0 '(Check1(1).Value = 0) And (Check1(2).Value = 0)
@@ -3407,6 +3419,10 @@ Private Sub mnCargaMasiva_Click()
     BotonCargaMasiva
 End Sub
 
+Private Sub mnGeneracionMaquila_click()
+    BotonGeneracionMaquila
+End Sub
+
 Private Sub mnEliminar_Click()
     BotonEliminar
 End Sub
@@ -3427,6 +3443,7 @@ Private Sub mnImprimir_Click()
 
     If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
     'Nombre fichero .rpt a Imprimir
+    
     frmImprimir.NombreRPT = nomDocu
     ' he añadido estas dos lineas para que llame al rpt correspondiente
 
@@ -3438,6 +3455,11 @@ Private Sub mnImprimir_Click()
     
     '[Monica]17/01/2019: abrimos la conta de la seccion pq quiere imprimir el iban de la contabilidad
     If vParamAplic.Cooperativa = 18 Then
+    
+        If Text1(3).Text = 1 Then
+            frmImprimir.NombreRPT = Replace(frmImprimir.NombreRPT, "SAT", "")
+        End If
+        
         Dim Sql As String
         Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
         conn.Execute Sql
@@ -5342,6 +5364,13 @@ Private Sub BotonCargaMasiva()
     AbrirListadoFVarias 2
     'frmCargaFactVar.Show vbModal
 End Sub
+
+Private Sub BotonGeneracionMaquila()
+    AbrirListadoFVarias 8
+    'frmCargaFactVar.Show vbModal
+End Sub
+
+
 
 Private Sub AbrirFrmForpa(indice As Integer)
     indCodigo = indice

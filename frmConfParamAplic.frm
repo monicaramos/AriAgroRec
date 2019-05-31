@@ -108,121 +108,67 @@ Begin VB.Form frmConfParamAplic
       TabPicture(2)   =   "frmConfParamAplic.frx":0044
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Label11"
-      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "Label14"
-      Tab(2).Control(1).Enabled=   0   'False
       Tab(2).Control(2)=   "Label19"
-      Tab(2).Control(2).Enabled=   0   'False
       Tab(2).Control(3)=   "Label20"
-      Tab(2).Control(3).Enabled=   0   'False
       Tab(2).Control(4)=   "Label21"
-      Tab(2).Control(4).Enabled=   0   'False
       Tab(2).Control(5)=   "Label22"
-      Tab(2).Control(5).Enabled=   0   'False
       Tab(2).Control(6)=   "Label1(101)"
-      Tab(2).Control(6).Enabled=   0   'False
       Tab(2).Control(7)=   "imgAyuda(2)"
-      Tab(2).Control(7).Enabled=   0   'False
       Tab(2).Control(8)=   "Frame3"
-      Tab(2).Control(8).Enabled=   0   'False
       Tab(2).Control(9)=   "chkTaraTractor"
-      Tab(2).Control(9).Enabled=   0   'False
       Tab(2).Control(10)=   "chkTraza"
-      Tab(2).Control(10).Enabled=   0   'False
       Tab(2).Control(11)=   "Text1(24)"
-      Tab(2).Control(11).Enabled=   0   'False
       Tab(2).Control(12)=   "Text1(31)"
-      Tab(2).Control(12).Enabled=   0   'False
       Tab(2).Control(13)=   "chkAgruparNotas"
-      Tab(2).Control(13).Enabled=   0   'False
       Tab(2).Control(14)=   "Text1(64)"
-      Tab(2).Control(14).Enabled=   0   'False
       Tab(2).Control(15)=   "Text1(65)"
-      Tab(2).Control(15).Enabled=   0   'False
       Tab(2).Control(16)=   "Text1(66)"
-      Tab(2).Control(16).Enabled=   0   'False
       Tab(2).Control(17)=   "chkRespetarNroNota"
-      Tab(2).Control(17).Enabled=   0   'False
       Tab(2).Control(18)=   "chkNotaManual"
-      Tab(2).Control(18).Enabled=   0   'False
       Tab(2).Control(19)=   "Text1(109)"
-      Tab(2).Control(19).Enabled=   0   'False
       Tab(2).Control(20)=   "chkCoopro"
-      Tab(2).Control(20).Enabled=   0   'False
       Tab(2).ControlCount=   21
       TabCaption(3)   =   "Aridoc"
       TabPicture(3)   =   "frmConfParamAplic.frx":0060
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "Label1(28)"
-      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).Control(1)=   "imgBuscar(9)"
-      Tab(3).Control(1).Enabled=   0   'False
       Tab(3).Control(2)=   "SSTab2"
-      Tab(3).Control(2).Enabled=   0   'False
       Tab(3).Control(3)=   "Text1(13)"
-      Tab(3).Control(3).Enabled=   0   'False
       Tab(3).Control(4)=   "Text2(13)"
-      Tab(3).Control(4).Enabled=   0   'False
       Tab(3).ControlCount=   5
       TabCaption(4)   =   "Otros"
       TabPicture(4)   =   "frmConfParamAplic.frx":007C
       Tab(4).ControlEnabled=   0   'False
       Tab(4).Control(0)=   "Label12"
-      Tab(4).Control(0).Enabled=   0   'False
       Tab(4).Control(1)=   "Label13"
-      Tab(4).Control(1).Enabled=   0   'False
       Tab(4).Control(2)=   "imgBuscar(0)"
-      Tab(4).Control(2).Enabled=   0   'False
       Tab(4).Control(3)=   "Label1(0)"
-      Tab(4).Control(3).Enabled=   0   'False
       Tab(4).Control(4)=   "Label1(58)"
-      Tab(4).Control(4).Enabled=   0   'False
       Tab(4).Control(5)=   "Label1(4)"
-      Tab(4).Control(5).Enabled=   0   'False
       Tab(4).Control(6)=   "Label15"
-      Tab(4).Control(6).Enabled=   0   'False
       Tab(4).Control(7)=   "imgZoom(0)"
-      Tab(4).Control(7).Enabled=   0   'False
       Tab(4).Control(8)=   "imgZoom(1)"
-      Tab(4).Control(8).Enabled=   0   'False
       Tab(4).Control(9)=   "Label16"
-      Tab(4).Control(9).Enabled=   0   'False
       Tab(4).Control(10)=   "Label17"
-      Tab(4).Control(10).Enabled=   0   'False
       Tab(4).Control(11)=   "Label1(102)"
-      Tab(4).Control(11).Enabled=   0   'False
       Tab(4).Control(12)=   "Label34"
-      Tab(4).Control(12).Enabled=   0   'False
       Tab(4).Control(13)=   "Label1(127)"
-      Tab(4).Control(13).Enabled=   0   'False
       Tab(4).Control(14)=   "imgAyuda(4)"
-      Tab(4).Control(14).Enabled=   0   'False
       Tab(4).Control(15)=   "Text1(25)"
-      Tab(4).Control(15).Enabled=   0   'False
       Tab(4).Control(16)=   "Text1(26)"
-      Tab(4).Control(16).Enabled=   0   'False
       Tab(4).Control(17)=   "Text1(27)"
-      Tab(4).Control(17).Enabled=   0   'False
       Tab(4).Control(18)=   "Text2(27)"
-      Tab(4).Control(18).Enabled=   0   'False
       Tab(4).Control(19)=   "Text1(28)"
-      Tab(4).Control(19).Enabled=   0   'False
       Tab(4).Control(20)=   "Frame5"
-      Tab(4).Control(20).Enabled=   0   'False
       Tab(4).Control(21)=   "Text1(37)"
-      Tab(4).Control(21).Enabled=   0   'False
       Tab(4).Control(22)=   "Text1(38)"
-      Tab(4).Control(22).Enabled=   0   'False
       Tab(4).Control(23)=   "Text1(39)"
-      Tab(4).Control(23).Enabled=   0   'False
       Tab(4).Control(24)=   "Text1(41)"
-      Tab(4).Control(24).Enabled=   0   'False
       Tab(4).Control(25)=   "Text1(110)"
-      Tab(4).Control(25).Enabled=   0   'False
       Tab(4).Control(26)=   "Text1(136)"
-      Tab(4).Control(26).Enabled=   0   'False
       Tab(4).Control(27)=   "Text1(142)"
-      Tab(4).Control(27).Enabled=   0   'False
       Tab(4).ControlCount=   28
       TabCaption(5)   =   "Terc/Trans"
       TabPicture(5)   =   "frmConfParamAplic.frx":0098
@@ -251,37 +197,21 @@ Begin VB.Form frmConfParamAplic
       TabPicture(7)   =   "frmConfParamAplic.frx":00D0
       Tab(7).ControlEnabled=   0   'False
       Tab(7).Control(0)=   "Label1(36)"
-      Tab(7).Control(0).Enabled=   0   'False
       Tab(7).Control(1)=   "imgBuscar(4)"
-      Tab(7).Control(1).Enabled=   0   'False
       Tab(7).Control(2)=   "imgBuscar(5)"
-      Tab(7).Control(2).Enabled=   0   'False
       Tab(7).Control(3)=   "Label1(42)"
-      Tab(7).Control(3).Enabled=   0   'False
       Tab(7).Control(4)=   "Label1(44)"
-      Tab(7).Control(4).Enabled=   0   'False
       Tab(7).Control(5)=   "imgBuscar(58)"
-      Tab(7).Control(5).Enabled=   0   'False
       Tab(7).Control(6)=   "Label1(106)"
-      Tab(7).Control(6).Enabled=   0   'False
       Tab(7).Control(7)=   "imgBuscar(23)"
-      Tab(7).Control(7).Enabled=   0   'False
       Tab(7).Control(8)=   "Text2(56)"
-      Tab(7).Control(8).Enabled=   0   'False
       Tab(7).Control(9)=   "Text1(56)"
-      Tab(7).Control(9).Enabled=   0   'False
       Tab(7).Control(10)=   "Text1(57)"
-      Tab(7).Control(10).Enabled=   0   'False
       Tab(7).Control(11)=   "Text2(57)"
-      Tab(7).Control(11).Enabled=   0   'False
       Tab(7).Control(12)=   "Text2(58)"
-      Tab(7).Control(12).Enabled=   0   'False
       Tab(7).Control(13)=   "Text1(58)"
-      Tab(7).Control(13).Enabled=   0   'False
       Tab(7).Control(14)=   "Text2(114)"
-      Tab(7).Control(14).Enabled=   0   'False
       Tab(7).Control(15)=   "Text1(114)"
-      Tab(7).Control(15).Enabled=   0   'False
       Tab(7).ControlCount=   16
       TabCaption(8)   =   "Suministros"
       TabPicture(8)   =   "frmConfParamAplic.frx":00EC
@@ -297,57 +227,31 @@ Begin VB.Form frmConfParamAplic
       TabPicture(9)   =   "frmConfParamAplic.frx":0108
       Tab(9).ControlEnabled=   0   'False
       Tab(9).Control(0)=   "imgBuscar(10)"
-      Tab(9).Control(0).Enabled=   0   'False
       Tab(9).Control(1)=   "Label1(53)"
-      Tab(9).Control(1).Enabled=   0   'False
       Tab(9).Control(2)=   "Label1(45)"
-      Tab(9).Control(2).Enabled=   0   'False
       Tab(9).Control(3)=   "imgBuscar(59)"
-      Tab(9).Control(3).Enabled=   0   'False
       Tab(9).Control(4)=   "Label1(65)"
-      Tab(9).Control(4).Enabled=   0   'False
       Tab(9).Control(5)=   "imgBuscar(69)"
-      Tab(9).Control(5).Enabled=   0   'False
       Tab(9).Control(6)=   "Label1(75)"
-      Tab(9).Control(6).Enabled=   0   'False
       Tab(9).Control(7)=   "Label1(76)"
-      Tab(9).Control(7).Enabled=   0   'False
       Tab(9).Control(8)=   "imgBuscar(16)"
-      Tab(9).Control(8).Enabled=   0   'False
       Tab(9).Control(9)=   "Label1(120)"
-      Tab(9).Control(9).Enabled=   0   'False
       Tab(9).Control(10)=   "imgAyuda(3)"
-      Tab(9).Control(10).Enabled=   0   'False
       Tab(9).Control(11)=   "imgAyuda(5)"
-      Tab(9).Control(11).Enabled=   0   'False
       Tab(9).Control(12)=   "Label1(128)"
-      Tab(9).Control(12).Enabled=   0   'False
       Tab(9).Control(13)=   "Text1(63)"
-      Tab(9).Control(13).Enabled=   0   'False
       Tab(9).Control(14)=   "Text2(63)"
-      Tab(9).Control(14).Enabled=   0   'False
       Tab(9).Control(15)=   "ChkContadorManual"
-      Tab(9).Control(15).Enabled=   0   'False
       Tab(9).Control(16)=   "Text2(59)"
-      Tab(9).Control(16).Enabled=   0   'False
       Tab(9).Control(17)=   "Text1(59)"
-      Tab(9).Control(17).Enabled=   0   'False
       Tab(9).Control(18)=   "Text2(69)"
-      Tab(9).Control(18).Enabled=   0   'False
       Tab(9).Control(19)=   "Text1(69)"
-      Tab(9).Control(19).Enabled=   0   'False
       Tab(9).Control(20)=   "Text1(75)"
-      Tab(9).Control(20).Enabled=   0   'False
       Tab(9).Control(21)=   "Text2(76)"
-      Tab(9).Control(21).Enabled=   0   'False
       Tab(9).Control(22)=   "Text1(76)"
-      Tab(9).Control(22).Enabled=   0   'False
       Tab(9).Control(23)=   "Frame15"
-      Tab(9).Control(23).Enabled=   0   'False
       Tab(9).Control(24)=   "Text1(128)"
-      Tab(9).Control(24).Enabled=   0   'False
       Tab(9).Control(25)=   "Text1(143)"
-      Tab(9).Control(25).Enabled=   0   'False
       Tab(9).ControlCount=   26
       TabCaption(10)  =   "Telefonia"
       TabPicture(10)  =   "frmConfParamAplic.frx":0124
@@ -1779,10 +1683,10 @@ Begin VB.Form frmConfParamAplic
             EndProperty
             Height          =   360
             Index           =   42
-            Left            =   4170
+            Left            =   4710
             TabIndex        =   339
             Top             =   750
-            Width           =   5820
+            Width           =   5280
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -1797,7 +1701,7 @@ Begin VB.Form frmConfParamAplic
             EndProperty
             Height          =   360
             Index           =   42
-            Left            =   2760
+            Left            =   3300
             MaxLength       =   10
             TabIndex        =   60
             Tag             =   "Cta Contable Retencion|T|S|||rparam|ctaterreten|||"
@@ -1818,10 +1722,10 @@ Begin VB.Form frmConfParamAplic
             EndProperty
             Height          =   360
             Index           =   40
-            Left            =   3390
+            Left            =   3930
             TabIndex        =   338
             Top             =   330
-            Width           =   6600
+            Width           =   6060
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -1836,7 +1740,7 @@ Begin VB.Form frmConfParamAplic
             EndProperty
             Height          =   360
             Index           =   40
-            Left            =   2760
+            Left            =   3300
             MaxLength       =   10
             TabIndex        =   59
             Tag             =   "Cod.Iva Extranjero|N|N|||rparam|codivaintracom|000||"
@@ -1864,13 +1768,13 @@ Begin VB.Form frmConfParamAplic
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   2
-            Left            =   2460
+            Left            =   3000
             ToolTipText     =   "Buscar cuenta"
             Top             =   780
             Width           =   240
          End
          Begin VB.Label Label1 
-            Caption         =   "Cod.IVA Extranjero"
+            Caption         =   "Cod.IVA Intracomunitario"
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75
@@ -1885,12 +1789,12 @@ Begin VB.Form frmConfParamAplic
             Left            =   330
             TabIndex        =   340
             Top             =   390
-            Width           =   1950
+            Width           =   2535
          End
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   1
-            Left            =   2460
+            Left            =   3000
             ToolTipText     =   "Buscar Iva"
             Top             =   360
             Width           =   240
@@ -10982,7 +10886,7 @@ End Sub
 
 
 Private Sub PonerBotonCabecera(B As Boolean)
-    Me.CmdAceptar.visible = Not B
+    Me.cmdAceptar.visible = Not B
     Me.cmdCancelar.visible = Not B
     Me.cmdSalir.visible = B
 '    If b Then Me.lblIndicador.Caption = ""
@@ -11569,17 +11473,17 @@ Private Function CargaPath(Codigo As Integer) As String
 Dim Nod As Node
 Dim J As Integer
 Dim i As Integer
-Dim c As String
+Dim C As String
 Dim campo1 As String
 Dim padre As String
 Dim A As String
 
     'Primero copiamos la carpeta
-    c = "\" & DevuelveDesdeBDNew(cAridoc, "carpetas", "nombre", "codcarpeta", CInt(Codigo), "N")
+    C = "\" & DevuelveDesdeBDNew(cAridoc, "carpetas", "nombre", "codcarpeta", CInt(Codigo), "N")
     campo1 = "nombre"
     padre = DevuelveDesdeBDNew(cAridoc, "carpetas", "padre", "codcarpeta", CStr(Codigo), "N", campo1)
     If CInt(ComprobarCero(padre)) > 0 Then
-        c = CargaPath(CInt(padre)) & c
+        C = CargaPath(CInt(padre)) & C
     End If
 '
 '    If No.Children > 0 Then
@@ -11590,7 +11494,7 @@ Dim A As String
 '           If i <> J Then Set Nod = Nod.Next
 '        Next i
 '    End If
-    CargaPath = c
+    CargaPath = C
 End Function
 
 

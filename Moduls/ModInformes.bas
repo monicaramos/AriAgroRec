@@ -35,7 +35,6 @@ Public Sub AbrirListadoPOZ(numero As Byte)
     Screen.MousePointer = vbDefault
 End Sub
 
-
 Public Sub AbrirListadoBodEntradas(numero As Byte)
     Screen.MousePointer = vbHourglass
     frmBodListEntradas.Opcionlistado = numero
@@ -92,15 +91,12 @@ Public Sub AbrirListado(numero As Byte)
     Screen.MousePointer = vbDefault
 End Sub
 
-
 Public Sub AbrirListadoComer(numero As Byte)
     Screen.MousePointer = vbHourglass
     frmListadoComer.Opcionlistado = numero
     frmListadoComer.Show vbModal
     Screen.MousePointer = vbDefault
 End Sub
-
-
 
 Public Sub AbrirListadoFVarias(numero As Byte)
     Screen.MousePointer = vbHourglass

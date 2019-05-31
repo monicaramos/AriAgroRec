@@ -505,8 +505,6 @@ Dim vcodigo As Long
     Label2(8).Caption = "Reparto de albaranes"
     DoEvents
     
-    
-    
     ' para todos los albaranes que han salido repartimos
     Sql = "select albaran.numalbar, albaran.codclien, codvarie, nrotraza, sum(numcajas), sum(pesoneto) pesoneto from albaran_variedad inner join albaran on albaran_variedad.numalbar = albaran.numalbar "
     Sql = Sql & " where albaran.fechaalb = " & DBSet(fec, "F")

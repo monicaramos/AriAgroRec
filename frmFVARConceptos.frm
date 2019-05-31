@@ -752,7 +752,7 @@ Begin VB.Form frmFVARConceptos
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   12240
+      Left            =   13230
       TabIndex        =   32
       Top             =   180
       Width           =   405
@@ -931,7 +931,7 @@ Dim i As Integer
     ' ********************************************************
 
     cmdAceptar.visible = Not B
-    CmdCancelar.visible = Not B
+    cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es retornar

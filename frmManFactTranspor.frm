@@ -3241,7 +3241,7 @@ Dim b1 As Boolean
     '---------------------------------------------
     b = (Modo <> 0 And Modo <> 2)
     cmdCancelar.visible = b
-    CmdAceptar.visible = b
+    cmdAceptar.visible = b
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     
@@ -3382,7 +3382,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -3390,7 +3390,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     End If
 End Sub
 
@@ -3577,7 +3577,7 @@ Private Sub PonerBotonCabecera(b As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
     On Error Resume Next
 
-    Me.CmdAceptar.visible = Not b
+    Me.cmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
     Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
@@ -3714,7 +3714,7 @@ Dim Sql As String
             PonerFormatoEntero txtAux1(Index)
 
         Case 9 ' importe
-            If PonerFormatoDecimal(txtAux1(Index), 3) Then PonerFocoBtn CmdAceptar
+            If PonerFormatoDecimal(txtAux1(Index), 3) Then PonerFocoBtn cmdAceptar
             
     End Select
     
@@ -3916,7 +3916,7 @@ Dim i As Integer
     Me.mnVerTodos.Enabled = b
     
     
-    '[Monica]15/01/2019: tienen que poder insertar
+    '[Monica]15/01/2019: tienen que poder insertar, tb frutas inma
     'Añadir
     Toolbar1.Buttons(1).Enabled = (vParamAplic.Cooperativa = 4) 'False 'B
     Me.mnModificar.Enabled = (vParamAplic.Cooperativa = 4) 'False 'B

@@ -584,7 +584,7 @@ Public Function LeerDatos(vCodsocio As String) As Boolean
 'OUT: True si lee los datos correctamente
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo ELeer
     
@@ -611,7 +611,7 @@ Dim B As Boolean
         mCodposta = DBLet(Rs!codpostal, "T")
         mPobsocio = DBLet(Rs!pobsocio, "T")
         mProsocio = DBLet(Rs!prosocio, "T")
-        mNIFsocio = Rs!nifSocio
+        mNIFsocio = Rs!nifsocio
         mTfno1 = DBLet(Rs!telsoci1, "T")
         mTfno2 = DBLet(Rs!telsoci2, "T")
         mTfno3 = DBLet(Rs!telsoci3, "T")
@@ -622,7 +622,7 @@ Dim B As Boolean
         mFecAlta = Rs!FechaAlta
         mFecBaja = DBLet(Rs!FechaBaja, "T")
         
-        '[Monica]22/11/2013: tema iban
+       '[Monica]22/11/2013: tema iban
         mIban = CStr(DBLet(Rs!Iban, "T"))
         
         mCodbanco = CStr(Format(ComprobarCero(DBLet(Rs!CodBanco, "N")), "0000"))
@@ -642,14 +642,14 @@ Dim B As Boolean
         
         '[Monica]27/10/2015
         mvarNoDevolverApor = DBLet(Rs!NoDevolverApor, "N") ' No devolver aportaciones
-       
+
         '[Monica]14/05/2018: hay embargo
         mvarHayEmbargo = DBLet(Rs!HayEmbargo, "N") ' Hay embargo
        
        
-        B = LeerTipoMovimientos
+        b = LeerTipoMovimientos
         
-        LeerDatos = B
+        LeerDatos = b
     End If
 
     Rs.Close

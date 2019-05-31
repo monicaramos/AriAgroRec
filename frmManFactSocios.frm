@@ -213,9 +213,9 @@ Begin VB.Form frmManFactSocios
       TabCaption(0)   =   "Variedad/Calidad"
       TabPicture(0)   =   "frmManFactSocios.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "FrameAnticipos"
+      Tab(0).Control(0)=   "Frame3"
       Tab(0).Control(1)=   "Frame4"
-      Tab(0).Control(2)=   "Frame3"
+      Tab(0).Control(2)=   "FrameAnticipos"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Gastos a Pie"
       TabPicture(1)   =   "frmManFactSocios.frx":0028
@@ -5881,7 +5881,7 @@ Dim b1 As Boolean
     '---------------------------------------------
     b = (Modo <> 0 And Modo <> 2)
     cmdCancelar.visible = b
-    CmdAceptar.visible = b
+    cmdAceptar.visible = b
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     BloquearImgFec Me, 0, Modo
@@ -6014,7 +6014,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -6022,7 +6022,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     End If
 End Sub
 
@@ -6331,7 +6331,7 @@ Private Sub PonerBotonCabecera(b As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
     On Error Resume Next
 
-    Me.CmdAceptar.visible = Not b
+    Me.cmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
     Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
@@ -6535,7 +6535,7 @@ Dim Sql As String
         Case 7 'peso neto
             If txtAux(Index) <> "" Then
                 PonerFormatoEntero txtAux(Index)
-                CmdAceptar.SetFocus
+                cmdAceptar.SetFocus
             End If
 
     End Select
@@ -6563,13 +6563,14 @@ Dim Mens As String
         
     '------------------------------------------------------------------------------
     '  LOG de acciones
-    If Me.Check1(1).Value = 1 Then
+'[Monica]26/04/2019: quito la condicion de que esté contabilizado para que me grabe en el log siempre
+'    If Me.Check1(1).Value = 1 Then
         Set LOG = New cLOG
         
         LOG.Insertar 12, vUsu, "Elimina Factura: " & Text1(12).Text & "-" & Text1(0).Text & "-" & Text1(1).Text
     
         Set LOG = Nothing
-    End If
+'    End If
     '-----------------------------------------------------------------------------
         
     'Eliminar en tablas de cabecera de factura
@@ -6845,7 +6846,7 @@ Dim Sql As String
             Sql = Sql & " and " & ObtenerWhereCP(False)
         End If
         If Opcion = 1 Then
-            Sql = Sql & " AND rfactsoc_calidad.codvarie=" & Data3.Recordset.Fields!codvarie
+            Sql = Sql & " AND rfactsoc_calidad.codvarie=" & Data3.Recordset.Fields!Codvarie
             Sql = Sql & " AND rfactsoc_calidad.codcampo=" & Data3.Recordset.Fields!codCampo
         End If
     Else
@@ -7165,7 +7166,7 @@ Dim cadMen As String
     
         Case 16 ' importe
             If txtAux3(Index) <> "" Then
-                If PonerFormatoDecimal(txtAux3(Index), 3) Then CmdAceptar.SetFocus
+                If PonerFormatoDecimal(txtAux3(Index), 3) Then cmdAceptar.SetFocus
             End If
         
     End Select
@@ -7906,9 +7907,9 @@ Dim Rs2 As ADODB.Recordset
     CadValues = ""
     While Not Rs.EOF
         TotalKilos = DBLet(Rs!KilosNet, "N")
-        ImporteVar = DevuelveValor("select imporvar from rfactsoc_variedad where " & ObtenerWhereCP(False) & " and codvarie = " & DBSet(Rs!codvarie, "N"))
+        ImporteVar = DevuelveValor("select imporvar from rfactsoc_variedad where " & ObtenerWhereCP(False) & " and codvarie = " & DBSet(Rs!Codvarie, "N"))
     
-        Sql2 = "select * from rhisfruta where numalbar in (" & albaranes & ") and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql2 = "select * from rhisfruta where numalbar in (" & albaranes & ") and codvarie = " & DBSet(Rs!Codvarie, "N")
         Set Rs2 = New ADODB.Recordset
         
         Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -7917,7 +7918,7 @@ Dim Rs2 As ADODB.Recordset
             PrecioAlb = Round2(ImporteAlb / Rs2!KilosNet, 4)
             
             CadValues = CadValues & "(" & DBSet(Text1(12).Text, "T") & "," & DBSet(Text1(0).Text, "N") & "," & DBSet(Text1(1).Text, "F") & ","
-            CadValues = CadValues & DBSet(Rs2!NumAlbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Rs2!codvarie, "N") & ",0," & DBSet(Rs2!KilosBru, "N") & ","
+            CadValues = CadValues & DBSet(Rs2!NumAlbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Rs2!Codvarie, "N") & ",0," & DBSet(Rs2!KilosBru, "N") & ","
             CadValues = CadValues & DBSet(Rs2!KilosNet, "N") & ",0," & DBSet(PrecioAlb, "N") & "," & DBSet(ImporteAlb, "N") & ",0,0,0,0),"
             
             Rs2.MoveNext
@@ -7930,7 +7931,7 @@ Dim Rs2 As ADODB.Recordset
         Sql = "update rfactsoc_variedad set kilosnet = " & DBSet(TotalKilos, "N")
         Sql = Sql & ", preciomed = " & DBSet(PrecioAlb, "N")
         Sql = Sql & " where " & ObtenerWhereCP(False)
-        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!Codvarie, "N")
         
         conn.Execute Sql
         
@@ -7938,7 +7939,7 @@ Dim Rs2 As ADODB.Recordset
         Sql = "update rfactsoc_calidad set kilosnet = " & DBSet(TotalKilos, "N")
         Sql = Sql & ", precio = " & DBSet(PrecioAlb, "N")
         Sql = Sql & " where " & ObtenerWhereCP(False)
-        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!Codvarie, "N")
         
         conn.Execute Sql
         
@@ -7996,9 +7997,9 @@ Dim Rs2 As ADODB.Recordset
     CadValues = ""
     While Not Rs.EOF
         TotalKilos = DBLet(Rs!KilosTra, "N")
-        ImporteVar = DevuelveValor("select imporvar from rfactsoc_variedad where " & ObtenerWhereCP(False) & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and codcampo = " & DBSet(Rs!codCampo, "N"))
+        ImporteVar = DevuelveValor("select imporvar from rfactsoc_variedad where " & ObtenerWhereCP(False) & " and codvarie = " & DBSet(Rs!Codvarie, "N") & " and codcampo = " & DBSet(Rs!codCampo, "N"))
     
-        Sql2 = "select * from rhisfruta where numalbar in (" & albaranes & ") and codvarie = " & DBSet(Rs!codvarie, "N") & " and codcampo = " & DBSet(Rs!codCampo, "N")
+        Sql2 = "select * from rhisfruta where numalbar in (" & albaranes & ") and codvarie = " & DBSet(Rs!Codvarie, "N") & " and codcampo = " & DBSet(Rs!codCampo, "N")
         Set Rs2 = New ADODB.Recordset
         
         Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -8007,7 +8008,7 @@ Dim Rs2 As ADODB.Recordset
             PrecioAlb = Round2(ImporteAlb / Rs2!KilosTra, 4)
             
             CadValues = CadValues & "(" & DBSet(Text1(12).Text, "T") & "," & DBSet(Text1(0).Text, "N") & "," & DBSet(Text1(1).Text, "F") & ","
-            CadValues = CadValues & DBSet(Rs2!NumAlbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Rs2!codvarie, "N") & ",0," & DBSet(Rs2!KilosBru, "N") & ","
+            CadValues = CadValues & DBSet(Rs2!NumAlbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Rs2!Codvarie, "N") & ",0," & DBSet(Rs2!KilosBru, "N") & ","
             CadValues = CadValues & DBSet(Rs2!KilosTra, "N") & ",0," & DBSet(PrecioAlb, "N") & "," & DBSet(ImporteAlb, "N") & ",0,0,0,0),"
             
             Rs2.MoveNext
@@ -8020,7 +8021,7 @@ Dim Rs2 As ADODB.Recordset
         Sql = "update rfactsoc_variedad set kilosnet = " & DBSet(TotalKilos, "N")
         Sql = Sql & ", preciomed = " & DBSet(PrecioAlb, "N")
         Sql = Sql & " where " & ObtenerWhereCP(False)
-        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!Codvarie, "N")
         Sql = Sql & " and codcampo = " & DBSet(Rs!codCampo, "N")
         
         conn.Execute Sql

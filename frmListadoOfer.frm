@@ -2905,7 +2905,8 @@ Dim Situacion As String
                                                '[Monica]26/11/2014: en turis tampoco
                                                     '[Monica]30/04/2015: en montifrut tampoco
                                                         '[Monica]10/07/2015: en bolbaite tampoco
-            If vParamAplic.Cooperativa <> 8 And vParamAplic.Cooperativa <> 1 And vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 14 Then
+                                                            '[Monica]09/05/2019: en utxera puede haber socios sin campos
+            If vParamAplic.Cooperativa <> 8 And vParamAplic.Cooperativa <> 10 And vParamAplic.Cooperativa <> 1 And vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 14 Then
                 tabla = "(" & tabla & ") inner join rcampos on rsocios.codsocio = rcampos.codsocio "
             End If
         End If
@@ -4494,7 +4495,7 @@ Dim Sql As String
     GasAcarreo = 0
     
     '[Monica]30/11/2018: para el caso de picassent los gastos de recoleccion se calculan con eursegsoc
-    SQL1 = "select eurdesta, eurecole, eurmanob from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+    SQL1 = "select eurdesta, eurecole, eurmanob from variedades where codvarie = " & DBSet(Rs!Codvarie, "N")
     
     Set Rs1 = New ADODB.Recordset
     Rs1.Open SQL1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText

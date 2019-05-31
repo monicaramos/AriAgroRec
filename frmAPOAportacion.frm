@@ -776,7 +776,7 @@ Public CodigoActual As String
 Public DeConsulta As Boolean
 
 Private CadenaConsulta As String
-Private CadB As String
+Private cadB As String
 
 Private WithEvents frmSoc As frmManSocios 'mantenimiento de socios
 Attribute frmSoc.VB_VarHelpID = -1
@@ -799,7 +799,7 @@ Dim Modo As Byte
 '   4.-  Modificar
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
-Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim indCodigo As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim i As Integer
 Dim SobreCampanya As String
@@ -810,35 +810,35 @@ Private BuscaChekc As String
 
 
 Private Sub PonerModo(vModo)
-Dim B As Boolean
+Dim b As Boolean
 
     Modo = vModo
     
-    B = (Modo = 2)
-    If B Then
-        PonerContRegIndicador lblIndicador, adodc1, CadB
+    b = (Modo = 2)
+    If b Then
+        PonerContRegIndicador lblIndicador, adodc1, cadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
     For i = 0 To txtAux.Count - 1
-        txtAux(i).visible = Not B
+        txtAux(i).visible = Not b
         txtAux(i).BackColor = vbWhite
     Next i
     
-    txtAux2(0).visible = Not B
-    txtAux2(6).visible = Not B
+    txtAux2(0).visible = Not b
+    txtAux2(6).visible = Not b
     
     For i = 0 To btnBuscar.Count - 1
-        btnBuscar(i).visible = Not B
+        btnBuscar(i).visible = Not b
     Next i
     
-    CmdAceptar.visible = Not B
-    CmdCancelar.visible = Not B
-    DataGrid1.Enabled = B
+    CmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
+    DataGrid1.Enabled = b
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
     
     PonerLongCampos
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
@@ -862,35 +862,35 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnBuscar.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnBuscar.Enabled = b
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnVerTodos.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnVerTodos.Enabled = b
     
     'Traspaso de aportaciones
-    Toolbar5.Buttons(2).Enabled = B
-    Me.mnTraspaso.Enabled = B
+    Toolbar5.Buttons(2).Enabled = b
+    Me.mnTraspaso.Enabled = b
     
     
     'Insertar
-    Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
-    Me.mnNuevo.Enabled = B And Not DeConsulta
+    Toolbar1.Buttons(1).Enabled = b And Not DeConsulta
+    Me.mnNuevo.Enabled = b And Not DeConsulta
     
     ' Carga kilos, alta socios y baja socios --> solo para mogente
     If vParamAplic.Cooperativa = 3 Then
-        Toolbar5.Buttons(3).Enabled = B And Not DeConsulta And vParamAplic.Cooperativa = 3
-        Me.mnCargaKilos.Enabled = B And Not DeConsulta And vParamAplic.Cooperativa = 3
+        Toolbar5.Buttons(3).Enabled = b And Not DeConsulta And vParamAplic.Cooperativa = 3
+        Me.mnCargaKilos.Enabled = b And Not DeConsulta And vParamAplic.Cooperativa = 3
         
-        Toolbar5.Buttons(4).Enabled = B And Not DeConsulta And vParamAplic.Cooperativa = 3
-        Me.mnAltaSocios.Enabled = B And Not DeConsulta And vParamAplic.Cooperativa = 3
+        Toolbar5.Buttons(4).Enabled = b And Not DeConsulta And vParamAplic.Cooperativa = 3
+        Me.mnAltaSocios.Enabled = b And Not DeConsulta And vParamAplic.Cooperativa = 3
         
-        Toolbar5.Buttons(5).Enabled = B And Not DeConsulta And vParamAplic.Cooperativa = 3
-        Me.mnBajaSocios.Enabled = B And Not DeConsulta And vParamAplic.Cooperativa = 3
+        Toolbar5.Buttons(5).Enabled = b And Not DeConsulta And vParamAplic.Cooperativa = 3
+        Me.mnBajaSocios.Enabled = b And Not DeConsulta And vParamAplic.Cooperativa = 3
     Else
         Toolbar5.Buttons(3).Enabled = False
         Toolbar5.Buttons(3).visible = False
@@ -909,16 +909,16 @@ Dim B As Boolean
     End If
     
     
-    B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
+    b = (b And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(2).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(2).Enabled = b
+    Me.mnModificar.Enabled = b
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(3).Enabled = b
+    Me.mnEliminar.Enabled = b
     'Imprimir
-    Toolbar1.Buttons(8).Enabled = B
-    Me.mnImprimir.Enabled = B
+    Toolbar1.Buttons(8).Enabled = b
+    Me.mnImprimir.Enabled = b
 
 End Sub
 
@@ -926,7 +926,7 @@ Private Sub BotonAnyadir()
     Dim NumF As String
     Dim anc As Single
     
-    CargaGrid CadB, True 'primer de tot carregue tot el grid
+    CargaGrid cadB, True 'primer de tot carregue tot el grid
 '    CadB = ""
    
 '    '******************** canviar taula i camp **************************
@@ -968,7 +968,7 @@ Private Sub BotonTraspasoAportaciones()
 End Sub
 
 Private Sub BotonVerTodos()
-    CadB = ""
+    cadB = ""
     CargaGrid ""
     PonerModo 2
 End Sub
@@ -1081,10 +1081,13 @@ Dim temp As Boolean
         Sql = "Delete from raportacion where codsocio=" & adodc1.Recordset!Codsocio
         Sql = Sql & " and fecaport = " & DBSet(adodc1.Recordset!fecaport, "F")
         Sql = Sql & " and codaport = " & DBLet(adodc1.Recordset!Codaport, "N")
-        Sql = Sql & " and numfactu = " & DBLet(adodc1.Recordset!numfactu, "N")
+        '[Monica]10/04/2019: el numero de factura es solo de la cooperativa 16
+        If vParamAplic.Cooperativa = 16 Then
+            Sql = Sql & " and numfactu = " & DBLet(adodc1.Recordset!numfactu, "N")
+        End If
         
         conn.Execute Sql
-        CargaGrid CadB
+        CargaGrid cadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
 '            lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
@@ -1150,7 +1153,7 @@ Private Sub btnBuscar_Click(Index As Integer)
             btnBuscar(Index).Tag = Index '<===
             ' *** repasar si el camp es txtAux o Text1 ***
             If Index = 0 Then
-                Indice = 1
+                indice = 1
                 If txtAux(1).Text <> "" Then frmC.NovaData = txtAux(1).Text
             End If
             
@@ -1174,18 +1177,18 @@ Private Sub cmdAceptar_Click()
 
     Select Case Modo
         Case 1 'BUSQUEDA
-            CadB = ObtenerBusqueda2(Me, BuscaChekc, 1) ' ObtenerBusqueda3(Me, False, BuscaChekc)
-            If CadB <> "" Then
-                CargaGrid CadB
+            cadB = ObtenerBusqueda2(Me, BuscaChekc, 1) ' ObtenerBusqueda3(Me, False, BuscaChekc)
+            If cadB <> "" Then
+                CargaGrid cadB
                 PonerModo 2
 '                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
             End If
             
         Case 3 'INSERTAR
-            If DatosOK Then
+            If DatosOk Then
                 If InsertarDesdeForm(Me) Then
-                    CargaGrid CadB
+                    CargaGrid cadB
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
 '                        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveLast
@@ -1196,18 +1199,18 @@ Private Sub cmdAceptar_Click()
                     Else
                         BotonAnyadir
                     End If
-                    CadB = ""
+                    cadB = ""
                 End If
             End If
             
         Case 4 'MODIFICAR
-            If DatosOK Then
+            If DatosOk Then
                 If ModificaDesdeFormulario(Me) Then
 '                If ModificaDesdeForm Then
                     TerminaBloquear
                     i = adodc1.Recordset.Fields(0)
                     PonerModo 2
-                    CargaGrid CadB
+                    CargaGrid cadB
 '                    If CadB <> "" Then
 '                        CargaGrid CadB
 '                        lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
@@ -1227,7 +1230,7 @@ Private Sub cmdCancelar_Click()
     
     Select Case Modo
         Case 1 'búsqueda
-            CargaGrid CadB
+            CargaGrid cadB
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
             CargaGrid
@@ -1249,7 +1252,7 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 Dim J As Integer
 Dim Aux As String
@@ -1258,7 +1261,7 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
+    Cad = ""
     i = 0
     Do
         J = i + 1
@@ -1266,10 +1269,10 @@ Dim Aux As String
         If i > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            cad = cad & adodc1.Recordset.Fields(J) & "|"
+            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
     Loop Until i = 0
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -1282,7 +1285,7 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Modo = 2 Then PonerContRegIndicador Me.lblIndicador, adodc1, CadB
+    If Modo = 2 Then PonerContRegIndicador Me.lblIndicador, adodc1, cadB
 End Sub
 
 Private Sub Form_Activate()
@@ -1388,10 +1391,10 @@ Private Sub Form_Load()
     
     '[Monica]18/01/2016: si viene de socios cargamos la tabla
     If CodigoActual <> "" Then
-        CadB = ""
+        cadB = ""
         CargaGrid ""
     Else
-        CadB = ""
+        cadB = ""
         CargaGrid "raportacion.codsocio = -1"
     End If
     
@@ -1423,7 +1426,7 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    If Indice = 1 Then
+    If indice = 1 Then
         txtAux(1).Text = Format(vFecha, "dd/mm/yyyy") '<===
     End If
     ' ********************************************
@@ -1442,7 +1445,7 @@ Dim vCampAnt As CCampAnt
 Dim Sql2 As String
 Dim Campanya As String
 Dim CadValues As String
-Dim B As Boolean
+Dim b As Boolean
 Dim Rs As ADODB.Recordset
 Dim vFecha As Date
 
@@ -1462,7 +1465,7 @@ Dim vFecha As Date
     
     CadValues = ""
     
-    B = True
+    b = True
 '    vFecha = DateAdd("yyyy", (-1), vParam.FecFinCam)
     
     ' Nos quedamos en la campaña actual
@@ -1476,12 +1479,12 @@ Dim vFecha As Date
         Set Rs = New ADODB.Recordset
         Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        While Not Rs.EOF And B
+        While Not Rs.EOF And b
             Sql2 = "select * from raportacion where codaport = 1 and fecaport = " & DBSet(vFecha, "F") & " and codsocio = " & DBSet(Rs!Codsocio, "N")
             
             If TotalRegistrosConsulta(Sql2) <> 0 Then
                 MsgBox "Existe una aportación para el socio " & Rs!Codsocio & ". Revise.", vbExclamation
-                B = False
+                b = False
             Else
                 CadValues = CadValues & "(" & DBSet(Rs!Codsocio, "N") & "," & DBSet(vFecha, "F") & ",1,"
                 CadValues = CadValues & DBSet("CAMPAÑA " & Campanya, "T") & "," & DBSet(Campanya, "T") & "," & DBSet(Rs!Kilos, "N") & ",0),"
@@ -1505,12 +1508,12 @@ Dim vFecha As Date
                 Set Rs = New ADODB.Recordset
                 Rs.Open Sql, ConnCAnt, adOpenForwardOnly, adLockPessimistic, adCmdText
             
-                While Not Rs.EOF And B
+                While Not Rs.EOF And b
                     Sql2 = "select * from raportacion where codaport = 1 and fecaport = " & DBSet(vFecha, "F") & " and codsocio = " & DBSet(Rs!Codsocio, "N")
                     
                     If TotalRegistrosConsulta(Sql2) <> 0 Then
                         MsgBox "Existe una aportación para el socio " & Rs!Codsocio & ". Revise.", vbExclamation
-                        B = False
+                        b = False
                     Else
                         CadValues = CadValues & "(" & DBSet(Rs!Codsocio, "N") & "," & DBSet(vFecha, "F") & ",1,"
                         CadValues = CadValues & DBSet("CAMPAÑA " & Campanya, "T") & "," & DBSet(Campanya, "T") & "," & DBSet(Rs!Kilos, "N") & ",0),"
@@ -1525,7 +1528,7 @@ Dim vFecha As Date
         End If
     End If
 
-    If B And CadValues <> "" Then
+    If b And CadValues <> "" Then
         CadValues = Mid(CadValues, 1, Len(CadValues) - 1)
         Sql = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe) values  " & CadValues
         
@@ -1535,10 +1538,10 @@ Dim vFecha As Date
 eCargaKilos:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Proceso Carga de Datos", Err.Description
-        B = False
+        b = False
     End If
     
-    If Not B Then
+    If Not b Then
         conn.RollbackTrans
     Else
         ProcesoCargaKilos = True
@@ -1548,8 +1551,8 @@ End Function
 
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo socio
-    txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre socio
+    txtAux(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo socio
+    txtAux2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre socio
 End Sub
 
 
@@ -1714,7 +1717,7 @@ Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub txtaux_GotFocus(Index As Integer)
+Private Sub txtAux_GotFocus(Index As Integer)
     ConseguirFoco txtAux(Index), Modo
 End Sub
 
@@ -1778,15 +1781,15 @@ Dim cadMen As String
     
 End Sub
 
-Private Function DatosOK() As Boolean
+Private Function DatosOk() As Boolean
 'Dim Datos As String
-Dim B As Boolean
+Dim b As Boolean
 Dim Sql As String
 Dim Mens As String
 
 
-    B = CompForm(Me)
-    If Not B Then Exit Function
+    b = CompForm(Me)
+    If Not b Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
         Sql = "select count(*) from raportacion where codsocio = " & DBSet(txtAux(0).Text, "N")
@@ -1795,7 +1798,7 @@ Dim Mens As String
         If TotalRegistros(Sql) <> 0 Then
             MsgBox "El socio existe para esta fecha, tipo de aportación. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
-            B = False
+            b = False
         End If
     End If
     
@@ -1806,7 +1809,7 @@ Dim Mens As String
 '        End If
 '    End If
     
-    DatosOK = B
+    DatosOk = b
 End Function
 
 
@@ -1819,9 +1822,9 @@ Private Sub printNou()
     With frmImprimir2
         .cadTabla2 = "raportacion"
         .Informe2 = "rManAportacion.rpt"
-        If CadB <> "" Then
+        If cadB <> "" Then
             '.cadRegSelec = Replace(SQL2SF(CadB), "clientes", "clientes_1")
-            .cadRegSelec = SQL2SF(CadB)
+            .cadRegSelec = SQL2SF(cadB)
         Else
             .cadRegSelec = ""
         End If
@@ -1860,7 +1863,7 @@ End Sub
 'Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
 '    KEYpress KeyAscii
 'End Sub
-Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
@@ -1884,12 +1887,12 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    btnBuscar_Click (Indice)
+    btnBuscar_Click (indice)
 End Sub
 
-Private Sub AbrirFrmAportacion(Indice As Integer)
+Private Sub AbrirFrmAportacion(indice As Integer)
     indCodigo = 6
     Set frmApo = New frmAPOTipos
     frmApo.DatosADevolverBusqueda = "0|1|"
@@ -1902,7 +1905,7 @@ Private Sub AbrirFrmAportacion(Indice As Integer)
 End Sub
 
 
-Private Sub AbrirFrmSocio(Indice As Integer)
+Private Sub AbrirFrmSocio(indice As Integer)
     indCodigo = 0
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"

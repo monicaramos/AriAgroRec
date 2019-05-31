@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "17:09"
+            TextSave        =   "17:52"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1123,6 +1123,14 @@ Begin VB.MDIForm MDIppal
          Caption         =   "Manejo Asignacion Albaranes"
          Index           =   13
       End
+      Begin VB.Menu mnRec_Trazabilidad 
+         Caption         =   "-"
+         Index           =   14
+      End
+      Begin VB.Menu mnRec_Trazabilidad 
+         Caption         =   "&Balance de Masas"
+         Index           =   15
+      End
    End
    Begin VB.Menu mnAlmazara 
       Caption         =   "&Almazara"
@@ -1873,7 +1881,7 @@ Private Sub MDIForm_Activate()
 End Sub
 
 Private Sub MDIForm_Load()
-Dim Cad As String
+Dim cad As String
 
     PrimeraVez = True
     CargarImagen
@@ -1883,7 +1891,7 @@ Dim Cad As String
     If vParam Is Nothing Then
         Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & " FALTA CONFIGURAR"
     Else
-        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & Cad & _
+        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & cad & _
                   " - Campaña: " & vParam.FecIniCam & " - " & vParam.FecFinCam & "   -  Usuario: " & vUsu.Nombre
     End If
 
@@ -1980,8 +1988,9 @@ Private Sub mnE_Soporte4_Click()
     
 '     frmPOZMantaTickets.Show vbModal
 '     frmPOZMantaAux.Show vbModal
-    frmVARIOS.Show vbModal
-    
+    'frmVARIOS.Show vbModal
+    frmFVARMaquilaAux.Show vbModal
+'    frmManHorasCreacion.Show vbModal
 '    MsgBox "Hola" & vbCrLf & "Qué tal?", vbQuestion + vbYesNo + vbDefaultButton2
 '    frmLotApport.Show vbModal
     
@@ -2303,9 +2312,9 @@ Dim Config As Boolean
     
     '[Monica]08/05/2012: añadida Escalona que funciona como Utxera
     If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Or vParamAplic.Cooperativa = 17 Then 'utxera
-        MDIppal.mnRec_Pozos.Item(2).Caption = "Contadores"
+        MDIppal.mnRec_Pozos.item(2).Caption = "Contadores"
     Else
-        MDIppal.mnRec_Pozos.Item(2).Caption = "Hidrantes"
+        MDIppal.mnRec_Pozos.item(2).Caption = "Hidrantes"
     End If
     
     '[Monica]02/09/2013: calculo de digito de control
@@ -2319,11 +2328,11 @@ End Sub
 ' ### [Monica] 05/09/2006
 Private Sub HabilitarSoloPrametros_o_Empresas(Habilitar As Boolean)
 Dim T As Control
-Dim Cad As String
+Dim cad As String
 
     On Error Resume Next
     For Each T In Me
-        Cad = T.Name
+        cad = T.Name
         If Mid(T.Name, 1, 2) = "mn" Then
             'If LCase(Mid(T.Name, 1, 8)) <> "mn_b" Then
                 T.Enabled = Habilitar
@@ -2422,7 +2431,7 @@ End Function
 
 Private Sub LanzaHome(Opcion As String)
     Dim i As Integer
-    Dim Cad As String
+    Dim cad As String
     On Error GoTo ELanzaHome
     
     'Obtenemos la pagina web de los parametros
@@ -2433,16 +2442,16 @@ Private Sub LanzaHome(Opcion As String)
     End If
         
     i = FreeFile
-    Cad = ""
+    cad = ""
     Open App.Path & "\lanzaexp.dat" For Input As #i
-    Line Input #i, Cad
+    Line Input #i, cad
     Close #i
     
     'Lanzamos
-    If Cad <> "" Then Shell Cad & " " & CadenaDesdeOtroForm, vbMaximizedFocus
+    If cad <> "" Then Shell cad & " " & CadenaDesdeOtroForm, vbMaximizedFocus
     
 ELanzaHome:
-    If Err.Number <> 0 Then MuestraError Err.Number, Cad & vbCrLf & Err.Description
+    If Err.Number <> 0 Then MuestraError Err.Number, cad & vbCrLf & Err.Description
     CadenaDesdeOtroForm = ""
 End Sub
 
@@ -2546,13 +2555,13 @@ End Sub
 
 Private Sub PonerDatosVisiblesForm()
 'Escribe texto de la barra de la aplicación
-Dim Cad As String
-    Cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
-    Cad = Cad & ", " & Format(Now, "d")
-    Cad = Cad & " de " & Format(Now, "mmmm")
-    Cad = Cad & " de " & Format(Now, "yyyy")
-    Cad = "    " & Cad & "    "
-    Me.StatusBar1.Panels(7).Text = Cad
+Dim cad As String
+    cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
+    cad = cad & ", " & Format(Now, "d")
+    cad = cad & " de " & Format(Now, "mmmm")
+    cad = cad & " de " & Format(Now, "yyyy")
+    cad = "    " & cad & "    "
+    Me.StatusBar1.Panels(7).Text = cad
     
     '
     Me.StatusBar1.Panels(2).Text = vUsu.CadenaConexion
@@ -2563,11 +2572,11 @@ Dim Cad As String
     End If
     
     
-    Cad = ""
+    cad = ""
     If vParam Is Nothing Then
         Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & " FALTA CONFIGURAR"
     Else
-        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & Cad & _
+        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & cad & _
                   "   -   " & vEmpresa.nomresum & "   -   Fechas: " & vParam.FecIniCam & " - " & vParam.FecFinCam & "   -   Usuario: " & vUsu.Nombre
     End If
 End Sub

@@ -16,6 +16,491 @@ Begin VB.Form frmListNomina
    ScaleWidth      =   8145
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FramePaseABanco 
+      Height          =   5990
+      Left            =   60
+      TabIndex        =   212
+      Top             =   30
+      Width           =   6435
+      Begin VB.Frame FrameConcep 
+         BorderStyle     =   0  'None
+         Height          =   495
+         Left            =   540
+         TabIndex        =   255
+         Top             =   4410
+         Width           =   5715
+         Begin VB.TextBox txtCodigo 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   66
+            Left            =   1305
+            MaxLength       =   30
+            TabIndex        =   225
+            Top             =   120
+            Width           =   4290
+         End
+         Begin VB.Label Label2 
+            AutoSize        =   -1  'True
+            Caption         =   "Descripción"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   240
+            Index           =   87
+            Left            =   0
+            TabIndex        =   256
+            Top             =   90
+            Width           =   1125
+         End
+      End
+      Begin VB.ComboBox Combo1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         Left            =   1830
+         Style           =   2  'Dropdown List
+         TabIndex        =   224
+         Tag             =   "Tipo|N|N|||straba|codsecci||N|"
+         Top             =   4080
+         Width           =   1665
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   62
+         Left            =   2730
+         Locked          =   -1  'True
+         TabIndex        =   231
+         Text            =   "Text5"
+         Top             =   1230
+         Width           =   3405
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   63
+         Left            =   2730
+         Locked          =   -1  'True
+         TabIndex        =   232
+         Text            =   "Text5"
+         Top             =   1635
+         Width           =   3405
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   63
+         Left            =   1845
+         MaxLength       =   6
+         TabIndex        =   220
+         Tag             =   "Código|N|N|0|999999|straba|codtraba|000000|S|"
+         Top             =   1635
+         Width           =   840
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   62
+         Left            =   1845
+         MaxLength       =   6
+         TabIndex        =   219
+         Tag             =   "Código|N|N|0|999999|straba|codtraba|000000|S|"
+         Top             =   1215
+         Width           =   840
+      End
+      Begin VB.CommandButton CmdAcepPaseBanco 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   2
+         Left            =   3945
+         TabIndex        =   226
+         Top             =   5370
+         Width           =   1065
+      End
+      Begin VB.CommandButton CmdCancel 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   11
+         Left            =   5070
+         TabIndex        =   227
+         Top             =   5370
+         Width           =   1065
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   60
+         Left            =   1845
+         MaxLength       =   10
+         TabIndex        =   222
+         Top             =   2910
+         Width           =   1350
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   59
+         Left            =   1845
+         MaxLength       =   10
+         TabIndex        =   221
+         Top             =   2310
+         Width           =   1350
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   58
+         Left            =   1830
+         MaxLength       =   6
+         TabIndex        =   223
+         Tag             =   "Código|N|N|0|9999|rcapataz|codcapat|0000|S|"
+         Top             =   3390
+         Width           =   840
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   58
+         Left            =   2715
+         Locked          =   -1  'True
+         TabIndex        =   233
+         Text            =   "Text5"
+         Top             =   3390
+         Width           =   3405
+      End
+      Begin MSComctlLib.ProgressBar Pb1 
+         Height          =   240
+         Left            =   480
+         TabIndex        =   213
+         Top             =   5070
+         Visible         =   0   'False
+         Width           =   5670
+         _ExtentX        =   10001
+         _ExtentY        =   423
+         _Version        =   393216
+         Appearance      =   1
+      End
+      Begin MSComDlg.CommonDialog CommonDialog1 
+         Left            =   120
+         Top             =   5190
+         _ExtentX        =   847
+         _ExtentY        =   847
+         _Version        =   393216
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   26
+         Left            =   1530
+         MouseIcon       =   "frmListNomina.frx":000C
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar trabajador"
+         Top             =   1635
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   25
+         Left            =   1530
+         MouseIcon       =   "frmListNomina.frx":015E
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar trabajador"
+         Top             =   1215
+         Width           =   240
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Trabajador"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   240
+         Index           =   81
+         Left            =   510
+         TabIndex        =   230
+         Top             =   930
+         Width           =   1065
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   80
+         Left            =   870
+         TabIndex        =   229
+         Top             =   1650
+         Width           =   630
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   79
+         Left            =   870
+         TabIndex        =   228
+         Top             =   1230
+         Width           =   675
+      End
+      Begin VB.Label Label16 
+         Caption         =   "Pase a Banco"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   510
+         TabIndex        =   218
+         Top             =   405
+         Width           =   5835
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   22
+         Left            =   1515
+         Picture         =   "frmListNomina.frx":02B0
+         ToolTipText     =   "Buscar fecha"
+         Top             =   2910
+         Width           =   240
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha Pago"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   240
+         Index           =   78
+         Left            =   540
+         TabIndex        =   217
+         Top             =   2610
+         Width           =   1155
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha Recibo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   240
+         Index           =   77
+         Left            =   540
+         TabIndex        =   216
+         Top             =   2040
+         Width           =   1320
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   21
+         Left            =   1530
+         Picture         =   "frmListNomina.frx":033B
+         ToolTipText     =   "Buscar fecha"
+         Top             =   2310
+         Width           =   240
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Banco "
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   240
+         Index           =   76
+         Left            =   540
+         TabIndex        =   215
+         Top             =   3360
+         Width           =   675
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   24
+         Left            =   1515
+         MouseIcon       =   "frmListNomina.frx":03C6
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar banco"
+         Top             =   3390
+         Width           =   240
+      End
+      Begin VB.Label Label14 
+         Caption         =   "Concepto Transferencia "
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Left            =   540
+         TabIndex        =   214
+         Top             =   3810
+         Width           =   1875
+      End
+   End
    Begin MSComDlg.CommonDialog cd1 
       Left            =   6750
       Top             =   4980
@@ -230,7 +715,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   25
             Left            =   1125
-            Picture         =   "frmListNomina.frx":000C
+            Picture         =   "frmListNomina.frx":0518
             Top             =   2250
             Width           =   240
          End
@@ -298,7 +783,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   28
             Left            =   1125
-            MouseIcon       =   "frmListNomina.frx":0097
+            MouseIcon       =   "frmListNomina.frx":05A3
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar trabajador"
             Top             =   810
@@ -308,7 +793,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   27
             Left            =   1125
-            MouseIcon       =   "frmListNomina.frx":01E9
+            MouseIcon       =   "frmListNomina.frx":06F5
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar trabajador"
             Top             =   420
@@ -650,7 +1135,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   30
             Left            =   1080
-            MouseIcon       =   "frmListNomina.frx":033B
+            MouseIcon       =   "frmListNomina.frx":0847
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar trabajador"
             Top             =   810
@@ -660,7 +1145,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   29
             Left            =   1080
-            MouseIcon       =   "frmListNomina.frx":048D
+            MouseIcon       =   "frmListNomina.frx":0999
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar trabajador"
             Top             =   420
@@ -1020,7 +1505,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   9
          Left            =   1605
-         MouseIcon       =   "frmListNomina.frx":05DF
+         MouseIcon       =   "frmListNomina.frx":0AEB
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   1725
@@ -1030,7 +1515,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   8
          Left            =   1605
-         MouseIcon       =   "frmListNomina.frx":0731
+         MouseIcon       =   "frmListNomina.frx":0C3D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   1335
@@ -1040,7 +1525,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   8
          Left            =   1590
-         Picture         =   "frmListNomina.frx":0883
+         Picture         =   "frmListNomina.frx":0D8F
          Top             =   2790
          Width           =   240
       End
@@ -1048,7 +1533,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   6
          Left            =   1605
-         Picture         =   "frmListNomina.frx":090E
+         Picture         =   "frmListNomina.frx":0E1A
          Top             =   2400
          Width           =   240
       End
@@ -1265,7 +1750,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   16
          Left            =   1545
-         MouseIcon       =   "frmListNomina.frx":0999
+         MouseIcon       =   "frmListNomina.frx":0EA5
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1155
@@ -1275,7 +1760,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   14
          Left            =   1545
-         Picture         =   "frmListNomina.frx":0AEB
+         Picture         =   "frmListNomina.frx":0FF7
          Top             =   1635
          Width           =   240
       End
@@ -1283,7 +1768,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   10
          Left            =   1545
-         MouseIcon       =   "frmListNomina.frx":0B76
+         MouseIcon       =   "frmListNomina.frx":1082
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   2115
@@ -1687,7 +2172,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   15
          Left            =   1620
-         MouseIcon       =   "frmListNomina.frx":0CC8
+         MouseIcon       =   "frmListNomina.frx":11D4
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1665
@@ -1697,7 +2182,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   14
          Left            =   1620
-         MouseIcon       =   "frmListNomina.frx":0E1A
+         MouseIcon       =   "frmListNomina.frx":1326
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1305
@@ -1707,7 +2192,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   3
          Left            =   1575
-         Picture         =   "frmListNomina.frx":0F6C
+         Picture         =   "frmListNomina.frx":1478
          Top             =   2745
          Width           =   240
       End
@@ -1715,7 +2200,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   2
          Left            =   1575
-         Picture         =   "frmListNomina.frx":0FF7
+         Picture         =   "frmListNomina.frx":1503
          Top             =   2340
          Width           =   240
       End
@@ -1879,7 +2364,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   1
          Left            =   1395
-         Picture         =   "frmListNomina.frx":1082
+         Picture         =   "frmListNomina.frx":158E
          Top             =   2745
          Width           =   240
       End
@@ -1887,7 +2372,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   0
          Left            =   1395
-         Picture         =   "frmListNomina.frx":110D
+         Picture         =   "frmListNomina.frx":1619
          Top             =   2340
          Width           =   240
       End
@@ -2284,7 +2769,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   34
          Left            =   1560
-         MouseIcon       =   "frmListNomina.frx":1198
+         MouseIcon       =   "frmListNomina.frx":16A4
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   3495
@@ -2294,7 +2779,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   33
          Left            =   1560
-         MouseIcon       =   "frmListNomina.frx":12EA
+         MouseIcon       =   "frmListNomina.frx":17F6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   3105
@@ -2490,7 +2975,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   21
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":143C
+         MouseIcon       =   "frmListNomina.frx":1948
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1620
@@ -2500,7 +2985,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   19
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":158E
+         MouseIcon       =   "frmListNomina.frx":1A9A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1260
@@ -2510,7 +2995,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   16
          Left            =   1560
-         Picture         =   "frmListNomina.frx":16E0
+         Picture         =   "frmListNomina.frx":1BEC
          Top             =   2520
          Width           =   240
       End
@@ -2518,7 +3003,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   15
          Left            =   1560
-         Picture         =   "frmListNomina.frx":176B
+         Picture         =   "frmListNomina.frx":1C77
          Top             =   2115
          Width           =   240
       End
@@ -2734,7 +3219,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   13
             Left            =   1215
-            MouseIcon       =   "frmListNomina.frx":17F6
+            MouseIcon       =   "frmListNomina.frx":1D02
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar trabajador"
             Top             =   2085
@@ -2744,7 +3229,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   12
             Left            =   1215
-            MouseIcon       =   "frmListNomina.frx":1948
+            MouseIcon       =   "frmListNomina.frx":1E54
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar trabajador"
             Top             =   1680
@@ -2794,7 +3279,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   12
             Left            =   1215
-            Picture         =   "frmListNomina.frx":1A9A
+            Picture         =   "frmListNomina.frx":1FA6
             Top             =   540
             Width           =   240
          End
@@ -2802,7 +3287,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   11
             Left            =   1200
-            Picture         =   "frmListNomina.frx":1B25
+            Picture         =   "frmListNomina.frx":2031
             Top             =   930
             Width           =   240
          End
@@ -2940,7 +3425,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   11
          Left            =   1545
-         MouseIcon       =   "frmListNomina.frx":1BB0
+         MouseIcon       =   "frmListNomina.frx":20BC
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1140
@@ -3088,7 +3573,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   20
          Left            =   1350
-         MouseIcon       =   "frmListNomina.frx":1D02
+         MouseIcon       =   "frmListNomina.frx":220E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar almacén"
          Top             =   2220
@@ -3118,7 +3603,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   13
          Left            =   1350
-         Picture         =   "frmListNomina.frx":1E54
+         Picture         =   "frmListNomina.frx":2360
          Top             =   1290
          Width           =   240
       End
@@ -3345,7 +3830,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   20
          Left            =   1605
-         Picture         =   "frmListNomina.frx":1EDF
+         Picture         =   "frmListNomina.frx":23EB
          Top             =   2880
          Width           =   240
       End
@@ -3353,7 +3838,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   19
          Left            =   1605
-         Picture         =   "frmListNomina.frx":1F6A
+         Picture         =   "frmListNomina.frx":2476
          Top             =   2475
          Width           =   240
       End
@@ -3361,7 +3846,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   23
          Left            =   1620
-         MouseIcon       =   "frmListNomina.frx":1FF5
+         MouseIcon       =   "frmListNomina.frx":2501
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1725
@@ -3371,7 +3856,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   22
          Left            =   1620
-         MouseIcon       =   "frmListNomina.frx":2147
+         MouseIcon       =   "frmListNomina.frx":2653
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1305
@@ -3670,7 +4155,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   36
          Left            =   1545
-         MouseIcon       =   "frmListNomina.frx":2299
+         MouseIcon       =   "frmListNomina.frx":27A5
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   1695
@@ -3680,7 +4165,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   26
          Left            =   1545
-         Picture         =   "frmListNomina.frx":23EB
+         Picture         =   "frmListNomina.frx":28F7
          Top             =   1245
          Width           =   240
       End
@@ -3912,7 +4397,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   10
             Left            =   1200
-            Picture         =   "frmListNomina.frx":2476
+            Picture         =   "frmListNomina.frx":2982
             Top             =   900
             Width           =   240
          End
@@ -3920,7 +4405,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   9
             Left            =   1215
-            Picture         =   "frmListNomina.frx":2501
+            Picture         =   "frmListNomina.frx":2A0D
             Top             =   480
             Width           =   240
          End
@@ -3928,7 +4413,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   4
             Left            =   1215
-            MouseIcon       =   "frmListNomina.frx":258C
+            MouseIcon       =   "frmListNomina.frx":2A98
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar trabajador"
             Top             =   1470
@@ -4019,7 +4504,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   7
          Left            =   1545
-         MouseIcon       =   "frmListNomina.frx":26DE
+         MouseIcon       =   "frmListNomina.frx":2BEA
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1125
@@ -4431,7 +4916,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   32
          Left            =   1545
-         MouseIcon       =   "frmListNomina.frx":2830
+         MouseIcon       =   "frmListNomina.frx":2D3C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   3855
@@ -4441,7 +4926,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   31
          Left            =   1560
-         MouseIcon       =   "frmListNomina.frx":2982
+         MouseIcon       =   "frmListNomina.frx":2E8E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   3450
@@ -4451,7 +4936,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   24
          Left            =   1560
-         Picture         =   "frmListNomina.frx":2AD4
+         Picture         =   "frmListNomina.frx":2FE0
          Top             =   2670
          Width           =   240
       End
@@ -4459,7 +4944,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   23
          Left            =   1575
-         Picture         =   "frmListNomina.frx":2B5F
+         Picture         =   "frmListNomina.frx":306B
          Top             =   2295
          Width           =   240
       End
@@ -4972,7 +5457,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   6
          Left            =   1515
-         MouseIcon       =   "frmListNomina.frx":2BEA
+         MouseIcon       =   "frmListNomina.frx":30F6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   2085
@@ -4982,7 +5467,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   7
          Left            =   1515
-         Picture         =   "frmListNomina.frx":2D3C
+         Picture         =   "frmListNomina.frx":3248
          Top             =   1605
          Width           =   240
       End
@@ -4990,7 +5475,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   5
          Left            =   1545
-         MouseIcon       =   "frmListNomina.frx":2DC7
+         MouseIcon       =   "frmListNomina.frx":32D3
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1125
@@ -5119,7 +5604,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   28
          Left            =   1575
-         Picture         =   "frmListNomina.frx":2F19
+         Picture         =   "frmListNomina.frx":3425
          Top             =   1215
          Width           =   240
       End
@@ -5304,7 +5789,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   18
          Left            =   1320
-         Picture         =   "frmListNomina.frx":2FA4
+         Picture         =   "frmListNomina.frx":34B0
          Top             =   2715
          Width           =   240
       End
@@ -5312,7 +5797,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   17
          Left            =   1335
-         Picture         =   "frmListNomina.frx":302F
+         Picture         =   "frmListNomina.frx":353B
          Top             =   2340
          Width           =   240
       End
@@ -5320,7 +5805,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   18
          Left            =   1335
-         MouseIcon       =   "frmListNomina.frx":30BA
+         MouseIcon       =   "frmListNomina.frx":35C6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   1680
@@ -5330,7 +5815,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   17
          Left            =   1350
-         MouseIcon       =   "frmListNomina.frx":320C
+         MouseIcon       =   "frmListNomina.frx":3718
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   1320
@@ -5784,7 +6269,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   3
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":335E
+         MouseIcon       =   "frmListNomina.frx":386A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   2730
@@ -5794,7 +6279,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   2
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":34B0
+         MouseIcon       =   "frmListNomina.frx":39BC
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   2370
@@ -5804,7 +6289,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   5
          Left            =   1575
-         Picture         =   "frmListNomina.frx":3602
+         Picture         =   "frmListNomina.frx":3B0E
          Top             =   3780
          Width           =   240
       End
@@ -5812,7 +6297,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   4
          Left            =   1575
-         Picture         =   "frmListNomina.frx":368D
+         Picture         =   "frmListNomina.frx":3B99
          Top             =   3390
          Width           =   240
       End
@@ -5820,7 +6305,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   0
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":3718
+         MouseIcon       =   "frmListNomina.frx":3C24
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1305
@@ -5830,7 +6315,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   1
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":386A
+         MouseIcon       =   "frmListNomina.frx":3D76
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1665
@@ -5967,491 +6452,6 @@ Begin VB.Form frmListNomina
          Width           =   690
       End
    End
-   Begin VB.Frame FramePaseABanco 
-      Height          =   5990
-      Left            =   60
-      TabIndex        =   212
-      Top             =   30
-      Width           =   6435
-      Begin VB.Frame FrameConcep 
-         BorderStyle     =   0  'None
-         Height          =   495
-         Left            =   540
-         TabIndex        =   255
-         Top             =   4410
-         Width           =   5715
-         Begin VB.TextBox txtCodigo 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   66
-            Left            =   1290
-            MaxLength       =   30
-            TabIndex        =   225
-            Top             =   120
-            Width           =   4290
-         End
-         Begin VB.Label Label2 
-            AutoSize        =   -1  'True
-            Caption         =   "Descripción"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   240
-            Index           =   87
-            Left            =   0
-            TabIndex        =   256
-            Top             =   90
-            Width           =   1125
-         End
-      End
-      Begin VB.ComboBox Combo1 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   0
-         Left            =   1830
-         Style           =   2  'Dropdown List
-         TabIndex        =   224
-         Tag             =   "Tipo|N|N|||straba|codsecci||N|"
-         Top             =   4080
-         Width           =   1665
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   62
-         Left            =   2730
-         Locked          =   -1  'True
-         TabIndex        =   231
-         Text            =   "Text5"
-         Top             =   1230
-         Width           =   3405
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   63
-         Left            =   2730
-         Locked          =   -1  'True
-         TabIndex        =   232
-         Text            =   "Text5"
-         Top             =   1635
-         Width           =   3405
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   63
-         Left            =   1845
-         MaxLength       =   6
-         TabIndex        =   220
-         Tag             =   "Código|N|N|0|999999|straba|codtraba|000000|S|"
-         Top             =   1635
-         Width           =   840
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   62
-         Left            =   1845
-         MaxLength       =   6
-         TabIndex        =   219
-         Tag             =   "Código|N|N|0|999999|straba|codtraba|000000|S|"
-         Top             =   1215
-         Width           =   840
-      End
-      Begin VB.CommandButton CmdAcepPaseBanco 
-         Caption         =   "&Aceptar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   2
-         Left            =   3945
-         TabIndex        =   226
-         Top             =   5370
-         Width           =   1065
-      End
-      Begin VB.CommandButton CmdCancel 
-         Caption         =   "&Cancelar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   11
-         Left            =   5070
-         TabIndex        =   227
-         Top             =   5370
-         Width           =   1065
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   60
-         Left            =   1845
-         MaxLength       =   10
-         TabIndex        =   222
-         Top             =   2910
-         Width           =   1350
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   59
-         Left            =   1845
-         MaxLength       =   10
-         TabIndex        =   221
-         Top             =   2310
-         Width           =   1350
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   58
-         Left            =   1830
-         MaxLength       =   6
-         TabIndex        =   223
-         Tag             =   "Código|N|N|0|9999|rcapataz|codcapat|0000|S|"
-         Top             =   3390
-         Width           =   840
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   58
-         Left            =   2715
-         Locked          =   -1  'True
-         TabIndex        =   233
-         Text            =   "Text5"
-         Top             =   3390
-         Width           =   3405
-      End
-      Begin MSComctlLib.ProgressBar Pb1 
-         Height          =   240
-         Left            =   480
-         TabIndex        =   213
-         Top             =   5070
-         Visible         =   0   'False
-         Width           =   5670
-         _ExtentX        =   10001
-         _ExtentY        =   423
-         _Version        =   393216
-         Appearance      =   1
-      End
-      Begin MSComDlg.CommonDialog CommonDialog1 
-         Left            =   120
-         Top             =   5190
-         _ExtentX        =   847
-         _ExtentY        =   847
-         _Version        =   393216
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   26
-         Left            =   1530
-         MouseIcon       =   "frmListNomina.frx":39BC
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar trabajador"
-         Top             =   1635
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   25
-         Left            =   1530
-         MouseIcon       =   "frmListNomina.frx":3B0E
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar trabajador"
-         Top             =   1215
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Trabajador"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   240
-         Index           =   81
-         Left            =   510
-         TabIndex        =   230
-         Top             =   930
-         Width           =   1065
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Hasta"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   80
-         Left            =   870
-         TabIndex        =   229
-         Top             =   1650
-         Width           =   630
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Desde"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   79
-         Left            =   870
-         TabIndex        =   228
-         Top             =   1230
-         Width           =   675
-      End
-      Begin VB.Label Label16 
-         Caption         =   "Pase a Banco"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   510
-         TabIndex        =   218
-         Top             =   405
-         Width           =   5835
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
-         Index           =   22
-         Left            =   1515
-         Picture         =   "frmListNomina.frx":3C60
-         ToolTipText     =   "Buscar fecha"
-         Top             =   2910
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Fecha Pago"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   240
-         Index           =   78
-         Left            =   540
-         TabIndex        =   217
-         Top             =   2610
-         Width           =   1155
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Fecha Recibo"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   240
-         Index           =   77
-         Left            =   540
-         TabIndex        =   216
-         Top             =   2040
-         Width           =   1320
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
-         Index           =   21
-         Left            =   1530
-         Picture         =   "frmListNomina.frx":3CEB
-         ToolTipText     =   "Buscar fecha"
-         Top             =   2310
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Banco "
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   240
-         Index           =   76
-         Left            =   540
-         TabIndex        =   215
-         Top             =   3360
-         Width           =   675
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   24
-         Left            =   1515
-         MouseIcon       =   "frmListNomina.frx":3D76
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar banco"
-         Top             =   3390
-         Width           =   240
-      End
-      Begin VB.Label Label14 
-         Caption         =   "Concepto Transferencia "
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   255
-         Left            =   540
-         TabIndex        =   214
-         Top             =   3810
-         Width           =   1875
-      End
-   End
 End
 Attribute VB_Name = "frmListNomina"
 Attribute VB_GlobalNameSpace = False
@@ -6464,7 +6464,7 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Public OpcionListado As Byte
+Public Opcionlistado As Byte
     '==== Listados BASICOS ====
     '=============================
     ' 15 .- Listado de Horas trababajadas
@@ -6549,14 +6549,18 @@ Attribute frmVar.VB_VarHelpID = -1
 Private WithEvents frmCap As frmManCapataz 'capataces
 Attribute frmCap.VB_VarHelpID = -1
 
+
 Private WithEvents frmBan As frmBasico2 'Banco propio
 Attribute frmBan.VB_VarHelpID = -1
 
+
+Private frmLis As frmListNominaAux
+
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private CadParam As String 'Cadena con los parametros para Crystal Report
+Private cadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
-Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadselect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
 Private cadNombreRPT As String 'Nombre del informe
 
@@ -6565,7 +6569,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -6603,7 +6607,7 @@ Dim Sql As String
         cHasta = Trim(txtCodigo(32).Text)
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & Tabla & ".codcapat}"
+            Codigo = "{" & tabla & ".codcapat}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
@@ -6613,16 +6617,16 @@ Dim Sql As String
         cHasta = Trim(txtCodigo(30).Text)
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & Tabla & ".fechahora}"
+            Codigo = "{" & tabla & ".fechahora}"
             TipCod = "F"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
 
-        If Not AnyadirAFormula(cadSelect, "{" & Tabla & ".fecharec} is null ") Then Exit Sub
+        If Not AnyadirAFormula(cadselect, "{" & tabla & ".fecharec} is null ") Then Exit Sub
 
 
-        cTabla = Tabla
-        cWhere = cadSelect
+        cTabla = tabla
+        cWhere = cadselect
         
         cTabla = QuitarCaracterACadena(cTabla, "{")
         cTabla = QuitarCaracterACadena(cTabla, "}")
@@ -6638,9 +6642,9 @@ Dim Sql As String
         NumF = TotalRegistros(Sql)
         If NumF <> 0 Then
             If MsgBox("Va a eliminar " & NumF & " registros. ¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Sub
-            If ProcesoBorradoMasivo(cTabla, cadSelect) Then
+            If ProcesoBorradoMasivo(cTabla, cadselect) Then
                 MsgBox "Proceso realizado correctamente.", vbExclamation
-                cmdCancel_Click (0)
+                CmdCancel_Click (0)
                 Exit Sub
             Else
                 MsgBox "El Proceso no se ha realizado correctamente. Llame a Ariadna.", vbExclamation
@@ -6670,7 +6674,7 @@ Dim Sql As String
         cHasta = Trim(txtCodigo(55).Text)
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & Tabla & ".codtraba}"
+            Codigo = "{" & tabla & ".codtraba}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
@@ -6680,16 +6684,16 @@ Dim Sql As String
         cHasta = Trim(txtCodigo(57).Text)
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & Tabla & ".fechahora}"
+            Codigo = "{" & tabla & ".fechahora}"
             TipCod = "F"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
 
-        If Not AnyadirAFormula(cadSelect, "{" & Tabla & ".idconta} = 1") Then Exit Sub
+        If Not AnyadirAFormula(cadselect, "{" & tabla & ".idconta} = 1") Then Exit Sub
 
 
-        cTabla = Tabla
-        cWhere = cadSelect
+        cTabla = tabla
+        cWhere = cadselect
         
         cTabla = QuitarCaracterACadena(cTabla, "{")
         cTabla = QuitarCaracterACadena(cTabla, "}")
@@ -6702,9 +6706,9 @@ Dim Sql As String
         End If
     
         If RegistrosAListar(Sql) <> 0 Then
-            If ProcesoBorradoMasivo(cTabla, cadSelect) Then
+            If ProcesoBorradoMasivo(cTabla, cadselect) Then
                 MsgBox "Proceso realizado correctamente.", vbExclamation
-                cmdCancel_Click (0)
+                CmdCancel_Click (0)
                 Exit Sub
             Else
                 MsgBox "El Proceso no se ha realizado correctamente. Llame a Ariadna.", vbExclamation
@@ -6737,19 +6741,19 @@ Dim CodigoETT As String
         Exit Sub
     End If
     
-    Select Case OpcionListado
+    Select Case Opcionlistado
         Case 20 'horasett: calculo de destajo alicatado ett
             If CalculoDestajoETT(True) Then
                 MsgBox "Proceso realizado correctamente.", vbExclamation
                
-                cmdCancel_Click (2)
+                CmdCancel_Click (2)
             End If
             
         Case 30 ' horas: calculo de destajo alicatado
             If CalculoDestajo(True) Then
                 MsgBox "Proceso realizado correctamente.", vbExclamation
                
-                cmdCancel_Click (2)
+                CmdCancel_Click (2)
             End If
             
         Case 21 'horasett: calculo de penalizacion ett
@@ -6767,7 +6771,7 @@ Dim CodigoETT As String
                 If CalculoPenalizacionETT(True) Then
                      MsgBox "Proceso realizado correctamente.", vbExclamation
                     
-                     cmdCancel_Click (2)
+                     CmdCancel_Click (2)
                 End If
             End If
         
@@ -6781,7 +6785,7 @@ Dim CodigoETT As String
                 If CalculoPenalizacion(True) Then
                      MsgBox "Proceso realizado correctamente.", vbExclamation
                     
-                     cmdCancel_Click (2)
+                     CmdCancel_Click (2)
                 End If
             End If
         
@@ -6800,7 +6804,7 @@ Dim CodigoETT As String
                 If CalculoBonificacionETT(True) Then
                      MsgBox "Proceso realizado correctamente.", vbExclamation
                     
-                     cmdCancel_Click (2)
+                     CmdCancel_Click (2)
                 End If
             End If
         
@@ -6814,7 +6818,7 @@ Dim CodigoETT As String
                 If CalculoBonificacion(True) Then
                      MsgBox "Proceso realizado correctamente.", vbExclamation
                     
-                     cmdCancel_Click (2)
+                     CmdCancel_Click (2)
                 End If
             End If
         
@@ -6874,7 +6878,7 @@ Dim CodigoETT As String
        
         vCadBusqueda = "horas.fechahora = " & DBSet(txtCodigo(82).Text, "F") & " and horas.codcapat = " & DBSet(txtCodigo(80).Text, "N") & " and horas.codvarie = 0"
        
-        cmdCancel_Click (2)
+        CmdCancel_Click (2)
     End If
 
 End Sub
@@ -6892,7 +6896,7 @@ Dim Sql As String
        InicializarVbles
        
         'Añadir el parametro de Empresa
-        CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+        cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
         numParam = numParam + 1
 
         'D/H Capataz
@@ -6900,7 +6904,7 @@ Dim Sql As String
         cHasta = Trim(txtCodigo(43).Text)
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & Tabla & ".codcapat}"
+            Codigo = "{" & tabla & ".codcapat}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
@@ -6910,7 +6914,7 @@ Dim Sql As String
         cHasta = Trim(txtCodigo(53).Text)
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & Tabla & ".fechahora}"
+            Codigo = "{" & tabla & ".fechahora}"
             TipCod = "F"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
@@ -6918,12 +6922,12 @@ Dim Sql As String
 '?????        If Not AnyadirAFormula(cadSelect, "{" & Tabla & ".fecharec} is null ") Then Exit Sub
 
 
-        CadParam = CadParam & "pResumen=" & Check4.Value & "|"
+        cadParam = cadParam & "pResumen=" & Check4.Value & "|"
         numParam = numParam + 1
 
 
-        cTabla = Tabla
-        cWhere = cadSelect
+        cTabla = tabla
+        cWhere = cadselect
         
         cTabla = QuitarCaracterACadena(cTabla, "{")
         cTabla = QuitarCaracterACadena(cTabla, "}")
@@ -6935,9 +6939,9 @@ Dim Sql As String
             Sql = Sql & " WHERE " & cWhere
         End If
     
-        If OpcionListado = 29 Then
+        If Opcionlistado = 29 Then
             ' entradas por capataz
-            If ProcesoEntradasCapataz(cTabla, cadSelect) Then
+            If ProcesoEntradasCapataz(cTabla, cadselect) Then
                 If HayRegParaInforme("tmpinformes", "{tmpinformes.codusu} = " & vUsu.Codigo) Then
                     cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
                     
@@ -6951,7 +6955,7 @@ Dim Sql As String
             End If
         Else
             ' rendimiento por capataz
-            If ProcesoEntradasCapatazRdto(cTabla, cadSelect) Then
+            If ProcesoEntradasCapatazRdto(cTabla, cadselect) Then
                 If HayRegParaInforme("tmpinformes", "{tmpinformes.codusu} = " & vUsu.Codigo) Then
                     cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
                     
@@ -6985,7 +6989,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
        InicializarVbles
        
         'Añadir el parametro de Empresa
-        CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+        cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
         numParam = numParam + 1
 
         'D/H Capataz
@@ -7003,7 +7007,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
         cHasta = Trim(txtCodigo(71).Text)
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & Tabla & ".fechapar}"
+            Codigo = "{" & tabla & ".fechapar}"
             TipCod = "F"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
@@ -7013,13 +7017,13 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
         cHasta = Trim(txtCodigo(75).Text)
         If Not (cDesde = "" And cHasta = "") Then
             'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & Tabla & ".nroparte}"
+            Codigo = "{" & tabla & ".nroparte}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHParte=""") Then Exit Sub
         End If
 
-        cTabla = Tabla & " inner join rcuadrilla on rpartes.codcuadrilla = rcuadrilla.codcuadrilla "
-        cWhere = cadSelect
+        cTabla = tabla & " inner join rcuadrilla on rpartes.codcuadrilla = rcuadrilla.codcuadrilla "
+        cWhere = cadselect
         
         cTabla = QuitarCaracterACadena(cTabla, "{")
         cTabla = QuitarCaracterACadena(cTabla, "}")
@@ -7035,7 +7039,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
         
             If vParamAplic.Cooperativa = 16 Then
                 CargarTemporalNotas cTabla, cWhere
-                CadParam = CadParam & "pUsu=" & vUsu.Codigo & "|"
+                cadParam = cadParam & "pUsu=" & vUsu.Codigo & "|"
                 numParam = numParam + 1
             End If
         
@@ -7043,7 +7047,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
             'Nombre fichero .rpt a Imprimir
             indRPT = 111 ' impresion de partes de trabajo
             
-            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
             
             cadNombreRPT = nomDocu '"rParteTrabajo.rpt"
             cadTitulo = "Impresión de Partes"
@@ -7097,7 +7101,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -7140,7 +7144,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     'Nombre fichero .rpt a Imprimir
     indRPT = 60 ' informe de asesoria
     
-    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
     
     cadNombreRPT = nomDocu '"rInfAsesoriaNomiMes.rpt"
     cadTitulo = "Informe para Asesoria Mensual"
@@ -7152,31 +7156,31 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
         cadTitulo = "Informe de Generacion de Nómina"
 '        If Me.Check2.Value = 1 Then cadNombreRPT = Replace(cadNombreRPT, ".rpt", "1.rpt") '"rInfAsesoriaNomiMes1.rpt"
         
-        If CargarTemporalListNominaCoopic(cadSelect, Fdesde, Fhasta, txtCodigo(78).Text) Then
-            Tabla = "{tmpinformes}"
-            cadSelect = "{tmpinformes.codusu} = " & vUsu.Codigo
+        If CargarTemporalListNominaCoopic(cadselect, Fdesde, Fhasta, txtCodigo(78).Text) Then
+            tabla = "{tmpinformes}"
+            cadselect = "{tmpinformes.codusu} = " & vUsu.Codigo
             cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
             
-            CadParam = CadParam & "pDias=" & Day(Fhasta) & "|"
+            cadParam = cadParam & "pDias=" & Day(Fhasta) & "|"
             numParam = numParam + 1
         Else
             Exit Sub
         End If
 
     Else
-        If CargarTemporalListAsesoria(cadSelect, Fdesde, Fhasta) Then
-            Tabla = "{tmpinformes}"
-            cadSelect = "{tmpinformes.codusu} = " & vUsu.Codigo
+        If CargarTemporalListAsesoria(cadselect, Fdesde, Fhasta) Then
+            tabla = "{tmpinformes}"
+            cadselect = "{tmpinformes.codusu} = " & vUsu.Codigo
             cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
             
-            CadParam = CadParam & "pDias=" & Day(Fhasta) & "|"
+            cadParam = cadParam & "pDias=" & Day(Fhasta) & "|"
             numParam = numParam + 1
         Else
             Exit Sub
         End If
     End If
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(Tabla, cadSelect) Then
+    If HayRegParaInforme(tabla, cadselect) Then
         If (vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19) And Me.Check2.Value = 1 Then
             
             If vParamAplic.Cooperativa = 4 Then  ' Alzira
@@ -7200,7 +7204,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
                     
                     If GeneraNominaA3(Fec1) Then
                         '[Monica]04/05/2018: generamos 2 ficheros
-                        If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
+                        If vParamAplic.Cooperativa = 0 Then
                             ' cargamos las hojas excel
                             
                             If Dir(App.Path & "\nomina.z") <> "" Then Kill App.Path & "\nomina.z"
@@ -7222,8 +7226,19 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
                             DoEvents
                             Me.Refresh
                         Else
-                            If CopiarFicheroA3("NominaA3.txt", CStr(Fec1)) Then
-                                MsgBox "Proceso realizado correctamente", vbExclamation
+                            '[Monica]29/04/2019: hacemos un fichero xml para frutas inma
+                            If vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then
+                                
+                                Set frmLis = New frmListNominaAux
+                                frmLis.Opcionlistado = 36
+                                frmLis.Show vbModal
+                                Set frmLis = Nothing
+                                
+                                CmdCancel_Click (0)
+                            Else
+                                If CopiarFicheroA3("NominaA3.txt", CStr(Fec1)) Then
+                                    MsgBox "Proceso realizado correctamente", vbExclamation
+                                End If
                             End If
                         End If
                     End If
@@ -7255,7 +7270,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -7296,7 +7311,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     
     
     
-    Select Case OpcionListado
+    Select Case Opcionlistado
         Case 28 ' informe de comprobacion
             ConSubInforme = False
         
@@ -7304,12 +7319,12 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
         
             indRPT = 84 ' personalizamos el informe de comprobacion
             
-            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
     
             cadTitulo = "Informe de Comprobación Nóminas"
             
             If vParamAplic.Cooperativa = 16 Then
-                CadParam = CadParam & "pResumen=" & Check7.Value & "|"
+                cadParam = cadParam & "pResumen=" & Check7.Value & "|"
                 numParam = numParam + 1
             End If
             
@@ -7326,9 +7341,9 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
             cadNombreRPT = "rInfAsesoriaNomi.rpt"
             cadTitulo = "Informe para Asesoria"
         
-            If CargarTemporalPicassent(cadSelect) Then
-                Tabla = "{tmpinformes}"
-                cadSelect = "{tmpinformes.codusu} = " & vUsu.Codigo
+            If CargarTemporalPicassent(cadselect) Then
+                tabla = "{tmpinformes}"
+                cadselect = "{tmpinformes.codusu} = " & vUsu.Codigo
                 cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
             Else
                 Exit Sub
@@ -7336,20 +7351,20 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     End Select
 
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(Tabla, cadSelect) Then
+    If HayRegParaInforme(tabla, cadselect) Then
         LlamarImprimir
     End If
 
 End Sub
 
-Private Function CargarTemporalPicassent(cadWHERE As String) As Boolean
+Private Function CargarTemporalPicassent(cadWhere As String) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 Dim HayReg As Integer
-Dim B As Boolean
+Dim b As Boolean
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Mens As String
@@ -7387,13 +7402,13 @@ On Error GoTo eProcesarCambiosPicassent
     
     conn.Execute "delete from tmpinformes where codusu = " & vUsu.Codigo
     
-    If cadWHERE <> "" Then
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "{")
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "}")
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
+    If cadWhere <> "" Then
+        cadWhere = QuitarCaracterACadena(cadWhere, "{")
+        cadWhere = QuitarCaracterACadena(cadWhere, "}")
+        cadWhere = QuitarCaracterACadena(cadWhere, "_1")
     End If
         
-    Sql = "select count(distinct horas.codtraba) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
+    Sql = "select count(distinct horas.codtraba) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWhere
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -7403,7 +7418,7 @@ On Error GoTo eProcesarCambiosPicassent
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql
     
-    Sql = "select horas.codtraba,  sum(horasdia), sum(compleme), sum(penaliza), sum(importe) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
+    Sql = "select horas.codtraba,  sum(horasdia), sum(compleme), sum(penaliza), sum(importe) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWhere
     Sql = Sql & " group by horas.codtraba "
     Sql = Sql & " order by 1 "
         
@@ -7479,7 +7494,7 @@ Dim Sql As String
     
     InicializarVbles
     'Añadir el parametro de Empresa
-    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '[Monica]25/05/2018: Añado Catadau
@@ -7498,29 +7513,29 @@ Dim Sql As String
         End If
     
         'La forma de pago tiene que ser de tipo Transferencia
-        AnyadirAFormula cadSelect, "forpago.tipoforp = 1"
+        AnyadirAFormula cadselect, "forpago.tipoforp = 1"
         
-        AnyadirAFormula cadSelect, "horasanticipos.fechapago is null"
+        AnyadirAFormula cadselect, "horasanticipos.fechapago is null"
      
      
-        Tabla = "(horasanticipos INNER JOIN straba ON horasanticipos.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
+        tabla = "(horasanticipos INNER JOIN straba ON horasanticipos.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
                    
-        cTabla = Tabla
+        cTabla = tabla
         
         cTabla = QuitarCaracterACadena(cTabla, "{")
         cTabla = QuitarCaracterACadena(cTabla, "}")
         Sql = "Select count(*) FROM " & QuitarCaracterACadena(cTabla, "_1")
-        If cadSelect <> "" Then
-            cadSelect = QuitarCaracterACadena(cadSelect, "{")
-            cadSelect = QuitarCaracterACadena(cadSelect, "}")
-            cadSelect = QuitarCaracterACadena(cadSelect, "_1")
-            Sql = Sql & " WHERE " & cadSelect
+        If cadselect <> "" Then
+            cadselect = QuitarCaracterACadena(cadselect, "{")
+            cadselect = QuitarCaracterACadena(cadselect, "}")
+            cadselect = QuitarCaracterACadena(cadselect, "_1")
+            Sql = Sql & " WHERE " & cadselect
         End If
         
         If RegistrosAListar(Sql) = 0 Then
             MsgBox "No hay datos para mostrar en el Informe.", vbInformation
         Else
-            ProcesoPaseABancoAnticipos (cadSelect)
+            ProcesoPaseABancoAnticipos (cadselect)
         End If
     
     
@@ -7539,28 +7554,28 @@ Dim Sql As String
         End If
     
         'La forma de pago tiene que ser de tipo Transferencia
-        AnyadirAFormula cadSelect, "forpago.tipoforp = 1"
+        AnyadirAFormula cadselect, "forpago.tipoforp = 1"
         
-        AnyadirAFormula cadSelect, "rrecasesoria.idconta = 0"
+        AnyadirAFormula cadselect, "rrecasesoria.idconta = 0"
      
-        Tabla = "(rrecasesoria INNER JOIN straba ON rrecasesoria.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
+        tabla = "(rrecasesoria INNER JOIN straba ON rrecasesoria.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
                    
-        cTabla = Tabla
+        cTabla = tabla
         
         cTabla = QuitarCaracterACadena(cTabla, "{")
         cTabla = QuitarCaracterACadena(cTabla, "}")
         Sql = "Select count(*) FROM " & QuitarCaracterACadena(cTabla, "_1")
-        If cadSelect <> "" Then
-            cadSelect = QuitarCaracterACadena(cadSelect, "{")
-            cadSelect = QuitarCaracterACadena(cadSelect, "}")
-            cadSelect = QuitarCaracterACadena(cadSelect, "_1")
-            Sql = Sql & " WHERE " & cadSelect
+        If cadselect <> "" Then
+            cadselect = QuitarCaracterACadena(cadselect, "{")
+            cadselect = QuitarCaracterACadena(cadselect, "}")
+            cadselect = QuitarCaracterACadena(cadselect, "_1")
+            Sql = Sql & " WHERE " & cadselect
         End If
         
         If RegistrosAListar(Sql) = 0 Then
             MsgBox "No hay datos para mostrar en el Informe.", vbInformation
         Else
-            ProcesoPaseABanco (cadSelect)
+            ProcesoPaseABanco (cadselect)
         End If
     
     End If
@@ -7580,7 +7595,7 @@ Dim Prevision As Boolean
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     Select Case Index
@@ -7612,28 +7627,28 @@ Dim Prevision As Boolean
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
             End If
     
-            cTabla = Tabla & " INNER JOIN rpartes_trabajador ON rpartes.nroparte = rpartes_trabajador.nroparte "
+            cTabla = tabla & " INNER JOIN rpartes_trabajador ON rpartes.nroparte = rpartes_trabajador.nroparte "
     
-            If HayRegParaInforme(cTabla, cadSelect) Then
+            If HayRegParaInforme(cTabla, cadselect) Then
                 If vParamAplic.Cooperativa = 4 Then ' Alzira
                     '[Monica]23/12/2011: sólo en el caso de que queramos la prevision
                     If Check5.Value = 1 Then
-                        If ProcesoCargaHoras(cTabla, cadSelect, True) Then
+                        If ProcesoCargaHoras(cTabla, cadselect, True) Then
                             ConSubInforme = False
                             cadNombreRPT = "rPrevPagoPartes.rpt"
                             cadTitulo = "Informe de Prevision Pago de Partes"
                             
                             cadFormula = "{tmpinformes.codusu}=" & vUsu.Codigo
-                            cadSelect = cadFormula
+                            cadselect = cadFormula
                             'Comprobar si hay registros a Mostrar antes de abrir el Informe
-                            If HayRegParaInforme("tmpinformes", cadSelect) Then
+                            If HayRegParaInforme("tmpinformes", cadselect) Then
                                 LlamarImprimir
                             End If
                         End If
                     Else
-                        If ProcesoCargaHoras(cTabla, cadSelect, False) Then
+                        If ProcesoCargaHoras(cTabla, cadselect, False) Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
-                            cmdCancel_Click (0)
+                            CmdCancel_Click (0)
                             Exit Sub
                         Else
                             MsgBox "El Proceso no se ha realizado correctamente. Llame a Ariadna.", vbExclamation
@@ -7642,9 +7657,9 @@ Dim Prevision As Boolean
                     End If
                 Else
                     If vParamAplic.Cooperativa = 2 Then  ' Picassent
-                        If ProcesoCargaHorasPicassent(cTabla, cadSelect) Then
+                        If ProcesoCargaHorasPicassent(cTabla, cadselect) Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
-                            cmdCancel_Click (0)
+                            CmdCancel_Click (0)
                             Exit Sub
                         Else
                             MsgBox "El Proceso no se ha realizado correctamente. Llame a Ariadna.", vbExclamation
@@ -7652,9 +7667,9 @@ Dim Prevision As Boolean
                         End If
                     Else
                         If vParamAplic.Cooperativa = 16 Then
-                            If ProcesoCargaHorasCoopic(cTabla, cadSelect) Then
+                            If ProcesoCargaHorasCoopic(cTabla, cadselect) Then
                                 MsgBox "Proceso realizado correctamente.", vbExclamation
-                                cmdCancel_Click (0)
+                                CmdCancel_Click (0)
                                 Exit Sub
                             Else
                                 MsgBox "El Proceso no se ha realizado correctamente. Llame a Ariadna.", vbExclamation
@@ -7665,9 +7680,9 @@ Dim Prevision As Boolean
                             '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
                             '                    Natural no tiene partes
                             If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then ' catadau
-                                If ProcesoCargaHorasCatadau(cTabla, cadSelect) Then
+                                If ProcesoCargaHorasCatadau(cTabla, cadselect) Then
                                     MsgBox "Proceso realizado correctamente.", vbExclamation
-                                    cmdCancel_Click (0)
+                                    CmdCancel_Click (0)
                                     Exit Sub
                                 Else
                                     MsgBox "El Proceso no se ha realizado correctamente. Llame a Ariadna.", vbExclamation
@@ -7703,7 +7718,7 @@ Dim Prevision As Boolean
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
             End If
 
-            CadParam = CadParam & "pHProductivas=" & Me.Check3.Value & "|"
+            cadParam = cadParam & "pHProductivas=" & Me.Check3.Value & "|"
             numParam = numParam + 1
             
             ConSubInforme = False
@@ -7711,7 +7726,7 @@ Dim Prevision As Boolean
             cadTitulo = "Informe de Horas Trabajadas"
             
             'Comprobar si hay registros a Mostrar antes de abrir el Informe
-            If HayRegParaInforme(Tabla, cadSelect) Then
+            If HayRegParaInforme(tabla, cadselect) Then
                 LlamarImprimir
             End If
     
@@ -7742,7 +7757,7 @@ Dim Prevision As Boolean
             
             
             
-            Select Case OpcionListado
+            Select Case Opcionlistado
                 Case 18 ' informe de horas de destajo trabajadas
                     ConSubInforme = False
                 
@@ -7755,13 +7770,13 @@ Dim Prevision As Boolean
                     End If
             
                     'Comprobar si hay registros a Mostrar antes de abrir el Informe
-                    If HayRegParaInforme(Tabla, cadSelect) Then
+                    If HayRegParaInforme(tabla, cadselect) Then
                         LlamarImprimir
                     End If
                 Case 19 ' actualizacion de horas de destajo al  fichero de horas
-                    If ActualizarTabla(Tabla, cadSelect) Then
+                    If ActualizarTabla(tabla, cadselect) Then
                         MsgBox "Proceso realizado correctamente.", vbExclamation
-                        cmdCancel_Click (1)
+                        CmdCancel_Click (1)
                     Else
                         MsgBox "No se ha realizado el proceso. Llame a Ariadna.", vbExclamation
                     End If
@@ -7808,7 +7823,7 @@ Dim CodigoETT As String
     If CalculoTrabajCapatazNew() Then
         MsgBox "Proceso realizado correctamente.", vbExclamation
        
-        cmdCancel_Click (2)
+        CmdCancel_Click (2)
     End If
 
 
@@ -7853,12 +7868,12 @@ Dim CodigoETT As String
     If CalculoAltaRapida() Then
         MsgBox "Proceso realizado correctamente.", vbExclamation
        
-        cmdCancel_Click (2)
+        CmdCancel_Click (2)
     End If
 
 End Sub
 
-Private Sub cmdCancel_Click(Index As Integer)
+Private Sub CmdCancel_Click(Index As Integer)
     Unload Me
 End Sub
 
@@ -7917,7 +7932,7 @@ Private Sub CmdEventuales_Click()
     If CalculoEventuales() Then
         MsgBox "Proceso realizado correctamente.", vbExclamation
        
-        cmdCancel_Click (2)
+        CmdCancel_Click (2)
     End If
 
 End Sub
@@ -7937,15 +7952,15 @@ Dim Sql As String
        InicializarVbles
        
         'Añadir el parametro de Empresa
-        CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+        cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
         numParam = numParam + 1
 
-        CadParam = CadParam & "pFecha=""" & txtCodigo(81).Text & """|"
+        cadParam = cadParam & "pFecha=""" & txtCodigo(81).Text & """|"
         numParam = numParam + 1
 
 
-        cTabla = Tabla
-        cWhere = cadSelect
+        cTabla = tabla
+        cWhere = cadselect
         
         cTabla = QuitarCaracterACadena(cTabla, "{")
         cTabla = QuitarCaracterACadena(cTabla, "}")
@@ -8041,7 +8056,7 @@ Dim cadSelect2 As String
     cadSelect2 = "(1=1)"
     
     'Añadir el parametro de Empresa
-    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -8060,7 +8075,7 @@ Dim cadSelect2 As String
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHTrabajador=""") Then Exit Sub
         
-        cadSelect2 = Replace(cadSelect, "rpartes_trabajador", "horas")
+        cadSelect2 = Replace(cadselect, "rpartes_trabajador", "horas")
     End If
     
     Fdesde = CDate("01/" & Format(Combo1(2).ListIndex + 1, "00") & "/" & txtCodigo(67).Text)
@@ -8089,25 +8104,25 @@ Dim cadSelect2 As String
     'Nombre fichero .rpt a Imprimir
     indRPT = 110 ' informe de dias trabajados
     
-    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
     
     cadNombreRPT = nomDocu '"rInfAsesoriaNomiMes.rpt"
     cadTitulo = "Informe Mensual Días Trabajados"
     If Me.Check2.Value = 1 Then cadNombreRPT = Replace(cadNombreRPT, ".rpt", "1.rpt") '"rInfAsesoriaNomiMes1.rpt"
 
-    If CargarTemporalListDiasTrabajados(cadSelect, Fdesde, Fhasta, cadSelect2) Then
-        Tabla = "{tmpinformes}"
-        cadSelect = "{tmpinformes.codusu} = " & vUsu.Codigo
+    If CargarTemporalListDiasTrabajados(cadselect, Fdesde, Fhasta, cadSelect2) Then
+        tabla = "{tmpinformes}"
+        cadselect = "{tmpinformes.codusu} = " & vUsu.Codigo
         cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
         
-        CadParam = CadParam & "pDias=" & Day(Fhasta) & "|"
+        cadParam = cadParam & "pDias=" & Day(Fhasta) & "|"
         numParam = numParam + 1
     Else
         Exit Sub
     End If
 
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(Tabla, cadSelect) Then
+    If HayRegParaInforme(tabla, cadselect) Then
         If (vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And Me.Check6.Value = 1 Then
             If vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 16 Then ' Alzira o Coopic
                 Shell App.Path & "\nomina.exe /E|" & vUsu.CadenaConexion & "|" & vUsu.Codigo & "|", vbNormalFocus
@@ -8127,7 +8142,7 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        Select Case OpcionListado
+        Select Case Opcionlistado
             Case 15 ' Informe de Horas Trabajadas
                 PonerFoco txtCodigo(18)
                 
@@ -8138,12 +8153,12 @@ Private Sub Form_Activate()
                         ' 19 = actualizacion de horas
                 PonerFoco txtCodigo(2)
                 
-                If OpcionListado = 19 Then Label3.Caption = "Actualización Entradas de Destajo"
+                If Opcionlistado = 19 Then Label3.Caption = "Actualización Entradas de Destajo"
                 
             Case 20, 21, 22, 30, 31, 32 '20,21,22= Horas ETT
                                         '30,31,32 = Horas
                 PonerFoco txtCodigo(9)
-                Select Case OpcionListado
+                Select Case Opcionlistado
                     Case 20, 30
                         Me.FrameDestajo.visible = True
                         Me.FramePenalizacion.visible = False
@@ -8301,24 +8316,24 @@ Dim List As Collection
     '###Descomentar
 '    CommitConexion
     
-    Select Case OpcionListado
+    Select Case Opcionlistado
     
     'LISTADOS DE MANTENIMIENTOS BASICOS
     '---------------------
     Case 15 ' Informe de Horas Trabajadas
         FrameHorasTrabajadasVisible True, H, W
         indFrame = 0
-        Tabla = "horas"
+        tabla = "horas"
         
     Case 16 ' Proceso de Calculo de Horas Productivas
         FrameCalculoHorasProductivasVisible True, H, W
         indFrame = 0
-        Tabla = "horas"
+        tabla = "horas"
         
     Case 17 ' Proceso de Pago de Partes de Campo
         FramePagoPartesCampoVisible True, H, W
         indFrame = 0
-        Tabla = "rpartes"
+        tabla = "rpartes"
     
         '[Monica]23/12/2011: solo Alzira puede sacar la prevision de pago de partes
         Frame1.visible = (vParamAplic.Cooperativa = 4)
@@ -8328,7 +8343,7 @@ Dim List As Collection
     Case 18 ' Informe de Horas Trabajadas destajo
         FrameHorasDestajoVisible True, H, W
         indFrame = 0
-        Tabla = "horasdestajo"
+        tabla = "horasdestajo"
     
         Check1.visible = True
         Check1.Enabled = True
@@ -8336,7 +8351,7 @@ Dim List As Collection
     Case 19 ' Actualizar horas de destajo ( pasa a la tabla de horas )
         FrameHorasDestajoVisible True, H, W
         indFrame = 0
-        Tabla = "horasdestajo"
+        tabla = "horasdestajo"
     
         Check1.visible = False
         Check1.Enabled = False
@@ -8344,65 +8359,65 @@ Dim List As Collection
     Case 20, 30 ' Horas ETT
         FrameHorasETTVisible True, H, W
         indFrame = 0
-        If OpcionListado = 20 Then
-            Tabla = "horasett"
+        If Opcionlistado = 20 Then
+            tabla = "horasett"
         Else
-            Tabla = "horas"
+            tabla = "horas"
         End If
     
     Case 21, 31 ' Penalizacion ett
         FrameHorasETTVisible True, H, W
         indFrame = 0
-        If OpcionListado = 21 Then
-            Tabla = "horasett"
+        If Opcionlistado = 21 Then
+            tabla = "horasett"
         Else
-            Tabla = "horas"
+            tabla = "horas"
         End If
     
     Case 22, 32 ' Bonificacion
         FrameHorasETTVisible True, H, W
         indFrame = 0
-        If OpcionListado = 22 Then
-            Tabla = "horasett"
+        If Opcionlistado = 22 Then
+            tabla = "horasett"
         Else
-            Tabla = "horas"
+            tabla = "horas"
         End If
     
     Case 23, 33 ' Borrado Masivo ETT
         FrameBorradoMasivoETTVisible True, H, W
         indFrame = 0
-        Select Case OpcionListado
+        Select Case Opcionlistado
             Case 23
-                Tabla = "horasett"
+                tabla = "horasett"
             Case 33
-                Tabla = "horas"
+                tabla = "horas"
         End Select
         
     Case 24 ' alta rapida
         FrameAltaRapidaVisible True, H, W
         indFrame = 0
-        Tabla = "horas"
+        tabla = "horas"
         
     Case 25 ' eventuales
         FrameEventualesVisible True, H, W
         indFrame = 0
-        Tabla = "horas"
+        tabla = "horas"
     
     Case 26 ' trabaajdores de un capataz
         FrameTrabajadoresCapatazVisible True, H, W
         indFrame = 0
-        Tabla = "horas"
+        tabla = "horas"
     
     Case 27 ' Borrado Masivo Horas
         Label5.Caption = "Borrado Masivo Horas"
         FrameBorradoMasivoETTVisible True, H, W
         indFrame = 0
-        Tabla = "horas"
+        tabla = "horas"
         
     Case 28 ' Informe de Comprobacion
         FrameInfComprobacionVisible True, H, W
         indFrame = 0
-        Tabla = "horas"
+        tabla = "horas"
     
         '[Monica]07/06/2018: Catadau tb quiere un resumen por trabajador
         Check7.visible = (vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19)
@@ -8411,25 +8426,25 @@ Dim List As Collection
     Case 29 ' Informe de Entradas Capataz
         FrameEntradasCapatazVisible True, H, W
         indFrame = 0
-        Tabla = "horas"
+        tabla = "horas"
     
     Case 34 ' Informe para Asesoria
         FrameInfComprobacionVisible True, H, W
         indFrame = 0
-        Tabla = "horas"
+        tabla = "horas"
         Label11.Caption = "Informe para Asesoria"
     
     Case 35 ' Borrado masivo Asesoria
         FrameBorradoAsesoriaVisible True, H, W
         indFrame = 0
-        Tabla = "rrecasesoria"
+        tabla = "rrecasesoria"
     
     Case 36 ' pase a banco
         CargaCombo
     
         FramePaseaBancoVisible True, H, W
         indFrame = 0
-        Tabla = "rrecasesoria"
+        tabla = "rrecasesoria"
     
     Case 37 ' Informe de horas mensual para asesoria
     
@@ -8441,7 +8456,7 @@ Dim List As Collection
     
         FrameListMensAsesoriaVisible True, H, W
         indFrame = 0
-        Tabla = "rrecasesoria"
+        tabla = "rrecasesoria"
         
         If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 18 Or vParamAplic.Cooperativa = 19 Then Check2.Caption = "Generar Fichero A3"
     
@@ -8452,30 +8467,30 @@ Dim List As Collection
         Check4.Enabled = False
         
         indFrame = 0
-        Tabla = "horas"
+        tabla = "horas"
 
     Case 39 ' Informe de dias trabajados
         CargaCombo
     
         FrameInfDiasTrabajadosVisible True, H, W
         indFrame = 0
-        Tabla = "rpartes"
+        tabla = "rpartes"
 
     Case 40 ' Impresion de partes de trabajo
     
         FrameImpresionParteVisible True, H, W
         indFrame = 0
-        Tabla = "rpartes"
+        tabla = "rpartes"
 
     Case 41 ' capataz servicios especiales
         FrameCapatazServiciosVisible True, H, W
         indFrame = 0
-        Tabla = "rpartes"
+        tabla = "rpartes"
         
     Case 42 ' trabajadores activos
         FrameTrabajadoresActivosVisible True, H, W
         indFrame = 0
-        Tabla = "straba"
+        tabla = "straba"
         
         txtCodigo(81).Text = Format(Now, "dd/mm/yyyy")
         
@@ -8621,7 +8636,7 @@ Private Sub imgFecha_Click(Index As Integer)
     Dim dalt As Long
     Dim menu As Long
     Dim obj As Object
-    Dim Indice As Integer
+    Dim indice As Integer
     
     Set frmC = New frmCal
     
@@ -8643,47 +8658,47 @@ Private Sub imgFecha_Click(Index As Integer)
     
     Select Case Index
         Case 0, 1, 13, 2, 3
-            Indice = Index + 14
+            indice = Index + 14
         Case 4, 5
-            Indice = Index
+            indice = Index
         Case 7
-            Indice = 11
+            indice = 11
         Case 6
-            Indice = 29
+            indice = 29
         Case 8
-            Indice = 30
+            indice = 30
         Case 9
-            Indice = 35
+            indice = 35
         Case 10
-            Indice = 26
+            indice = 26
         Case 12
-            Indice = 37
+            indice = 37
         Case 11
-            Indice = 33
+            indice = 33
         Case 14
-            Indice = 46
+            indice = 46
         Case 15
-            Indice = 44
+            indice = 44
         Case 16
-            Indice = 48
+            indice = 48
         Case 17, 18
-            Indice = Index + 35
+            indice = Index + 35
         Case 19, 20
-            Indice = Index + 37
+            indice = Index + 37
         Case 21, 22
-            Indice = Index + 38
+            indice = Index + 38
         Case 25
-            Indice = 78
+            indice = 78
         Case 26
-            Indice = 82
+            indice = 82
         Case 28
-            Indice = 81
+            indice = 81
     End Select
     
-    imgFecha(0).Tag = Indice '<===
+    imgFecha(0).Tag = indice '<===
     
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
+    If txtCodigo(indice).Text <> "" Then frmC.NovaData = txtCodigo(indice).Text
     ' ********************************************
 
     frmC.Show vbModal
@@ -8804,19 +8819,19 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (Indice)
+    imgBuscar_Click (indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    imgFecha_Click (Indice)
+    imgFecha_Click (indice)
 End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
     txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
@@ -8834,7 +8849,7 @@ Dim cad As String, cadTipo As String 'tipo cliente
             If txtCodigo(Index).Text <> "" Then
                 PonerFormatoFecha txtCodigo(Index)
                 If Index = 11 Then
-                    Select Case OpcionListado
+                    Select Case Opcionlistado
                         Case 20
                             CalculoDestajoETT False
                         Case 21
@@ -8860,7 +8875,7 @@ Dim cad As String, cadTipo As String 'tipo cliente
             PonerFormatoEntero txtCodigo(Index)
             txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
             If Index = 9 And txtCodigo(Index).Text <> "" Then
-                Select Case OpcionListado
+                Select Case Opcionlistado
                     Case 20
                         CalculoDestajoETT False
                     Case 21
@@ -8880,7 +8895,7 @@ Dim cad As String, cadTipo As String 'tipo cliente
         Case 12 'CAPATAZ
             txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rcapataz", "nomcapat", "codcapat", "N")
             If txtCodigo(Index).Text <> "" Then
-                Select Case OpcionListado
+                Select Case Opcionlistado
                     Case 20
                         CalculoDestajoETT False
                     Case 21
@@ -8911,7 +8926,7 @@ Dim cad As String, cadTipo As String 'tipo cliente
             
         Case 21 ' porcentaje de penalizacion
             If PonerFormatoDecimal(txtCodigo(21), 4) Then
-                If OpcionListado = 21 Then
+                If Opcionlistado = 21 Then
                     CalculoPenalizacionETT False
                 Else
                     CalculoPenalizacion False
@@ -9191,8 +9206,8 @@ End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
-    cadSelect = ""
-    CadParam = ""
+    cadselect = ""
+    cadParam = ""
     numParam = 0
 End Sub
 
@@ -9211,16 +9226,16 @@ Dim devuelve2 As String
     If devuelve = "Error" Then Exit Function
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Function
     If TipCod <> "F" Then 'Fecha
-        If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
+        If Not AnyadirAFormula(cadselect, devuelve) Then Exit Function
     Else
         devuelve2 = CadenaDesdeHastaBD(codD, codH, Codigo, TipCod)
         If devuelve2 = "Error" Then Exit Function
-        If Not AnyadirAFormula(cadSelect, devuelve2) Then Exit Function
+        If Not AnyadirAFormula(cadselect, devuelve2) Then Exit Function
     End If
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -9230,36 +9245,36 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .Titulo = cadTitulo
         .NombreRPT = cadNombreRPT
         .EnvioEMail = False
         .ConSubInforme = ConSubInforme
-        .Opcion = OpcionListado
+        .Opcion = Opcionlistado
         .Show vbModal
     End With
 End Sub
 
-Private Sub AbrirFrmManTraba(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmManTraba(indice As Integer)
+    indCodigo = indice
     Set frmTra = New frmManTraba
     frmTra.DatosADevolverBusqueda = "0|2|"
     frmTra.Show vbModal
     Set frmTra = Nothing
 End Sub
 
-Private Sub AbrirFrmManCapataz(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmManCapataz(indice As Integer)
+    indCodigo = indice
     Set frmCap = New frmManCapataz
     frmCap.DatosADevolverBusqueda = "0|1|"
     frmCap.Show vbModal
     Set frmCap = Nothing
 End Sub
 
-Private Sub AbrirFrmManBanco(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmManBanco(indice As Integer)
+    indCodigo = indice
     
     Set frmBan = New frmBasico2
     
@@ -9271,8 +9286,8 @@ Private Sub AbrirFrmManBanco(Indice As Integer)
 End Sub
 
 
-Private Sub AbrirFrmManAlmac(Indice As Integer)
-    indCodigo = Indice + 4
+Private Sub AbrirFrmManAlmac(indice As Integer)
+    indCodigo = indice + 4
     
     Set frmAlm = New frmBasico2
     
@@ -9287,7 +9302,7 @@ End Sub
 
 Private Function CargarTablaTemporal() As Boolean
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo eCargarTablaTemporal
@@ -9340,8 +9355,8 @@ Dim Rs As ADODB.Recordset
     If txtCodigo(14).Text <> "" Then Sql = Sql & " and smoval.fechamov >= " & DBSet(txtCodigo(14).Text, "F")
     If txtCodigo(15).Text <> "" Then Sql = Sql & " and smoval.fechamov <= " & DBSet(txtCodigo(15).Text, "F")
 
-    Sql1 = "insert into tmpenvasesret " & Sql
-    conn.Execute Sql1
+    SQL1 = "insert into tmpenvasesret " & Sql
+    conn.Execute SQL1
     
     CargarTablaTemporal = True
     Exit Function
@@ -9353,7 +9368,7 @@ End Function
 Private Function CalculoHorasProductivas() As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 
     On Error GoTo eCalculoHorasProductivas
 
@@ -9364,12 +9379,12 @@ Dim Sql1 As String
 
 
     If BloqueaRegistro("horas", Sql) Then
-        Sql1 = "update horas set horasproduc = round(horasdia * (1 + (" & DBSet(txtCodigo(25), "N") & "/ 100)),2) "
-        Sql1 = Sql1 & " where fechahora = " & DBSet(txtCodigo(27).Text, "F")
-        Sql1 = Sql1 & " and codalmac = " & DBSet(txtCodigo(24), "N")
-        Sql1 = Sql1 & " and codtraba in (select codtraba from straba where codsecci = 1) "
+        SQL1 = "update horas set horasproduc = round(horasdia * (1 + (" & DBSet(txtCodigo(25), "N") & "/ 100)),2) "
+        SQL1 = SQL1 & " where fechahora = " & DBSet(txtCodigo(27).Text, "F")
+        SQL1 = SQL1 & " and codalmac = " & DBSet(txtCodigo(24), "N")
+        SQL1 = SQL1 & " and codtraba in (select codtraba from straba where codsecci = 1) "
         
-        conn.Execute Sql1
+        conn.Execute SQL1
     
         CalculoHorasProductivas = True
     End If
@@ -9861,13 +9876,13 @@ End Function
 Private Function ActualizarTabla(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Sql2 As String
 Dim cadMen As String
-Dim I As Long
-Dim B As Boolean
+Dim i As Long
+Dim b As Boolean
 Dim vTipoMov As CTiposMov
-Dim numalbar As Long
+Dim NumAlbar As Long
 Dim devuelve As String
 Dim Existe As Boolean
 Dim NumRegis As Long
@@ -9888,7 +9903,7 @@ Dim Rs1 As ADODB.Recordset
         Exit Function
     End If
     
-    B = True
+    b = True
     
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
@@ -9936,10 +9951,10 @@ Dim Rs1 As ADODB.Recordset
     
 eActualizarTabla:
     If Err.Number Then
-        B = False
+        b = False
         MuestraError Err.Number, "Actualizando Horas Destajo", Err.Description & cadMen
     End If
-    If B Then
+    If b Then
         conn.CommitTrans
         ActualizarTabla = True
     Else
@@ -9949,8 +9964,8 @@ eActualizarTabla:
 End Function
 
 
-Private Sub AbrirFrmVariedades(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmVariedades(indice As Integer)
+    indCodigo = indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
     frmVar.CodigoActual = txtCodigo(indCodigo)
@@ -9958,8 +9973,8 @@ Private Sub AbrirFrmVariedades(Indice As Integer)
     Set frmVar = Nothing
 End Sub
 
-Private Sub AbrirFrmCapataces(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmCapataces(indice As Integer)
+    indCodigo = indice
     Set frmCap = New frmManCapataz
     frmCap.DatosADevolverBusqueda = "0|1|"
     frmCap.CodigoActual = txtCodigo(indCodigo)
@@ -9972,7 +9987,7 @@ End Sub
 Private Function CalculoDestajoETT(actualiza As Boolean) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Kilos As Long
 Dim CodigoETT As Long
 Dim Categoria As Long
@@ -10032,29 +10047,29 @@ Dim Importe As Currency
         Sql = Sql & " and codigoett = " & DBSet(CodigoETT, "N")
         
         If TotalRegistros(Sql) = 0 Then
-            Sql1 = "insert into horasett (fechahora,codvarie,codigoett,codcapat,complemento,codcateg,importe,penaliza,"
-            Sql1 = Sql1 & "complcapataz , kilosalicatados, kilostiron, fecharec, intconta, pasaridoc) values ("
-            Sql1 = Sql1 & DBSet(txtCodigo(11).Text, "F") & ","
-            Sql1 = Sql1 & DBSet(txtCodigo(9).Text, "N") & ","
-            Sql1 = Sql1 & DBSet(CodigoETT, "N") & ","
-            Sql1 = Sql1 & DBSet(txtCodigo(12).Text, "N") & ","
-            Sql1 = Sql1 & "0,"
-            Sql1 = Sql1 & DBSet(Categoria, "N") & ","
-            Sql1 = Sql1 & DBSet(Importe, "N") & ","
-            Sql1 = Sql1 & "0,0,"
-            Sql1 = Sql1 & DBSet(Kilos, "N") & ","
-            Sql1 = Sql1 & "0,null,0,0) "
+            SQL1 = "insert into horasett (fechahora,codvarie,codigoett,codcapat,complemento,codcateg,importe,penaliza,"
+            SQL1 = SQL1 & "complcapataz , kilosalicatados, kilostiron, fecharec, intconta, pasaridoc) values ("
+            SQL1 = SQL1 & DBSet(txtCodigo(11).Text, "F") & ","
+            SQL1 = SQL1 & DBSet(txtCodigo(9).Text, "N") & ","
+            SQL1 = SQL1 & DBSet(CodigoETT, "N") & ","
+            SQL1 = SQL1 & DBSet(txtCodigo(12).Text, "N") & ","
+            SQL1 = SQL1 & "0,"
+            SQL1 = SQL1 & DBSet(Categoria, "N") & ","
+            SQL1 = SQL1 & DBSet(Importe, "N") & ","
+            SQL1 = SQL1 & "0,0,"
+            SQL1 = SQL1 & DBSet(Kilos, "N") & ","
+            SQL1 = SQL1 & "0,null,0,0) "
             
-            conn.Execute Sql1
+            conn.Execute SQL1
         Else
-            Sql1 = "update horasett set importe = " & DBSet(Importe, "N")
-            Sql1 = Sql1 & ", kilosalicatados = " & DBSet(Kilos, "N")
-            Sql1 = Sql1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
-            Sql1 = Sql1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
-            Sql1 = Sql1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
-            Sql1 = Sql1 & " and codigoett = " & DBSet(CodigoETT, "N")
+            SQL1 = "update horasett set importe = " & DBSet(Importe, "N")
+            SQL1 = SQL1 & ", kilosalicatados = " & DBSet(Kilos, "N")
+            SQL1 = SQL1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
+            SQL1 = SQL1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
+            SQL1 = SQL1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
+            SQL1 = SQL1 & " and codigoett = " & DBSet(CodigoETT, "N")
             
-            conn.Execute Sql1
+            conn.Execute SQL1
         End If
         
         CalculoDestajoETT = True
@@ -10103,7 +10118,7 @@ End Function
 Private Function CalculoPenalizacionETT(actualiza As Boolean) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Kilos As Long
 Dim CodigoETT As Long
 Dim KilosTiron As Long
@@ -10165,15 +10180,15 @@ Dim Porcentaje As Currency
         Exit Function
     Else
         
-        Sql1 = "update horasett set  penaliza = " & DBSet(Penalizacion, "N")
-        Sql1 = Sql1 & ", kilosalicatados = " & DBSet(Kilos - KilosTiron, "N")
-        Sql1 = Sql1 & ", kilostiron = " & DBSet(KilosTiron, "N")
-        Sql1 = Sql1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
-        Sql1 = Sql1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
-        Sql1 = Sql1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
-        Sql1 = Sql1 & " and codigoett = " & DBSet(CodigoETT, "N")
+        SQL1 = "update horasett set  penaliza = " & DBSet(Penalizacion, "N")
+        SQL1 = SQL1 & ", kilosalicatados = " & DBSet(Kilos - KilosTiron, "N")
+        SQL1 = SQL1 & ", kilostiron = " & DBSet(KilosTiron, "N")
+        SQL1 = SQL1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
+        SQL1 = SQL1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
+        SQL1 = SQL1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
+        SQL1 = SQL1 & " and codigoett = " & DBSet(CodigoETT, "N")
         
-        conn.Execute Sql1
+        conn.Execute SQL1
         
         CalculoPenalizacionETT = True
         Exit Function
@@ -10187,7 +10202,7 @@ End Function
 Private Function CalculoBonificacionETT(actualiza As Boolean) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim CodigoETT As Long
 
     On Error GoTo eCalculoBonificacionETT
@@ -10198,13 +10213,13 @@ Dim CodigoETT As Long
     
     CodigoETT = DevuelveValor(Sql)
 
-    Sql1 = "update horasett set  complemento = " & DBSet(txtCodigo(23).Text, "N")
-    Sql1 = Sql1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
-    Sql1 = Sql1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
-    Sql1 = Sql1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
-    Sql1 = Sql1 & " and codigoett = " & DBSet(CodigoETT, "N")
+    SQL1 = "update horasett set  complemento = " & DBSet(txtCodigo(23).Text, "N")
+    SQL1 = SQL1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
+    SQL1 = SQL1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
+    SQL1 = SQL1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
+    SQL1 = SQL1 & " and codigoett = " & DBSet(CodigoETT, "N")
     
-    conn.Execute Sql1
+    conn.Execute SQL1
         
     CalculoBonificacionETT = True
     Exit Function
@@ -10265,14 +10280,14 @@ End Function
 Private Function CalculoAltaRapida() As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Kilos As Long
 Dim CodigoETT As Long
 Dim Categoria As Long
 
 Dim Precio As Currency
 Dim Importe As Currency
-Dim I As Integer
+Dim i As Integer
 
 Dim Fdesde As Date
 Dim Fhasta As Date
@@ -10303,8 +10318,8 @@ Dim Dias As Long
         Importe = ImporteSinFormato(txtCodigo(40).Text)
     End If
 
-    For I = 0 To Dias
-        Fecha = DateAdd("y", I, Fdesde)
+    For i = 0 To Dias
+        Fecha = DateAdd("y", i, Fdesde)
 
         Sql = "select count(*) from horas where fechahora = " & DBSet(Fecha, "F")
         Sql = Sql & " and codvarie = " & DBSet(txtCodigo(36).Text, "N")
@@ -10312,18 +10327,18 @@ Dim Dias As Long
         Sql = Sql & " and codtraba = " & DBSet(Trabajador, "N")
         
         If TotalRegistros(Sql) = 0 Then
-            Sql1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,importe,fecharec,intconta,pasaridoc,codalmac) values ("
-            Sql1 = Sql1 & DBSet(Fecha, "F") & ","
-            Sql1 = Sql1 & DBSet(txtCodigo(36).Text, "N") & ","
-            Sql1 = Sql1 & DBSet(Trabajador, "N") & ","
-            Sql1 = Sql1 & DBSet(txtCodigo(34).Text, "N") & ","
-            Sql1 = Sql1 & DBSet(Importe, "N") & ","
-            Sql1 = Sql1 & "null,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ") "
+            SQL1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,importe,fecharec,intconta,pasaridoc,codalmac) values ("
+            SQL1 = SQL1 & DBSet(Fecha, "F") & ","
+            SQL1 = SQL1 & DBSet(txtCodigo(36).Text, "N") & ","
+            SQL1 = SQL1 & DBSet(Trabajador, "N") & ","
+            SQL1 = SQL1 & DBSet(txtCodigo(34).Text, "N") & ","
+            SQL1 = SQL1 & DBSet(Importe, "N") & ","
+            SQL1 = SQL1 & "null,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ") "
             
-            conn.Execute Sql1
+            conn.Execute SQL1
         End If
         
-    Next I
+    Next i
     
     CalculoAltaRapida = True
     Exit Function
@@ -10338,7 +10353,7 @@ End Function
 Private Function CalculoEventuales() As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Kilos As Long
 Dim CodigoETT As Long
 Dim Categoria As Long
@@ -10346,7 +10361,7 @@ Dim Categoria As Long
 Dim Precio As Currency
 Dim Importe As Currency
 
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 
 Dim Fdesde As Date
@@ -10378,8 +10393,8 @@ Dim Dias As Long
         '[Monica]29/10/2014: añadimos la condicion de que el trabajador que vamos a introducir no tenga fecha de baja
         If TotalRegistros("select count(*) from straba where codtraba = " & J & " and (fechabaja is null or fechabaja = '')") <> 0 Then
     
-            For I = 0 To Dias
-                Fecha = DateAdd("y", I, Fdesde)
+            For i = 0 To Dias
+                Fecha = DateAdd("y", i, Fdesde)
         
                 Sql = "select count(*) from horas where fechahora = " & DBSet(Fecha, "F")
                 Sql = Sql & " and codvarie = " & DBSet(txtCodigo(28).Text, "N")
@@ -10387,18 +10402,18 @@ Dim Dias As Long
                 Sql = Sql & " and codtraba = " & DBSet(J, "N")
                 
                 If TotalRegistros(Sql) = 0 Then
-                    Sql1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,importe,fecharec,intconta,pasaridoc,codalmac) values ("
-                    Sql1 = Sql1 & DBSet(Fecha, "F") & ","
-                    Sql1 = Sql1 & DBSet(txtCodigo(28).Text, "N") & ","
-                    Sql1 = Sql1 & DBSet(J, "N") & ","
-                    Sql1 = Sql1 & "0,"
-                    Sql1 = Sql1 & DBSet(Importe, "N") & ","
-                    Sql1 = Sql1 & "null,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ") "
+                    SQL1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,importe,fecharec,intconta,pasaridoc,codalmac) values ("
+                    SQL1 = SQL1 & DBSet(Fecha, "F") & ","
+                    SQL1 = SQL1 & DBSet(txtCodigo(28).Text, "N") & ","
+                    SQL1 = SQL1 & DBSet(J, "N") & ","
+                    SQL1 = SQL1 & "0,"
+                    SQL1 = SQL1 & DBSet(Importe, "N") & ","
+                    SQL1 = SQL1 & "null,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ") "
                     
-                    conn.Execute Sql1
+                    conn.Execute SQL1
                 End If
                 
-            Next I
+            Next i
         End If
     Next J
     
@@ -10416,7 +10431,7 @@ End Function
 Private Function CalculoTrabajCapataz() As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Importe As Currency
 
     On Error GoTo eCalculoTrabajCapataz
@@ -10443,23 +10458,23 @@ Dim Importe As Currency
         Sql = Sql & " and codcapat = " & DBSet(txtCodigo(45).Text, "N")
         
         If TotalRegistros(Sql) = 0 Then
-            Sql1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,importe,compleme, fecharec,intconta,pasaridoc,codalmac) values ("
-            Sql1 = Sql1 & DBSet(txtCodigo(46).Text, "F") & ","
-            Sql1 = Sql1 & DBSet(txtCodigo(47).Text, "N") & ","
-            Sql1 = Sql1 & DBSet(Rs!CodTraba, "N") & ","
-            Sql1 = Sql1 & DBSet(txtCodigo(45).Text, "N") & ",null, "
-            Sql1 = Sql1 & DBSet(Importe, "N") & ","
-            Sql1 = Sql1 & "null,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ") "
+            SQL1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,importe,compleme, fecharec,intconta,pasaridoc,codalmac) values ("
+            SQL1 = SQL1 & DBSet(txtCodigo(46).Text, "F") & ","
+            SQL1 = SQL1 & DBSet(txtCodigo(47).Text, "N") & ","
+            SQL1 = SQL1 & DBSet(Rs!CodTraba, "N") & ","
+            SQL1 = SQL1 & DBSet(txtCodigo(45).Text, "N") & ",null, "
+            SQL1 = SQL1 & DBSet(Importe, "N") & ","
+            SQL1 = SQL1 & "null,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ") "
             
-            conn.Execute Sql1
+            conn.Execute SQL1
         Else
-            Sql1 = "update horas set compleme = if(compleme is null,0,compleme) + " & DBSet(Importe, "N")
-            Sql1 = Sql1 & " where fechahora = " & DBSet(txtCodigo(46).Text, "F")
-            Sql1 = Sql1 & " and codvarie = " & DBSet(txtCodigo(47).Text, "N")
-            Sql1 = Sql1 & " and codtraba = " & DBSet(Rs!CodTraba, "N")
-            Sql1 = Sql1 & " and codcapat = " & DBSet(txtCodigo(45).Text, "N")
+            SQL1 = "update horas set compleme = if(compleme is null,0,compleme) + " & DBSet(Importe, "N")
+            SQL1 = SQL1 & " where fechahora = " & DBSet(txtCodigo(46).Text, "F")
+            SQL1 = SQL1 & " and codvarie = " & DBSet(txtCodigo(47).Text, "N")
+            SQL1 = SQL1 & " and codtraba = " & DBSet(Rs!CodTraba, "N")
+            SQL1 = SQL1 & " and codcapat = " & DBSet(txtCodigo(45).Text, "N")
         
-            conn.Execute Sql1
+            conn.Execute SQL1
         End If
         
         Rs.MoveNext
@@ -10482,7 +10497,7 @@ End Function
 Private Function CalculoTrabajCapatazNew() As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Importe As Currency
 
     On Error GoTo eCalculoTrabajCapatazNew
@@ -10513,31 +10528,31 @@ Dim Importe As Currency
             Sql = Sql & " and codcapat = " & DBSet(txtCodigo(45).Text, "N")
             
             If TotalRegistros(Sql) = 0 Then
-                Sql1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,importe,compleme, fecharec,intconta,pasaridoc,codalmac) values ("
-                Sql1 = Sql1 & DBSet(txtCodigo(46).Text, "F") & ","
-                Sql1 = Sql1 & DBSet(txtCodigo(47).Text, "N") & ","
-                Sql1 = Sql1 & DBSet(Rs!CodTraba, "N") & ","
-                Sql1 = Sql1 & DBSet(txtCodigo(45).Text, "N") & ",null, "
-                Sql1 = Sql1 & DBSet(Importe, "N") & ","
-                Sql1 = Sql1 & "null,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ") "
+                SQL1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,importe,compleme, fecharec,intconta,pasaridoc,codalmac) values ("
+                SQL1 = SQL1 & DBSet(txtCodigo(46).Text, "F") & ","
+                SQL1 = SQL1 & DBSet(txtCodigo(47).Text, "N") & ","
+                SQL1 = SQL1 & DBSet(Rs!CodTraba, "N") & ","
+                SQL1 = SQL1 & DBSet(txtCodigo(45).Text, "N") & ",null, "
+                SQL1 = SQL1 & DBSet(Importe, "N") & ","
+                SQL1 = SQL1 & "null,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ") "
                 
-                conn.Execute Sql1
+                conn.Execute SQL1
             Else
-                Sql1 = "update horas set compleme = if(compleme is null,0,compleme) + " & DBSet(Importe, "N")
-                Sql1 = Sql1 & " where fechahora = " & DBSet(txtCodigo(46).Text, "F")
-                Sql1 = Sql1 & " and codvarie = " & DBSet(txtCodigo(47).Text, "N")
-                Sql1 = Sql1 & " and codtraba = " & DBSet(Rs!CodTraba, "N")
-                Sql1 = Sql1 & " and codcapat = " & DBSet(txtCodigo(45).Text, "N")
+                SQL1 = "update horas set compleme = if(compleme is null,0,compleme) + " & DBSet(Importe, "N")
+                SQL1 = SQL1 & " where fechahora = " & DBSet(txtCodigo(46).Text, "F")
+                SQL1 = SQL1 & " and codvarie = " & DBSet(txtCodigo(47).Text, "N")
+                SQL1 = SQL1 & " and codtraba = " & DBSet(Rs!CodTraba, "N")
+                SQL1 = SQL1 & " and codcapat = " & DBSet(txtCodigo(45).Text, "N")
             
-                conn.Execute Sql1
+                conn.Execute SQL1
             
-                Sql1 = "update horas set compleme = if(compleme=0,null,compleme) "
-                Sql1 = Sql1 & " where fechahora = " & DBSet(txtCodigo(46).Text, "F")
-                Sql1 = Sql1 & " and codvarie = " & DBSet(txtCodigo(47).Text, "N")
-                Sql1 = Sql1 & " and codtraba = " & DBSet(Rs!CodTraba, "N")
-                Sql1 = Sql1 & " and codcapat = " & DBSet(txtCodigo(45).Text, "N")
+                SQL1 = "update horas set compleme = if(compleme=0,null,compleme) "
+                SQL1 = SQL1 & " where fechahora = " & DBSet(txtCodigo(46).Text, "F")
+                SQL1 = SQL1 & " and codvarie = " & DBSet(txtCodigo(47).Text, "N")
+                SQL1 = SQL1 & " and codtraba = " & DBSet(Rs!CodTraba, "N")
+                SQL1 = SQL1 & " and codcapat = " & DBSet(txtCodigo(45).Text, "N")
             
-                conn.Execute Sql1
+                conn.Execute SQL1
             
             End If
             
@@ -10572,7 +10587,7 @@ End Function
 Private Function CalculoDestajo(actualiza As Boolean) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Kilos As Long
 Dim CodigoETT As Long
 Dim Categoria As Long
@@ -10645,29 +10660,29 @@ Dim Nregs As Long
                 Sql = Sql & " and codtraba = " & DBSet(Rs!CodTraba, "N")
                 
                 If TotalRegistros(Sql) = 0 Then
-                    Sql1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,compleme,importe,penaliza,"
-                    Sql1 = Sql1 & "kilos, fecharec, intconta, pasaridoc,codalmac) values ("
-                    Sql1 = Sql1 & DBSet(txtCodigo(11).Text, "F") & ","
-                    Sql1 = Sql1 & DBSet(txtCodigo(9).Text, "N") & ","
-                    Sql1 = Sql1 & DBSet(Rs!CodTraba, "N") & ","
-                    Sql1 = Sql1 & DBSet(txtCodigo(12).Text, "N") & ","
-                    Sql1 = Sql1 & "0,"
-                    Sql1 = Sql1 & DBSet(ImporteTrab, "N") & ","
-                    Sql1 = Sql1 & "0,"
-                    Sql1 = Sql1 & DBSet(KilosTrab, "N") & ","
-                    Sql1 = Sql1 & "null,0,0, "
-                    Sql1 = Sql1 & vParamAplic.AlmacenNOMI & ") "
+                    SQL1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,compleme,importe,penaliza,"
+                    SQL1 = SQL1 & "kilos, fecharec, intconta, pasaridoc,codalmac) values ("
+                    SQL1 = SQL1 & DBSet(txtCodigo(11).Text, "F") & ","
+                    SQL1 = SQL1 & DBSet(txtCodigo(9).Text, "N") & ","
+                    SQL1 = SQL1 & DBSet(Rs!CodTraba, "N") & ","
+                    SQL1 = SQL1 & DBSet(txtCodigo(12).Text, "N") & ","
+                    SQL1 = SQL1 & "0,"
+                    SQL1 = SQL1 & DBSet(ImporteTrab, "N") & ","
+                    SQL1 = SQL1 & "0,"
+                    SQL1 = SQL1 & DBSet(KilosTrab, "N") & ","
+                    SQL1 = SQL1 & "null,0,0, "
+                    SQL1 = SQL1 & vParamAplic.AlmacenNOMI & ") "
                     
-                    conn.Execute Sql1
+                    conn.Execute SQL1
                 Else
-                    Sql1 = "update horas set importe = " & DBSet(ImporteTrab, "N")
-                    Sql1 = Sql1 & ", kilos = " & DBSet(KilosTrab, "N")
-                    Sql1 = Sql1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
-                    Sql1 = Sql1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
-                    Sql1 = Sql1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
-                    Sql1 = Sql1 & " and codtraba = " & DBSet(Rs!CodTraba, "N")
+                    SQL1 = "update horas set importe = " & DBSet(ImporteTrab, "N")
+                    SQL1 = SQL1 & ", kilos = " & DBSet(KilosTrab, "N")
+                    SQL1 = SQL1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
+                    SQL1 = SQL1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
+                    SQL1 = SQL1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
+                    SQL1 = SQL1 & " and codtraba = " & DBSet(Rs!CodTraba, "N")
                     
-                    conn.Execute Sql1
+                    conn.Execute SQL1
                 End If
                 
                 Rs.MoveNext
@@ -10688,7 +10703,7 @@ End Function
 Private Function CalculoPenalizacion(actualiza As Boolean) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Kilos As Long
 Dim CodigoETT As Long
 Dim KilosTiron As Long
@@ -10782,15 +10797,15 @@ Dim TrabCapataz As Long
         
         While Not Rs.EOF
         
-            Sql1 = "update horas set  penaliza = " & DBSet(PenalizacionTrab, "N")
-            Sql1 = Sql1 & ", kilos = " & DBSet(KilosTrab, "N")
-            Sql1 = Sql1 & ", kilostiron = " & DBSet(KilosTironTrab, "N")
-            Sql1 = Sql1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
-            Sql1 = Sql1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
-            Sql1 = Sql1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
-            Sql1 = Sql1 & " and codtraba = " & DBSet(Rs!CodTraba, "N")
+            SQL1 = "update horas set  penaliza = " & DBSet(PenalizacionTrab, "N")
+            SQL1 = SQL1 & ", kilos = " & DBSet(KilosTrab, "N")
+            SQL1 = SQL1 & ", kilostiron = " & DBSet(KilosTironTrab, "N")
+            SQL1 = SQL1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
+            SQL1 = SQL1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
+            SQL1 = SQL1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
+            SQL1 = SQL1 & " and codtraba = " & DBSet(Rs!CodTraba, "N")
             
-            conn.Execute Sql1
+            conn.Execute SQL1
         
             Rs.MoveNext
         
@@ -10799,15 +10814,15 @@ Dim TrabCapataz As Long
         If PenalizacionDif <> 0 Or KilosDif <> 0 Or KilosTironDif <> 0 Then
             TrabCapataz = DevuelveValor("select codtraba from rcapataz where codcapat = " & DBSet(txtCodigo(12).Text, "N"))
             
-            Sql1 = "update horas set penaliza = penaliza + " & DBSet(PenalizacionDif, "N")
-            Sql1 = Sql1 & ", kilos = kilos + " & DBSet(KilosDif, "N")
-            Sql1 = Sql1 & ", kilostiron = kilostiron + " & DBSet(KilosTironDif, "N")
-            Sql1 = Sql1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
-            Sql1 = Sql1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
-            Sql1 = Sql1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
-            Sql1 = Sql1 & " and codtraba = " & DBSet(TrabCapataz, "N")
+            SQL1 = "update horas set penaliza = penaliza + " & DBSet(PenalizacionDif, "N")
+            SQL1 = SQL1 & ", kilos = kilos + " & DBSet(KilosDif, "N")
+            SQL1 = SQL1 & ", kilostiron = kilostiron + " & DBSet(KilosTironDif, "N")
+            SQL1 = SQL1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
+            SQL1 = SQL1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
+            SQL1 = SQL1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
+            SQL1 = SQL1 & " and codtraba = " & DBSet(TrabCapataz, "N")
             
-            conn.Execute Sql1
+            conn.Execute SQL1
         End If
         
         Set Rs = Nothing
@@ -10824,7 +10839,7 @@ End Function
 Private Function CalculoBonificacion(actualiza As Boolean) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Bonif As Currency
 Dim NumTrab As Long
 
@@ -10852,13 +10867,13 @@ Dim TrabCapataz As Long
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        Sql1 = "update horas set  compleme = " & DBSet(BonifTrab, "N")
-        Sql1 = Sql1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
-        Sql1 = Sql1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
-        Sql1 = Sql1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
-        Sql1 = Sql1 & " and codtraba = " & DBSet(Rs!CodTraba, "N")
+        SQL1 = "update horas set  compleme = " & DBSet(BonifTrab, "N")
+        SQL1 = SQL1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
+        SQL1 = SQL1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
+        SQL1 = SQL1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
+        SQL1 = SQL1 & " and codtraba = " & DBSet(Rs!CodTraba, "N")
         
-        conn.Execute Sql1
+        conn.Execute SQL1
         
         Rs.MoveNext
     Wend
@@ -10866,13 +10881,13 @@ Dim TrabCapataz As Long
     If BonifDif <> 0 Then
         TrabCapataz = DevuelveValor("select codtraba from rcapataz where codcapat = " & DBSet(txtCodigo(12).Text, "N"))
     
-        Sql1 = "update horas set  complemen = " & DBSet(BonifDif, "N")
-        Sql1 = Sql1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
-        Sql1 = Sql1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
-        Sql1 = Sql1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
-        Sql1 = Sql1 & " and codtraba = " & DBSet(TrabCapataz, "N")
+        SQL1 = "update horas set  complemen = " & DBSet(BonifDif, "N")
+        SQL1 = SQL1 & " where fechahora = " & DBSet(txtCodigo(11).Text, "F")
+        SQL1 = SQL1 & " and codvarie = " & DBSet(txtCodigo(9).Text, "N")
+        SQL1 = SQL1 & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
+        SQL1 = SQL1 & " and codtraba = " & DBSet(TrabCapataz, "N")
         
-        conn.Execute Sql1
+        conn.Execute SQL1
     
     End If
         
@@ -11231,14 +11246,14 @@ eProcesoEntradasCapatazRdto:
 End Function
 
 
-Private Sub ProcesoPaseABanco(cadWHERE As String)
+Private Sub ProcesoPaseABanco(cadWhere As String)
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 Dim HayReg As Integer
-Dim B As Boolean
+Dim b As Boolean
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Mens As String
@@ -11267,13 +11282,13 @@ On Error GoTo eProcesoPaseABanco
     conn.Execute Sql
     
     
-    If cadWHERE <> "" Then
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "{")
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "}")
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
+    If cadWhere <> "" Then
+        cadWhere = QuitarCaracterACadena(cadWhere, "{")
+        cadWhere = QuitarCaracterACadena(cadWhere, "}")
+        cadWhere = QuitarCaracterACadena(cadWhere, "_1")
     End If
         
-    Sql = "select count(distinct rrecasesoria.codtraba) from (rrecasesoria inner join straba on rrecasesoria.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
+    Sql = "select count(distinct rrecasesoria.codtraba) from (rrecasesoria inner join straba on rrecasesoria.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWhere
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -11283,7 +11298,7 @@ On Error GoTo eProcesoPaseABanco
     
     Rs.Close
     
-    Sql = "select rrecasesoria.codtraba, sum(importe) importe from (rrecasesoria inner join straba on rrecasesoria.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
+    Sql = "select rrecasesoria.codtraba, sum(importe) importe from (rrecasesoria inner join straba on rrecasesoria.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWhere
     Sql = Sql & " group by rrecasesoria.codtraba "
     
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -11321,13 +11336,13 @@ On Error GoTo eProcesoPaseABanco
     CodigoOrden34 = ""
     Extra = ""
     If Rs.EOF Then
-        cad = ""
+        Cad = ""
     Else
         If IsNull(Rs!CodBanco) Then
-            cad = ""
+            Cad = ""
         Else
             '[Monica]22/11/2013: iban
-            cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
         Extra = DBLet(Rs!sufijoem, "T") & "|" & vParam.NombreEmpresa & "|"
@@ -11335,7 +11350,7 @@ On Error GoTo eProcesoPaseABanco
     
     Set Rs = Nothing
     
-    CuentaPropia = cad
+    CuentaPropia = Cad
     
     '[Monica]22/11/2013: iban
     Dim vSeccion As CSeccion
@@ -11348,12 +11363,12 @@ On Error GoTo eProcesoPaseABanco
     
     If vEmpresa.AplicarNorma19_34Nueva = 1 Then
         If HayXML Then
-            B = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+            b = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
         Else
-            B = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+            b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
         End If
     Else
-        B = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(0).ListIndex)
+        b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(0).ListIndex)
     End If
     
     vSeccion.CerrarConta
@@ -11361,26 +11376,26 @@ On Error GoTo eProcesoPaseABanco
      
 'antes
 '    b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(0).ListIndex)
-    If B Then
-        B = CopiarFichero
-        If B Then
-            CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
-            CadParam = CadParam & "pFechaRecibo=""" & txtCodigo(59).Text & """|pFechaPago=""" & txtCodigo(60).Text & """|"
+    If b Then
+        b = CopiarFichero
+        If b Then
+            cadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
+            cadParam = cadParam & "pFechaRecibo=""" & txtCodigo(59).Text & """|pFechaPago=""" & txtCodigo(60).Text & """|"
             numParam = 3
             cadFormula = "{tmpinformes.codusu}=" & vUsu.Codigo
             cadNombreRPT = "rListadoPagos.rpt"
             cadTitulo = "Impresion de Pagos"
             ConSubInforme = False
             
-            AntOpcion = OpcionListado
-            OpcionListado = 0
+            AntOpcion = Opcionlistado
+            Opcionlistado = 0
 
             LlamarImprimir
             
-            OpcionListado = AntOpcion
+            Opcionlistado = AntOpcion
             
             If MsgBox("¿Proceso realizado correctamente para actualizar?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                Sql = "update rrecasesoria, straba, forpago set rrecasesoria.idconta = 1 where rrecasesoria.codtraba = straba.codtraba and straba.codforpa = forpago.codforpa and " & cadWHERE
+                Sql = "update rrecasesoria, straba, forpago set rrecasesoria.idconta = 1 where rrecasesoria.codtraba = straba.codtraba and straba.codforpa = forpago.codforpa and " & cadWhere
                 conn.Execute Sql
             End If
         End If
@@ -11389,12 +11404,12 @@ On Error GoTo eProcesoPaseABanco
 eProcesoPaseABanco:
     If Err.Number <> 0 Then
         Mens = Err.Description
-        B = False
+        b = False
     End If
-    If B Then
+    If b Then
         conn.CommitTrans
         MsgBox "Proceso realizado correctamente.", vbExclamation
-        cmdCancel_Click (0)
+        CmdCancel_Click (0)
     Else
         conn.RollbackTrans
         MsgBox "Error " & Mens, vbExclamation
@@ -11479,40 +11494,40 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 Dim Sql As String
 'Dim Datos As String
 
     On Error GoTo EDatosOK
 
     DatosOk = False
-    B = True
+    b = True
     
     If txtCodigo(59).Text = "" Or txtCodigo(60).Text = "" Then
         Sql = "Debe introducir obligatoriamente un valor en los campos de fecha. Reintroduzca. " & vbCrLf & vbCrLf
         MsgBox Sql, vbExclamation
-        B = False
+        b = False
         PonerFoco txtCodigo(59)
     End If
-    If B Then
+    If b Then
         If txtCodigo(58).Text = "" Then
             Sql = "Debe introducir obligatoriamente un valor en el banco. Reintroduzca. " & vbCrLf & vbCrLf
             MsgBox Sql, vbExclamation
-            B = False
+            b = False
             PonerFoco txtCodigo(58)
         End If
     End If
     '[Monica]18/09/2013: debe introducir el concepto
-    If B And vParamAplic.Cooperativa = 9 Then
+    If b And vParamAplic.Cooperativa = 9 Then
         If txtCodigo(66).Text = "" Then
             Sql = "Debe introducir obligatoriamente una descripción. Reintroduzca. " & vbCrLf & vbCrLf
             MsgBox Sql, vbExclamation
-            B = False
+            b = False
             PonerFoco txtCodigo(66)
         End If
     End If
         
-    DatosOk = B
+    DatosOk = b
     
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -11522,7 +11537,7 @@ End Function
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim I As Integer
+Dim i As Integer
 
 ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
 '    For I = 0 To Combo1.Count - 1
@@ -11598,14 +11613,14 @@ Dim I As Integer
 End Sub
 
 
-Private Function CargarTemporalListAsesoria(cadWHERE As String, Fdesde As Date, Fhasta As Date) As Boolean
+Private Function CargarTemporalListAsesoria(cadWhere As String, Fdesde As Date, Fhasta As Date) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 Dim HayReg As Integer
-Dim B As Boolean
+Dim b As Boolean
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Mens As String
@@ -11648,16 +11663,16 @@ On Error GoTo eCargarTemporalListAsesoria
     
     CargarTemporalListAsesoria = False
     
-    If cadWHERE <> "" Then
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "{")
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "}")
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
+    If cadWhere <> "" Then
+        cadWhere = QuitarCaracterACadena(cadWhere, "{")
+        cadWhere = QuitarCaracterACadena(cadWhere, "}")
+        cadWhere = QuitarCaracterACadena(cadWhere, "_1")
     End If
         
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql
     
-    Sql = "select distinct horas.codtraba, fechahora, sum(if(importe is null,0,importe) + if(compleme is null,0,compleme) - if(penaliza is null,0,penaliza)) importe from horas where " & cadWHERE
+    Sql = "select distinct horas.codtraba, fechahora, sum(if(importe is null,0,importe) + if(compleme is null,0,compleme) - if(penaliza is null,0,penaliza)) importe from horas where " & cadWhere
     Sql = Sql & " group by 1, 2 "
     Sql = Sql & " having sum(if(importe is null,0,importe) + if(compleme is null,0,compleme) - if(penaliza is null,0,penaliza)) <> 0 "
     Sql = Sql & " order by 1, 2 "
@@ -11732,12 +11747,12 @@ On Error GoTo eCargarTemporalListAsesoria
             Dias = 0
         End If
         
-        I = Day(DBLet(Rs.Fields(1).Value, "N"))
-        If I = 1 Then
+        i = Day(DBLet(Rs.Fields(1).Value, "N"))
+        If i = 1 Then
             v_cadena = "S" & Mid(v_cadena, 2, Len(v_cadena)) ' Replace(v_cadena, "N", "S", I, 1)
         Else
 '            v_cadena = Mid(v_cadena, 1, I - 1) & Replace(v_cadena, "N", "S", I, 1)
-            v_cadena = Mid(v_cadena, 1, I - 1) & "S" & Mid(v_cadena, I + 1)
+            v_cadena = Mid(v_cadena, 1, i - 1) & "S" & Mid(v_cadena, i + 1)
         End If
         Dias = Dias + 1
         
@@ -11797,14 +11812,14 @@ End Function
 
 
 
-Private Sub ProcesoPaseABancoAnticipos(cadWHERE As String)
+Private Sub ProcesoPaseABancoAnticipos(cadWhere As String)
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 Dim HayReg As Integer
-Dim B As Boolean
+Dim b As Boolean
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Mens As String
@@ -11833,13 +11848,13 @@ On Error GoTo eProcesoPaseABanco
     conn.Execute Sql
     
     
-    If cadWHERE <> "" Then
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "{")
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "}")
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
+    If cadWhere <> "" Then
+        cadWhere = QuitarCaracterACadena(cadWhere, "{")
+        cadWhere = QuitarCaracterACadena(cadWhere, "}")
+        cadWhere = QuitarCaracterACadena(cadWhere, "_1")
     End If
         
-    Sql = "select count(distinct horasanticipos.codtraba) from (horasanticipos inner join straba on horasanticipos.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
+    Sql = "select count(distinct horasanticipos.codtraba) from (horasanticipos inner join straba on horasanticipos.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWhere
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -11849,7 +11864,7 @@ On Error GoTo eProcesoPaseABanco
     
     Rs.Close
     
-    Sql = "select horasanticipos.codtraba, sum(importe) importe from (horasanticipos inner join straba on horasanticipos.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
+    Sql = "select horasanticipos.codtraba, sum(importe) importe from (horasanticipos inner join straba on horasanticipos.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWhere
     Sql = Sql & " group by horasanticipos.codtraba "
     
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -11887,13 +11902,13 @@ On Error GoTo eProcesoPaseABanco
     CodigoOrden34 = ""
     Extra = ""
     If Rs.EOF Then
-        cad = ""
+        Cad = ""
     Else
         If IsNull(Rs!CodBanco) Then
-            cad = ""
+            Cad = ""
         Else
             '[Monica]22/11/2013: iban
-            cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
         Extra = DBLet(Rs!sufijoem, "T") & "|" & vParam.NombreEmpresa & "|"
@@ -11901,7 +11916,7 @@ On Error GoTo eProcesoPaseABanco
     
     Set Rs = Nothing
     
-    CuentaPropia = cad
+    CuentaPropia = Cad
     '[Monica]22/11/2013: iban
     Dim vSeccion As CSeccion
     If vSeccion Is Nothing Then
@@ -11912,12 +11927,12 @@ On Error GoTo eProcesoPaseABanco
     End If
     If vEmpresa.AplicarNorma19_34Nueva = 1 Then
         If HayXML Then
-            B = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, "", txtCodigo(66).Text, Combo1(0).ListIndex, CodigoOrden34)
+            b = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, "", txtCodigo(66).Text, Combo1(0).ListIndex, CodigoOrden34)
         Else
-            B = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, "", txtCodigo(66).Text, Combo1(0).ListIndex, CodigoOrden34)
+            b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, "", txtCodigo(66).Text, Combo1(0).ListIndex, CodigoOrden34)
         End If
     Else
-        B = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, 9, 0, txtCodigo(66).Text, CodigoOrden34, Combo1(0).ListIndex)
+        b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, 9, 0, txtCodigo(66).Text, CodigoOrden34, Combo1(0).ListIndex)
     End If
     
     vSeccion.CerrarConta
@@ -11925,32 +11940,32 @@ On Error GoTo eProcesoPaseABanco
      
 'antes
 '    b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtCodigo(60).Text), CuentaPropia, 9, 0, txtCodigo(66).Text, CodigoOrden34, Combo1(0).ListIndex)
-    If B Then
-        B = CopiarFichero
-        If B Then
-            CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
-            CadParam = CadParam & "pFechaRecibo=""" & txtCodigo(59).Text & """|pFechaPago=""" & txtCodigo(60).Text & """|"
+    If b Then
+        b = CopiarFichero
+        If b Then
+            cadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
+            cadParam = cadParam & "pFechaRecibo=""" & txtCodigo(59).Text & """|pFechaPago=""" & txtCodigo(60).Text & """|"
             numParam = 3
             cadFormula = "{tmpinformes.codusu}=" & vUsu.Codigo
             cadNombreRPT = "rListadoPagos.rpt"
             cadTitulo = "Impresion de Pagos"
             ConSubInforme = False
             
-            AntOpcion = OpcionListado
-            OpcionListado = 0
+            AntOpcion = Opcionlistado
+            Opcionlistado = 0
 
             LlamarImprimir
             
-            OpcionListado = AntOpcion
+            Opcionlistado = AntOpcion
             
             If MsgBox("¿Proceso realizado correctamente para actualizar?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
                 Sql = "update horasanticipos, straba, forpago set horasanticipos.fechapago = " & DBSet(txtCodigo(60).Text, "F")
                 Sql = Sql & ", concepto = " & DBSet(Trim(txtCodigo(66).Text), "T")
-                Sql = Sql & " where horasanticipos.codtraba = straba.codtraba and straba.codforpa = forpago.codforpa and " & cadWHERE
+                Sql = Sql & " where horasanticipos.codtraba = straba.codtraba and straba.codforpa = forpago.codforpa and " & cadWhere
                 conn.Execute Sql
             Else
                 conn.RollbackTrans
-                cmdCancel_Click (0)
+                CmdCancel_Click (0)
                 Exit Sub
             End If
         End If
@@ -11959,12 +11974,12 @@ On Error GoTo eProcesoPaseABanco
 eProcesoPaseABanco:
     If Err.Number <> 0 Then
         Mens = Err.Description
-        B = False
+        b = False
     End If
-    If B Then
+    If b Then
         conn.CommitTrans
         MsgBox "Proceso realizado correctamente.", vbExclamation
-        cmdCancel_Click (0)
+        CmdCancel_Click (0)
     Else
         conn.RollbackTrans
         MsgBox "Error " & Mens, vbExclamation
@@ -11973,14 +11988,14 @@ End Sub
 
 
 
-Private Function CargarTemporalListDiasTrabajados(cadWHERE As String, Fdesde As Date, Fhasta As Date, cadWHERE2 As String) As Boolean
+Private Function CargarTemporalListDiasTrabajados(cadWhere As String, Fdesde As Date, Fhasta As Date, cadWHERE2 As String) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 Dim HayReg As Integer
-Dim B As Boolean
+Dim b As Boolean
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Mens As String
@@ -12023,10 +12038,10 @@ On Error GoTo eCargarTemporalListAsesoria
     
     CargarTemporalListDiasTrabajados = False
     
-    If cadWHERE <> "" Then
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "{")
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "}")
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
+    If cadWhere <> "" Then
+        cadWhere = QuitarCaracterACadena(cadWhere, "{")
+        cadWhere = QuitarCaracterACadena(cadWhere, "}")
+        cadWhere = QuitarCaracterACadena(cadWhere, "_1")
     End If
     
     If cadWHERE2 <> "" Then
@@ -12042,7 +12057,7 @@ On Error GoTo eCargarTemporalListAsesoria
     
     Sql = "select codtraba, fecha from ("
     
-    Sql = Sql & "select distinct rpartes_trabajador.codtraba, rpartes.fecentrada fecha, sum(coalesce(rpartes_trabajador.importe,0)) from rpartes inner join rpartes_trabajador on rpartes.nroparte = rpartes_trabajador.nroparte where " & cadWHERE
+    Sql = Sql & "select distinct rpartes_trabajador.codtraba, rpartes.fecentrada fecha, sum(coalesce(rpartes_trabajador.importe,0)) from rpartes inner join rpartes_trabajador on rpartes.nroparte = rpartes_trabajador.nroparte where " & cadWhere
     Sql = Sql & " group by 1, 2 "
     Sql = Sql & " having sum(coalesce(rpartes_trabajador.importe,0)) <> 0 "
     
@@ -12123,12 +12138,12 @@ On Error GoTo eCargarTemporalListAsesoria
             Dias = 0
         End If
         
-        I = Day(DBLet(Rs.Fields(1).Value, "N"))
-        If I = 1 Then
+        i = Day(DBLet(Rs.Fields(1).Value, "N"))
+        If i = 1 Then
             v_cadena = "S" & Mid(v_cadena, 2, Len(v_cadena)) ' Replace(v_cadena, "N", "S", I, 1)
         Else
             '[Monica]01/06/2018
-            v_cadena = Mid(v_cadena, 1, I - 1) & "S" & Mid(v_cadena, I + 1) '& Replace(v_cadena, "N", "S", I, 1)
+            v_cadena = Mid(v_cadena, 1, i - 1) & "S" & Mid(v_cadena, i + 1) '& Replace(v_cadena, "N", "S", I, 1)
         End If
         Dias = Dias + 1
         
@@ -12185,14 +12200,14 @@ End Function
 
 
 
-Private Function CargarTemporalListNominaCoopic(cadWHERE As String, Fdesde As Date, Fhasta As Date, FBaja As String) As Boolean
+Private Function CargarTemporalListNominaCoopic(cadWhere As String, Fdesde As Date, Fhasta As Date, FBaja As String) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 Dim HayReg As Integer
-Dim B As Boolean
+Dim b As Boolean
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Mens As String
@@ -12240,10 +12255,10 @@ On Error GoTo eCargarTemporalListNominaCoopic
     
     CargarTemporalListNominaCoopic = False
     
-    If cadWHERE <> "" Then
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "{")
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "}")
-        cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
+    If cadWhere <> "" Then
+        cadWhere = QuitarCaracterACadena(cadWhere, "{")
+        cadWhere = QuitarCaracterACadena(cadWhere, "}")
+        cadWhere = QuitarCaracterACadena(cadWhere, "_1")
     End If
         
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
@@ -12252,7 +12267,7 @@ On Error GoTo eCargarTemporalListNominaCoopic
     Sql = "select distinct horas.codtraba, fechahora, straba.pluscapataz, horas.escapataz, sum(coalesce(horasdia, 0)) horas, sum(if(importe is null,0,importe) + if(compleme is null,0,compleme) - if(penaliza is null,0,penaliza)) importe,"
     '[Monica]07/06/2018: añadimos los kilometros ( importe en euros )
     Sql = Sql & " sum(coalesce(importekms,0)) kilometros "
-    Sql = Sql & " from horas, straba where " & cadWHERE
+    Sql = Sql & " from horas, straba where " & cadWhere
     Sql = Sql & " and horas.codtraba = straba.codtraba " 'and straba.hayembargo = 0"
     
     '[Monica]07/02/2017: si pone fecha de baja solo cogemos los trabajadores con esa fecha de baja en caso contrario
@@ -12287,9 +12302,9 @@ On Error GoTo eCargarTemporalListNominaCoopic
     PlusCapataz = 0
     Bruto = 0
     
-    B = True
+    b = True
     
-    While Not Rs.EOF And B
+    While Not Rs.EOF And b
         HayReg = 1
         Mens = "Calculando Dias" & vbCrLf & vbCrLf & "Trabajador: " & ActTraba & vbCrLf
         ActTraba = DBLet(Rs!CodTraba, "N")
@@ -12328,12 +12343,12 @@ On Error GoTo eCargarTemporalListNominaCoopic
             Kilometros = 0
         End If
         
-        I = Day(DBLet(Rs.Fields(1).Value, "F"))
-        If I = 1 Then
+        i = Day(DBLet(Rs.Fields(1).Value, "F"))
+        If i = 1 Then
             v_cadena = "S" & Mid(v_cadena, 2, Len(v_cadena)) ' Replace(v_cadena, "N", "S", I, 1)
         Else
 '            v_cadena = Mid(v_cadena, 1, I - 1) & Replace(v_cadena, "N", "S", I, 1)
-            v_cadena = Mid(v_cadena, 1, I - 1) & "S" & Mid(v_cadena, I + 1)
+            v_cadena = Mid(v_cadena, 1, i - 1) & "S" & Mid(v_cadena, i + 1)
         End If
         Dias = Dias + 1
         
@@ -12465,7 +12480,7 @@ End Function
 Private Function CalculoCapatazServicios() As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim Sql1 As String
+Dim SQL1 As String
 Dim Importe As Currency
 
     On Error GoTo eCalculoCapatazServicios
@@ -12493,14 +12508,14 @@ Dim Importe As Currency
             Sql = Sql & " and codcapat = " & DBSet(txtCodigo(80).Text, "N")
             
             If TotalRegistros(Sql) = 0 Then
-                Sql1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,importe,compleme, fecharec,intconta,pasaridoc,codalmac) values ("
-                Sql1 = Sql1 & DBSet(txtCodigo(82).Text, "F") & ","
-                Sql1 = Sql1 & "0,"
-                Sql1 = Sql1 & DBSet(Rs!CodTraba, "N") & ","
-                Sql1 = Sql1 & DBSet(txtCodigo(80).Text, "N") & ",null, null,"
-                Sql1 = Sql1 & "null,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ") "
+                SQL1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,importe,compleme, fecharec,intconta,pasaridoc,codalmac) values ("
+                SQL1 = SQL1 & DBSet(txtCodigo(82).Text, "F") & ","
+                SQL1 = SQL1 & "0,"
+                SQL1 = SQL1 & DBSet(Rs!CodTraba, "N") & ","
+                SQL1 = SQL1 & DBSet(txtCodigo(80).Text, "N") & ",null, null,"
+                SQL1 = SQL1 & "null,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ") "
                 
-                conn.Execute Sql1
+                conn.Execute SQL1
             End If
             
             Rs.MoveNext

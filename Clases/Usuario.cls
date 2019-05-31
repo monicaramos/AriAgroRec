@@ -26,8 +26,8 @@ Private mvarNivel As Long 'copia local
 Private mvarCadenaConexion As String
 Private mvarPC As String
 
-Private RS As ADODB.Recordset
-Private SQL As String
+Private Rs As ADODB.Recordset
+Private Sql As String
 Private Mens As String
 
 Public Property Let Nivel(ByVal vData As Long)
@@ -47,7 +47,6 @@ End Property
 Public Property Get Passwd() As String
     Passwd = mvarPasswd
 End Property
-
 
 
 Public Property Let CadenaConexion(ByVal vData As String)
@@ -139,33 +138,32 @@ Public Property Get PC() As String
 End Property
 
 
-
 Public Function Leer(ByVal vlogin As String) As Byte
 Dim i As Long
     On Error GoTo Err1
-    SQL = "SELECT * FROM usuarios.usuarios WHERE login = '" & vlogin & "'"
-    SQL = SQL & " AND nivelariagro >=0"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Sql = "SELECT * FROM usuarios.usuarios WHERE login = '" & vlogin & "'"
+    Sql = Sql & " AND nivelariagro >=0"
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    If RS.EOF Then
+    If Rs.EOF Then
         Leer = 1
     Else
         i = DevuelveAumentoPC
-        mvarCodigo = Val(DBLet(RS!CodUsu)) + i
-        mvarNombre = DBLet(RS!nomusu)
-        mvarNivel = Val(DBLet(RS!nivelariagro))
-        mvarPasswdPROPIO = RS!passwordpropio
+        mvarCodigo = Val(DBLet(Rs!CodUsu)) + i
+        mvarNombre = DBLet(Rs!nomusu)
+        mvarNivel = Val(DBLet(Rs!nivelariagro))
+        mvarPasswdPROPIO = Rs!passwordpropio
         mvarlogin = vlogin
         mvarCadenaConexion = ""  'Se le asigna en tiempo de diseño
         Leer = 0
     End If
-    RS.Close
+    Rs.Close
     Exit Function
 Err1:
     Mens = "Error: " & Err.Number & " : " & Err.Description
     MsgBox Mens, vbExclamation
-    RS.Close
+    Rs.Close
     Leer = 1
 End Function
 
@@ -175,8 +173,8 @@ Public Function DevuelveAumentoPC() As Long
 DevuelveAumentoPC = 32000
 'mvarPC = ComputerName
 mvarPC = ComputerName
-SQL = DevuelveDesdeBD("codpc", "usuarios.pcs", "nompc", mvarPC, "T")
-If SQL <> "" Then DevuelveAumentoPC = Val(SQL) * 1000
+Sql = DevuelveDesdeBD("codpc", "usuarios.pcs", "nompc", mvarPC, "T")
+If Sql <> "" Then DevuelveAumentoPC = Val(Sql) * 1000
 
 End Function
 

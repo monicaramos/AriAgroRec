@@ -748,9 +748,9 @@ Attribute frmMens1.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private CadParam As String 'Cadena con los parametros para Crystal Report
+Private cadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
-Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadselect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
 Private cadNombreRPT As String 'Nombre del informe
 
@@ -759,7 +759,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -791,7 +791,7 @@ Dim cTabla As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     Select Case Index
@@ -845,17 +845,17 @@ Dim cTabla As String
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
             End If
             
-            Tabla = "(rclasifica INNER JOIN variedades ON rclasifica.codvarie = variedades.codvarie) "
+            tabla = "(rclasifica INNER JOIN variedades ON rclasifica.codvarie = variedades.codvarie) "
 
             'Comprobar si hay registros a Mostrar antes de abrir el Informe
-            If HayRegParaInforme(Tabla, cadSelect) Then
+            If HayRegParaInforme(tabla, cadselect) Then
                 
                 Sql = "delete from tmpclasifica where codusu = " & vUsu.Codigo
                 conn.Execute Sql
             
                 ' comprobamos que no existan las notas a actualizar en el hco de entradas
                 If vParamAplic.SeRespetaNota Then
-                    HayReg = HayRegEnHcoEntradas(Tabla, cadSelect)
+                    HayReg = HayRegEnHcoEntradas(tabla, cadselect)
                     If HayReg Then
                         Set frmMens1 = New frmMensajes
                         frmMens1.OpcionMensaje = 19
@@ -874,7 +874,7 @@ Dim cTabla As String
                     End If
                 End If
             
-                HayReg = HayRegSinClasificacion(Tabla, cadSelect)
+                HayReg = HayRegSinClasificacion(tabla, cadselect)
                 If HayReg Then
 '[Monica]:04/06/2010 antes no dejabamos seguir si habian registros sin clasificacion
 '                    ahora preguntamos si quieren seguir actualizando solo los clasificados
@@ -889,7 +889,7 @@ Dim cTabla As String
                 
                 '[Monica]12/06/2018: comprobamos que las entradas clasificadas de variedades en comun han sido comunicadas
                 If vParamAplic.Cooperativa = 16 Then
-                    HayReg = HayRegNoComunicados(Tabla, cadSelect)
+                    HayReg = HayRegNoComunicados(tabla, cadselect)
                     If HayReg Then
                         Set frmMens1 = New frmMensajes
                         frmMens1.OpcionMensaje = 71
@@ -903,7 +903,7 @@ Dim cTabla As String
                 '[Monica] 06/05/2010: si hay registros sin gastos correctos (acarreo, recoleccion)
                 '                     añadida la condicion de que no lo compruebe si es alzira
                 If vParamAplic.Cooperativa <> 4 Then
-                    HayReg = HayRegSinGastosCorrectos(Tabla, cadSelect)
+                    HayReg = HayRegSinGastosCorrectos(tabla, cadselect)
                 End If
                     
                     
@@ -917,13 +917,13 @@ Dim cTabla As String
                     Set frmMens = Nothing
                 
                     If Continuar Then
-                        If ActualizarTabla(Tabla, cadSelect) Then
+                        If ActualizarTabla(tabla, cadselect) Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
                             cmdCancel_Click (0)
                         End If
                     End If
                 Else
-                    If ActualizarTabla(Tabla, cadSelect) Then
+                    If ActualizarTabla(tabla, cadselect) Then
                         MsgBox "Proceso realizado correctamente.", vbExclamation
                         cmdCancel_Click (0)
                     End If
@@ -963,7 +963,7 @@ Dim List As Collection
     Me.lblProgres.visible = False
     Me.lblProgres1.visible = False
     Me.lblProgres2.visible = False
-    Tabla = "rclasifica"
+    tabla = "rclasifica"
     CodTipoMov = "ALF"
     
 End Sub
@@ -1122,8 +1122,8 @@ End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
-    cadSelect = ""
-    CadParam = ""
+    cadselect = ""
+    cadParam = ""
     numParam = 0
 End Sub
 
@@ -1142,16 +1142,16 @@ Dim devuelve2 As String
     If devuelve = "Error" Then Exit Function
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Function
     If TipCod <> "F" Then 'Fecha
-        If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
+        If Not AnyadirAFormula(cadselect, devuelve) Then Exit Function
     Else
         devuelve2 = CadenaDesdeHastaBD(codD, codH, Codigo, TipCod)
         If devuelve2 = "Error" Then Exit Function
-        If Not AnyadirAFormula(cadSelect, devuelve2) Then Exit Function
+        If Not AnyadirAFormula(cadselect, devuelve2) Then Exit Function
     End If
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -1161,7 +1161,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -1203,7 +1203,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -1270,7 +1270,7 @@ Dim NumRegis As Long
 
 Dim cTabla2 As String
 Dim cWhere2 As String
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 
     On Error GoTo eActualizarTabla
     
@@ -1351,20 +1351,20 @@ Dim RS1 As ADODB.Recordset
     Me.Pb1.Value = 0
     DoEvents
     
-    Set RS1 = New ADODB.Recordset
-    RS1.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs1 = New ADODB.Recordset
+    Rs1.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     conn.BeginTrans
     
     i = 0
     b = True
     
-    While Not RS1.EOF And b
+    While Not Rs1.EOF And b
             
         i = i + 1
         
         Me.Pb1.Value = Me.Pb1.Value + 1
-        lblProgres.Caption = "Linea: " & i & ". Socio: " & Format(DBLet(RS1!Codsocio, "N"), "00000000")
+        lblProgres.Caption = "Linea: " & i & ". Socio: " & Format(DBLet(Rs1!Codsocio, "N"), "00000000")
         Me.Refresh
         DoEvents
         
@@ -1373,7 +1373,7 @@ Dim RS1 As ADODB.Recordset
         cTabla = QuitarCaracterACadena(cTabla, "}")
         
         '[Monica]24/09/2013: en el caso de ser Picassent no tengo en cuenta si es tercero o no para agrupar
-        If ((DBLet(RS1.Fields(1).Value, "N") <> 1) And vParamAplic.SeAgrupanNotas And vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16) Or _
+        If ((DBLet(Rs1.Fields(1).Value, "N") <> 1) And vParamAplic.SeAgrupanNotas And vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16) Or _
            (vParamAplic.SeAgrupanNotas And (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)) Then   ' caso de no ser tercero
             ' si no es tercero y se agrupan notas
             '[Monica]30/01/2014: en el caso de Alzira se rompe tambien por capataz
@@ -1392,9 +1392,9 @@ Dim RS1 As ADODB.Recordset
                 cWhere = QuitarCaracterACadena(cWhere, "{")
                 cWhere = QuitarCaracterACadena(cWhere, "}")
                 cWhere = QuitarCaracterACadena(cWhere, "_1")
-                Sql = Sql & " WHERE " & cWhere & " and rclasifica.codsocio = " & DBSet(RS1!Codsocio, "N")
+                Sql = Sql & " WHERE " & cWhere & " and rclasifica.codsocio = " & DBSet(Rs1!Codsocio, "N")
             Else
-                Sql = Sql & " where rclasifica.codsocio = " & DBSet(RS1!Codsocio, "N")
+                Sql = Sql & " where rclasifica.codsocio = " & DBSet(Rs1!Codsocio, "N")
             End If
             Sql = Sql & " and rclasifica.numnotac = tmpNotas.numnotac "
             '[Monica]30/01/2014: en el caso de Alzira se rompe tambien por capataz
@@ -1535,9 +1535,9 @@ Dim RS1 As ADODB.Recordset
                 cWhere = QuitarCaracterACadena(cWhere, "{")
                 cWhere = QuitarCaracterACadena(cWhere, "}")
                 cWhere = QuitarCaracterACadena(cWhere, "_1")
-                Sql = Sql & " WHERE " & cWhere & " and rclasifica.codsocio = " & DBSet(RS1!Codsocio, "N")
+                Sql = Sql & " WHERE " & cWhere & " and rclasifica.codsocio = " & DBSet(Rs1!Codsocio, "N")
             Else
-                Sql = Sql & " where rclasifica.codsocio = " & DBSet(RS1!Codsocio, "N")
+                Sql = Sql & " where rclasifica.codsocio = " & DBSet(Rs1!Codsocio, "N")
             End If
             Sql = Sql & " and rclasifica.numnotac = tmpNotas.numnotac "
             '[Monica]30/01/2014: en el caso de alzira se rompe por capataz
@@ -1698,7 +1698,7 @@ Dim RS1 As ADODB.Recordset
         
         Set Rs = Nothing
         
-        RS1.MoveNext
+        Rs1.MoveNext
     Wend
     
 ' 11-06-2009
@@ -1826,7 +1826,7 @@ Private Function InsertarCabecera(ByRef Rs As ADODB.Recordset, Albaran As Long, 
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim SQL1 As String
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Cad As String
 Dim NumCajones As Currency
@@ -1936,7 +1936,7 @@ Private Function InsertarEntradas(ByRef Rs As ADODB.Recordset, Albaran As Long, 
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim SQL1 As String
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Cad As String
 Dim NumCajones As Currency
@@ -1953,12 +1953,17 @@ Dim Precio As Currency
 'imprecol,imppenal
 '
     Sql = "insert into rhisfruta_entradas (numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,"
-    Sql = Sql & "observac,kilosnet,imptrans,impacarr,imprecol,imppenal,prestimado,codtrans,codtarif,codcapat,kilostra, tiporecol, horastra, numtraba) "
+    Sql = Sql & "observac,kilosnet,imptrans,impacarr,imprecol,imppenal,prestimado,codtrans,codtarif,codcapat,kilostra, tiporecol, horastra, numtraba, "
+    '[Monica]11/04/2019: me guardo el calibrador por el que ha pasado la nota, frutas inma 0=grande 1=pequeño
+    Sql = Sql & "calibrador) "
 
     Sql = Sql & "select " & Albaran & ",rclasifica.numnotac,fechaent,horaentr,kilosbru,numcajon,"
     Sql = Sql & "observac,rclasifica.kilosnet,imptrans,impacarr,imprecol,imppenal,prestimado,codtrans,codtarif, codcapat, kilostra, "
     '[Monica]28/02/2012: se graban tambien el tipo de recolecion, las horas y el nro de trabajadores
     Sql = Sql & " tiporecol, horastra, numtraba "
+    '[Monica]11/04/2019: gurado el calibrador (frutas inma 0=grande 1=pequeño)
+    Sql = Sql & ", calibrador "
+    
     Sql = Sql & " from rclasifica, tmpNotas "
     Sql = Sql & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
     Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codCampo, "N") & " and "
@@ -2019,7 +2024,7 @@ End Function
 Private Function RecalculaPrecioEstimadoCabecera(Albaran As Long, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim Cad As String
 Dim Precio As Currency
 
@@ -2029,13 +2034,13 @@ Dim Precio As Currency
     
     Sql = "select count(*), sum(prestimado) from rhisfruta_entradas where numalbar = " & DBSet(Albaran, "N")
     
-    Set RS1 = New ADODB.Recordset
-    RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs1 = New ADODB.Recordset
+    Rs1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     Precio = 0
-    If Not RS1.EOF Then
-        If DBLet(RS1.Fields(0).Value, "N") <> 0 Then
-            Precio = Round2(DBLet(RS1.Fields(1).Value, "N") / DBLet(RS1.Fields(0).Value, "N"), 4)
+    If Not Rs1.EOF Then
+        If DBLet(Rs1.Fields(0).Value, "N") <> 0 Then
+            Precio = Round2(DBLet(Rs1.Fields(1).Value, "N") / DBLet(Rs1.Fields(0).Value, "N"), 4)
         End If
     End If
     
@@ -2057,7 +2062,7 @@ Private Function InsertarClasificacion(ByRef Rs As ADODB.Recordset, Albaran As L
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim SQL1 As String
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim Cad As String
 Dim KilosMuestra As Currency
 Dim TotalKilos As Currency
@@ -2126,7 +2131,7 @@ Private Function InsertarClasificacionTranspor(ByRef Rs As ADODB.Recordset, Alba
 Dim Sql As String
 Dim SQL1 As String
 Dim Sql2 As String
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim Cad As String
 Dim KilosMuestra As Currency
 Dim TotalKilos As Currency
@@ -2169,34 +2174,34 @@ Dim KilosNeto As Currency
     
     Sql = Sql & " group by 1,2,3,4,5,6  order by 1,2,3,4,5, 6"
     
-    Set RS1 = New ADODB.Recordset
-    RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs1 = New ADODB.Recordset
+    Rs1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not RS1.EOF Then
-        KilosTra = DBLet(RS1!KilosTra, "N")
-        KilosNeto = DBLet(RS1!KilosNet, "N")
+    If Not Rs1.EOF Then
+        KilosTra = DBLet(Rs1!KilosTra, "N")
+        KilosNeto = DBLet(Rs1!KilosNet, "N")
         
         Total = 0
     End If
     
     MaxCalidad = 0
-    While Not RS1.EOF
-        Kilos = Round2(DBLet(RS1!KilosCal, "N") * KilosTra / KilosNeto, 0)
+    While Not Rs1.EOF
+        Kilos = Round2(DBLet(Rs1!KilosCal, "N") * KilosTra / KilosNeto, 0)
         Total = Total + Kilos
         
-        If MaxCalidad = 0 And DBLet(RS1!KilosCal, "N") <> 0 Then MaxCalidad = DBLet(RS1!codcalid, "N")
+        If MaxCalidad = 0 And DBLet(Rs1!KilosCal, "N") <> 0 Then MaxCalidad = DBLet(Rs1!codcalid, "N")
         '[Monica]28/12/2018: meto tambien la muestra que habia por si hay que recuperar
         Sql2 = "update rhisfruta_clasif set kilostra = " & DBSet(Kilos, "N")
-        Sql2 = Sql2 & ", muestra = " & DBSet(RS1!Muestra, "N") & " where numalbar = " & DBSet(Albaran, "N") & " and codcalid = " & DBSet(RS1!codcalid, "N")
+        Sql2 = Sql2 & ", muestra = " & DBSet(Rs1!Muestra, "N") & " where numalbar = " & DBSet(Albaran, "N") & " and codcalid = " & DBSet(Rs1!codcalid, "N")
         conn.Execute Sql2
         
-        RS1.MoveNext
+        Rs1.MoveNext
     Wend
     If Total <> KilosTra Then
         Sql2 = "update rhisfruta_clasif set kilostra = kilostra + " & DBSet(KilosTra - Total, "N") & " where numalbar = " & DBSet(Albaran, "N") & " and codcalid = " & DBSet(MaxCalidad, "N")
         conn.Execute Sql2
     End If
-    Set RS1 = Nothing
+    Set Rs1 = Nothing
     
 
 EInsertar:
@@ -2215,7 +2220,7 @@ End Function
 Private Function InsertarIncidencias(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
 Dim Sql As String
 Dim SQL1 As String
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim Cad As String
 Dim KilosMuestra As Currency
 Dim TotalKilos As Currency
@@ -2382,7 +2387,7 @@ End Function
 Private Function EliminarRegistro(ByRef Rs As ADODB.Recordset, cadErr As String, Estercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim Cad As String
 Dim NumCajones As Currency
 Dim Transporte As Currency
@@ -2688,7 +2693,7 @@ Private Function InsertarHcoHortonature(NumNotac As Long, Albaran As Long, cadEr
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim SQL1 As String
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Cad As String
 Dim NumCajones As Currency
@@ -2759,7 +2764,7 @@ Private Function InsertarClasificaHortonature(NumNotac As Long, Albaran As Long,
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim SQL1 As String
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Cad As String
 Dim NumCajones As Currency
