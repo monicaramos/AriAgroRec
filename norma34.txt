@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANPAG000000F20190529T114131</MsgId>
-      <CreDtTm>2019-05-29T11:41:31</CreDtTm>
+      <MsgId>TRANPAG000000F20190603T125433</MsgId>
+      <CreDtTm>2019-06-03T12:54:33</CreDtTm>
       <NbOfTxs>1</NbOfTxs>
-      <CtrlSum>39.00</CtrlSum>
+      <CtrlSum>444.44</CtrlSum>
       <InitgPty>
          <Nm>INMA FRUITS SAT N 657CV</Nm>
          <Id>
@@ -18,9 +18,9 @@
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>20190529114131V98987266</PmtInfId>
+      <PmtInfId>20190603125433V98987266</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
-      <ReqdExctnDt>2019-05-29</ReqdExctnDt>
+      <ReqdExctnDt>2019-06-03</ReqdExctnDt>
       <Dbtr>
          <Nm>INMA FRUITS SAT N 657CV</Nm>
          <PstlAdr>
@@ -48,40 +48,40 @@
     </DbtrAgt>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>Y0846805M</EndToEndId>
+         <EndToEndId>X9891177G</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">39</InstdAmt>
+          <InstdAmt Ccy="EUR">444.44</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
-             <BIC>CAIXESBBXXX</BIC>
+             <BIC>CCRIES2AXXX</BIC>
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>BLOSENKO, EDUARDS</Nm>
+          <Nm>RAJI, ABDERRAZAK</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>Y0846805M</Id>
+                     <Id>X9891177G</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES3321000209420100620319</IBAN>
+              <IBAN>ES9430580096742810041627</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>nomina mayo 29/05/2019 Importe 39,00</Ustrd>
+         <Ustrd>03/06/2019 Importe 444,44</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    </PmtInf>

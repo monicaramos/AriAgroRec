@@ -92,8 +92,11 @@ Private mPorcCorredor As Currency   '% corredor
 Private mConcepCargo As Integer
 Private mImpCargo As Currency
 
-Dim vvIban As String
 
+'[Monica]07/06/2019:
+Private mEsRectificativa As Byte
+
+Dim vvIban As String
 
 
 '------------------------------------------------
@@ -548,6 +551,20 @@ Public Property Get Intracomunitario() As Byte
 End Property
 
 
+'**** Es factura rectificativa
+
+Public Property Let EsRectificativa(ByVal vData As Byte)
+     mEsRectificativa = vData
+End Property
+
+Public Property Get EsRectificativa() As Byte
+     EsRectificativa = mEsRectificativa
+End Property
+
+
+
+
+
 '**** Variedad
 
 Public Property Let Variedad(ByVal vData As String)
@@ -625,14 +642,14 @@ Public Function LeerDatos(vTercero As String, vNumfactu As String, vFecfactu As 
 'Lee de la BD: Ariges, Tabla: scafpc
 'OUT: True si lee los datos correctamente
 Dim Rs As ADODB.Recordset
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 Dim Mens As String
 Dim SQL As String
 
     On Error GoTo ELeer
     
     LeerDatos = False
-    SQL = "SELECT codsocio,numfactu,fecfactu,codforpa,brutofac, totalfac FROM rcafter "
+    SQL = "SELECT codsocio,numfactu,fecfactu,codforpa,brutofac, totalfac, esrectificativa FROM rcafter "
     SQL = SQL & " WHERE codsocio=" & vTercero
     SQL = SQL & " AND numfactu='" & vNumfactu & "'"
     SQL = SQL & " AND fecfactu='" & Format(vFecfactu, FormatoFecha) & "'"
@@ -654,6 +671,10 @@ Dim SQL As String
         
         '[Monica]03/07/2013: añado trim(codmacta)
         CtaTerce = Trim(DevuelveDesdeBDNew(cAgro, "rsocios_seccion", "codmacpro", "codsocio", vTercero, "N", , "codsecci", vParamAplic.Seccionhorto, "N"))
+        
+        '[Monica]07/06/2019: es factura rectificativa
+        mEsRectificativa = DBLet(Rs!EsRectificativa, "N")
+        
         
         
         'si venimos de proceso de insertar tenemos la cuenta prevista de pago que
@@ -1121,7 +1142,7 @@ Dim Nulo6 As String
 
     'Insertar en la tabla cabecera de la factura de compras
     SQL = "INSERT INTO rcafter (codsocio,numfactu,fecfactu,fecrecep,nomsocio,domsocio,codpobla,pobsocio,prosocio,nifsocio,telsocio,codforpa,brutofac,dtoppago,dtognral,impppago,impgnral,baseiva1,baseiva2,baseiva3, "
-    SQL = SQL & "tipoiva1,tipoiva2,tipoiva3,porciva1,porciva2,porciva3,impoiva1,impoiva2,impoiva3,retfacpr,trefacpr,basereten, totalfac,intconta, intracom, porccorredor, esanticipo, concepcargo, impcargo) "
+    SQL = SQL & "tipoiva1,tipoiva2,tipoiva3,porciva1,porciva2,porciva3,impoiva1,impoiva2,impoiva3,retfacpr,trefacpr,basereten, totalfac,intconta, intracom, porccorredor, esanticipo, concepcargo, impcargo, esrectificativa) "
     SQL = SQL & " VALUES (" & Tercero & "," & DBSet(numfactu, "T") & "," & DBSet(fecfactu, "F") & "," & DBSet(FecRecep, "F") & ","
     SQL = SQL & DBSet(NombreTerce, "T", "N") & "," & DBSet(DomicilioTerce, "T", "N") & "," & DBSet(CPostalTerce, "T", "N") & "," & DBSet(PoblacionTerce, "T", "N") & "," & DBSet(ProvinciaTerce, "T", "N") & ","
     SQL = SQL & DBSet(NIFTerce, "T", "N") & "," & DBSet(TelefTerce, "T", "N") & "," & ForPago & ","
@@ -1149,7 +1170,10 @@ Dim Nulo6 As String
     SQL = SQL & DBSet(PorcCorredor, "N") & ","
     SQL = SQL & DBSet(EsAnticipo, "N") & ","
     SQL = SQL & DBSet(ConcepCargo, "N", "S") & ","
-    SQL = SQL & DBSet(ImpCargo, "N", "S") & ")"
+    SQL = SQL & DBSet(ImpCargo, "N", "S") & "," '")"
+    
+    '[Monica]07/06/2019: marcamos si es rectificativa
+    SQL = SQL & DBSet(mEsRectificativa, "N") & ")"
     
     conn.Execute SQL
     Set vSocio = Nothing
@@ -1358,7 +1382,7 @@ End Function
 
 
 
-Public Function CalcularDatosFactura(cadWHERE As String, Socio As String, Optional Insertar As Boolean) As Boolean
+Public Function CalcularDatosFactura(cadWhere As String, Socio As String, Optional Insertar As Boolean) As Boolean
 'cadWhere: cad para la where de la SQL que selecciona las lineas del albaran o la factura
 'nomTabla: nombre de la tabla de albaranes(scaalp) o de AlbaranesXFactura(scafpa)
 '           segun llamemos desde recepcion de facturas o desde Hco de Facturas
@@ -1391,7 +1415,7 @@ Dim NumConta As String
             If mIntracomunitario Then
                 SQL = "SELECT sum(impentrada) as bruto"
                 SQL = SQL & " FROM rhisfruta "
-                SQL = SQL & " WHERE " & cadWHERE
+                SQL = SQL & " WHERE " & cadWhere
             
                 TotBruto = DevuelveValor(SQL)
                 ImpBImIVA = TotBruto
@@ -1465,7 +1489,7 @@ Dim NumConta As String
                 
                 SQL = "SELECT variedades.codigiva, sum(impentrada) as bruto"
                 SQL = SQL & " FROM rhisfruta, variedades "
-                SQL = SQL & " WHERE rhisfruta.codvarie = variedades.codvarie and " & cadWHERE
+                SQL = SQL & " WHERE rhisfruta.codvarie = variedades.codvarie and " & cadWhere
                 SQL = SQL & " group by 1"
                 SQL = SQL & " order by 1"
                 Set Rs = New ADODB.Recordset
